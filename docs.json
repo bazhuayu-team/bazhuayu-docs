@@ -442,12 +442,6 @@
                 ]
               },
               {
-                "group": "实战案例",
-                "pages": [
-                  "zh/mcp/cases/index"
-                ]
-              },
-              {
                 "group": "参考",
                 "pages": [
                   "zh/mcp/rate-limits",
