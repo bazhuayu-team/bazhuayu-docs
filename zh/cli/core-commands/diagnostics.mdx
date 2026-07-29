@@ -1,34 +1,34 @@
 ---
 title: 环境诊断
-description: 使用 octopus doctor、browser status 与 auth status 检查八爪鱼 CLI 环境、浏览器依赖与登录状态。
+description: 使用 bazhuayu doctor、browser status 与 auth status 检查八爪鱼 CLI 环境、浏览器依赖与登录状态。
 ---
 
 > 跑不起来、登录异常或网页识别失败时，先用这些命令排查环境。
 
-## `octopus doctor`（检查运行环境）
+## `bazhuayu doctor`（检查运行环境）
 
 ```bash
-octopus doctor
-octopus doctor --json
-octopus doctor --output ./runs --api-base-url https://api.example.com --json
+bazhuayu doctor
+bazhuayu doctor --json
+bazhuayu doctor --output ./runs --api-base-url https://api.example.com --json
 ```
 
 `doctor` 会检查 Node.js、CLI 运行时、Chrome for Testing、认证/API 连通性和本地运行目录可写性，并在 Windows / macOS 上报告可选用户浏览器扩展状态。可用 `--output <dir>` 指定运行目录检查位置，用 `--api-base-url <url>` 指定 API 诊断地址。若某项为 `ok: false`，按提示修复后再运行采集任务。
 
-## `octopus browser status`（检查用户浏览器）
+## `bazhuayu browser status`（检查用户浏览器）
 
 ```bash
-octopus browser status --browser-id chrome --json
-octopus browser profiles --browser-id chrome --json
+bazhuayu browser status --browser-id chrome --json
+bazhuayu browser profiles --browser-id chrome --json
 ```
 
 `browser status --json` 会报告浏览器路径、Profile、扩展安装情况、`readyForUserBrowserRun` 和后续 `nextActions`。使用 Edge 时把 `chrome` 改为 `edge`。独立浏览器环境由 `doctor` 检查。
 
-## `octopus auth status`（查看登录状态）
+## `bazhuayu auth status`（查看登录状态）
 
 ```bash
-octopus auth status
-octopus auth status --json
+bazhuayu auth status
+bazhuayu auth status --json
 ```
 
 若未登录，请先 [获取 API Key 并登录](/zh/cli/quick-start/get-api-key-and-log-in)。
@@ -37,12 +37,14 @@ octopus auth status --json
 
 | 现象 | 处理建议 |
 | --- | --- |
-| `octopus` 命令找不到 | 检查 Node.js 目录和 npm 全局 bin 是否在 `PATH` |
+| `bazhuayu` 命令找不到 | 检查 Node.js 目录和 npm 全局 bin 是否在 `PATH` |
+| 升级后 `octopus` 命令找不到 | v0.1.32 已将入口改为 `bazhuayu`；替换脚本、CI 和 Agent 调用，但保留 `OCTOPUS_*` 环境变量 |
 | 中文 `--goal` 参数异常 | 使用双引号：`--goal "提取电影名称、评分"` |
 | PowerShell 多行命令报错 | 使用反引号 `` ` `` 续行，或写成单行 |
 | URL 导航失败 | 检查 `https://`、域名和路径是否完整 |
 | `--output` 文件位置不对 | 先切换到工作目录，或传绝对路径 |
-| `octopus recognize` 报未知命令 | v0.1.23 已更名为 `octopus detect` |
+| 旧版 `octopus recognize` 报未知命令 | `recognize` 已在 v0.1.23 被移除；当前使用 `bazhuayu detect` |
+| `detect` 在生成任务前报告验证码、访问限制或安全验证 | v0.1.32 的提前识别机制已阻止无效任务生成；先处理网站验证或访问限制，再重新执行 `bazhuayu detect` |
 | `--run-sample` 报参数错误 | 仅在 `detect --agent` 中使用，并传入正整数 |
 | Agent plan preview 不通过 | 打开上下文中的截图和候选区裁剪图，补全 `visualReview`，并确保候选 ID 与 `selection` 一致 |
 | Agent 任务已生成但样品采集失败 | 检查 JSON 中的 `sampleRun.exitCode`、`sampleRun.summary` 和样品输出目录 |
@@ -54,8 +56,9 @@ octopus auth status --json
 | Linux 上 `--browser user` 不可用 | 用户模式仅支持 Windows 和 macOS；Linux 使用独立模式 |
 | `task rename/move/delete` 或 `schedule cloud update/start/stop` 报缺少确认 | 远端状态修改命令必须显式传入 `--yes` |
 | `data preview --unexported` 没有标记数据为已导出 | 这是预期行为；`--unexported` 只读取云端未导出数据，不改变导出状态 |
-| API 列表任务无法同步到云端 | API 列表任务当前 `localOnly: true`，使用 `octopus run <taskId> --task-file task.json` 本地运行 |
-| 安装 `@latest` 卡住 | 使用固定版本：`npm install -g bazhuayu-cli@0.1.30` |
+| API 列表任务无法同步到云端 | API 列表任务当前 `localOnly: true`，使用 `bazhuayu run <taskId> --task-file task.json` 本地运行 |
+| `run --max-rows <n>` 到上限后未退出 | 升级到 v0.1.32；该版本已修复部分任务达到上限后无法正常结束的问题 |
+| 安装 `@latest` 卡住 | 使用固定版本：`npm install -g bazhuayu-cli@0.1.32` |
 
 ## 下一步
 

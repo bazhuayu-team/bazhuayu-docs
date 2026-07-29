@@ -12,16 +12,16 @@ CLI 同时支持人类可读终端输出与机器可读 JSON / JSONL。
 需要单次、完整的结构化响应时使用：
 
 ```bash
-octopus task list --json
-octopus task show <taskId> --json
-octopus task-group list --json
-octopus browser status --browser-id chrome --json
-octopus data preview <taskId> --source cloud --limit 20 --json
-octopus auth status --json
-octopus local status <taskId> --json
-octopus detect URL --agent --agent-command "node make-plan.mjs" --goal "提取用户评论" --run-sample 3 --json
-octopus detect URL --prepare-agent --json --goal "提取用户评论" --output context.json
-octopus detect URL --auto --json --output task.json
+bazhuayu task list --json
+bazhuayu task show <taskId> --json
+bazhuayu task-group list --json
+bazhuayu browser status --browser-id chrome --json
+bazhuayu data preview <taskId> --source cloud --limit 20 --json
+bazhuayu auth status --json
+bazhuayu local status <taskId> --json
+bazhuayu detect URL --agent --agent-command "node make-plan.mjs" --goal "提取用户评论" --run-sample 3 --json
+bazhuayu detect URL --prepare-agent --json --goal "提取用户评论" --output context.json
+bazhuayu detect URL --auto --json --output task.json
 ```
 
 成功时通常返回 `ok: true` 与 `data` 字段：
@@ -43,6 +43,10 @@ octopus detect URL --auto --json --output task.json
 
 失败时通常返回 `ok: false` 与 `error`。各命令的 `data` 结构不同，编写脚本时请以具体命令输出为准，并容忍新增字段。
 
+### 验证页提前终止
+
+v0.1.32 的 `bazhuayu detect` 会在任务生成前识别验证码、访问限制和安全验证页面。命中时命令以非零退出码结束，JSON 输出为失败 envelope，不应假定存在可运行的 `generatedTask` 或任务文件。自动化流程应先处理验证或访问限制，再重试检测。
+
 v0.1.28 新增的 `task-group`、`template`、`template-task`、`schedule cloud`、`data count` 和 `data preview` 均支持 `--json`。会修改远端状态的命令缺少 `--yes` 时会返回失败 envelope，脚本应把它当作需要人工确认或补齐确认参数处理。
 
 ### 用户浏览器状态
@@ -59,7 +63,7 @@ v0.1.28 新增的 `task-group`、`template`、`template-task`、`schedule cloud`
     "nextActions": [
       {
         "action": "install_extension",
-        "command": "octopus browser install --browser-id chrome --profile \"Default\" --json"
+        "command": "bazhuayu browser install --browser-id chrome --profile \"Default\" --json"
       }
     ]
   }
@@ -107,9 +111,9 @@ v0.1.28 新增的 `task-group`、`template`、`template-task`、`schedule cloud`
 `data count` 和 `data preview` 适合在导出前做轻量检查：
 
 ```bash
-octopus data count <taskId> --source cloud --json
-octopus data preview <taskId> --source cloud --limit 20 --json
-octopus data preview <taskId> --source cloud --unexported --limit 20 --json
+bazhuayu data count <taskId> --source cloud --json
+bazhuayu data preview <taskId> --source cloud --limit 20 --json
+bazhuayu data preview <taskId> --source cloud --unexported --limit 20 --json
 ```
 
 `--unexported` 只读取云端未导出数据，不会把这些数据标记为已导出。自动化程序若需要维护导出状态，应另行调用对应 OpenAPI 或客户端能力。
@@ -119,8 +123,8 @@ octopus data preview <taskId> --source cloud --unexported --limit 20 --json
 长时间运行或管道处理时使用：
 
 ```bash
-octopus run <taskId> --jsonl
-octopus run <taskId> --task-file task.json --jsonl
+bazhuayu run <taskId> --jsonl
+bazhuayu run <taskId> --task-file task.json --jsonl
 ```
 
 每行一个 JSON 对象，便于流式处理进度：

@@ -1,9 +1,9 @@
 {
   "version": 1,
-  "generatedAt": "2026-07-23T07:36:36.669Z",
+  "generatedAt": "2026-07-29T02:33:52.386Z",
   "counts": {
     "faqIntents": 412,
-    "publicAnswers": 660
+    "publicAnswers": 661
   },
   "aliases": [],
   "intents": [
@@ -5700,6 +5700,13 @@
       "route": "/zh/product/pricing/template",
       "sourceType": "产品文档"
     },
+    "doc:/zh/mcp/cases/index": {
+      "title": "实战案例",
+      "summary": "通过完整案例了解如何使用八爪鱼 MCP 解决真实业务问题。",
+      "steps": [],
+      "route": "/zh/mcp/cases/index",
+      "sourceType": "MCP 服务"
+    },
     "doc:/zh/mcp/ecommerce-data-task": {
       "title": "ecommerce_data_task",
       "summary": "提交 Temu 或 TikTok Shop 商品与评论采集任务。",
@@ -6025,56 +6032,56 @@
     },
     "doc:/zh/cli/core-commands/browser-management": {
       "title": "浏览器管理",
-      "summary": "使用 octopus browser 配置独立浏览器或复用 Chrome、Edge 用户 Profile 的登录状态。",
+      "summary": "使用 bazhuayu browser 配置独立浏览器或复用 Chrome、Edge 用户 Profile 的登录状态。",
       "steps": [],
       "route": "/zh/cli/core-commands/browser-management",
       "sourceType": "CLI"
     },
     "doc:/zh/cli/core-commands/detect": {
       "title": "网页检测与任务生成",
-      "summary": "使用 octopus detect 检测网页结构、选择采集区域，并生成可校验和运行的本地任务文件。",
+      "summary": "使用 bazhuayu detect 检测网页结构、选择采集区域，并生成可校验和运行的本地任务文件。",
       "steps": [
+        "命令改名：所有当前调用改用 bazhuayu detect；octopus 可执行命令已删除。",
+        "验证页提前终止：检测到验证码、访问限制或安全验证页面时，detect 会在生成任务前失败退出，避免把验证页保存成无效任务。",
+        "候选区判断优化：弱候选和整页导航区域的判断得到优化，降低把导航栏、侧边栏误选为主数据区的概率。",
         "generatedTask：任务文件、任务 ID、字段和候选区",
         "preview：Agent plan 风险预览",
         "agentFiles：使用 --keep-agent-files 时保留的上下文和计划文件",
         "sampleRun：样品采集的退出码、运行结果和质量摘要",
-        "打开标注截图或全页截图。",
-        "检查所选候选区的裁剪图。",
-        "根据用户目标、页面标题、首屏、当前导航/Tab、语义目的和主内容显著性判断主目标。",
-        "核对主数据区域、字段、详情链接和分页控件。"
+        "打开标注截图或全页截图。"
       ],
       "route": "/zh/cli/core-commands/detect",
       "sourceType": "CLI"
     },
     "doc:/zh/cli/core-commands/diagnostics": {
       "title": "环境诊断",
-      "summary": "使用 octopus doctor、browser status 与 auth status 检查八爪鱼 CLI 环境、浏览器依赖与登录状态。",
+      "summary": "使用 bazhuayu doctor、browser status 与 auth status 检查八爪鱼 CLI 环境、浏览器依赖与登录状态。",
       "steps": [],
       "route": "/zh/cli/core-commands/diagnostics",
       "sourceType": "CLI"
     },
     "doc:/zh/cli/core-commands/export-data": {
       "title": "导出数据",
-      "summary": "使用 octopus data history、count、preview 与 export 查看采集历史、检查行数、预览样例并导出 Excel、CSV、JSON 等格式。",
+      "summary": "使用 bazhuayu data history、count、preview 与 export 查看采集历史、检查行数、预览样例并导出 Excel、CSV、JSON 等格式。",
       "steps": [],
       "route": "/zh/cli/core-commands/export-data",
       "sourceType": "CLI"
     },
     "doc:/zh/cli/core-commands/run-tasks": {
       "title": "运行采集任务",
-      "summary": "使用 octopus run 运行已有任务或本地任务文件，使用 octopus cloud start 在云端运行任务。",
+      "summary": "使用 bazhuayu run 运行已有任务或本地任务文件，使用 bazhuayu cloud start 在云端运行任务。",
       "steps": [],
       "route": "/zh/cli/core-commands/run-tasks",
       "sourceType": "CLI"
     },
     "doc:/zh/cli/core-commands/task-management": {
       "title": "任务管理",
-      "summary": "使用 octopus task、task-group、template、template-task 与 schedule cloud 查找、查看、校验和管理八爪鱼任务。",
+      "summary": "使用 bazhuayu task、task-group、template、template-task 与 schedule cloud 查找、查看、校验和管理八爪鱼任务。",
       "steps": [
-        "octopus task rename/move/delete ... --yes",
-        "octopus task-group update/delete/set-default ... --yes",
-        "octopus template-task update ... --yes",
-        "octopus schedule cloud update/start/stop ... --yes"
+        "bazhuayu task rename/move/delete ... --yes",
+        "bazhuayu task-group update/delete/set-default ... --yes",
+        "bazhuayu template-task update ... --yes",
+        "bazhuayu schedule cloud update/start/stop ... --yes"
       ],
       "route": "/zh/cli/core-commands/task-management",
       "sourceType": "CLI"
@@ -6107,7 +6114,7 @@
     },
     "doc:/zh/cli/quick-start/installation": {
       "title": "安装与验证",
-      "summary": "安装 bazhuayu-cli@0.1.30，并验证 octopus 命令、Node.js 环境与本地采集运行时。",
+      "summary": "安装 bazhuayu-cli@0.1.32，并验证 bazhuayu 命令、Node.js 环境与本地采集运行时。",
       "steps": [
         "Node.js 20 或更高（推荐 22 LTS）",
         "npm 8 或更高",
@@ -6129,7 +6136,7 @@
     },
     "doc:/zh/cli/reference/command-cheatsheet": {
       "title": "命令速查表",
-      "summary": "八爪鱼 CLI v0.1.30 常用命令快速参考。",
+      "summary": "八爪鱼 CLI v0.1.32 常用命令快速参考。",
       "steps": [],
       "route": "/zh/cli/reference/command-cheatsheet",
       "sourceType": "CLI"

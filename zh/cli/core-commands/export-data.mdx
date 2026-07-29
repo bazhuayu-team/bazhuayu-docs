@@ -1,6 +1,6 @@
 ---
 title: 导出数据
-description: 使用 octopus data history、count、preview 与 export 查看采集历史、检查行数、预览样例并导出 Excel、CSV、JSON 等格式。
+description: 使用 bazhuayu data history、count、preview 与 export 查看采集历史、检查行数、预览样例并导出 Excel、CSV、JSON 等格式。
 ---
 
 > 采集完成后，通过统一的 `data` 命令查看历史批次、检查结果数量、预览数据并导出文件。v0.1.28 起新增 `data count`、`data preview` 和云端未导出数据读取能力。
@@ -10,66 +10,66 @@ description: 使用 octopus data history、count、preview 与 export 查看采�
 `data` 命令默认读取本地结果。读取云端结果时传 `--source cloud` 或 `--cloud`；读取本地结果时可传 `--source local` 或 `--local`。
 
 ```bash
-octopus data history <taskId> --source local
-octopus data history <taskId> --source cloud
+bazhuayu data history <taskId> --source local
+bazhuayu data history <taskId> --source cloud
 ```
 
 如果本地运行时使用了 `--output ./runs`，查看历史、计数、预览或导出时保持相同路径：
 
 ```bash
-octopus run <taskId> --output ./runs
-octopus data history <taskId> --source local --output ./runs
-octopus data export <taskId> --source local --output ./runs --format xlsx
+bazhuayu run <taskId> --output ./runs
+bazhuayu data history <taskId> --source local --output ./runs
+bazhuayu data export <taskId> --source local --output ./runs --format xlsx
 ```
 
-## `octopus data history`（查看采集历史）
+## `bazhuayu data history`（查看采集历史）
 
 ```bash
-octopus data history <taskId>
-octopus data history <taskId> --local
-octopus data history <taskId> --cloud
-octopus data history <taskId> --source cloud --json
+bazhuayu data history <taskId>
+bazhuayu data history <taskId> --local
+bazhuayu data history <taskId> --cloud
+bazhuayu data history <taskId> --source cloud --json
 ```
 
 历史列表用于获取批次 ID。导出或预览指定批次时传 `--lot-id <lotId>`。
 
-## `octopus data count`（检查行数）
+## `bazhuayu data count`（检查行数）
 
 ```bash
-octopus data count <taskId>
-octopus data count <taskId> --source local --json
-octopus data count <taskId> --source cloud --json
-octopus data count <taskId> --source cloud --unexported --json
+bazhuayu data count <taskId>
+bazhuayu data count <taskId> --source local --json
+bazhuayu data count <taskId> --source cloud --json
+bazhuayu data count <taskId> --source cloud --unexported --json
 ```
 
 `--unexported` 只适用于云端未导出数据计数。
 
-## `octopus data preview`（预览数据）
+## `bazhuayu data preview`（预览数据）
 
 ```bash
-octopus data preview <taskId>
-octopus data preview <taskId> --source local --limit 20 --json
-octopus data preview <taskId> --source cloud --limit 20 --offset 0 --json
-octopus data preview <taskId> --source cloud --lot-id <lotId> --limit 20 --json
-octopus data preview <taskId> --source cloud --unexported --limit 20 --json
+bazhuayu data preview <taskId>
+bazhuayu data preview <taskId> --source local --limit 20 --json
+bazhuayu data preview <taskId> --source cloud --limit 20 --offset 0 --json
+bazhuayu data preview <taskId> --source cloud --lot-id <lotId> --limit 20 --json
+bazhuayu data preview <taskId> --source cloud --unexported --limit 20 --json
 ```
 
 未传 `--offset` 时，`preview` 默认返回最新的若干行。传 `--offset <n>` 可从指定偏移读取。
 
-## `octopus data export`（导出采集结果）
+## `bazhuayu data export`（导出采集结果）
 
 ```bash
 # 导出为 Excel
-octopus data export <taskId> --format xlsx --file result.xlsx
+bazhuayu data export <taskId> --format xlsx --file result.xlsx
 
 # 导出本地结果为 CSV
-octopus data export <taskId> --local --format csv --file result.csv
+bazhuayu data export <taskId> --local --format csv --file result.csv
 
 # 按批次导出 JSON
-octopus data export <taskId> --lot-id <lotId> --format json
+bazhuayu data export <taskId> --lot-id <lotId> --format json
 
 # 导出云端未导出数据
-octopus data export <taskId> --source cloud --unexported --format csv --file unexported.csv
+bazhuayu data export <taskId> --source cloud --unexported --format csv --file unexported.csv
 ```
 
 <Note>
@@ -79,11 +79,11 @@ octopus data export <taskId> --source cloud --unexported --format csv --file une
 ## 支持格式
 
 ```bash
-octopus data export <taskId> --format xlsx
-octopus data export <taskId> --format csv
-octopus data export <taskId> --format json
-octopus data export <taskId> --format html
-octopus data export <taskId> --format xml
+bazhuayu data export <taskId> --format xlsx
+bazhuayu data export <taskId> --format csv
+bazhuayu data export <taskId> --format json
+bazhuayu data export <taskId> --format html
+bazhuayu data export <taskId> --format xml
 ```
 
 | 格式 | 适合场景 |

@@ -1,21 +1,29 @@
 ---
 title: 网页检测与任务生成
-description: 使用 octopus detect 检测网页结构、选择采集区域，并生成可校验和运行的本地任务文件。
+description: 使用 bazhuayu detect 检测网页结构、选择采集区域，并生成可校验和运行的本地任务文件。
 ---
 
-> `octopus detect` 是网页检测与任务生成入口。v0.1.30 支持使用系统 Chrome / Edge 用户 Profile 检测登录后的页面，并继续兼容既有 Agent 计划、API 列表候选、可见 DOM 字段选择和自定义候选区能力。
+> `bazhuayu detect` 是网页检测与任务生成入口。v0.1.32 使用 `bazhuayu` 作为唯一命令入口，并继续兼容用户浏览器模式、Agent 计划、API 列表候选、可见 DOM 字段选择和自定义候选区能力。
+
+## v0.1.32 识别与命令更新
+
+- **命令改名**：所有当前调用改用 `bazhuayu detect`；`octopus` 可执行命令已删除。
+- **验证页提前终止**：检测到验证码、访问限制或安全验证页面时，`detect` 会在生成任务前失败退出，避免把验证页保存成无效任务。
+- **候选区判断优化**：弱候选和整页导航区域的判断得到优化，降低把导航栏、侧边栏误选为主数据区的概率。
+
+遇到验证页失败时，先完成网站要求的登录、验证或访问限制处理，再重新运行 `bazhuayu detect`。不要把失败输出当作已生成的任务继续执行 `run`。
 
 ## v0.1.30 用户浏览器模式
 
 默认 `independent` 模式使用临时 Chrome for Testing Profile。需要检测后台、会员页或其他登录后页面时，可使用 v0.1.30 新增的 `user` 模式复用 Chrome / Edge 登录状态：
 
 ```bash
-octopus detect "https://example.com/account" --auto --browser user --browser-id chrome --profile "Default" --goal "提取账户数据" --output task.json
-octopus detect "https://example.com/account" --manual --browser user --browser-id edge --profile "Profile 1" --output task.json
-octopus detect "https://example.com/account" --agent --agent-command "node make-plan.mjs" --browser user --browser-id chrome --profile "Default" --goal "提取账户数据" --run-sample 3 --json
+bazhuayu detect "https://example.com/account" --auto --browser user --browser-id chrome --profile "Default" --goal "提取账户数据" --output task.json
+bazhuayu detect "https://example.com/account" --manual --browser user --browser-id edge --profile "Profile 1" --output task.json
+bazhuayu detect "https://example.com/account" --agent --agent-command "node make-plan.mjs" --browser user --browser-id chrome --profile "Default" --goal "提取账户数据" --run-sample 3 --json
 ```
 
-首次使用前必须通过 [`octopus browser`](/zh/cli/core-commands/browser-management) 安装扩展，并确认 `browser status --json` 的 `readyForUserBrowserRun` 为 `true`。用户模式仅支持 Windows 和 macOS，不支持 `--headless`。日常 detect 会复用已打开的浏览器并创建专用会话窗口；只有 `browser install` 要求浏览器完全关闭。
+首次使用前必须通过 [`bazhuayu browser`](/zh/cli/core-commands/browser-management) 安装扩展，并确认 `browser status --json` 的 `readyForUserBrowserRun` 为 `true`。用户模式仅支持 Windows 和 macOS，不支持 `--headless`。日常 detect 会复用已打开的浏览器并创建专用会话窗口；只有 `browser install` 要求浏览器完全关闭。
 
 浏览器选择优先级为 `--browser` 参数、`OCTOPUS_BROWSER` 环境变量、`browser use` 保存的默认设置、`independent`。`--force-close-browser` 仅用于多开或 Profile 锁定等故障恢复，通常无需传入。
 
@@ -24,10 +32,10 @@ octopus detect "https://example.com/account" --agent --agent-command "node make-
 v0.1.28 的主要新增能力集中在任务管理、任务组、模板任务、云定时和数据检查命令。新建任务的推荐流程保持为：
 
 ```bash
-octopus detect URL --agent --agent-command "node make-plan.mjs" --goal "采集目标" --run-sample 3 --json
-octopus detect URL --auto --goal "采集目标" --task-id <taskId> --output task.json
-octopus task validate <taskId> --task-file task.json
-octopus run <taskId> --task-file task.json --max-rows 20
+bazhuayu detect URL --agent --agent-command "node make-plan.mjs" --goal "采集目标" --run-sample 3 --json
+bazhuayu detect URL --auto --goal "采集目标" --task-id <taskId> --output task.json
+bazhuayu task validate <taskId> --task-file task.json
+bazhuayu run <taskId> --task-file task.json --max-rows 20
 ```
 
 ## v0.1.27 更新要点（历史）
@@ -42,7 +50,7 @@ octopus run <taskId> --task-file task.json --max-rows 20
 
 `--agent` 当前不再需要 `--yes`。为了兼容旧脚本，CLI 仍接受 `--yes`，但新示例和新脚本请省略。
 
-API 列表任务会在 JSON 输出中标记 `generatedTask.mode: "api_list"` 与 `localOnly: true`。这类任务可以用 `octopus run <taskId> --task-file task.json` 本地运行，当前不自动同步云端任务。
+API 列表任务会在 JSON 输出中标记 `generatedTask.mode: "api_list"` 与 `localOnly: true`。这类任务可以用 `bazhuayu run <taskId> --task-file task.json` 本地运行，当前不自动同步云端任务。
 
 ## v0.1.26 更新要点（历史）
 
@@ -69,10 +77,10 @@ API 列表任务会在 JSON 输出中标记 `generatedTask.mode: "api_list"` 与
 
 ## Agent 最短路径
 
-LLM 或 Agent 创建任务时，应先运行 `octopus capabilities --json`，再使用可信的本地 Agent 运行器：
+LLM 或 Agent 创建任务时，应先运行 `bazhuayu capabilities --json`，再使用可信的本地 Agent 运行器：
 
 ```bash
-octopus detect https://movie.douban.com/explore --agent --agent-command "node make-plan.mjs" --goal "提取电影名称、评分、导演和年份" --task-id douban-movies --output task.json --run-sample 3 --json
+bazhuayu detect https://movie.douban.com/explore --agent --agent-command "node make-plan.mjs" --goal "提取电影名称、评分、导演和年份" --task-id douban-movies --output task.json --run-sample 3 --json
 ```
 
 <Warning>
@@ -82,7 +90,7 @@ octopus detect https://movie.douban.com/explore --agent --agent-command "node ma
 `--run-sample <n>` 只支持 `--agent`，且 `n` 必须是正整数。它会使用生成的任务执行一次 `--max-rows <n>` 本地采集。可用 `--run-output <dir>` 指定样品产物目录。独立模式可用 `--headless` 控制样品采集；用户浏览器模式不支持无头运行。
 
 ```bash
-octopus detect URL --agent --agent-command "node make-plan.mjs" --goal "提取商品信息" --run-sample 5 --run-output ./sample-runs --keep-agent-files --json
+bazhuayu detect URL --agent --agent-command "node make-plan.mjs" --goal "提取商品信息" --run-sample 5 --run-output ./sample-runs --keep-agent-files --json
 ```
 
 结构化结果保持为单个 JSON envelope，其中可能包含：
@@ -97,9 +105,9 @@ octopus detect URL --agent --agent-command "node make-plan.mjs" --goal "提取�
 v0.1.27 的 Agent 计划可在 preview 未通过时根据 `repairInstruction` 修正后重新应用：
 
 ```bash
-octopus detect --preview-agent-plan plan.json --agent-context context.json --json
+bazhuayu detect --preview-agent-plan plan.json --agent-context context.json --json
 # 修改 plan.json 中的候选区、字段、customCandidate 或 visualReview 后
-octopus detect --apply-agent-plan plan.json --agent-context context.json --output task-fixed.json --json
+bazhuayu detect --apply-agent-plan plan.json --agent-context context.json --output task-fixed.json --json
 ```
 
 ## Agent 审计路径
@@ -107,10 +115,10 @@ octopus detect --apply-agent-plan plan.json --agent-context context.json --outpu
 需要保留完整上下文和人工审查记录时，使用分步流程：
 
 ```bash
-octopus detect URL --prepare-agent --json --goal "提取用户评论" --output context.json
-octopus detect --preview-agent-plan plan.json --agent-context context.json --json
-octopus detect --apply-agent-plan plan.json --agent-context context.json --output task.json --json
-octopus task validate <taskId> --task-file task.json --json
+bazhuayu detect URL --prepare-agent --json --goal "提取用户评论" --output context.json
+bazhuayu detect --preview-agent-plan plan.json --agent-context context.json --json
+bazhuayu detect --apply-agent-plan plan.json --agent-context context.json --output task.json --json
+bazhuayu task validate <taskId> --task-file task.json --json
 ```
 
 上下文可能包含全页截图、标注候选区的截图、候选区裁剪图、`visualElements`、`pageVisualElements` 和 `apiCandidates`，路径位于 `context.screenshot`、`context.visualArtifacts` 和 `context.decisionSummary`。Agent 写 `plan.json` 前必须：
@@ -202,39 +210,39 @@ API 候选生成的任务是 `api_list` 本地任务；输出会包含 `localOnl
 `--auto` 适合用户直接操作 CLI，由确定性检测结果自动选择最佳候选区。它不是 LLM/Agent 创建任务的默认路径。
 
 ```bash
-octopus detect https://movie.douban.com/explore --auto --goal "提取电影名称、评分、简介、导演和年份" --task-id douban-movies --output task.json
+bazhuayu detect https://movie.douban.com/explore --auto --goal "提取电影名称、评分、简介、导演和年份" --task-id douban-movies --output task.json
 ```
 
 如果省略 `--output`，CLI 会在当前目录自动创建 `detected_<host>.json`。带有 `&`、`?` 等 shell 特殊字符的 URL 应使用引号包裹。
 
 ```bash
-octopus detect "https://example.com/page?a=1&b=2" --auto --output task.json
+bazhuayu detect "https://example.com/page?a=1&b=2" --auto --output task.json
 ```
 
 提高检测质量：
 
 ```bash
 # 使用 LLM 辅助候选排序
-octopus detect URL --auto --goal "提取商品信息" --llm-rank --output task.json
+bazhuayu detect URL --auto --goal "提取商品信息" --llm-rank --output task.json
 
 # 不自动关闭登录、Cookie 或广告弹窗
-octopus detect URL --auto --no-dismiss-popups --output task.json
+bazhuayu detect URL --auto --no-dismiss-popups --output task.json
 ```
 
 检测结果包含候选区域、字段、样例数据、匹配度以及分页信息。需要人工指定候选区域时：
 
 ```bash
-octopus detect URL
-octopus detect URL --select protected_smart_1 --output task.json
+bazhuayu detect URL
+bazhuayu detect URL --select protected_smart_1 --output task.json
 ```
 
 ## 手动与搜索模式
 
 ```bash
-octopus detect URL --manual --goal "提取商品详情" --output task.json
-octopus detect https://www.example.com --auto --query "关键词" --output task.json
-octopus detect https://www.example.com --auto --input keyword=关键词 --output task.json
-octopus detect URL --manual --browser user --browser-id chrome --profile "Default" --output task.json
+bazhuayu detect URL --manual --goal "提取商品详情" --output task.json
+bazhuayu detect https://www.example.com --auto --query "关键词" --output task.json
+bazhuayu detect https://www.example.com --auto --input keyword=关键词 --output task.json
+bazhuayu detect URL --manual --browser user --browser-id chrome --profile "Default" --output task.json
 ```
 
 手动模式用于登录、处理验证、选择高亮区域、配置详情页采集方式和保存会话。搜索模式生成的任务会保留输入框与提交动作。遇到登录、验证码或付费墙时，改用手动模式，并按需使用 `--save-session` 与 `--session-name`。
@@ -247,7 +255,7 @@ v0.1.25 新增能力：`detect --auto` 或 `detect --agent` 生成的普通任�
 
 ```bash
 # detect 后，任务出现在客户端的"本地任务"列表中
-octopus detect https://movie.douban.com/explore --auto --goal "提取电影名称"
+bazhuayu detect https://movie.douban.com/explore --auto --goal "提取电影名称"
 # → task.json 在本地，同时同步到客户端任务列表（可见可编辑）
 ```
 
@@ -258,7 +266,7 @@ octopus detect https://movie.douban.com/explore --auto --goal "提取电影名�
 
 ```bash
 # CLI 查看同步后的任务
-octopus task list --keyword "detected"
+bazhuayu task list --keyword "detected"
 ```
 
 ## 校验并运行
@@ -266,24 +274,24 @@ octopus task list --keyword "detected"
 `detect` 负责生成任务，不会直接执行采集。推荐流程：
 
 ```bash
-octopus detect URL --auto --goal "提取标题和链接" --task-id <taskId> --output task.json
-octopus task validate <taskId> --task-file task.json
-octopus run <taskId> --task-file task.json --max-rows 20
-octopus data export <taskId> --source local --lot-id <lotId> --format xlsx --file result.xlsx
+bazhuayu detect URL --auto --goal "提取标题和链接" --task-id <taskId> --output task.json
+bazhuayu task validate <taskId> --task-file task.json
+bazhuayu run <taskId> --task-file task.json --max-rows 20
+bazhuayu data export <taskId> --source local --lot-id <lotId> --format xlsx --file result.xlsx
 ```
 
 ## 从旧命令迁移
 
 <Warning>
-  v0.1.23 起不再提供 `octopus recognize`，请改用 `octopus detect`。`octopus run-url` 仍作为隐藏兼容入口存在，但不在顶层帮助中展示，新文档和新脚本不应继续依赖它。
+  v0.1.32 起，`octopus` 命令已删除，当前命令统一使用 `bazhuayu`。更早的 `octopus recognize` 已在 v0.1.23 被移除；v0.1.32 之前的 `octopus run-url` 仅为隐藏兼容入口，新文档和新脚本不应继续依赖它。
 </Warning>
 
 | 旧用法 | 当前推荐用法 |
 | --- | --- |
-| `octopus recognize URL --auto` | `octopus detect URL --auto` |
-| `octopus recognize URL --manual` | `octopus detect URL --manual` |
-| `octopus recognize URL --prepare-agent` | `octopus detect URL --prepare-agent` |
-| `octopus run-url URL --auto --max-rows 20` | 先 `detect --task-id <taskId> --output task.json`，再 `run <taskId> --task-file task.json --max-rows 20` |
+| `octopus recognize URL --auto` | `bazhuayu detect URL --auto` |
+| `octopus recognize URL --manual` | `bazhuayu detect URL --manual` |
+| `octopus recognize URL --prepare-agent` | `bazhuayu detect URL --prepare-agent` |
+| `octopus run-url URL --auto --max-rows 20` | 先 `bazhuayu detect --task-id <taskId> --output task.json`，再 `bazhuayu run <taskId> --task-file task.json --max-rows 20` |
 
 ## 下一步
 

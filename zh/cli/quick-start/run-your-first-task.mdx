@@ -14,7 +14,7 @@ description: 使用 detect 从新 URL 生成任务，校验并运行任务文件
 LLM 或 Agent 创建任务时，推荐使用可信的本地 Agent 运行器，并立即采集少量样品验证质量：
 
 ```bash
-octopus detect https://movie.douban.com/explore --agent --agent-command "node make-plan.mjs" --goal "提取电影名称、评分、导演和年份" --task-id douban-movies --output task.json --run-sample 3 --json
+bazhuayu detect https://movie.douban.com/explore --agent --agent-command "node make-plan.mjs" --goal "提取电影名称、评分、导演和年份" --task-id douban-movies --output task.json --run-sample 3 --json
 ```
 
 `--agent-command` 是本地 shell 命令，不是自然语言提示。`detect --agent` 不需要 `--yes`；旧脚本传入时仍会被兼容。`--run-sample` 只支持 `--agent` 且必须为正整数。命令返回单个 JSON envelope；任务生成结果与样品采集结果应分别检查，尤其是 `sampleRun.exitCode` 和 `sampleRun.summary`。
@@ -24,52 +24,52 @@ octopus detect https://movie.douban.com/explore --agent --agent-command "node ma
 如果没有现成任务，先检测网页并生成任务文件：
 
 ```bash
-octopus detect https://movie.douban.com/explore --auto --goal "提取电影名称和评分" --task-id douban-movies --output task.json
-octopus task validate douban-movies --task-file task.json
-octopus run douban-movies --task-file task.json --max-rows 20
+bazhuayu detect https://movie.douban.com/explore --auto --goal "提取电影名称和评分" --task-id douban-movies --output task.json
+bazhuayu task validate douban-movies --task-file task.json
+bazhuayu run douban-movies --task-file task.json --max-rows 20
 ```
 
-`--auto` 适合用户直接操作 CLI。`detect` 会分析列表页、详情页与分页逻辑，但不会直接执行采集。v0.1.25 起，detect 生成的普通任务还会自动同步到八爪鱼桌面客户端任务列表，你可以在客户端中查看和编辑后再运行。v0.1.27 对 DOM 候选弱的 API 支撑列表页会优先生成 `api_list` 本地任务，这类任务当前不自动同步云端。
+`--auto` 适合用户直接操作 CLI。`detect` 会分析列表页、详情页与分页逻辑，但不会直接执行采集。v0.1.32 遇到验证码、访问限制或安全验证页面会在生成任务前提前失败；先处理网站验证或访问限制，再重新检测。v0.1.25 起，detect 生成的普通任务还会自动同步到八爪鱼桌面客户端任务列表，你可以在客户端中查看和编辑后再运行。v0.1.27 对 DOM 候选弱的 API 支撑列表页会优先生成 `api_list` 本地任务，这类任务当前不自动同步云端。
 
 ### 采集需要登录的页面
 
 v0.1.30 可复用 Chrome / Edge 用户 Profile。首次安装扩展并启用用户模式后，为依赖登录状态的 detect 和 run 指定同一个浏览器与 Profile：
 
 ```bash
-octopus detect "https://example.com/account/orders" --auto --browser user --browser-id chrome --profile "Default" --goal "提取订单号、金额和时间" --task-id account-orders --output task.json
-octopus task validate account-orders --task-file task.json
-octopus run account-orders --task-file task.json --browser user --browser-id chrome --profile "Default" --max-rows 20
+bazhuayu detect "https://example.com/account/orders" --auto --browser user --browser-id chrome --profile "Default" --goal "提取订单号、金额和时间" --task-id account-orders --output task.json
+bazhuayu task validate account-orders --task-file task.json
+bazhuayu run account-orders --task-file task.json --browser user --browser-id chrome --profile "Default" --max-rows 20
 ```
 
-如果已通过 `octopus browser use user` 保存默认模式，可以省略这些浏览器参数。用户模式不支持 `--headless`。
+如果已通过 `bazhuayu browser use user` 保存默认模式，可以省略这些浏览器参数。用户模式不支持 `--headless`。
 
 ### detect → 客户端编辑 → 采集
 
 ```bash
 # 1. CLI AI 识别并生成任务（自动同步到客户端）
-octopus detect https://movie.douban.com/explore --auto --goal "提取电影名称、评分、导演、年份"
+bazhuayu detect https://movie.douban.com/explore --auto --goal "提取电影名称、评分、导演、年份"
 
 # 2. 在八爪鱼桌面客户端查看和编辑任务
 #    客户端 → 任务列表 → 找到 detected_movie.douban.com
 
 # 3. 编辑完从 CLI 或客户端运行
-octopus run detected_movie.douban.com --max-rows 20 --jsonl
+bazhuayu run detected_movie.douban.com --max-rows 20 --jsonl
 ```
 
 常用检测方式：
 
 ```bash
-octopus detect URL --auto --goal "提取商品名称、价格和链接" --task-id <taskId> --output task.json
-octopus detect URL --manual --goal "提取商品详情" --task-id <taskId> --output task.json
-octopus detect URL --auto --llm-rank --task-id <taskId> --output task.json
-octopus detect URL --auto --json --task-id <taskId> --output task.json
+bazhuayu detect URL --auto --goal "提取商品名称、价格和链接" --task-id <taskId> --output task.json
+bazhuayu detect URL --manual --goal "提取商品详情" --task-id <taskId> --output task.json
+bazhuayu detect URL --auto --llm-rank --task-id <taskId> --output task.json
+bazhuayu detect URL --auto --json --task-id <taskId> --output task.json
 ```
 
 需要手动选择候选区域时，先查看候选结果，再生成任务：
 
 ```bash
-octopus detect URL
-octopus detect URL --select protected_smart_1 --output task.json
+bazhuayu detect URL
+bazhuayu detect URL --select protected_smart_1 --output task.json
 ```
 
 ## 路径三：运行已有任务
@@ -77,10 +77,10 @@ octopus detect URL --select protected_smart_1 --output task.json
 先列出任务：
 
 ```bash
-octopus task list
-octopus task list --keyword 新闻 --page 1 --page-size 10
-octopus task list --task-group <groupId> --template-id <templateRegistrationId> --json
-octopus task list --json
+bazhuayu task list
+bazhuayu task list --keyword 新闻 --page 1 --page-size 10
+bazhuayu task list --task-group <groupId> --template-id <templateRegistrationId> --json
+bazhuayu task list --json
 ```
 
 从结果中记下 **任务 ID**（`taskId`）。
@@ -88,38 +88,38 @@ octopus task list --json
 查看与校验任务：
 
 ```bash
-octopus task show <taskId> --json
-octopus task inspect <taskId>
-octopus task validate <taskId>
+bazhuayu task show <taskId> --json
+bazhuayu task inspect <taskId>
+bazhuayu task validate <taskId>
 ```
 
 本地运行：
 
 ```bash
-octopus run <taskId>
-octopus run <taskId> --headless
-octopus run <taskId> --max-rows 100
-octopus run <taskId> --detach
-octopus run <taskId> --output ./runs
+bazhuayu run <taskId>
+bazhuayu run <taskId> --headless
+bazhuayu run <taskId> --max-rows 100
+bazhuayu run <taskId> --detach
+bazhuayu run <taskId> --output ./runs
 ```
 
 后台运行后可查看、暂停、恢复或停止：
 
 ```bash
-octopus local status <taskId>
-octopus local pause <taskId>
-octopus local resume <taskId>
-octopus local stop <taskId>
-octopus local cleanup
+bazhuayu local status <taskId>
+bazhuayu local pause <taskId>
+bazhuayu local resume <taskId>
+bazhuayu local stop <taskId>
+bazhuayu local cleanup
 ```
 
 云端运行：
 
 ```bash
-octopus cloud start <taskId>
-octopus cloud status <taskId>
-octopus cloud history <taskId>
-octopus cloud stop <taskId>
+bazhuayu cloud start <taskId>
+bazhuayu cloud status <taskId>
+bazhuayu cloud history <taskId>
+bazhuayu cloud stop <taskId>
 ```
 
 ## 导出数据
@@ -127,20 +127,20 @@ octopus cloud stop <taskId>
 查看历史、计数和样例数据：
 
 ```bash
-octopus data history <taskId>
-octopus data history <taskId> --local
-octopus data history <taskId> --cloud
-octopus data count <taskId> --source cloud --json
-octopus data preview <taskId> --source cloud --limit 20 --json
+bazhuayu data history <taskId>
+bazhuayu data history <taskId> --local
+bazhuayu data history <taskId> --cloud
+bazhuayu data count <taskId> --source cloud --json
+bazhuayu data preview <taskId> --source cloud --limit 20 --json
 ```
 
 导出结果：
 
 ```bash
-octopus data export <taskId> --format xlsx --file result.xlsx
-octopus data export <taskId> --local --format csv --file result.csv
-octopus data export <taskId> --lot-id <lotId> --format json
-octopus data export <taskId> --source cloud --unexported --format csv --file unexported.csv
+bazhuayu data export <taskId> --format xlsx --file result.xlsx
+bazhuayu data export <taskId> --local --format csv --file result.csv
+bazhuayu data export <taskId> --lot-id <lotId> --format json
+bazhuayu data export <taskId> --source cloud --unexported --format csv --file unexported.csv
 ```
 
 支持格式：`xlsx`、`csv`、`html`、`json`、`xml`。`--unexported` 只读取云端未导出数据，不会自动把这些数据标记为已导出。
@@ -149,7 +149,7 @@ octopus data export <taskId> --source cloud --unexported --format csv --file une
 
 <CardGroup cols={2}>
   <Card title="网页检测与任务生成" href="/zh/cli/core-commands/detect">
-    查看 `octopus detect` 的模式、参数与迁移说明。
+    查看 `bazhuayu detect` 的模式、参数与迁移说明。
   </Card>
   <Card title="运行采集任务" href="/zh/cli/core-commands/run-tasks">
     本地或云端运行已有任务和任务文件。

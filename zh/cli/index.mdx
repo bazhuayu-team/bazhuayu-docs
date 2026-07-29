@@ -5,36 +5,40 @@ description: 在终端中识别网页、生成任务、运行采集并导出数�
 
 > 使用八爪鱼 CLI，在命令行中完成网页检测、任务生成、已有任务运行、云采集控制和数据导出。
 
-八爪鱼 CLI 是面向开发者、数据团队、运维和 AI Agent 场景的命令行工具。v0.1.30 新增用户浏览器模式，可复用 Chrome / Edge Profile 的登录状态；任务管理、Agent 视觉规划和数据检查能力继续保持兼容。
+八爪鱼 CLI 是面向开发者、数据团队、运维和 AI Agent 场景的命令行工具。v0.1.32 将命令入口统一为 `bazhuayu`，保留用户浏览器模式、任务管理、Agent 视觉规划和数据检查能力；同时增强验证页识别和候选区判断。
+
+<Warning>
+  v0.1.32 起，`octopus` 命令已删除。所有新脚本、CI 和 Agent 调用都应使用 `bazhuayu`。环境变量 `OCTOPUS_API_KEY`、`OCTOPUS_ACCESS_TOKEN`、`OCTOPUS_API_BASE_URL` 与配置目录 `~/.octopus` 保持不变。
+</Warning>
 
 ## CLI 能做什么
 
 <CardGroup cols={2}>
   <Card title="网页检测与任务生成" icon="sparkles" href="/zh/cli/core-commands/detect">
-    使用 `octopus detect` 检测列表页、详情页与分页逻辑，生成可复用本地任务文件；普通任务会同步到客户端任务列表。
+    使用 `bazhuayu detect` 检测列表页、详情页与分页逻辑，生成可复用本地任务文件；普通任务会同步到客户端任务列表。
   </Card>
   <Card title="运行生成的任务" icon="wand-magic-sparkles" href="/zh/cli/core-commands/run-tasks">
-    使用 `octopus run <taskId> --task-file task.json` 执行检测生成的任务，并通过 `--max-rows` 控制条数。
+    使用 `bazhuayu run <taskId> --task-file task.json` 执行检测生成的任务，并通过 `--max-rows` 控制条数。
   </Card>
   <Card title="运行已有任务" icon="play" href="/zh/cli/core-commands/run-tasks">
-    使用 `octopus run <taskId>` 本地运行，或用 `octopus cloud start <taskId>` 在云端运行。
+    使用 `bazhuayu run <taskId>` 本地运行，或用 `bazhuayu cloud start <taskId>` 在云端运行。
   </Card>
   <Card title="导出采集数据" icon="download" href="/zh/cli/core-commands/export-data">
-    通过 `octopus data history/count/preview/export` 查看批次、预览数据并导出 XLSX、CSV、HTML、JSON、XML。
+    通过 `bazhuayu data history/count/preview/export` 查看批次、预览数据并导出 XLSX、CSV、HTML、JSON、XML。
   </Card>
   <Card title="管理远端资源" icon="folder-tree" href="/zh/cli/core-commands/task-management">
     使用 `task-group`、`template`、`template-task` 和 `schedule cloud` 管理任务组、模板任务与云定时。
   </Card>
   <Card title="复用浏览器登录状态" icon="browser" href="/zh/cli/core-commands/browser-management">
-    使用 `octopus browser` 配置 Chrome / Edge 用户 Profile，采集需要登录的页面。
+    使用 `bazhuayu browser` 配置 Chrome / Edge 用户 Profile，采集需要登录的页面。
   </Card>
 </CardGroup>
 
 ## 安装
 
 ```bash
-npm install -g bazhuayu-cli@0.1.30
-octopus --version
+npm install -g bazhuayu-cli@0.1.32
+bazhuayu --version
 ```
 
 环境要求：
@@ -50,10 +54,10 @@ Linux x64 从 v0.1.22 起支持本地采集；Linux arm64 暂不支持本地执�
 
 <Steps>
   <Step title="安装 CLI">
-    使用 `npm install -g bazhuayu-cli@0.1.30` 安装，并运行 `octopus doctor` 检查环境。
+    使用 `npm install -g bazhuayu-cli@0.1.32` 安装，并运行 `bazhuayu doctor` 检查环境。
   </Step>
   <Step title="登录认证">
-    通过 `octopus auth login`、`--oauth`、`--stdin` 或环境变量完成认证。
+    通过 `bazhuayu auth login`、`--oauth`、`--stdin` 或环境变量完成认证。
   </Step>
   <Step title="按需配置用户浏览器">
     公开网页可继续使用默认独立模式；需要登录状态时，按 `browser status` → `profiles` → `install` → `use user` 配置 Chrome / Edge Profile。
@@ -62,40 +66,40 @@ Linux x64 从 v0.1.22 起支持本地采集；Linux arm64 暂不支持本地执�
     LLM / Agent 使用 `detect --agent` 生成并审查任务；用户直接操作 CLI 时可用 `detect --auto`，已有任务或任务文件用 `run` 执行。
   </Step>
   <Step title="运行与监控">
-    本地运行可使用 `--detach` 后台执行，并用 `octopus local status` 查看进度。
+    本地运行可使用 `--detach` 后台执行，并用 `bazhuayu local status` 查看进度。
   </Step>
   <Step title="导出数据">
-    使用 `octopus data count/preview/export` 检查并导出 Excel、CSV、JSON 等格式。
+    使用 `bazhuayu data count/preview/export` 检查并导出 Excel、CSV、JSON 等格式。
   </Step>
 </Steps>
 
 ## 快速命令示例
 
 ```bash
-octopus --help
-octopus doctor
-octopus browser status --browser-id chrome --json
-octopus auth login
-octopus detect https://example.com --agent --agent-command "node make-plan.mjs" --goal "提取列表数据" --task-id example-list --output task.json --run-sample 3 --json
-octopus detect https://example.com --auto --goal "提取列表数据" --task-id example-list --output task.json
-octopus task validate example-list --task-file task.json
-octopus run example-list --task-file task.json --max-rows 20
-octopus task list
-octopus task-group list --json
-octopus data preview <taskId> --source cloud --limit 20 --json
-octopus run <taskId> --detach
-octopus data export <taskId> --format xlsx --file result.xlsx
+bazhuayu --help
+bazhuayu doctor
+bazhuayu browser status --browser-id chrome --json
+bazhuayu auth login
+bazhuayu detect https://example.com --agent --agent-command "node make-plan.mjs" --goal "提取列表数据" --task-id example-list --output task.json --run-sample 3 --json
+bazhuayu detect https://example.com --auto --goal "提取列表数据" --task-id example-list --output task.json
+bazhuayu task validate example-list --task-file task.json
+bazhuayu run example-list --task-file task.json --max-rows 20
+bazhuayu task list
+bazhuayu task-group list --json
+bazhuayu data preview <taskId> --source cloud --limit 20 --json
+bazhuayu run <taskId> --detach
+bazhuayu data export <taskId> --format xlsx --file result.xlsx
 ```
 
 ## CLI、MCP / 客户端功能对比
 
 | 功能 | MCP / 客户端 | CLI |
 | --- | --- | --- |
-| 浏览和搜索采集模板 | 可以 | 可以，使用 `octopus template search/view/version` |
-| 通过模板创建任务 | 可以 | 可以，使用 `octopus template-task create/update` |
-| 管理任务组 | 可以 | 可以，使用 `octopus task-group` |
-| 管理云定时 | 可以 | 可以，使用 `octopus schedule cloud`；本地定时仍在客户端中设置 |
-| 从 URL 新建采集任务 | 客户端可以 | 可以，使用 `octopus detect` |
+| 浏览和搜索采集模板 | 可以 | 可以，使用 `bazhuayu template search/view/version` |
+| 通过模板创建任务 | 可以 | 可以，使用 `bazhuayu template-task create/update` |
+| 管理任务组 | 可以 | 可以，使用 `bazhuayu task-group` |
+| 管理云定时 | 可以 | 可以，使用 `bazhuayu schedule cloud`；本地定时仍在客户端中设置 |
+| 从 URL 新建采集任务 | 客户端可以 | 可以，使用 `bazhuayu detect` |
 | 从 URL 执行采集 | 客户端可以 | 先用 `detect` 生成任务，再使用 `run <taskId> --task-file` |
 | 修改复杂采集规则 | 客户端更适合 | 部分支持，复杂规则建议客户端调整 |
 | 运行已有任务 | 可以 | 可以 |

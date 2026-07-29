@@ -12,12 +12,12 @@ description: 创建八爪鱼 API Key，并通过 API Key、OAuth、stdin 或环�
 无需认证即可运行的诊断命令包括：
 
 ```bash
-octopus --help
-octopus --version
-octopus capabilities
-octopus doctor
-octopus browser status --json
-octopus auth
+bazhuayu --help
+bazhuayu --version
+bazhuayu capabilities
+bazhuayu doctor
+bazhuayu browser status --json
+bazhuayu auth
 ```
 
 ## 创建 API Key
@@ -33,7 +33,7 @@ octopus auth
 ### 交互式登录
 
 ```bash
-octopus auth login
+bazhuayu auth login
 ```
 
 交互式登录会引导你选择 OAuth 或 API Key 登录方式。
@@ -41,7 +41,7 @@ octopus auth login
 ### OAuth 登录
 
 ```bash
-octopus auth login --oauth
+bazhuayu auth login --oauth
 ```
 
 适合可打开浏览器的桌面环境。
@@ -49,7 +49,7 @@ octopus auth login --oauth
 ### 直接传入 API Key
 
 ```bash
-octopus auth login <你的APIKey>
+bazhuayu auth login <你的APIKey>
 ```
 
 ### 从 stdin 读取
@@ -57,39 +57,41 @@ octopus auth login <你的APIKey>
 适合 CI/CD 或密钥管理系统：
 
 ```bash
-echo <你的APIKey> | octopus auth login --stdin
+echo <你的APIKey> | bazhuayu auth login --stdin
 ```
 
 ### 不自动打开浏览器
 
 ```bash
-octopus auth login --no-open
+bazhuayu auth login --no-open
 ```
 
 适合无 GUI 服务器或需要手动复制授权地址的环境。
 
 ### 环境变量
 
+v0.1.32 虽将命令入口改为 `bazhuayu`，但认证环境变量仍使用 `OCTOPUS_*` 前缀：
+
 ```bash
 # Windows PowerShell
 $env:OCTOPUS_API_KEY="你的APIKey"
-octopus task list --json
+bazhuayu task list --json
 
 # Linux / macOS
-OCTOPUS_API_KEY=你的APIKey octopus task list --json
+OCTOPUS_API_KEY=你的APIKey bazhuayu task list --json
 ```
 
 如果你使用 Access Token：
 
 ```bash
-OCTOPUS_ACCESS_TOKEN=你的AccessToken octopus task list --json
+OCTOPUS_ACCESS_TOKEN=你的AccessToken bazhuayu task list --json
 ```
 
 私有化或代理环境可覆盖 API 地址：
 
 ```bash
-OCTOPUS_API_BASE_URL=https://example.com octopus task list --json
-octopus auth status --api-base-url https://example.com --json
+OCTOPUS_API_BASE_URL=https://example.com bazhuayu task list --json
+bazhuayu auth status --api-base-url https://example.com --json
 ```
 
 ## 凭据优先级
@@ -101,7 +103,7 @@ CLI 会优先读取环境变量，其次读取本地凭据文件：
 2. 本地凭据文件 ~/.octopus/credentials.json
 ```
 
-`octopus auth login` 会自动创建本地凭据文件。默认路径：
+`bazhuayu auth login` 会自动创建本地凭据文件。默认路径：
 
 | 系统 | 路径 |
 | --- | --- |
@@ -111,9 +113,9 @@ CLI 会优先读取环境变量，其次读取本地凭据文件：
 ## 查看与退出登录
 
 ```bash
-octopus auth status
-octopus auth status --json
-octopus auth logout
+bazhuayu auth status
+bazhuayu auth status --json
+bazhuayu auth logout
 ```
 
 ## 下一步

@@ -1,9 +1,9 @@
 {
   "version": 1,
-  "generatedAt": "2026-07-23T07:36:36.669Z",
+  "generatedAt": "2026-07-29T02:33:52.386Z",
   "counts": {
     "faqIntents": 412,
-    "publicAnswers": 660
+    "publicAnswers": 661
   },
   "aliases": [],
   "postings": {
@@ -247,14 +247,6 @@
     ],
     "30": [
       [
-        "doc:/zh/cli/quick-start/installation",
-        2
-      ],
-      [
-        "doc:/zh/cli/reference/command-cheatsheet",
-        2
-      ],
-      [
         "verified:p0Fezk",
         2
       ],
@@ -273,6 +265,14 @@
       [
         "faq:wingOz",
         8
+      ],
+      [
+        "doc:/zh/cli/quick-start/installation",
+        2
+      ],
+      [
+        "doc:/zh/cli/reference/command-cheatsheet",
+        2
       ],
       [
         "verified:wingOz",
@@ -1654,6 +1654,10 @@
       ],
       [
         "doc:/zh/product/pricing/template",
+        2
+      ],
+      [
+        "doc:/zh/mcp/cases/index",
         2
       ],
       [
@@ -3280,6 +3284,10 @@
       ],
       [
         "doc:/zh/product/pricing/template",
+        2
+      ],
+      [
+        "doc:/zh/mcp/cases/index",
         2
       ],
       [
@@ -4913,6 +4921,10 @@
         2
       ],
       [
+        "doc:/zh/mcp/cases/index",
+        2
+      ],
+      [
         "doc:/zh/mcp/execute-task",
         2
       ],
@@ -6539,6 +6551,10 @@
         2
       ],
       [
+        "doc:/zh/mcp/cases/index",
+        2
+      ],
+      [
         "doc:/zh/mcp/execute-task",
         2
       ],
@@ -8162,6 +8178,10 @@
       ],
       [
         "doc:/zh/product/pricing/template",
+        2
+      ],
+      [
+        "doc:/zh/mcp/cases/index",
         2
       ],
       [
@@ -11924,6 +11944,10 @@
       ],
       [
         "doc:/zh/mcp/workflow",
+        2
+      ],
+      [
+        "doc:/zh/cli/core-commands/detect",
         2
       ],
       [
@@ -30983,6 +31007,10 @@
         2
       ],
       [
+        "doc:/zh/mcp/cases/index",
+        2
+      ],
+      [
         "doc:/zh/mcp/integrations/chatgpt",
         2
       ],
@@ -30992,6 +31020,10 @@
       ],
       [
         "doc:/zh/mcp/troubleshooting",
+        2
+      ],
+      [
+        "doc:/zh/cli/core-commands/detect",
         2
       ],
       [
@@ -34338,6 +34370,10 @@
       ],
       [
         "doc:/zh/academy/xpath/modify-element/modify-loop-pagination",
+        2
+      ],
+      [
+        "doc:/zh/mcp/cases/index",
         2
       ],
       [
@@ -37795,15 +37831,15 @@
         2
       ],
       [
+        "doc:/zh/mcp/cases/index",
+        2
+      ],
+      [
         "doc:/zh/mcp/quick-start/api-key",
         2
       ],
       [
         "doc:/zh/mcp/troubleshooting",
-        2
-      ],
-      [
-        "doc:/zh/cli/core-commands/detect",
         2
       ],
       [
@@ -39700,6 +39736,10 @@
       ],
       [
         "doc:/zh/mcp/quick-start/api-key",
+        2
+      ],
+      [
+        "doc:/zh/cli/core-commands/detect",
         2
       ],
       [
@@ -42248,6 +42288,10 @@
       ],
       [
         "doc:/zh/academy/troubleshooting/index",
+        2
+      ],
+      [
+        "doc:/zh/cli/core-commands/detect",
         2
       ],
       [
@@ -48592,6 +48636,10 @@
       ],
       [
         "doc:/zh/mcp/workflow",
+        2
+      ],
+      [
+        "doc:/zh/cli/core-commands/detect",
         2
       ],
       [
@@ -61192,10 +61240,6 @@
       ],
       [
         "doc:/zh/cli/core-commands/browser-management",
-        2
-      ],
-      [
-        "doc:/zh/cli/core-commands/detect",
         2
       ],
       [
@@ -90359,6 +90403,10 @@
         2
       ],
       [
+        "doc:/zh/mcp/cases/index",
+        2
+      ],
+      [
         "doc:/zh/mcp/rate-limits",
         2
       ],
@@ -91661,6 +91709,10 @@
         2
       ],
       [
+        "doc:/zh/mcp/cases/index",
+        2
+      ],
+      [
         "doc:/zh/mcp/rate-limits",
         2
       ],
@@ -92435,6 +92487,10 @@
         2
       ],
       [
+        "doc:/zh/mcp/cases/index",
+        2
+      ],
+      [
         "doc:/zh/mcp/rate-limits",
         2
       ],
@@ -93084,10 +93140,6 @@
       ],
       [
         "doc:/zh/mcp/workflow",
-        2
-      ],
-      [
-        "doc:/zh/cli/core-commands/detect",
         2
       ],
       [
@@ -94756,6 +94808,10 @@
       ],
       [
         "doc:/zh/academy/data-export/export-to-database/export-to-database-faq",
+        2
+      ],
+      [
+        "doc:/zh/cli/core-commands/detect",
         2
       ],
       [
@@ -97035,10 +97091,6 @@
         2
       ],
       [
-        "doc:/zh/cli/core-commands/detect",
-        2
-      ],
-      [
         "verified:BPM4CC",
         2
       ],
@@ -97342,10 +97394,6 @@
       ],
       [
         "doc:/zh/academy/xpath/getting-started/what-is-html-xpath",
-        2
-      ],
-      [
-        "doc:/zh/cli/core-commands/detect",
         2
       ],
       [
@@ -97792,10 +97840,6 @@
       ],
       [
         "doc:/zh/mcp/workflow",
-        2
-      ],
-      [
-        "doc:/zh/cli/core-commands/detect",
         2
       ],
       [
@@ -98420,10 +98464,6 @@
       ],
       [
         "doc:/zh/mcp/troubleshooting",
-        2
-      ],
-      [
-        "doc:/zh/cli/core-commands/detect",
         2
       ],
       [
@@ -109186,6 +109226,10 @@
       ],
       [
         "doc:/zh/mcp/workflow",
+        2
+      ],
+      [
+        "doc:/zh/cli/core-commands/detect",
         2
       ],
       [
@@ -120613,10 +120657,6 @@
         2
       ],
       [
-        "doc:/zh/cli/core-commands/detect",
-        2
-      ],
-      [
         "doc:mcp-protocol:lifecycle-capability-negotiation",
         2
       ],
@@ -122801,6 +122841,10 @@
         8
       ],
       [
+        "doc:/zh/mcp/cases/index",
+        2
+      ],
+      [
         "verified:QJ1XNc",
         2
       ],
@@ -123080,6 +123124,10 @@
       ],
       [
         "doc:/zh/product/intro/what-is-octoparse",
+        2
+      ],
+      [
+        "doc:/zh/mcp/cases/index",
         2
       ],
       [
@@ -123826,6 +123874,10 @@
       ],
       [
         "doc:/zh/product/intro/what-is-octoparse",
+        2
+      ],
+      [
+        "doc:/zh/mcp/cases/index",
         2
       ],
       [
@@ -124732,6 +124784,10 @@
       ],
       [
         "doc:/zh/product/pricing/template",
+        2
+      ],
+      [
+        "doc:/zh/mcp/cases/index",
         2
       ],
       [
@@ -128067,10 +128123,6 @@
         2
       ],
       [
-        "doc:/zh/cli/core-commands/detect",
-        2
-      ],
-      [
         "doc:mcp-protocol:tools",
         2
       ],
@@ -128688,10 +128740,6 @@
       ],
       [
         "doc:/zh/mcp/search-platform-content",
-        2
-      ],
-      [
-        "doc:/zh/cli/core-commands/detect",
         2
       ],
       [
@@ -129730,6 +129778,10 @@
       ],
       [
         "doc:/zh/mcp/workflow",
+        2
+      ],
+      [
+        "doc:/zh/cli/core-commands/detect",
         2
       ],
       [
@@ -132227,10 +132279,6 @@
         8
       ],
       [
-        "doc:/zh/cli/core-commands/detect",
-        2
-      ],
-      [
         "verified:nJ2Gig",
         2
       ],
@@ -132340,10 +132388,6 @@
       ],
       [
         "doc:/zh/mcp/quick-start/api-key",
-        2
-      ],
-      [
-        "doc:/zh/cli/core-commands/detect",
         2
       ],
       [
@@ -138377,10 +138421,6 @@
       [
         "faq:3HBfJN",
         8
-      ],
-      [
-        "doc:/zh/cli/core-commands/detect",
-        2
       ],
       [
         "verified:BPM4CC",
@@ -153151,10 +153191,6 @@
         2
       ],
       [
-        "doc:/zh/cli/core-commands/detect",
-        2
-      ],
-      [
         "verified:1ScjrC",
         2
       ],
@@ -153320,10 +153356,6 @@
       ],
       [
         "doc:/zh/mcp/search-templates",
-        2
-      ],
-      [
-        "doc:/zh/cli/core-commands/detect",
         2
       ],
       [
@@ -155117,10 +155149,6 @@
         2
       ],
       [
-        "doc:/zh/cli/core-commands/detect",
-        2
-      ],
-      [
         "doc:/zh/overview",
         2
       ],
@@ -155496,10 +155524,6 @@
       ],
       [
         "doc:/zh/academy/xpath/modify-element/locate-element",
-        2
-      ],
-      [
-        "doc:/zh/cli/core-commands/detect",
         2
       ],
       [
@@ -168091,6 +168115,10 @@
         2
       ],
       [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ],
+      [
         "doc:/zh/cli/index",
         2
       ],
@@ -177101,6 +177129,10 @@
         2
       ],
       [
+        "doc:/zh/mcp/cases/index",
+        2
+      ],
+      [
         "doc:/zh/mcp/ecommerce-data-task",
         2
       ],
@@ -186069,6 +186101,10 @@
         2
       ],
       [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ],
+      [
         "doc:/zh/api-reference/data/get-batch-data",
         2
       ],
@@ -187086,6 +187122,10 @@
       ],
       [
         "doc:/zh/academy/xpath/cases/duplicate-last-page",
+        2
+      ],
+      [
+        "doc:/zh/cli/core-commands/detect",
         2
       ],
       [
@@ -188139,6 +188179,10 @@
         2
       ],
       [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ],
+      [
         "verified:jAmZnK",
         2
       ],
@@ -188369,6 +188413,10 @@
         2
       ],
       [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ],
+      [
         "verified:jAmZnK",
         2
       ],
@@ -188548,6 +188596,10 @@
       ],
       [
         "doc:/zh/mcp/rate-limits",
+        2
+      ],
+      [
+        "doc:/zh/cli/core-commands/detect",
         2
       ],
       [
@@ -196795,6 +196847,10 @@
         2
       ],
       [
+        "doc:/zh/mcp/cases/index",
+        2
+      ],
+      [
         "doc:/zh/mcp/rate-limits",
         2
       ],
@@ -197644,6 +197700,10 @@
       ],
       [
         "doc:/zh/academy/xpath/relative-absolute-xpath",
+        2
+      ],
+      [
+        "doc:/zh/mcp/cases/index",
         2
       ],
       [
@@ -199221,6 +199281,10 @@
         2
       ],
       [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ],
+      [
         "verified:BGGMaF",
         2
       ],
@@ -199267,6 +199331,10 @@
         2
       ],
       [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ],
+      [
         "verified:nJlalj",
         2
       ],
@@ -199298,6 +199366,10 @@
       ],
       [
         "doc:/zh/mcp/execute-task",
+        2
+      ],
+      [
+        "doc:/zh/cli/core-commands/detect",
         2
       ],
       [
@@ -202189,6 +202261,10 @@
         2
       ],
       [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ],
+      [
         "doc:/zh/cli/quick-start/installation",
         2
       ],
@@ -202419,6 +202495,10 @@
         2
       ],
       [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ],
+      [
         "doc:/zh/cli/quick-start/get-api-key-and-log-in",
         2
       ],
@@ -202646,6 +202726,10 @@
       ],
       [
         "doc:/zh/product/pricing/captcha",
+        2
+      ],
+      [
+        "doc:/zh/cli/core-commands/detect",
         2
       ],
       [
@@ -206277,10 +206361,6 @@
         2
       ],
       [
-        "doc:/zh/cli/core-commands/detect",
-        2
-      ],
-      [
         "doc:mcp-protocol:lifecycle-capability-negotiation",
         2
       ],
@@ -206583,6 +206663,10 @@
         2
       ],
       [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ],
+      [
         "doc:/zh/cli/quick-start/installation",
         2
       ],
@@ -206609,6 +206693,10 @@
         8
       ],
       [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ],
+      [
         "doc:/zh/cli/quick-start/installation",
         2
       ],
@@ -206625,6 +206713,10 @@
       [
         "faq:7xpcxt",
         8
+      ],
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
       ],
       [
         "doc:/zh/cli/quick-start/installation",
@@ -214281,6 +214373,10 @@
         2
       ],
       [
+        "doc:/zh/mcp/cases/index",
+        2
+      ],
+      [
         "doc:/zh/mcp/quick-start/api-key",
         2
       ],
@@ -218006,6 +218102,10 @@
       ],
       [
         "doc:/zh/mcp/workflow",
+        2
+      ],
+      [
+        "doc:/zh/cli/core-commands/detect",
         2
       ],
       [
@@ -226041,10 +226141,6 @@
         2
       ],
       [
-        "doc:/zh/cli/core-commands/detect",
-        2
-      ],
-      [
         "doc:/zh/cli/index",
         2
       ],
@@ -226430,6 +226526,10 @@
       ],
       [
         "doc:/zh/mcp/search-templates",
+        2
+      ],
+      [
+        "doc:/zh/cli/core-commands/detect",
         2
       ],
       [
@@ -234946,6 +235046,10 @@
       ],
       [
         "doc:/zh/mcp/search-templates",
+        2
+      ],
+      [
+        "doc:/zh/cli/core-commands/detect",
         2
       ],
       [
@@ -248327,6 +248431,10 @@
         2
       ],
       [
+        "doc:/zh/mcp/cases/index",
+        2
+      ],
+      [
         "doc:/zh/mcp/search-platform-content",
         2
       ],
@@ -250065,6 +250173,10 @@
         2
       ],
       [
+        "doc:/zh/mcp/cases/index",
+        2
+      ],
+      [
         "doc:/zh/mcp/rate-limits",
         2
       ],
@@ -250351,6 +250463,10 @@
         2
       ],
       [
+        "doc:/zh/mcp/cases/index",
+        2
+      ],
+      [
         "verified:ZxdEeE",
         2
       ],
@@ -250570,6 +250686,10 @@
       ],
       [
         "doc:/zh/academy/xpath/modify-element/modify-loop-pagination",
+        2
+      ],
+      [
+        "doc:/zh/mcp/cases/index",
         2
       ],
       [
@@ -252902,6 +253022,10 @@
       ],
       [
         "doc:/zh/mcp/quick-start/api-key",
+        2
+      ],
+      [
+        "doc:/zh/cli/core-commands/detect",
         2
       ],
       [
@@ -257953,6 +258077,10 @@
         2
       ],
       [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ],
+      [
         "doc:/zh/cli/core-commands/run-tasks",
         2
       ],
@@ -260139,10 +260267,6 @@
         2
       ],
       [
-        "doc:/zh/cli/core-commands/detect",
-        2
-      ],
-      [
         "doc:/zh/cli/index",
         2
       ],
@@ -262080,6 +262204,10 @@
       ],
       [
         "doc:/zh/mcp/integrations/chatgpt",
+        2
+      ],
+      [
+        "doc:/zh/cli/core-commands/detect",
         2
       ],
       [
@@ -264437,6 +264565,10 @@
         8
       ],
       [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ],
+      [
         "doc:/zh/api-reference/task/delete-tasks",
         2
       ],
@@ -264541,6 +264673,10 @@
       [
         "faq:FiaeZ3",
         8
+      ],
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
       ],
       [
         "doc:/zh/api-reference/task/delete-tasks",
@@ -265910,6 +266046,10 @@
       ],
       [
         "doc:/zh/mcp/troubleshooting",
+        2
+      ],
+      [
+        "doc:/zh/cli/core-commands/detect",
         2
       ],
       [
@@ -267663,6 +267803,10 @@
         8
       ],
       [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ],
+      [
         "verified:FiaeZ3",
         2
       ]
@@ -269333,6 +269477,10 @@
         2
       ],
       [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ],
+      [
         "doc:/zh/cli/index",
         2
       ],
@@ -269428,6 +269576,10 @@
       ],
       [
         "doc:/zh/mcp/workflow",
+        2
+      ],
+      [
+        "doc:/zh/cli/core-commands/detect",
         2
       ],
       [
@@ -270734,6 +270886,10 @@
       ],
       [
         "doc:/zh/academy/troubleshooting/rule-optimization",
+        2
+      ],
+      [
+        "doc:/zh/mcp/cases/index",
         2
       ],
       [
@@ -272746,10 +272902,6 @@
       ],
       [
         "doc:/zh/mcp/quick-start/api-key",
-        2
-      ],
-      [
-        "doc:/zh/cli/core-commands/detect",
         2
       ],
       [
@@ -277851,6 +278003,10 @@
         2
       ],
       [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ],
+      [
         "verified:3QI8G3",
         2
       ],
@@ -281670,6 +281826,10 @@
       ],
       [
         "doc:/zh/academy/xpath/relative-absolute-xpath",
+        2
+      ],
+      [
+        "doc:/zh/mcp/cases/index",
         2
       ],
       [
@@ -287641,6 +287801,10 @@
         2
       ],
       [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ],
+      [
         "doc:/zh/api-reference/cloud-extraction/get-statuses-v2",
         2
       ],
@@ -287754,6 +287918,10 @@
       ],
       [
         "doc:/zh/mcp/execute-task",
+        2
+      ],
+      [
+        "doc:/zh/cli/core-commands/detect",
         2
       ],
       [
@@ -289156,6 +289324,10 @@
       ],
       [
         "doc:/zh/academy/basic-collection/pagination/scroll-and-collect",
+        2
+      ],
+      [
+        "doc:/zh/cli/core-commands/detect",
         2
       ],
       [
@@ -291700,6 +291872,10 @@
       ],
       [
         "doc:/zh/academy/index",
+        2
+      ],
+      [
+        "doc:/zh/mcp/cases/index",
         2
       ],
       [
@@ -300811,6 +300987,10 @@
         2
       ],
       [
+        "doc:/zh/mcp/cases/index",
+        2
+      ],
+      [
         "doc:/zh/mcp/ecommerce-data-task",
         2
       ],
@@ -301519,6 +301699,10 @@
         2
       ],
       [
+        "doc:/zh/mcp/cases/index",
+        2
+      ],
+      [
         "doc:/zh/mcp/troubleshooting",
         2
       ],
@@ -301724,6 +301908,10 @@
       ],
       [
         "doc:/zh/mcp/start-or-stop-task",
+        2
+      ],
+      [
+        "doc:/zh/cli/core-commands/detect",
         2
       ],
       [
@@ -302485,6 +302673,10 @@
         2
       ],
       [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ],
+      [
         "verified:LSjcDz",
         2
       ],
@@ -302556,6 +302748,10 @@
       ],
       [
         "doc:/zh/academy/case-studies/social-media/bilibili-up-videos",
+        2
+      ],
+      [
+        "doc:/zh/cli/core-commands/detect",
         2
       ],
       [
@@ -304033,6 +304229,10 @@
         2
       ],
       [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ],
+      [
         "doc:/zh/cli/index",
         2
       ],
@@ -304077,6 +304277,10 @@
       [
         "faq:FNYzKF",
         8
+      ],
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
       ],
       [
         "verified:FNYzKF",
@@ -305717,6 +305921,10 @@
         2
       ],
       [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ],
+      [
         "verified:BPM4CC",
         2
       ],
@@ -305836,6 +306044,10 @@
       ],
       [
         "doc:/zh/academy/troubleshooting/rule-optimization",
+        2
+      ],
+      [
+        "doc:/zh/cli/core-commands/detect",
         2
       ],
       [
@@ -312221,6 +312433,10 @@
         2
       ],
       [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ],
+      [
         "doc:/zh/api-reference/authentication",
         2
       ],
@@ -312437,10 +312653,6 @@
         2
       ],
       [
-        "doc:/zh/cli/core-commands/detect",
-        2
-      ],
-      [
         "doc:/zh/api-reference/task/update-loop-items",
         2
       ],
@@ -312636,10 +312848,6 @@
       ],
       [
         "doc:/zh/mcp/search-platform-content",
-        2
-      ],
-      [
-        "doc:/zh/cli/core-commands/detect",
         2
       ],
       [
@@ -314244,10 +314452,6 @@
       ],
       [
         "doc:/zh/mcp/integrations/vscode",
-        2
-      ],
-      [
-        "doc:/zh/cli/core-commands/detect",
         2
       ],
       [
@@ -316211,6 +316415,10 @@
         2
       ],
       [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ],
+      [
         "verified:xYh8DJ",
         2
       ],
@@ -317461,6 +317669,10 @@
         2
       ],
       [
+        "doc:/zh/mcp/cases/index",
+        2
+      ],
+      [
         "doc:/zh/mcp/index",
         2
       ],
@@ -317474,6 +317686,10 @@
       ],
       [
         "doc:/zh/mcp/workflow",
+        2
+      ],
+      [
+        "doc:/zh/cli/core-commands/detect",
         2
       ],
       [
@@ -317796,6 +318012,10 @@
       ],
       [
         "doc:/zh/academy/xpath/relative-absolute-xpath",
+        2
+      ],
+      [
+        "doc:/zh/mcp/cases/index",
         2
       ],
       [
@@ -321132,10 +321352,6 @@
       ],
       [
         "doc:/zh/mcp/search-platform-content",
-        2
-      ],
-      [
-        "doc:/zh/cli/core-commands/detect",
         2
       ],
       [
@@ -337049,6 +337265,10 @@
         2
       ],
       [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ],
+      [
         "verified:BUVlkR",
         2
       ],
@@ -345105,6 +345325,10 @@
         8
       ],
       [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ],
+      [
         "verified:uGtmBd",
         2
       ],
@@ -347035,6 +347259,10 @@
         2
       ],
       [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ],
+      [
         "doc:/zh/cli/index",
         2
       ],
@@ -347230,6 +347458,10 @@
       ],
       [
         "doc:/zh/mcp/workflow",
+        2
+      ],
+      [
+        "doc:/zh/cli/core-commands/detect",
         2
       ],
       [
@@ -351213,6 +351445,10 @@
         2
       ],
       [
+        "doc:/zh/mcp/cases/index",
+        2
+      ],
+      [
         "doc:/zh/mcp/workflow",
         2
       ],
@@ -351629,10 +351865,6 @@
         2
       ],
       [
-        "doc:/zh/cli/core-commands/detect",
-        2
-      ],
-      [
         "verified:8BOpqQ",
         2
       ],
@@ -351702,10 +351934,6 @@
       ],
       [
         "doc:/zh/mcp/search-templates",
-        2
-      ],
-      [
-        "doc:/zh/cli/core-commands/detect",
         2
       ],
       [
@@ -351794,6 +352022,10 @@
       ],
       [
         "doc:/zh/academy/case-studies/life-services/baidu-map-list",
+        2
+      ],
+      [
+        "doc:/zh/cli/core-commands/detect",
         2
       ]
     ],
@@ -358265,6 +358497,10 @@
         2
       ],
       [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ],
+      [
         "verified:BUVlkR",
         2
       ]
@@ -362679,10 +362915,6 @@
         2
       ],
       [
-        "doc:/zh/cli/core-commands/detect",
-        2
-      ],
-      [
         "doc:/zh/overview",
         2
       ],
@@ -363211,6 +363443,10 @@
         2
       ],
       [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ],
+      [
         "doc:mcp-protocol:stdio-transport",
         2
       ],
@@ -363350,6 +363586,10 @@
       ],
       [
         "doc:/zh/academy/case-studies/social-media/zhihu-keyword-search",
+        2
+      ],
+      [
+        "doc:/zh/cli/core-commands/detect",
         2
       ]
     ],
@@ -363752,10 +363992,6 @@
       ],
       [
         "doc:/zh/academy/case-studies/finance/eastmoney-private-placement",
-        2
-      ],
-      [
-        "doc:/zh/cli/core-commands/detect",
         2
       ]
     ],
@@ -372107,10 +372343,6 @@
         2
       ],
       [
-        "doc:/zh/cli/core-commands/detect",
-        2
-      ],
-      [
         "doc:/zh/cli/reference/output-and-exit-codes",
         2
       ],
@@ -372382,10 +372614,6 @@
       ],
       [
         "doc:/zh/mcp/quick-start/api-key",
-        2
-      ],
-      [
-        "doc:/zh/cli/core-commands/detect",
         2
       ],
       [
@@ -386554,6 +386782,10 @@
       ],
       [
         "doc:/zh/academy/case-studies/life-services/baidu-map-list",
+        2
+      ],
+      [
+        "doc:/zh/mcp/cases/index",
         2
       ],
       [
@@ -402933,6 +403165,10 @@
         2
       ],
       [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ],
+      [
         "verified:VpVDWS",
         2
       ],
@@ -404474,10 +404710,6 @@
       ],
       [
         "doc:/zh/academy/case-studies/news/people-home-news",
-        2
-      ],
-      [
-        "doc:/zh/cli/core-commands/detect",
         2
       ],
       [
@@ -416211,6 +416443,10 @@
         2
       ],
       [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ],
+      [
         "doc:/zh/cli/quick-start/installation",
         2
       ],
@@ -416326,6 +416562,10 @@
       ],
       [
         "doc:/zh/mcp/integrations/dify",
+        2
+      ],
+      [
+        "doc:/zh/cli/core-commands/detect",
         2
       ],
       [
@@ -424245,10 +424485,6 @@
       [
         "doc:/zh/academy/case-studies/news/toutiao-author-articles",
         2
-      ],
-      [
-        "doc:/zh/cli/core-commands/detect",
-        2
       ]
     ],
     "article": [
@@ -425456,6 +425692,10 @@
       ],
       [
         "doc:/zh/academy/xpath/modify-element/modify-loop-pagination",
+        2
+      ],
+      [
+        "doc:/zh/mcp/cases/index",
         2
       ]
     ],
@@ -430817,6 +431057,10 @@
         2
       ],
       [
+        "doc:/zh/mcp/cases/index",
+        2
+      ],
+      [
         "verified:M0Qm7C",
         2
       ]
@@ -430942,10 +431186,6 @@
     "和主": [
       [
         "doc:/zh/academy/case-studies/social-media/douban-hot-movies",
-        2
-      ],
-      [
-        "doc:/zh/cli/core-commands/detect",
         2
       ]
     ],
@@ -437997,6 +438237,10 @@
         2
       ],
       [
+        "doc:/zh/mcp/cases/index",
+        2
+      ],
+      [
         "verified:M0Qm7C",
         2
       ]
@@ -438004,6 +438248,10 @@
     "战案": [
       [
         "doc:/zh/academy/index",
+        2
+      ],
+      [
+        "doc:/zh/mcp/cases/index",
         2
       ]
     ],
@@ -438026,6 +438274,10 @@
       ],
       [
         "doc:/zh/academy/xpath/modify-element/modify-loop-pagination",
+        2
+      ],
+      [
+        "doc:/zh/mcp/cases/index",
         2
       ],
       [
@@ -446503,6 +446755,10 @@
         2
       ],
       [
+        "doc:/zh/mcp/cases/index",
+        2
+      ],
+      [
         "doc:/zh/mcp/index",
         2
       ],
@@ -447191,6 +447447,10 @@
       [
         "doc:/zh/academy/xpath/cases/duplicate-pages",
         2
+      ],
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
       ]
     ],
     "致重": [
@@ -447549,15 +447809,15 @@
       [
         "doc:/zh/academy/xpath/cases/loop-filter-items",
         2
+      ],
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
       ]
     ],
     "和分": [
       [
         "doc:/zh/academy/xpath/cases/loop-filter-items",
-        2
-      ],
-      [
-        "doc:/zh/cli/core-commands/detect",
         2
       ]
     ],
@@ -447878,6 +448138,10 @@
       ],
       [
         "doc:/zh/academy/xpath/relative-absolute-xpath",
+        2
+      ],
+      [
+        "doc:/zh/cli/core-commands/detect",
         2
       ]
     ],
@@ -450003,6 +450267,174 @@
         2
       ]
     ],
+    "mcp": [
+      [
+        "doc:/zh/mcp/cases/index",
+        2
+      ],
+      [
+        "doc:/zh/mcp/guides/clients",
+        2
+      ],
+      [
+        "doc:/zh/mcp/index",
+        2
+      ],
+      [
+        "doc:/zh/mcp/integrations/chatgpt",
+        2
+      ],
+      [
+        "doc:/zh/mcp/integrations/claude",
+        2
+      ],
+      [
+        "doc:/zh/mcp/integrations/coze",
+        2
+      ],
+      [
+        "doc:/zh/mcp/integrations/cursor",
+        2
+      ],
+      [
+        "doc:/zh/mcp/integrations/dify",
+        2
+      ],
+      [
+        "doc:/zh/mcp/integrations/gemini",
+        2
+      ],
+      [
+        "doc:/zh/mcp/integrations/openclaw",
+        2
+      ],
+      [
+        "doc:/zh/mcp/integrations/qclaw",
+        2
+      ],
+      [
+        "doc:/zh/mcp/integrations/vscode",
+        2
+      ],
+      [
+        "doc:/zh/mcp/quick-start/api-key",
+        2
+      ],
+      [
+        "doc:/zh/mcp/rate-limits",
+        2
+      ],
+      [
+        "doc:/zh/mcp/troubleshooting",
+        2
+      ],
+      [
+        "doc:/zh/mcp/workflow",
+        2
+      ],
+      [
+        "doc:mcp-protocol:lifecycle-capability-negotiation",
+        2
+      ],
+      [
+        "doc:mcp-protocol:stdio-transport",
+        2
+      ],
+      [
+        "doc:mcp-protocol:streamable-http-transport",
+        2
+      ],
+      [
+        "doc:mcp-protocol:authorization",
+        2
+      ],
+      [
+        "doc:mcp-protocol:tools",
+        2
+      ],
+      [
+        "doc:mcp-protocol:resources",
+        2
+      ],
+      [
+        "doc:mcp-protocol:prompts",
+        2
+      ]
+    ],
+    "过完": [
+      [
+        "doc:/zh/mcp/cases/index",
+        2
+      ]
+    ],
+    "整案": [
+      [
+        "doc:/zh/mcp/cases/index",
+        2
+      ]
+    ],
+    "例了": [
+      [
+        "doc:/zh/mcp/cases/index",
+        2
+      ]
+    ],
+    "鱼解": [
+      [
+        "doc:/zh/mcp/cases/index",
+        2
+      ]
+    ],
+    "决真": [
+      [
+        "doc:/zh/mcp/cases/index",
+        2
+      ]
+    ],
+    "真": [
+      [
+        "doc:/zh/mcp/cases/index",
+        2
+      ],
+      [
+        "verified:N7dVRA",
+        2
+      ],
+      [
+        "verified:iag2bR",
+        2
+      ],
+      [
+        "verified:W56p1s",
+        2
+      ],
+      [
+        "verified:M0Qm7C",
+        2
+      ]
+    ],
+    "真实": [
+      [
+        "doc:/zh/mcp/cases/index",
+        2
+      ],
+      [
+        "verified:M0Qm7C",
+        2
+      ]
+    ],
+    "实业": [
+      [
+        "doc:/zh/mcp/cases/index",
+        2
+      ]
+    ],
+    "务问": [
+      [
+        "doc:/zh/mcp/cases/index",
+        2
+      ]
+    ],
     "ecommercedatatask": [
       [
         "doc:/zh/mcp/ecommerce-data-task",
@@ -450829,10 +451261,6 @@
       [
         "doc:/zh/mcp/execute-task",
         2
-      ],
-      [
-        "doc:/zh/cli/core-commands/detect",
-        2
       ]
     ],
     "选的": [
@@ -451165,96 +451593,6 @@
         2
       ]
     ],
-    "mcp": [
-      [
-        "doc:/zh/mcp/guides/clients",
-        2
-      ],
-      [
-        "doc:/zh/mcp/index",
-        2
-      ],
-      [
-        "doc:/zh/mcp/integrations/chatgpt",
-        2
-      ],
-      [
-        "doc:/zh/mcp/integrations/claude",
-        2
-      ],
-      [
-        "doc:/zh/mcp/integrations/coze",
-        2
-      ],
-      [
-        "doc:/zh/mcp/integrations/cursor",
-        2
-      ],
-      [
-        "doc:/zh/mcp/integrations/dify",
-        2
-      ],
-      [
-        "doc:/zh/mcp/integrations/gemini",
-        2
-      ],
-      [
-        "doc:/zh/mcp/integrations/openclaw",
-        2
-      ],
-      [
-        "doc:/zh/mcp/integrations/qclaw",
-        2
-      ],
-      [
-        "doc:/zh/mcp/integrations/vscode",
-        2
-      ],
-      [
-        "doc:/zh/mcp/quick-start/api-key",
-        2
-      ],
-      [
-        "doc:/zh/mcp/rate-limits",
-        2
-      ],
-      [
-        "doc:/zh/mcp/troubleshooting",
-        2
-      ],
-      [
-        "doc:/zh/mcp/workflow",
-        2
-      ],
-      [
-        "doc:mcp-protocol:lifecycle-capability-negotiation",
-        2
-      ],
-      [
-        "doc:mcp-protocol:stdio-transport",
-        2
-      ],
-      [
-        "doc:mcp-protocol:streamable-http-transport",
-        2
-      ],
-      [
-        "doc:mcp-protocol:authorization",
-        2
-      ],
-      [
-        "doc:mcp-protocol:tools",
-        2
-      ],
-      [
-        "doc:mcp-protocol:resources",
-        2
-      ],
-      [
-        "doc:mcp-protocol:prompts",
-        2
-      ]
-    ],
     "等客": [
       [
         "doc:/zh/mcp/guides/clients",
@@ -451412,6 +451750,34 @@
       ],
       [
         "doc:/zh/mcp/troubleshooting",
+        2
+      ],
+      [
+        "doc:/zh/cli/core-commands/browser-management",
+        2
+      ],
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ],
+      [
+        "doc:/zh/cli/core-commands/diagnostics",
+        2
+      ],
+      [
+        "doc:/zh/cli/core-commands/export-data",
+        2
+      ],
+      [
+        "doc:/zh/cli/core-commands/run-tasks",
+        2
+      ],
+      [
+        "doc:/zh/cli/core-commands/task-management",
+        2
+      ],
+      [
+        "doc:/zh/cli/quick-start/installation",
         2
       ],
       [
@@ -453634,6 +454000,10 @@
       ],
       [
         "doc:/zh/mcp/quick-start/api-key",
+        2
+      ],
+      [
+        "doc:/zh/cli/core-commands/detect",
         2
       ]
     ],
@@ -457289,6 +457659,10 @@
         2
       ],
       [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ],
+      [
         "verified:xu-yao-zhan-kai-quan-wen-de-zen-me-cai-ji",
         2
       ]
@@ -457640,10 +458014,6 @@
     "户目": [
       [
         "doc:/zh/mcp/integrations/vscode",
-        2
-      ],
-      [
-        "doc:/zh/cli/core-commands/detect",
         2
       ]
     ],
@@ -460873,6 +461243,10 @@
         2
       ],
       [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ],
+      [
         "verified:3LXy2r",
         2
       ],
@@ -461076,44 +461450,6 @@
       ],
       [
         "doc:/zh/api-reference/authentication",
-        2
-      ]
-    ],
-    "octopus": [
-      [
-        "doc:/zh/cli/core-commands/browser-management",
-        2
-      ],
-      [
-        "doc:/zh/cli/core-commands/detect",
-        2
-      ],
-      [
-        "doc:/zh/cli/core-commands/diagnostics",
-        2
-      ],
-      [
-        "doc:/zh/cli/core-commands/export-data",
-        2
-      ],
-      [
-        "doc:/zh/cli/core-commands/run-tasks",
-        2
-      ],
-      [
-        "doc:/zh/cli/core-commands/task-management",
-        2
-      ],
-      [
-        "doc:/zh/cli/quick-start/installation",
-        2
-      ],
-      [
-        "verified:guan-wang-xia-zai-an-zhuang-ke-hu-duan-hou-da-kai-ke-hu-duan-ti-shi-yao-sheng-ji-dan-shi-mei-you-sheng-ji-an-niu-dao-zhi-yi-zhi-ka-zai-ti-shi-sheng-ji-jie-mian",
-        2
-      ],
-      [
-        "verified:KQeUld",
         2
       ]
     ],
@@ -461411,6 +461747,676 @@
         2
       ]
     ],
+    "octopus": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ],
+      [
+        "verified:guan-wang-xia-zai-an-zhuang-ke-hu-duan-hou-da-kai-ke-hu-duan-ti-shi-yao-sheng-ji-dan-shi-mei-you-sheng-ji-an-niu-dao-zhi-yi-zhi-ka-zai-ti-shi-sheng-ji-jie-mian",
+        2
+      ],
+      [
+        "verified:KQeUld",
+        2
+      ]
+    ],
+    "令改": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ]
+    ],
+    "改名": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ]
+    ],
+    "名所": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ]
+    ],
+    "有当": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ],
+      [
+        "verified:Dvdfv2",
+        2
+      ],
+      [
+        "verified:bang-wo-zha-xia-yi-xia-wo-hai-sheng-duo-shao-dao-chu-yu-e-ma",
+        2
+      ]
+    ],
+    "前调": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ]
+    ],
+    "用改": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ]
+    ],
+    "用可": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ],
+      [
+        "verified:diU6lp",
+        2
+      ]
+    ],
+    "可执": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ]
+    ],
+    "行命": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ]
+    ],
+    "令已": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ]
+    ],
+    "证页": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ]
+    ],
+    "前终": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ]
+    ],
+    "止检": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ]
+    ],
+    "测到": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ]
+    ],
+    "码访": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ]
+    ],
+    "问限": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ],
+      [
+        "verified:uFuI0u",
+        2
+      ]
+    ],
+    "制或": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ]
+    ],
+    "或安": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ]
+    ],
+    "安全": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/authentication",
+        2
+      ],
+      [
+        "verified:BPM4CC",
+        2
+      ],
+      [
+        "verified:B2MLnT",
+        2
+      ],
+      [
+        "verified:oTSADK",
+        2
+      ],
+      [
+        "verified:YMEDrw",
+        2
+      ],
+      [
+        "verified:5aK990",
+        2
+      ],
+      [
+        "verified:JGsihi",
+        2
+      ],
+      [
+        "verified:Jt7UEV",
+        2
+      ],
+      [
+        "verified:QWUNRF",
+        2
+      ],
+      [
+        "verified:1vKUb8",
+        2
+      ],
+      [
+        "verified:oCoqKD",
+        2
+      ],
+      [
+        "verified:DBNsyq",
+        2
+      ],
+      [
+        "verified:6KH0wp",
+        2
+      ],
+      [
+        "verified:Arkazg",
+        2
+      ]
+    ],
+    "全验": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ]
+    ],
+    "面时": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ]
+    ],
+    "时会": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ],
+      [
+        "verified:tlQfFR",
+        2
+      ],
+      [
+        "verified:rSdqx9",
+        2
+      ]
+    ],
+    "在生": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ]
+    ],
+    "成任": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ],
+      [
+        "doc:/zh/cli/index",
+        2
+      ],
+      [
+        "doc:/zh/cli/quick-start/run-your-first-task",
+        2
+      ],
+      [
+        "doc:/zh/cli/reference/output-and-exit-codes",
+        2
+      ]
+    ],
+    "务前": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ]
+    ],
+    "前失": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ]
+    ],
+    "败退": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ]
+    ],
+    "退出": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ],
+      [
+        "doc:/zh/cli/reference/output-and-exit-codes",
+        2
+      ],
+      [
+        "verified:BPM4CC",
+        2
+      ],
+      [
+        "verified:Vpju1S",
+        2
+      ],
+      [
+        "verified:tkTJSk",
+        2
+      ],
+      [
+        "verified:TwskpT",
+        2
+      ],
+      [
+        "verified:f2JCY6",
+        2
+      ],
+      [
+        "verified:epj8vl",
+        2
+      ],
+      [
+        "verified:PTauGt",
+        2
+      ],
+      [
+        "verified:IjrPPH",
+        2
+      ],
+      [
+        "verified:1vKUb8",
+        2
+      ],
+      [
+        "verified:oCoqKD",
+        2
+      ],
+      [
+        "verified:DBNsyq",
+        2
+      ],
+      [
+        "verified:AlX2ij",
+        2
+      ],
+      [
+        "verified:Arkazg",
+        2
+      ]
+    ],
+    "出避": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ]
+    ],
+    "免把": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ]
+    ],
+    "把验": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ]
+    ],
+    "页保": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ]
+    ],
+    "存成": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ]
+    ],
+    "成无": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ]
+    ],
+    "无效": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ],
+      [
+        "verified:3QI8G3",
+        2
+      ]
+    ],
+    "效任": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ]
+    ],
+    "候选": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ]
+    ],
+    "选区": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ]
+    ],
+    "区判": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ]
+    ],
+    "断优": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ]
+    ],
+    "化弱": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ]
+    ],
+    "弱": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ]
+    ],
+    "弱候": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ]
+    ],
+    "和整": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ]
+    ],
+    "整页": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ],
+      [
+        "verified:i7gSoT",
+        2
+      ]
+    ],
+    "航区": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ]
+    ],
+    "的判": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ]
+    ],
+    "断得": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ]
+    ],
+    "到优": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ]
+    ],
+    "化降": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ]
+    ],
+    "降": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ],
+      [
+        "verified:BUVlkR",
+        2
+      ],
+      [
+        "verified:1dXGeO",
+        2
+      ],
+      [
+        "verified:KyySER",
+        2
+      ],
+      [
+        "verified:IyX131",
+        2
+      ],
+      [
+        "verified:nlf18A",
+        2
+      ],
+      [
+        "verified:aRE4wt",
+        2
+      ],
+      [
+        "verified:uwr00I",
+        2
+      ],
+      [
+        "verified:c3Azud",
+        2
+      ]
+    ],
+    "降低": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ],
+      [
+        "verified:BUVlkR",
+        2
+      ],
+      [
+        "verified:1dXGeO",
+        2
+      ],
+      [
+        "verified:KyySER",
+        2
+      ],
+      [
+        "verified:IyX131",
+        2
+      ],
+      [
+        "verified:nlf18A",
+        2
+      ],
+      [
+        "verified:aRE4wt",
+        2
+      ],
+      [
+        "verified:uwr00I",
+        2
+      ],
+      [
+        "verified:c3Azud",
+        2
+      ]
+    ],
+    "低把": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ]
+    ],
+    "把导": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ]
+    ],
+    "航栏": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ]
+    ],
+    "栏侧": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ]
+    ],
+    "侧": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ],
+      [
+        "verified:a0rm9k",
+        2
+      ],
+      [
+        "verified:lkC6cP",
+        2
+      ],
+      [
+        "verified:q6rfxv",
+        2
+      ],
+      [
+        "verified:U6CPjO",
+        2
+      ],
+      [
+        "verified:q0AUxi",
+        2
+      ],
+      [
+        "verified:ed3gZi",
+        2
+      ],
+      [
+        "verified:Rt7pQf",
+        2
+      ],
+      [
+        "verified:f15l5Z",
+        2
+      ],
+      [
+        "verified:ukuMst",
+        2
+      ]
+    ],
+    "侧边": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ]
+    ],
+    "边栏": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ]
+    ],
+    "栏误": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ]
+    ],
+    "误选": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ]
+    ],
+    "选为": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ]
+    ],
+    "为主": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ]
+    ],
+    "主数": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ]
+    ],
+    "据区": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ]
+    ],
+    "概率": [
+      [
+        "doc:/zh/cli/core-commands/detect",
+        2
+      ],
+      [
+        "verified:BUVlkR",
+        2
+      ]
+    ],
     "generatedtask": [
       [
         "doc:/zh/cli/core-commands/detect",
@@ -461434,18 +462440,6 @@
       ]
     ],
     "和候": [
-      [
-        "doc:/zh/cli/core-commands/detect",
-        2
-      ]
-    ],
-    "候选": [
-      [
-        "doc:/zh/cli/core-commands/detect",
-        2
-      ]
-    ],
-    "选区": [
       [
         "doc:/zh/cli/core-commands/detect",
         2
@@ -461627,68 +462621,6 @@
         2
       ]
     ],
-    "退出": [
-      [
-        "doc:/zh/cli/core-commands/detect",
-        2
-      ],
-      [
-        "doc:/zh/cli/reference/output-and-exit-codes",
-        2
-      ],
-      [
-        "verified:BPM4CC",
-        2
-      ],
-      [
-        "verified:Vpju1S",
-        2
-      ],
-      [
-        "verified:tkTJSk",
-        2
-      ],
-      [
-        "verified:TwskpT",
-        2
-      ],
-      [
-        "verified:f2JCY6",
-        2
-      ],
-      [
-        "verified:epj8vl",
-        2
-      ],
-      [
-        "verified:PTauGt",
-        2
-      ],
-      [
-        "verified:IjrPPH",
-        2
-      ],
-      [
-        "verified:1vKUb8",
-        2
-      ],
-      [
-        "verified:oCoqKD",
-        2
-      ],
-      [
-        "verified:DBNsyq",
-        2
-      ],
-      [
-        "verified:AlX2ij",
-        2
-      ],
-      [
-        "verified:Arkazg",
-        2
-      ]
-    ],
     "出码": [
       [
         "doc:/zh/cli/core-commands/detect",
@@ -461766,256 +462698,6 @@
       ]
     ],
     "页截": [
-      [
-        "doc:/zh/cli/core-commands/detect",
-        2
-      ]
-    ],
-    "查所": [
-      [
-        "doc:/zh/cli/core-commands/detect",
-        2
-      ]
-    ],
-    "选候": [
-      [
-        "doc:/zh/cli/core-commands/detect",
-        2
-      ]
-    ],
-    "的裁": [
-      [
-        "doc:/zh/cli/core-commands/detect",
-        2
-      ]
-    ],
-    "裁": [
-      [
-        "doc:/zh/cli/core-commands/detect",
-        2
-      ]
-    ],
-    "裁剪": [
-      [
-        "doc:/zh/cli/core-commands/detect",
-        2
-      ]
-    ],
-    "剪": [
-      [
-        "doc:/zh/cli/core-commands/detect",
-        2
-      ]
-    ],
-    "剪图": [
-      [
-        "doc:/zh/cli/core-commands/detect",
-        2
-      ]
-    ],
-    "据用": [
-      [
-        "doc:/zh/cli/core-commands/detect",
-        2
-      ]
-    ],
-    "标页": [
-      [
-        "doc:/zh/cli/core-commands/detect",
-        2
-      ]
-    ],
-    "面标": [
-      [
-        "doc:/zh/cli/core-commands/detect",
-        2
-      ]
-    ],
-    "题首": [
-      [
-        "doc:/zh/cli/core-commands/detect",
-        2
-      ]
-    ],
-    "首屏": [
-      [
-        "doc:/zh/cli/core-commands/detect",
-        2
-      ]
-    ],
-    "屏当": [
-      [
-        "doc:/zh/cli/core-commands/detect",
-        2
-      ]
-    ],
-    "前导": [
-      [
-        "doc:/zh/cli/core-commands/detect",
-        2
-      ]
-    ],
-    "航语": [
-      [
-        "doc:/zh/cli/core-commands/detect",
-        2
-      ]
-    ],
-    "语义": [
-      [
-        "doc:/zh/cli/core-commands/detect",
-        2
-      ],
-      [
-        "doc:mcp-protocol:lifecycle-capability-negotiation",
-        2
-      ],
-      [
-        "doc:mcp-protocol:tools",
-        2
-      ],
-      [
-        "doc:mcp-protocol:resources",
-        2
-      ],
-      [
-        "doc:mcp-protocol:prompts",
-        2
-      ]
-    ],
-    "义目": [
-      [
-        "doc:/zh/cli/core-commands/detect",
-        2
-      ]
-    ],
-    "主内": [
-      [
-        "doc:/zh/cli/core-commands/detect",
-        2
-      ]
-    ],
-    "容显": [
-      [
-        "doc:/zh/cli/core-commands/detect",
-        2
-      ]
-    ],
-    "显著": [
-      [
-        "doc:/zh/cli/core-commands/detect",
-        2
-      ]
-    ],
-    "著": [
-      [
-        "doc:/zh/cli/core-commands/detect",
-        2
-      ]
-    ],
-    "著性": [
-      [
-        "doc:/zh/cli/core-commands/detect",
-        2
-      ]
-    ],
-    "性判": [
-      [
-        "doc:/zh/cli/core-commands/detect",
-        2
-      ]
-    ],
-    "断主": [
-      [
-        "doc:/zh/cli/core-commands/detect",
-        2
-      ]
-    ],
-    "主目": [
-      [
-        "doc:/zh/cli/core-commands/detect",
-        2
-      ]
-    ],
-    "核": [
-      [
-        "doc:/zh/cli/core-commands/detect",
-        2
-      ],
-      [
-        "doc:/zh/cli/index",
-        2
-      ],
-      [
-        "verified:8UV8qy",
-        2
-      ],
-      [
-        "verified:1dXGeO",
-        2
-      ],
-      [
-        "verified:B6aAC2",
-        2
-      ],
-      [
-        "verified:ciuK5o",
-        2
-      ]
-    ],
-    "核对": [
-      [
-        "doc:/zh/cli/core-commands/detect",
-        2
-      ],
-      [
-        "verified:1dXGeO",
-        2
-      ]
-    ],
-    "对主": [
-      [
-        "doc:/zh/cli/core-commands/detect",
-        2
-      ]
-    ],
-    "主数": [
-      [
-        "doc:/zh/cli/core-commands/detect",
-        2
-      ]
-    ],
-    "据区": [
-      [
-        "doc:/zh/cli/core-commands/detect",
-        2
-      ]
-    ],
-    "域字": [
-      [
-        "doc:/zh/cli/core-commands/detect",
-        2
-      ]
-    ],
-    "段详": [
-      [
-        "doc:/zh/cli/core-commands/detect",
-        2
-      ]
-    ],
-    "接和": [
-      [
-        "doc:/zh/cli/core-commands/detect",
-        2
-      ]
-    ],
-    "页控": [
-      [
-        "doc:/zh/cli/core-commands/detect",
-        2
-      ]
-    ],
-    "控件": [
       [
         "doc:/zh/cli/core-commands/detect",
         2
@@ -462507,20 +463189,6 @@
         2
       ]
     ],
-    "成任": [
-      [
-        "doc:/zh/cli/index",
-        2
-      ],
-      [
-        "doc:/zh/cli/quick-start/run-your-first-task",
-        2
-      ],
-      [
-        "doc:/zh/cli/reference/output-and-exit-codes",
-        2
-      ]
-    ],
     "据适": [
       [
         "doc:/zh/cli/index",
@@ -462830,6 +463498,28 @@
     "内核": [
       [
         "doc:/zh/cli/index",
+        2
+      ]
+    ],
+    "核": [
+      [
+        "doc:/zh/cli/index",
+        2
+      ],
+      [
+        "verified:8UV8qy",
+        2
+      ],
+      [
+        "verified:1dXGeO",
+        2
+      ],
+      [
+        "verified:B6aAC2",
+        2
+      ],
+      [
+        "verified:ciuK5o",
         2
       ]
     ],
@@ -465298,64 +465988,6 @@
       ],
       [
         "verified:DdSwKt",
-        2
-      ]
-    ],
-    "安全": [
-      [
-        "doc:/zh/api-reference/authentication",
-        2
-      ],
-      [
-        "verified:BPM4CC",
-        2
-      ],
-      [
-        "verified:B2MLnT",
-        2
-      ],
-      [
-        "verified:oTSADK",
-        2
-      ],
-      [
-        "verified:YMEDrw",
-        2
-      ],
-      [
-        "verified:5aK990",
-        2
-      ],
-      [
-        "verified:JGsihi",
-        2
-      ],
-      [
-        "verified:Jt7UEV",
-        2
-      ],
-      [
-        "verified:QWUNRF",
-        2
-      ],
-      [
-        "verified:1vKUb8",
-        2
-      ],
-      [
-        "verified:oCoqKD",
-        2
-      ],
-      [
-        "verified:DBNsyq",
-        2
-      ],
-      [
-        "verified:6KH0wp",
-        2
-      ],
-      [
-        "verified:Arkazg",
         2
       ]
     ],
@@ -470088,6 +470720,24 @@
     "息语": [
       [
         "doc:mcp-protocol:lifecycle-capability-negotiation",
+        2
+      ]
+    ],
+    "语义": [
+      [
+        "doc:mcp-protocol:lifecycle-capability-negotiation",
+        2
+      ],
+      [
+        "doc:mcp-protocol:tools",
+        2
+      ],
+      [
+        "doc:mcp-protocol:resources",
+        2
+      ],
+      [
+        "doc:mcp-protocol:prompts",
         2
       ]
     ],
@@ -477759,12 +478409,6 @@
         2
       ]
     ],
-    "无效": [
-      [
-        "verified:3QI8G3",
-        2
-      ]
-    ],
     "效的": [
       [
         "verified:3QI8G3",
@@ -481182,12 +481826,6 @@
       ]
     ],
     "这一": [
-      [
-        "verified:diU6lp",
-        2
-      ]
-    ],
-    "用可": [
       [
         "verified:diU6lp",
         2
@@ -488567,44 +489205,6 @@
         2
       ]
     ],
-    "侧": [
-      [
-        "verified:a0rm9k",
-        2
-      ],
-      [
-        "verified:lkC6cP",
-        2
-      ],
-      [
-        "verified:q6rfxv",
-        2
-      ],
-      [
-        "verified:U6CPjO",
-        2
-      ],
-      [
-        "verified:q0AUxi",
-        2
-      ],
-      [
-        "verified:ed3gZi",
-        2
-      ],
-      [
-        "verified:Rt7pQf",
-        2
-      ],
-      [
-        "verified:f15l5Z",
-        2
-      ],
-      [
-        "verified:ukuMst",
-        2
-      ]
-    ],
     "侧点": [
       [
         "verified:a0rm9k",
@@ -489361,74 +489961,6 @@
         2
       ]
     ],
-    "降": [
-      [
-        "verified:BUVlkR",
-        2
-      ],
-      [
-        "verified:1dXGeO",
-        2
-      ],
-      [
-        "verified:KyySER",
-        2
-      ],
-      [
-        "verified:IyX131",
-        2
-      ],
-      [
-        "verified:nlf18A",
-        2
-      ],
-      [
-        "verified:aRE4wt",
-        2
-      ],
-      [
-        "verified:uwr00I",
-        2
-      ],
-      [
-        "verified:c3Azud",
-        2
-      ]
-    ],
-    "降低": [
-      [
-        "verified:BUVlkR",
-        2
-      ],
-      [
-        "verified:1dXGeO",
-        2
-      ],
-      [
-        "verified:KyySER",
-        2
-      ],
-      [
-        "verified:IyX131",
-        2
-      ],
-      [
-        "verified:nlf18A",
-        2
-      ],
-      [
-        "verified:aRE4wt",
-        2
-      ],
-      [
-        "verified:uwr00I",
-        2
-      ],
-      [
-        "verified:c3Azud",
-        2
-      ]
-    ],
     "低采": [
       [
         "verified:BUVlkR",
@@ -489478,12 +490010,6 @@
       ]
     ],
     "封概": [
-      [
-        "verified:BUVlkR",
-        2
-      ]
-    ],
-    "概率": [
       [
         "verified:BUVlkR",
         2
@@ -493290,16 +493816,6 @@
     "取只": [
       [
         "verified:Dvdfv2",
-        2
-      ]
-    ],
-    "有当": [
-      [
-        "verified:Dvdfv2",
-        2
-      ],
-      [
-        "verified:bang-wo-zha-xia-yi-xia-wo-hai-sheng-duo-shao-dao-chu-yu-e-ma",
         2
       ]
     ],
@@ -499104,16 +499620,6 @@
     "中时": [
       [
         "verified:tlQfFR",
-        2
-      ]
-    ],
-    "时会": [
-      [
-        "verified:tlQfFR",
-        2
-      ],
-      [
-        "verified:rSdqx9",
         2
       ]
     ],
@@ -513207,24 +513713,6 @@
         2
       ]
     ],
-    "真": [
-      [
-        "verified:N7dVRA",
-        2
-      ],
-      [
-        "verified:iag2bR",
-        2
-      ],
-      [
-        "verified:W56p1s",
-        2
-      ],
-      [
-        "verified:M0Qm7C",
-        2
-      ]
-    ],
     "真正": [
       [
         "verified:N7dVRA",
@@ -521031,6 +521519,12 @@
         2
       ]
     ],
+    "核对": [
+      [
+        "verified:1dXGeO",
+        2
+      ]
+    ],
     "否全": [
       [
         "verified:1dXGeO",
@@ -521810,12 +522304,6 @@
       ]
     ],
     "录访": [
-      [
-        "verified:uFuI0u",
-        2
-      ]
-    ],
-    "问限": [
       [
         "verified:uFuI0u",
         2
@@ -548603,12 +549091,6 @@
         2
       ]
     ],
-    "真实": [
-      [
-        "verified:M0Qm7C",
-        2
-      ]
-    ],
     "实电": [
       [
         "verified:M0Qm7C",
@@ -555832,12 +556314,6 @@
       ]
     ],
     "漏整": [
-      [
-        "verified:i7gSoT",
-        2
-      ]
-    ],
-    "整页": [
       [
         "verified:i7gSoT",
         2
@@ -563092,6 +563568,13 @@
       "route": "/zh/product/pricing/template",
       "sourceType": "产品文档"
     },
+    "doc:/zh/mcp/cases/index": {
+      "title": "实战案例",
+      "summary": "通过完整案例了解如何使用八爪鱼 MCP 解决真实业务问题。",
+      "steps": [],
+      "route": "/zh/mcp/cases/index",
+      "sourceType": "MCP 服务"
+    },
     "doc:/zh/mcp/ecommerce-data-task": {
       "title": "ecommerce_data_task",
       "summary": "提交 Temu 或 TikTok Shop 商品与评论采集任务。",
@@ -563417,56 +563900,56 @@
     },
     "doc:/zh/cli/core-commands/browser-management": {
       "title": "浏览器管理",
-      "summary": "使用 octopus browser 配置独立浏览器或复用 Chrome、Edge 用户 Profile 的登录状态。",
+      "summary": "使用 bazhuayu browser 配置独立浏览器或复用 Chrome、Edge 用户 Profile 的登录状态。",
       "steps": [],
       "route": "/zh/cli/core-commands/browser-management",
       "sourceType": "CLI"
     },
     "doc:/zh/cli/core-commands/detect": {
       "title": "网页检测与任务生成",
-      "summary": "使用 octopus detect 检测网页结构、选择采集区域，并生成可校验和运行的本地任务文件。",
+      "summary": "使用 bazhuayu detect 检测网页结构、选择采集区域，并生成可校验和运行的本地任务文件。",
       "steps": [
+        "命令改名：所有当前调用改用 bazhuayu detect；octopus 可执行命令已删除。",
+        "验证页提前终止：检测到验证码、访问限制或安全验证页面时，detect 会在生成任务前失败退出，避免把验证页保存成无效任务。",
+        "候选区判断优化：弱候选和整页导航区域的判断得到优化，降低把导航栏、侧边栏误选为主数据区的概率。",
         "generatedTask：任务文件、任务 ID、字段和候选区",
         "preview：Agent plan 风险预览",
         "agentFiles：使用 --keep-agent-files 时保留的上下文和计划文件",
         "sampleRun：样品采集的退出码、运行结果和质量摘要",
-        "打开标注截图或全页截图。",
-        "检查所选候选区的裁剪图。",
-        "根据用户目标、页面标题、首屏、当前导航/Tab、语义目的和主内容显著性判断主目标。",
-        "核对主数据区域、字段、详情链接和分页控件。"
+        "打开标注截图或全页截图。"
       ],
       "route": "/zh/cli/core-commands/detect",
       "sourceType": "CLI"
     },
     "doc:/zh/cli/core-commands/diagnostics": {
       "title": "环境诊断",
-      "summary": "使用 octopus doctor、browser status 与 auth status 检查八爪鱼 CLI 环境、浏览器依赖与登录状态。",
+      "summary": "使用 bazhuayu doctor、browser status 与 auth status 检查八爪鱼 CLI 环境、浏览器依赖与登录状态。",
       "steps": [],
       "route": "/zh/cli/core-commands/diagnostics",
       "sourceType": "CLI"
     },
     "doc:/zh/cli/core-commands/export-data": {
       "title": "导出数据",
-      "summary": "使用 octopus data history、count、preview 与 export 查看采集历史、检查行数、预览样例并导出 Excel、CSV、JSON 等格式。",
+      "summary": "使用 bazhuayu data history、count、preview 与 export 查看采集历史、检查行数、预览样例并导出 Excel、CSV、JSON 等格式。",
       "steps": [],
       "route": "/zh/cli/core-commands/export-data",
       "sourceType": "CLI"
     },
     "doc:/zh/cli/core-commands/run-tasks": {
       "title": "运行采集任务",
-      "summary": "使用 octopus run 运行已有任务或本地任务文件，使用 octopus cloud start 在云端运行任务。",
+      "summary": "使用 bazhuayu run 运行已有任务或本地任务文件，使用 bazhuayu cloud start 在云端运行任务。",
       "steps": [],
       "route": "/zh/cli/core-commands/run-tasks",
       "sourceType": "CLI"
     },
     "doc:/zh/cli/core-commands/task-management": {
       "title": "任务管理",
-      "summary": "使用 octopus task、task-group、template、template-task 与 schedule cloud 查找、查看、校验和管理八爪鱼任务。",
+      "summary": "使用 bazhuayu task、task-group、template、template-task 与 schedule cloud 查找、查看、校验和管理八爪鱼任务。",
       "steps": [
-        "octopus task rename/move/delete ... --yes",
-        "octopus task-group update/delete/set-default ... --yes",
-        "octopus template-task update ... --yes",
-        "octopus schedule cloud update/start/stop ... --yes"
+        "bazhuayu task rename/move/delete ... --yes",
+        "bazhuayu task-group update/delete/set-default ... --yes",
+        "bazhuayu template-task update ... --yes",
+        "bazhuayu schedule cloud update/start/stop ... --yes"
       ],
       "route": "/zh/cli/core-commands/task-management",
       "sourceType": "CLI"
@@ -563499,7 +563982,7 @@
     },
     "doc:/zh/cli/quick-start/installation": {
       "title": "安装与验证",
-      "summary": "安装 bazhuayu-cli@0.1.30，并验证 octopus 命令、Node.js 环境与本地采集运行时。",
+      "summary": "安装 bazhuayu-cli@0.1.32，并验证 bazhuayu 命令、Node.js 环境与本地采集运行时。",
       "steps": [
         "Node.js 20 或更高（推荐 22 LTS）",
         "npm 8 或更高",
@@ -563521,7 +564004,7 @@
     },
     "doc:/zh/cli/reference/command-cheatsheet": {
       "title": "命令速查表",
-      "summary": "八爪鱼 CLI v0.1.30 常用命令快速参考。",
+      "summary": "八爪鱼 CLI v0.1.32 常用命令快速参考。",
       "steps": [],
       "route": "/zh/cli/reference/command-cheatsheet",
       "sourceType": "CLI"

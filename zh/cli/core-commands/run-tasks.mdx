@@ -1,43 +1,45 @@
 ---
 title: 运行采集任务
-description: 使用 octopus run 运行已有任务或本地任务文件，使用 octopus cloud start 在云端运行任务。
+description: 使用 bazhuayu run 运行已有任务或本地任务文件，使用 bazhuayu cloud start 在云端运行任务。
 ---
 
 > 运行方式取决于任务来源：新 URL 先用 `detect` 生成任务文件，已有任务可用 `run`，大批量稳定采集可用云端运行。
 
-## `octopus run`（本地运行已有任务）
+## `bazhuayu run`（本地运行已有任务）
 
 **命令描述**
 
 在你自己的电脑上启动本地采集。默认使用 CLI 管理的独立 Chrome for Testing；也可以使用 v0.1.30 的用户浏览器模式复用 Chrome / Edge 登录状态。独立模式下可以用 `--headless` 隐藏浏览器窗口。
 
+v0.1.32 修复了部分任务在达到 `--max-rows <n>` 上限后未正常结束的问题。升级后，达到设置的行数上限会正常收尾并退出。
+
 ```bash
-octopus run <taskId>
+bazhuayu run <taskId>
 ```
 
 常用选项：
 
 ```bash
-octopus run <taskId> --headless
-octopus run <taskId> --max-rows 100
-octopus run <taskId> --detach
-octopus run <taskId> --output ./runs
+bazhuayu run <taskId> --headless
+bazhuayu run <taskId> --max-rows 100
+bazhuayu run <taskId> --detach
+bazhuayu run <taskId> --output ./runs
 ```
 
 ## 选择浏览器模式
 
 ```bash
 # 单次使用独立浏览器
-octopus run <taskId> --browser independent --headless
+bazhuayu run <taskId> --browser independent --headless
 
 # 单次复用 Chrome 用户 Profile
-octopus run <taskId> --browser user --browser-id chrome --profile "Default" --max-rows 100
+bazhuayu run <taskId> --browser user --browser-id chrome --profile "Default" --max-rows 100
 
 # 保存后续 detect/run 的默认模式
-octopus browser use user --browser-id chrome --profile "Default"
+bazhuayu browser use user --browser-id chrome --profile "Default"
 
 # 切回独立浏览器
-octopus browser use independent
+bazhuayu browser use independent
 ```
 
 用户模式仅支持 Windows 和 macOS，且不支持 `--headless`。首次使用前按 [浏览器管理](/zh/cli/core-commands/browser-management) 页面安装扩展并验证状态。浏览器选择优先级为命令参数、环境变量、保存的默认设置、独立模式。
@@ -47,8 +49,8 @@ octopus browser use independent
 `detect` 生成的 `.json` 任务文件可直接用于本地运行：
 
 ```bash
-octopus run <taskId> --task-file ./task.json --output ./results/
-octopus run <taskId> --task-file ./task.json --detach --max-rows 100
+bazhuayu run <taskId> --task-file ./task.json --output ./results/
+bazhuayu run <taskId> --task-file ./task.json --detach --max-rows 100
 ```
 
 如果命令需要任务标识，可使用任务文件中的 `taskId`，或按 CLI 输出提示传入。
@@ -58,26 +60,26 @@ octopus run <taskId> --task-file ./task.json --detach --max-rows 100
 使用 `--detach` 后，终端可以关闭，任务会继续在后台运行。之后用 `local` 子命令管理：
 
 ```bash
-octopus local status <taskId>
-octopus local pause <taskId>
-octopus local resume <taskId>
-octopus local stop <taskId>
-octopus local cleanup
+bazhuayu local status <taskId>
+bazhuayu local pause <taskId>
+bazhuayu local resume <taskId>
+bazhuayu local stop <taskId>
+bazhuayu local cleanup
 ```
 
 如果本地运行时指定了 `--output ./runs`，查询状态或导出时也应使用同一目录：
 
 ```bash
-octopus local status <taskId> --output ./runs
+bazhuayu local status <taskId> --output ./runs
 ```
 
-## `octopus cloud start`（云端运行任务）
+## `bazhuayu cloud start`（云端运行任务）
 
 ```bash
-octopus cloud start <taskId>
-octopus cloud status <taskId>
-octopus cloud history <taskId>
-octopus cloud stop <taskId>
+bazhuayu cloud start <taskId>
+bazhuayu cloud status <taskId>
+bazhuayu cloud history <taskId>
+bazhuayu cloud stop <taskId>
 ```
 
 云端运行适合稳定任务、大数据量任务和不希望本地 Chrome 长时间运行的场景。
@@ -85,28 +87,28 @@ octopus cloud stop <taskId>
 v0.1.28 起，可以用 `schedule cloud` 管理云定时；本地定时仍在桌面客户端中设置：
 
 ```bash
-octopus schedule cloud get <taskId> --json
-octopus schedule cloud update <taskId> --type daily --date 1 --time 09:00 --yes --json
-octopus schedule cloud start <taskId> --yes --json
-octopus schedule cloud stop <taskId> --yes --json
-octopus schedule cloud next --type daily --date 1 --time 09:00 --json
+bazhuayu schedule cloud get <taskId> --json
+bazhuayu schedule cloud update <taskId> --type daily --date 1 --time 09:00 --yes --json
+bazhuayu schedule cloud start <taskId> --yes --json
+bazhuayu schedule cloud stop <taskId> --yes --json
+bazhuayu schedule cloud next --type daily --date 1 --time 09:00 --json
 ```
 
 ## 怎么选运行方式
 
 | 场景 | 推荐方式 | 原因 |
 | --- | --- | --- |
-| LLM / Agent 从新 URL 创建任务 | `octopus detect URL --agent --agent-command "<可信本地运行器>" --goal "采集目标" --run-sample 3 --json` | 同时保留视觉审查、任务生成和少量样品质量信息 |
-| API 支撑的列表页 | `octopus detect URL --auto --output task.json` 或 Agent 选择 `apiCandidates` 后 `octopus run <taskId> --task-file task.json` | DOM 候选弱时可生成 `api_list` 本地任务；当前不自动同步云端 |
-| 用户直接从新 URL 创建任务 | `octopus detect URL --auto --task-id <taskId> --output task.json` 后 `octopus run <taskId> --task-file task.json` | 自动选择候选区，生成并校验任务后再执行采集 |
-| CLI 生成任务 → 客户端微调 → 再运行 | `octopus detect URL --auto` → 客户端编辑 → `octopus run <taskId>` | v0.1.25 起 detect 任务自动同步到客户端，方便团队协作 |
-| 需要人工选择采集区域 | `octopus detect URL --manual --output task.json` | 可交互选择详情页、列表和分页方式 |
-| 已有任务，调试或小批量 | `octopus run <taskId>` | 能看到本地浏览器，便于排查 |
-| 已有任务，需要复用登录状态 | `octopus run <taskId> --browser user --browser-id chrome --profile "Default"` | 复用已验证的 Chrome / Edge Profile 与 Cookie |
-| 已有任务，大批量或定期运行 | `octopus cloud start <taskId>` | 交给云端资源执行 |
+| LLM / Agent 从新 URL 创建任务 | `bazhuayu detect URL --agent --agent-command "<可信本地运行器>" --goal "采集目标" --run-sample 3 --json` | 同时保留视觉审查、任务生成和少量样品质量信息 |
+| API 支撑的列表页 | `bazhuayu detect URL --auto --output task.json` 或 Agent 选择 `apiCandidates` 后 `bazhuayu run <taskId> --task-file task.json` | DOM 候选弱时可生成 `api_list` 本地任务；当前不自动同步云端 |
+| 用户直接从新 URL 创建任务 | `bazhuayu detect URL --auto --task-id <taskId> --output task.json` 后 `bazhuayu run <taskId> --task-file task.json` | 自动选择候选区，生成并校验任务后再执行采集 |
+| CLI 生成任务 → 客户端微调 → 再运行 | `bazhuayu detect URL --auto` → 客户端编辑 → `bazhuayu run <taskId>` | v0.1.25 起 detect 任务自动同步到客户端，方便团队协作 |
+| 需要人工选择采集区域 | `bazhuayu detect URL --manual --output task.json` | 可交互选择详情页、列表和分页方式 |
+| 已有任务，调试或小批量 | `bazhuayu run <taskId>` | 能看到本地浏览器，便于排查 |
+| 已有任务，需要复用登录状态 | `bazhuayu run <taskId> --browser user --browser-id chrome --profile "Default"` | 复用已验证的 Chrome / Edge Profile 与 Cookie |
+| 已有任务，大批量或定期运行 | `bazhuayu cloud start <taskId>` | 交给云端资源执行 |
 
 <Warning>
-  若出现扩展注册或浏览器启动错误，请先运行 `octopus doctor --json`；用户模式再运行 `octopus browser status --browser-id chrome --profile "Default" --json`，并按 `nextActions` 修复扩展或 Profile 状态。
+  若出现扩展注册或浏览器启动错误，请先运行 `bazhuayu doctor --json`；用户模式再运行 `bazhuayu browser status --browser-id chrome --profile "Default" --json`，并按 `nextActions` 修复扩展或 Profile 状态。
 </Warning>
 
 ## 下一步
