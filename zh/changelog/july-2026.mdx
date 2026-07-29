@@ -3,6 +3,17 @@ title: 2026 年 7 月更新日志
 description: 2026 年 7 月八爪鱼文档更新，包含 CLI v0.1.32 命令迁移与识别优化、MCP 实战案例、本地浏览器采集方式、数据中心与电商数据工具。
 ---
 
+# MCP 数据中心平台目录同步
+
+> **核验日期：** 2026 年 7 月 29 日
+> 本次只读调用 `list_platforms`，按 MCP 服务实时返回同步文档；未创建采集任务。
+
+数据中心当前返回 **898 个平台条目**，映射到 **787 个去重域名**。条目数与域名数分别用于表示来源入口和可筛选域名的规模：同一域名可能对应多个入口，例如微头条、头条号、今日头条和今日头条客户端均映射到 `toutiao.com`，因此两种统计不能互相替代，也不表示固定的内容记录总量。
+
+平台目录覆盖社交社区、新闻资讯、财经证券、汽车、消费维权、招投标、公共资源和海外媒体等来源。本轮已核验示例包括小红书、微信、微信视频号、知乎、豆瓣、百度贴吧、Facebook、人民网、新华网、腾讯新闻、东方财富网、雪球网、懂车帝、汽车之家、中国政府采购网、Reuters、Bloomberg、The Guardian 和 Yahoo! JAPAN。
+
+同步更新了数据中心概览、平台清单、内容搜索、标准流程和排障说明。后续应始终先调用 [`list_platforms`](/zh/mcp/list-platforms)，并将返回的 `domain` 用于 `search_platform_content` 的 `include` 或 `exclude`；静态示例不构成完整或长期有效的支持名单。
+
 # CLI v0.1.32
 
 > **更新日期：** 2026 年 7 月 29 日
@@ -77,7 +88,7 @@ bazhuayu detect URL --auto
 
 服务还公开 `octoparse://workflow` 工作流 Resource，以及模板搜索、任务搜索和导出预览 Widget。Widget 是否渲染取决于 MCP 客户端实现。
 
-数据中心通过对接各大平台的数据接口与公开内容源，提前采集、清洗并索引存量内容；覆盖量级为数百个国内外网站、20+ 语种，平台范围持续扩充。相关文档：[MCP 概览](/zh/mcp/index)、[标准工作流程](/zh/mcp/workflow)、[数据中心内容搜索](/zh/mcp/search-platform-content)、[电商数据任务](/zh/mcp/ecommerce-data-task)
+数据中心通过对接各大平台的数据接口与公开内容源，提前采集、清洗并索引存量内容。平台目录会持续调整，当前支持范围应以 `list_platforms` 实时返回为准；最新同步见本页的 [MCP 数据中心平台目录同步](#mcp-数据中心平台目录同步)。相关文档：[MCP 概览](/zh/mcp/index)、[标准工作流程](/zh/mcp/workflow)、[数据中心内容搜索](/zh/mcp/search-platform-content)、[电商数据任务](/zh/mcp/ecommerce-data-task)
 
 # 知识库审核台（本地）
 
