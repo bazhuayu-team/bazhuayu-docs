@@ -4,8 +4,16 @@ description: "基于已确认教程整理八爪鱼采集器的操作建议与相
 mode: "custom"
 ---
 
+const publicAgentConfig = {
+  enabled: true,
+  endpoint: 'https://docs-api.bazhuayu.com/v1/ask',
+  feedbackEndpoint: 'https://docs-api.bazhuayu.com/v1/feedback',
+  localEndpoint: 'http://127.0.0.1:8787/v1/ask',
+  localFeedbackEndpoint: 'http://127.0.0.1:8787/v1/feedback',
+}
+
 export const KnowledgeAgent = () => {
-  const [config, setConfig] = useState(null)
+  const [config, setConfig] = useState(publicAgentConfig)
   const [fallbackIndex, setFallbackIndex] = useState(null)
   const [question, setQuestion] = useState('')
   const [answer, setAnswer] = useState(null)
@@ -18,8 +26,8 @@ export const KnowledgeAgent = () => {
   useEffect(() => {
     fetch('/assets/knowledge-base/agent-config.json.txt')
       .then((response) => response.ok ? response.json() : null)
-      .then((data) => setConfig(data))
-      .catch(() => setConfig(null))
+      .then((data) => setConfig(data ? { ...publicAgentConfig, ...data } : publicAgentConfig))
+      .catch(() => setConfig(publicAgentConfig))
     fetch('/assets/knowledge-base/search-index.json.txt')
       .then((response) => response.ok ? response.json() : null)
       .then((data) => setFallbackIndex(data))
