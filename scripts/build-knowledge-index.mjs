@@ -15,6 +15,7 @@ import { legacyApprovedContent } from "./lib/kb-review-decision.mjs";
 
 const auditPath = path.join(root, "reports", "knowledge-base-audit.json");
 const overridePath = path.join(root, "scripts", "data", "kb-review-overrides.json");
+const curatedAnswerPath = path.join(root, "scripts", "data", "kb-curated-answers.json");
 const aliasPath = path.join(root, "scripts", "data", "kb-aliases.json");
 const outputPath = path.join(root, "assets", "knowledge-base", "search-index.json");
 const browserIndexPath = path.join(root, "assets", "knowledge-base", "search-index.json.txt");
@@ -146,9 +147,10 @@ function appendPosting(postings, token, id, weight) {
 }
 
 async function build() {
-  const [audit, overrides, aliases, trusted] = await Promise.all([
+  const [audit, overrides, curatedAnswers, aliases, trusted] = await Promise.all([
     fs.readFile(auditPath, "utf8").then(JSON.parse),
     fs.readFile(overridePath, "utf8").then(JSON.parse),
+    fs.readFile(curatedAnswerPath, "utf8").then(JSON.parse),
     fs.readFile(aliasPath, "utf8").then(JSON.parse),
     trustedDocuments(),
   ]);
@@ -199,6 +201,36 @@ async function build() {
     });
   }
 
+  for (const item of curatedAnswers.items ?? []) {
+    if (item.status !== "verified") continue;
+    const answer = String(item.content ?? "").trim();
+    if (!item.id || !item.title || answer.length < 8) continue;
+    const id = `curated:${item.id}`;
+    const steps = extractSteps(answer);
+    const document = {
+      id,
+      route: String(item.route ?? "").trim(),
+      title: item.title,
+      summary: excerpt(answer, 360),
+      steps,
+      sourceType: "人工确认",
+      tokens: tokenSet(item.title, item.category, answer, ...steps),
+      body: answer,
+    };
+    answerDocuments.push(document);
+    answerById.set(id, document);
+    intents.push({
+      id: `curated:${item.id}`,
+      sourceSlug: item.id,
+      title: item.title,
+      category: item.category || "人工确认",
+      status: "verified",
+      titleTokens: aliasTokens(tokenSet(item.title), aliases),
+      categoryTokens: aliasTokens(tokenSet(item.category), aliases),
+      answerIds: [id],
+    });
+  }
+
   const postings = {};
   for (const intent of intents) {
     for (const token of intent.titleTokens) appendPosting(postings, token, intent.id, 8);
@@ -238,7 +270,7 @@ async function build() {
   };
   await writeJsonAtomic(browserIndexPath, browserPayload);
   const verifiedChunks = answerDocuments
-    .filter((document) => document.id.startsWith("verified:"))
+    .filter((document) => document.id.startsWith("verified:") || document.id.startsWith("curated:"))
     .flatMap(documentChunks);
   const agentPayload = {
     version: 1,

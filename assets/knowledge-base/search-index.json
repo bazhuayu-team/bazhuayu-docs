@@ -1,9 +1,9 @@
 {
   "version": 1,
-  "generatedAt": "2026-07-29T03:00:34.112Z",
+  "generatedAt": "2026-07-30T08:56:06.551Z",
   "counts": {
-    "faqIntents": 412,
-    "publicAnswers": 661
+    "faqIntents": 413,
+    "publicAnswers": 662
   },
   "aliases": [],
   "postings": {
@@ -2595,6 +2595,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "八爪": [
@@ -4224,6 +4228,10 @@
       ],
       [
         "verified:c1tiHQ",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -5859,6 +5867,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "爪鱼": [
@@ -7488,6 +7500,10 @@
       ],
       [
         "verified:c1tiHQ",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -9119,6 +9135,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "鱼登": [
@@ -9591,6 +9611,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "登录": [
@@ -10032,6 +10056,10 @@
       ],
       [
         "verified:c1tiHQ",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -10518,6 +10546,10 @@
       ],
       [
         "verified:c1tiHQ",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -12572,6 +12604,10 @@
       ],
       [
         "verified:c1tiHQ",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -26056,6 +26092,10 @@
       ],
       [
         "verified:c1tiHQ",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -41123,6 +41163,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "成功": [
@@ -45173,6 +45217,10 @@
       [
         "verified:uGvGU2",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "动怎": [
@@ -45464,6 +45512,10 @@
       ],
       [
         "faq:uGvGU2",
+        8
+      ],
+      [
+        "curated:mcp-how-to-use",
         8
       ],
       [
@@ -46046,6 +46098,10 @@
       ],
       [
         "faq:uGvGU2",
+        8
+      ],
+      [
+        "curated:mcp-how-to-use",
         8
       ],
       [
@@ -46892,6 +46948,10 @@
       ],
       [
         "faq:uGvGU2",
+        8
+      ],
+      [
+        "curated:mcp-how-to-use",
         8
       ],
       [
@@ -49481,6 +49541,10 @@
       [
         "verified:uGvGU2",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "有苹": [
@@ -50637,6 +50701,10 @@
       [
         "verified:3jcqH7",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "系统": [
@@ -50758,6 +50826,10 @@
       ],
       [
         "verified:OcYQnB",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -50904,6 +50976,10 @@
       ],
       [
         "verified:OcYQnB",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -55800,6 +55876,10 @@
       ],
       [
         "verified:uGvGU2",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -60793,6 +60873,10 @@
       [
         "verified:i7gSoT",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "客户": [
@@ -61126,6 +61210,10 @@
       ],
       [
         "verified:m0gOry",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -61713,6 +61801,10 @@
       [
         "verified:oqpugi",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "户端": [
@@ -61990,6 +62082,10 @@
       ],
       [
         "verified:m0gOry",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -62445,6 +62541,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "端吗": [
@@ -62872,6 +62972,10 @@
       ],
       [
         "verified:uGvGU2",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -64412,6 +64516,10 @@
       ],
       [
         "verified:c1tiHQ",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -68603,6 +68711,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "采集": [
@@ -71616,6 +71728,10 @@
       ],
       [
         "verified:c1tiHQ",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -74639,6 +74755,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "集器": [
@@ -77026,6 +77146,10 @@
       ],
       [
         "verified:c1tiHQ",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -80489,6 +80613,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "要购": [
@@ -81916,6 +82044,10 @@
       ],
       [
         "verified:KD8IvQ",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -86763,6 +86895,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "数是": [
@@ -91373,6 +91509,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "如何": [
@@ -93576,6 +93716,10 @@
       ],
       [
         "verified:c1tiHQ",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -96841,6 +96985,10 @@
       [
         "verified:uGvGU2",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "网络": [
@@ -97297,6 +97445,10 @@
       [
         "verified:i7gSoT",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "链接": [
@@ -97594,6 +97746,10 @@
       ],
       [
         "verified:i7gSoT",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -98348,6 +98504,10 @@
       ],
       [
         "verified:i7gSoT",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -100487,6 +100647,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "互联": [
@@ -101401,6 +101565,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "切换": [
@@ -101506,6 +101674,10 @@
       ],
       [
         "verified:c1tiHQ",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -101736,6 +101908,10 @@
       ],
       [
         "verified:c1tiHQ",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -104051,6 +104227,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "开客": [
@@ -104863,6 +105043,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "没有": [
@@ -105172,6 +105356,10 @@
       ],
       [
         "verified:c1tiHQ",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -106779,6 +106967,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "导致": [
@@ -108307,6 +108499,10 @@
       [
         "verified:uGvGU2",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "一直": [
@@ -108834,6 +109030,10 @@
       ],
       [
         "verified:z3uWeh",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -110162,6 +110362,10 @@
       ],
       [
         "verified:uGvGU2",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -113281,6 +113485,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "据": [
@@ -115218,6 +115426,10 @@
       ],
       [
         "verified:c1tiHQ",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -117274,6 +117486,10 @@
       ],
       [
         "verified:uGvGU2",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -119498,6 +119714,10 @@
       ],
       [
         "verified:c1tiHQ",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -124587,6 +124807,10 @@
         8
       ],
       [
+        "curated:mcp-how-to-use",
+        8
+      ],
+      [
         "doc:/zh/academy/advanced-features/data-processing/backup-location",
         2
       ],
@@ -127941,6 +128165,10 @@
       [
         "verified:uGvGU2",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "相对": [
@@ -128496,6 +128724,10 @@
       ],
       [
         "verified:c1tiHQ",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -129084,6 +129316,10 @@
       ],
       [
         "verified:uGvGU2",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -131219,6 +131455,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "出现": [
@@ -131978,6 +132218,10 @@
       ],
       [
         "verified:c1tiHQ",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -134793,6 +135037,10 @@
       [
         "verified:uGvGU2",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "页采": [
@@ -136751,6 +136999,10 @@
       [
         "verified:uGvGU2",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "页在": [
@@ -136942,6 +137194,10 @@
       ],
       [
         "verified:c1tiHQ",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -137906,6 +138162,10 @@
       ],
       [
         "verified:uGvGU2",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -139323,6 +139583,10 @@
       [
         "verified:i7gSoT",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "和去": [
@@ -140230,6 +140494,10 @@
       ],
       [
         "verified:c1tiHQ",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -142947,6 +143215,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "或加": [
@@ -143420,6 +143692,10 @@
       ],
       [
         "verified:c1tiHQ",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -144509,6 +144785,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "个元": [
@@ -145283,6 +145563,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "列表": [
@@ -145800,6 +146084,10 @@
       ],
       [
         "verified:c1tiHQ",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -146443,6 +146731,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "表不": [
@@ -146670,6 +146962,10 @@
       ],
       [
         "verified:0BFkOT",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -148593,6 +148889,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "可以": [
@@ -149986,6 +150286,10 @@
       ],
       [
         "verified:c1tiHQ",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -151708,6 +152012,10 @@
       ],
       [
         "verified:uGvGU2",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -153761,6 +154069,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "分别": [
@@ -154696,6 +155008,10 @@
       ],
       [
         "verified:Arkazg",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -156532,6 +156848,10 @@
       ],
       [
         "verified:c1tiHQ",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -159425,6 +159745,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "的时": [
@@ -161487,6 +161811,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "需要": [
@@ -162121,6 +162449,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "要翻": [
@@ -162754,6 +163086,10 @@
       ],
       [
         "verified:c1tiHQ",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -165166,6 +165502,10 @@
       ],
       [
         "verified:uGvGU2",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -170241,6 +170581,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "站": [
@@ -170843,6 +171187,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "站吗": [
@@ -171282,6 +171630,10 @@
       ],
       [
         "verified:i7gSoT",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -171866,6 +172218,10 @@
       ],
       [
         "verified:c1tiHQ",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -175279,6 +175635,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "任务": [
@@ -176036,6 +176396,10 @@
       ],
       [
         "verified:c1tiHQ",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -177094,6 +177458,10 @@
       ],
       [
         "faq:zen-me-zha-kan-mu-ban-yu-e-xiao-hao-ji-lu",
+        3
+      ],
+      [
+        "curated:mcp-how-to-use",
         3
       ],
       [
@@ -179405,6 +179773,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "云采": [
@@ -179962,6 +180334,10 @@
       ],
       [
         "verified:c1tiHQ",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -181001,6 +181377,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "理如": [
@@ -181821,6 +182201,10 @@
       [
         "verified:uGvGU2",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "图片": [
@@ -182010,6 +182394,10 @@
       ],
       [
         "verified:j2ChsA",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -182204,6 +182592,10 @@
       ],
       [
         "verified:j2ChsA",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -183681,6 +184073,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "能返": [
@@ -184589,6 +184985,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "并显": [
@@ -184726,6 +185126,10 @@
       ],
       [
         "verified:i7gSoT",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -185310,6 +185714,10 @@
       ],
       [
         "verified:i7gSoT",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -189987,6 +190395,10 @@
       [
         "verified:uGvGU2",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "动输": [
@@ -194341,6 +194753,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "素跳": [
@@ -195342,6 +195758,10 @@
       ],
       [
         "verified:i7gSoT",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -197341,6 +197761,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "了这": [
@@ -197464,6 +197888,10 @@
       ],
       [
         "verified:h7gYlN",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -200491,6 +200919,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "器为": [
@@ -200971,6 +201403,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "支持": [
@@ -201384,6 +201820,10 @@
       ],
       [
         "verified:c1tiHQ",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -201847,6 +202287,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "持吗": [
@@ -202252,6 +202696,10 @@
       ],
       [
         "verified:c1tiHQ",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -205439,6 +205887,10 @@
       [
         "verified:KD8IvQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "爬取": [
@@ -208269,6 +208721,10 @@
       [
         "verified:PTauGt",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "建议": [
@@ -209272,6 +209728,10 @@
       ],
       [
         "verified:c1tiHQ",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -211801,6 +212261,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "关闭": [
@@ -213815,6 +214279,10 @@
       [
         "verified:0BFkOT",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "于": [
@@ -214273,6 +214741,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "于要": [
@@ -214376,6 +214848,10 @@
       ],
       [
         "faq:W56p1s",
+        8
+      ],
+      [
+        "curated:mcp-how-to-use",
         8
       ],
       [
@@ -214566,6 +215042,10 @@
       ],
       [
         "verified:i7gSoT",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -215020,6 +215500,10 @@
       ],
       [
         "verified:i7gSoT",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -215942,6 +216426,10 @@
       ],
       [
         "verified:ukuMst",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -218739,6 +219227,10 @@
       [
         "verified:PTauGt",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "个网": [
@@ -221325,6 +221817,10 @@
       [
         "verified:uGvGU2",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "行采": [
@@ -221514,6 +222010,10 @@
       ],
       [
         "verified:PTauGt",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -223049,6 +223549,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "前时": [
@@ -224237,6 +224741,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "特定": [
@@ -224326,6 +224834,10 @@
       ],
       [
         "verified:w99uaz",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -224766,6 +225278,10 @@
       ],
       [
         "verified:i7gSoT",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -226731,6 +227247,10 @@
       [
         "verified:Arkazg",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "名和": [
@@ -227543,6 +228063,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "做规": [
@@ -227946,6 +228470,10 @@
       ],
       [
         "verified:uGvGU2",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -231401,6 +231929,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "处理": [
@@ -231594,6 +232126,10 @@
       ],
       [
         "verified:i7gSoT",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -232400,6 +232936,10 @@
       ],
       [
         "verified:Xd5hKt",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -235655,6 +236195,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "里的": [
@@ -236082,6 +236626,10 @@
       ],
       [
         "verified:PTauGt",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -237421,6 +237969,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "信息": [
@@ -237730,6 +238282,10 @@
       ],
       [
         "verified:c1tiHQ",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -238072,6 +238628,10 @@
       ],
       [
         "verified:c1tiHQ",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -240829,6 +241389,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "复数": [
@@ -243115,6 +243679,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "源码": [
@@ -244301,6 +244869,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "选项": [
@@ -245177,6 +245749,10 @@
       [
         "verified:B6aAC2",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "工具": [
@@ -246038,6 +246614,10 @@
       ],
       [
         "verified:uGvGU2",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -249701,6 +250281,10 @@
       [
         "verified:zen-me-zha-kan-mu-ban-yu-e-xiao-hao-ji-lu",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "业版": [
@@ -251127,6 +251711,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "的反": [
@@ -252026,6 +252614,10 @@
       ],
       [
         "verified:FNYzKF",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -255351,6 +255943,10 @@
       [
         "verified:9M5VQy",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "闻": [
@@ -255448,6 +256044,10 @@
       ],
       [
         "verified:9M5VQy",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -256675,6 +257275,10 @@
       [
         "verified:zen-me-zha-kan-mu-ban-yu-e-xiao-hao-ji-lu",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "模板": [
@@ -256956,6 +257560,10 @@
       ],
       [
         "verified:zen-me-zha-kan-mu-ban-yu-e-xiao-hao-ji-lu",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -257250,6 +257858,10 @@
       ],
       [
         "verified:zen-me-zha-kan-mu-ban-yu-e-xiao-hao-ji-lu",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -257678,6 +258290,10 @@
       ],
       [
         "verified:Xyu4Oz",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -258351,6 +258967,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "已有": [
@@ -258388,6 +259008,10 @@
       ],
       [
         "verified:8UV8qy",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -258857,6 +259481,10 @@
       [
         "verified:i7gSoT",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "合需": [
@@ -259192,6 +259820,10 @@
       ],
       [
         "verified:i7gSoT",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -259682,6 +260314,10 @@
       ],
       [
         "verified:i7gSoT",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -260745,6 +261381,10 @@
       [
         "verified:i7gSoT",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "内置": [
@@ -261543,6 +262183,10 @@
       [
         "verified:M0Qm7C",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "商品": [
@@ -261652,6 +262296,10 @@
       ],
       [
         "verified:e5qhRB",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -261843,6 +262491,10 @@
       [
         "verified:0BFkOT",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "品评": [
@@ -261876,6 +262528,10 @@
       ],
       [
         "verified:HLkqXo",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -261999,6 +262655,10 @@
       [
         "verified:fxbpjL",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "评论": [
@@ -262088,6 +262748,10 @@
       ],
       [
         "verified:wei-bo-ping-lun-pa-qu-shu-ju-hou-wei-shen-me-na-me-duo-chong-fu-de-shu-ju-chu-xian",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -262190,6 +262854,10 @@
       ],
       [
         "verified:XMp0H0",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -263223,6 +263891,10 @@
       [
         "verified:m0gOry",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "的亚": [
@@ -263969,6 +264641,10 @@
       [
         "verified:XMp0H0",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "集出": [
@@ -264490,6 +265166,10 @@
       ],
       [
         "verified:ukuMst",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -267951,6 +268631,10 @@
       [
         "verified:6QhLOm",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "能否": [
@@ -268357,6 +269041,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "运行": [
@@ -268622,6 +269310,10 @@
       ],
       [
         "verified:c1tiHQ",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -269667,6 +270359,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "调用": [
@@ -269752,6 +270448,10 @@
       ],
       [
         "verified:c1tiHQ",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -269958,6 +270658,10 @@
       ],
       [
         "verified:PTauGt",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -270434,6 +271138,10 @@
       ],
       [
         "verified:PTauGt",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -275411,6 +276119,10 @@
       [
         "verified:i7gSoT",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "与数": [
@@ -276888,6 +277600,10 @@
       ],
       [
         "verified:c1tiHQ",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -278613,6 +279329,10 @@
       [
         "verified:0dJ53e",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "直接": [
@@ -278934,6 +279654,10 @@
       ],
       [
         "verified:cJydBl",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -280179,6 +280903,10 @@
       [
         "verified:uGvGU2",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "己": [
@@ -280364,6 +281092,10 @@
       ],
       [
         "verified:uGvGU2",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -280673,6 +281405,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "帮我": [
@@ -280686,6 +281422,10 @@
       ],
       [
         "verified:c1tiHQ",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -281009,6 +281749,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "我查": [
@@ -281018,6 +281762,10 @@
       ],
       [
         "verified:bang-wo-zha-xia-yi-xia-wo-hai-sheng-duo-shao-dao-chu-yu-e-ma",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -286113,6 +286861,10 @@
       [
         "verified:zen-me-zha-kan-mu-ban-yu-e-xiao-hao-ji-lu",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "突然": [
@@ -288146,6 +288898,10 @@
       ],
       [
         "verified:1DgGj9",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -290251,6 +291007,10 @@
       [
         "faq:8ZOOcq",
         8
+      ],
+      [
+        "curated:mcp-how-to-use",
+        3
       ],
       [
         "doc:/zh/academy/case-studies/ecommerce/baidu-aigou-products",
@@ -295491,6 +296251,10 @@
       [
         "verified:ciuK5o",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "人工": [
@@ -295669,6 +296433,10 @@
       [
         "verified:jjsENG",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "工服": [
@@ -295741,6 +296509,10 @@
       [
         "faq:8ZOOcq",
         8
+      ],
+      [
+        "curated:mcp-how-to-use",
+        3
       ],
       [
         "doc:/zh/academy/case-studies/ecommerce/baidu-aigou-products",
@@ -296245,6 +297017,10 @@
       [
         "verified:uwr00I",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "集网": [
@@ -296482,6 +297258,10 @@
       ],
       [
         "verified:c3Azud",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -299782,6 +300562,10 @@
       ],
       [
         "verified:c1tiHQ",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -305641,6 +306425,10 @@
       [
         "verified:cJydBl",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "态": [
@@ -305766,6 +306554,10 @@
       ],
       [
         "verified:c1tiHQ",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -307401,6 +308193,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "到采": [
@@ -308825,6 +309621,10 @@
       [
         "verified:ddcOQ6",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "了运": [
@@ -308920,6 +309720,10 @@
       ],
       [
         "verified:Ngw7Hg",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -309667,6 +310471,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "状态": [
@@ -309772,6 +310580,10 @@
       ],
       [
         "verified:c1tiHQ",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -310022,6 +310834,10 @@
       ],
       [
         "verified:i7gSoT",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -312725,6 +313541,10 @@
       [
         "verified:x3ygvg",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "内容": [
@@ -312914,6 +313734,10 @@
       ],
       [
         "verified:rOKsKL",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -313128,6 +313952,10 @@
       ],
       [
         "verified:i7gSoT",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -313450,6 +314278,10 @@
       ],
       [
         "verified:PTauGt",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -314805,6 +315637,10 @@
       [
         "verified:zXQWvW",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "目么": [
@@ -315647,6 +316483,10 @@
       [
         "verified:kHmppc",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "适合": [
@@ -315753,6 +316593,10 @@
       [
         "verified:mWSMFm",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "合外": [
@@ -315834,6 +316678,10 @@
       ],
       [
         "verified:M0Qm7C",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -316801,6 +317649,10 @@
       [
         "verified:ciuK5o",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "交的": [
@@ -316930,6 +317782,10 @@
       ],
       [
         "verified:e5qhRB",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -317640,6 +318496,10 @@
       ],
       [
         "verified:i7gSoT",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -318597,6 +319457,10 @@
       [
         "verified:90wFl8",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "虫": [
@@ -318626,6 +319490,10 @@
       ],
       [
         "verified:90wFl8",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -319424,6 +320292,10 @@
       ],
       [
         "verified:PTauGt",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -321445,6 +322317,10 @@
       [
         "verified:6EY6kr",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "监控": [
@@ -322209,6 +323085,10 @@
       [
         "verified:i7gSoT",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "析": [
@@ -322258,6 +323138,10 @@
       ],
       [
         "verified:i7gSoT",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -323757,6 +324641,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "等文": [
@@ -323802,6 +324690,10 @@
       ],
       [
         "verified:N9qqmK",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -328443,6 +329335,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "主博": [
@@ -330047,6 +330943,10 @@
       [
         "verified:x4Yvez",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "询电": [
@@ -330080,6 +330980,10 @@
       ],
       [
         "verified:h7gYlN",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -330521,6 +331425,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "要业": [
@@ -330721,6 +331629,10 @@
       [
         "verified:x4Yvez",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "你们": [
@@ -330881,6 +331793,10 @@
       [
         "verified:Q2EQcr",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "称": [
@@ -331007,6 +331923,10 @@
       [
         "verified:PbBytL",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "称是": [
@@ -331048,6 +331968,10 @@
       ],
       [
         "verified:XIiBVq",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -331976,6 +332900,10 @@
       ],
       [
         "verified:9M5VQy",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -334681,6 +335609,10 @@
       [
         "verified:GbyRu9",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "价格": [
@@ -334842,6 +335774,10 @@
       ],
       [
         "verified:Xd5hKt",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -337595,6 +338531,10 @@
       [
         "verified:Arkazg",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "是本": [
@@ -337777,6 +338717,10 @@
       [
         "verified:6EY6kr",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "舆情": [
@@ -337791,6 +338735,10 @@
       [
         "verified:6EY6kr",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "情监": [
@@ -337804,6 +338752,10 @@
       ],
       [
         "verified:6EY6kr",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -341559,6 +342511,10 @@
       [
         "verified:ePMi7t",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "鱼线": [
@@ -341666,6 +342622,10 @@
       ],
       [
         "verified:oqpugi",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -347613,6 +348573,10 @@
       [
         "verified:uGvGU2",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "执行": [
@@ -347815,6 +348779,10 @@
       [
         "verified:uGvGU2",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "行下": [
@@ -347882,6 +348850,104 @@
       ],
       [
         "verified:uGvGU2",
+        2
+      ]
+    ],
+    "mcp": [
+      [
+        "curated:mcp-how-to-use",
+        8
+      ],
+      [
+        "doc:/zh/mcp/cases/index",
+        2
+      ],
+      [
+        "doc:/zh/mcp/guides/clients",
+        2
+      ],
+      [
+        "doc:/zh/mcp/index",
+        2
+      ],
+      [
+        "doc:/zh/mcp/integrations/chatgpt",
+        2
+      ],
+      [
+        "doc:/zh/mcp/integrations/claude",
+        2
+      ],
+      [
+        "doc:/zh/mcp/integrations/coze",
+        2
+      ],
+      [
+        "doc:/zh/mcp/integrations/cursor",
+        2
+      ],
+      [
+        "doc:/zh/mcp/integrations/dify",
+        2
+      ],
+      [
+        "doc:/zh/mcp/integrations/gemini",
+        2
+      ],
+      [
+        "doc:/zh/mcp/integrations/openclaw",
+        2
+      ],
+      [
+        "doc:/zh/mcp/integrations/qclaw",
+        2
+      ],
+      [
+        "doc:/zh/mcp/integrations/vscode",
+        2
+      ],
+      [
+        "doc:/zh/mcp/quick-start/api-key",
+        2
+      ],
+      [
+        "doc:/zh/mcp/rate-limits",
+        2
+      ],
+      [
+        "doc:/zh/mcp/troubleshooting",
+        2
+      ],
+      [
+        "doc:/zh/mcp/workflow",
+        2
+      ],
+      [
+        "doc:mcp-protocol:lifecycle-capability-negotiation",
+        2
+      ],
+      [
+        "doc:mcp-protocol:stdio-transport",
+        2
+      ],
+      [
+        "doc:mcp-protocol:streamable-http-transport",
+        2
+      ],
+      [
+        "doc:mcp-protocol:authorization",
+        2
+      ],
+      [
+        "doc:mcp-protocol:tools",
+        2
+      ],
+      [
+        "doc:mcp-protocol:resources",
+        2
+      ],
+      [
+        "doc:mcp-protocol:prompts",
         2
       ]
     ],
@@ -351823,6 +352889,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "能点": [
@@ -352098,6 +353168,10 @@
       ],
       [
         "verified:c3Azud",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -352481,11 +353555,19 @@
       [
         "doc:/zh/academy/advanced-features/workflow-settings/bulk-url-input-extra",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "补充": [
       [
         "doc:/zh/academy/advanced-features/workflow-settings/bulk-url-input-extra",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -353387,6 +354469,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "助中": [
@@ -353555,6 +354641,10 @@
       [
         "verified:jjsENG",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "心": [
@@ -353676,6 +354766,10 @@
       ],
       [
         "verified:jjsENG",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -355377,6 +356471,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "三种": [
@@ -356087,6 +357185,10 @@
       [
         "verified:QWUNRF",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "场景": [
@@ -356404,6 +357506,10 @@
       ],
       [
         "verified:QWUNRF",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -356726,6 +357832,10 @@
       ],
       [
         "verified:QWUNRF",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -357417,6 +358527,10 @@
       [
         "verified:ng3Hbl",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "杂": [
@@ -357446,6 +358560,10 @@
       ],
       [
         "verified:ng3Hbl",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -357554,6 +358672,10 @@
       ],
       [
         "verified:c1tiHQ",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -358105,6 +359227,10 @@
       [
         "doc:/zh/academy/basic-collection/beginner/local-collection",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "交互": [
@@ -358114,6 +359240,10 @@
       ],
       [
         "verified:XMp0H0",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -358638,6 +359768,10 @@
       ],
       [
         "verified:j2ChsA",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -361739,6 +362873,10 @@
       [
         "verified:ddcOQ6",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "搜索": [
@@ -361952,6 +363090,10 @@
       ],
       [
         "verified:ddcOQ6",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -362174,6 +363316,10 @@
       ],
       [
         "verified:ddcOQ6",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -363849,6 +364995,10 @@
       [
         "doc:/zh/overview",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "表信": [
@@ -364968,6 +366118,10 @@
       ],
       [
         "doc:/zh/academy/case-studies/life-services/ctrip-attraction-reviews",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -373145,6 +374299,10 @@
       [
         "verified:i7gSoT",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "求和": [
@@ -374224,6 +375382,10 @@
       ],
       [
         "verified:uGvGU2",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -378241,6 +379403,10 @@
       [
         "verified:i7gSoT",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "择": [
@@ -378522,6 +379688,10 @@
       ],
       [
         "verified:i7gSoT",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -381900,6 +383070,10 @@
       ],
       [
         "doc:/zh/academy/case-studies/social-media/douban-book-reviews",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -385989,6 +387163,10 @@
       [
         "verified:tghdRB",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "与云": [
@@ -386678,6 +387856,10 @@
       ],
       [
         "verified:DF6Uxs",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -388781,6 +389963,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "参数": [
@@ -388974,6 +390160,10 @@
       ],
       [
         "verified:ba-zhua-yu-RPA-shi-shen-me",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -389985,6 +391175,10 @@
       [
         "verified:j2ChsA",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "视平": [
@@ -390100,6 +391294,10 @@
       ],
       [
         "verified:Arkazg",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -394871,6 +396069,10 @@
       [
         "verified:vpxJdm",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "的字": [
@@ -398613,6 +399815,10 @@
       [
         "verified:j2ChsA",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "频晒": [
@@ -400097,6 +401303,10 @@
       [
         "verified:Arkazg",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "台之": [
@@ -401493,6 +402703,10 @@
       [
         "doc:/zh/academy/case-studies/ecommerce/jd-scenarios-overview",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "调研": [
@@ -401502,6 +402716,10 @@
       ],
       [
         "verified:aRE4wt",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -401520,6 +402738,10 @@
       ],
       [
         "verified:aRE4wt",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -402380,6 +403602,10 @@
       ],
       [
         "verified:mViQFu",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -404593,6 +405819,10 @@
       [
         "verified:h7gYlN",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "周期": [
@@ -406043,6 +407273,10 @@
       [
         "doc:/zh/mcp/search-platform-content",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "讨论": [
@@ -406052,6 +407286,10 @@
       ],
       [
         "doc:/zh/mcp/search-platform-content",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -406365,6 +407603,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "考": [
@@ -406550,6 +407792,10 @@
       ],
       [
         "verified:c1tiHQ",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -406790,6 +408036,10 @@
       ],
       [
         "verified:kzdEt6",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -407639,6 +408889,10 @@
       [
         "verified:cLbawR",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "近": [
@@ -407676,6 +408930,10 @@
       ],
       [
         "verified:cLbawR",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -409079,6 +410337,10 @@
       [
         "verified:kHmppc",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "适的": [
@@ -409088,6 +410350,10 @@
       ],
       [
         "doc:/zh/academy/case-studies/real-estate/58-short-rental-listings",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -410280,6 +411546,10 @@
       ],
       [
         "verified:c1tiHQ",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -413097,6 +414367,10 @@
       [
         "verified:i7gSoT",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "前搜": [
@@ -415323,6 +416597,10 @@
       [
         "doc:/zh/mcp/search-platform-content",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "车键": [
@@ -416643,6 +417921,10 @@
       [
         "verified:i7gSoT",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "让浏": [
@@ -416994,6 +418276,10 @@
       ],
       [
         "doc:/zh/academy/case-studies/social-media/zhihu-keyword-search",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -417618,6 +418904,10 @@
       ],
       [
         "doc:/zh/academy/case-studies/social-media/zhihu-keyword-search",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -418593,6 +419883,10 @@
       [
         "verified:cJydBl",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "力日": [
@@ -418951,6 +420245,10 @@
       [
         "verified:oqpugi",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "描述": [
@@ -419092,6 +420390,10 @@
       ],
       [
         "verified:oqpugi",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -419250,6 +420552,10 @@
       ],
       [
         "verified:oqpugi",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -419755,6 +421061,10 @@
       [
         "doc:/zh/mcp/integrations/cursor",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "cqvip": [
@@ -420092,6 +421402,10 @@
       ],
       [
         "doc:/zh/mcp/search-platform-content",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -421566,6 +422880,10 @@
       ],
       [
         "doc:/zh/academy/case-studies/real-estate/58-short-rental-listings",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -423543,6 +424861,10 @@
       [
         "doc:/zh/mcp/search-platform-content",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "片文": [
@@ -423642,6 +424964,10 @@
       ],
       [
         "doc:/zh/mcp/integrations/chatgpt",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -425569,6 +426895,10 @@
       [
         "doc:/zh/overview",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "击新": [
@@ -427342,6 +428672,10 @@
     "择合": [
       [
         "doc:/zh/academy/case-studies/real-estate/58-short-rental-listings",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -432671,6 +434005,10 @@
       [
         "verified:2ssOLb",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "集主": [
@@ -432816,6 +434154,10 @@
       ],
       [
         "verified:B9w6nV",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -433724,6 +435066,10 @@
       ],
       [
         "verified:PTauGt",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -435950,6 +437296,10 @@
       ],
       [
         "verified:uGvGU2",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -438405,6 +439755,10 @@
       [
         "doc:/zh/cli/quick-start/run-your-first-task",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "的本": [
@@ -439371,6 +440725,10 @@
       [
         "verified:cJydBl",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "实况": [
@@ -439894,6 +441252,10 @@
       ],
       [
         "doc:/zh/mcp/guides/clients",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -442679,6 +444041,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "开合": [
@@ -444982,6 +446348,10 @@
       ],
       [
         "verified:c1tiHQ",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -448873,6 +450243,10 @@
       [
         "verified:c1tiHQ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "它由": [
@@ -450627,100 +452001,6 @@
         2
       ]
     ],
-    "mcp": [
-      [
-        "doc:/zh/mcp/cases/index",
-        2
-      ],
-      [
-        "doc:/zh/mcp/guides/clients",
-        2
-      ],
-      [
-        "doc:/zh/mcp/index",
-        2
-      ],
-      [
-        "doc:/zh/mcp/integrations/chatgpt",
-        2
-      ],
-      [
-        "doc:/zh/mcp/integrations/claude",
-        2
-      ],
-      [
-        "doc:/zh/mcp/integrations/coze",
-        2
-      ],
-      [
-        "doc:/zh/mcp/integrations/cursor",
-        2
-      ],
-      [
-        "doc:/zh/mcp/integrations/dify",
-        2
-      ],
-      [
-        "doc:/zh/mcp/integrations/gemini",
-        2
-      ],
-      [
-        "doc:/zh/mcp/integrations/openclaw",
-        2
-      ],
-      [
-        "doc:/zh/mcp/integrations/qclaw",
-        2
-      ],
-      [
-        "doc:/zh/mcp/integrations/vscode",
-        2
-      ],
-      [
-        "doc:/zh/mcp/quick-start/api-key",
-        2
-      ],
-      [
-        "doc:/zh/mcp/rate-limits",
-        2
-      ],
-      [
-        "doc:/zh/mcp/troubleshooting",
-        2
-      ],
-      [
-        "doc:/zh/mcp/workflow",
-        2
-      ],
-      [
-        "doc:mcp-protocol:lifecycle-capability-negotiation",
-        2
-      ],
-      [
-        "doc:mcp-protocol:stdio-transport",
-        2
-      ],
-      [
-        "doc:mcp-protocol:streamable-http-transport",
-        2
-      ],
-      [
-        "doc:mcp-protocol:authorization",
-        2
-      ],
-      [
-        "doc:mcp-protocol:tools",
-        2
-      ],
-      [
-        "doc:mcp-protocol:resources",
-        2
-      ],
-      [
-        "doc:mcp-protocol:prompts",
-        2
-      ]
-    ],
     "过完": [
       [
         "doc:/zh/mcp/cases/index",
@@ -450813,6 +452093,10 @@
       [
         "doc:/zh/mcp/query-collected-reviews",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "tiktok": [
@@ -450823,6 +452107,10 @@
       [
         "doc:/zh/mcp/query-collected-reviews",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "shop": [
@@ -450832,6 +452120,10 @@
       ],
       [
         "doc:/zh/mcp/query-collected-reviews",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -450860,6 +452152,10 @@
     "与评": [
       [
         "doc:/zh/mcp/ecommerce-data-task",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -451145,6 +452441,10 @@
       [
         "verified:i7gSoT",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "校验": [
@@ -451186,6 +452486,10 @@
       ],
       [
         "verified:i7gSoT",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -451851,6 +453155,10 @@
       [
         "verified:ba-zhua-yu-RPA-shi-shen-me",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "claude": [
@@ -451869,6 +453177,10 @@
       [
         "doc:/zh/mcp/troubleshooting",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "cursor": [
@@ -451886,6 +453198,10 @@
       ],
       [
         "doc:/zh/mcp/troubleshooting",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -451982,6 +453298,10 @@
       ],
       [
         "verified:PTauGt",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -453054,6 +454374,10 @@
       ],
       [
         "verified:2ssOLb",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -456095,6 +457419,10 @@
       [
         "doc:/zh/mcp/search-tasks",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "数并": [
@@ -456156,6 +457484,10 @@
       ],
       [
         "doc:/zh/mcp/integrations/gemini",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -456561,6 +457893,10 @@
       [
         "doc:/zh/mcp/troubleshooting",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "接扣": [
@@ -456684,6 +458020,10 @@
       ],
       [
         "doc:/zh/mcp/integrations/cursor",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -457051,6 +458391,10 @@
       [
         "verified:PTauGt",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "中完": [
@@ -457084,6 +458428,10 @@
       ],
       [
         "doc:/zh/mcp/troubleshooting",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -457929,6 +459277,10 @@
       [
         "doc:/zh/mcp/troubleshooting",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "接小": [
@@ -458024,6 +459376,10 @@
       ],
       [
         "verified:xu-yao-zhan-kai-quan-wen-de-zen-me-cai-ji",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -459069,6 +460425,10 @@
       [
         "doc:/zh/cli/reference/output-and-exit-codes",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "踪": [
@@ -459090,6 +460450,10 @@
       ],
       [
         "doc:/zh/cli/reference/output-and-exit-codes",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -459423,17 +460787,29 @@
       [
         "verified:uFuI0u",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "和视": [
       [
         "doc:/zh/mcp/search-platform-content",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "频内": [
       [
         "doc:/zh/mcp/search-platform-content",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -459851,11 +461227,19 @@
       [
         "doc:/zh/mcp/search-platform-content",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "汽车": [
       [
         "doc:/zh/mcp/search-platform-content",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -459901,11 +461285,19 @@
       [
         "doc:/zh/mcp/search-platform-content",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "投标": [
       [
         "doc:/zh/mcp/search-platform-content",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -460261,11 +461653,19 @@
       [
         "doc:/zh/mcp/search-platform-content",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "跨平": [
       [
         "doc:/zh/mcp/search-platform-content",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -460335,6 +461735,10 @@
       [
         "verified:90wFl8",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "竞品": [
@@ -460348,6 +461752,10 @@
       ],
       [
         "verified:90wFl8",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -460477,11 +461885,19 @@
       [
         "doc:/zh/mcp/search-platform-content",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "究": [
       [
         "doc:/zh/mcp/search-platform-content",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -460590,6 +462006,10 @@
     "线索": [
       [
         "doc:/zh/mcp/search-platform-content",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -461717,11 +463137,19 @@
       [
         "doc:/zh/mcp/workflow",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "验参": [
       [
         "doc:/zh/mcp/workflow",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -461832,6 +463260,10 @@
     "踪状": [
       [
         "doc:/zh/mcp/workflow",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -462240,6 +463672,10 @@
       ],
       [
         "verified:bang-wo-zha-xia-yi-xia-wo-hai-sheng-duo-shao-dao-chu-yu-e-ma",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -463603,6 +465039,10 @@
       [
         "doc:/zh/cli/core-commands/task-management",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "集历": [
@@ -464000,6 +465440,10 @@
     "据适": [
       [
         "doc:/zh/cli/index",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -470221,6 +471665,10 @@
       [
         "doc:/zh/api-reference/task/update-loop-items",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "址列": [
@@ -470952,6 +472400,10 @@
     "监测": [
       [
         "doc:/zh/overview",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -474362,6 +475814,10 @@
       ],
       [
         "verified:vpxJdm",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -480602,6 +482058,10 @@
       ],
       [
         "verified:nlf18A",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -492097,6 +493557,10 @@
       [
         "verified:Wk6wGZ",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "要同": [
@@ -493202,6 +494666,10 @@
       ],
       [
         "verified:PTauGt",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -495597,6 +497065,10 @@
       [
         "verified:kHmppc",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "单比": [
@@ -496278,6 +497750,10 @@
       ],
       [
         "verified:80mTJA",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -497364,6 +498840,10 @@
     "等常": [
       [
         "verified:s4aFmb",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -509831,6 +511311,10 @@
       [
         "verified:jjsENG",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "话可": [
@@ -521031,6 +522515,10 @@
       [
         "verified:vWe3g8",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "是放": [
@@ -522498,6 +523986,10 @@
       ],
       [
         "verified:AlX2ij",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -526781,6 +528273,10 @@
       [
         "verified:vpxJdm",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "比数": [
@@ -530043,6 +531539,10 @@
       [
         "verified:fdL3pK",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "等包": [
@@ -530254,6 +531754,10 @@
     "等特": [
       [
         "verified:6zd7a6",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -532191,6 +533695,10 @@
       [
         "verified:v2vKiS",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "板介": [
@@ -533598,6 +535106,10 @@
     "常规": [
       [
         "verified:O1n2JF",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -537598,6 +539110,10 @@
     "帮你": [
       [
         "verified:uwr00I",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -544589,6 +546105,10 @@
       [
         "verified:XMp0H0",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "和介": [
@@ -547426,6 +548946,10 @@
     "动切": [
       [
         "verified:XIiBVq",
+        2
+      ],
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ],
@@ -555595,6 +557119,10 @@
       [
         "verified:ciuK5o",
         2
+      ],
+      [
+        "curated:mcp-how-to-use",
+        2
       ]
     ],
     "交提": [
@@ -558598,6 +560126,660 @@
     "生相": [
       [
         "verified:uGvGU2",
+        2
+      ]
+    ],
+    "以让": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "让你": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "你在": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "等助": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "手里": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "里直": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "接调": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "力不": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "己写": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "写爬": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "虫或": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "换多": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "个系": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "统它": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "它主": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "做三": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "类事": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "事直": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "心已": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "以跨": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "台搜": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "索已": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "容适": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "合舆": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "测竞": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "品研": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "究行": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "业动": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "态招": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "标线": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "索等": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "等例": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "如帮": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "查最": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "近一": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "一周": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "周新": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "新能": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "能源": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "源汽": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "车相": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "闻和": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "和讨": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "论让": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "让帮": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "你运": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "能搜": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "鱼模": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "数创": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "务跟": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "态并": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "合商": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "表新": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "站公": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "开信": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "规采": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "求例": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "我用": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "用现": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "现成": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "成模": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "称价": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "商商": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "论支": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "持等": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "定电": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "商场": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "务与": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "论查": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "询适": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "合做": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "做商": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "价分": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "析竞": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "研和": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "和选": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "选品": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "品参": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "考简": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "说把": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "把找": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "找数": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "采数": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "导数": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "据变": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "接对": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "对说": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "说的": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "话你": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "你描": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "述目": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "标负": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "负": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "负责": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "责": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "责选": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "力并": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "并执": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "录复": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "互或": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "或没": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "有合": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "适模": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "站仍": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "仍可": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "中人": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "工处": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "或补": [
+      [
+        "curated:mcp-how-to-use",
+        2
+      ]
+    ],
+    "充配": [
+      [
+        "curated:mcp-how-to-use",
         2
       ]
     ]
@@ -562721,6 +564903,16 @@
       "status": "verified",
       "answerIds": [
         "verified:uGvGU2"
+      ]
+    },
+    {
+      "id": "curated:mcp-how-to-use",
+      "sourceSlug": "mcp-how-to-use",
+      "title": "MCP怎么用？",
+      "category": "MCP 服务",
+      "status": "verified",
+      "answerIds": [
+        "curated:mcp-how-to-use"
       ]
     }
   ],
@@ -567944,6 +570136,13 @@
       "summary": "手动执行下规则是指在规则编写时，从流程设计中从头至尾手动点击一遍，以保证规 则的正确有效性。在点击时注意观察网页页面的变化情况，看跟自己设置的流程图是 否相符，是否产生相应的联动。",
       "steps": [],
       "route": "",
+      "sourceType": "人工确认"
+    },
+    "curated:mcp-how-to-use": {
+      "title": "MCP怎么用？",
+      "summary": "八爪鱼 MCP 可以让你在 ChatGPT、Claude、Cursor、Coze、Dify、QClaw 等 AI 助手里，直接调用八爪鱼的数据能力，不用自己写爬虫或手动切换多个系统。 它主要能做三类事 直接查询数据中心已有内容 AI 可以跨平台搜索已提前采集的网页、图片和视频内容，适合舆情监测、竞品研究、行业动态、招投标线索等。 例如：\"帮我查最近一周新能源汽车相关的新闻和讨论。\" 让 AI 帮你运行采集任务 AI 能搜索八爪鱼模板、校验参数、创建云采集任务、跟踪状态并导出数据，适合商品列表、新闻列表、网站公开信息等常规采集需求。 例如：\"帮我用现成模板采集某网站的商品名称、价格和链接。…",
+      "steps": [],
+      "route": "/zh/mcp/index",
       "sourceType": "人工确认"
     }
   }

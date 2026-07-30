@@ -6,6 +6,7 @@ const audit = JSON.parse(await fs.readFile(path.join(root, "reports", "knowledge
 const index = JSON.parse(await fs.readFile(path.join(root, "assets", "knowledge-base", "search-index.json"), "utf8"));
 const agentIndex = JSON.parse(await fs.readFile(path.join(root, "assets", "knowledge-base", "agent-index.json"), "utf8"));
 const overrides = JSON.parse(await fs.readFile(path.join(root, "scripts", "data", "kb-review-overrides.json"), "utf8"));
+const curatedAnswers = JSON.parse(await fs.readFile(path.join(root, "scripts", "data", "kb-curated-answers.json"), "utf8"));
 const errors = [];
 const warnings = [];
 
@@ -45,6 +46,11 @@ for (const [slug, decision] of Object.entries(overrides.items ?? {})) {
   const chunks = agentIndex.chunks.filter((chunk) => chunk.id.startsWith(`verified:${slug}:`));
   if (decision.status === "verified" && !chunks.length) errors.push(`${slug}: verified answer missing from agent index`);
   if (decision.status !== "verified" && chunks.length) errors.push(`${slug}: non-verified answer leaked into agent index`);
+}
+for (const item of curatedAnswers.items ?? []) {
+  const chunks = agentIndex.chunks.filter((chunk) => chunk.id.startsWith(`curated:${item.id}:`));
+  if (item.status === "verified" && !chunks.length) errors.push(`${item.id}: curated answer missing from agent index`);
+  if (item.status !== "verified" && chunks.length) errors.push(`${item.id}: non-verified curated answer leaked into agent index`);
 }
 if (audit.stats.articles !== 541 || audit.items.length !== 541) errors.push(`audit count is ${audit.items.length}, expected 541`);
 if (errors.length) {

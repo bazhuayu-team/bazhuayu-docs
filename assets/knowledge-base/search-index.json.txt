@@ -1,9 +1,9 @@
 {
   "version": 1,
-  "generatedAt": "2026-07-29T03:00:34.112Z",
+  "generatedAt": "2026-07-30T08:56:06.551Z",
   "counts": {
-    "faqIntents": 412,
-    "publicAnswers": 661
+    "faqIntents": 413,
+    "publicAnswers": 662
   },
   "aliases": [],
   "intents": [
@@ -4125,6 +4125,16 @@
       "status": "verified",
       "answerIds": [
         "verified:uGvGU2"
+      ]
+    },
+    {
+      "id": "curated:mcp-how-to-use",
+      "sourceSlug": "mcp-how-to-use",
+      "title": "MCP怎么用？",
+      "category": "MCP 服务",
+      "status": "verified",
+      "answerIds": [
+        "curated:mcp-how-to-use"
       ]
     }
   ],
@@ -9348,6 +9358,13 @@
       "summary": "手动执行下规则是指在规则编写时，从流程设计中从头至尾手动点击一遍，以保证规 则的正确有效性。在点击时注意观察网页页面的变化情况，看跟自己设置的流程图是 否相符，是否产生相应的联动。",
       "steps": [],
       "route": "",
+      "sourceType": "人工确认"
+    },
+    "curated:mcp-how-to-use": {
+      "title": "MCP怎么用？",
+      "summary": "八爪鱼 MCP 可以让你在 ChatGPT、Claude、Cursor、Coze、Dify、QClaw 等 AI 助手里，直接调用八爪鱼的数据能力，不用自己写爬虫或手动切换多个系统。 它主要能做三类事 直接查询数据中心已有内容 AI 可以跨平台搜索已提前采集的网页、图片和视频内容，适合舆情监测、竞品研究、行业动态、招投标线索等。 例如：\"帮我查最近一周新能源汽车相关的新闻和讨论。\" 让 AI 帮你运行采集任务 AI 能搜索八爪鱼模板、校验参数、创建云采集任务、跟踪状态并导出数据，适合商品列表、新闻列表、网站公开信息等常规采集需求。 例如：\"帮我用现成模板采集某网站的商品名称、价格和链接。…",
+      "steps": [],
+      "route": "/zh/mcp/index",
       "sourceType": "人工确认"
     }
   }
