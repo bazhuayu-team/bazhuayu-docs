@@ -1,0 +1,14 @@
+---
+title: 2026 年 8 月更新日志
+description: 2026 年 8 月八爪鱼文档更新，包含 OpenAPI API Key 认证说明。
+---
+
+# OpenAPI 支持 API Key 认证
+
+> **文档同步日期：** 2026 年 8 月 3 日
+
+OpenAPI 业务接口现补充 API Key 授权说明。调用时在请求头中传入 `x-api-key: op_sk_xxxxxx`；API Key 与 MCP 使用同一套密钥，可在八爪鱼官网账户中心创建。
+
+交互式 OpenAPI 界面现声明 `x-api-key` 的 API-key security scheme，并保留既有 Access Token 作为兼容认证方式。每个请求只需选择其中一种，不要把 API Key 写成 Bearer Token，也不要将真实密钥提交到代码、截图或日志中。
+
+相关文档：[OpenAPI 概述](/zh/api-reference/intro)、[认证](/zh/api-reference/authentication)、[获取 API Key](/zh/mcp/quick-start/api-key)

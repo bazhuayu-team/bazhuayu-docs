@@ -2,7 +2,7 @@
 title: 批量获取任务状态
 api: POST https://openapi.bazhuayu.com/cloudextraction/statuses
 playground: interactive
-authMethod: bearer
+authMethod: apiKey
 ---
 
 > **所需套餐：** 旗舰+、企业版、团队版
@@ -21,7 +21,8 @@ POST https://openapi.bazhuayu.com/cloudextraction/statuses
 
 | 参数 | 类型 | 必填 | 说明 |
 |------|------|------|------|
-| `Authorization` | String | 是 | 身份令牌 |
+| `x-api-key` | String | 二选一 | API Key，例如 `op_sk_xxxxxx`；创建方式见 [获取 API Key](/zh/mcp/quick-start/api-key) |
+| `Authorization` | String | 二选一 | Access Token，格式 `Bearer <access_token>` |
 | `Content-Type` | String | 是 | application/json |
 
 **请求头示例**

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-07-30T08:56:06.551Z",
+  "generatedAt": "2026-08-03T03:35:41.948Z",
   "counts": {
     "faqIntents": 413,
     "publicAnswers": 662
@@ -6181,74 +6181,74 @@
     },
     "doc:/zh/api-reference/authentication": {
       "title": "认证",
-      "summary": "所有 API 请求均需使用 Access Token 进行认证。",
+      "summary": "业务 API 支持 API Key 或 Access Token 认证。",
       "steps": [
-        "请将 Access Token 安全存储，切勿公开发布",
+        "请将 API Key 和 Access Token 安全存储，切勿公开发布",
         "使用环境变量或密钥管理器管理凭据，切勿硬编码在代码中",
-        "如怀疑 Token 已被泄露，请从八爪鱼账户设置中重置"
+        "如怀疑凭据已泄露，请立即在账户中心作废并重新创建"
       ],
       "route": "/zh/api-reference/authentication",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/cloud-extraction/get-statuses-v2": {
       "title": "批量获取任务状态 V2",
-      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 此接口接收用户传入的一批任务ID，返回相应的任务状态列表。调用频率：1秒5次请求。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | Authorization | String | 是 | 身份令牌 | | Content-Type | Str…",
+      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 此接口接收用户传入的一批任务ID，返回相应的任务状态列表。调用频率：1秒5次请求。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
       "steps": [],
       "route": "/zh/api-reference/cloud-extraction/get-statuses-v2",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/cloud-extraction/get-statuses": {
       "title": "批量获取任务状态",
-      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 根据任务 ID 批量获取任务状态信息。调用频率：5 秒 1 次请求。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | Authorization | String | 是 | 身份令牌 | | Content-Type | String | 是…",
+      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 根据任务 ID 批量获取任务状态信息。调用频率：5 秒 1 次请求。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
       "steps": [],
       "route": "/zh/api-reference/cloud-extraction/get-statuses",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/cloud-extraction/get-subtask-status": {
       "title": "获取子任务状态",
-      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 获取任务最新批次的子任务状态 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | Authorization | String | 是 | 身份令牌 | | Content-Type | String | 是 | application/json…",
+      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 获取任务最新批次的子任务状态 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
       "steps": [],
       "route": "/zh/api-reference/cloud-extraction/get-subtask-status",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/cloud-extraction/get-task-stats": {
       "title": "任务运行情况",
-      "summary": "所需套餐： 企业版 端点 描述 此接口用于获取云采集监控平台中任务和子任务运行数量情况。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | Authorization | String | 是 | 身份令牌 | 请求头示例 请求示例 本接口无查询参数与请求体，仅需在请求头中携带 Authori…",
+      "summary": "所需套餐： 企业版 端点 描述 此接口用于获取云采集监控平台中任务和子任务运行数量情况。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
       "steps": [],
       "route": "/zh/api-reference/cloud-extraction/get-task-stats",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/cloud-extraction/get-task-status": {
       "title": "获取任务状态",
-      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 此接口接收用户传入的一批任务ID，返回相应的任务状态列表。调用频率：5秒1次请求。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | Authorization | String | 是 | 身份令牌 | | Content-Type | Str…",
+      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 此接口接收用户传入的一批任务ID，返回相应的任务状态列表。调用频率：5秒1次请求。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
       "steps": [],
       "route": "/zh/api-reference/cloud-extraction/get-task-status",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/cloud-extraction/start-subtasks": {
       "title": "批量启动子任务",
-      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 启动云节点子任务 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | Authorization | String | 是 | 身份令牌 | | Content-Type | String | 是 | application/json | 请求头示…",
+      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 启动云节点子任务 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
       "steps": [],
       "route": "/zh/api-reference/cloud-extraction/start-subtasks",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/cloud-extraction/start-task": {
       "title": "启动任务",
-      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 启动云节点任务 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | Authorization | String | 是 | 身份令牌 | | Content-Type | String | 是 | application/json | 请求头示例…",
+      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 启动云节点任务 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
       "steps": [],
       "route": "/zh/api-reference/cloud-extraction/start-task",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/cloud-extraction/stop-subtasks": {
       "title": "批量停止子任务",
-      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 停止云节点子任务 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | Authorization | String | 是 | 身份令牌 | | Content-Type | String | 是 | application/json | 请求头示…",
+      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 停止云节点子任务 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
       "steps": [],
       "route": "/zh/api-reference/cloud-extraction/stop-subtasks",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/cloud-extraction/stop-task": {
       "title": "停止任务",
-      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 停止任务采集 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | Authorization | String | 是 | 身份令牌 | | Content-Type | String | 是 | application/json | 请求头示例…",
+      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 停止任务采集 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
       "steps": [],
       "route": "/zh/api-reference/cloud-extraction/stop-task",
       "sourceType": "OpenAPI"
@@ -6269,21 +6269,21 @@
     },
     "doc:/zh/api-reference/data/get-non-exported-data": {
       "title": "获取未导出的数据",
-      "summary": "所需套餐： 旗舰版、旗舰+、企业版、团队版 端点 描述 获取任务中尚未标记为已导出的数据。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | Authorization | String | 是 | 身份令牌 | 请求头示例 查询参数 | 参数 | 类型 | 必填 | 说明 | |------…",
+      "summary": "所需套餐： 旗舰版、旗舰+、企业版、团队版 端点 描述 获取任务中尚未标记为已导出的数据。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
       "steps": [],
       "route": "/zh/api-reference/data/get-non-exported-data",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/data/mark-data-as-exported": {
       "title": "标记数据为已导出状态",
-      "summary": "所需套餐： 旗舰版、旗舰+、企业版、团队版 端点 描述 确认数据已导出，否则数据仍属于未导出。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | Authorization | String | 是 | 身份令牌 | | Content-Type | String | 是 | applicat…",
+      "summary": "所需套餐： 旗舰版、旗舰+、企业版、团队版 端点 描述 确认数据已导出，否则数据仍属于未导出。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
       "steps": [],
       "route": "/zh/api-reference/data/mark-data-as-exported",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/data/remove-data": {
       "title": "清空任务数据",
-      "summary": "所需套餐： 旗舰版、旗舰+、企业版、团队版 端点 描述 清空任务数据 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | Authorization | String | 是 | 身份令牌 | | Content-Type | String | 是 | application/json | 请求…",
+      "summary": "所需套餐： 旗舰版、旗舰+、企业版、团队版 端点 描述 清空任务数据 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
       "steps": [],
       "route": "/zh/api-reference/data/remove-data",
       "sourceType": "OpenAPI"
@@ -6307,70 +6307,70 @@
     },
     "doc:/zh/api-reference/task/copy-tasks": {
       "title": "批量复制任务到多个任务组",
-      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 此接口用于批量复制多个任务到多个不同的任务组。用户可以选择多个任务，并将它们复制到多个任务组中。每个任务可以被复制到不同的任务组，从而实现灵活的任务分配和管理。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | Authorization | S…",
+      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 此接口用于批量复制多个任务到多个不同的任务组。用户可以选择多个任务，并将它们复制到多个任务组中。每个任务可以被复制到不同的任务组，从而实现灵活的任务分配和管理。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | Strin…",
       "steps": [],
       "route": "/zh/api-reference/task/copy-tasks",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/task/delete-tasks": {
       "title": "批量删除任务",
-      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 删除任务接口说明：支持根据任务id批量删除任务 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | Authorization | String | 是 | 身份令牌 | | Content-Type | String | 是 | applicat…",
+      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 删除任务接口说明：支持根据任务id批量删除任务 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
       "steps": [],
       "route": "/zh/api-reference/task/delete-tasks",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/task/duplicate-task": {
       "title": "复制任务",
-      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 复制任务到指定组 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | Authorization | String | 是 | 身份令牌 | 请求头示例 查询参数 | 参数 | 类型 | 必填 | 说明 | |------|------|-----…",
+      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 复制任务到指定组 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
       "steps": [],
       "route": "/zh/api-reference/task/duplicate-task",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/task/get-actions": {
       "title": "批量获取任务步骤信息",
-      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 此接口根据步骤类型，获取一批任务的步骤信息。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | Authorization | String | 是 | 身份令牌 | | Content-Type | String | 是 | applicati…",
+      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 此接口根据步骤类型，获取一批任务的步骤信息。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
       "steps": [],
       "route": "/zh/api-reference/task/get-actions",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/task/move-task": {
       "title": "移动任务",
-      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 移动任务到指定组 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | Authorization | String | 是 | 身份令牌 | 请求头示例 查询参数 | 参数 | 类型 | 必填 | 说明 | |------|------|-----…",
+      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 移动任务到指定组 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
       "steps": [],
       "route": "/zh/api-reference/task/move-task",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/task/search-task": {
       "title": "搜索任务",
-      "summary": "所需套餐： 旗舰版、旗舰+、企业版、团队版 端点 描述 根据条件搜索任务，目前支持按任务组搜索。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | Authorization | String | 是 | 身份令牌 | 请求头示例 请求体 | 参数 | 类型 | 必填 | 说明 | |----…",
+      "summary": "所需套餐： 旗舰版、旗舰+、企业版、团队版 端点 描述 根据条件搜索任务，目前支持按任务组搜索。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
       "steps": [],
       "route": "/zh/api-reference/task/search-task",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/task/update-action-properties": {
       "title": "更新步骤配置",
-      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 此接口用于更新任务中指定步骤配置。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | Authorization | String | 是 | 身份令牌 | | Content-Type | String | 是 | application/js…",
+      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 此接口用于更新任务中指定步骤配置。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
       "steps": [],
       "route": "/zh/api-reference/task/update-action-properties",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/task/update-loop-items": {
       "title": "更新循环步骤的内容",
-      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 此接口更新循环步骤的循环列表，目前支持【文本列表】、【网址列表】。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | Authorization | String | 是 | 身份令牌 | | Content-Type | String | 是…",
+      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 此接口更新循环步骤的循环列表，目前支持【文本列表】、【网址列表】。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
       "steps": [],
       "route": "/zh/api-reference/task/update-loop-items",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/task/update-task-parameters": {
       "title": "更新任务参数",
-      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 通过该接口，用户可以一次性更新多行输入框中的可循环参数（如多行文本、多行URLs），以及单个文本、数字等非循环参数。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | Authorization | String | 是 | 身份令牌 | | C…",
+      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 通过该接口，用户可以一次性更新多行输入框中的可循环参数（如多行文本、多行URLs），以及单个文本、数字等非循环参数。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 o…",
       "steps": [],
       "route": "/zh/api-reference/task/update-task-parameters",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/task/update-task-urls": {
       "title": "更新采集 URLs",
-      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 将采集的网址替换 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | Authorization | String | 是 | 身份令牌 | | Content-Type | String | 是 | multipart/form-data（需包含…",
+      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 将采集的网址替换 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
       "steps": [],
       "route": "/zh/api-reference/task/update-task-urls",
       "sourceType": "OpenAPI"
@@ -6384,14 +6384,14 @@
     },
     "doc:/zh/api-reference/task-group/delete-groups": {
       "title": "批量删除任务组",
-      "summary": "所需套餐： 企业版、团队版 端点 描述 支持通过查询任务组名称（精确匹配）批量删除任务组。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | Authorization | String | 是 | 身份令牌 | | Content-Type | String | 是 | applicatio…",
+      "summary": "所需套餐： 企业版、团队版 端点 描述 支持通过查询任务组名称（精确匹配）批量删除任务组。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
       "steps": [],
       "route": "/zh/api-reference/task-group/delete-groups",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/task-group/get-task-group-information": {
       "title": "获取用户的任务组信息",
-      "summary": "所需套餐： 旗舰版、旗舰+、企业版、团队版 端点 描述 此接口用于获取用户所有任务组信息。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | Authorization | String | 是 | 身份令牌 | 请求头示例 响应 | 参数 | 类型 | 必填 | 说明 | |------|-…",
+      "summary": "所需套餐： 旗舰版、旗舰+、企业版、团队版 端点 描述 此接口用于获取用户所有任务组信息。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
       "steps": [],
       "route": "/zh/api-reference/task-group/get-task-group-information",
       "sourceType": "OpenAPI"

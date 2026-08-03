@@ -15,7 +15,13 @@
         "type": "http",
         "scheme": "bearer",
         "bearerFormat": "JWT",
-        "description": "身份令牌"
+        "description": "Access Token，格式 Bearer <access_token>"
+      },
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "x-api-key",
+        "description": "八爪鱼 API Key，格式 op_sk_xxxxxx；创建方式见 /zh/mcp/quick-start/api-key"
       }
     }
   },
@@ -24,30 +30,7 @@
       "post": {
         "summary": "查询任务采集与执行分析",
         "operationId": "taskAnalyticsQueries",
-        "security": [{ "bearerAuth": [] }],
-        "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "required": true,
-            "description": "身份令牌，格式 Bearer {access_token}",
-            "schema": {
-              "type": "string",
-              "example": "Bearer <access_token>"
-            }
-          },
-          {
-            "name": "Content-Type",
-            "in": "header",
-            "required": true,
-            "description": "application/json",
-            "schema": {
-              "type": "string",
-              "default": "application/json",
-              "example": "application/json"
-            }
-          }
-        ],
+        "security": [{ "apiKeyAuth": [] }, { "bearerAuth": [] }],
         "requestBody": {
           "required": true,
           "content": {
@@ -114,12 +97,12 @@
           {
             "lang": "python",
             "label": "Python",
-            "source": "import requests\n\nurl = \"https://openapi.bazhuayu.com/taskanalytics/queries\"\nheaders = {\n    \"Authorization\": \"Bearer <access_token>\",\n    \"Content-Type\": \"application/json\",\n}\npayload = {\n    \"start\": \"\",\n    \"end\": \"\",\n    \"page\": None,\n    \"pageSize\": None,\n    \"taskIds\": [],\n    \"memberNames\": [],\n    \"collectionMethod\": \"\",\n    \"timeGranularity\": \"\",\n}\n\nresponse = requests.post(url, json=payload, headers=headers)\nprint(response.json())"
+            "source": "import requests\n\nurl = \"https://openapi.bazhuayu.com/taskanalytics/queries\"\nheaders = {\n    \"x-api-key\": \"op_sk_xxxxxx\",\n    \"Content-Type\": \"application/json\",\n}\npayload = {\n    \"start\": \"\",\n    \"end\": \"\",\n    \"page\": None,\n    \"pageSize\": None,\n    \"taskIds\": [],\n    \"memberNames\": [],\n    \"collectionMethod\": \"\",\n    \"timeGranularity\": \"\",\n}\n\nresponse = requests.post(url, json=payload, headers=headers)\nprint(response.json())"
           },
           {
             "lang": "curl",
             "label": "cURL",
-            "source": "curl -X POST \"https://openapi.bazhuayu.com/taskanalytics/queries\" \\\n  -H \"Authorization: Bearer <access_token>\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"start\":\"\",\"end\":\"\",\"page\":null,\"pageSize\":null,\"taskIds\":[],\"memberNames\":[],\"collectionMethod\":\"\",\"timeGranularity\":\"\"}'"
+            "source": "curl -X POST \"https://openapi.bazhuayu.com/taskanalytics/queries\" \\\n  -H \"x-api-key: op_sk_xxxxxx\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"start\":\"\",\"end\":\"\",\"page\":null,\"pageSize\":null,\"taskIds\":[],\"memberNames\":[],\"collectionMethod\":\"\",\"timeGranularity\":\"\"}'"
           }
         ]
       }

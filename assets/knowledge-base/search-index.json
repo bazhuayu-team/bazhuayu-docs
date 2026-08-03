@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-07-30T08:56:06.551Z",
+  "generatedAt": "2026-08-03T03:35:41.948Z",
   "counts": {
     "faqIntents": 413,
     "publicAnswers": 662
@@ -1805,10 +1805,6 @@
         2
       ],
       [
-        "doc:/zh/api-reference/authentication",
-        2
-      ],
-      [
         "doc:/zh/api-reference/intro",
         2
       ],
@@ -3436,10 +3432,6 @@
       ],
       [
         "doc:/zh/api-reference/access-token/obtain-a-new-token",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/authentication",
         2
       ],
       [
@@ -5077,10 +5069,6 @@
         2
       ],
       [
-        "doc:/zh/api-reference/authentication",
-        2
-      ],
-      [
         "doc:/zh/api-reference/intro",
         2
       ],
@@ -6711,10 +6699,6 @@
         2
       ],
       [
-        "doc:/zh/api-reference/authentication",
-        2
-      ],
-      [
         "doc:/zh/api-reference/intro",
         2
       ],
@@ -8342,10 +8326,6 @@
       ],
       [
         "doc:/zh/api-reference/access-token/obtain-a-new-token",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/authentication",
         2
       ],
       [
@@ -13068,46 +13048,6 @@
       ],
       [
         "doc:/zh/api-reference/access-token/refresh-token",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-task-stats",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/start-subtasks",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/start-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/stop-subtasks",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/stop-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/data/get-non-exported-data",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/duplicate-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/move-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/search-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task-group/get-task-group-information",
         2
       ],
       [
@@ -20360,6 +20300,10 @@
       ],
       [
         "doc:/zh/cli/index",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/authentication",
         2
       ],
       [
@@ -42375,10 +42319,6 @@
         2
       ],
       [
-        "doc:/zh/api-reference/cloud-extraction/get-task-stats",
-        2
-      ],
-      [
         "verified:5G0oeY",
         2
       ],
@@ -48747,10 +48687,6 @@
         2
       ],
       [
-        "doc:/zh/api-reference/authentication",
-        2
-      ],
-      [
         "doc:/zh/api-reference/task-group/get-task-group-information",
         2
       ],
@@ -52791,10 +52727,6 @@
         2
       ],
       [
-        "doc:/zh/api-reference/cloud-extraction/get-task-stats",
-        2
-      ],
-      [
         "doc:/zh/api-reference/task/update-loop-items",
         2
       ],
@@ -56002,10 +55934,6 @@
       ],
       [
         "doc:/zh/cli/quick-start/installation",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/update-task-urls",
         2
       ],
       [
@@ -87401,98 +87329,6 @@
         2
       ],
       [
-        "doc:/zh/api-reference/cloud-extraction/get-statuses-v2",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-statuses",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-subtask-status",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-task-stats",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-task-status",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/start-subtasks",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/start-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/stop-subtasks",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/stop-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/data/get-non-exported-data",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/data/mark-data-as-exported",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/data/remove-data",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/delete-tasks",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/duplicate-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/get-actions",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/move-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/search-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/update-action-properties",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/update-loop-items",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/update-task-parameters",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/update-task-urls",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task-group/delete-groups",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task-group/get-task-group-information",
-        2
-      ],
-      [
         "doc:mcp-protocol:prompts",
         2
       ],
@@ -90607,6 +90443,42 @@
         2
       ],
       [
+        "doc:/zh/api-reference/cloud-extraction/get-statuses-v2",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/get-statuses",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/get-subtask-status",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/get-task-stats",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/get-task-status",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/start-subtasks",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/start-task",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/stop-subtasks",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/stop-task",
+        2
+      ],
+      [
         "doc:/zh/api-reference/data/get-batch-data",
         2
       ],
@@ -90615,7 +90487,59 @@
         2
       ],
       [
+        "doc:/zh/api-reference/data/get-non-exported-data",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/data/mark-data-as-exported",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/data/remove-data",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/delete-tasks",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/duplicate-task",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/get-actions",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/move-task",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/search-task",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/update-action-properties",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/update-loop-items",
+        2
+      ],
+      [
         "doc:/zh/api-reference/task/update-task-parameters",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/update-task-urls",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task-group/delete-groups",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task-group/get-task-group-information",
         2
       ],
       [
@@ -93356,22 +93280,6 @@
       ],
       [
         "doc:/zh/cli/reference/output-and-exit-codes",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-task-stats",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/data/get-non-exported-data",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/duplicate-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/move-task",
         2
       ],
       [
@@ -107717,7 +107625,35 @@
         2
       ],
       [
+        "doc:/zh/api-reference/cloud-extraction/get-statuses",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/get-subtask-status",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/get-task-stats",
+        2
+      ],
+      [
         "doc:/zh/api-reference/cloud-extraction/get-task-status",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/start-subtasks",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/start-task",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/stop-subtasks",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/stop-task",
         2
       ],
       [
@@ -107729,11 +107665,59 @@
         2
       ],
       [
+        "doc:/zh/api-reference/data/get-non-exported-data",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/data/mark-data-as-exported",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/data/remove-data",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/delete-tasks",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/duplicate-task",
+        2
+      ],
+      [
         "doc:/zh/api-reference/task/get-actions",
         2
       ],
       [
+        "doc:/zh/api-reference/task/move-task",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/search-task",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/update-action-properties",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/update-loop-items",
+        2
+      ],
+      [
         "doc:/zh/api-reference/task/update-task-parameters",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/update-task-urls",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task-group/delete-groups",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task-group/get-task-group-information",
         2
       ],
       [
@@ -109506,10 +109490,6 @@
       ],
       [
         "doc:/zh/api-reference/authentication",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-task-stats",
         2
       ],
       [
@@ -139133,6 +139113,10 @@
         2
       ],
       [
+        "doc:/zh/api-reference/authentication",
+        2
+      ],
+      [
         "doc:/zh/api-reference/cloud-extraction/get-task-stats",
         2
       ],
@@ -161025,10 +161009,6 @@
         2
       ],
       [
-        "doc:/zh/api-reference/authentication",
-        2
-      ],
-      [
         "doc:/zh/api-reference/cloud-extraction/get-statuses-v2",
         2
       ],
@@ -163577,10 +163557,6 @@
         2
       ],
       [
-        "doc:/zh/api-reference/authentication",
-        2
-      ],
-      [
         "doc:/zh/api-reference/data/get-batch-data",
         2
       ],
@@ -164192,10 +164168,6 @@
       ],
       [
         "doc:/zh/academy/xpath/cases/missing-or-misaligned-fields",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/authentication",
         2
       ],
       [
@@ -164906,10 +164878,6 @@
       ],
       [
         "doc:/zh/cli/core-commands/browser-management",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/authentication",
         2
       ],
       [
@@ -171929,6 +171897,10 @@
         2
       ],
       [
+        "doc:/zh/api-reference/authentication",
+        2
+      ],
+      [
         "doc:/zh/api-reference/cloud-extraction/get-subtask-status",
         2
       ],
@@ -177682,6 +177654,10 @@
       ],
       [
         "doc:/zh/cli/reference/output-and-exit-codes",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/authentication",
         2
       ],
       [
@@ -184747,6 +184723,10 @@
         2
       ],
       [
+        "doc:/zh/api-reference/authentication",
+        2
+      ],
+      [
         "doc:/zh/api-reference/data/get-batch-data",
         2
       ],
@@ -187936,98 +187916,6 @@
       ],
       [
         "doc:/zh/academy/case-studies/social-media/zhihu-keyword-search",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-statuses-v2",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-statuses",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-subtask-status",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-task-stats",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-task-status",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/start-subtasks",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/start-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/stop-subtasks",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/stop-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/data/get-non-exported-data",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/data/mark-data-as-exported",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/data/remove-data",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/delete-tasks",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/duplicate-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/get-actions",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/move-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/search-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/update-action-properties",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/update-loop-items",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/update-task-parameters",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/update-task-urls",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task-group/delete-groups",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task-group/get-task-group-information",
         2
       ],
       [
@@ -195367,11 +195255,103 @@
         2
       ],
       [
+        "doc:/zh/api-reference/cloud-extraction/get-statuses-v2",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/get-statuses",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/get-subtask-status",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/get-task-stats",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/get-task-status",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/start-subtasks",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/start-task",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/stop-subtasks",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/stop-task",
+        2
+      ],
+      [
         "doc:/zh/api-reference/data/get-batch-data",
         2
       ],
       [
         "doc:/zh/api-reference/data/get-data-by-offset",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/data/get-non-exported-data",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/data/mark-data-as-exported",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/data/remove-data",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/delete-tasks",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/duplicate-task",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/get-actions",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/move-task",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/search-task",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/update-action-properties",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/update-loop-items",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/update-task-parameters",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/update-task-urls",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task-group/delete-groups",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task-group/get-task-group-information",
         2
       ],
       [
@@ -199987,6 +199967,10 @@
         2
       ],
       [
+        "doc:/zh/api-reference/authentication",
+        2
+      ],
+      [
         "verified:BPM4CC",
         2
       ],
@@ -201101,6 +201085,10 @@
         2
       ],
       [
+        "doc:/zh/api-reference/authentication",
+        2
+      ],
+      [
         "doc:/zh/api-reference/intro",
         2
       ],
@@ -201539,6 +201527,10 @@
         2
       ],
       [
+        "doc:/zh/api-reference/authentication",
+        2
+      ],
+      [
         "doc:/zh/api-reference/intro",
         2
       ],
@@ -201962,6 +201954,10 @@
       ],
       [
         "doc:/zh/cli/index",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/authentication",
         2
       ],
       [
@@ -203654,10 +203650,6 @@
       ],
       [
         "doc:/zh/api-reference/data/get-data-by-offset",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task-group/get-task-group-information",
         2
       ],
       [
@@ -207287,98 +207279,6 @@
         2
       ],
       [
-        "doc:/zh/api-reference/cloud-extraction/get-statuses-v2",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-statuses",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-subtask-status",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-task-stats",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-task-status",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/start-subtasks",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/start-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/stop-subtasks",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/stop-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/data/get-non-exported-data",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/data/mark-data-as-exported",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/data/remove-data",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/delete-tasks",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/duplicate-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/get-actions",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/move-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/search-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/update-action-properties",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/update-loop-items",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/update-task-parameters",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/update-task-urls",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task-group/delete-groups",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task-group/get-task-group-information",
-        2
-      ],
-      [
         "verified:7xpcxt",
         2
       ]
@@ -208556,6 +208456,10 @@
       ],
       [
         "doc:/zh/cli/quick-start/get-api-key-and-log-in",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/authentication",
         2
       ],
       [
@@ -216965,10 +216869,6 @@
         2
       ],
       [
-        "doc:/zh/api-reference/authentication",
-        2
-      ],
-      [
         "doc:/zh/api-reference/task/copy-tasks",
         2
       ],
@@ -219691,10 +219591,6 @@
         2
       ],
       [
-        "doc:/zh/api-reference/authentication",
-        2
-      ],
-      [
         "doc:mcp-protocol:stdio-transport",
         2
       ],
@@ -220410,10 +220306,6 @@
       ],
       [
         "doc:/zh/academy/xpath/getting-started/what-is-html-xpath",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/authentication",
         2
       ],
       [
@@ -221196,10 +221088,6 @@
       ],
       [
         "doc:/zh/cli/reference/output-and-exit-codes",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/authentication",
         2
       ],
       [
@@ -236917,10 +236805,6 @@
         8
       ],
       [
-        "doc:/zh/api-reference/cloud-extraction/get-task-stats",
-        2
-      ],
-      [
         "verified:AK8NCp",
         2
       ],
@@ -240073,10 +239957,6 @@
         2
       ],
       [
-        "doc:/zh/api-reference/task-group/get-task-group-information",
-        2
-      ],
-      [
         "doc:mcp-protocol:streamable-http-transport",
         2
       ],
@@ -240149,10 +240029,6 @@
       [
         "faq:0Cuep5",
         8
-      ],
-      [
-        "doc:/zh/api-reference/task-group/get-task-group-information",
-        2
       ],
       [
         "doc:mcp-protocol:streamable-http-transport",
@@ -244523,7 +244399,99 @@
         2
       ],
       [
+        "doc:/zh/api-reference/cloud-extraction/get-statuses-v2",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/get-statuses",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/get-subtask-status",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/get-task-stats",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/get-task-status",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/start-subtasks",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/start-task",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/stop-subtasks",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/stop-task",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/data/get-non-exported-data",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/data/mark-data-as-exported",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/data/remove-data",
+        2
+      ],
+      [
         "doc:/zh/api-reference/task/copy-tasks",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/delete-tasks",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/duplicate-task",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/get-actions",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/move-task",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/search-task",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/update-action-properties",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/update-loop-items",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/update-task-parameters",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/update-task-urls",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task-group/delete-groups",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task-group/get-task-group-information",
         2
       ],
       [
@@ -249144,6 +249112,10 @@
       ],
       [
         "doc:/zh/mcp/search-platform-content",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/authentication",
         2
       ],
       [
@@ -259989,10 +259961,6 @@
         2
       ],
       [
-        "doc:/zh/api-reference/authentication",
-        2
-      ],
-      [
         "doc:/zh/api-reference/cloud-extraction/get-statuses-v2",
         2
       ],
@@ -269641,11 +269609,103 @@
         2
       ],
       [
+        "doc:/zh/api-reference/cloud-extraction/get-statuses-v2",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/get-statuses",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/get-subtask-status",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/get-task-stats",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/get-task-status",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/start-subtasks",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/start-task",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/stop-subtasks",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/stop-task",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/data/get-non-exported-data",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/data/mark-data-as-exported",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/data/remove-data",
+        2
+      ],
+      [
         "doc:/zh/api-reference/intro",
         2
       ],
       [
         "doc:/zh/api-reference/reference",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/delete-tasks",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/duplicate-task",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/get-actions",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/move-task",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/search-task",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/update-action-properties",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/update-loop-items",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/update-task-parameters",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/update-task-urls",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task-group/delete-groups",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task-group/get-task-group-information",
         2
       ],
       [
@@ -275974,10 +276034,6 @@
       ],
       [
         "doc:/zh/cli/reference/output-and-exit-codes",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-task-stats",
         2
       ],
       [
@@ -290597,98 +290653,6 @@
         2
       ],
       [
-        "doc:/zh/api-reference/cloud-extraction/get-statuses-v2",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-statuses",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-subtask-status",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-task-stats",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-task-status",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/start-subtasks",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/start-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/stop-subtasks",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/stop-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/data/get-non-exported-data",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/data/mark-data-as-exported",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/data/remove-data",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/delete-tasks",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/duplicate-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/get-actions",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/move-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/search-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/update-action-properties",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/update-loop-items",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/update-task-parameters",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/update-task-urls",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task-group/delete-groups",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task-group/get-task-group-information",
-        2
-      ],
-      [
         "verified:wo-zhe-bian-yun-cai-ji-shi-bu-shi-zhi-neng-yun-xing-yi-ge-ren-wu-wo-kan-shuo-ming-shi-zui-da-ke-yi-yun-xing-6-ge",
         2
       ]
@@ -292776,6 +292740,10 @@
       ],
       [
         "doc:/zh/mcp/cases/index",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/authentication",
         2
       ],
       [
@@ -303261,10 +303229,6 @@
         2
       ],
       [
-        "doc:/zh/api-reference/authentication",
-        2
-      ],
-      [
         "doc:/zh/api-reference/data/get-batch-data",
         2
       ],
@@ -313007,10 +312971,6 @@
         2
       ],
       [
-        "doc:/zh/api-reference/authentication",
-        2
-      ],
-      [
         "doc:/zh/api-reference/cloud-extraction/get-statuses-v2",
         2
       ],
@@ -313426,10 +313386,6 @@
       ],
       [
         "doc:/zh/cli/core-commands/detect",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/authentication",
         2
       ],
       [
@@ -314246,6 +314202,10 @@
       ],
       [
         "doc:/zh/cli/quick-start/get-api-key-and-log-in",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/authentication",
         2
       ],
       [
@@ -320268,6 +320228,10 @@
       ],
       [
         "doc:/zh/cli/quick-start/get-api-key-and-log-in",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/authentication",
         2
       ],
       [
@@ -330762,22 +330726,6 @@
       ],
       [
         "doc:/zh/cli/reference/output-and-exit-codes",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-task-stats",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/data/get-non-exported-data",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/duplicate-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/move-task",
         2
       ],
       [
@@ -345165,10 +345113,6 @@
         8
       ],
       [
-        "doc:/zh/api-reference/authentication",
-        2
-      ],
-      [
         "verified:IjrPPH",
         2
       ],
@@ -346772,10 +346716,6 @@
       ],
       [
         "doc:/zh/mcp/search-tasks",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/authentication",
         2
       ],
       [
@@ -352743,11 +352683,35 @@
         2
       ],
       [
+        "doc:/zh/api-reference/cloud-extraction/get-statuses-v2",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/get-statuses",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/get-subtask-status",
+        2
+      ],
+      [
         "doc:/zh/api-reference/cloud-extraction/get-task-stats",
         2
       ],
       [
+        "doc:/zh/api-reference/cloud-extraction/get-task-status",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/start-subtasks",
+        2
+      ],
+      [
         "doc:/zh/api-reference/cloud-extraction/start-task",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/stop-subtasks",
         2
       ],
       [
@@ -352767,7 +352731,23 @@
         2
       ],
       [
+        "doc:/zh/api-reference/data/mark-data-as-exported",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/data/remove-data",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/delete-tasks",
+        2
+      ],
+      [
         "doc:/zh/api-reference/task/duplicate-task",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/get-actions",
         2
       ],
       [
@@ -352776,6 +352756,26 @@
       ],
       [
         "doc:/zh/api-reference/task/search-task",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/update-action-properties",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/update-loop-items",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/update-task-parameters",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/update-task-urls",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task-group/delete-groups",
         2
       ],
       [
@@ -353647,10 +353647,6 @@
         2
       ],
       [
-        "doc:/zh/api-reference/task/update-task-urls",
-        2
-      ],
-      [
         "verified:JleRkS",
         2
       ],
@@ -353734,10 +353730,6 @@
       ],
       [
         "doc:/zh/mcp/search-templates",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/update-task-urls",
         2
       ],
       [
@@ -354627,6 +354619,10 @@
         2
       ],
       [
+        "doc:/zh/api-reference/authentication",
+        2
+      ],
+      [
         "verified:ALEZT9",
         2
       ],
@@ -354730,6 +354726,10 @@
       ],
       [
         "doc:/zh/mcp/workflow",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/authentication",
         2
       ],
       [
@@ -356282,6 +356282,10 @@
       ],
       [
         "doc:/zh/cli/quick-start/installation",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/authentication",
         2
       ],
       [
@@ -358595,11 +358599,103 @@
         2
       ],
       [
+        "doc:/zh/api-reference/cloud-extraction/get-statuses-v2",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/get-statuses",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/get-subtask-status",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/get-task-stats",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/get-task-status",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/start-subtasks",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/start-task",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/stop-subtasks",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/stop-task",
+        2
+      ],
+      [
         "doc:/zh/api-reference/data/get-batch-data",
         2
       ],
       [
         "doc:/zh/api-reference/data/get-data-by-offset",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/data/get-non-exported-data",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/data/mark-data-as-exported",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/data/remove-data",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/delete-tasks",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/duplicate-task",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/get-actions",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/move-task",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/search-task",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/update-action-properties",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/update-loop-items",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/update-task-parameters",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/update-task-urls",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task-group/delete-groups",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task-group/get-task-group-information",
         2
       ],
       [
@@ -366757,38 +366853,6 @@
         2
       ],
       [
-        "doc:/zh/api-reference/cloud-extraction/get-task-stats",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/start-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/stop-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/data/get-non-exported-data",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/duplicate-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/move-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/search-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task-group/get-task-group-information",
-        2
-      ],
-      [
         "verified:cz1Vjm",
         2
       ],
@@ -371563,6 +371627,10 @@
         2
       ],
       [
+        "doc:/zh/api-reference/authentication",
+        2
+      ],
+      [
         "verified:BPM4CC",
         2
       ],
@@ -372902,10 +372970,6 @@
       ],
       [
         "doc:/zh/academy/case-studies/social-media/zhihu-keyword-search",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/authentication",
         2
       ],
       [
@@ -375929,14 +375993,6 @@
         2
       ],
       [
-        "doc:/zh/api-reference/cloud-extraction/get-task-stats",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/search-task",
-        2
-      ],
-      [
         "doc:mcp-protocol:stdio-transport",
         2
       ],
@@ -377788,6 +377844,10 @@
       ],
       [
         "doc:/zh/academy/case-studies/social-media/bilibili-up-videos",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/authentication",
         2
       ],
       [
@@ -401597,98 +401657,6 @@
         2
       ],
       [
-        "doc:/zh/api-reference/cloud-extraction/get-statuses-v2",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-statuses",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-subtask-status",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-task-stats",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-task-status",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/start-subtasks",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/start-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/stop-subtasks",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/stop-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/data/get-non-exported-data",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/data/mark-data-as-exported",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/data/remove-data",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/delete-tasks",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/duplicate-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/get-actions",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/move-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/search-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/update-action-properties",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/update-loop-items",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/update-task-parameters",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/update-task-urls",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task-group/delete-groups",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task-group/get-task-group-information",
-        2
-      ],
-      [
         "verified:Xp3DWQ",
         2
       ],
@@ -403570,22 +403538,6 @@
       ],
       [
         "doc:/zh/cli/reference/output-and-exit-codes",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-task-stats",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/data/get-non-exported-data",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/duplicate-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/move-task",
         2
       ],
       [
@@ -408301,98 +408253,6 @@
         2
       ],
       [
-        "doc:/zh/api-reference/cloud-extraction/get-statuses-v2",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-statuses",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-subtask-status",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-task-stats",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-task-status",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/start-subtasks",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/start-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/stop-subtasks",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/stop-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/data/get-non-exported-data",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/data/mark-data-as-exported",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/data/remove-data",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/delete-tasks",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/duplicate-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/get-actions",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/move-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/search-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/update-action-properties",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/update-loop-items",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/update-task-parameters",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/update-task-urls",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task-group/delete-groups",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task-group/get-task-group-information",
-        2
-      ],
-      [
         "verified:FiaeZ3",
         2
       ],
@@ -412953,10 +412813,6 @@
         2
       ],
       [
-        "doc:/zh/api-reference/authentication",
-        2
-      ],
-      [
         "verified:deQSAS",
         2
       ],
@@ -414646,10 +414502,6 @@
       ],
       [
         "doc:/zh/academy/case-studies/life-services/ctrip-travel-guides",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-task-stats",
         2
       ]
     ],
@@ -423929,6 +423781,102 @@
       [
         "doc:/zh/cli/reference/output-and-exit-codes",
         2
+      ],
+      [
+        "doc:/zh/api-reference/authentication",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/get-statuses-v2",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/get-statuses",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/get-subtask-status",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/get-task-stats",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/get-task-status",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/start-subtasks",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/start-task",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/stop-subtasks",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/stop-task",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/data/get-non-exported-data",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/data/mark-data-as-exported",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/data/remove-data",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/delete-tasks",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/duplicate-task",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/get-actions",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/move-task",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/search-task",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/update-action-properties",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/update-loop-items",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/update-task-parameters",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/update-task-urls",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task-group/delete-groups",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task-group/get-task-group-information",
+        2
       ]
     ],
     "e6": [
@@ -425098,10 +425046,6 @@
       ],
       [
         "doc:/zh/cli/index",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-task-stats",
         2
       ],
       [
@@ -435419,6 +435363,98 @@
       [
         "doc:/zh/academy/case-studies/social-media/sogou-wechat-list-and-detail",
         2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/get-statuses-v2",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/get-statuses",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/get-subtask-status",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/get-task-stats",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/get-task-status",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/start-subtasks",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/start-task",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/stop-subtasks",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/stop-task",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/data/get-non-exported-data",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/data/mark-data-as-exported",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/data/remove-data",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/delete-tasks",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/duplicate-task",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/get-actions",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/move-task",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/search-task",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/update-action-properties",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/update-loop-items",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/update-task-parameters",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/update-task-urls",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task-group/delete-groups",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task-group/get-task-group-information",
+        2
       ]
     ],
     "个段": [
@@ -437080,10 +437116,6 @@
     "应参": [
       [
         "doc:/zh/academy/case-studies/social-media/weibo-keyword-search",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task-group/get-task-group-information",
         2
       ]
     ],
@@ -441207,6 +441239,10 @@
       [
         "doc:/zh/academy/premium-features/enterprise-management/cloud-monitoring-alerts",
         2
+      ],
+      [
+        "doc:/zh/api-reference/authentication",
+        2
       ]
     ],
     "持点": [
@@ -442931,6 +442967,10 @@
         2
       ],
       [
+        "doc:/zh/api-reference/authentication",
+        2
+      ],
+      [
         "verified:cz1Vjm",
         2
       ],
@@ -443328,10 +443368,6 @@
     "需在": [
       [
         "doc:/zh/academy/troubleshooting/ajax-web-scraping",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-task-stats",
         2
       ],
       [
@@ -454939,6 +454975,102 @@
       [
         "doc:/zh/mcp/troubleshooting",
         2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/get-statuses-v2",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/get-statuses",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/get-subtask-status",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/get-task-stats",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/get-task-status",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/start-subtasks",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/start-task",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/stop-subtasks",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/stop-task",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/data/get-non-exported-data",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/data/mark-data-as-exported",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/data/remove-data",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/copy-tasks",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/delete-tasks",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/duplicate-task",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/get-actions",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/move-task",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/search-task",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/update-action-properties",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/update-loop-items",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/update-task-parameters",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/update-task-urls",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task-group/delete-groups",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task-group/get-task-group-information",
+        2
       ]
     ],
     "本次": [
@@ -455187,10 +455319,6 @@
         2
       ],
       [
-        "doc:/zh/api-reference/cloud-extraction/get-task-stats",
-        2
-      ],
-      [
         "verified:B2MLnT",
         2
       ]
@@ -455222,10 +455350,6 @@
       ],
       [
         "doc:/zh/api-reference/access-token/refresh-token",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/authentication",
         2
       ],
       [
@@ -455471,10 +455595,6 @@
       [
         "doc:/zh/mcp/quick-start/api-key",
         2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-task-stats",
-        2
       ]
     ],
     "authorization": [
@@ -455488,102 +455608,6 @@
       ],
       [
         "doc:/zh/mcp/quick-start/api-key",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-statuses-v2",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-statuses",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-subtask-status",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-task-stats",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-task-status",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/start-subtasks",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/start-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/stop-subtasks",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/stop-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/data/get-non-exported-data",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/data/mark-data-as-exported",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/data/remove-data",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/copy-tasks",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/delete-tasks",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/duplicate-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/get-actions",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/move-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/search-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/update-action-properties",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/update-loop-items",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/update-task-parameters",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/update-task-urls",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task-group/delete-groups",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task-group/get-task-group-information",
         2
       ]
     ],
@@ -459923,6 +459947,10 @@
         2
       ],
       [
+        "doc:/zh/api-reference/authentication",
+        2
+      ],
+      [
         "verified:ALEZT9",
         2
       ],
@@ -460736,10 +460764,6 @@
     "从八": [
       [
         "doc:/zh/mcp/search-platform-content",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/authentication",
         2
       ]
     ],
@@ -466939,70 +466963,6 @@
         2
       ],
       [
-        "doc:/zh/api-reference/cloud-extraction/get-statuses-v2",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-statuses",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-subtask-status",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-task-status",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/start-subtasks",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/start-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/stop-subtasks",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/stop-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/data/mark-data-as-exported",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/data/remove-data",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/delete-tasks",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/get-actions",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/update-action-properties",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/update-loop-items",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/update-task-urls",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task-group/delete-groups",
-        2
-      ],
-      [
         "verified:B2MLnT",
         2
       ]
@@ -467014,30 +466974,6 @@
       ],
       [
         "doc:/zh/api-reference/access-token/refresh-token",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-subtask-status",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/start-subtasks",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/start-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/stop-subtasks",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/stop-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/data/remove-data",
         2
       ]
     ],
@@ -467971,26 +467907,6 @@
         2
       ],
       [
-        "doc:/zh/api-reference/cloud-extraction/start-subtasks",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/start-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/stop-subtasks",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/stop-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/data/remove-data",
-        2
-      ],
-      [
         "verified:F57Nik",
         2
       ]
@@ -468003,59 +467919,11 @@
       [
         "doc:/zh/api-reference/access-token/refresh-token",
         2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-task-stats",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/start-subtasks",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/start-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/stop-subtasks",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/stop-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/data/get-non-exported-data",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/duplicate-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/move-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/search-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task-group/get-task-group-information",
-        2
       ]
     ],
     "例请": [
       [
         "doc:/zh/api-reference/access-token/obtain-a-new-token",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-task-stats",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/search-task",
         2
       ]
     ],
@@ -468063,23 +467931,11 @@
       [
         "doc:/zh/api-reference/access-token/obtain-a-new-token",
         2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-task-stats",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/search-task",
-        2
       ]
     ],
     "体参": [
       [
         "doc:/zh/api-reference/access-token/obtain-a-new-token",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/search-task",
         2
       ],
       [
@@ -468171,69 +468027,27 @@
         2
       ]
     ],
-    "有请": [
-      [
-        "doc:/zh/api-reference/authentication",
-        2
-      ],
-      [
-        "verified:bjUqai",
-        2
-      ],
-      [
-        "verified:wei-shen-me-zhi-neng-cai-ji-1-tiao-shu-ju-jiu-jie-shu-le",
-        2
-      ]
-    ],
-    "求均": [
+    "持或": [
       [
         "doc:/zh/api-reference/authentication",
         2
       ]
     ],
-    "均需": [
-      [
-        "doc:/zh/api-reference/authentication",
-        2
-      ],
-      [
-        "verified:f2JCY6",
-        2
-      ]
-    ],
-    "需使": [
-      [
-        "doc:/zh/api-reference/authentication",
-        2
-      ],
-      [
-        "verified:6QhLOm",
-        2
-      ],
-      [
-        "verified:ULUKk3",
-        2
-      ]
-    ],
-    "用进": [
+    "或认": [
       [
         "doc:/zh/api-reference/authentication",
         2
       ]
     ],
-    "行认": [
+    "将和": [
       [
         "doc:/zh/api-reference/authentication",
         2
       ]
     ],
-    "将安": [
+    "和安": [
       [
         "doc:/zh/api-reference/authentication",
-        2
-      ],
-      [
-        "verified:DdSwKt",
         2
       ]
     ],
@@ -468387,19 +468201,31 @@
         2
       ]
     ],
-    "疑已": [
+    "疑凭": [
       [
         "doc:/zh/api-reference/authentication",
         2
       ]
     ],
-    "已被": [
+    "据已": [
       [
         "doc:/zh/api-reference/authentication",
         2
+      ],
+      [
+        "doc:/zh/api-reference/data/mark-data-as-exported",
+        2
+      ],
+      [
+        "verified:cz1Vjm",
+        2
+      ],
+      [
+        "verified:i7gSoT",
+        2
       ]
     ],
-    "被泄": [
+    "已泄": [
       [
         "doc:/zh/api-reference/authentication",
         2
@@ -468433,25 +468259,59 @@
         2
       ]
     ],
-    "请从": [
+    "请立": [
       [
         "doc:/zh/api-reference/authentication",
         2
       ]
     ],
-    "户设": [
-      [
-        "doc:/zh/api-reference/authentication",
-        2
-      ]
-    ],
-    "中重": [
+    "在账": [
       [
         "doc:/zh/api-reference/authentication",
         2
       ],
       [
-        "verified:VEsdwT",
+        "verified:KD8IvQ",
+        2
+      ]
+    ],
+    "心作": [
+      [
+        "doc:/zh/api-reference/authentication",
+        2
+      ]
+    ],
+    "作废": [
+      [
+        "doc:/zh/api-reference/authentication",
+        2
+      ]
+    ],
+    "废": [
+      [
+        "doc:/zh/api-reference/authentication",
+        2
+      ]
+    ],
+    "废并": [
+      [
+        "doc:/zh/api-reference/authentication",
+        2
+      ]
+    ],
+    "并重": [
+      [
+        "doc:/zh/api-reference/authentication",
+        2
+      ],
+      [
+        "verified:Ce66Ui",
+        2
+      ]
+    ],
+    "新创": [
+      [
+        "doc:/zh/api-reference/authentication",
         2
       ]
     ],
@@ -468493,13 +468353,93 @@
         2
       ]
     ],
-    "str": [
+    "opskxxxxxx": [
       [
         "doc:/zh/api-reference/cloud-extraction/get-statuses-v2",
         2
       ],
       [
+        "doc:/zh/api-reference/cloud-extraction/get-statuses",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/get-subtask-status",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/get-task-stats",
+        2
+      ],
+      [
         "doc:/zh/api-reference/cloud-extraction/get-task-status",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/start-subtasks",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/start-task",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/stop-subtasks",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/cloud-extraction/stop-task",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/data/get-non-exported-data",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/data/mark-data-as-exported",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/data/remove-data",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/delete-tasks",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/duplicate-task",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/get-actions",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/move-task",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/search-task",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/update-action-properties",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/update-loop-items",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task/update-task-urls",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task-group/delete-groups",
+        2
+      ],
+      [
+        "doc:/zh/api-reference/task-group/get-task-group-information",
         2
       ]
     ],
@@ -469117,7 +469057,7 @@
         2
       ]
     ],
-    "是身": [
+    "明二": [
       [
         "doc:/zh/api-reference/cloud-extraction/get-statuses-v2",
         2
@@ -469211,105 +469151,7 @@
         2
       ]
     ],
-    "身份": [
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-statuses-v2",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-statuses",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-subtask-status",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-task-stats",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-task-status",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/start-subtasks",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/start-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/stop-subtasks",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/stop-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/data/get-non-exported-data",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/data/mark-data-as-exported",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/data/remove-data",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/delete-tasks",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/duplicate-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/get-actions",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/move-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/search-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/update-action-properties",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/update-loop-items",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/update-task-parameters",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/update-task-urls",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task-group/delete-groups",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task-group/get-task-group-information",
-        2
-      ],
-      [
-        "verified:Q2EQcr",
-        2
-      ]
-    ],
-    "份令": [
+    "二选": [
       [
         "doc:/zh/api-reference/cloud-extraction/get-statuses-v2",
         2
@@ -469403,7 +469245,7 @@
         2
       ]
     ],
-    "令牌": [
+    "一例": [
       [
         "doc:/zh/api-reference/cloud-extraction/get-statuses-v2",
         2
@@ -469534,64 +469376,6 @@
     "息调": [
       [
         "doc:/zh/api-reference/cloud-extraction/get-statuses",
-        2
-      ]
-    ],
-    "牌是": [
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-statuses",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-subtask-status",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/start-subtasks",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/start-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/stop-subtasks",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/cloud-extraction/stop-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/data/mark-data-as-exported",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/data/remove-data",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/delete-tasks",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/get-actions",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/update-action-properties",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/update-loop-items",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/update-task-urls",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task-group/delete-groups",
         2
       ]
     ],
@@ -469763,12 +469547,6 @@
         2
       ]
     ],
-    "authori": [
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-task-stats",
-        2
-      ]
-    ],
     "餐企": [
       [
         "doc:/zh/api-reference/cloud-extraction/get-task-stats",
@@ -469896,116 +469674,6 @@
       ],
       [
         "verified:ZmWLfY",
-        2
-      ]
-    ],
-    "牌请": [
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-task-stats",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/data/get-non-exported-data",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/duplicate-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/move-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/search-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task-group/get-task-group-information",
-        2
-      ]
-    ],
-    "求示": [
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-task-stats",
-        2
-      ]
-    ],
-    "例本": [
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-task-stats",
-        2
-      ]
-    ],
-    "本接": [
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-task-stats",
-        2
-      ]
-    ],
-    "口无": [
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-task-stats",
-        2
-      ]
-    ],
-    "无查": [
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-task-stats",
-        2
-      ]
-    ],
-    "询参": [
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-task-stats",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/data/get-non-exported-data",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/duplicate-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/move-task",
-        2
-      ]
-    ],
-    "数与": [
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-task-stats",
-        2
-      ]
-    ],
-    "与请": [
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-task-stats",
-        2
-      ]
-    ],
-    "体仅": [
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-task-stats",
-        2
-      ]
-    ],
-    "仅需": [
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-task-stats",
-        2
-      ]
-    ],
-    "中携": [
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-task-stats",
-        2
-      ]
-    ],
-    "携带": [
-      [
-        "doc:/zh/api-reference/cloud-extraction/get-task-stats",
         2
       ]
     ],
@@ -470671,34 +470339,6 @@
         2
       ]
     ],
-    "例查": [
-      [
-        "doc:/zh/api-reference/data/get-non-exported-data",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/duplicate-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/move-task",
-        2
-      ]
-    ],
-    "数参": [
-      [
-        "doc:/zh/api-reference/data/get-non-exported-data",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/duplicate-task",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/move-task",
-        2
-      ]
-    ],
     "记数": [
       [
         "doc:/zh/api-reference/data/mark-data-as-exported",
@@ -470711,16 +470351,6 @@
         2
       ]
     ],
-    "applicat": [
-      [
-        "doc:/zh/api-reference/data/mark-data-as-exported",
-        2
-      ],
-      [
-        "doc:/zh/api-reference/task/delete-tasks",
-        2
-      ]
-    ],
     "述确": [
       [
         "doc:/zh/api-reference/data/mark-data-as-exported",
@@ -470730,20 +470360,6 @@
     "认数": [
       [
         "doc:/zh/api-reference/data/mark-data-as-exported",
-        2
-      ]
-    ],
-    "据已": [
-      [
-        "doc:/zh/api-reference/data/mark-data-as-exported",
-        2
-      ],
-      [
-        "verified:cz1Vjm",
-        2
-      ],
-      [
-        "verified:i7gSoT",
         2
       ]
     ],
@@ -471046,6 +470662,12 @@
       ]
     ],
     "到多": [
+      [
+        "doc:/zh/api-reference/task/copy-tasks",
+        2
+      ]
+    ],
+    "strin": [
       [
         "doc:/zh/api-reference/task/copy-tasks",
         2
@@ -471469,12 +471091,6 @@
         2
       ]
     ],
-    "applicati": [
-      [
-        "doc:/zh/api-reference/task/get-actions",
-        2
-      ]
-    ],
     "口根": [
       [
         "doc:/zh/api-reference/task/get-actions",
@@ -471570,12 +471186,6 @@
       ],
       [
         "verified:fGjj5G",
-        2
-      ]
-    ],
-    "application/js": [
-      [
-        "doc:/zh/api-reference/task/update-action-properties",
         2
       ]
     ],
@@ -471799,12 +471409,6 @@
         2
       ]
     ],
-    "multipart/form-data": [
-      [
-        "doc:/zh/api-reference/task/update-task-urls",
-        2
-      ]
-    ],
     "址替": [
       [
         "doc:/zh/api-reference/task/update-task-urls",
@@ -471812,30 +471416,6 @@
       ]
     ],
     "换请": [
-      [
-        "doc:/zh/api-reference/task/update-task-urls",
-        2
-      ]
-    ],
-    "是需": [
-      [
-        "doc:/zh/api-reference/task/update-task-urls",
-        2
-      ],
-      [
-        "verified:lW9Hd0",
-        2
-      ],
-      [
-        "verified:nfqvbQ",
-        2
-      ],
-      [
-        "verified:c1tiHQ",
-        2
-      ]
-    ],
-    "需包": [
       [
         "doc:/zh/api-reference/task/update-task-urls",
         2
@@ -472183,12 +471763,6 @@
         2
       ]
     ],
-    "applicatio": [
-      [
-        "doc:/zh/api-reference/task-group/delete-groups",
-        2
-      ]
-    ],
     "述支": [
       [
         "doc:/zh/api-reference/task-group/delete-groups",
@@ -472242,12 +471816,6 @@
       ]
     ],
     "户所": [
-      [
-        "doc:/zh/api-reference/task-group/get-task-group-information",
-        2
-      ]
-    ],
-    "例响": [
       [
         "doc:/zh/api-reference/task-group/get-task-group-information",
         2
@@ -477858,6 +477426,12 @@
       ]
     ],
     "统请": [
+      [
+        "verified:DdSwKt",
+        2
+      ]
+    ],
+    "将安": [
       [
         "verified:DdSwKt",
         2
@@ -487732,6 +487306,16 @@
       ],
       [
         "verified:wNM8Ht",
+        2
+      ]
+    ],
+    "有请": [
+      [
+        "verified:bjUqai",
+        2
+      ],
+      [
+        "verified:wei-shen-me-zhi-neng-cai-ji-1-tiao-shu-ju-jiu-jie-shu-le",
         2
       ]
     ],
@@ -506993,6 +506577,20 @@
         2
       ]
     ],
+    "是需": [
+      [
+        "verified:lW9Hd0",
+        2
+      ],
+      [
+        "verified:nfqvbQ",
+        2
+      ],
+      [
+        "verified:c1tiHQ",
+        2
+      ]
+    ],
     "墙才": [
       [
         "verified:lW9Hd0",
@@ -514292,6 +513890,12 @@
       ]
     ],
     "箱均": [
+      [
+        "verified:f2JCY6",
+        2
+      ]
+    ],
+    "均需": [
       [
         "verified:f2JCY6",
         2
@@ -523326,6 +522930,16 @@
       ],
       [
         "verified:XMp0H0",
+        2
+      ]
+    ],
+    "需使": [
+      [
+        "verified:6QhLOm",
+        2
+      ],
+      [
+        "verified:ULUKk3",
         2
       ]
     ],
@@ -539713,12 +539327,6 @@
         2
       ]
     ],
-    "并重": [
-      [
-        "verified:Ce66Ui",
-        2
-      ]
-    ],
     "启然": [
       [
         "verified:Ce66Ui",
@@ -548147,6 +547755,12 @@
         2
       ]
     ],
+    "中重": [
+      [
+        "verified:VEsdwT",
+        2
+      ]
+    ],
     "点考": [
       [
         "verified:VEsdwT",
@@ -548510,6 +548124,12 @@
       ]
     ],
     "名身": [
+      [
+        "verified:Q2EQcr",
+        2
+      ]
+    ],
+    "身份": [
       [
         "verified:Q2EQcr",
         2
@@ -550336,12 +549956,6 @@
       ],
       [
         "verified:c1tiHQ",
-        2
-      ]
-    ],
-    "在账": [
-      [
-        "verified:KD8IvQ",
         2
       ]
     ],
@@ -566959,74 +566573,74 @@
     },
     "doc:/zh/api-reference/authentication": {
       "title": "认证",
-      "summary": "所有 API 请求均需使用 Access Token 进行认证。",
+      "summary": "业务 API 支持 API Key 或 Access Token 认证。",
       "steps": [
-        "请将 Access Token 安全存储，切勿公开发布",
+        "请将 API Key 和 Access Token 安全存储，切勿公开发布",
         "使用环境变量或密钥管理器管理凭据，切勿硬编码在代码中",
-        "如怀疑 Token 已被泄露，请从八爪鱼账户设置中重置"
+        "如怀疑凭据已泄露，请立即在账户中心作废并重新创建"
       ],
       "route": "/zh/api-reference/authentication",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/cloud-extraction/get-statuses-v2": {
       "title": "批量获取任务状态 V2",
-      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 此接口接收用户传入的一批任务ID，返回相应的任务状态列表。调用频率：1秒5次请求。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | Authorization | String | 是 | 身份令牌 | | Content-Type | Str…",
+      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 此接口接收用户传入的一批任务ID，返回相应的任务状态列表。调用频率：1秒5次请求。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
       "steps": [],
       "route": "/zh/api-reference/cloud-extraction/get-statuses-v2",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/cloud-extraction/get-statuses": {
       "title": "批量获取任务状态",
-      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 根据任务 ID 批量获取任务状态信息。调用频率：5 秒 1 次请求。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | Authorization | String | 是 | 身份令牌 | | Content-Type | String | 是…",
+      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 根据任务 ID 批量获取任务状态信息。调用频率：5 秒 1 次请求。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
       "steps": [],
       "route": "/zh/api-reference/cloud-extraction/get-statuses",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/cloud-extraction/get-subtask-status": {
       "title": "获取子任务状态",
-      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 获取任务最新批次的子任务状态 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | Authorization | String | 是 | 身份令牌 | | Content-Type | String | 是 | application/json…",
+      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 获取任务最新批次的子任务状态 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
       "steps": [],
       "route": "/zh/api-reference/cloud-extraction/get-subtask-status",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/cloud-extraction/get-task-stats": {
       "title": "任务运行情况",
-      "summary": "所需套餐： 企业版 端点 描述 此接口用于获取云采集监控平台中任务和子任务运行数量情况。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | Authorization | String | 是 | 身份令牌 | 请求头示例 请求示例 本接口无查询参数与请求体，仅需在请求头中携带 Authori…",
+      "summary": "所需套餐： 企业版 端点 描述 此接口用于获取云采集监控平台中任务和子任务运行数量情况。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
       "steps": [],
       "route": "/zh/api-reference/cloud-extraction/get-task-stats",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/cloud-extraction/get-task-status": {
       "title": "获取任务状态",
-      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 此接口接收用户传入的一批任务ID，返回相应的任务状态列表。调用频率：5秒1次请求。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | Authorization | String | 是 | 身份令牌 | | Content-Type | Str…",
+      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 此接口接收用户传入的一批任务ID，返回相应的任务状态列表。调用频率：5秒1次请求。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
       "steps": [],
       "route": "/zh/api-reference/cloud-extraction/get-task-status",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/cloud-extraction/start-subtasks": {
       "title": "批量启动子任务",
-      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 启动云节点子任务 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | Authorization | String | 是 | 身份令牌 | | Content-Type | String | 是 | application/json | 请求头示…",
+      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 启动云节点子任务 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
       "steps": [],
       "route": "/zh/api-reference/cloud-extraction/start-subtasks",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/cloud-extraction/start-task": {
       "title": "启动任务",
-      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 启动云节点任务 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | Authorization | String | 是 | 身份令牌 | | Content-Type | String | 是 | application/json | 请求头示例…",
+      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 启动云节点任务 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
       "steps": [],
       "route": "/zh/api-reference/cloud-extraction/start-task",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/cloud-extraction/stop-subtasks": {
       "title": "批量停止子任务",
-      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 停止云节点子任务 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | Authorization | String | 是 | 身份令牌 | | Content-Type | String | 是 | application/json | 请求头示…",
+      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 停止云节点子任务 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
       "steps": [],
       "route": "/zh/api-reference/cloud-extraction/stop-subtasks",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/cloud-extraction/stop-task": {
       "title": "停止任务",
-      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 停止任务采集 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | Authorization | String | 是 | 身份令牌 | | Content-Type | String | 是 | application/json | 请求头示例…",
+      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 停止任务采集 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
       "steps": [],
       "route": "/zh/api-reference/cloud-extraction/stop-task",
       "sourceType": "OpenAPI"
@@ -567047,21 +566661,21 @@
     },
     "doc:/zh/api-reference/data/get-non-exported-data": {
       "title": "获取未导出的数据",
-      "summary": "所需套餐： 旗舰版、旗舰+、企业版、团队版 端点 描述 获取任务中尚未标记为已导出的数据。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | Authorization | String | 是 | 身份令牌 | 请求头示例 查询参数 | 参数 | 类型 | 必填 | 说明 | |------…",
+      "summary": "所需套餐： 旗舰版、旗舰+、企业版、团队版 端点 描述 获取任务中尚未标记为已导出的数据。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
       "steps": [],
       "route": "/zh/api-reference/data/get-non-exported-data",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/data/mark-data-as-exported": {
       "title": "标记数据为已导出状态",
-      "summary": "所需套餐： 旗舰版、旗舰+、企业版、团队版 端点 描述 确认数据已导出，否则数据仍属于未导出。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | Authorization | String | 是 | 身份令牌 | | Content-Type | String | 是 | applicat…",
+      "summary": "所需套餐： 旗舰版、旗舰+、企业版、团队版 端点 描述 确认数据已导出，否则数据仍属于未导出。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
       "steps": [],
       "route": "/zh/api-reference/data/mark-data-as-exported",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/data/remove-data": {
       "title": "清空任务数据",
-      "summary": "所需套餐： 旗舰版、旗舰+、企业版、团队版 端点 描述 清空任务数据 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | Authorization | String | 是 | 身份令牌 | | Content-Type | String | 是 | application/json | 请求…",
+      "summary": "所需套餐： 旗舰版、旗舰+、企业版、团队版 端点 描述 清空任务数据 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
       "steps": [],
       "route": "/zh/api-reference/data/remove-data",
       "sourceType": "OpenAPI"
@@ -567085,70 +566699,70 @@
     },
     "doc:/zh/api-reference/task/copy-tasks": {
       "title": "批量复制任务到多个任务组",
-      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 此接口用于批量复制多个任务到多个不同的任务组。用户可以选择多个任务，并将它们复制到多个任务组中。每个任务可以被复制到不同的任务组，从而实现灵活的任务分配和管理。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | Authorization | S…",
+      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 此接口用于批量复制多个任务到多个不同的任务组。用户可以选择多个任务，并将它们复制到多个任务组中。每个任务可以被复制到不同的任务组，从而实现灵活的任务分配和管理。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | Strin…",
       "steps": [],
       "route": "/zh/api-reference/task/copy-tasks",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/task/delete-tasks": {
       "title": "批量删除任务",
-      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 删除任务接口说明：支持根据任务id批量删除任务 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | Authorization | String | 是 | 身份令牌 | | Content-Type | String | 是 | applicat…",
+      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 删除任务接口说明：支持根据任务id批量删除任务 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
       "steps": [],
       "route": "/zh/api-reference/task/delete-tasks",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/task/duplicate-task": {
       "title": "复制任务",
-      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 复制任务到指定组 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | Authorization | String | 是 | 身份令牌 | 请求头示例 查询参数 | 参数 | 类型 | 必填 | 说明 | |------|------|-----…",
+      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 复制任务到指定组 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
       "steps": [],
       "route": "/zh/api-reference/task/duplicate-task",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/task/get-actions": {
       "title": "批量获取任务步骤信息",
-      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 此接口根据步骤类型，获取一批任务的步骤信息。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | Authorization | String | 是 | 身份令牌 | | Content-Type | String | 是 | applicati…",
+      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 此接口根据步骤类型，获取一批任务的步骤信息。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
       "steps": [],
       "route": "/zh/api-reference/task/get-actions",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/task/move-task": {
       "title": "移动任务",
-      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 移动任务到指定组 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | Authorization | String | 是 | 身份令牌 | 请求头示例 查询参数 | 参数 | 类型 | 必填 | 说明 | |------|------|-----…",
+      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 移动任务到指定组 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
       "steps": [],
       "route": "/zh/api-reference/task/move-task",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/task/search-task": {
       "title": "搜索任务",
-      "summary": "所需套餐： 旗舰版、旗舰+、企业版、团队版 端点 描述 根据条件搜索任务，目前支持按任务组搜索。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | Authorization | String | 是 | 身份令牌 | 请求头示例 请求体 | 参数 | 类型 | 必填 | 说明 | |----…",
+      "summary": "所需套餐： 旗舰版、旗舰+、企业版、团队版 端点 描述 根据条件搜索任务，目前支持按任务组搜索。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
       "steps": [],
       "route": "/zh/api-reference/task/search-task",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/task/update-action-properties": {
       "title": "更新步骤配置",
-      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 此接口用于更新任务中指定步骤配置。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | Authorization | String | 是 | 身份令牌 | | Content-Type | String | 是 | application/js…",
+      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 此接口用于更新任务中指定步骤配置。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
       "steps": [],
       "route": "/zh/api-reference/task/update-action-properties",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/task/update-loop-items": {
       "title": "更新循环步骤的内容",
-      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 此接口更新循环步骤的循环列表，目前支持【文本列表】、【网址列表】。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | Authorization | String | 是 | 身份令牌 | | Content-Type | String | 是…",
+      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 此接口更新循环步骤的循环列表，目前支持【文本列表】、【网址列表】。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
       "steps": [],
       "route": "/zh/api-reference/task/update-loop-items",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/task/update-task-parameters": {
       "title": "更新任务参数",
-      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 通过该接口，用户可以一次性更新多行输入框中的可循环参数（如多行文本、多行URLs），以及单个文本、数字等非循环参数。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | Authorization | String | 是 | 身份令牌 | | C…",
+      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 通过该接口，用户可以一次性更新多行输入框中的可循环参数（如多行文本、多行URLs），以及单个文本、数字等非循环参数。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 o…",
       "steps": [],
       "route": "/zh/api-reference/task/update-task-parameters",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/task/update-task-urls": {
       "title": "更新采集 URLs",
-      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 将采集的网址替换 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | Authorization | String | 是 | 身份令牌 | | Content-Type | String | 是 | multipart/form-data（需包含…",
+      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 将采集的网址替换 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
       "steps": [],
       "route": "/zh/api-reference/task/update-task-urls",
       "sourceType": "OpenAPI"
@@ -567162,14 +566776,14 @@
     },
     "doc:/zh/api-reference/task-group/delete-groups": {
       "title": "批量删除任务组",
-      "summary": "所需套餐： 企业版、团队版 端点 描述 支持通过查询任务组名称（精确匹配）批量删除任务组。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | Authorization | String | 是 | 身份令牌 | | Content-Type | String | 是 | applicatio…",
+      "summary": "所需套餐： 企业版、团队版 端点 描述 支持通过查询任务组名称（精确匹配）批量删除任务组。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
       "steps": [],
       "route": "/zh/api-reference/task-group/delete-groups",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/task-group/get-task-group-information": {
       "title": "获取用户的任务组信息",
-      "summary": "所需套餐： 旗舰版、旗舰+、企业版、团队版 端点 描述 此接口用于获取用户所有任务组信息。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | Authorization | String | 是 | 身份令牌 | 请求头示例 响应 | 参数 | 类型 | 必填 | 说明 | |------|-…",
+      "summary": "所需套餐： 旗舰版、旗舰+、企业版、团队版 端点 描述 此接口用于获取用户所有任务组信息。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
       "steps": [],
       "route": "/zh/api-reference/task-group/get-task-group-information",
       "sourceType": "OpenAPI"

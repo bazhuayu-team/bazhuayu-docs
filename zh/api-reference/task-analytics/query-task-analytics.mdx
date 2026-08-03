@@ -3,7 +3,7 @@ title: 查询任务采集与执行分析
 api: POST https://openapi.bazhuayu.com/taskanalytics/queries
 openapi: en/api-reference/task-analytics/openapi.json POST /taskanalytics/queries
 playground: interactive
-authMethod: bearer
+authMethod: apiKey
 ---
 
 > **所需套餐：** 旗舰版、旗舰+、企业版
@@ -26,14 +26,14 @@ POST https://openapi.bazhuayu.com/taskanalytics/queries
 
 | 参数 | 类型 | 必填 | 说明 |
 |------|------|------|------|
-| `Authorization` | String | 是 | 身份令牌 |
+| `x-api-key` | String | 是 | API Key，例如 `op_sk_xxxxxx`；创建方式见[获取 API Key](/zh/mcp/quick-start/api-key) |
 | `Content-Type` | String | 是 | application/json |
 
 **请求头示例**
 
 ```json
 {
-  "Authorization": "Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6ImdXS3hWc0F4SHhaMDlDcWh6NkNJb3ciLCJ0eXAiOiJhdCtqd3QifQ.eyJuYmYiOjE2MzY0NjIyNzAsImV4cCI6MTYzNjU0ODY2OSwiaXNzIjoiaHR0cDovL3Rlc3QuaWRlbnRpdHkuYmF6aHVheXUuY29tIiwiY2xpZW50X2lkIjoiT2N0b3B1cyIsInN1YiI6IjllOGJiM2VhLWUwMWQtNGFlZC05ODM3LTVhMWUyODg0NWI5ZSIsImF1dGhfdGltZSI6MTYzNjQ2MjI3MCwiaWRwIjoibG9jYWwiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjllOGJiM2VhLWUwMWQtNGFlZC05ODM3LTVhMWUyODg0NWI5ZSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJ0ZXN0d2VuIiwicHJlZmVycmVkX3VzZXJuYW1lIjoidGVzdHdlbiIsInVuaXF1ZV9uYW1lIjoidGVzdHdlbiIsInJlZ2lzdGVyX2RhdGUiOiIxMS8wNC8yMDE2IDA4OjM4OjE2ICswODowMCIsImxhc3RfbG9naW5fZGF0ZSI6IjA0LzIyLzIwMTkgMDk6MDE6MDIgKzA4OjAwIiwibGFzdF9wYXNzd29yZF9jaGFuZ2VkX2RhdGUiOiIwMS8yMy8yMDE5IDA4OjMwOjMxICswODowMCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6IndlbmRpQHNraWVlci5jb20iLCJlbWFpbCI6IndlbmRpQHNraWVlci5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwic2NvcGUiOlsiZW1haWwiLCJvcGVuaWQiLCJyb2xlcyIsIm9mZmxpbmVfYWNjZXNzIl0sImFtciI6WyJwd2QiXX0.ARhbBfzI1xS6yo-Ue1CFHzMaUIfzw4gJlubNBOkUT4SSTlhuS4bVQ4t4UHuYGbE9VX6XgNVgkcDnx6XapqcPohSy7vPv9TIAsjtbrQSA3mj13SnVVAPWwfAVJ-I7g9HDnyPEEOVSvmZUJhiz-irH5L0ojbnt3ck2rQ9tIFuSd7j2eh5BS4ItjNoHY00rh_QPZltk66a9q-fNE33GrxOaXUdHH47WMlsENnh1gybB7QtGtd6bZ982Qa9JljpFnZWSdEf4VfkN4JmhkUTTC908DqS3stT-LD-9tpztFwB54sd0D4CyOBnESkKrUwjxchYYZo4l1O7auiZVGV48YhZYMw",
+  "x-api-key": "op_sk_xxxxxx",
   "Content-Type": "application/json"
 }
 ```

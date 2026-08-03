@@ -578,6 +578,7 @@
           {
             "tab": "更新日志",
             "pages": [
+              "zh/changelog/august-2026",
               "zh/changelog/july-2026",
               "zh/changelog/june-2026",
               "zh/changelog/may-2026",
@@ -603,7 +604,7 @@
     },
     {
       "source": "/zh/changelog",
-      "destination": "/zh/changelog/july-2026"
+      "destination": "/zh/changelog/august-2026"
     },
     {
       "source": "/favicons/:path*",

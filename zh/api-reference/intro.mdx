@@ -5,6 +5,28 @@ description: "八爪鱼开放API文档 — 涵盖认证、任务管理、云端�
 
 通过开放接口，您可以获取或更新任务信息、控制云采集、读取采集到的数据等。在此之前，您应该拥有一个八爪鱼的账号。
 
+## 认证方式
+
+除获取和刷新 Access Token 的接口外，业务接口支持以下任一认证方式。每个请求只需选择一种，不要同时传入两种凭据。
+
+### API Key
+
+在请求头中传入 API Key：
+
+```http
+x-api-key: op_sk_xxxxxx
+```
+
+API Key 与 MCP 使用同一套密钥：登录八爪鱼官网后，在账户中心创建。具体步骤见 [获取 API Key](/zh/mcp/quick-start/api-key)。使用 API Key 时不要写成 `Authorization: Bearer op_sk_xxxxxx`。
+
+<Tip>
+  在 OpenAPI 交互式界面中，选择或填写 **API Key（x-api-key）** 授权后即可试用接口；请勿把真实 Key 写入示例、截图、公开代码或日志。
+</Tip>
+
+### Access Token
+
+已有集成仍可继续使用 `Authorization: Bearer <access_token>`。获取和刷新方式见 [认证](/zh/api-reference/authentication)。
+
 ## 联系方式
 
 - 联系人：八爪鱼技术支持
