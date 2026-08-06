@@ -1,0 +1,624 @@
+---
+title: "【维普网】关键词搜索文献采集"
+source: "https://www.bazhuayu.com/helpcenter/docs/wei-pu-wang-guan-jian-ci-sou-suo-wen-xian-cai-ji"
+---
+场景介绍
+
+应科研及科技前沿报告等相关需求，对于文献期刊的数据供应日渐密集，相应也用于AI数据投喂。企业为支撑数据库需要，定期采集相关词条数据，为第三方项目数据供应。 
+
+ 
+
+**采集场景**
+
+打开维普官网文献搜索界面（实例网址：[https://www.cqvip.com/search?k=%E8%88%AA%E7%A9%BA%E5%88%B6%E9%80%A0&amp](https://www.cqvip.com/search?k=%E8%88%AA%E7%A9%BA%E5%88%B6%E9%80%A0&amp)），输入相应关键词，采集文献基础信息。
+
+![【维普网】关键词搜索文献采集](/assets/academy/case-studies/cqvip-keyword-papers/01-693a8e860f06c.png)
+
+![【维普网】关键词搜索文献采集](/assets/academy/case-studies/cqvip-keyword-papers/02-693a8e86a0794.png)
+
+ 
+
+主要采集字段
+
+搜索关键词，①论文标题、标题详情链接，②作者，③来源，④摘要，⑤机构，⑥关键词，⑦学科分类号。
+
+ 
+
+**采集结果**
+
+采集结果可导出为Excel、CSV、HTML、数据库等多种格式。 导出为Excel示例：
+
+![【维普网】关键词搜索文献采集](/assets/academy/case-studies/cqvip-keyword-papers/03-693a8e86e47fe.png)
+
+ 
+
+**教程说明**
+
+本篇制作时间：2025/12/11 八爪鱼版本：V8.7.7
+
+如果因网页改版造成网址或步骤无效，无法收集到目标数据，请联系官方客服，我们将及时修正。
+
+ 
+
+**采集步骤**
+
+步骤一、打开网页
+
+步骤二、循环搜索关键词并提取
+
+步骤三、确定循环列表并提取文献标题及链接
+
+步骤四、进入详情页提取相应数据
+
+步骤五、字段格式化处理
+
+步骤六、优化规则
+
+步骤七、启动采集
+
+ 
+
+**以下为具体步骤：**
+
+ 
+
+### 步骤一、打开网页
+
+ 
+
+1、打开网址
+
+在首页输入框中，输入网址[https://www.cqvip.com/search?k=%E8%88%AA%E7%A9%BA%E5%88%B6%E9%80%A0&amp](https://www.cqvip.com/search?k=%E8%88%AA%E7%A9%BA%E5%88%B6%E9%80%A0&amp)，然后点击【开始采集】，八爪鱼自动打开网页,网站会自动跳到登录页面
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/2a75649a5145403708740334452/Wk12A4FdmkkA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 打开网页后，如果开始开始【自动识别】，请等待自动识别完成。八爪鱼支持自动识别网页上的列表、滚动和翻页，识别成功后直接启动采集即可获取数据。如果【自动识别】的结果不是我们需要的，可点击【取消】关闭智能识别，自行配置采集流程。详情点击查看 【自动识别】
+
+ 
+
+ 
+
+### 步骤二、循环搜索关键词并提取
+
+ 
+
+1、点击搜索框、循环输入文本
+
+① 选中搜索框
+
+② 在黄色操作提示框中，选择【输入文本】
+
+③在黄色操作提示框中，点击【批量输入文本】并自行输入所需查询的搜索词（此处案例为：“造船业”、“智能农业”）
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/33ec9c0a5145403708740751699/cexDdyglASQA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 本教程主要以“任务字段”作为关键词类型搜索为例。
+> 
+> ![【维普网】关键词搜索文献采集](/assets/academy/case-studies/cqvip-keyword-papers/04-693a8e861b4f3.png)
+> 
+> 如果需要其他类型，模拟人点击修改即可，涉及到相关功能参考：[鼠标移上去出现新数据](/zh/academy/advanced-features/special-steps/hover-to-load-data)。
+
+ 
+
+2、提取搜索词，点击搜索按键
+
+① 选中搜索框
+
+② 在黄色操作提示框中，选择提取【文本框内的值】
+
+③ 选中搜索按钮
+
+④在黄色操作提示框中，选择鼠标操作【点击该按钮】
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/137d19d05145403708736694829/5rvGSOW50VQA.mp4" width="100%"></video>
+
+ 
+
+### 步骤三、确定循环列表并提取文献标题及链接
+
+ 
+
+1、确定循环列表
+
+① 点击选中列表-具体见本步骤特别说明a
+
+② 在黄色操作提示框中，选择提取【文本内容】
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/608ebe3c5145403708744413326/tMTIV7So5rEA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 此列表选取后不会自动识别到循环项（没有出现【选中全部】），需要再点击相似列表手动识别，具体说明参考：[ 从列表进入详情页采集](/zh/academy/basic-collection/beginner/list-to-detail#44607904244435bc9eec718871b488c6)
+> - b.此配置完获取到的数据是整个列表的文本，实际不具有实用性，仅仅是为了获取循环列表的xpath，便于后续选择具体字段采集/点击提供拼接条件，相关说明可参考：[绝对xpath、相对XPath学习与实例](https://www.bazhuayu.com/helpcenter/docs/bs4o6e)
+
+ 
+
+2、获取标题数据与链接
+
+①点击标题
+
+②在黄色操作提示框中，选择提取【文本+链接】
+
+③删除第一个字段
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/cab141515145403708735829876/74o9fE5HFt8A.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a.为何只点击一个标题，整个循环列表都能正常采集呢？原因就是如果在已经生成的循环列表中选择点击/提取元素，系统会优先匹配相对xpath拼接，便于数据采集调试。可参考：[绝对xpath、相对XPath学习与实例](https://www.bazhuayu.com/helpcenter/docs/bs4o6e)
+> 
+> ![【维普网】关键词搜索文献采集](/assets/academy/case-studies/cqvip-keyword-papers/05-693a8e85f2a52.png)
+
+ 
+
+3、设置翻页
+
+①找到并点击翻页按钮
+
+②在黄色操作提示框中，选择提取【循环点击】
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/1fd0cf6d5145403708743996931/KWRyLs8zpCcA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a.某一元素选择循环点击，从流程角度来说都是循环翻页，当黄色提示框没有提示翻页按钮配置时，可以如上操作实现翻页。相关参考：[翻页以采集多页数据](/zh/academy/basic-collection/pagination/next-page-button#141a1e00d56ad162b1ca7eae995e64a0)
+
+ 
+
+### 步骤四、进入详情页提取相应数据
+
+ 
+
+1、点击标题进入详情页
+
+① 首先点击流程“循环列表1”-具体原因见步骤三-2、获取标题数据与链接-特殊说明a
+
+② 点击标题
+
+③在黄色操作提示框中，选择操作【点击该链接】
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/601f0dc95145403708737648840/2WokHBwmVfUA.mp4" width="100%"></video>
+
+ 
+
+ 
+
+2、获取相关字段数据
+
+①依次点击所需字段并采集
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/ade59a045145403708745467009/ekKBmurBB5kA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a.此时获取的字段数据是按照路径xpath定位，理论上元素定位非常脆弱，详情页常规变化就无法获取到实用信息。下一步骤着重说明定位思考逻辑和xpath书写展示。
+
+ 
+
+ 
+
+### 步骤五、字段格式化处理
+
+ 
+
+1、修改流程名
+
+①更改“循环列表”为“循环文本”
+
+②更改“提取数据”为“提取搜索关键词”
+
+③更改“点击元素”为“点击搜索”
+
+④更改“循环列表1”为“循环文献列表”
+
+⑤更改“提取列表数据”为“提取标题与链接”
+
+⑥更改“点击元素1”为“点击进入详情页”
+
+⑦更改“提取数据1”为“提取详情页数据”
+
+![【维普网】关键词搜索文献采集](/assets/academy/case-studies/cqvip-keyword-papers/06-693a8e862708b.png)
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 修改流程名目的主要是规范流程，为后续排查问题打下便利基础。
+> 
+> - b.若是在基础设置中修改流程名。则改完后一定要点击应用。
+> 
+> ![【维普网】关键词搜索文献采集](/assets/academy/case-studies/cqvip-keyword-papers/07-693a8e861b3fb.png)
+
+ 
+
+2、修改字段名
+
+①更改“文本框值”为“搜索关键词”
+
+②更改“\_文本”为“论文标题”
+
+③更改“\_链接”为“标题详情链接”
+
+④更改“文本”为“作者”
+
+⑤更改“文本3”为“来源”
+
+⑥更改“文本2”为“摘要”
+
+⑦更改“文本1”为“机构”
+
+⑧更改“文本4”为“关键词”
+
+⑨更改“文本5”为“学科分类号”
+
+ 
+
+ 
+
+3、初步采集，发现问题
+
+初步采集测试，发现数据有如下问题：
+
+①部分字段缺失。
+
+②字段错位（即字段存在，但是出现实际数据与字段名无法对应的情况）
+
+③作者字段有异常前缀
+
+④摘要字段不显示完整数据。
+
+![【维普网】关键词搜索文献采集](/assets/academy/case-studies/cqvip-keyword-papers/08-693a8e868fe0a.png)
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 此案例检查方式主要是将异常数据明细输入浏览器中查看，确定是否是定位问题。如问题①，以链接：[https://www.cqvip.com/doc/journal/00002HCP5V987JP0MJDO2JP06HR?sign=61e5ad17bc2600eca6f5819e53e1c5560926e42f4db30efe74aefd15db9151ec&expireTime=1796906266570&resourceId=00002HCP5V987JP0MJDO2JP06HR](https://www.cqvip.com/doc/journal/00002HCP5V987JP0MJDO2JP06HR?sign=61e5ad17bc2600eca6f5819e53e1c5560926e42f4db30efe74aefd15db9151ec&expireTime=1796906266570&resourceId=00002HCP5V987JP0MJDO2JP06HR)为例，发现网址中本身就没有作者字段，即不是采集器问题，后续对此情况做数据格式化即可。
+> 
+> ![【维普网】关键词搜索文献采集](/assets/academy/case-studies/cqvip-keyword-papers/09-693a8e866c32b.png)
+> 
+> 其他字段都以此思路排查，整体排查方式可参考：[规则出错排查方法](https://www.bazhuayu.com/helpcenter/docs/i7gSoT?search=1#b39c416536625e1bfa1ce6521629de75)
+
+ 
+
+4、确定问题产生原因 -具体原因见步骤五-3、初步采集，发现问题-特殊说明a ，排查出以上问题具体原因：
+
+①详情页本身没有部分字段，采集器无法获取。——非可调整问题
+
+②由于问题①和系统自动识别的xpath是路径定位，所以如果缺失部分层级元素，就会导致整体定位失效-具体原因见步骤四-2、获取相关字段数据-特殊说明a
+
+![【维普网】关键词搜索文献采集](/assets/academy/case-studies/cqvip-keyword-papers/10-693a8e871e288.png)
+
+ 
+
+③这里将作者字段识别到的xpath（//div[@class="info-line author-ellipsis"]）输入浏览器检查，发现该元素隐藏了部分信息，导致我们定位到无用信息。
+
+![【维普网】关键词搜索文献采集](/assets/academy/case-studies/cqvip-keyword-papers/11-693a8e880e4dc.png)
+
+ 
+
+④发现部分详情页中由于摘要太长，没有完全显示。
+
+![【维普网】关键词搜索文献采集](/assets/academy/case-studies/cqvip-keyword-papers/12-693a8e870c268.png)
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 问题②xpath路径定位依赖坚实的源码结构，一旦变化，定位就会不准，建议试用属性或者函数定位。xpath参考：[XPath系统学习与实例](https://www.bazhuayu.com/helpcenter/docs/V2h1Ec)，外部学习参考：[建议关注前11分钟](https://www.bilibili.com/video/BV1mW411D7wC/?spm_id_from=333.337.search-card.all.click\&vd_source=cea887da41884abc13cebfb6fb5e355b)
+> 
+> - b.问题④的异常链接：[https://www.cqvip.com/doc/journal/7107840668?sign=b563761d780aceb0cd84d7f78be1ed04c9b1e8e198ca16e58efe1ba99befe644&expireTime=1796906266570&resourceId=7107840668](https://www.cqvip.com/doc/journal/7107840668?sign=b563761d780aceb0cd84d7f78be1ed04c9b1e8e198ca16e58efe1ba99befe644&expireTime=1796906266570&resourceId=7107840668)为案例
+
+ 
+
+5、解决问题
+
+问题①不需要定位解决，不过为格式美观，可以设置相关默认值。-特别说明b扩展
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/fa6a162e5145403708739691368/sonoECUg3K0A.mp4" width="100%"></video>
+
+ 
+
+问题②修改xpath解决。 首先观察网页各个字段特点，发现所有字段名都是独一无二的，可以考虑用独特属性定位。
+
+不过最后发现，字段名的属性都是一致的，无法有效区分。
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/c914c8445145403708742535736/rBT3XeAKJvUA.mp4" width="100%"></video>
+
+ 
+
+则只能采用模糊文本定位。-特别说明c扩展
+
+![【维普网】关键词搜索文献采集](/assets/academy/case-studies/cqvip-keyword-papers/13-693a8e8658f8e.png)
+
+观察到这些带引号元素独一无二，则考虑定位此元素。书写xpath：//span[contains(text(),"构：")]可以准确定位。
+
+![【维普网】关键词搜索文献采集](/assets/academy/case-studies/cqvip-keyword-papers/14-693a8e862ab83.png)
+
+ 
+
+现在通过观察网页结构，确定所需元素的xpath（需要跳到刚刚定位元素的爷层，所以用/../..，之后用同级函数定位）。书写为：//span[contains(text(),"构：")]/../../following-sibling::div[1]可以准确定位。
+
+![【维普网】关键词搜索文献采集](/assets/academy/case-studies/cqvip-keyword-papers/15-693a8e86455d6.png)
+
+ 
+
+按照此逻辑，处理其他字段即可。
+
+![【维普网】关键词搜索文献采集](/assets/academy/case-studies/cqvip-keyword-papers/16-693a8e86243e7.png)
+
+ 
+
+此时发现预览中除了学科分类号都准确定位-特别说明d扩展
+
+这时我们通过观察，发现“学”字是字段中独有的，但是模糊文本只定位“学”是更佳不准的，所以我们需要并列定位属性。写为//span[@data-v-7b1f1d9f][contains(text(),"学")]/../../following-sibling::div[1]可以准确定位。
+
+![【维普网】关键词搜索文献采集](/assets/academy/case-studies/cqvip-keyword-papers/17-693a8e8708cfc.png)
+
+至此问题②解决。
+
+ 
+
+问题③观察发现，前缀都是“发文量： 被引量：0”，则直接格式化替换即可。
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/601df14a5145403708737646780/QhfP6dhVbRsA.mp4" width="100%"></video>
+
+ 
+
+问题④修改xpath为：//span[contains(text(),"要：")]/../../following-sibling::div[1]/div[1]/span[1]-特别说明e扩展
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. xpath参考：[XPath系统学习与实例](https://www.bazhuayu.com/helpcenter/docs/V2h1Ec)，外部学习参考：[建议关注前11分钟](https://www.bilibili.com/video/BV1mW411D7wC/?spm_id_from=333.337.search-card.all.click\&vd_source=cea887da41884abc13cebfb6fb5e355b)
+> 
+> - b.为确保美观其他字段也可以按照上述问题①解决方式设置默认值。
+> 
+> - c.为何不使用准确文本定位呢？因为观察发现，网页中单独元素有空符号，准确文本无法定位。
+> 
+> ![【维普网】关键词搜索文献采集](/assets/academy/case-studies/cqvip-keyword-papers/18-693a8e85f1dd1.png)
+> 
+> - d.为何学科分类号没有准确定位呢？因为我们用//span[contains(text(),"号：")]可以定位到两个字段（“中图分类号”、“学科分类号”），所以还需要修改xpath。
+> 
+> ![【维普网】关键词搜索文献采集](/assets/academy/case-studies/cqvip-keyword-papers/19-693a8e8651673.png)
+> 
+> - e.通过观察发现，源码中实际存在全文摘要，只是界面设置不显示而已，网页界面逻辑就是点击打开才显示，但这个与我们直接获取源码文本无关，定位编写xpath即可。
+> 
+> ![【维普网】关键词搜索文献采集](/assets/academy/case-studies/cqvip-keyword-papers/20-693a8e8635b69.png)
+
+ 
+
+### 步骤六、优化规则
+
+刚刚尝试运行，发现实际运行也较稳定，为确保更佳顺畅，常规优化即可。
+
+1、给“点击搜索”设置执行前等待2秒
+
+2、给“点击搜索”设置Ajax超时7秒执行下一步
+
+3、给“循环翻页”设置执行前等待3秒
+
+4、给“提取详情页数据”设置执行前等待2秒
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/17a82e9e5145403708736823700/a94Fn0NrUbAA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 设置完相关优化（高级设置）后一定要及时点击应用。
+> 
+> ![【维普网】关键词搜索文献采集](/assets/academy/case-studies/cqvip-keyword-papers/21-693a8e86316f7.png)
+> 
+> - b.具体规格优化参考：[规则优化-八爪鱼帮助中心](https://www.bazhuayu.com/helpcenter/docs/gui-ze-you-hua?search=1)
+> 
+> - c.相关Ajax网页设置：[ajax网页采集方法-八爪鱼帮助中心](https://www.bazhuayu.com/helpcenter/docs/R01mM3#ddaf632fa6acc222f916f4d065e660fe)
+
+ 
+
+ 
+
+### 步骤七、启动采集与下载
+
+ 
+
+1、单击【采集】并【启动本地采集】。
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/27ad1aa05145403708733463048/2dN4zfEq8EwA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 【本地采集】是使用自己的电脑进行采集，【云采集】是使用八爪鱼提供的云服务器采集，点击查看 [本地采集与云采集详解](https://www.bazhuayu.com/helpcenter/docs/2xF5Mz)
+
+ 
+
+2、采集完成后，选择合适的导出方式来导出数据。支持导出为Excel，CSV，HTML，数据库等。这里导出为Excel。
+
+![【维普网】关键词搜索文献采集](/assets/academy/case-studies/cqvip-keyword-papers/22-693a8e860406c.png)
+
+ 
+
+3、云采集与本地采集区别效果
+
+①本地采集
+
+ 
+
+![【维普网】关键词搜索文献采集](/assets/academy/case-studies/cqvip-keyword-papers/23-693be05d7124b.png)
+
+ 
+
+ 
+
+②云采集
+
+ 
+
+![【维普网】关键词搜索文献采集](/assets/academy/case-studies/cqvip-keyword-papers/24-693be05d6ae74.png)
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 通过启动采集发现【本地采集】数量较少，采集时间也较长，【云采集】则更加稳定，数据更多，且采集时间更短，具体原因就是【云采集】使用云服务器更佳稳定（云服务器网络更佳流畅，ip更佳优质。）、不受本地设备与网络环境限制，同时可以拆分任务多ip执行，使采集效率大幅度提升。
+> 
+> - b.更多详情请关注：[云采集高阶功能](https://www.bazhuayu.com/helpcenter/docs/ZQuadl)
+> 
+> - c.数据案例解释：【本地采集】由于关机所以自动结束，采集280条。【云采集】作为对比案例，效果超过本地采集后便手动关闭。实际可以采集更多，此效果展示仅做参考。
+
+ 
+
+ 
+
+ 
+
+ 
+
+作者：YfY

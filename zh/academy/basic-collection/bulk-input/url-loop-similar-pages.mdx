@@ -1,0 +1,119 @@
+---
+title: "URL循环：批量采集同类网页"
+description: "URL循环：批量采集同类网页教程，来自八爪鱼帮助中心「操作指南 / 基本采集」。"
+source: "https://www.bazhuayu.com/helpcenter/docs/GmOVea"
+---
+
+有时候，我们有大量同类网页，希望八爪鱼能自动采集每个网页中的数据。通过设置【URL循环】，可实现此需求。
+
+ 
+
+什么是同类网页？结构相同、字段差不多的网页。例：
+
+ 
+
+京东商品详情页：
+
+*https\://item.jd.com/1138288.html*
+
+*https\://item.jd.com/27305099378.html*
+
+*https\://item.jd.com/46339353993.html*
+
+ 
+
+豆瓣电影详情页：
+
+https\://movie.douban.com/subject/26387939/
+
+https\://movie.douban.com/subject/6311303/
+
+https\://movie.douban.com/subject/1578714/
+
+ 
+
+ 
+
+### **一、【URL循环】操作演示**
+
+ 
+
+示例网址：
+
+https\://movie.douban.com/subject/26387939/
+
+https\://movie.douban.com/subject/6311303/
+
+https\://movie.douban.com/subject/1578714/
+
+https\://movie.douban.com/subject/26718838/
+
+https\://movie.douban.com/subject/25937854/
+
+https\://movie.douban.com/subject/26743573/
+
+https\://movie.douban.com/subject/20451290/
+
+https\://movie.douban.com/subject/26816383/
+
+ 
+
+采集需求：
+
+采集每个豆瓣电影详情页的电影
+
+ 
+
+#### Step1. 打开网页
+
+在首页左上角点击【新建】—【自定义任务】。网址输入界面默认的是【手动输入】。将复制好的一批同类网址，粘贴进网址输入框中，并点击【保存网址】。八爪鱼中内置的浏览器会自动打开网页。同时，可以看到，流程中已自动创建【循环-打开网页】步骤。
+
+ ![URL循环：批量采集同类网页](/assets/academy/basic-collection/url-loop-similar-pages/01-65489cd9a37ee.gif)
+
+ 
+
+> 特别说明：
+>
+> a. 手动输入的url数量不得大于1万个，如有超过1万url，请选择【从文件导入】，具体请查看教程 [网址批量输入](https://www.bazhuayu.com/helpcenter/docs/I0LCzr)
+>
+> b.  Url还可以选择【从任务导入】和【批量生成】，具体请查看教程 [网址批量输入 ](https://www.bazhuayu.com/helpcenter/docs/I0LCzr)
+
+ 
+
+#### Step2. 按照需求配置所需的字段。
+
+ 
+
+![URL循环：批量采集同类网页](/assets/academy/basic-collection/url-loop-similar-pages/02-6548a15423b89.gif)
+
+#### Step3. 配置完成后启动采集。
+
+ ![URL循环：批量采集同类网页](/assets/academy/basic-collection/url-loop-similar-pages/03-6548a6c5b7c48.gif)
+
+采集到的数据示例如下图所示：
+
+ ![URL循环：批量采集同类网页](/assets/academy/basic-collection/url-loop-similar-pages/04-65360fc24072e.png)
+
+ 
+
+ 
+
+### **二、Url循环的使用场景**
+
+ 
+
+1、【URL循环】的任务，在进行【云采集】时，可有效进行任务拆分，分配到每个云节点上并发采集，极大提高采集速度。
+
+点击  [云采集原理以及规则加速设置](https://www.bazhuayu.com/helpcenter/docs/MJgzIG) 查看url循环类规则进行云采集拆分加速的详细过程。
+
+ 
+
+2、有的网页在采集时，点击跳转至详情页后，无法返回列表页。可以先在列表页采集详情页URL，然后通过【URL循环】，批量打采集每个详情页内的数据。
+
+ 
+
+ 
+
+作者：西瓜
+
+编辑：Jeffrey

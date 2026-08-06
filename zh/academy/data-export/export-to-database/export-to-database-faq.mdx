@@ -1,0 +1,153 @@
+---
+title: 导出到数据库常见问题
+description: 汇总八爪鱼采集器导出数据到数据库时遇到的常见错误及解决方案，包括连接失败、字符编码、字段长度等问题
+---
+
+## 一、连接数据库问题
+
+### 1、在连接数据库时提示：无法连接到指定的数据库，详细信息：Keyword not supported.参数名：!!!Charset。
+
+问题原因：请检查数据库密码是否包含了特殊符号
+
+解决方法：建议密码修改为：字母和数字组合。
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/data-export/export-to-database/export-to-database-faq/6513f53615f39.png" />
+</div>
+
+### 2、连接数据库报错：Client does not support authentication protocol requested by server; consider upgrading MySQL client
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/data-export/export-to-database/export-to-database-faq/65713b65df037.png" />
+</div>
+
+出现错误的原因：当MySQL数据库由低版本升级到高版本8.0以上时，访问数据库服务时会报：Client does not support authentication protocol requested by server; consider upgrading MySQL client错误提示。
+
+解决办法：
+
+第一步：进入MySQL命令提示符窗口，输入密码进入数据库
+
+第二步：输入ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '123';然后按Enter键，其中root是用户名，localhost特指本地主机，mysql_native_password是旧的密码校验机制，123是密码
+
+第三步：输入FLUSH PRIVILEGES;然后按Enter键
+
+```
+mysql> alter user 'root'@'localhost' identified with mysql_native_password by '123';
+mysql>flush privileges;
+```
+
+## 二、导入数据库问题
+
+### 1、提示：Invalid column type from bcp client for colid x.(从 bcp 客户端收到一个对 colid x 无效的列长度)
+
+问题原因：datatable(数据表中)中的colid列x的数据字段长度超过了数据表中定义的字段长度。
+
+解决方法：将数据库该字段的长度增大。
+
+例如，mysql中设置了某字段类型为varchar(255)，根据colid x判断是该字段问题要修改字段的长度为varchar(1255)，具体的要看该字段采集的字符数多少，要是超过varchar的长度，要改字段类型为文本型longtext 字段长度无效再填写。
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/data-export/export-to-database/export-to-database-faq/6513f53623d47.png" />
+</div>
+
+### 2、导出数据提示："max_allowed_packet"相关的字眼
+
+问题原因：mysql的设置参数中max_allowed_packet过小导致操作异常。
+
+mysql中max_allowed_packet参数的配置方法（避免大数据写入或者更新失败）
+
+MySQL根据配置文件会限制Server接受的数据包大小。有时候大的插入和更新会受 max_allowed_packet 参数限制，导致写入或者更新失败。查看目前配置：
+
+```
+show VARIABLES like '%max_allowed_packet%';
+```
+
+显示的结果为：
+
+```
++--------------------+---------+
+| Variable_name       | Value   |
++--------------------+---------+
+| max_allowed_packet | 1048576 |
++--------------------+---------+
+```
+
+以上说明目前的配置是：1M
+
+修改方法
+
+① 修改配置文件
+
+可以编辑my.cnf来修改（windows下my.ini）,在[mysqld]段或者mysql的server配置段进行修改。
+
+```
+max_allowed_packet = 20M
+```
+
+如果找不到my.cnf可以通过以下命令去寻找my.cnf文件：
+
+```
+mysql --help | grep my.cnf
+```
+
+② 在mysql命令行中修改，在mysql 命令行中运行：
+
+```
+set global max_allowed_packet = 2*1024*1024*10
+```
+
+然后退出命令行，重启mysql服务，再进入。
+
+```
+show VARIABLES like '%max_allowed_packet%';
+```
+
+查看下max_allowed_packet是否编辑成功
+
+注意：该值设置过小将导致单个记录超过限制后写入数据库失败，且后续记录写入也将失败。
+
+### 3、导出数据提示： Incorrect string value: '\xF0\x9F\x92\xAA",...' for column 'raw_json' at row 1
+
+应用日志显示：
+
+java.sql.SQLException: Incorrect string value: '\xF0\x9F\x92\xAA",...' for column 'raw_json' at row 1, 异常:org.springframework.jdbc.UncategorizedSQLException:
+
+问题原因：由提示可知，插入的字段里面包含emoji表情符。基本可以判定是字符编码的问题。我们的数据库里面使用的是utf8编码，普通的字符串或者表情都是占位3个字节，所以utf8足够用了，但是移动端的表情符号占位是4个字节，普通的utf8就不够用了，为了避免 emoji 表情符号带来的问题、涉及无线相关的 MySQL 数据库建议都提前采用utf8mb4 字符集。
+
+解决方法参考链接：<a href="https://www.cnblogs.com/janehoo/archive/2016/04/06/5359800.html" target="_blank" rel="noopener">https://www.cnblogs.com/janehoo/archive/2016/04/06/5359800.html</a>
+
+解决方法：更换字符集utf8-->utf8mb4，数据库和数据表字段都要同时修改。
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/data-export/export-to-database/export-to-database-faq/6513f535d7619.png" />
+</div>
+
+### 4、导出数据提示： Cannot enqueue Query after fatal error.(发生致命错误后无法将查询排队。)
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/data-export/export-to-database/export-to-database-faq/6513f535e179d.png" />
+</div>
+
+解决方法：将每批导出"1000"条改为100或10条，若无法导出正常，判断是数据库的问题参考以下链接修改数据库的参数：
+
+<a href="https://www.cnblogs.com/clnchanpin/p/6882001.html" target="_blank" rel="noopener">https://www.cnblogs.com/clnchanpin/p/6882001.html</a>
+
+### 5、导出数据提示：获取数据遇到网络故障，第[retryCount]次失败，read ECONNRESET
+
+解决方法：修改每批次导出的数量，最大不能超过：2000条，要是修改后还提示，可设置批次导出量为1000,100,10条进行测试。
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/data-export/export-to-database/export-to-database-faq/6513f53615d90.png" />
+</div>
+
+若一直提示read ECONNRESET
+
+解决方法：查看一下ie浏览器里面的Internet选项里的局域网设置，是否勾选了，取消勾选【自动检测设置】试试
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/data-export/export-to-database/export-to-database-faq/6513f5361c181.png" />
+</div>
+
+### 6、手动导出到数据库正常，定时入库报错：Cannot enqueue Query after fatal error
+
+原因：数据库字段设置了not null解决办法：修改数据库字段设置，取消not null设置。

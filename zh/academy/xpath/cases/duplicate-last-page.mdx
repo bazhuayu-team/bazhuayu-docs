@@ -1,0 +1,48 @@
+---
+title: 重复采集最后一页数据
+description: 分析采集到最后一页后不停止、一直循环采集的原因，通过修改 XPath 排除最后一页的下一页按钮解决此问题。
+---
+
+有些网站可能我们用系统做好的规则在采集的时候可能明明已经采集最后一页了，就是不停止，一直在最后一页循环采集，这种情况其实是由于Xpath定位不对导致的，我们需要通过修改Xpath来解决这个翻页问题。
+
+在出现这个问题的时候，我们可以直接在流程里面找到问题所在，下面的规则是直接按照新手入门的步骤做的（列表循环-翻页循环）：
+
+此教程引用的示例网址：http://www.gzebpubservice.cn/dlzbgg/index_694.htm
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/xpath/cases/duplicate-last-page/6566b1835094c.png" />
+</div>
+
+如上图中，浏览器中要采集的数据已经在最后一页了，可是我们在循环列表中依旧能找到下一页的按钮，代表一直都可以点击这个按钮进行采集，循环是结束不了的。那么我们点开循环列表的基础设置按钮，可以看下一页的Xpath如下图所示：
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/xpath/cases/duplicate-last-page/6566b18358d16.png" />
+</div>
+
+我们把这个Xpath复制到浏览器控制台里面去，发现在第694页等其他页面是的确可以定位到下一页的，并且可以看到这个Xpath每一页都能定位。那么我们看一下第695页和最后一页里面源码的区别：
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/xpath/cases/duplicate-last-page/6566b183481d8.png" />
+</div>
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/xpath/cases/duplicate-last-page/6566b18386aa8.png" />
+</div>
+
+可以看到第694页和最后一页里面，第694页是没有class属性的，而最后一页的下一页是有一个class属性的，并且都有一个共同属性就是title='下一页'，现在我们的需求是前面几页的下一页能正确定位，但是最后一页是不需要的，这样可以直接用class属性来区别，手动在浏览器控制台里面直接写，只需要将li里面的属性改为li[(@title='下一页') and not(@class='disabled')]
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/xpath/cases/duplicate-last-page/6566b18349d15.png" />
+</div>
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/xpath/cases/duplicate-last-page/6566b1833a963.png" />
+</div>
+
+然后将//ul[@class="go-after"]/li[(@title='下一页') and not(@class='disabled')]这条Xpath再复制到八爪鱼里面。
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/xpath/cases/duplicate-last-page/6566b18459a4b.png" />
+</div>
+
+编辑：FAN

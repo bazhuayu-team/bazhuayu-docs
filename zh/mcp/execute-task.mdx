@@ -1,0 +1,54 @@
+---
+title: execute_task
+description: 校验模板参数，或创建并启动八爪鱼云采集任务。
+---
+
+`execute_task` 有两种模式：`validateOnly: true` 只校验模板和参数，不创建任务；正常调用会创建并启动云采集任务。
+
+## 参数
+
+| 参数 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `templateName` | string | 是 | `search_templates` 返回的 `recommendedTemplateName` 或 `templateName` |
+| `taskName` | string | 否 | 任务名称；长任务建议填写，便于客户端断开后恢复查询 |
+| `parameters` | string | 否 | JSON 对象字符串，键必须来自 `inputSchema[].field` |
+| `targetMaxRows` | integer | 否 | `0-1000000`；正整数仅在 MCP Tasks 模式下启用尽力停止，`0` 或省略表示自然结束 |
+| `validateOnly` | boolean | 否 | 只做参数预检，不创建或启动任务 |
+
+`parameters` 在原始 MCP 接口中是 JSON 字符串：
+
+```json
+{
+  "templateName": "<模板名称>",
+  "taskName": "手机商品采集",
+  "parameters": "{\"search_keyword\":[\"phone\"],\"site\":\"United States\"}",
+  "validateOnly": true
+}
+```
+
+部分客户端会替你把对象序列化成字符串；如果调用时报参数类型错误，请显式传入上面形式的 JSON 对象字符串。
+
+## 参数规则
+
+- 使用 `inputSchema[].field` 作为 key，未知 key 会以 `unmapped_parameters` 失败。
+- `MultiInput` 字段始终传 `string[]`，即使只有一个值。
+- 对 source-backed 字段，先精确查询模板取得根级 `sourceOptions`，再把所选 option 的 `key` 作为字段值。
+- 依赖其他字段的数据源选项可通过 `validateOnly: true` 逐级取得。
+
+## 先校验再执行
+
+预检响应包含 `status`、`canExecuteNow`、`blockingIssues`、`nextAction`、`normalizedParametersPreview`，并可能包含下一层 `sourceOptions`。`success: true` 只表示本次校验请求成功；是否可以执行应以 `canExecuteNow` 为准。
+
+确认 `canExecuteNow: true` 后，移除 `validateOnly` 或改为 `false` 再执行。
+
+## MCP Tasks 与兼容模式
+
+支持 MCP Tasks 的客户端应优先以 Task 模式调用，并通过 `tasks/get` 查看状态、通过 `tasks/result` 获取最终执行结果。`execute_task` 的 Task 支持是可选能力，实际可用性取决于客户端。
+
+不支持 MCP Tasks 的客户端会在创建并启动成功后收到 `accepted` 和八爪鱼 `taskId`。等待约 10-30 秒，再调用 `export_data(taskId)` 轮询采集和导出进度。
+
+<Warning>
+  正整数 `targetMaxRows` 只适用于 MCP Tasks，并通过轮询后尽力发送停止请求，因此可能略有超出，不是严格行数上限。
+</Warning>
+
+另请参阅：[工作流程示例](/zh/mcp/workflow)、[`search_templates`](/zh/mcp/search-templates)、[`export_data`](/zh/mcp/export-data)

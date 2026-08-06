@@ -1,0 +1,152 @@
+---
+title: "【知乎】近期热榜采集"
+source: "https://www.bazhuayu.com/helpcenter/docs/zhi-hu-jin-qi-re-bang-cai-ji"
+---
+**采集场景**
+
+采集知乎近期小时榜、日榜、周榜的列表信息
+
+![【知乎】近期热榜采集](/assets/academy/case-studies/zhihu-hot-ranking/01-664acaac0f388.png)
+
+**采集字段**
+
+分类、问题、 问题链接 、标签、 热力值 、关注增量 、浏览增量、 回答增量 、赞同增量
+
+ 
+
+**采集结果**
+
+采集结果可导出为Excel，CSV，HTML，数据库等多种格式。导出为Excel示例：
+
+![【知乎】近期热榜采集](/assets/academy/case-studies/zhihu-hot-ranking/02-664acb440786a.png)
+
+ 
+
+ 
+
+**教程说明**
+
+八爪鱼版本：V8.7.7
+
+如果因网页改版造成网址或步骤无效，无法采集到目标数据，请联系官方客服，我们将及时修正。
+
+ 
+
+**采集步骤**
+
+步骤一、建立循环网址
+
+步骤二、设置向下滚动
+
+步骤三、设置循环列表采集
+
+步骤四、编辑字段
+
+步骤五、启动采集
+
+ 
+
+**以下为具体步骤：**
+
+ 
+
+### 步骤一、建立循环网址
+
+1、在首页【输入框】中输入知乎的小时榜，周榜和月榜的网址，然后复制到客户端
+
+[https://www.zhihu.com/knowledge-plan/hot-question/hot/0/hour\](https://www.zhihu.com/knowledge-plan/hot-question/hot/0/hour\)
+[https://www.zhihu.com/knowledge-plan/hot-question/hot/0/day\](https://www.zhihu.com/knowledge-plan/hot-question/hot/0/day\)
+[https://www.zhihu.com/knowledge-plan/hot-question/hot/0/week](https://www.zhihu.com/knowledge-plan/hot-question/hot/0/week)
+
+点击【开始采集】，八爪鱼自动打开网页，创建了循环网址
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/592b92cf5145403696654854339/AxmhDY12hFcA.mp4" width="100%"></video>
+
+ 
+
+特别说明：
+
+- a. 打开网页后，如果开始开始【自动识别】，请点击【不再自动识别】或【取消识别】将其关掉。因为本文不适合使用【自动识别】。
+- b. 【自动识别】适用于自动识别网页上的列表、滚动和翻页，识别成功后直接启动采集即可获取数据。详情点击查看 [【自动识别】教程](https://www.bazhuayu.com/helpcenter/docs/eeI3gE)
+
+ 
+
+### 步骤二、设置向下滚动
+
+ 打开网页步骤设置向下滚动，任务执行的时候先加载出全部的列表信息
+
+ <video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/5a9945491253642697296612616/OKy1cPpzVeoA.mp4" width="100%"></video>
+
+ 
+
+### 步骤三、设置循环列表采集
+
+1、创建【循环列表】
+
+通过以下连续3步，采集所有循环列表
+
+① 选中页面上1个列表的一个元素，选择【选中全部相似子元素】，
+
+② 选择【选中全部相似组】
+
+③ 在黄色操作提示框中，点击【元素中数据内容】
+
+ <video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/1292bbed1253642697295854082/002WPUA6zUsA.mp4" width="100%"></video>
+
+ 
+
+2、采集榜单类型
+
+ 
+
+为了区分是采集的哪一个榜单的数据，我们可以采集下来榜单的分类(小时榜，越帮用于区分，并将字段的xpath修改为：//a[@class="StyledTab-Link css-1cljkfh"]，便于精确定位
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/50acc0cc1253642697289420188/81Ic1Xb5nAUA.mp4" width="100%"></video>
+
+ 
+
+ 
+
+ 
+
+### 步骤四、编辑字段
+
+在【当前数据预览】面板，删除不需要的字段信息并编辑字段
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/5f3212c81253642697296803802/TyotQ515DREA.mp4" width="100%"></video>
+
+\
+
+ 
+
+**步骤五 、启动采集**
+
+1、单击【保存】，【采集】并选择【普通模式】。启动后八爪鱼开始自动采集数据。
+
+ <video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/7634f5081253642697293740904/HZBhbg8DAYsA.mp4" width="100%"></video>
+
+ 
+
+特别说明：
+
+- a. 【本地采集】是使用自己的电脑进行采集，【云采集】是使用八爪鱼提供的云服务器采集，点击查看 [本地采集与云采集详解](https://www.bazhuayu.com/helpcenter/docs/2xF5Mz)。
+
+ 
+
+2、采集完成后，选择合适的导出方式导出数据。支持导出为Excel、CSV、HTML、数据库等。这里导出为Excel。
+
+ 
+
+![【知乎】近期热榜采集](/assets/academy/case-studies/zhihu-hot-ranking/03-6625d6e260017.png)
+
+ 
+
+示例数据：
+
+ ![【知乎】近期热榜采集](/assets/academy/case-studies/zhihu-hot-ranking/04-664acb440786a.png)
+
+ 
+
+作者：Mona

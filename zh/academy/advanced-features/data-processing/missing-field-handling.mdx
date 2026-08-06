@@ -1,0 +1,93 @@
+---
+title: "无此字段时如何处理"
+description: "介绍八爪鱼采集器进阶功能：无此字段时如何处理。"
+source: "https://www.bazhuayu.com/helpcenter/docs/ocsCPR"
+---
+
+网页上的数据情况十分复杂。以京东商品列表页为例，每个列表项的字段个数并非完全一致。
+
+如下图所示：第2、4、5个商品列表有【自营】字段，第1、3个是没有【自营】字段的。
+
+在采集第1、3个商品列表时，找不到【自营】字段，本条数据如何处理？下文将具体说明。
+
+示例网址：[https://search.jd.com/Search?keyword=%E6%89%8B%E6%9C%BA&enc=utf-8&qrst=1&rt=1&stop=1&vt=2&wq=%E6%89%8B%E6%9C%BA&page=7&s=177&click=0](https://search.jd.com/Search?keyword=%E6%89%8B%E6%9C%BA&enc=utf-8&qrst=1&rt=1&stop=1&vt=2&wq=%E6%89%8B%E6%9C%BA&page=7&s=177&click=0)
+
+![](/assets/academy/advanced-features/missing-field-handling/01-6513f49410564.png)
+
+ 
+
+先配置一个简单的规则（包含提取数据步骤）。然后将点击流程中的【提取数据】步骤上，在数据预览界面，找到对应字段的![](/assets/academy/advanced-features/missing-field-handling/02-6513f493a3ec6.png)并点击，再点击 ![](/assets/academy/advanced-features/missing-field-handling/03-6513f493b9e26.png) 按钮，可看到【找不到元素】时相关设置。
+
+ ![](/assets/academy/advanced-features/missing-field-handling/04-6513f4946fdd4.gif)
+
+ 
+
+可以看到，【提取数据】找不到字段时，八爪鱼提供3种处理方式：
+
+1、使用默认值：找不到当前字段时，自动填充一个默认值。
+
+2、该步骤留空：找不到当前字段时，该步骤留空，一般默认留空。
+
+3、该步骤所有字段留空：找不到到当前字段时，该步骤所有字段留空，相当于将本条数据删除。
+
+ 
+
+![](/assets/academy/advanced-features/missing-field-handling/05-6513f493b51b3.png)
+
+ 
+
+下面将结合具体场景，详细说明每一种的使用情况。
+
+ 
+
+### 1、使用默认值
+
+**需求：**&#x91C7;集京东的商品列表页信息，有的商品列表有【自营】字段，有的没有【自营】字段。当没有【自营】字段时，自动填充一个默认值【非自营】。
+
+选中【是否自营】字段，点击 ![](/assets/academy/advanced-features/missing-field-handling/06-6513f493c691e.png) 按钮，勾选【使用默认值】，输入固定值【非自营】，点击【应用】保存配置。
+
+ ![](/assets/academy/advanced-features/missing-field-handling/07-6513f4951c0fe.gif)
+
+ 
+
+启动采集看一下，当找不到【自营】字段时，则填充固定值【非自营】。
+
+这里只是一个示例，请大家根据自身需求，设置需要的固定值。
+
+ ![](/assets/academy/advanced-features/missing-field-handling/08-6513f49512a32.png)
+
+ 
+
+ 
+
+### 2、该字段留空
+
+**需求：**&#x91C7;集京东的商品列表页信息，有的商品列表有【自营】字段，有的没有【自营】字段。当没有【自营】字段时，该字段留空。
+
+选中【是否自营】字段，点击 ![](/assets/academy/advanced-features/missing-field-handling/09-6513f494a0f94.png) 按钮，勾选【该字段留空】，点击【应用】保存配置。（在找不到字段时，八爪鱼默认【该字段留空】，无需特意设置，在此是为了演示）![](/assets/academy/advanced-features/missing-field-handling/10-6513f495b7d7b.gif)
+
+ 
+
+启动采集看一下，当找不到【自营】字段时，则该字段留空。
+
+![](/assets/academy/advanced-features/missing-field-handling/11-6513f495dea4e.png)
+
+ 
+
+### 3、该步骤所有字段留空
+
+**需求：**&#x91C7;集京东的商品列表页信息，有的商品列表有【自营】字段，有的没有【自营】字段。当没有【自营】字段时，该步骤所有字段留空，相当于放弃本条数据。
+
+选中【是否自营】字段，点击  ![](/assets/academy/advanced-features/missing-field-handling/12-6513f495859b7.png) 按钮，勾选【该步骤所有字段为空】，点击【应用】保存配置。
+
+ 
+
+![](/assets/academy/advanced-features/missing-field-handling/13-6513f495d0778.png)
+
+ 
+
+启动采集看一下，当找不到【自营】字段时，则该步骤所有字段留空。可在导出数据时去重空白行，则只导出自营数据。
+
+ 
+
+![](/assets/academy/advanced-features/missing-field-handling/14-6513f496de4ba.png)

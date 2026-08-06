@@ -1,0 +1,212 @@
+---
+title: MCP 对接 Gemini
+description: 在 Gemini CLI 中通过 MCP 连接八爪鱼采集器，用自然语言搜索模板、创建任务、运行云采集并导出数据。
+---
+
+## 前置准备
+
+开始之前，请确认以下条件：
+
+- 已安装 **Node.js**（建议 LTS 版本，[下载地址](https://nodejs.org/)）
+- 拥有可用的 **Google 账户**（用于 Gemini CLI 登录）
+- 已注册八爪鱼账户
+- MCP 地址：`https://mcp.bazhuayu.com`
+- 运行云采集任务可能需要可用套餐或**八爪鱼账户余额**
+
+## 接入后可用的能力
+
+连接成功后，你可以在终端中用自然语言管理采集任务，例如：
+
+- 搜索八爪鱼采集模板
+- 校验模板参数并创建云采集任务
+- 启动与停止云采集任务
+- 查看任务执行状态
+- 导出数据（EXCEL / CSV / JSON / 数据库）
+- 查询数据中心的网页与媒体存量内容
+- 提交并查询 Temu、TikTok Shop 商品评论采集
+
+当前 MCP 不提供账户余额、版本或账单查询工具。连接后建议先让 Gemini 调用 `list_platforms`，或检查是否发现了[当前 10 个工具](/zh/mcp/guides/clients#验证连接)。
+
+## 八爪鱼 MCP 服务信息
+
+八爪鱼提供 MCP（Model Context Protocol）服务器，供 Gemini CLI 调用采集相关工具。
+
+| 项目 | 内容 |
+| --- | --- |
+| 服务地址 | `https://mcp.bazhuayu.com` |
+| 推荐认证 | OAuth 2.1（浏览器登录八爪鱼账户） |
+| 备选认证 | API Key（Header：`x-api-key`，见 [获取 API Key](/zh/mcp/quick-start/api-key)） |
+
+该服务会将八爪鱼的模板、任务、导出等功能公开给 AI 助手。
+
+## 步骤一：安装并启动 Gemini CLI
+
+<Steps>
+  <Step title="1.1 安装 Gemini CLI">
+    在 PowerShell 或终端中全局安装 Gemini CLI：
+
+    ```bash
+    npm install -g @google/gemini-cli
+    ```
+
+    **Windows 用户提示：** 若出现「禁止运行脚本」相关错误，请以管理员身份打开 PowerShell 并执行：
+
+    ```powershell
+    Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+    ```
+  </Step>
+  <Step title="1.2 启动 CLI 并完成 Google 登录">
+    1. 在终端输入 `gemini` 并回车，启动 CLI
+    2. 在菜单中选择 **（Recommended）Login with Google**（推荐使用 Google 登录）
+    3. 浏览器会自动打开，按提示使用 Google 账户登录
+    4. 凭据会缓存在本地，后续会话无需重复登录
+
+    <img src="/assets/mcp/gemini/step-1-start-cli.png" alt="启动 Gemini CLI 并选择 Google 登录" className="mcp-step-image" />
+    <img src="/assets/mcp/gemini/step-2-google-login.png" alt="在浏览器中完成 Google 账户登录" className="mcp-step-image" />
+  </Step>
+</Steps>
+
+## 步骤二：配置八爪鱼 MCP 服务器
+
+<Steps>
+  <Step title="2.1 定位配置文件">
+    在 Gemini CLI 中输入 `/config path`，查看配置文件所在目录（通常为 `~/.gemini/` 或 Windows 下的 `C:\Users\你的用户名\.gemini\`）。
+  </Step>
+  <Step title="2.2 编辑 settings.json">
+    用文本编辑器打开 `settings.json`（例如 `C:\Users\你的用户名\.gemini\settings.json`），在 **顶层** JSON 对象中添加 `mcpServers` 配置：
+
+    ```json
+    "mcpServers": {
+      "octoparse": {
+        "httpUrl": "https://mcp.bazhuayu.com",
+        "oauth": {
+          "clientId": "bazhuayu",
+          "enabled": true
+        }
+      }
+    }
+    ```
+
+    **合并提示：**
+
+    - 将上述块添加到 `settings.json` 顶层
+    - 若前面已有其他配置块（如 `security`），需在上一块末尾加逗号 `,`，保持 JSON 语法正确
+
+    完整示例结构如下：
+
+    ```json
+    {
+      "security": {
+        "...": "..."
+      },
+      "mcpServers": {
+        "octoparse": {
+          "httpUrl": "https://mcp.bazhuayu.com",
+          "oauth": {
+            "clientId": "bazhuayu",
+            "enabled": true
+          }
+        }
+      }
+    }
+    ```
+
+    <img src="/assets/mcp/gemini/step-3-settings-json.png" alt="在 settings.json 中配置八爪鱼 MCP 服务器" className="mcp-step-image" />
+  </Step>
+  <Step title="2.3 保存并重启">
+    保存 `settings.json` 后，在 Gemini CLI 提示符中输入 `/restart` 使配置生效。
+  </Step>
+  <Step title="2.4 完成八爪鱼 OAuth 授权">
+    首次让 Gemini 执行八爪鱼相关操作（例如「搜索模板」）时，会触发 OAuth 流程：
+
+    1. Gemini 提示你授权八爪鱼访问
+    2. 浏览器自动打开八爪鱼登录 / 授权页面
+    3. 登录账户并批准请求的权限
+    4. 授权完成后，Gemini 可安全调用八爪鱼工具
+
+    Gemini **不会**获取你的八爪鱼账户密码。
+  </Step>
+</Steps>
+
+### OAuth 认证流程说明
+
+首次调用八爪鱼 MCP 工具时：
+
+1. Gemini CLI 尝试调用八爪鱼工具
+2. 触发 OAuth 授权流程
+3. 你在浏览器中登录八爪鱼并批准权限
+4. 授权完成，后续可正常调用工具
+
+## 步骤三：在 Gemini CLI 中使用八爪鱼 MCP
+
+配置完成后，在 `>` 提示符下即可用自然语言操作采集任务。
+
+### 模板与任务创建
+
+```
+帮我找一个采集 Amazon 商品列表的八爪鱼模板
+使用 eBay 模板创建一个任务，并在云端启动
+```
+
+### 监控与导出
+
+```
+我最新的采集任务状态是什么？
+把「Product Scraper」任务的结果导出为 CSV
+```
+
+<AccordionGroup>
+  <Accordion title="展开查看更多提示词示例">
+
+  **搜索模板**
+
+  ```
+  搜索可用于采集 LinkedIn 公司信息的八爪鱼模板
+  ```
+
+  **创建并运行**
+
+  ```
+  使用模板 ID 12345 创建任务，然后启动云采集
+  ```
+
+  **导出数据**
+
+  ```
+  导出任务 abc123 的最新数据，格式为 JSON
+  ```
+
+  </Accordion>
+</AccordionGroup>
+
+## 重要使用说明
+
+- 仅 **支持云采集的模板** 可通过 Gemini CLI 启动；纯本地任务请在八爪鱼桌面客户端运行
+- 云采集有可能会消耗**八爪鱼账户余额**，具体见具体使用的八爪鱼模板
+- 部分模板需要 **专业版及以上** 套餐，或额外消耗积分
+- 修改 `settings.json` 后需执行 `/restart` 才能生效
+- 若 OAuth 授权失败，检查 JSON 配置是否正确，并重试授权流程
+
+## 常见问题
+
+| 现象 | 处理建议 |
+| --- | --- |
+| `npm install` 失败 | 确认 Node.js 已安装；检查网络与 npm 镜像源 |
+| Windows 脚本执行被禁止 | 执行 `Set-ExecutionPolicy RemoteSigned -Scope CurrentUser` |
+| 找不到 settings.json | 在 CLI 中运行 `/config path` 查看路径 |
+| JSON 解析错误 | 检查逗号、括号是否匹配；参考上方完整示例 |
+| 八爪鱼工具不可用 | 确认已 `/restart`；完成 OAuth 授权 |
+| 无法启动任务 | 确认模板支持云采集；检查账户套餐与余额 |
+| 本地任务无法运行 | 本地采集需在八爪鱼客户端操作，Gemini CLI 仅支持云采集相关工具 |
+
+<Note>
+  若教程截图与 Gemini CLI 当前界面有出入，请以 Google 官方文档为准。
+</Note>
+
+## 相关链接
+
+- [八爪鱼 MCP 概述](/zh/mcp/index)
+- [获取 API Key](/zh/mcp/quick-start/api-key)
+- [工作流程示例](/zh/mcp/workflow)
+- [故障排查](/zh/mcp/troubleshooting)
+- [客户端配置指南 — Gemini](/zh/mcp/guides/clients)

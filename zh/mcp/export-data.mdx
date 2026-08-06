@@ -1,0 +1,43 @@
+---
+title: export_data
+description: 查询采集与导出进度，预览并下载八爪鱼任务数据。
+---
+
+根据八爪鱼 `taskId` 导出任务数据。对 MCP Tasks 创建的任务，应先通过 `tasks/get` 或 `tasks/result` 等待执行成功，再调用本工具。
+
+## 参数
+
+| 参数 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `taskId` | string | 是 | `execute_task` 返回的任务 ID，或已有八爪鱼任务 ID |
+| `exportFileType` | string | 否 | 导出类型，默认 `JSON`，可选值见下方 |
+| `previewRows` | integer | 否 | 预览行数，范围 `0-20`，默认 `5`；设为 `0` 不返回 `sampleData` |
+
+支持的 `exportFileType`：
+
+`EXCEL`、`CSV`、`HTML`、`JSON`、`XML`、`GOOGLE_SHEETS`、`ZAPIER_FILE`、`ZIP`、`MYSQL`、`ORACLE`、`SQL_SERVER`、`POSTGRESQL`。
+
+```json
+{
+  "taskId": "<任务 ID>",
+  "exportFileType": "CSV",
+  "previewRows": 5
+}
+```
+
+## 响应状态
+
+| `status` | 含义 | 后续操作 |
+| --- | --- | --- |
+| `collecting` | 任务仍在采集 | 等待 10-30 秒后重试 |
+| `exporting` | 正在生成导出文件 | 等待 10-30 秒后重试 |
+| `exported` | 导出完成 | 展示预览和下载地址 |
+| `no_data` | 当前没有可导出数据 | 检查任务状态、参数和目标网站 |
+
+响应还可能包含 `dataTotal`、`exportProgressPercent`、`sampleData`、`sampleRowCount` 和 `exportFileUrl`。客户端应将 `sampleData` 以表格展示，并在存在 `exportFileUrl` 时始终向用户提供下载地址。
+
+<Note>
+  `exportFileType` 决定生成的文件类型，不改变 `sampleData` 的结构。除非用户明确要求读取导出文件，否则无需下载并再次解析 `exportFileUrl`。
+</Note>
+
+另请参阅：[MCP 概览](/zh/mcp/index)、[工作流程示例](/zh/mcp/workflow)、[`execute_task`](/zh/mcp/execute-task)

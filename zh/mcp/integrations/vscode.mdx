@@ -1,0 +1,213 @@
+---
+title: MCP 对接 VS Code
+description: 在 VS Code 中通过 MCP 连接八爪鱼采集器，配合 GitHub Copilot 用自然语言搜索模板、创建任务、运行云采集并导出数据。
+---
+
+## 前置准备
+
+开始之前，请确认以下条件：
+
+- 已安装 [Visual Studio Code](https://code.visualstudio.com/)
+- 已在 VS Code 中启用 **GitHub Copilot** 与 **Copilot Chat**（MCP 能力属于 Copilot 体验的一部分）
+- 已注册八爪鱼账户
+- MCP 地址：`https://mcp.bazhuayu.com`
+- 连接过程中可能需要在浏览器中完成八爪鱼授权
+
+VS Code 通过 `mcp.json` 管理 MCP 服务器配置，可放在：
+
+- **工作区**：`.vscode/mcp.json`（仅当前项目可用）
+- **用户配置**：用户目录下的 MCP 配置文件（全局可用）
+
+## 接入后可用的能力
+
+连接成功后，你可以在 VS Code 的 GitHub Copilot 中用自然语言管理采集任务，例如：
+
+- 搜索八爪鱼采集模板
+- 校验模板参数并创建云采集任务
+- 启动与停止云采集任务
+- 查看任务执行状态
+- 导出数据（EXCEL / CSV / JSON / 数据库）
+- 查询数据中心的网页与媒体存量内容
+- 提交并查询 Temu、TikTok Shop 商品评论采集
+
+当前 MCP 不提供账户余额、版本或账单查询工具。连接后建议先让 Copilot 调用 `list_platforms`，或检查是否发现了[当前 10 个工具](/zh/mcp/guides/clients#验证连接)。
+
+## 八爪鱼 MCP 服务信息
+
+八爪鱼提供 MCP（Model Context Protocol）服务器，供 VS Code 中的 Copilot 调用采集相关工具。
+
+| 项目 | 内容 |
+| --- | --- |
+| 服务地址 | `https://mcp.bazhuayu.com` |
+| 推荐认证 | OAuth 2.1（浏览器登录八爪鱼账户） |
+| 备选认证 | API Key（Header：`x-api-key`，见 [获取 API Key](/zh/mcp/quick-start/api-key)） |
+
+该服务会将八爪鱼的模板、任务、导出等功能公开给 AI 助手。
+
+## 步骤一：在 VS Code 中配置八爪鱼 MCP
+
+<Steps>
+  <Step title="1.1 打开 VS Code 并启用 Copilot">
+    1. 打开 VS Code
+    2. 确认 **GitHub Copilot** 与 **Copilot Chat** 已安装并可用
+
+    使用 MCP 工具需要 Copilot 相关权限；具体以 Microsoft 官方文档为准。
+
+    <img src="/assets/mcp/vscode/step-1-copilot.png" alt="在 VS Code 中启用 GitHub Copilot" className="mcp-step-image" />
+  </Step>
+  <Step title="1.2 打开 MCP 服务器配置">
+    在 VS Code 中打开 MCP 配置文件 `mcp.json`。
+
+    - 仅当前项目使用：创建或编辑 `.vscode/mcp.json`
+    - 全局使用：编辑用户级 MCP 配置
+
+    VS Code 会为 `mcp.json` 提供 IntelliSense 与 schema 提示。
+
+    <img src="/assets/mcp/vscode/step-2-mcp-config.png" alt="在 VS Code 中打开 MCP 配置" className="mcp-step-image" />
+  </Step>
+  <Step title="1.3 添加八爪鱼 MCP 服务器">
+    在 `mcp.json` 中添加八爪鱼 MCP 配置，例如：
+
+    ```json
+    {
+      "mcpServers": {
+        "octoparse": {
+          "url": "https://mcp.bazhuayu.com"
+        }
+      }
+    }
+    ```
+
+    若使用 API Key 认证，可参考以下配置（见 [获取 API Key](/zh/mcp/quick-start/api-key)）：
+
+    ```json
+    {
+      "mcpServers": {
+        "octoparse": {
+          "type": "http",
+          "url": "https://mcp.bazhuayu.com",
+          "headers": {
+            "x-api-key": "你的APIKey"
+          }
+        }
+      }
+    }
+    ```
+
+    <Note>
+      不同 VS Code 版本与 MCP 认证流程下，配置字段可能略有差异，请以编辑器内 schema 提示与官方文档为准。
+    </Note>
+
+    <img src="/assets/mcp/vscode/step-3-add-server.png" alt="在 mcp.json 中添加八爪鱼 MCP 服务器" className="mcp-step-image" />
+  </Step>
+  <Step title="1.4 保存配置">
+    保存 `mcp.json` 文件。
+
+    若 JSON 格式正确且路径无误，VS Code 应能识别八爪鱼 MCP 服务器配置。
+
+    <img src="/assets/mcp/vscode/step-4-save-auth.png" alt="保存 MCP 配置并完成认证" className="mcp-step-image" />
+  </Step>
+  <Step title="1.5 完成认证">
+    若八爪鱼 MCP 需要认证，首次使用时 VS Code 会引导你完成授权流程：
+
+    1. 可能跳转至八爪鱼登录 / 授权页面
+    2. 登录账户并批准访问权限
+    3. 授权完成后返回 VS Code
+
+    VS Code **不会**直接获取你的八爪鱼账户密码。
+  </Step>
+</Steps>
+
+### 认证流程说明
+
+首次在 VS Code 中使用八爪鱼 MCP 工具时：
+
+1. Copilot 尝试调用八爪鱼 MCP 工具
+2. VS Code 启动 MCP 授权流程
+3. 你在浏览器中登录八爪鱼并批准权限
+4. 授权完成后，八爪鱼工具在 Copilot 中可用
+
+## 步骤二：在 Copilot 中使用八爪鱼 MCP
+
+八爪鱼 MCP 最适合在支持工具调用的 Copilot 工作流中使用，尤其是 **Agent 模式**下的多步骤任务。
+
+### 模板与任务创建
+
+```
+帮我找一个采集 Amazon 商品列表的八爪鱼模板
+用这个模板创建一个采集任务
+在云端启动这个任务
+```
+
+### 监控与导出
+
+```
+查看我最新的八爪鱼云采集任务状态
+把最新结果导出为 CSV
+```
+
+### 数据获取
+
+```
+列出这个八爪鱼任务的所有导出选项
+下载最新数据集，格式为 JSON
+```
+
+<AccordionGroup>
+  <Accordion title="展开查看更多提示词示例">
+
+  **分步执行（推荐）**
+
+  对于复杂任务，建议拆成短指令依次执行：
+
+  ```
+  搜索模板 → 创建任务 → 启动任务 → 查看状态 → 导出数据
+  ```
+
+  **搜索模板**
+
+  ```
+  搜索可用于采集 LinkedIn 公司信息的八爪鱼模板
+  ```
+
+  **导出数据**
+
+  ```
+  导出任务 abc123 的最新数据，格式为 JSON
+  ```
+
+  </Accordion>
+</AccordionGroup>
+
+## 重要使用说明
+
+- MCP 在 VS Code 中属于 **GitHub Copilot** 能力，不是独立的连接器市场
+- 八爪鱼 MCP 在 **Agent 模式** 等多步骤 Copilot 场景中效果最佳
+- 仅 **支持云采集的模板** 可通过 Copilot 启动；纯本地任务请在八爪鱼桌面客户端运行
+- 云采集有可能会消耗**八爪鱼账户余额**，具体见具体使用的八爪鱼模板
+- 部分模板需要 **专业版及以上** 套餐，或额外消耗积分
+- 长而复杂的多步骤提示更容易失败，建议拆成短指令依次执行
+- 企业环境可能通过 `chat.mcp.access` 等策略限制 MCP 使用，请联系管理员
+
+## 常见问题
+
+| 现象 | 处理建议 |
+| --- | --- |
+| MCP 服务器未加载 | 检查 `mcp.json` JSON 格式；确认文件路径正确；重载 VS Code 窗口 |
+| Copilot 中看不到工具 | 确认 Copilot 已启用；使用支持工具调用的 Copilot 界面；尝试 Agent 模式 |
+| 组织策略阻止 MCP | 联系管理员检查 `chat.mcp.access` 等 Copilot 策略设置 |
+| 认证无法完成 | 重新连接服务器；重试登录授权；授权完成后重启 VS Code |
+| 无法启动任务 | 确认模板支持云采集；检查账户套餐与余额 |
+| 本地任务无法运行 | 本地采集需在八爪鱼客户端操作，VS Code 仅支持云采集相关工具 |
+
+<Note>
+  若教程截图与 VS Code / Copilot 当前界面有出入，请以 Microsoft 官方界面为准。
+</Note>
+
+## 相关链接
+
+- [八爪鱼 MCP 概述](/zh/mcp/index)
+- [获取 API Key](/zh/mcp/quick-start/api-key)
+- [工作流程示例](/zh/mcp/workflow)
+- [故障排查](/zh/mcp/troubleshooting)
+- [客户端配置指南 — VS Code](/zh/mcp/guides/clients)

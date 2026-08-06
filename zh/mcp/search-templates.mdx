@@ -1,0 +1,53 @@
+---
+title: search_templates
+description: 搜索并查看八爪鱼预置采集模板、输入字段和数据源选项。
+---
+
+在执行 `execute_task` 前查找合适的模板。一次调用必须且只能使用 `keyword`、`id`、`slug` 中的一种查询方式。
+
+## 参数
+
+| 参数 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `keyword` | string | 三选一 | 按主题、网站或使用场景搜索模板 |
+| `id` | integer | 三选一 | 按正整数模板 ID 精确查询 |
+| `slug` | string | 三选一 | 按模板别名精确查询 |
+| `page` | integer | 否 | 关键词模式的页码，从 `1` 开始 |
+| `limit` | integer | 否 | 关键词模式每页数量，范围 `1-50`，默认 `10` |
+
+<Note>
+  关键词模式适合发现模板；确定模板后，再用 `id` 或 `slug` 精确查询，以取得完整 `inputSchema` 和可能存在的根级 `sourceOptions`。
+</Note>
+
+## 响应
+
+关键词模式可能返回：
+
+- `recommendedTemplateName`：建议传给 `execute_task` 的模板名称
+- `templates`：标准化模板列表，包含 `templateName`、`executionMode` 和输入/输出摘要
+- `page`、`pageSize`、`totalMatchingTemplates`、`totalPages`：分页信息
+- `localCollectionGuidance`：最佳匹配仅支持本地采集时的处理建议
+
+精确查询通过 `template` 返回模板详情，其中 `inputSchema[].field` 是后续 `parameters` 的字段契约。若模板包含数据源选择字段，根级 `sourceOptions` 会提供可选项；应将选项的 `key` 作为字段值。
+
+## 调用示例
+
+```json
+{
+  "keyword": "电商商品",
+  "page": 1,
+  "limit": 10
+}
+```
+
+精确查看已选模板：
+
+```json
+{
+  "slug": "<模板别名>"
+}
+```
+
+优先选择 `executionMode` 包含 `Cloud` 的模板。标记为 `Local only` 的模板需要在八爪鱼桌面客户端中运行。
+
+另请参阅：[MCP 概览](/zh/mcp/index)、[工作流程示例](/zh/mcp/workflow)、[`execute_task`](/zh/mcp/execute-task)

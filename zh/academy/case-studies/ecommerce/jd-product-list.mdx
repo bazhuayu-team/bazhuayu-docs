@@ -1,0 +1,245 @@
+---
+title: "【京东】商品列表采集"
+source: "https://www.bazhuayu.com/helpcenter/docs/vOELFx"
+---
+**采集场景**
+
+在京东搜索页 [https://search.jd.com/Search](https://search.jd.com/Search) 输入搜索，搜出后得到的多个商品列表数据。
+
+![【京东】商品列表采集](/assets/academy/case-studies/jd-product-list/01-6531f3db4c386.png)
+
+![](/assets/academy/case-studies/jd-product-list/02--E5-BE-AE-E4-BF-A1-E6-88-AA-E5-9B-BE_20200420191453.png)**采集字段**
+
+商品标题、价格、到手价、标签、已售数量、店铺名称、评价等字段。
+
+**采集结果**
+
+采集结果可导出为Excel，CSV，HTML，数据库等格式。导出为Excel示例：\
+![【京东】商品列表采集](/assets/academy/case-studies/jd-product-list/03-68a67ebf94ef8.png)
+
+![](/assets/academy/case-studies/jd-product-list/04-2.png)![](/assets/academy/case-studies/jd-product-list/05-1.png)
+
+**教程说明**
+
+本篇更新时间：2025/8/21 八爪鱼版本：V8.7.7
+
+如果因网页改版导致网址或步骤无效，无法获取到目标数据，请联系官方客服，我们将及时修改。
+
+ 
+
+**采集步骤**
+
+步骤一、打开网页
+
+步骤二、批量输入多个并搜索关键词
+
+步骤三、创建【循环列表】
+
+步骤四、编辑字段
+
+步骤五、创建【循环翻页】
+
+步骤六、设置滚动、修改翻页XPath
+
+步骤七、优化规则
+
+步骤八、启动收集
+
+ 
+
+下面为具体步骤：
+
+ 
+
+### 步骤一、打开网页
+
+在首页【输入框】中输入目标网址[https://search.jd.com/Search?keyword=%E9%9E%8B%E5%AD%90&enc=utf-8&wq=%E9%9E%8B%E5%AD%90&pvid=c1993697d9ac44d681e617f7c0daee5b&czLogin=1](https://search.jd.com/Search?keyword=%E9%9E%8B%E5%AD%90&enc=utf-8&wq=%E9%9E%8B%E5%AD%90&pvid=c1993697d9ac44d681e617f7c0daee5b&czLogin=1)，点击【开始采集】，八爪鱼自动打开网页，此处会默认跳到登录页面，需要右上角切换到浏览模式之后，手动的登录网站
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/7c3e11c45145403695831740392/QpFUTVYsRbMA.mp4" width="100%"></video>![](/assets/academy/case-studies/jd-product-list/06-1.gif)
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 打开网页后，如果开始【自动识别】，请点击【不再自动识别】或【取消识别】将其关掉。因为本文不适合使用【自动识别】。
+> 
+> - b. 【自动识别】适用于自动识别网页上的列表、滚动和翻页，识别成功后直接启动采集即可获取数据。详情点击查看 [【自动识别】教程](tutorial8/81zdypz)
+> 
+> - c.京东的数据需要登录后才可以查看，所以开始采集之后需要点击暂停后手动登录，或者在流程里设置登录步骤，具体参考教程[登录采集](/zh/academy/basic-collection/beginner/login-verification)
+
+ 
+
+### 步骤二、批量输入多个并搜索关键词
+
+打开网页后，通过以下几步，实现批量输入多个关键词。
+
+① 选中京东搜索框，在操作提示框中，点击【输入文本】
+
+②点击操作框的【批量输入文本】，输入要搜索的所有关键词，点击确定，及在右侧生成一个循环输入文本的步骤
+
+③ 选中【搜索】按钮，在操作提示框中，点击【点击一次】，出现关键词的搜索结果。
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/168d0dcd5145403695833790556/leQTrgPv4TwA.mp4" width="100%"></video>![](/assets/academy/case-studies/jd-product-list/07-4.gif)
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 示例中输入的关键词是【李宁】、【特步】和【安踏】，可根据自身需求进行替换。
+> 
+> - b. 一次最多输入2W个关键字。可先准备一个包含多个关键字的文档，然后将其复制粘贴进八爪鱼中。
+
+ 
+
+### 步骤三、创建【循环列表】
+
+通过以下步骤，采集所有商品列表中的数据：
+
+1、选中页面上1个商品列表（注意一定要选中整个列表，包含所有所需字段） 
+
+2、在黄色操作提示框中，点击【选中全部子元素】
+
+3、点击【选择全部相似组】
+
+4、点击【元素中数据内容】
+
+ [ ](http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/613210aa5145403695834690139/E2A3PRWB93YA.mp4)![](/assets/academy/case-studies/jd-product-list/08-5.gif)![](/assets/academy/case-studies/jd-product-list/09-4.gif)
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 经过以上连续4步，【循环-提取数据】创建完成。【循环】中的项，对应着页面上所有商品列表，【提取数据】中的字段，对应着每个商品列表中的字段。启动采集以后，八爪鱼就会按照循环中的顺序依次提取每个列表中的字段。
+> 
+> - b. 为何通过以上4步，可建立【循环-提取数据】？详情点击查看 [列表数据采集教程 ](/zh/academy/basic-collection/beginner/list-collection)。
+
+ 
+
+### 步骤四、编辑字段
+
+在【数据预览】页面，可删除多余字段，修改字段名，移动字段顺序等。
+
+ [ ](http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/b007cf705145403695835729654/rBQQ9WdP5W8A.mp4)![](/assets/academy/case-studies/jd-product-list/10-6.gif)![](/assets/academy/case-studies/jd-product-list/11-5.gif)
+
+### 步骤五、创建【多页翻页】
+
+1、创建循环翻页
+
+如果只是采集一页数据，可跳过此步骤。
+
+如果需要翻页以采集多页数据：选择页面中的【下一页】按钮，在操作提示上单击【循环点击下一页】，创建【循环翻页】。
+
+ [ ](http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/1e2f0e5b5145403695901175122/sEcl24AZZfoA.mp4)![](/assets/academy/case-studies/jd-product-list/12-7.gif)
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 创建【循环翻页】后，八爪鱼会自动点击【下一页】按钮进行翻页，从第1页，第2页......直到最后1页。如果只需采集特定页的数据，可在八爪鱼中设置循环翻页的次数，详情点击查看  [翻页以采集多页数据教程](/zh/academy/basic-collection/pagination/next-page-button)。
+> 
+> - b. 在选中【下一页】范围时，选中的范围不同，弹出的提示也不同。如果选中的是最里层的文字【下一页】，黄色操作提示框中弹出的提示是【循环点击下一页】。如果选中的是最整个【下一页】按钮，黄色操作提示框中弹出的提示是【循环点击单个链接】。两者的作用相同，都是为了实现翻页。
+
+ 
+
+### 步骤六、设置滚动、修改翻页XPath
+
+1、设置滚动
+
+点击浏览和翻页后，京东默认只显示前30个商品列表。滚动滚动页面到底部，将全部中加载60个商品列表，在八爪鱼也需要滚动设置。
+
+【点击元素】和【点击翻页】设置页面，打开【高级设置】，勾选【页面】，滚动方式为【向下滚动一屏】，【滚动次数】为20次，【每次间隔】2秒，设置后保存。
+
+ [ ](http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/0a552f3d5145403695833215215/Agv8O4493qIA.mp4)![](/assets/academy/case-studies/jd-product-list/13-7.gif)
+
+2、修改【循环翻页】XPath
+
+默认的【循环翻页】XPath会在最后一页重复翻页，导致其他关键词无法输入并采集，需修改【循环翻页】XPath。
+
+进入【循环翻页】设置页面，修改XPath为：//a[@class="pn-next"]/EM[text()="下一页"]  。\
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/7541f6855145403695831446822/OIAGrY6Bje4A.mp4" width="100%"></video>
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 为什么会不结束翻页？这是因为循环页】默认生成的XPath，在最后1时，仍然能定位到【下一页】按钮，【翻页导致其一直点击【下一页】为了解决这个问题，我们需要手动写一条XPath ，使之在当前页面非定位到最后一页时，按钮为【下一页】，以实现不断点击【下一个】页】按钮进行翻页。同时在当前页为最后一页时，不定位到【下一页】按钮，以翻页结束。这里需要一定的XPath知识。点击查看[XPath学习与实例](https://www.bazhuayu.com/helpcenter/docs/V2h1Ec)
+> 
+> 湾。设置中的滚动次数和时间间隔，请根据采集加载情况进行设置，不是需要和网页数据一成不变的，具体请点击查看 [处理滚动加载的网页教程](/zh/academy/basic-collection/pagination/scroll-loading-pagination)
+
+### 
+
+### 步骤七、优化规则
+
+为【循环列表】、【提取列表数据】设置执行前等待4s，然后点击【应用】保存。
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/cb473cfa5145403695832804101/JwhA2c7U0gsA.mp4" width="100%"></video>
+
+### 步骤八、启动采集
+
+1、采集【采集】并【开始采集】。后八爪鱼开始采集数据。
+
+ [ ](http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/702b6fe45145403695899879973/xyaTBMZEBpEA.mp4)![](/assets/academy/case-studies/jd-product-list/14-9.gif)
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 【本地采集】是使用自己的电脑采集数据，【云采集】是使用八爪鱼提供的云采集，点击查看 [本地集与云采集详解](https://www.bazhuayu.com/helpcenter/docs/2xF5Mz)。
+
+2、采集完成后，选择合适的导出为Excel、CSV、HTML、等的导出数据库。支持导出为Excel、CSV、HTML、等。这里导出为Excel。
+
+数据示例：![](/assets/academy/case-studies/jd-product-list/15-2.png)
+
+![](/assets/academy/case-studies/jd-product-list/16-1.png)![【京东】商品列表采集](/assets/academy/case-studies/jd-product-list/17-68a67ed39dd58.png)![](/assets/academy/case-studies/jd-product-list/18-1.png)
+
+  
+
+拓展阅读
+
+通过以上，我们点击京东商品详情页链接，可以使用 [网址循环功能](https://portal.helplook.net/content/41401) ，进入每个商品详情，[获取京东商品详情数据](/zh/academy/case-studies/ecommerce/jd-product-detail)。
+
+ 
+
+作者：Mona 
+
+ 
+
+ 
+
+"

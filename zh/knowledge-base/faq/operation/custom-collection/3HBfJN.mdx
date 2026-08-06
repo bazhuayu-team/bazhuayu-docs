@@ -1,0 +1,41 @@
+---
+title: "如何利用xpath中的following-sibling和preceding-sibling定位标签？"
+description: "有些标签我们无法直接定位，需要用到兄弟标签来定位，例如没有“下一页”翻页按钮，页面上只有数字页码，我们可以通过页面1找到页面2，通过页面2找到页面3，...，以此类推，示例如下： A[1] A[2] A[...] A[N] 此时利用following-sibling的取值是： //A[1]/following-sibl…"
+hidden: true
+kbStatus: "unverified"
+kbSource: "faq"
+sourceSlug: "3HBfJN"
+source: "https://www.bazhuayu.com/helpcenter/docs/3HBfJN"
+---
+
+有些标签我们无法直接定位，需要用到兄弟标签来定位，例如没有“下一页”翻页按钮，页面上只有数字页码，我们可以通过页面1找到页面2，通过页面2找到页面3，...，以此类推，示例如下：
+
+A[1] A[2] A[...] A[N]
+
+ 
+
+此时利用following-sibling的取值是：
+
+ 
+
+//A[1]/following-sibling::a[1]
+
+ 
+
+这样就可以利用A[1]标签定位到A[2]标签了。
+
+ 
+
+preceding-sibling同理即可，如利用A[2]标签定位A[1]标签的取值是：
+
+ 
+
+//A[2]/preceding-sibling::a[1]
+
+ 
+
+详细教程参考：[https://www.bazhuayu.com/helpcenter/docs/hhjudS](https://www.bazhuayu.com/helpcenter/docs/hhjudS)
+
+ 
+
+XPATH入门图文教程：[https://helpcenter.bazhuayu.com/helpcenter/docs/pWdSFO](https://www.bazhuayu.com/helpcenter/docs/pWdSFO)

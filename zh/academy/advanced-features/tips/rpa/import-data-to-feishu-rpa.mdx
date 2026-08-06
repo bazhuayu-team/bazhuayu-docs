@@ -1,0 +1,547 @@
+---
+title: "采集器数据导入飞书表格（RPA实现）"
+description: "介绍八爪鱼采集器进阶功能：采集器数据导入飞书表格（RPA实现）。"
+source: "https://www.bazhuayu.com/helpcenter/docs/cai-ji-qi-shu-ju-dao-ru-fei-shu-biao-ge-RPA-shi-xian"
+---
+
+## 一、背景与痛点
+
+在激烈的市场竞争中，企业需要快速获取并分析数据，以指导业务决策。及时采集竞品数据、热点笔记、用户评论等至关重要。数据从采集器出来后，因为缺乏自动化的“清洗”和“搬运”能力，导致业务人员不得不做重复的手工劳动，且数据质量无法保证。
+
+ 
+
+## 二、基本介绍
+
+本场景中这三款软件形成了一个从数据采集到决策支持的完整闭环：八爪鱼采集器负责高效获取网页数据；八爪鱼RPA负责清洗、转换和自动化流转数据；飞书表格负责存储、分析和可视化呈现数据。
+
+本教程主要以RPA流程搭建切入，完成采集器数据导入飞书表格的需求。
+
+ 
+
+## 三、采集器数据获取
+
+### 1、数据采集与数据源
+
+所谓数据源就是指咱们需要将什么数据导入飞书中，该场景中采集动作主要还是依赖采集器。
+
+此处我们直接以模板为例--“**微信公众号文章采集-限云采集**”
+
+![采集器数据导入飞书表格（RPA实现）](/assets/academy/advanced-features/import-data-to-feishu-rpa/01-69834db017fe2.png)
+
+> 特别说明：
+>
+> a. 采集器采集优势：1）采集器结构较简单，采集更加稳定。2）采集器有云采集，其能自动去重并且不占用本地资源。
+>
+> b.模板需要填写相关参数，请根据使用模板详情介绍按照要求填写。
+
+ 
+
+#### 步骤一：填写参数
+
+![采集器数据导入飞书表格（RPA实现）](/assets/academy/advanced-features/import-data-to-feishu-rpa/02-69834db0267ae.png)
+
+ 
+
+> 特别说明：
+>
+> a. 填写参数时一定要确保参数准确，同时步长建议设置成1。（步长实际是指云节点执行几个关键词/网址，设置成1能大大提升采集稳定性）
+
+ 
+
+#### 步骤二：启动任务
+
+确保参数填写正确后，点击立即使用。
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/e6198ab35145403715632715111/4tLXFYuXnYwA.mp4" width="100%"></video>
+
+ 
+
+返回任务列表，找到目标任务
+
+![采集器数据导入飞书表格（RPA实现）](/assets/academy/advanced-features/import-data-to-feishu-rpa/03-69834db011a52.png)
+
+ 
+
+### 2、规则任务属性
+
+等待其任务采集完，点击任务右侧--“更多”，确定其任务ID
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/84b7e7e95145403715634914895/A7yti8MVzIIA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> a. 确定任务ID主要是为下文配置RPA指令准备，同时任务ID主要是与云采集有关，所以后续配置数据源都来源于云采集呦，目前团队版以上支持云采集，升级请参考：[https://www.bazhuayu.com/plan](https://www.bazhuayu.com/plan)
+>
+> b.此案例仅为展示，所以中途手动停止，特此解释。
+
+ 
+
+ 
+
+## 四、飞书端配置
+
+### 1、获取飞书凭证
+
+#### 1.1前提条件：
+
+你需要拥有一个飞书企业管理员账号，或者拥有“企业自建应用”创建权限的账号。
+
+#### 1.2操作步骤：
+
+①访问：[飞书开放平台](https://open.feishu.cn/?uc_biz_str=OPT%3ABACK_BTN_STYLE%401%7COPT%3ASAREA%401%7COPT%3AS_BAR_BG_FLOW%401%7COPT%3ATOOLBAR_STYLE%400%7COPT%3ATITLE_BAR_ENABLE%401%7COPT%3AW_ENTER_QUARK_LOADING%401%7COPT%3ADISABLE_RIGHT_BACK%401\&upstream_biz=toutiao_pc)
+
+使用你的飞书账号登录。
+
+②进入应用创建页面
+
+在控制台首页，找到并点击“创建应用”按钮。在创建向导中，选择“企业自建应用”（如果你是为企业内部开发应用，请务必选此项）。
+
+③填写应用信息
+
+应用名称：输入你的应用名称（例如：测试应用、内部管理系统）。
+
+应用描述：简要描述应用的功能。
+
+点击“创建”。
+
+④获取凭证 (App ID & App Secret)
+
+创建成功后，你会进入应用的详情页面。
+
+在左侧导航栏中，点击 “凭证与基础信息”（通常在“基础信息”菜单下）。
+
+在右侧的“应用凭证”区域，你将看到：
+
+App ID：应用的唯一标识符。
+
+App Secret：应用的密钥（为了安全，通常默认隐藏或需要点击“显示”图标，部分平台可能需要通过短信/扫码验证才能查看）。
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/3381fba45145403715633778037/A5CohjRyZnwA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> a. 具体请参考官方：[获取访问凭证 - 服务端 API - 开发文档 - 飞书开放平台](https://open.feishu.cn/document/server-docs/api-call-guide/calling-process/get-access-token)
+
+⑤开启权限
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/358b9e445145403715633832937/MdKRt357hSkA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> a. 视频中开启的全部权限，一般只需要开启下列权限，本案例开启前两个即可。
+>
+> ①[查看知识库以及云空间权限](https://open.feishu.cn/app/cli_a9099fd0dcf89cb2/auth?q=wiki:wiki,wiki:wiki:readonly,wiki:node:read\&op_from=openapi\&token_type=tenant)
+>
+> ②[飞书表格调取权限](https://open.feishu.cn/app/cli_a9099fd0dcf89cb2/auth?q=sheets:spreadsheet,drive:drive,sheets:spreadsheet:readonly,drive:drive:readonly,sheets:spreadsheet:read\&op_from=openapi\&token_type=tenant)
+>
+> ③[多维表格相关权限](https://open.feishu.cn/app/cli_a9099fd0dcf89cb2/auth?q=bitable:app:readonly,bitable:app,base:app:read\&op_from=openapi\&token_type=tenant)
+>
+> b. 同时应用权限也可以人为设置审核，具体请关注：[配置应用数据权限](https://open.feishu.cn/document/api-call-guide/calling-process/configure-app-data-permissions)
+>
+> c. 开完权限后部分标红，因为此类权限还需要细节配置，本功能并不需求，可不必关注。
+>
+> ![采集器数据导入飞书表格（RPA实现）](/assets/academy/advanced-features/import-data-to-feishu-rpa/04-69834db01fd43.png)
+>
+>  
+
+ 
+
+### 2、创建飞书表格
+
+在飞书云文档空间中创建飞书表格，修改表格名称为“公众号数据”，同时确定将权限改为可编辑，并且记录表格链接。
+
+![采集器数据导入飞书表格（RPA实现）](/assets/academy/advanced-features/import-data-to-feishu-rpa/05-69834db025204.png)
+
+ 
+
+确定首行表头字段名与模板中一致。
+
+![采集器数据导入飞书表格（RPA实现）](/assets/academy/advanced-features/import-data-to-feishu-rpa/06-69834db013014.png)
+
+ 
+
+ 
+
+> 特别说明：
+>
+> a. 手动编写字段名是因为RPA中采集器指令只针对数据，不针对表头，所以需要提前编辑好。
+>
+> b. 可以自行调整表头格式，建议加粗字体、设置背景颜色并冻结首行。
+>
+>  
+>
+> <video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/431734755145403715630352343/6PaUhLaozG0A.mp4" width="100%"></video>
+
+ 
+
+ 
+
+## 五、RPA端配置
+
+### 1、RPA环境准备
+
+进入官网下载界面（[八爪鱼RPA下载中心|机器人自动化工具](https://rpa.bazhuayu.com/download)）点击下载。
+
+![采集器数据导入飞书表格（RPA实现）](/assets/academy/advanced-features/import-data-to-feishu-rpa/07-69834db04ef1d.png)
+
+注册账号，登录。
+
+![采集器数据导入飞书表格（RPA实现）](/assets/academy/advanced-features/import-data-to-feishu-rpa/08-69834db076c5a.png)
+
+ 
+
+点击应用，新建应用。
+
+![采集器数据导入飞书表格（RPA实现）](/assets/academy/advanced-features/import-data-to-feishu-rpa/09-69834db02dca3.png)
+
+ 
+
+此时到达应用搭建界面。修改应用名称为：采集器数据导入飞书。后续梳理完需求后即可搭建应用。
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/74507b4c5145403715634202102/g32d4Ap6U8EA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> a. 目前RPA仅支持Windows版本。
+>
+> b. 上手前需要基本了解RPA原理以及基础概念，有助于下文搭建。RPA完整教程请关注：[RPA课堂(图文)-八爪鱼RPA帮助中心](https://www.bazhuayu.com/helpcenter/docs/fQxLRf)，对于此需求请着重关注[初相识](https://www.bazhuayu.com/helpcenter/docs/2Vm2lK)与[基本概念](https://www.bazhuayu.com/helpcenter/docs/nOVWRT)。
+
+### 2、需求分析与流程图
+
+![采集器数据导入飞书表格（RPA实现）](/assets/academy/advanced-features/import-data-to-feishu-rpa/10-69834db016162.png)
+
+此需求RPA主要做数据衔接。数据端与接收端的部署可以分开理解，设置不同子流程。
+
+#### 2.1采集器端部署：
+
+①获取八爪鱼账号授权（需要输入账号密码）。
+
+②确定具体任务ID，准确定位要采集的任务。
+
+③获取数据。（获取到的格式是临时存储的数据表格）
+
+#### 2.2飞书端部署：
+
+①获取飞书凭证。
+
+②获取飞书表格。（绑定要导出到的飞书表格）
+
+③将此前获取到的数据按行循环导入飞书表格中。
+
+ 
+
+### 3、RPA应用搭建
+
+#### 3.1应用搭建流程
+
+主流程：该需求分为两部分，主流程顺序调用子流程即可
+
+![采集器数据导入飞书表格（RPA实现）](/assets/academy/advanced-features/import-data-to-feishu-rpa/11-69834db02bf1e.png)
+
+子流程：采集器部署
+
+![采集器数据导入飞书表格（RPA实现）](/assets/academy/advanced-features/import-data-to-feishu-rpa/12-69834db01b056.png)
+
+子流程：飞书部署
+
+![采集器数据导入飞书表格（RPA实现）](/assets/academy/advanced-features/import-data-to-feishu-rpa/13-69834db027f0a.png)
+
+ 
+
+#### 3.2应用搭建分析
+
+##### 3.2.1子流程创建：
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/9e13342d5145403715631957769/8YuAYakoFeUA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> a. 封装搭建是为了让流程更加模块化更加可控。具体可了解：[第2节 给应用进行封装-八爪鱼RPA帮助中心](https://www.bazhuayu.com/helpcenter/docs/2FUcfb)
+
+ 
+
+##### 3.2.2采集器部署：
+
+找到指令，拖拽至搭建框。
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/e4417e865145403715632682676/Ntrt1cl6wZsA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> a. 搭建时不仅可以拖拽，也可以点击新增，输入关键词搜索指令。后续所有指令搭建方式均如此，不做过多介绍。
+>
+>  
+>
+> <video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/2514653c5145403715633114828/rrIia3awFIkA.mp4" width="100%"></video>
+
+ 
+
+搭建八爪鱼采集器账号授权指令
+
+![采集器数据导入飞书表格（RPA实现）](/assets/academy/advanced-features/import-data-to-feishu-rpa/14-69834db02199e.png)
+
+> 特别说明：
+>
+> a. 正常输入账号密码即可,生成的变量授权对象仅能在后续八爪鱼相关指令使用。
+>
+> b. 相关指令介绍可以点击右边蓝色指令说明查看，或者官网说明：[八爪鱼账号授权](https://www.bazhuayu.com/helpcenter/docs/getaccesstokencommand)。
+
+ 
+
+在八爪鱼账号授权指令下方搭建获取采集任务数据，输入相关参数：
+
+①授权对象即上一步指令【八爪鱼账号授权】获取的变量。
+
+②任务ID：此前确定的采集器任务ID。
+
+③获取：这里选择未导出数据。
+
+④数据条数：指定获取数据的条数，我们需求是获取采集到的数据，这里直接填最大值1000.
+
+⑤一定要选择：将获取到的数据标记为已导出状态。
+
+![采集器数据导入飞书表格（RPA实现）](/assets/academy/advanced-features/import-data-to-feishu-rpa/15-69834db01f8b2.png)
+
+> 特别说明：
+>
+> a. 勾选“将获取到的数据标记为已导出状态”是为了标记数据，由于我们选择获取未导出数据，所以此配置可以确保下次执行任务时只导入最新的数据，不会进行重复导入。
+>
+> b. 相关指令介绍可以点击右边蓝色指令说明查看，或者官网说明：[获取采集任务数据](https://www.bazhuayu.com/helpcenter/docs/gettaskdatacommand)。
+
+ 
+
+此指令可以将采集器采集到的数据临时存储到数据表格中，后续导入飞书都是从此数据表格中提取。
+
+![采集器数据导入飞书表格（RPA实现）](/assets/academy/advanced-features/import-data-to-feishu-rpa/16-69834db0226f5.png)
+
+ 
+
+##### 3.2.3飞书部署：
+
+①获取飞书凭证
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/e62ccde65145403715632727586/IDTAEl33m8gA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> a. 输入上文获取到的参数。,生成的变量飞书凭证能在后续飞书相关指令使用。 b. 相关指令介绍可以点击右边蓝色指令说明查看，或者官网说明：[获取飞书访问凭证](https://www.bazhuayu.com/helpcenter/docs/getlarkaccesstokencommand)
+
+ 
+
+②在获取飞书凭证指令下方搭建获取飞书表格
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/2c6eea245145403715633465917/AoJKc1mJAIgA.mp4" width="100%"></video>
+
+ 
+
+配置好后，建议先尝试（点击运行当前流程），如果没报错说明连接正常。
+
+![采集器数据导入飞书表格（RPA实现）](/assets/academy/advanced-features/import-data-to-feishu-rpa/17-69834db01cbeb.png)
+
+ 
+
+> 特别说明：
+>
+> a. 如果报错，请按照报错提示执行即可。
+>
+>  
+>
+> <video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/25167d775145403715633118243/KoYkxVDAZCsA.mp4" width="100%"></video>
+>
+>  
+>
+> b. 相关指令介绍可以点击右边蓝色指令说明查看，或者官网说明：[获取飞书表格](https://www.bazhuayu.com/helpcenter/docs/getlarkspreadsheetcommand)
+
+ 
+
+③循环数据表格“采集任务数据列表”
+
+此前采集器部署已经获取到数据存入数据表格中，使用循环数据表格内容即可实现循环遍历操作。
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/e619a4605145403715632715727/uANfQR4YdpcA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> a. 相关指令介绍可以点击右边蓝色指令说明查看，或者官网说明：[循环数据表格内容](https://www.bazhuayu.com/helpcenter/docs/loopdatasheetcommand)
+
+ 
+
+④循环体中设置飞书写入行
+
+由于我们确定字段是一一对其的，所以如下设置即可。
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/38189c035145403715633965335/a20Qombb2IIA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> a. 我们并没有修改过字段顺序，不需要额外调整。
+>
+> b. 视频中只做部分举例，实际配置完如下图。
+>
+> ![采集器数据导入飞书表格（RPA实现）](/assets/academy/advanced-features/import-data-to-feishu-rpa/18-69834db02456c.png)
+>
+> c. 相关指令介绍可以点击右边蓝色指令说明查看，或者官网说明：[写入行至飞书表格](https://www.bazhuayu.com/helpcenter/docs/writerowtolarkspreadsheetcommand)
+
+ 
+
+##### 3.2.3主流程设置
+
+【插入主流程部署】
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/9e2309a25145403715631963329/joiC0tcvM6wA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> a. 由于飞书数据导入需要先获取采集器数据，所以流程放在采集器部署之后。
+>
+> c. 相关指令介绍可以点击右边蓝色指令说明查看，或者官网说明：[调用子流程](https://www.bazhuayu.com/helpcenter/docs/invokesubflowcommand)
+
+ 
+
+## 六、效果展示与优化
+
+### 1、真实运行情况
+
+【RPA飞书自动传输数据效果展示】
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/430908495145403715630349879/2zf51RExJ1UA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> a. 也可以从应用列表启动。
+>
+> ![采集器数据导入飞书表格（RPA实现）](/assets/academy/advanced-features/import-data-to-feishu-rpa/19-69834db0160dd.png)
+>
+> b. 导出后状态会变化。
+>
+> ![采集器数据导入飞书表格（RPA实现）](/assets/academy/advanced-features/import-data-to-feishu-rpa/20-69834db01d3b5.png)
+>
+> c. 由此可见数据已经传输完成，但是这个仍然需要我们人为点击操作，并未实现自动化，那该怎么实现自动化呢？见下文。
+
+ 
+
+### 2、采集器定时任务-RPA触发器自动化执行
+
+#### 2.1链路分析
+
+采集器先设置定时采集，采集新增数据，则常规任务10分钟内即可完成。保险起见，在采集器定时任务完成30分钟后开启RPA触发器。执行完任务即可上传至飞书。
+
+各阶段执行操作分析：
+
+①采集器端是云采集，设置定时任务即可。
+
+②RPA端可设置触发器执行在云采集30分钟之后（一般要确保采集器正常采集完，同时RPA是本地操作，则**电脑不能关机**）。
+
+③飞书本身是云文档，不需要设置。
+
+> 特别说明：
+>
+> a. 采集器定时任务可参考：[定时云采集](https://www.bazhuayu.com/helpcenter/docs/xin-yun-cai-ji-shi-yong-fang-fa-han-ding-shi-yun-cai-ji-wei-bian-ji-wan-quan-jin-zhi-fa-bu)
+>
+> b. RPA触发器配置可参考：[本地触发任务](https://www.bazhuayu.com/helpcenter/docs/timingtrigger?search=1)
+
+ 
+
+#### 2.2执行自动化
+
+采集器先设置定时任务。
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/9e0fd8e15145403715631951367/1w3qB3hP0rwA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> a. 为了体现效果，我们重新开新任务，设置新参数。
+
+ 
+
+ 
+
+RPA设置本地定时触发器。
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/337f5ba95145403715633773749/ch2szybyROwA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> a. 为了保障RPA执行导数据全面，设置触发器在定时任务之后20分钟执行。
+
+ 
+
+定时效果自动化
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/381a3ce75145403715633968237/VHAPLt2Z3jUA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> a. 视频加速处理。
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+作者：YfY

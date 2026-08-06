@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "protocolVersion": "2025-11-25",
+  "status": "stable",
+  "checkedAt": "2026-07-15",
+  "versioningUrl": "https://modelcontextprotocol.io/docs/learn/versioning",
+  "entries": [
+    {
+      "id": "lifecycle-capability-negotiation",
+      "title": "MCP 生命周期与能力协商",
+      "heading": "协议版本和能力协商",
+      "sourceUrl": "https://modelcontextprotocol.io/specification/2025-11-25/basic/lifecycle",
+      "content": "MCP 客户端和服务端在初始化阶段协商协议版本与双方能力。协议定义通用消息语义，但某项能力存在于协议中，不等于每个 MCP 服务端都已经实现；客户端只能使用双方协商后实际支持的能力。"
+    },
+    {
+      "id": "stdio-transport",
+      "title": "MCP stdio 传输",
+      "heading": "本地进程连接",
+      "sourceUrl": "https://modelcontextprotocol.io/specification/2025-11-25/basic/transports",
+      "content": "stdio 传输由客户端把 MCP 服务端作为本地子进程启动，通过标准输入和标准输出交换 JSON-RPC 消息。凭证通常通过进程环境提供，服务端不得向标准输出写入非 MCP 消息。具体 command、args 和 env 的配置结构由各客户端决定，并非所有客户端配置文件可以直接互用。"
+    },
+    {
+      "id": "streamable-http-transport",
+      "title": "MCP Streamable HTTP 传输",
+      "heading": "远程 HTTP 连接",
+      "sourceUrl": "https://modelcontextprotocol.io/specification/2025-11-25/basic/transports",
+      "content": "Streamable HTTP 通过 MCP 端点处理 HTTP POST 和可选的 GET/SSE 流。客户端必须支持 JSON 响应，也应支持服务端事件流。远程地址、请求头、会话和认证配置方式可能因客户端而异，因此不能把某个客户端的配置样例当作全部客户端的统一格式。"
+    },
+    {
+      "id": "authorization",
+      "title": "MCP HTTP 授权原则",
+      "heading": "HTTP 与 stdio 的凭证边界",
+      "sourceUrl": "https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization",
+      "content": "MCP 的 HTTP 授权规范适用于基于 HTTP 的传输；使用 stdio 时，凭证通常从环境中取得。协议提供授权框架不代表任意 MCP 服务或客户端支持所有认证方式，实际连接仍需以服务端产品文档和客户端配置说明为准。"
+    },
+    {
+      "id": "tools",
+      "title": "MCP Tools 通用语义",
+      "heading": "工具发现与调用",
+      "sourceUrl": "https://modelcontextprotocol.io/specification/2025-11-25/server/tools",
+      "content": "MCP 服务端可以向客户端暴露可发现、可调用的 tools。协议规定工具列表、输入模式和调用结果的通用语义；具体有哪些工具、能否创建、修改或删除业务对象，完全取决于该 MCP 服务端实际提供的工具。"
+    },
+    {
+      "id": "resources",
+      "title": "MCP Resources 通用语义",
+      "heading": "资源读取与订阅",
+      "sourceUrl": "https://modelcontextprotocol.io/specification/2025-11-25/server/resources",
+      "content": "MCP resources 用于向客户端提供可读取的上下文数据，可由 URI 标识，并可按服务端能力支持列表、读取或订阅。协议定义资源语义，不保证每个服务端都提供 resources。"
+    },
+    {
+      "id": "prompts",
+      "title": "MCP Prompts 通用语义",
+      "heading": "提示模板发现与获取",
+      "sourceUrl": "https://modelcontextprotocol.io/specification/2025-11-25/server/prompts",
+      "content": "MCP prompts 是服务端可公开的提示模板，客户端可以发现并获取。是否提供 prompts、提供哪些模板，以及客户端如何呈现，取决于服务端能力和客户端实现。"
+    }
+  ]
+}

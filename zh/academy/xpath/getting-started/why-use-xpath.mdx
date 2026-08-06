@@ -1,0 +1,56 @@
+---
+title: 为什么要用xpath？
+description: 通过百度搜索采集案例说明为什么要学习 XPath，以及 XPath 在八爪鱼采集流程中的重要作用。
+---
+
+我们很多时候会遇到采集不到数据，或者是采集到的数据重复，自己怎么检查规则，都没有问题，但就是采不到数据，那这是因为什么呢，其实大部分是由于xpath的原因，往往因为xpath路径错误，导致采集不到数据或重复采集数据，所以学习xpath，使用xpath是采集数据十分重要的一环。
+
+例如，我们先采集一下百度搜索的数据 <a href="https://www.baidu.com/s?wd=室内设计地面至基础底面的垂直距离">百度搜索</a>
+
+我们先按照<a href="https://www.bazhuayu.com/docs/zh/academy/basic-collection/beginner/list-collection">列表采集</a>和<a href="https://www.bazhuayu.com/docs/zh/academy/basic-collection/pagination/next-page-button">翻页采集</a>配置采集规则，列表采集，翻页采集
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/xpath/getting-started/why-use-xpath/656070431341d.png" />
+</div>
+
+观察到数据预览区域已经正常出现我们想要的数据，接下来我们执行采集指令看看有什么问题
+
+可以观察到采集一直没有终止，我们再仔细观察发现，一直重复采集第一页第二页的数据，翻页并没有正常进行，这是为什么呢？
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/xpath/getting-started/why-use-xpath/656072eded61e.png" />
+</div>
+
+我们回去检查一下流程有没有配置错误，<a href="https://www.bazhuayu.com/docs/zh/academy/troubleshooting/local-debug">本地排错</a>，根据排错顺序我们发现，流程执行到翻页的时候，第一次翻页没有问题，第二次翻页的时候和采集的时候一样回到了第一页，我们来观察一下网页，发现第一页有下一页按钮
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/xpath/getting-started/why-use-xpath/656075e3b08df.png" />
+</div>
+
+跳转到第二页的时候，出现了"上一页"按钮
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/xpath/getting-started/why-use-xpath/656075cbcabb1.png" />
+</div>
+
+我们可以大致猜到，识别出下一页的属性值和百度在第二页新出现的"上一页"属性相同，系统会自动点击第一个按钮，也就是上一页按钮，跳转回到第一页，这也是为什么我们一直重复采集第一页和第二页的原因。
+
+那么怎么去解决这个问题呢，这个问题出现在哪里呢，实际上这是由于xpath路径的错误，把本来下一页的按钮位置，错误的识别成包含上一页按钮的位置，导致一直重复采集前两页，解决这个问题就要认识xpath，学习xpath。
+
+八爪鱼采集网页数据的可视化流程，几乎每个步骤都涉及XPath。 80%以上采集难题，都可以通过写「 一条正确的XPath」解决。我们日常面对的问题大多数是由于路径错误，xpath定位不准导致，因此学会修改xpath至关重要。
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/xpath/getting-started/why-use-xpath/6565ac12ad299.png" />
+</div>
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/xpath/getting-started/why-use-xpath/6565ac1c15231.png" />
+</div>
+
+在八爪鱼中，我们是怎么做采集流程的呢？
+
+流程步骤如下：在八爪鱼内置浏览器中打开网页 → 在网页中选中目标对象 （使用XPath，在网页源码中定位目标对象） → 弹出操作提示框，选择所需指令 → 自动生成步骤
+
+这其中选中目标对象这一步就需要使用XPath定位目标对象，一旦目标对象错误，就会很容易导致提取失败，下一篇中我们将讲述<a href="https://www.bazhuayu.com/docs/zh/academy/xpath/getting-started/what-is-html-xpath">什么是XPath以及html</a>
+
+编辑：Y

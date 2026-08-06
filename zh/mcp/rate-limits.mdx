@@ -1,0 +1,159 @@
+---
+title: MCP 速率限制
+description: 了解 八爪鱼 MCP 请求限制及如何处理重试逻辑。
+---
+
+## 速率限制
+
+octoparse MCP 服务端（`https://mcp.bazhuayu.com`）具有以下限制：
+
+| 类型 | 说明 |
+| --- | --- |
+| **API 请求** | 约 **300 次/分钟**（所有 MCP 工具合计） |
+| **模板搜索** | 计入上述 MCP 请求配额 |
+| **任务执行** | 受账户套餐、云采集额度与并发限制 |
+| **数据导出** | 受套餐及单次导出记录数限制 |
+
+<Note>
+  免费和基础版用户每周通过 MCP 提取可获得 **2,000 条**免费记录。
+</Note>
+
+## 响应头
+
+触发限流时返回 HTTP **429 Too Many Requests**，响应头可能包含：
+
+| 响应头 | 说明 |
+| --- | --- |
+| `X-RateLimit-Limit` | 当前窗口允许的最大请求数 |
+| `X-RateLimit-Remaining` | 当前窗口剩余请求数 |
+| `X-RateLimit-Reset` | 配额重置时间（Unix 时间戳） |
+
+客户端应读取 `X-RateLimit-Reset` 或在收到 429 后使用指数退避，避免持续重试加剧限流。
+
+## 重试逻辑
+
+当请求因速率限制失败时，MCP 服务端返回 `429 Too Many Requests` 响应。请实现指数退避重试：
+
+<CodeGroup>
+
+```javascript JavaScript
+async function callWithRetry(fn, maxRetries = 3) {
+  for (let i = 0; i < maxRetries; i++) {
+    try {
+      return await fn();
+    } catch (err) {
+      if (err.status === 429 && i < maxRetries - 1) {
+        const delay = Math.pow(2, i) * 1000; // 1s, 2s, 4s
+        await new Promise((r) => setTimeout(r, delay));
+      } else {
+        throw err;
+      }
+    }
+  }
+}
+```
+
+```typescript TypeScript
+async function callWithRetry<T>(
+  fn: () => Promise<T>,
+  maxRetries = 3
+): Promise<T> {
+  for (let i = 0; i < maxRetries; i++) {
+    try {
+      return await fn();
+    } catch (err) {
+      const status = (err as { status?: number }).status;
+      if (status === 429 && i < maxRetries - 1) {
+        const delay = Math.pow(2, i) * 1000; // 1s, 2s, 4s
+        await new Promise((r) => setTimeout(r, delay));
+      } else {
+        throw err;
+      }
+    }
+  }
+  throw new Error("unreachable");
+}
+```
+
+```python Python
+import asyncio
+from typing import Awaitable, Callable, TypeVar
+
+T = TypeVar("T")
+
+
+async def call_with_retry(
+    fn: Callable[[], Awaitable[T]],
+    max_retries: int = 3,
+) -> T:
+    for i in range(max_retries):
+        try:
+            return await fn()
+        except Exception as err:
+            status = getattr(err, "status", None) or getattr(err, "status_code", None)
+            if status == 429 and i < max_retries - 1:
+                await asyncio.sleep(2**i)  # 1s, 2s, 4s
+            else:
+                raise
+    raise RuntimeError("unreachable")
+```
+
+```go Go
+import (
+	"errors"
+	"time"
+)
+
+var ErrRateLimited = errors.New("rate limited")
+
+func callWithRetry(fn func() error, maxRetries int) error {
+	if maxRetries <= 0 {
+		maxRetries = 3
+	}
+	for i := 0; i < maxRetries; i++ {
+		err := fn()
+		if err == nil {
+			return nil
+		}
+		if errors.Is(err, ErrRateLimited) && i < maxRetries-1 {
+			time.Sleep(time.Duration(1<<uint(i)) * time.Second) // 1s, 2s, 4s
+			continue
+		}
+		return err
+	}
+	return nil
+}
+```
+
+```java Java
+import java.util.concurrent.Callable;
+
+public static <T> T callWithRetry(Callable<T> fn, int maxRetries) throws Exception {
+  if (maxRetries <= 0) {
+    maxRetries = 3;
+  }
+  for (int i = 0; i < maxRetries; i++) {
+    try {
+      return fn.call();
+    } catch (RateLimitException e) {
+      if (e.getStatus() == 429 && i < maxRetries - 1) {
+        Thread.sleep((long) Math.pow(2, i) * 1000); // 1s, 2s, 4s
+      } else {
+        throw e;
+      }
+    }
+  }
+  throw new IllegalStateException("unreachable");
+}
+```
+
+</CodeGroup>
+
+## 最佳实践
+
+- **尽量批量操作** — 将多个操作合并为更少的请求
+- **缓存模板结果** — `search_templates` 的结果很少变化，可以缓存
+- **长任务使用 MCP Tasks** — 客户端支持时通过 `tasks/get` / `tasks/result` 跟踪；兼容模式按 10-30 秒间隔调用 `export_data`
+- **监控用量** — 追踪每周提取的记录数，保持在限制范围内
+
+另请参阅：[MCP 概览](/zh/mcp/index)、[故障排查](/zh/mcp/troubleshooting)

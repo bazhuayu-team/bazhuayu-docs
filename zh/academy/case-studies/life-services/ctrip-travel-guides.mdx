@@ -1,0 +1,310 @@
+---
+title: "【携程】游记攻略采集"
+source: "https://www.bazhuayu.com/helpcenter/docs/xie-cheng-you-ji-gong-lyue-cai-ji"
+---
+**采集场景**
+
+在携程网点击【攻略】-【游记】，采集【游记】类目下的游记内容。
+
+示例网址：[https://you.ctrip.com/travels/chengdu104/3966766.html](https://you.ctrip.com/travels/chengdu104/3966766.html)
+
+              [https://you.ctrip.com/travels/henan100058/3968107.html](https://you.ctrip.com/travels/henan100058/3968107.html)
+
+ 
+
+**采集字段**
+
+页面地址、发表时间、标题、喜欢数、评论数、浏览数、城市、天数、时间、人均、和谁、游记目录、游记正文
+
+ 
+
+![](/assets/academy/case-studies/ctrip-travel-guides/01-656ff65aea09f.png)
+
+ *点击查看高清大图，**下文其他图片同理*  
+
+ 
+
+**采集结果**
+
+采集结果可导出为Excel、CSV、HTML、数据库等多种格式。导出为Excel示例：
+
+ 
+
+![](/assets/academy/case-studies/ctrip-travel-guides/02-656ff65a93836.png)
+
+ 
+
+**教程说明**
+
+本篇制作时间：2022/6/23   八爪鱼版本：V8.5.4
+
+如果因网页改版造成网址或步骤无效，无法收集到目标数据，请联系官方客服，我们将及时修正。
+
+ 
+
+**采集步骤**
+
+ 
+
+步骤一、打开网页
+
+步骤二、采集字段数据
+
+步骤三、建立循环列表设置分支判断
+
+步骤四、采集字段数据
+
+步骤五、启动采集
+
+ 
+
+ 
+
+**以下为具体步骤：**
+
+ 
+
+## 步骤一、打开网页
+
+ 
+
+1、打开网页
+
+在首页左上角点击【新建】—【自定义任务】，将复制好的一批同类网址，粘贴进网址输入框中，并点击【保存网址】，八爪鱼中内置的浏览器会自动打开第一个网页。
+
+同时可以看到，流程中已自动创建【循环-打开网页】步骤。
+
+ 
+
+示例中输入的网址为：[https://you.ctrip.com/travels/chengdu104/3966766.html](https://you.ctrip.com/travels/chengdu104/3966766.html)
+
+                            [https://you.ctrip.com/travels/henan100058/3968107.html](https://you.ctrip.com/travels/henan100058/3968107.html)
+
+ 
+
+![](/assets/academy/case-studies/ctrip-travel-guides/03-656ff65aebf5b.gif)
+
+ 
+
+特别说明：
+
+- a.  手动输入的url数量不得大于1万个，如有超过1万url，请选择【从文件导入】，具体请查看教程 [网址输入升级](https://v1.bazhuayu.com/tutorial/urlshengji)
+- b. 打开网页后，如果开始开始【自动识别】，请点击【不再自动识别】或【取消识别】将其关掉。因为本文不适合使用【自动识别】。
+- c. 【自动识别】适用于自动识别网页上的列表、滚动和翻页，识别成功后直接启动采集即可获取数据。详情点击查看 [【自动识别】教程](https://v1.bazhuayu.com/tutorial8/81zdypz)
+
+ 
+
+2、设置滚动
+
+由于游记内容需要向下滚动页面，才会将正文和图片全部加载出来，因此我们先设置滚动加载数据，数据全部出现后再采集数据。
+
+点击【打开网页】步骤，点击下方【高级设置】，勾选【页面滚动】，选择滚动方式为【滚动到底部】，滚动次数为30次，每次间隔1秒。
+
+ 
+
+![](/assets/academy/case-studies/ctrip-travel-guides/04-656ff65bb5903.gif)
+
+ 
+
+特别说明：
+
+- a. 设置中的滚动次数和时间间隔，请根据采集需求和网页加载情况进行设置，并非是一成不变的，具体请点击查看 [处理滚动加载数据的网页教程](https://v1.bazhuayu.com/tutorial8/81ymgd)
+
+ 
+
+## 步骤二、采集游记正文前的所需字段
+
+ 
+
+1、采集字段
+
+打开网页后，提取游记正文前所需的字段（游记正文稍后再提取。），包括页面地址、发表时间、标题、喜欢数、评论数、浏览数、城市、天数、时间、人均、和谁、游记目录等。
+
+如果是文本类型的字段：选中页面中的文本，然后再选择【采集该元素文本】。
+
+页面地址：在【数据预览】面板，点击 + 号即可添加。
+
+提取到字段后，在【数据预览】面板，依次修改所需字段的字段名称。
+
+ 
+
+![](/assets/academy/case-studies/ctrip-travel-guides/05-656ff65b80d2d.gif)
+
+ 
+
+ 
+
+ 
+
+3、修改字段XPath
+
+为了完整采集到所有游记详情页的目标字段，我们需要修改其XPath。
+
+点击【提取数据】步骤，点击需要修改xpath的字段右侧的【更多字段操作】按钮，点击【修改元素定位】，进入【修改元素定位】设置页面，修改XPath，然后点击【应用】保存。
+
+以下为各个字段修改后的XPath：
+
+【发表时间】：//div[@class="ctd\_content"]//h3|//div[@class="time"]
+
+【标题】：//DIV[@class="ctd\_head\_con cf"]/H1[1]|//div[@class="ctd\_head\_left"]//h2
+
+【城市】：//UL[@class="ctd\_des\_list cf"]/LI[1]/H3[1]|//ul[@class="ctd\_ttd"]/li[@style]/h4
+
+【天数】：//span[contains(text(),'天数')]
+
+【时间】：//span[contains(text(),'时间')]
+
+【和谁】：//span[contains(text(),'和谁')]
+
+【人均】：//span[contains(text(),'人均')]
+
+ 
+
+![](/assets/academy/case-studies/ctrip-travel-guides/06-656ff65b51871.gif)
+
+ 
+
+特别说明：
+
+- a.  修改Xpath，需要一定的XPath知识。点击查看 [*XPath学习与实例教程*](https://v1.bazhuayu.com/tutorial8/81xpath)
+
+ 
+
+## 步骤三、建立【循环列表】并设置分支判断
+
+ 
+
+该网页游记正文为图文交叉的数据，我们如果需要按顺序将图文依次采集下来，就需要建立【循环列表】并设置分支判断，先用不同分支采集图文，再将其合并在一个单元格中，具体操作如下：
+
+ 
+
+1、创建【循环列表】
+
+① 选中页面上一个文章段落（注意一定要选中整个段落，而不是一行），八爪鱼会自动识别其他同类段落
+
+② 点击【选中全部】
+
+③ 点击【采集以下元素文本】
+
+这样段落文本采集的循环列表就建立好了，但是，以上【循环列表】没有包括图片。为了将图片也包括进去，需要修改一下【循环列表】的XPath：
+
+进入【循环列表】设置页面，修改XPath为：
+
+//div[@class="ctd\_content"]/div  |  //div[@class="ctd\_content"]/p。
+
+然后，将生成的【提取数据】步骤删掉，后面再手动创建。
+
+ 
+
+ 
+
+ 
+
+![](/assets/academy/case-studies/ctrip-travel-guides/07-656ff65ca2a3c.gif)
+
+ 
+
+特别说明：
+
+- a.  为何通过以上3步，可建立【循环列表】？详情点击查看 [*采集列表数据的教程*](https://v1.bazhuayu.com/tutorial8/81xsrm4) 。
+- b.  如何修改XPath？这需要一定的XPath知识。点击查看 [*XPath学习与实例教程*](https://v1.bazhuayu.com/tutorial8/81xpath)
+
+ 
+
+2、设置分支判断
+
+由于文本和图片是不同的采集方式，因此我们要设置判断分支，不同的分支采集不同类型的数据。
+
+① 在流程图中添加一个【判断条件】步骤，默认为两个分支。
+
+② 为左分支设置【分支执行条件】为【当前循环项包含元素】，填入XPath: //div[contains(text(),img)] ，用来判断并采集图片地址。
+
+③ 右分支不做设置，默认执行，用来采集文本。
+
+ 
+
+![](/assets/academy/case-studies/ctrip-travel-guides/08-656ff65cceead.gif)
+
+ 
+
+特别说明：
+
+- a.  判断条件是什么？如何设置判断条件？点击查看 [判断条件教程](https://v1.bazhuayu.com/tutorial8/81pdtj) 。
+
+ 
+
+## 步骤四、采集字段数据
+
+ 
+
+1、采集字段
+
+判断条件设置好后，接下来就是分别提取图片和文本数据。
+
+点击【循环列表】框，然后在页面中选中一张图片，点击【采集该图片链接】，生成一个【提取数据1】步骤，将该步骤拖动到左分支中，用来采集图片地址。
+
+将字段名改为正文。
+
+ 
+
+![](/assets/academy/case-studies/ctrip-travel-guides/09-656ff65d02ba2.gif)
+
+ 
+
+点击【循环列表】框，然后在页面中选中一个段落，点击【采集该元素的文本】，生成一个【提取数据2】步骤，将该步骤拖动到右分支中，用来采集文本。
+
+将字段名改为正文。
+
+![](/assets/academy/case-studies/ctrip-travel-guides/10-656ff65dccbca.gif)
+
+ 
+
+ 
+
+2、编辑字段
+
+ 修改两个【提取数据】步骤里面的【正文】字段的设置【同一字段的多行合并】，以将列表中的文本和图片按顺序采集下来并合并在一个单元格中。
+
+ 
+
+![](/assets/academy/case-studies/ctrip-travel-guides/11-656ff65dbbf03.gif)
+
+ 
+
+特别说明：
+
+- a.  使用判断条件时有一些注意事项，包括上面提到的：两个分支【提取数据】中的字段名称和字段个数需保持一致。其他注意事项请点击查看 [判断条件教程](https://v1.bazhuayu.com/tutorial8/81pdtj) 。
+
+ 
+
+ 
+
+## 步骤六、启动采集
+
+ 
+
+1、单击【采集】并【启动本地采集】。启动后八爪鱼开始自动采集数据。
+
+ 
+
+![](/assets/academy/case-studies/ctrip-travel-guides/12-656ff65d8885b.png)
+
+ 
+
+特别说明：
+
+- a. 【本地采集】是使用自己的电脑进行采集，【云采集】是使用八爪鱼提供的云服务器采集，点击查看 [本地采集与云采集详解](https://v1.bazhuayu.com/tutorial8/81xsrm8)。
+
+ 
+
+2、采集完成后，选择合适的导出方式来导出数据。支持导出为Excel，CSV，HTML，数据库等。这里导出为Excel。数据示例：
+
+ 
+
+![](/assets/academy/case-studies/ctrip-travel-guides/13-656ff65e548f5.png)
+
+ 
+
+ 作者：Fan
+
+ 编辑：surely

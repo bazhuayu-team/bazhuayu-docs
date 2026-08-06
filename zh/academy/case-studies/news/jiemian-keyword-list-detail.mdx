@@ -1,0 +1,134 @@
+---
+title: "【界面新闻】批量搜索关键词采集列表+详情"
+source: "https://www.bazhuayu.com/helpcenter/docs/jie-mian-xin-wen-pi-liang-sou-suo-guan-jian-ci-cai-ji-lie-biao-xiang-qing"
+---
+**一、采集场景**
+
+界面新闻网站，通过批量输入多个关键词检索相关新闻，然后采集新闻的列表页数据，再点击列表标题进入详情页获取新闻正文等字段，最后再翻页采集全部页的数据
+
+[https://a.jiemian.com/index.php?m=search\&a=index\&opt=old\&msg=%E8%A5%BF%E8%97%8F](https://a.jiemian.com/index.php?m=search\&a=index\&opt=old\&msg=西藏)
+
+ 
+
+**二、采集字段**
+
+关键词、封面图图、标题、标题链接、简介、发布时间、正文、正文源码\
+![【界面新闻】批量搜索关键词采集列表+详情](/assets/academy/case-studies/jiemian-keyword-list-detail/01-6899a7b6e8f69.png)
+
+**三、采集结果**
+
+采集结果可导出为Excel，CSV，HTML，数据库等多种格式。导出为Excel示例：
+
+![【界面新闻】批量搜索关键词采集列表+详情](/assets/academy/case-studies/jiemian-keyword-list-detail/02-689ef941c1569.png)
+
+ 
+
+**四、采集步骤**
+
+步骤一：打开网页
+
+步骤二、批量输入关键词
+
+步骤三、采集列表数据
+
+步骤四、列表进入详情提取详情数据
+
+步骤五、编辑字段
+
+步骤六、设置循环翻页
+
+步骤七、优化规则
+
+步骤八、启动采集
+
+ 
+
+**以下为具体步骤：**
+
+ 
+
+#### 步骤一、打开网页
+
+在首页【输入框】中输入目标网址 [https://a.jiemian.com/index.php?m=search\&a=index\&opt=old\&msg=%E8%A5%BF%E8%97%8F](https://a.jiemian.com/index.php?m=search\&a=index\&opt=old\&msg=西藏)，点击【开始采集】，八爪鱼自动打开网页。\
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/5a2d07e95145403695281578911/BY1EoCrtvckA.mp4" width="100%"></video>
+
+ 
+
+#### 步骤二、设置循环输入关键词检索
+
+点击网页上的输入框，根据提示选择点击 输入文本-批量输入文本，然后批量输入关键词，每个关键词之间用回车键隔开。如输入:\
+华为
+
+汽车
+
+新疆
+
+设置循环输入文本后，还需要点击网页上的检索按钮进行检索，具体流程如下：
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/55a5b5a55145403695281396333/p8D0EE86UeQA.mp4" width="100%"></video>
+
+ 
+
+ 
+
+#### 步骤三、创建【循环列表】提取列表数据
+
+采集列表的数据，创建一个循环列表进行提取列表数据，并且添加输入的关键词作为采集的字段
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/ecfc0f635145403695283255119/aNkJxyMfUEIA.mp4" width="100%"></video>
+
+> 说明：如何实现采集列表数据？学习教程 [03 采集列表数据](/zh/academy/basic-collection/beginner/list-collection)
+
+ 
+
+#### 步骤四、点击进入详情提取详情字段
+
+点击新闻标题，根据提示选择点击进入详情页提取正文、正文源码等字段
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/8b87bf0c5145403695285443685/A9CAY5MpyVsA.mp4" width="100%"></video>
+
+ 
+
+#### 步骤五、修改编辑字段
+
+ 
+
+依次修改编辑字段名，或调整字段顺序，如下：
+
+**<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/828cf8e35145403695285092226/AfXBfvAqUv0A.mp4" width="100%"></video>**
+
+#### 
+
+#### 步骤六、设置循环翻页
+
+找到翻页按钮，设置循环点击生成循环翻页，实现采集每一页的数据
+
+**<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/828c82b15145403695285091799/w7MjAuSJyq0A.mp4" width="100%"></video>**
+
+ 
+
+#### 步骤七、规则优化
+
+对任务进行优化设置，采集数据更加稳定
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/f3d91f885145403695283538921/pNUEaAYM9ikA.mp4" width="100%"></video>
+
+> 说明：规则优化是怎么优化？具体学习教程 [规则优化](https://www.bazhuayu.com/helpcenter/docs/gui-ze-you-hua?search=1)
+>
+>  
+
+ 
+
+#### 步骤八、保存任务启动采集
+
+ 1.配置好任务后，点击【保存】-【启动采集】
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/849c78fe5145403695285157111/UoqQEkGEJKwA.mp4" width="100%"></video>
+
+ 
+
+2、采集完成后，选择合适的导出方式导出数据。
+
+支持导出为Excel、CSV、HTML、数据库等。这里导出为Excel。数据示例：
+
+![【界面新闻】批量搜索关键词采集列表+详情](/assets/academy/case-studies/jiemian-keyword-list-detail/03-689ef94a3e8e3.png)

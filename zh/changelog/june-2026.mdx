@@ -1,0 +1,306 @@
+---
+title: 2026 年 6 月更新日志
+description: 2026 年 6 月八爪鱼文档更新，包含 CLI v0.1.27 Agent 任务修正、首页产品与计费文档迁移，以及采集学院快速入门、进阶功能、高版本功能与实战案例栏目扩充。
+---
+
+# 2026 年 6 月发布说明
+
+> **更新日期：** 2026 年 6 月 30 日
+> CLI 升级至 v0.1.27；首页新增产品介绍与产品计费结构；采集学院扩充快速入门、进阶功能、高版本功能与实战案例，并完成大批帮助中心图文内容本地化迁移。
+
+## CLI 更新 v0.1.27
+
+安装或更新：
+
+```bash
+npm install -g bazhuayu-cli@0.1.27
+```
+
+本次更新：
+
+- 🧠 **Agent 任务修正能力**：`--preview-agent-plan` 会返回风险、修复建议和 `repairInstruction`，可修改 plan 后重新 `--apply-agent-plan`
+- 🔄 **API 列表候选**：DOM 候选弱、页面数据来自 JSON/XHR 或已知 API 搜索模式时，可生成 `api_list` 本地任务
+- 👁️ **Agent 视觉规划增强**：Agent context 新增 `visualElements` 与 `pageVisualElements`，可按可见 DOM 元素选择字段
+- 🧩 **自定义候选区**：候选区不覆盖目标时，可用 `selection.customCandidate` 基于 `pageVisualElements` 构造合成候选
+- 🐞 **字段名规范化**：自动规范化部分不适合运行的字段名，减少特殊字符导致的运行失败
+- 🩺 **doctor 诊断增强**：`octopus doctor` 新增 `--output <dir>` 和 `--api-base-url <url>`
+
+推荐的 Agent 最短路径：
+
+```bash
+octopus detect URL --agent --agent-command "node make-plan.mjs" --goal "提取标题、日期和作者" --output task.json --run-sample 5 --json
+```
+
+<Note>
+  `--agent-command` 是可信本地 shell 命令，不是自然语言提示；采集目标应传给 `--goal`。v0.1.27 不再需要 `--yes`，但 CLI 仍接受它以兼容旧脚本。
+</Note>
+
+Agent 审计与修正流程：
+
+```bash
+octopus detect URL --prepare-agent --json --goal "提取商品标题、价格和链接" --output context.json
+octopus detect --preview-agent-plan plan.json --agent-context context.json --json
+octopus detect --apply-agent-plan plan.json --agent-context context.json --output task.json --json
+```
+
+Agent 写 plan 前应综合用户目标、页面标题、首屏、当前导航/Tab、语义目的和主内容显著性判断主目标，不能默认选择详情区或最大列表。当 `context.candidates` 没有覆盖目标时，使用 `context.pageVisualElements` 与 `selection.customCandidate`；当 `context.apiCandidates` 明确对应主列表且 DOM 候选弱时，可以选择 API 候选生成 `api_list` 本地任务。
+
+诊断示例：
+
+```bash
+octopus doctor --output ./runs --api-base-url https://api.example.com --json
+```
+
+<Warning>
+  `api_list` 任务会标记 `localOnly: true`，请使用 `octopus run <taskId> --task-file task.json` 本地运行；当前不自动同步云端任务。
+</Warning>
+
+## CLI 更新 v0.1.26（历史）
+
+安装或更新：
+
+```bash
+npm install -g bazhuayu-cli@0.1.26
+```
+
+本次更新：
+
+- 📊 **候选 ranking 改进**：`detect --auto` 的候选区排序算法持续优化，最匹配的候选区更稳定地排在第一位
+- 🐞 **Windows 任务名异常修复**：修复 v0.1.25 在 Windows 上使用含特殊字符的 URL 生成任务名称时异常报错的问题
+- 🖼️ **Agent 截图标注增大**：Agent 模式下生成任务时截图标注区域增大，便于 LLM/Agent 更清晰地查看页面结构，提升视觉审查质量
+- 🔧 **detect 命令实现拆分**：按能力（自动识别、手动识别、Agent 模式、分页检测等）拆为独立模块，各子模块可独立迭代，降低单次变更影响面
+
+```bash
+# 接口不变，排序更准
+octopus detect https://movie.douban.com/explore --auto --goal "提取电影名称、评分"
+# → 返回的 [protected_smart_1] 就是最匹配的结果
+```
+
+<Note>
+  v0.1.26 CLI 接口完全兼容 v0.1.25，所有 v0.1.23~v0.1.25 的脚本无需修改。Agent 契约不变。detect 和 run 仍需 Chrome 浏览器环境。
+</Note>
+
+## CLI 更新 v0.1.25（历史）
+
+安装或更新：
+
+```bash
+npm install -g bazhuayu-cli@0.1.25
+```
+
+本次更新：
+
+- 🔧 **detector 智能识别模块重构**：底层 detector 模块整体重构，对外接口完全兼容，所有 v0.1.24 的命令和脚本无需修改
+- 📊 **候选区排序改进**：AI 识别后候选区排序更精准，最匹配的候选区更稳定地排在第一位
+- 📄 **分页识别改进**：翻页逻辑识别准确率提升，覆盖点击加载更多、滚动加载、传统分页和页码导航
+- ☁️ **detect 任务同步客户端**：`detect --auto/--agent` 生成的任务自动同步到八爪鱼桌面客户端任务列表，可在客户端直接编辑
+- 🚫 **弹窗筛选逻辑优化**：网页弹窗（登录提示、广告弹层、cookie 同意等）过滤和关闭逻辑改进，减少误关重要内容
+
+推荐的 detect → 客户端编辑 → 采集工作流：
+
+```bash
+# 1. CLI AI 识别并生成任务（自动同步到客户端）
+octopus detect https://movie.douban.com/explore --auto --goal "提取电影名称、评分、导演、年份"
+
+# 2. 在八爪鱼桌面客户端查看和编辑任务
+#    客户端 → 任务列表 → 找到 detected_movie.douban.com
+
+# 3. 编辑完从 CLI 或客户端运行
+octopus run detected_movie.douban.com --max-rows 20 --jsonl
+```
+
+<Note>
+  v0.1.25 CLI 接口完全兼容 v0.1.24，Agent 契约不变。detect 和 run 仍需 Chrome 浏览器环境。
+</Note>
+
+## CLI 更新 v0.1.24（历史）
+
+安装或更新：
+
+```bash
+npm install -g bazhuayu-cli@0.1.24
+```
+
+本次更新：
+
+- LLM / Agent 创建任务时，推荐使用 `detect --agent` 工作流；用户直接操作 CLI 时仍可使用 `--auto`
+- 新增 `--run-sample <正整数>`，可在任务生成后立即执行少量本地采集
+- 可用 `--run-output <dir>` 指定样品产物目录，使用 `--keep-agent-files` 保留 Agent 上下文和计划文件
+- Agent plan 必须提供 `visualReview` 与 `selection`，并记录截图路径、候选 ID 和视觉证据
+- Agent 上下文新增标注截图、候选区裁剪图与数据质量判断策略
+
+推荐的 Agent 最短路径：
+
+```bash
+octopus detect URL --agent --agent-command "node make-plan.mjs" --goal "提取标题、价格和链接" --task-id <taskId> --output task.json --run-sample 3 --json
+```
+
+<Warning>
+  `--agent-command` 是会在本机执行的 shell 命令，只能传入可信的本地运行器；自然语言采集目标应传给 `--goal`。样品采集失败时任务文件仍可能已经生成，自动化程序应单独检查 `sampleRun.exitCode`。
+</Warning>
+
+Agent 写入计划前必须打开标注截图或全页截图，并核对候选区裁剪图。`visualReview` 至少要包含 `reviewed: true`、截图路径、候选 ID 和一条 `evidence`；缺少证据或候选 ID 与 `selection` 不一致会使计划预览失败。
+
+少量广告、推荐卡或异构行缺少可选字段可能属于正常的部分数据。只有主区域、核心字段、搜索或分页结构出现系统性错误时，才需要重建任务。
+
+## CLI 更新 v0.1.23（历史）
+
+安装或更新：
+
+```bash
+npm install -g bazhuayu-cli@0.1.23
+```
+
+本次更新：
+
+- 网页识别命令由 `octopus recognize` 正式更名为 [`octopus detect`](/zh/cli/core-commands/detect)
+- 修复手动检测详情页时部分采集方式不显示的问题
+- 优化列表页字段识别、详情页检测、分页逻辑检测和候选区排序
+- 继续支持 `--auto`、`--manual`、`--llm-rank` 和 Agent 计划流程
+
+推荐工作流：
+
+```bash
+octopus detect URL --auto --goal "提取标题和链接" --task-id <taskId> --output task.json
+octopus task validate <taskId> --task-file task.json
+octopus run <taskId> --task-file task.json --max-rows 20
+```
+
+<Warning>
+  `detect --auto` 负责检测网页并生成任务，不会直接执行采集。`octopus recognize` 已不可用；`octopus run-url` 仅作为隐藏兼容入口保留，新脚本请使用上面的 `detect` → `validate` → `run` 流程。
+</Warning>
+
+## 新功能
+
+### CLI 国内更新 v0.1.22（历史）
+
+本次 CLI 从 `0.1.14` 升级到 `0.1.22`。安装或更新：
+
+```bash
+npm install -g bazhuayu-cli@0.1.22
+```
+
+新增能力：
+
+- `octopus recognize` — 当时用于从网页 URL 识别结构并生成任务文件，v0.1.23 已更名为 `detect`
+- `octopus run-url` — 当时用于无需预制任务的 URL 直接采集，v0.1.23 起仅作为兼容入口保留
+- 支持列表页、详情页、列表 + 详情页任务与分页识别
+- 新增 Agent 模式上下文准备与计划应用流程
+- 新增 Linux x64 平台本地采集支持
+
+### MCP 服务 — AI 客户端完整对接教程
+
+ChatGPT、Claude、Cursor、VS Code、Gemini 五个平台的 MCP 对接页由外部跳转改为 **站内完整中文分步指南**，每篇均含：
+
+- 前置条件、MCP 服务地址（`https://mcp.bazhuayu.com`）与 OAuth 认证说明
+- 分步操作截图（安装插件 / 添加 MCP 服务器 / 登录授权等）
+- 配置示例（如 Cursor / VS Code 的 `settings.json`、Gemini CLI 的 OAuth `clientId` 等）
+- 接入后可用的能力说明与常见问题
+
+| 平台 | 文档 |
+| --- | --- |
+| ChatGPT | [MCP 对接 ChatGPT](/zh/mcp/integrations/chatgpt) |
+| Claude | [MCP 对接 Claude](/zh/mcp/integrations/claude) |
+| Cursor | [MCP 对接 Cursor](/zh/mcp/integrations/cursor) |
+| VS Code | [MCP 对接 VS Code](/zh/mcp/integrations/vscode) |
+| Gemini | [MCP 对接 Gemini](/zh/mcp/integrations/gemini) |
+
+各教程统一说明：导出格式为 **EXCEL / CSV / JSON / 数据库**；云采集可能消耗八爪鱼账户余额，具体取决于所用模板。
+
+### 采集学院 — 规则排错与优化栏目
+
+从八爪鱼帮助中心（Helplook）迁入 7 篇排错与流程优化文章，统一整理到采集学院 → 操作指南 → **规则排错与优化** 栏目下。文章内容、图片、视频与原文完全一致，并适配 Mintlify 文档站版式。
+
+| 文章 | 说明 |
+| --- | --- |
+| [本地采集排错](/zh/academy/troubleshooting/local-debug) | 手动执行规则排查，本地采集常见问题（无数据、速度慢、数据重复/错位/漏采）的解决方法 |
+| [规则优化](/zh/academy/troubleshooting/rule-optimization) | 执行前等待、Ajax 超时设置、页面滚动配置 |
+| [Ajax 网页采集方法](/zh/academy/troubleshooting/ajax-web-scraping) | 判断 Ajax 网页、设置 Ajax 点击与超时 |
+| [新标签页处理](/zh/academy/troubleshooting/new-tab) | 识别和配置新标签页采集 |
+| [自动重试](/zh/academy/troubleshooting/auto-retry) | 重试条件、切换代理 IP、切换浏览器版本 |
+| [常见防采集套路及解决方法](/zh/academy/troubleshooting/anti-scraping) | 验证码、登录验证、数据加密、虚假数据、IP 封锁等防采套路的识别与应对 |
+| [云采集排错](/zh/academy/troubleshooting/cloud-debug) | 本地有数据但云采集无数据的排查方法 |
+
+栏目导航采用扁平结构，分为「直接文章」和「流程优化」子分组两部分，方便按场景快速定位。
+
+### 采集学院 — 数据导出栏目
+
+从八爪鱼帮助中心（Helplook）迁入 7 篇数据导出文章，统一整理到采集学院 → 操作指南 → **数据导出** 栏目下。文章内容、图片与原文完全一致，并适配 Mintlify 文档站版式。
+
+| 文章 | 说明 |
+| --- | --- |
+| [启动采集并导出](/zh/academy/data-export/start-and-export) | 本地采集与云采集的启动方式，以及 Excel、CSV、HTML、数据库、API 等多种导出格式说明 |
+| [文件下载](/zh/academy/data-export/file-download) | 文件下载功能介绍，支持在采集过程中下载网页中的图片、音频、视频、文档等 |
+| [导出到MySQL数据库](/zh/academy/data-export/export-to-database/export-to-mysql) | 手动/自动导出数据到 MySQL 的完整步骤，包括数据库配置、字段映射和定时导出设置 |
+| [导出到SqlServer数据库](/zh/academy/data-export/export-to-database/export-to-sqlserver) | 手动/自动导出数据到 SqlServer 的完整步骤，支持 Windows 身份验证和 Sqlserver 身份验证 |
+| [导出到Oracle数据库](/zh/academy/data-export/export-to-database/export-to-oracle) | Oracle 依赖组件安装方法，以及手动/自动导出数据到 Oracle 的完整配置流程 |
+| [导出到数据库常见问题](/zh/academy/data-export/export-to-database/export-to-database-faq) | 汇总数据库导出时的常见错误及解决方案（连接失败、字符编码、字段长度限制等） |
+| [自动导出到本地](/zh/academy/data-export/auto-export-local) | 团队版及以上专享功能，支持将采集数据自动保存为 Excel、CSV、HTML、JSON、XML 到本地 |
+
+栏目导航采用分组结构，包含 3 个直属页面和「**导出到数据库**」子分组（4 篇文章），层级清晰便于查找。
+
+### 采集学院 — XPath学习与案例栏目
+
+从八爪鱼帮助中心（Helplook）迁入 13 篇 XPath 学习与案例文章，统一整理到采集学院 → 操作指南 → **XPath学习与案例** 栏目下。文章内容、图片、视频与原文完全一致，并适配 Mintlify 文档站版式。
+
+| 文章 | 说明 |
+| --- | --- |
+| [为什么要用xpath？](/zh/academy/xpath/getting-started/why-use-xpath) | 通过百度搜索采集案例说明学习 XPath 的重要性及 XPath 在采集流程中的作用 |
+| [什么是html和xpath？](/zh/academy/xpath/getting-started/what-is-html-xpath) | HTML 基本结构与常用标签，XPath 概念与表达式写法入门 |
+| [xpath获取方法](/zh/academy/xpath/getting-started/get-xpath) | 通过浏览器开发者工具查看网页源码、定位元素、获取和验证 XPath |
+| [xpath函数](/zh/academy/xpath/getting-started/xpath-functions) | text、contains、position、last、following-sibling 等常用 XPath 函数及实战演练 |
+| [相对xpath、绝对XPath](/zh/academy/xpath/relative-absolute-xpath) | 绝对 XPath 与相对 XPath 的概念、循环框 XPath 与相对 XPath 的关系及修改实例 |
+| [定位某一元素Xpath](/zh/academy/xpath/modify-element/locate-element) | 通过详情页和列表页实例修改字段定位 XPath，解决字段提取不到、错位等问题 |
+| [修改循环列表xpath](/zh/academy/xpath/modify-element/modify-loop-list) | 修改循环列表 XPath 解决漏采、只采集到部分列表等问题 |
+| [修改循环翻页xpath](/zh/academy/xpath/modify-element/modify-loop-pagination) | 观察翻页确定问题并修改循环翻页 XPath，解决一二页重复循环 |
+| [数据字段缺失或错位](/zh/academy/xpath/cases/missing-or-misaligned-fields) | 同一字段在不同页面位置不同时，通过设置备用位置和修改 XPath 解决字段缺失或错位 |
+| [重复采集某几页数据](/zh/academy/xpath/cases/duplicate-pages) | 分析翻页 XPath 在第二页同时定位到上一页和下一页导致重复采集的原因及解决办法 |
+| [重复采集最后一页数据](/zh/academy/xpath/cases/duplicate-last-page) | 采集到最后一页后不停止、一直循环采集的原因分析及 XPath 修改方案 |
+| [循环列表-添加更多的项](/zh/academy/xpath/cases/loop-add-more-items) | 手动修改 XPath 让循环列表定位到全部所需数据项 |
+| [循环列表-过滤多余的项](/zh/academy/xpath/cases/loop-filter-items) | 两种过滤循环列表多余项的方法：修改 XPath 筛选和分支判断丢弃 |
+
+栏目导航采用分组结构，包含「**Xpath入门**」（4 篇）、「**修改Xpath元素**」（3 篇）、「**xpath案例**」（5 篇）三个子分组，以及「相对xpath、绝对XPath」1 篇直属页面，层级与原帮助中心完全一致。
+
+### 首页与采集学院 — 帮助中心内容迁移扩充
+
+本次继续将帮助中心的产品说明、计费信息与采集教程系统迁入站内文档，并统一改造成可维护的 Mintlify 结构：
+
+- **首页重构为产品入口**：`首页` Tab 拆分为「概述」「产品介绍」「产品计费」三组，补齐产品简介、优势特点、采集器与 RPA 区别、使用须知、套餐版本、模板计费、验证码计费、代理 IP 计费、一对一远程服务与数据/模板定制计费等页面
+- **概述页重写整合**：`/zh/overview` 保留产品主线说明，同时补充产品能力、应用场景、采集学院入口、OpenAPI / MCP / CLI 跳转、下载与联系入口，避免信息散落
+- **采集学院新增快速入门**：在「操作指南」之前新增「快速入门」分组，包含「注册安装」和「3分钟快速上手」两层结构，覆盖 Windows / Mac 安装、免费注册、客户端、采集界面、新手指引、模板采集、自动识别采集、搭建第一个规则任务等内容
+- **采集学院扩充操作指南体系**：新增「进阶功能」与「高版本功能」两大栏目，覆盖字段处理、流程设置、触发器、增量采集、RPA 配合、云采集、企业版管理、代理 IP、定时任务等内容
+- **采集学院新增实战案例**：新增「实战案例」栏目，并按电商、社交媒体、新闻资讯、房产、生活服务、金融六个业务场景分组整理站内案例教程
+- **资源全面本地化**：迁移页面中的图片和 GIF 已统一下载到仓库本地 `assets` 目录，避免继续依赖旧帮助中心远端资源；腾讯云视频仍保留远程地址直接播放
+- **站内链接与目录修整**：清理重复标题、异常目录项与错误锚点，将概览页卡片和正文中的相关跳转尽量改为站内链接，提升后续检索与维护体验
+
+## 改进
+
+### CLI 命令与文档
+
+- `octopus run` 支持 `--task-file`、`--detach`、`--max-rows`、`--headless`
+- `octopus task validate` 支持校验模板任务与本地任务文件
+- `octopus data history/export` 作为本地与云端数据访问的统一入口
+- 认证支持 API Key、OAuth、stdin、环境变量与自定义 API 地址
+- 同步更新 [CLI 概述](/zh/cli/index)、[安装](/zh/cli/quick-start/installation)、[登录](/zh/cli/quick-start/get-api-key-and-log-in)、[运行第一个任务](/zh/cli/quick-start/run-your-first-task)、[命令速查表](/zh/cli/reference/command-cheatsheet) 等页面
+
+### 站点路由
+
+- 根路径 **`/`** 自动跳转至 [概述](/zh/overview)
+- **`/zh/changelog`** 自动跳转至最新月份更新日志
+
+### 文档内容规范
+
+- MCP 对接教程统一使用八爪鱼品牌表述，移除 Octoparse 相关外链与重复说明
+- 各 AI 客户端页采用与 Coze / QClaw 一致的分步教程版式
+
+## 注意事项
+
+- 当前 `detect` 与本地 `run` 需要可用 Chrome 环境
+- Linux arm64 暂不支持本地执行，可使用云采集能力
+- PowerShell 中中文 `--goal` 参数请使用双引号包裹
+
+## Bug 修复
+
+- 修复 ChatGPT、Gemini 等对接页缺少分步截图、仅跳转外部帮助中心的问题
+
+如有问题或反馈，请联系 [help@skieer.com](mailto:help@skieer.com)。

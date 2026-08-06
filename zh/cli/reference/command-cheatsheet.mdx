@@ -1,0 +1,247 @@
+---
+title: 命令速查表
+description: 八爪鱼 CLI v0.1.32 常用命令快速参考。
+---
+
+> 八爪鱼 CLI 常用命令一览。尖括号 `<taskId>`、`<apiKey>`、`<url>` 表示需替换为实际值。
+
+除特别说明外，功能命令均需先完成 `bazhuayu auth login`。脚本、CI、Codex 或 Agent 调用时优先使用 `--json` / `--jsonl`。
+
+<Warning>
+  v0.1.32 起所有命令均以 `bazhuayu` 开头，`octopus` 已不再可用。`OCTOPUS_*` 环境变量和 `~/.octopus` 配置目录不变。
+</Warning>
+
+## 帮助与诊断
+
+```bash
+bazhuayu --help
+bazhuayu --version
+bazhuayu capabilities
+bazhuayu doctor
+bazhuayu browser status --browser-id chrome --json
+
+bazhuayu capabilities --json
+bazhuayu doctor --json
+bazhuayu doctor --output ./runs --api-base-url https://api.example.com --json
+```
+
+## 浏览器管理
+
+```bash
+bazhuayu browser status --browser-id chrome --json
+bazhuayu browser profiles --browser-id chrome --json
+bazhuayu browser install --browser-id chrome --profile "Default" --force-close --json
+bazhuayu browser use user --browser-id chrome --profile "Default" --json
+bazhuayu browser use status --json
+bazhuayu browser use independent --json
+bazhuayu browser close --browser-id chrome --profile "Default" --json
+```
+
+用户浏览器模式仅支持 Windows 和 macOS，且不支持 `--headless`。安装扩展后需重新打开浏览器并确认 `browser status --json` 返回 `readyForUserBrowserRun: true`。
+
+## 认证
+
+```bash
+bazhuayu auth login
+bazhuayu auth login --oauth
+bazhuayu auth login <apiKey>
+bazhuayu auth login --stdin
+bazhuayu auth login --no-open
+bazhuayu auth status
+bazhuayu auth status --json
+bazhuayu auth logout
+```
+
+环境变量：
+
+```bash
+OCTOPUS_API_KEY=<apiKey> bazhuayu task list --json
+OCTOPUS_ACCESS_TOKEN=<accessToken> bazhuayu task list --json
+OCTOPUS_API_BASE_URL=https://example.com bazhuayu task list --json
+bazhuayu auth status --api-base-url https://example.com --json
+```
+
+## 网页检测与任务生成
+
+```bash
+bazhuayu detect <url>
+bazhuayu detect <url> --agent --agent-command "node make-plan.mjs" --goal "提取商品信息" --run-sample 5 --json
+bazhuayu detect <url> --agent --agent-command "node make-plan.mjs" --goal "提取商品信息" --run-sample 5 --run-output ./sample-runs --keep-agent-files --json
+```
+
+Agent 审计流程：
+
+```bash
+bazhuayu detect <url> --prepare-agent --json --goal "提取用户评论" --output context.json
+bazhuayu detect --preview-agent-plan plan.json --agent-context context.json --json
+bazhuayu detect --apply-agent-plan plan.json --agent-context context.json --output task.json --json
+```
+
+用户直接操作 CLI：
+
+```bash
+bazhuayu detect <url> --auto --output task.json
+bazhuayu detect <url> --manual --output task.json
+bazhuayu detect <url> --auto --goal "提取商品评论" --output task.json
+bazhuayu detect <url> --auto --goal "提取商品信息" --llm-rank --output task.json
+bazhuayu detect <url> --auto --no-dismiss-popups --output task.json
+bazhuayu detect <url> --select protected_smart_1 --output task.json
+bazhuayu detect <url> --auto --query "烤面包机" --output task.json
+bazhuayu detect <url> --manual --save-session --session-name shop --output task.json
+bazhuayu detect <url> --auto --browser user --browser-id chrome --profile "Default" --output task.json
+```
+
+`--agent-command` 必须是可信的本地 shell 命令；自然语言目标使用 `--goal`。`--run-sample` 只支持 `--agent`，且参数必须是正整数。`detect --agent` 不需要 `--yes`；该参数仍为旧脚本兼容保留。
+
+v0.1.32 会在任务生成前识别验证码、访问限制和安全验证页面，并以失败状态提前结束，避免生成采集验证页的无效任务。遇到这类错误时，先处理登录、验证或访问限制，再重新执行 `detect`。
+
+## 任务
+
+```bash
+bazhuayu task list
+bazhuayu task list --page 2 --page-size 20
+bazhuayu task list --limit 10
+bazhuayu task list --keyword 关键词
+bazhuayu task list --task-group <groupId>
+bazhuayu task list --template-id <templateRegistrationId>
+bazhuayu task list --template-version-id <templateVersionId>
+bazhuayu task list --scheduled true --json
+
+bazhuayu task show <taskId> --json
+bazhuayu task inspect <taskId>
+bazhuayu task validate <taskId>
+bazhuayu task copy <taskId> --task-group <groupId> --json
+bazhuayu task rename <taskId> --name "新任务名" --yes
+bazhuayu task move <taskId> --task-group <groupId> --yes
+bazhuayu task delete <taskId> --yes
+```
+
+使用本地任务文件：
+
+```bash
+bazhuayu task inspect <taskId> --task-file <file.json|file.xml|file.otd>
+bazhuayu task validate <taskId> --task-file <file.json|file.xml|file.otd>
+```
+
+## 任务组
+
+```bash
+bazhuayu task-group list --json
+bazhuayu task-group create "项目任务组" --json
+bazhuayu task-group update <groupId> --name "新任务组名" --yes
+bazhuayu task-group delete <groupId> --yes
+bazhuayu task-group set-default <groupId> --yes
+```
+
+## 模板与模板任务
+
+```bash
+bazhuayu template search "电商" --page 1 --page-size 20 --json
+bazhuayu template search "评论" --kind-id <kindId> --free true --run-on <n> --scope <n> --json
+bazhuayu template view <templateRegistrationId> --json
+bazhuayu template version <templateRegistrationId> --json
+
+bazhuayu template-task create <templateRegistrationId> --name "模板采集任务" --task-group <groupId> --params-file params.json --json
+bazhuayu template-task update <taskId> --task-group <groupId> --params '{"UIParameters":[]}' --yes --json
+```
+
+## 本地采集
+
+```bash
+bazhuayu run <taskId>
+bazhuayu run <taskId> --headless
+bazhuayu run <taskId> --max-rows 100
+bazhuayu run <taskId> --detach
+bazhuayu run <taskId> --output ./runs
+bazhuayu run <taskId> --chrome-path /path/to/chrome
+bazhuayu run <taskId> --browser independent --headless
+bazhuayu run <taskId> --browser user --browser-id chrome --profile "Default"
+
+bazhuayu run <taskId> --task-file ./task.json --output ./results/
+bazhuayu run <taskId> --task-file ./task.json --detach --max-rows 100
+```
+
+浏览器选择优先级：`--browser` > `OCTOPUS_BROWSER` > `bazhuayu browser use` > `independent`。用户模式下不要传 `--headless`；`--force-close-browser` 仅用于浏览器或 Profile 冲突时的故障恢复。v0.1.32 修复了本地 `run --max-rows <n>` 到达上限后部分任务未正常结束的问题。
+
+## 云采集与云定时
+
+```bash
+bazhuayu cloud start <taskId>
+bazhuayu cloud stop <taskId>
+bazhuayu cloud status <taskId>
+bazhuayu cloud history <taskId>
+
+bazhuayu schedule cloud get <taskId> --json
+bazhuayu schedule cloud update <taskId> --type daily --date 1 --time 09:00 --yes --json
+bazhuayu schedule cloud start <taskId> --yes --json
+bazhuayu schedule cloud stop <taskId> --yes --json
+bazhuayu schedule cloud next --type daily --date 1 --time 09:00 --json
+```
+
+云定时类型：`date` / `once`、`weekly`、`monthly`、`interval-minute`、`every-hour`、`daily`，也可传 `1` 到 `6`。
+
+## 本地运行控制
+
+```bash
+bazhuayu local status <taskId>
+bazhuayu local status <taskId> --output ./runs
+bazhuayu local pause <taskId>
+bazhuayu local resume <taskId>
+bazhuayu local stop <taskId>
+bazhuayu local history <taskId>
+bazhuayu local cleanup
+```
+
+## 数据历史、预览与导出
+
+```bash
+bazhuayu data history <taskId>
+bazhuayu data history <taskId> --local
+bazhuayu data history <taskId> --cloud
+
+bazhuayu data count <taskId> --source local --json
+bazhuayu data count <taskId> --source cloud --json
+bazhuayu data count <taskId> --source cloud --unexported --json
+
+bazhuayu data preview <taskId> --source local --limit 20 --json
+bazhuayu data preview <taskId> --source cloud --limit 20 --offset 0 --json
+bazhuayu data preview <taskId> --source cloud --unexported --limit 20 --json
+
+bazhuayu data export <taskId> --format xlsx --file result.xlsx
+bazhuayu data export <taskId> --local --format csv --file result.csv
+bazhuayu data export <taskId> --lot-id <lotId> --format json
+bazhuayu data export <taskId> --source cloud --unexported --format csv --file unexported.csv
+```
+
+导出格式：`xlsx`、`csv`、`html`、`json`、`xml`。`--unexported` 读取云端未导出数据，但不会标记为已导出。
+
+## 需要 `--yes` 的远端修改命令
+
+```bash
+bazhuayu task rename <taskId> --name "新任务名" --yes
+bazhuayu task move <taskId> --task-group <groupId> --yes
+bazhuayu task delete <taskId> --yes
+bazhuayu task-group update <groupId> --name "新任务组名" --yes
+bazhuayu task-group delete <groupId> --yes
+bazhuayu task-group set-default <groupId> --yes
+bazhuayu template-task update <taskId> --params-file params.json --yes
+bazhuayu schedule cloud update <taskId> --type daily --date 1 --time 09:00 --yes
+bazhuayu schedule cloud start <taskId> --yes
+bazhuayu schedule cloud stop <taskId> --yes
+```
+
+## 任务文件结构（参考）
+
+```json
+{
+  "taskId": "abc123",
+  "taskName": "示例任务",
+  "xml": "... OTD XML ...",
+  "xoml": "... BPMN XOML ...",
+  "fieldNames": ["title", "url"],
+  "workflowSetting": {},
+  "brokerSettings": {},
+  "userAgent": "Mozilla/5.0 ...",
+  "disableAD": false
+}
+```

@@ -1,0 +1,125 @@
+---
+title: "点击元素跳转"
+description: "点击元素跳转教程，来自八爪鱼帮助中心「操作指南 / 基本采集」。"
+source: "https://www.bazhuayu.com/helpcenter/docs/dian-ji-yuan-su-tiao-zhuan"
+---
+
+本课目标：学习使&#x7528;**“点击元素**”功能，像手动操作一样，让采集器从网站首页找到并进入指定栏目，然后自动采集该栏目下的所有列表信息\
+\
+很多网站，比如我们这次要操作的“浙江政府采购网”（*[http://www.ccgp-zhejiang.gov.cn/site/home](http://www.ccgp-zhejiang.gov.cn/site/home)*），首页上都会有多个并排的导航栏，例如“资讯动态”、“采购公告”、“办事指南”、“政策法规”、“网站工作年度报表”等
+
+![飞书文档 - 图片](/assets/academy/basic-collection/click-to-jump/01-6985b830e92aa.png)\
+\
+
+首页导航可能展示多个栏目，如何找到目标栏目并且进行数据采集呢，目的是让采集器识别到**某个栏目**下条目信息，**点击到该栏目**这是最关键的一步，然后进行自动依次采集列表页面中的字段，并保存为Excel等结构化的数据\
+\
+\
+在八爪鱼中该如何操作？以下为具体步骤
+
+## 一、采集列表
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/6cc9df9a5145403715865119130/JYpiOA2bbOsA.mp4" width="100%"></video>\
+
+ 
+
+\
+以下步骤，进行详情说明：\
+\
+
+#### 步骤一、输入网址并点击进入**目标栏目**
+
+####
+
+1、在首页【输入框】中输入目标网址：[http://www.ccgp-zhejiang.gov.cn/site/home ](http://www.ccgp-zhejiang.gov.cn/site/home)，点击【开始采集】，八爪鱼自动打开网页
+
+\
+\
+![点击元素跳转](/assets/academy/basic-collection/click-to-jump/02-6985bcfc3d6dd.png)\
+\
+2、比如要采集资讯动态栏目，需要先点击**资讯动态**板块，右上角操作提示选中：【点击一次】，设置点击元素步骤\
+\
+\
+![点击元素跳转](/assets/academy/basic-collection/click-to-jump/03-6985bfd569b7f.png)
+
+> 特别说明：
+>
+> a. 若多个栏目（如“采购公告”“政策法规”）进入后，列表页结构与数据字段完全一致，可设置循环自动遍历采集。\
+> b.若栏目间结构差异较大（如“资讯动态”为文章列表，“办事指南”为PDF链接列表），则需为每个栏目单独配置采集规则 
+
+#### 步骤二、建立【循环-提取数据】
+
+观察网页可以看到此网页上有很多资讯动态列表，每个列表结构相同，都包含标题、发布时间等领域。最关键的点在于:如何让八爪鱼识别所有列表，并按具体收集资讯动态列表中的数据。在八爪鱼中，建立【循环提取数据】可实现此需求。【循环提取数据】会包含所有的资讯动态列表，并按顺序收集其中的数据。
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/7196bd625145403715865336182/XGmYilnzUlwA.mp4" width="100%"></video>\
+\
+\
+以下步骤，进行详情说明：
+
+ 
+
+先看建立【循环-提取数据】的完整步骤：
+
+1、选中页面上1个资讯列表，选中后的列表会被绿色框框起来，同时出现黄色操作提示框，八爪鱼提示识别到当前选中的元素组中有多个【选中全部相似元素】，点击提示框中的【选中全部相似元素】\
+\
+![点击元素跳转](/assets/academy/basic-collection/click-to-jump/04-6985be9d05178.png)
+
+2、系统自动识别所有同类列表并生成循环步骤，提取数据：【文本内容】，依次提取每个列表中的标题、发布时间等字段\
+\
+![点击元素跳转](/assets/academy/basic-collection/click-to-jump/05-6985bed1471c8.png)
+
+3、完成了这个步骤，【循环以上提取】数据创建完成。可以看到流程项中自动生成了1个循环步骤。循环中的数据对应页面上所有资讯动态列表\
+\
+\
+![点击元素跳转](/assets/academy/basic-collection/click-to-jump/06-6985bf2088e23.png)
+
+ 
+
+ 
+
+#### 步骤三、建立【翻页循环】
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/d9973a7c5145403715900274707/rVlYpxkaZcQA.mp4" width="100%"></video>
+
+以下步骤，进行详情说明：\
+\
+1、找到并点击页面中的翻页按钮，在自动弹出的【黄色操作提示框】中点击【循环点击】。这样，用翻页按钮创建【循环翻页】的步骤就完成了。
+
+ 
+
+#### **![点击元素跳转](/assets/academy/basic-collection/click-to-jump/07-6989554a8bcb9.png)**
+
+2、可以看到流程图中出现一个【循环翻页】的步骤，这就表明我们已经成功创建好了【循环翻页】，八爪鱼就能自动完成翻页了\
+\
+\
+![点击元素跳转](/assets/academy/basic-collection/click-to-jump/08-6985c1788863c.png)****
+
+ 
+
+#### 步骤四、编辑字段
+
+ 
+
+八爪鱼自动为我们提取了列表中的所有字段，可以对这些字段进行删除、修改字段名称等操作。
+
+鼠标移到【数据预览】移动对应的字段名称，可修改字段名称（字段名称表头），也可以切换布局方式进行编辑，布局布局方式有【纵向布局布局】和【横向布局布局】
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/6cc72f475145403715865114499/Uyof3uup16IA.mp4" width="100%"></video>
+
+以下步骤，进行详情说明：
+
+ 
+
+ 1、在【当前页面数据预览】页面，可删除多余字段，修改字段名字段名称表头），移动字段顺序等，也可以切换布局方式进行编辑，布局布局方式有【纵向布局布局】和【横向布局布局】
+
+####  步骤五、启动采集
+
+1、点击【保存】，点击【采集】，选择【启动本地采集】，启动后八爪鱼开始全自动采集数据。（本地采集是使用自己的电脑进行采集，云采集是使用八爪鱼提供的云服务器采集，[点击查看详细说明](https://www.bazhuayu.com/docs/zh/academy/data-export/start-and-export)）\
+\
+\
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/414abdbf5145403715932623347/FkMJ6PzjRCkA.mp4" width="100%"></video>\
+\
+1、采集完成后，选择合适的导出方式导出数据。支持导出为Excel、CSV、HTML。这里导出为Excel。\
+\
+![点击元素跳转](/assets/academy/basic-collection/click-to-jump/10-6985c43e68f0b.png)

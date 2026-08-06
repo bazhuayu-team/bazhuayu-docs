@@ -1,0 +1,23 @@
+---
+title: "导出到数据库不成功怎么办？"
+description: "导出时不要勾选忽略错误，看报什么错。根据其报错进行相应的修改。 A.Packets larger than max\\allowed\\packet are not allowed. 这类一般是数据库中某个数据字段不够大导致超限，应修改字段大小。 B.…"
+hidden: true
+kbStatus: "unverified"
+kbSource: "faq"
+sourceSlug: "Brarkx"
+source: "https://www.bazhuayu.com/helpcenter/docs/Brarkx"
+---
+
+导出时不要勾选忽略错误，看报什么错。根据其报错进行相应的修改。
+
+**A.Packets larger than max\_allowed\_packet are not allowed.**
+
+这类一般是数据库中某个数据字段不够大导致超限，应修改字段大小。
+
+ 
+
+**B.导出到数据库时出现“ Incorrect string value: '\xF0\x9F\x98\x84\xF0\x9F”。**
+
+采集的数据有emoji等表情符，有的数据库不支持表情符，应先将其去除后再入库。
+
+详情请点击查看[导出到数据库常见问题教程](https://www.bazhuayu.com/helpcenter/docs/AKoFi5)。

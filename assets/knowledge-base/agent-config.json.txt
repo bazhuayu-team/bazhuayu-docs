@@ -1,0 +1,8 @@
+{
+  "enabled": true,
+  "endpoint": "https://docs-api.bazhuayu.com/v1/ask",
+  "feedbackEndpoint": "https://docs-api.bazhuayu.com/v1/feedback",
+  "localEndpoint": "http://127.0.0.1:8787/v1/ask",
+  "localFeedbackEndpoint": "http://127.0.0.1:8787/v1/feedback",
+  "timeoutMs": 45000
+}

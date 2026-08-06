@@ -1,0 +1,17 @@
+---
+title: "本地采集一段时间，采集到一定数据量后程序闪退？"
+description: "原因：网页内容较多，页面信息量大，采集到一定数据量时，缓存过多导致内存分区爆掉。 解决方法：可以尝试将任务进行拆分，分为多个任务进行采集。比如先采集详情页的网址（URL），再通过循环打开这些链接（URL）去采集详情页面的数据，可参考以下教程。 1\\. URL循环：批量采集同类网页（图文） 2\\.…"
+hidden: true
+kbStatus: "unverified"
+kbSource: "faq"
+sourceSlug: "vo7uIf"
+source: "https://www.bazhuayu.com/helpcenter/docs/vo7uIf"
+---
+
+原因：网页内容较多，页面信息量大，采集到一定数据量时，缓存过多导致内存分区爆掉。
+
+解决方法：可以尝试将任务进行拆分，分为多个任务进行采集。比如先采集详情页的网址（URL），再通过循环打开这些链接（URL）去采集详情页面的数据，可参考以下教程。
+
+1\. [URL循环：批量采集同类网页（图文）](/zh/academy/basic-collection/bulk-input/url-loop-similar-pages)
+
+2\. [URL循环：批量采集同类网页（视频）](https://www.bazhuayu.com/helpcenter/docs/LGfMnL)

@@ -1,0 +1,192 @@
+---
+title: "【澎湃新闻】图文按顺序采集新闻正文"
+source: "https://www.bazhuayu.com/helpcenter/docs/peng-pai-xin-wen-an-tu-wen-an-shun-xu-cai-ji-xin-wen-zheng-wen"
+---
+**一、采集场景**
+
+澎湃新闻网站，采集新闻某个栏目下的列表页数据，再点击列表标题进入详情页获取新闻正文等字段，最后再循环滚动采集更多数据
+
+[https://www.thepaper.cn/channel_25950](https://www.thepaper.cn/channel_25950)
+
+ 
+
+**二、采集字段**
+
+标题、标题链接、图片链接、栏目链接、栏目名称、时间、正文等\
+![【澎湃新闻】图文按顺序采集新闻正文](/assets/academy/case-studies/thepaper-ordered-article-content/01-689dbb4a0b40f.png)
+
+ 
+
+**三、采集结果**
+
+采集结果可导出为Excel，CSV，HTML，数据库等多种格式。导出为Excel示例：
+
+![【澎湃新闻】图文按顺序采集新闻正文](/assets/academy/case-studies/thepaper-ordered-article-content/02-698adcdd403d1.png)
+
+> 可以看到正文内文本与图片链接穿插按段落顺序采集
+
+ 
+
+**教程说明**
+
+八爪鱼版本：V8.7.7
+
+如果因网页改版造成网址或步骤无效，无法采集到目标数据，请联系官方客服，我们将及时修正。
+
+ 
+
+**四、采集步骤**
+
+步骤一：打开网页
+
+步骤二、配置循环点击进入详情页
+
+步骤三、提取详情数据
+
+步骤四、优化规则
+
+步骤五、启动采集
+
+ 
+
+**以下为具体步骤：**
+
+ 
+
+#### 步骤一、打开网页
+
+ 
+
+在首页【输入框】中输入目标网址 [https://www.thepaper.cn/channel_25950](https://www.thepaper.cn/channel_25950)，点击【开始采集】，八爪鱼自动打开网页。
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/ddf375ab5145403695174463865/UJvR9NNkgaAA.mp4" width="100%"></video>
+
+ 
+
+#### 步骤二、配置循环点击进入详情页
+
+点击第一个标题，操作提示框内，源码层定位到【A】标签层，点击【选中全部相似元素】，然后点击【循环点击每个链接】，其他都选择不需要。
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/dab452de5145403716357255721/N1I6zrAtagoA.mp4" width="100%"></video>
+
+ 
+
+> 说明：
+>
+> 具体操作参考：[从列表进入详情页采集](/zh/academy/basic-collection/beginner/list-to-detail)
+
+ 
+
+ 
+
+#### 步骤三、提取详情数据
+
+ 
+
+1、提取非正文字段数据
+
+1️⃣点击标题，在操作提示框内，点击【文本内容】，即可生成单一字段提取，其他字段如法炮制
+
+2️⃣根据需要修改字段命名
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/92ae5a285145403716356498291/QFsdhoANZJ0A.mp4" width="100%"></video>
+
+ 
+
+ 
+
+ 
+
+2、对正文配置循环列表
+
+1️⃣点击正文第一个段落，操作提示框内，点击【选中全部相似元素】，然后点击【文本内容】，生成循环列表。
+
+2️⃣【循环列表1】循环框架内元素XPath修改为：
+
+//div[@class="cententWrap\_\_UojXm"]/p|//div[@class="cententWrap\_\_UojXm"]/img
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/d80397c05145403716357103785/PxajYRZ4mjEA.mp4" width="100%"></video>
+
+ 
+
+ 
+
+ 
+
+#### 步骤四、配置判断条件
+
+1️⃣在【循环列表1】下点击➕，![【澎湃新闻】图文按顺序采集新闻正文](/assets/academy/case-studies/thepaper-ordered-article-content/03-698ad24890daa.png)添加流程，选择判断条件，![【澎湃新闻】图文按顺序采集新闻正文](/assets/academy/case-studies/thepaper-ordered-article-content/04-698ad2bba2cc3.png)
+
+2️⃣选中左侧【判断条件\_分支】，选择【当前循环项包含元素】，元素XPath修改为：[@src]
+
+3️⃣循环列表的提取步骤拖入右侧分支，并复制一份放入左侧分支，字段统一命名为【正文】，需保持一致
+
+4️⃣字段右侧更多按钮，点击后勾选【同一字段的多行合并】![【澎湃新闻】图文按顺序采集新闻正文](/assets/academy/case-studies/thepaper-ordered-article-content/05-698ad3c803805.png)
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/8ddd21575145403716356273400/TF3L9NeajmQA.mp4" width="100%"></video>
+
+ 
+
+#### 步骤五、优化规则
+
+1、添加滚动
+
+1️⃣点击【循环列表】框架，回到列表页
+
+2️⃣在【循环列表】上方点击➕，添加流程【循环滚动网页】，滚动方式为【全局滚动】，循环次数可根据需要自行修改
+
+3️⃣先选中【循环列表】框架，拖拽全部流程置于【循环滚动网页】步骤内部
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/d805d15f5145403716357107951/7BbsvABh2MkA.mp4" width="100%"></video>
+
+ 
+
+2、规则优化
+
+1️⃣【循环列表】内循环方式修改为【不固定循环列表】，XPath修改为：//div[@class="toplink\_\_MC3AJ"]/a
+
+2️⃣ 配置好任务后，为了采集效果更稳定一些，根据页面加载情况，对任务步骤设置执行前等待及AJAX加载时长设置进行优化
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/435ef8265145403716355398327/u9J33xeB6fwA.mp4" width="100%"></video>
+
+ 
+
+> 说明：规则优化设置，参考教程：[规则优化](https://www.bazhuayu.com/helpcenter/docs/gui-ze-you-hua?search=1)
+
+ 
+
+#### 步骤六、启动采集
+
+1、单击【保存】，【采集】并选择【普通模式】。启动后八爪鱼开始自动采集数据。
+
+建议启动采集后**立即**点击“显示网页”，从而及时发现网站是否出现验证码，需要先【暂停采集】自己手动完成验证码点击，然后再继续采集，**如果出现验证，请及时验证通过后才能采集，*如果验证无法通过，则无法正常采集数据！***
+
+ <video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/2315b6225145403716358064294/Uer4cYih9t0A.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 【本地采集】是使用自己的电脑进行采集，【云采集】是使用八爪鱼提供的云服务器采集，点击查看 [本地采集与云采集详解](https://www.bazhuayu.com/helpcenter/docs/2xF5Mz)。
+
+ 
+
+2、采集完成后，选择合适的导出方式导出数据。支持导出为Excel、CSV、HTML、数据库等
+
+ ![【澎湃新闻】图文按顺序采集新闻正文](/assets/academy/case-studies/thepaper-ordered-article-content/06-689e9a3947242.png)
+
+ 
+
+示例数据：
+
+ ![【澎湃新闻】图文按顺序采集新闻正文](/assets/academy/case-studies/thepaper-ordered-article-content/07-698adccb89537.png)

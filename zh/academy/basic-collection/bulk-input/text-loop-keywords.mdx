@@ -1,0 +1,205 @@
+---
+title: "文本循环：批量输入关键词"
+description: "文本循环：批量输入关键词教程，来自八爪鱼帮助中心「操作指南 / 基本采集」。"
+source: "https://www.bazhuayu.com/helpcenter/docs/2DUt4F"
+---
+
+有很多网站，需要输入关键词查询，然后采集查询后得到的结果数据。
+
+ 
+
+例如：在京东首页搜索框中输入商品名称搜索，采集搜索后得到的商品信息；在新闻网站的搜索框中，输入热门关键词，采集搜索后得到的最新资讯。
+
+ 
+
+在八爪鱼中该如何操作呢？来看一下具体的操作步骤。
+
+ 
+
+### **一、输入1个关键词查询**
+
+ 
+
+示例网址：[https://www.jd.com](https://www.jd.com)
+
+采集需求：在京东首页，输入关键词【手机】，采集出现的手机商品数据。
+
+ 
+
+Step1. 输入网址打开网页。需先登录，请先点击切换到浏览器模式，然后像在正常浏览器里面操作一样，点击滑块手动拖动过去。拖动完成后再继续往下操作。
+
+选中网页中的文本输入框，在提示框中选择【输入文字】，输入关键词【手机】，按【确定】保存。可以看到，左侧流程区出现了【输入文字】步骤。接下来是点击搜索。选中页面上的【搜索】按钮，在提示框选择【点击该按钮】。
+
+ ![文本循环：批量输入关键词](/assets/academy/basic-collection/text-loop-keywords/01-6548aaf48bc0e.gif)
+
+ 
+
+ 
+
+Step2. 接下来按需提取数据即可。具体请看 [新手入门课程](https://www.bazhuayu.com/helpcenter/docs/865xfpn6)  。
+
+ 
+
+ 
+
+### **二、批量输入多个关键词（单文本输入）**
+
+ 
+
+示例网址：[https://www.jd.com](https://www.jd.com)
+
+采集需求：在京东首页，依次输入 **关键词1、关键词2、关键词3、关键词4** （用户可将其更换成自己想要的关键词，单次最多支持输入2W个）并搜索，然后采集每个关键词的搜索结果数据。
+
+ 
+
+#### Step1.  设置【文本循环】
+
+输入网址后，自动打开网页。我们需要输入多个关键词，在八爪鱼中需要用到【文本循环】。将鼠标移动到流程中【打开网页】步骤后的 <img src="/assets/academy/basic-collection/text-loop-keywords/02-650d2e8a9278d.png" alt="" className="academy-inline-icon" />位置，会出现 <img src="/assets/academy/basic-collection/text-loop-keywords/03-650d2e8a82be8.png" alt="" className="academy-inline-icon" /> 按钮。点击 <img src="/assets/academy/basic-collection/text-loop-keywords/04-650d2e8a8695e.png" alt="" className="academy-inline-icon" />按钮，添加一个【循环】步骤。
+
+然后将鼠标移动到【循环】上，点击 该循环框，进入步骤设置页面，点击高级设置，选择循环方式为【文本列表】，然后点击 <img src="/assets/academy/basic-collection/text-loop-keywords/05-650d2e8a9a3d2.png" alt="" className="academy-inline-icon" /> 按钮，将我们准备好的关键词输进去（可同时输入多个关键词，一行一个即可），输入完成后点击【应用】，再点击应用保存。
+
+检查一下，现在，循环中就有了我们输入的关键词。
+
+![文本循环：批量输入关键词](/assets/academy/basic-collection/text-loop-keywords/06-6548afdccaba9.gif)
+
+>  特别说明：
+>
+> a. 可先准备一个含有多个关键词的excel文档，支持复制粘贴。一次最多输入2W个关键词。
+
+ 
+
+#### Step2. 设置【输入文字】
+
+准备好了关键词后，如何将其输入到网页中呢？选中页面中的文本框，在操作提示框中选择【输入文本】，流程中将自动生成一个【输入文本】步骤。
+
+将【输入文本】步骤拖入【循环】中，然后点击 循环框，勾选【使用当前循环里的文本来填充输入框】。该操作是为了实现【循环输入文字】的效果。
+
+来验证一下，在流程中选择关键词，点击【输入文本】，可以看到，可以成功的依次填充我们设置的关键词到网页上的文本框中。
+
+ ![](/assets/academy/basic-collection/text-loop-keywords/07-654a29aae70df.gif)
+
+ 
+
+Step3.点击搜索
+
+选中网页上的输入框， 【输入关键词】的步骤已经完成，接下来是点击搜索。选中页面上的【搜索】按钮，在提示框选择【点击该按钮】。八爪鱼就执行了搜索操作，出现搜索后的数据。同时，左侧的流程中，出现一个【点击元素】步骤。
+
+![](/assets/academy/basic-collection/text-loop-keywords/08-654a31cbc72e9.gif)
+
+ 
+
+Step4. 按需提取数据。
+
+在这里，我们选择提取第一个商品的标题和价格。选中商品标题，在提示框中选择【采集该元素的文本】。价格字段也进行同样操作。
+
+ ![](/assets/academy/basic-collection/text-loop-keywords/09-654a3325e86b1.gif)
+
+ 
+
+Step5.开始采集数据
+
+数据完成后，点击【采集】，选择【启动本地采集】。采集的数据如图展示：八爪鱼自动依次输入关键词，并采集相关数据。
+
+![](/assets/academy/basic-collection/text-loop-keywords/10-650d2e8b87c9a.png)
+
+ 
+
+ 
+
+注意：有的网页，在输入第1个关键词并点击搜索以后，文本输入框的位置（本质上）是网页源码会有变化，第1个关键词的数据采集完成以后，没办法输入第2个关键词。此时，需将【打开网页】步骤，拖至【循环】内，如下图所示：
+
+![](/assets/academy/basic-collection/text-loop-keywords/11-650d2e8c2ef4d.png) 
+
+### **三、批量输入多个关键词（双文本输入）**
+
+ 
+
+示例网址：[https://kns.cnki.net/kns8/AdvSearch?dbcode=CFLS](https://kns.cnki.net/kns8/AdvSearch?dbcode=CFLS)
+
+采集需求：&#x5728;**【作者发文检索】**&#x7684;条件下，有俩个文本框需要一一对应输入，依次输入 **组合关键词1;组合关键词1****、组合关键词2;组合关键词2、组合关键词3;组合关键词3**（一组关键词间用英文符号间隔开，用户可将其更换成自己想要的关键词，单次最多支持输入2W个）并搜索，然后采集每个关键词的搜索结果数据。
+
+ 
+
+#### Step1.  输入网址，设置【点击元素】
+
+输入网址后，自动打开网页。我们需要选&#x62E9;**【作者发文检索】。**&#x5C06;鼠标移动&#x5230;**【作者发文检索】，**&#x70B9;击之后选择【点击该元素】，并设置Ajax超时时间为3s。
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/1a041cf53270835015512120883/PNaCHkyBP0AA.mp4" width="100%"></video>
+
+ 
+
+#### Step2.  选中文本输入框
+
+我们需要输入多组关键词，在八爪鱼中需要用&#x5230;**【组合文本循环】**。
+
+将鼠标移动到第一个输入框，点击后选&#x62E9;**【输入文本】**，再点击第二个循环框，由于咱们会在后面输入多组关键词，因此操作框内不输入关键词，直接点&#x51FB;**【确定】**&#x5373;可。
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/699fa55b3270835015513267354/7IhjdoWAC8gA.mp4" width="100%"></video>
+
+ 
+
+#### Step3. 创建文本循环
+
+流程&#x4E2D;**【输入文本】**&#x6B65;骤后的 <img src="/assets/academy/basic-collection/text-loop-keywords/12-650d2e8ddaca8.png" alt="" className="academy-inline-icon" />位置，会出现 <img src="/assets/academy/basic-collection/text-loop-keywords/13-650d2e8d04f01.png" alt="" className="academy-inline-icon" /> 按钮。点击 <img src="/assets/academy/basic-collection/text-loop-keywords/14-650d2e8de5bf8.png" alt="" className="academy-inline-icon" />按钮，添加一&#x4E2A;**【循环】**&#x6B65;骤。
+
+然后将鼠标移动&#x5230;**【循环】**&#x4E0A;，点击 该循环框，进入步骤设置页面，点击高级设置，选择循环方式&#x4E3A;**【文本列表】**，然后点击 <img src="/assets/academy/basic-collection/text-loop-keywords/15-650d2e8ec6e3a.png" alt="" className="academy-inline-icon" /> 按钮，将我们准备好的多组关键词粘贴进去（可同时输入多组关键词一般是不超过2W个，一行一组即可），每组关键词之间用**英****文版分号;**&#x9694;开，输入完成后点击【应用】，再点击应用保存。
+
+检查一下，现在，循环中就有了我们输入的多组关键词。
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/46c728c13270835015509097075/9xuWtWRcA0QA.mp4" width="100%"></video>
+
+关键词：
+
+范嘉昊;北京科技大学冶金与生态工程学院\
+吴克辉;中国科学院物理研究所\
+程妍昕;西安电子科技大学
+
+ 
+
+ 
+
+#### Step4. **设置【输入循环文本】**
+
+将【输入文本】步骤拖入【循环】中，然后点击【输入文本】，勾选【使用当前循环里的文本来填充输入框】。该操作是为了实现【循环输入文字】的效果。
+
+来验证一下，选中【循环】，在流程中选择关键词，点击【输入循环文本】，可以看到，可以成功的依次填充我们设置的关键词到网页上的文本框中。
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/6700f8d23270835015513125109/PUYrBMNp6sIA.mp4" width="100%"></video>
+
+#### Step5.设置点击元素
+
+点击页面的【检索】，选择【点击该按钮】，然后选择我们要的字段进行提取，【点击元素】设置Ajax超时时间位3s。
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/7545a6ba3270835015513760661/NtGhUj0T888A.mp4" width="100%"></video>
+
+####  
+
+#### Step6.优化流程
+
+优化调整下流程的高级设置，选中【循环】框，设置【执行前等待】2秒。
+
+修改下字段名称，删除不必要的字段以及调整字段顺序后点击保存。
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/09e6f05c3270835015508760245/j3PPUinIcN0A.mp4" width="100%"></video>
+
+ 
+
+ 
+
+#### Step7：开始采集
+
+点击采集，选择普通模式。
+
+可以看到采集页面一一对应的输入咱们设置的三组关键词，并采集到对应的字段。
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/d2137dc33270835015511379198/6AimAeLgNUIA.mp4" width="100%"></video>
+
+![文本循环：批量输入关键词](/assets/academy/basic-collection/text-loop-keywords/16-65b2314782875.png)

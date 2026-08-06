@@ -1,0 +1,33 @@
+---
+title: "新标签页处理"
+---
+
+当我们进行数据采集，常常需要从当前页面点击到下级页面，当我们执行点击元素时，需要判断网页是否用了新标签，并进行相关设置。
+
+## 一、什么是新标签？
+
+**新标签页通常指当我们执行点击操作时，在浏览器中打开一个新的网页来显示特定的内容，并在新标签页中加载新的网页地址。** 不同于只ajax只需要更新部分网页，此类网站如果需要更新内容，必须重新加载整个网页页面。
+
+## 二、如何判断网页是否使用了新标签
+
+1.在浏览器里打开网页，如果点击后在浏览器中打开了一个全新的标签页，且地址栏显示的是新的 URL，即可判断网页使用了新标签。
+
+<div style={{ textAlign: "center" }}>
+
+![new-tab](/assets/academy/troubleshooting/new-tab/6787754aa4225.png)
+
+</div>
+
+2.在客户端里点击后整个页面重新加载（点击后浏览器网址栏开始转圈 <img src="/assets/academy/troubleshooting/new-tab/6787768ce47fc.png" alt="" className="academy-inline-icon" /> ，等待一段时间后转圈停止变成 <img src="/assets/academy/troubleshooting/new-tab/6787768cef00d.png" alt="" className="academy-inline-icon" />），转圈停止后有新的数据出现，即该网页也使用了新标签。示例网址：https://weixin.sogou.com/weixin?ie=utf8&s_from=input&_sug_=n&_sug_type_=1&type=2&query=%E8%83%BD%E6%BA%90&w=01015002&oq=&ri=2&sourceid=sugg&sut=0&sst0=1699866616906&lkt=0%2C0%2C0&p=40040108 <img src="/assets/academy/troubleshooting/new-tab/6787768d13f4b.png" alt="" className="academy-inline-icon" /> <img src="/assets/academy/troubleshooting/new-tab/6787768d22aba.png" alt="" className="academy-inline-icon" />
+
+## 三、如何设置新标签
+
+判断该网页使用了新标签后，我们可以在【点击元素】步骤的设置中找到新标签设置，选中该框以启用它，反之亦然。不要忘记单击应用保存您的更改。
+
+<div style={{ textAlign: "center" }}>
+
+![new-tab](/assets/academy/troubleshooting/new-tab/678777bb0e3d2.png)
+
+</div>
+
+需要注意的是，如果该网页没有使用新标签，但我们进行了勾选，当我们执行点击元素步骤后的提取数据步骤，页面会白屏，网址显示about:blank ，此时我们将新标签取消勾选即可。

@@ -1,0 +1,208 @@
+---
+title: "【豆瓣】电影短评采集"
+source: "https://www.bazhuayu.com/helpcenter/docs/dou-ban-dian-ying-duan-ping-cai-ji"
+---
+**采集场景**
+
+在豆瓣【电影】短评页面 [https://movie.douban.com/subject/36809864/comments](https://movie.douban.com/subject/36809864/comments)
+
+[https://movie.douban.com/subject/36448279/comments](https://movie.douban.com/subject/36448279/comments)
+
+采集电影短评评论信息
+
+ 
+
+**采集字段**
+
+电影名、看过人数、评论人、评论时间、评论内容、星级、页面网址
+
+![【豆瓣】电影短评采集](/assets/academy/case-studies/douban-movie-short-reviews/01-688889b7504c9.png)
+
+ 
+
+ 
+
+**采集结果**
+
+采集结果可导出为Excel、CSV、HTML、数据库等多种格式。导出为Excel示例：\
+![【豆瓣】电影短评采集](/assets/academy/case-studies/douban-movie-short-reviews/02-688974d179446.png)
+
+ 
+
+**教程说明**
+
+本篇制作时间：2025/7/30   八爪鱼版本：V8.7.7
+
+如果因网页改版造成网址或步骤无效，无法收集到目标数据，请联系官方客服，我们将及时修正。
+
+ 
+
+**采集步骤**
+
+步骤一：打开网页
+
+步骤二、创建【循环列表】，采集所有电影评论列表中的数据
+
+步骤三、编辑字段
+
+步骤四、格式化数据
+
+步骤五、创建【循环翻页】，采集多页数据
+
+步骤六、启动采集
+
+ 
+
+**以下为具体步骤：**
+
+### 
+
+#### 步骤一、打开网页
+
+在首页【新建】-【自定义任务】-【手动输入】网址 [https://movie.douban.com/subject/36809864/comments](https://movie.douban.com/subject/36809864/comments)、\
+[https://movie.douban.com/subject/36448279/comments](https://movie.douban.com/subject/36448279/comments) ，然后点击【保存设置】，八爪鱼自动打开网页并生成循环网址步骤。
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/e4d00d605145403693480181283/WuGOU3095c8A.mp4" width="100%"></video>
+
+#### 步骤二、创建【循环列表】
+
+1、通过以下连续4步，采集所有图书评论列表中的数据
+
+①、选中页面上1个评论列表（注意一定要选中整个列表，包含所有所需字段）
+
+②、在黄色操作提示框中，点击【选中全部子元素】
+
+③、点击【选择全部子元素】
+
+④、点击【元素中数据内容】
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/250f8d315145403693491488972/jMtq7F6DTt0A.mp4" width="100%"></video>
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 经过以上连续4步，【循环-提取数据】创建完成。【循环】中的项，对应着页面上所有图书评论列表，【提取数据】中的字段，对应着每个图书评论列表中的字段。启动采集以后，八爪鱼就会按照循环中的顺序依次提取每个列表中的字段。
+> 
+> - b. 为何通过以上4步，可建立【循环-提取数据】？详情点击查看 [列表数据采集教程 ](/zh/academy/basic-collection/beginner/list-collection)。
+
+ 
+
+#### 步骤三、编辑字段
+
+1、编辑字段
+
+在【当前页面数据预览】面板中，删除不需要的字段，同时修改字段名称。
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/c0ea65c55145403693493524814/pnhorkrb13EA.mp4" width="100%"></video>
+
+ 
+
+2、添加更多字段
+
+默认提取的是评价中的字段。其他字段，如：作品名、星级、看过人数、页面网址等，需手动添加。
+
+【电影名】：选中电影名， 在操作提示框中，点击【文本内容】
+
+【看过人数】：选中看过人数， 在操作提示框中，点击【文本内容】
+
+【星级】：选中星级， 在操作提示框中，点击【Outer Html】
+
+【页面网址】：在【当前页面数据预览】面板中，点击【+】→ 【添加当前网页信息】 →【网址】
+
+可以通过拖拽字段修改字段的顺序
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/8ea6e6565145403693502051417/pIT40nPvu1oA.mp4" width="100%"></video>
+
+### 
+
+#### 步骤四、格式化数据
+
+1、去除【电影名】字段中的【短评】文字
+
+提取作品名时，都会带上【短评】2字。如果不想带有【短评】2字，请按以下步骤操作：
+
+点击【电影名】字段后的  ... 按钮 → 【格式化数据】→【添加步骤】→【替换】，将【短评】替换为【空】，然后保存设置。
+
+2、【看过人数】字段只保留纯数字
+
+点击【看过人数】字段后的  ... 按钮 → 【格式化数据】→【添加步骤】→【正则匹配】，正则表达式\d+，然后保存设置
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/d34528685145403693490265926/JCZiHTdEgZEA.mp4" width="100%"></video>
+
+3、 【星级】字段格式化
+
+在步骤三中，将【星级】字段对应的源码提取下来。但是源码中有许多无效信息，如果需要精准将【星级】提取出来：
+
+点击【星级】字段后的  ... 按钮 → 【格式化数据】→【添加步骤】→【正则表达式匹配】→ 匹配user-stars 和rating之间的数据→【确定】，得到【allstar50】，即评分为50。
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/2f65a57c5145403693504323374/HfctiMb2GMAA.mp4" width="100%"></video>
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 什么是数据格式化？数据采集下来之后，有时候格式不是我们想要的，或者只想从一段数据里提取特定数据，可通过八爪鱼的【格式化数据】功能实现。详情点击查看 [数据格式化教程](https://www.bazhuayu.com/helpcenter/docs/ohUzyg) 。
+> 
+> - b. 正则表达式是什么？怎么写？正则表达式是对字符串（包括普通字符（例如，a 到 z 之间的字母）和特殊字符（称为“元字符”））操作的一种逻辑公式，用来从文本中匹配/过滤信息。正则表达式有其特定写法，需要系统学习才能掌握，点击查看 [正则表达式 教程](https://www.bazhuayu.com/helpcenter/docs/43CIS3) 。
+
+ 
+
+#### 步骤五、创建【循环翻页】
+
+1、建立【循环翻页】
+
+如果只是采集一页数据，可跳过此步骤。
+
+如果需要翻页以采集多页数据：选择页面中的【后页】按钮，在操作提示上单击【循环点击单个链接】，创建【循环翻页】。
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/d3545d1c5145403693490270054/gYxHPYiEjqQA.mp4" width="100%"></video>
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 为什么重复翻页？这是因为【循环翻页】默认生成的XPath，不仅可以定位到【下一页】的按钮，还能同时定位到【上一页】或者【首页】等，导致不断重复提取某页或某几页内容，因此我们需要修改翻页按钮的XPATH。这里需要一定的XPath知识。点击查看 [XPath学习与实例教程](https://www.bazhuayu.com/helpcenter/docs/V2h1Ec) 。
+
+### 
+
+#### 步骤六、启动采集
+
+1、单击【采集】并【启动本地采集】。启动后八爪鱼开始自动采集数据。
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/f4ae02895145403693497502539/dtBCvVYGOR8A.mp4" width="100%"></video>
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 【本地采集】是使用自己的电脑进行采集，【云采集】是使用八爪鱼提供的云服务器采集，点击查看 [本地采集与云采集详解](https://www.bazhuayu.com/helpcenter/docs/2xF5Mz)。
+
+ 
+
+2、采集完成后，选择合适的导出方式导出数据。支持导出为Excel、CSV、HTML、数据库等。这里导出为Excel。\
+![【豆瓣】电影短评采集](/assets/academy/case-studies/douban-movie-short-reviews/03-6889ebb78497f.png)

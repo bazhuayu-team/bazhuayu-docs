@@ -1,0 +1,67 @@
+---
+title: "Cloudflare验证"
+description: "介绍八爪鱼采集器高版本功能：Cloudflare验证。"
+source: "https://www.bazhuayu.com/helpcenter/docs/Cloudflare-yan-zheng"
+---
+
+在当今的网络环境中，许多外国网站会使用Cloudflare进行反爬，这为我们的数据采集造成很大阻碍。在新版本（8.9）我们会上线处理外网Cloudflare验证的功能，并介绍两种处理方法。
+
+ 
+
+## 一、介绍
+
+Cloudflare 验证是一种安全措施，网站利用该措施来区分合法用户与自动化机器人。这通常包括验证码挑战、浏览器完整性检查和速率限制等。这些检查虽有助于保护网站免受DDoS攻击、垃圾邮件等威胁，不过也对网络爬虫工具构成了重大障碍。
+
+**具体效果为：一直在加载，但始终无法通过安全检查。**
+
+![Cloudflare验证](/assets/academy/premium-features/cloudflare-verification/01-6976dfe18f118.png)
+
+ 
+
+> 特别说明：
+>
+> a.下文功能效果展示以：[https://www.skroutz.gr/c/579/thikes-kinhtwn-thlefwnwn/m/28/Samsung.html?o=samsung](https://www.skroutz.gr/c/579/thikes-kinhtwn-thlefwnwn/m/28/Samsung.html?o=samsung)为例。
+>
+> b.一般使用Cloudflare验证都是外网，访问前请注意IP，需要自行科学上网。
+
+## 二、处理方式
+
+### 自动识别验证
+
+自新版本8.9起，采集器可自动处理Cloudflare验证。如果网站出现Cloudflare验证码，请勾选【**自动处理Cloudflare】**&#x9009;项；当出现Cloudflare验证时，只需点击【启动识别】,然后等待自动完成验证。
+
+ 
+
+![Cloudflare验证](/assets/academy/premium-features/cloudflare-verification/02-698a8420d10e7.png)
+
+ 
+
+每次验证需花费0.04元，因此请在使用前确保您的账户拥有充足的余额。请注意，无论操作是否成功，只要点击**开始启动流程，即会开始计费（在余额中自动扣除）。验证成功率约为80%。**
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/6099de835145403718457654027/muxXTSi6nlkA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> a.该功能仅团队版及以上才可使用。
+>
+> b.如果需要在抓取过程中禁用自动处理Cloudflare验证功能，请在**任务设置**中取消勾&#x9009;**［自动处理Cloudflare］**&#x9009;项。
+>
+> ![Cloudflare验证](/assets/academy/premium-features/cloudflare-verification/03-698a864918b1c.png)
+
+ 
+
+###  
+
+ 
+
+ 
+
+ 
+
+ 
+
+作者：YfY

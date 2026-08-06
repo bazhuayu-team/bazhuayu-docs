@@ -1,0 +1,92 @@
+---
+title: 任务运行情况
+api: GET https://openapi.bazhuayu.com/cloudextraction/task/stats
+playground: interactive
+authMethod: apiKey
+---
+
+> **所需套餐：** 企业版
+
+## 端点
+
+```
+GET https://openapi.bazhuayu.com/cloudextraction/task/stats
+```
+
+## 描述
+
+此接口用于获取云采集监控平台中任务和子任务运行数量情况。
+
+## 请求头
+
+| 参数 | 类型 | 必填 | 说明 |
+|------|------|------|------|
+| `x-api-key` | String | 二选一 | API Key，例如 `op_sk_xxxxxx`；创建方式见 [获取 API Key](/zh/mcp/quick-start/api-key) |
+| `Authorization` | String | 二选一 | Access Token，格式 `Bearer <access_token>` |
+
+**请求头示例**
+
+```json
+{
+ "Authorization":"Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6ImdXS3hWc0F4SHhaMDlDcWh6NkNJb3ciLCJ0eXAiOiJhdCtqd3QifQ.eyJuYmYiOjE2MzY0NjIyNzAsImV4cCI6MTYzNjU0ODY2OSwiaXNzIjoiaHR0cDovL3Rlc3QuaWRlbnRpdHkuYmF6aHVheXUuY29tIiwiY2xpZW50X2lkIjoiT2N0b3B1cyIsInN1YiI6IjllOGJiM2VhLWUwMWQtNGFlZC05ODM3LTVhMWUyODg0NWI5ZSIsImF1dGhfdGltZSI6MTYzNjQ2MjI3MCwiaWRwIjoibG9jYWwiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjllOGJiM2VhLWUwMWQtNGFlZC05ODM3LTVhMWUyODg0NWI5ZSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJ0ZXN0d2VuIiwicHJlZmVycmVkX3VzZXJuYW1lIjoidGVzdHdlbiIsInVuaXF1ZV9uYW1lIjoidGVzdHdlbiIsInJlZ2lzdGVyX2RhdGUiOiIxMS8wNC8yMDE2IDA4OjM4OjE2ICswODowMCIsImxhc3RfbG9naW5fZGF0ZSI6IjA0LzIyLzIwMTkgMDk6MDE6MDIgKzA4OjAwIiwibGFzdF9wYXNzd29yZF9jaGFuZ2VkX2RhdGUiOiIwMS8yMy8yMDE5IDA4OjMwOjMxICswODowMCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6IndlbmRpQHNraWVlci5jb20iLCJlbWFpbCI6IndlbmRpQHNraWVlci5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwic2NvcGUiOlsiZW1haWwiLCJvcGVuaWQiLCJyb2xlcyIsIm9mZmxpbmVfYWNjZXNzIl0sImFtciI6WyJwd2QiXX0.ARhbBfzI1xS6yo-Ue1CFHzMaUIfzw4gJlubNBOkUT4SSTlhuS4bVQ4t4UHuYGbE9VX6XgNVgkcDnx6XapqcPohSy7vPv9TIAsjtbrQSA3mj13SnVVAPWwfAVJ-I7g9HDnyPEEOVSvmZUJhiz-irH5L0ojbnt3ck2rQ9tIFuSd7j2eh5BS4ItjNoHY00rh_QPZltk66a9q-fNE33GrxOaXUdHH47WMlsENnh1gybB7QtGtd6bZ982Qa9JljpFnZWSdEf4VfkN4JmhkUTTC908DqS3stT-LD-9tpztFwB54sd0D4CyOBnESkKrUwjxchYYZo4l1O7auiZVGV48YhZYMw"
+}
+```
+
+**请求示例**
+
+```
+GET https://openapi.bazhuayu.com/cloudextraction/task/stats
+```
+
+本接口无查询参数与请求体，仅需在请求头中携带 `Authorization`。
+
+## 响应
+
+| 参数 | 类型 | 必填 | 说明 |
+|------|------|------|------|
+| `data` | Object[] | 是 | 响应数据 |
+| `ExtractingCount` | String | 是 | 采集中任务数 |
+| `WaitingCount` | String | 是 | 等待中任务数 |
+| `FinishedCount` | String | 是 | 已完成任务数 |
+| `WaitingSubTaskCount` | String | 是 | 采集中子任务数 |
+| `ExecutingSubTaskCount` | String | 是 | 等待中子任务数 |
+| `requestId` | String | 是 | 请求Id |
+
+**成功示例**
+
+```json
+{
+  "data": {
+    "extractingCount": 0,
+    "waitingCount": 0,
+    "finishedCount": 0,
+    "waitingSubTaskCount": 0,
+    "executingSubTaskCount": 6
+  },
+  "requestId": "0HNDERFQAC2G9:00000001"
+}
+```
+
+## 错误响应
+
+| 参数 | 类型 | 必填 | 说明 |
+|------|------|------|------|
+| `requestId` | String | 是 | 请求Id |
+| `error` | Object | 是 | 错误信息，参考错误码 |
+| `code` | String | 是 | 错误码 |
+| `message` | String | 是 | 错误描述 |
+
+**错误示例**
+
+```json
+{
+  "error": {
+    "code": "ServerError",
+    "message": "Internal Server Error"
+  },
+  "requestId": "0HMD469L0I8R0:00000001"
+}
+```
+
+<ParamField header="Authorization" type="string" required hidden>
+</ParamField>

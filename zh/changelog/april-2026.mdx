@@ -1,0 +1,41 @@
+---
+title: 2026 年 4 月更新日志
+description: 2026 年 4 月 八爪鱼 集成功能的更新与改进。
+---
+
+# 2026 年 4 月发布说明
+
+> 新增 MCP 工具、平台文档及 API 参考更新。
+
+## 新功能
+
+### MCP 服务端 — 新增工具
+
+三个全新的 MCP 工具：
+- `redeem_coupon_code` — 通过 AI 智能体兑换促销优惠码
+- `search_tasks` — 列出并搜索已有的 八爪鱼 任务
+- `start_or_stop_task` — 通过任务 ID 启动或停止云端任务
+
+### OpenAPI — 任务状态 V2
+
+全新的 `GET /cloud-extraction/task-status-v2` 端点：
+- 改进的响应结构，包含步骤级别的进度
+- 子任务细分及独立状态追踪
+- 预估剩余时间
+
+### 平台文档
+
+新增页面涵盖核心概念、任务构建模块、本地与云端提取对比，以及数据导出目标。
+
+## 改进
+
+- MCP 服务端响应时间降低约 40%
+- 速率限制处理现在包含 Retry-After 头部指导
+- 模板搜索结果现在包含网站难度评分
+
+## Bug 修复
+
+- 修复了认证 Token 刷新的边界情况
+- 解决了数据导出分页偏移量 Bug
+
+如有问题或反馈，请联系 [support@octoparse.com](mailto:support@octoparse.com)。

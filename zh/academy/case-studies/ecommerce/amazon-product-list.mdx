@@ -1,0 +1,291 @@
+---
+title: "【Amazon】商品列表页采集"
+source: "https://www.bazhuayu.com/helpcenter/docs/77G16M"
+---
+**采集场景**
+
+在Amazon首页（[https://www.amazon.com）输入关键词搜索](https://www.amazon.com）输入关键词搜索)，采集搜索后得到的商品列表数据。实例网址   [https://www.amazon.com/s?k=Apple&ref=nb_sb_noss_2](https://www.amazon.com/s?k=Apple&ref=nb_sb_noss_2)，是搜索关键词 Apple后得到的商品列表页。
+
+ 
+
+**采集字段**
+
+商品标题、图片URL、商品链接、商品价格、商品评分、评论数等字段。
+
+ 
+
+![](/assets/academy/case-studies/amazon-product-list/01-65323d7511a30.png)
+
+ 
+
+ 
+
+**采集结果**
+
+采集结果可导出为Excel，CSV，HTML，数据库等多种格式。导出为Excel示例：
+
+ 
+
+![](/assets/academy/case-studies/amazon-product-list/02-65323d750aa3d.png)
+
+ 
+
+**教程说明**
+
+本篇更新时间：2023/11/27   八爪鱼版本：V8.6.7
+
+如果因网页改版造成网址或步骤无效，无法采集到目标数据，请联系官方客服，我们将及时修正。
+
+ 
+
+**采集步骤**
+
+步骤一、打开网页
+
+步骤二、选择配送地区
+
+步骤三、输入1个或多个关键词并搜索，然后使用【自动识别】，识别搜索结果列表和翻页
+
+步骤四、优化采集规则
+
+步骤五、启动采集
+
+ 
+
+**以下为具体步骤：**
+
+ 
+
+## 步骤一、打开网页
+
+ 
+
+1、在首页点击左上角 <img src="/assets/academy/case-studies/amazon-product-list/03-65323d739b7af.png" alt="" className="academy-inline-icon" /> 按钮，选择【自定义任务】，输入示例网址 https\://www\.amazon.com，然后点【开始采集】，八爪鱼自动打开网页。
+
+![](/assets/academy/case-studies/amazon-product-list/04-65323d7496da1.gif)
+
+ 
+
+ 
+
+## 步骤二、选择配送地区
+
+ 
+
+在Amazon中，选择不同的配送地址，输入关键词搜索后得到的商品列表是不一样的。
+
+示例中打开网页后，默认的配送地址为【中国大陆】。如果默认配送地址满足采集需求，可跳过此步骤。
+
+如果需要修改配送地址，Amazon支持通过【登录账户并确认地址簿】、【输入美国邮政编码】和【选择美国境外其他国家】修改配送地址。
+
+本文以【输入美国邮政编码】为例，输入 California (CA)的邮政编码：95136。具体操作如下：
+
+ 
+
+1、在页面中选中【中国大陆】，在操作提示框中点击【点击该元素】，页面弹出位置输入框
+
+2、选中位置输入框，在操作提示框中点击【输入文本】
+
+3、在操作提示框中输入【95136】后保存
+
+4、选中【设置】按钮，在操作提示框中点击【点击该元素】
+
+5、选中【完成】，在操作提示框中选择【点击该按钮】，完成配送地址的修改。
+
+<video controls src="https://resource-wangsu.helplook.net/docker_production/3mkuae/article/77G16M/video/656487c0227e7.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 【登录账户并确认地址簿】和【选择美国境外其他国家】来修改配送地址的方法，本文未讲解。如有需要请联系客服指导。
+> 
+> - b. 示例中输入的是California (CA)的邮政编码：95136，可按需求更换成美国其他州的邮政编码。
+
+ 
+
+ 
+
+ 
+
+## 步骤三、输入关键词并搜索采集列表
+
+## 
+
+ 
+
+1、选中页面中的搜索框，在黄色操作提示框中，选择【输入文本】-批量输入，输入关键词【Apple】、【xiaomi】等多个关键词，然后点击确定。
+
+2、选中【搜索】按钮，在操作提示框中点击【点击该按钮】，出现关键词的搜索结果列表页。
+
+3、点击【自动识别网页】，成功识别了文章列表中的数据和翻页。
+
+4、点击【生成采集设置】，将自动识别出的列表数据和翻页，生成为采集流程，方便我们使用和修改。
+
+<video controls src="https://resource-wangsu.helplook.net/docker_production/3mkuae/article/77G16M/video/65648a1b8ac3f.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 本文使用【自动识别】，自动识别网页上的列表、滚动和翻页。识别成功后会生成采集规则，再对采集规则调整，以采集目标数据。如果【自动识别】的结果与以上图片不同，可点击【取消识别】自行配置采集流程或联系客服反馈。详情点击查看 [【自动识别】教程](https://www.bazhuayu.com/helpcenter/docs/wduVyb)
+
+ 
+
+ 
+
+## 步骤四、优化采集规则
+
+ 
+
+以上步骤可以完成基本的数据采集。但Amazon有防采集，如需稳定采集大量数据，需对采集规则进行优化。常见的优化方法如下：
+
+ 
+
+1、设置执行前等待 + 调整Ajax超时时间
+
+双击进入【点击元素】、【点击元素1】、【点击元素2】和【输入文本】步骤的设置页面，设置【执行前等待】3s，【Ajax超时】15s。
+
+<video controls src="https://resource-wangsu.helplook.net/docker_production/3mkuae/article/77G16M/video/65648b620a581.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 使用了Ajax技术的网页，八爪鱼会自动判断并设置一定的【Ajax超时】。如果系统自动设置的【Ajax超时】过短，可根据采集需求和网页加载情况进行调整，详情点击查看 [Ajax教程](https://www.bazhuayu.com/helpcenter/docs/R01mM3) 。
+> 
+> - b. 执行前等待，即在执行此步骤前等待一段时间，可有效避免因网页未加载完全导致的漏数据，详情点击查看 [执行前等待使用场景与设置方法](https://www.bazhuayu.com/helpcenter/docs/zigIaV)
+
+ 
+
+2、修改【循环列表】XPath
+
+ 
+
+为了精准定位到所有关键词搜索结果列表，需修改一下【循环列表】的XPath。
+
+进入【循环列表】设置页面，选择循环方式为【不固定元素列表循环】，然后填入XPath：**//div[@data-component-type="s-search-result"]&#xA0;**&#x5E76;保存。
+
+<video controls src="https://resource-wangsu.helplook.net/docker_production/3mkuae/article/77G16M/video/656492384708c.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 在搜索关键词后，出现的搜索结果排列方式会不同，属于amazon 防采集形式的一种。默认生成的【循环列表】XPath，无法精准定位到所有关键词搜索结果列表链接，所以我们需要手动修改XPath，使之定位到所有的搜索结果列表。这里需要一定的XPath知识。点击查看 [XPath学习与实例教程](https://www.bazhuayu.com/helpcenter/docs/V2h1Ec) 。
+
+ 
+
+ 
+
+3、提取ASIN编码
+
+每个商品具有唯一的ASIN编码，将其提取下来，可便于后续采集商品详情和商品评论数据。如果无需ASIN编码，可跳过此步骤。
+
+ASIN编码在当前商品链接中，先采集商品链接，然后对商品链接进行格式化处理，得到ASIN编码。
+
+ 
+
+复制商品链接命名为ASIN编码。
+
+然后将复制的商品链接格式化：点击【链接地址】字段后的【...】→【格式化数据】→【添加步骤】→【正则表达式匹配】，将编码匹配出来，然后点击【应用】保存。
+
+<video controls src="https://resource-wangsu.helplook.net/docker_production/3mkuae/article/77G16M/video/656492152c5a8.mp4" width="100%"></video>
+
+ 
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 什么是数据格式化？数据采集下来之后，有时候格式不是我们想要的，或者只想从一段数据里提取特定数据，可通过八爪鱼的【格式化数据】功能实现。详情点击查看 [数据格式化教程](/zh/academy/advanced-features/data-processing/field-formatting) 。
+> 
+> - b. 正则表达式是什么？怎么写？正则表达式是对字符串（包括普通字符（例如，a 到 z 之间的字母）和特殊字符（称为“元字符”））操作的一种逻辑公式，用来从文本中匹配/过滤信息。正则表达式有其特定写法，需要系统学习才能掌握，点击查看 [正则表达式教程](/zh/academy/advanced-features/data-processing/regular-expression) 。
+
+ 
+
+ 
+
+### 步骤五：启动采集
+
+ 
+
+1、单击【采集】并【启动本地采集】。启动后八爪鱼开始自动采集数据。 
+
+ 
+
+![【Amazon】商品列表页采集](/assets/academy/case-studies/amazon-product-list/05-6615f5046b331.png)
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 【本地采集】是使用自己的电脑进行采集，【云采集】是使用八爪鱼提供的云服务器采集
+
+ 
+
+2、采集完成后，选择合适的导出方式来导出数据。支持导出为Excel，CSV，HTML，数据库等。这里导出为Excel。
+
+ 
+
+![【Amazon】商品列表页采集](/assets/academy/case-studies/amazon-product-list/06-6615f582e3770.png)
+
+ 
+
+示例数据：
+
+ 
+
+![【Amazon】商品列表页采集](/assets/academy/case-studies/amazon-product-list/07-6615fa13585dd.png)
+
+ 
+
+作者:妙卡

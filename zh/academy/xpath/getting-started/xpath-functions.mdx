@@ -1,0 +1,148 @@
+---
+title: xpath函数
+description: 介绍 XPath 常用函数（text、contains、position、last、and/or/not、following-sibling、preceding-sibling）及实战演练。
+---
+
+网页情况十分复杂，仅通过标签和属性，难以将我们需要的数据精准定位出来。XPath有一套XPath函数，便于我们更精准定位。
+
+下面是一些常见XPath函数，在八爪鱼数据抓取中应用十分广泛，请大家认真学习。
+
+在开始学习XPath函数之前，有2点特别强调：
+
+XPath函数有其固定写法，请遵循其固定写法；
+
+XPath中的所有符号() [] ''均为英文符号，不可用中文符号。
+
+以下示例网址均为：https://book.douban.com/tag/%E5%B0%8F%E8%AF%B4
+
+## ① text() 用文本定位位置
+
+text()='xxx' 精确定位，引号中的内容需与HTML文档中的文本完全一样
+
+contains(text(),'xxx') 模糊定位，HTML文档中的文本，包含引号中的内容即可
+
+如果需要定位到此网页中的【后页>】按钮。
+
+用 **text()='xxx'** 定位，则XPath为： **//a[text()='后页>']** ，引号中的文本一定要为 **'后页>'**，如果换成 **'后页'** （少了一个>），则定位不到【后页>】按钮。
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/xpath/getting-started/xpath-functions/65e176e9db00e.png" />
+</div>
+
+用 **contains(text(),'xxx')** 定位，则XPath为： **//a[contains(text(),'后页>')]** ； **//a[contains(text(),'后页')]** ； **//a[contains(text(),'页')]** ； **//a[contains(text(),'后')]** 均可（包含文本中相连的一段字符即可，不用全部复制）。
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/xpath/getting-started/xpath-functions/65e176ea06430.png" />
+</div>
+
+## ② contains() 用于判断文本的一部分是否包含XXX，或者属性值是否包含XXX
+
+contains(text(),'xxx') 判断文本的一部分是否包含XXX，上面已经详细说明
+
+contains(@class,'xxx') 判断属性值是否包含XXX
+
+如果需要定位到此网页中的所有图书列表。
+
+直接用属性定位，则XPath为： **//li[@class='subject-item']** ，引号中的属性值一定要为 **'subject-item'**，跟HTML文档中的属性值完全一致。
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/xpath/getting-started/xpath-functions/65e176ea0a07b.png" />
+</div>
+
+如果用 **contains(@class,'xxx')** 定位 ，则XPath为： **//li[contains(@class,'subject-item')]**； **//li[contains(@class,'subject')]** 均可（包含属性中相连的一段即可，不用全部复制）。
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/xpath/getting-started/xpath-functions/65e176ea08074.png" />
+</div>
+
+## ③ position() 用于定位节点的位置和限制节点的范围
+
+position()=1 同级标签的第1个
+
+position()>1 and position()&lt;10 同级标签的第2-9个
+
+常用于控制循环列表的项。如图， **//ul[@class='subject-list']/li[position()>1 and position()&lt;10]**，定位的是第2-9个li标签。
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/xpath/getting-started/xpath-functions/65e176e9e3478.png" />
+</div>
+
+## ④ last() 最后1个
+
+last() 最后1个标签
+
+last()-1 倒数第2个标签
+
+last()-2 倒数第3个标签
+
+如图， **//ul[@class='subject-list']/li[last()]**，定位的是最后1个li标签。
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/xpath/getting-started/xpath-functions/65e176ea00c44.png" />
+</div>
+
+## ⑤ and/or/not 同时满足/满足其中1个即可/无
+
+and 且，同时满足 a\[@class and @href\] 既有class属性，又有href属性的a标签
+
+or 或，满足其中1个即可 a\[@class or @href\] 有class属性，或者有href属性的a标签
+
+not 无 a\[not(@class)\] 不含class属性的a标签
+
+## ⑥ following-sibling:: 选取当前节点之后的所有同级节点
+
+在八爪鱼中常用于数字翻页，点击查看 <a href="https://www.bazhuayu.com/docs/zh/academy/basic-collection/pagination/number-pagination">数字翻页教程</a>。
+
+如图， **//span[@class="thisclass"]/following-sibling::a** ，定位到span节点之后的所有同级a节点
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/xpath/getting-started/xpath-functions/65e176eae5b66.png" />
+</div>
+
+## ⑦ preceding-sibling:: 选取当前节点之前的所有同级节点
+
+如图， **//a[@target='_blank']/preceding-sibling::strong** ，定位到a节点之前的所有同级strong节点
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/xpath/getting-started/xpath-functions/65e176eadcf0f.png" />
+</div>
+
+## 实战演练
+
+**题1：采集以下网址，全部的列表数据。**
+
+http://newhouse.sz.fang.com/house/s/b91/?ctm=1.sz.xf_search.page.1
+
+1、按照 <a href="https://www.bazhuayu.com/docs/zh/academy/basic-collection/beginner/list-collection">列表采集</a> 和 <a href="https://www.bazhuayu.com/docs/zh/academy/basic-collection/pagination/next-page-button">翻页</a> 的方法，配置采集规则。
+
+2、按需求编辑采集下来的字段，如图。
+
+3、启动采集，我们发现，有非常多的重复数据。观察重复数据发现，是从第2页后开始重复的。为什么？
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/xpath/getting-started/xpath-functions/65e176eae9c3b.png" />
+</div>
+
+4、找到规则中，翻页的XPath：//a[@class="next"] ，并将其复制下来。
+
+5、将翻页的XPath：//a[@class="next"] 复制进浏览器控制台中开始调试。第1页，通过 //a[@class="next"] 定位到的是【下一页】按钮，没问题。但是第2页出问题了，通过//a[@class="next"] 定位到【上一页】和【下一页】2个按钮，因【上一页】按钮在前，会先执行前一个。因此，在第2页的时候，会点【上一页】回到第1页，翻页就无法正常进行了。
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/xpath/getting-started/xpath-functions/65e176eb3f03b.png" />
+</div>
+
+我们需要在第2页（应该说是除最后1页的所有页）都只定位到【下一页】按钮，对吧？XPath怎么改？观察第2页中，【上一页】和【下一页】按钮的源码区别。很明显，文字不同，一个是【上一页】，一个是【下一页】。
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/xpath/getting-started/xpath-functions/65e176eb16b91.png" />
+</div>
+
+利用这个特征和XPath的 Text函数（忘了Text函数怎么用？返回本教程 3、常用的XPath函数 中查看），我们可以写出一条定位XPath：//A[text()='下一页']。将这条新的XPath，放到每一页去检查一下，发现在除最后1页的所有页中都能精准定位到【下一页】按钮，正符合我们的翻页需求。
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/xpath/getting-started/xpath-functions/65e176eb2f476.png" />
+</div>
+
+6、将改好的这条XPath：//A[text()='下一页']，复制进八爪鱼的相应位置即可。手动执行规则，发现在第二页的时候点击下一页按钮，可以翻到第3页，再次启动采集，会发现正常翻页，无重复数据。
+
+以上是一个【翻页】定位出错的实例。在实际采集数据过程中，【循环列表】、【点击元素】、【提取数据】步骤均可能定位不准。就需要我们进行错误排查并修改定位XPath。

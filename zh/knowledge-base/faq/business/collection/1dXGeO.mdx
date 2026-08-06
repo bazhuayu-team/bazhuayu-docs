@@ -1,0 +1,25 @@
+---
+title: "采集过程中漏数据？"
+description: "首先请先查看网页是否存在该数据，如果网页有数据则参考以下情况： A、数据没有加载出来，就进行了采集。原因：网页加载慢，数据未加载完全就采集完成。 解决方法：在循环列表或提取数据（每次提取数据前等待，会降低采集速度）的高级选项里设置执行前等待时间，或设置等待元素出现再进行采集，填入采集数据的xpath。…"
+hidden: true
+kbStatus: "unverified"
+kbSource: "faq"
+sourceSlug: "1dXGeO"
+source: "https://www.bazhuayu.com/helpcenter/docs/1dXGeO"
+---
+
+首先请先查看网页是否存在该数据，如果网页有数据则参考以下情况：
+
+A、数据没有加载出来，就进行了采集。原因：网页加载慢，数据未加载完全就采集完成。
+
+解决方法：在循环列表或提取数据（每次提取数据前等待，会降低采集速度）的高级选项里设置执行前等待时间，或设置等待元素出现再进行采集，填入采集数据的xpath。点击查看[执行前等待教程](https://www.bazhuayu.com/helpcenter/docs/zigIaV)。
+
+B、循环列表未将所有数据涵盖进来，请手动执行下规则核对数据是否全部加载进入列表循环。原因：网页需要设置滚动下拉页面来使数据加载完全。
+
+解决方法：在打开网页和点击翻页的高级选项里设置滚动。点击查看[滚动加载数据采集教程](https://www.bazhuayu.com/helpcenter/docs/McMBHy)。
+
+C、没有配置翻页或者翻页配置错误，请参考[翻页相关教程](/zh/knowledge-base/faq/operation/custom-collection/I1QzNn)配置正确的翻页步骤来实现翻页采集数据。
+
+D、有的页面该数据可以获取到，有的页面不能。原因：网页格式不一样，导致XPATH定位不准确。
+
+解决方法：使用备选位置或手写XPATH进行精准定位，请参考以下教程，耐心学习下XPATH的知识，该知识有一定难度，但学会后就掌握了八爪鱼的核心，可以随意采集。点击查看[ XPath学习教程](https://www.bazhuayu.com/helpcenter/docs/pWdSFO)（图文），[XPath学习教程](https://www.bazhuayu.com/helpcenter/docs/vFMWDY)（视频）。

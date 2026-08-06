@@ -1,0 +1,56 @@
+---
+title: 循环列表-过滤多余的项
+description: 通过实例讲解两种过滤循环列表中多余项的方法：修改 XPath 筛选和分支判断丢弃。
+---
+
+我们通过创建【循环列表】去采集多个列表或详情页的数据。创建【循环列表】的方式在<a href="https://www.bazhuayu.com/docs/zh/academy/basic-collection/beginner/custom-collection">初级采集课程</a>中有详细讲过。
+
+一般情况下，通过以上方法创建的【循环列表】不会出错，能够精准采集到全部数据。但有时候也会遇到一些问题：比如列表中有的部分不是我们想要的，需要进行丢弃。
+
+这时候，可以手动修改XPath去定位列表丢弃不需要的部分。也可以用分支判断丢弃。
+
+以下通过实例进行说明。
+
+实例网址：<a href="https://www.ebidding.cecep.cn/jyxx/001006/001006001/7.html">https://www.ebidding.cecep.cn/jyxx/001006/001006001/7.html</a>
+
+## 一、用XPath过滤多余的项
+
+Step1：按照常规操作创建流程
+
+这个网页采集列表信息，我们按登录网站后常规的采集列表的方法创建循环列表。
+
+Step2：手动执行规则
+
+配置好后，手动执行规则发现：当页面处于第一页时，所有列表都被选中了采集，观察发现有的列表名称已经作废，如果我们只需要采集未作废的列表内容，需要过滤掉项目名称是null[已作废]的
+
+这里通过修改【循环列表】XPath进行筛选。
+
+Step3：修改【循环列表】XPath
+
+进入【循环列表】的设置页面，修改xpath为//span[@class="go-txt" and not(contains(text(),"null"))]/../../..
+
+修改前循环列表是定位到了全部的10条列表元素，修改后循环列表定位到了8条，成功过滤掉了项目名为null[已作废]的列表
+
+这里为什么要改用这个xpath呢，观察列表，我们发现这个可以通过限制项目名称来达到过滤的目的，//span[@class="go-txt" and not(contains(text(),"null"))]/../../.. ，这个xpath达到的效果即找到不包含null的标题，然后符号\.. 表示返回父级标签，\..\..表示返回到父级的父级标签，以此类推下去。
+
+这里总结一下：当发现列表定位过多，需要过滤多余的项，就需要修改【循环列表】的定位XPath
+
+如何修改需要一定的XPath知识，请看之前的 <a href="https://www.bazhuayu.com/docs/zh/academy/xpath/getting-started/why-use-xpath">XPath系统学习教程</a> 。
+
+## 二、分支判断丢弃不需要的列表数据
+
+Step1：按照常规操作创建流程
+
+同上面所讲述方法一致，我们按登录网站后常规的采集列表的方法创建循环列表。
+
+Step2：添加判断条件
+
+1.如下所示添加判断条件
+
+2.左侧分支条件勾选【当前循环项包含元素】，然后填入xpath://span[@class="go-txt" and not(contains(text(),"null"))]
+
+3.把提取数据拖入左侧分支条件，右侧分支不设置提取数据。
+
+提示：
+
+关于判断设置，可学习<a href="https://www.bazhuayu.com/helpcenter/docs/EiGV1Z">判断条件教程</a>

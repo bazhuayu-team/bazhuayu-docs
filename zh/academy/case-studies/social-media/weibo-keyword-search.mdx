@@ -1,0 +1,337 @@
+---
+title: "【微博】搜索关键词采集"
+source: "https://www.bazhuayu.com/helpcenter/docs/OGo3db"
+---
+**采集场景**
+
+在微博主页（[https://weibo.com/）登录后](https://weibo.com/）登录后)，输入关键词搜索，采集得到的搜索结果列表数据。支持按【高级搜索】中设置的条件进搜索。
+
+ ![](/assets/academy/case-studies/weibo-keyword-search/01-689ea03b69d32.png)
+
+ 
+
+**采集字段**
+
+博主用户名、发布时间、博文内容、分享数、评论数、点赞数、评论、评论用户名、评论时间。
+
+ 
+
+**采集结果**
+
+采集结果可导出为Excel、CSV、HTML、数据库等多种格式。导出为Excel示例：
+
+ ![【微博】搜索关键词采集](/assets/academy/case-studies/weibo-keyword-search/02-689f085f8b70d.png)
+
+ 
+
+ 
+
+**教程说明**
+
+本篇更新时间：2025/08/13   八爪鱼版本：V8.7.7
+
+如果因网页改版造成网址或步骤无效，无法收集到目标数据，请联系官方客服，我们将及时修正。
+
+ 
+
+**采集步骤**
+
+步骤一：打开网页
+
+步骤二、微博登录
+
+步骤三、在【高级搜索】中选择搜索条件
+
+步骤四、使用自动识别，自动识别列表页和翻页
+
+步骤五、编辑字段
+
+步骤六、优化字段
+
+步骤七、采集多个关键词的搜索结果数据
+
+步骤八、启动采集
+
+ 
+
+ 
+
+**以下为具体步骤：**
+
+ 
+
+### 步骤一、打开网页
+
+ 
+
+在首页搜索框输入微博首页网址 [https://weibo.com/](https://weibo.com/)，然后点【开始采集】，八爪鱼自动打开网页。
+
+ <video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/dfc3a76c5145403695252437787/XATYShtxghMA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 打开网页后，如果开始【自动识别】，请点击【不再自动识别】或【取消识别】将其关掉。因为本文不适合使用【自动识别】。
+> 
+> - b. 【自动识别】适用于自动识别网页上的列表、滚动和翻页，识别成功后直接启动采集即可获取数据。详情点击查看 [【自动识别】教程](http://www.bazhuayu.com:8099/tutorial8/81zdypz)
+
+ 
+
+### 步骤二、微博登录
+
+ 
+
+要采集博文列表数据，首先需要登录。如果没有登录，只能采集第一页的博文。
+
+在八爪鱼中的登录步骤：
+
+ 
+
+1、打开浏览器模式
+
+点击 ![](/assets/academy/case-studies/weibo-keyword-search/03-654b5840531fe.png) 按钮，打开浏览器模式。在浏览器模式中，点击页面的登录按钮，打开手机微博app扫码登录。
+
+ 
+
+2、使用Cookie登录微博
+
+进入【打开网页】设置界面，勾选【使用指定的Cookie】，点击【获取当前页面Cookie】并保存。
+
+这样就获取到了登录后的Cookie，启动时直接以登录状态打开网页。
+
+ <video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/258451b65145403695253100912/Yjb9gkkB2LcA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 什么是浏览器模式？在浏览器模式下，我们可以像在浏览器中一样点击操作网页，不会生成流程步骤。如需编辑流程步骤，需关闭浏览器模式。关闭状态：<img src="/assets/academy/case-studies/weibo-keyword-search/04-654b5840b7ccd.png" alt="" className="academy-inline-icon" />  ；打开状态：<img src="/assets/academy/case-studies/weibo-keyword-search/05-654b584108b6f.png" alt="" className="academy-inline-icon" />
+> 
+> - b. Cookie是什么？通俗的说，Cookie是一些存储在用户电脑上的小文件，用来保存一些站点的用户数据，作用是让浏览器为用户定制内容。例如：用户第一次访问某网站，输入了账号密码登录。浏览器会问你是否需要【记住账号密码】。选择【是】以后，浏览器就会将这些账号密码信息存储在用户电脑上。下次再访问此网站，就无需再次输入账号密码。详情点击查看 [登录验证采集](/zh/academy/basic-collection/beginner/login-verification)）
+> 
+> - c. 怎么判断是否获取到Cookie？获取Cookie后 ![](/assets/academy/case-studies/weibo-keyword-search/06-654b584060316.png) 会变成  ![](/assets/academy/case-studies/weibo-keyword-search/07-654b58411fb80.png) ，点击 <img src="/assets/academy/case-studies/weibo-keyword-search/08-654b58413a6ed.png" alt="" className="academy-inline-icon" /> ，可查看具体的Cookie内容。
+
+ 
+
+### 步骤三、在【高级搜索】中选择搜索条件
+
+ 
+
+在八爪鱼中有2种方式实现：
+
+① 在八爪鱼中做一遍流程：输入关键词 → 点击【高级搜索】→ 在【高级搜索】中选择条件 → 点击【搜索微博】，获得搜索结果。
+
+② 在网页中完成 输入关键词 → 点击【高级搜索】→ 在【高级搜索】中选择条件 → 点击【搜索微博】，获得一条带有搜索关键词和筛选条件的网址，将这条网址直接复制进八爪鱼中去进行采集。
+
+第2种方式更快更稳，示例中选择第2种方式。
+
+ 
+
+1、获得带有搜索关键词和筛选条件的网址
+
+先在浏览器中测试一下。打开微博首页，输入关键词【小米发布会】，在【高级搜索】中选择条件：【原创】【2025-08-01 00时 至 2025-08-13 00时】，得到网址：[https://s.weibo.com/weibo?q=%E4%B8%89%E4%BD%93&scope=ori&suball=1&timescope=custom%3A2023-03-01-0%3A2023-03-30-0&Refer=g](https://s.weibo.com/weibo?q=%E4%B8%89%E4%BD%93&scope=ori&suball=1&timescope=custom%3A2023-03-01-0%3A2023-03-30-0&Refer=g)。
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/72b88cdf5145403695254137136/Atgy3XcrI7MA.mp4" width="100%"></video>
+
+ 
+
+特别说明：
+
+- a. 在【高级搜索】中选择什么条件，在得到的网址中就有一个对应参数，请注意观察筛选条件跟网址参数的对应关系，选择自己需要的。
+
+ 
+
+2、将1中的网址，输入进八爪鱼中
+
+在【打开网页】后，增加一个步骤【打开网页1】。
+
+双击进入【打开网页1】设置页面，输入网址 [https://s.weibo.com/weibo?q=%E4%B8%89%E4%BD%93&scope=ori&suball=1&timescope=custom%3A2023-03-01-0%3A2023-03-30-0&Refer=g](https://s.weibo.com/weibo?q=%E4%B8%89%E4%BD%93&scope=ori&suball=1&timescope=custom%3A2023-03-01-0%3A2023-03-30-0&Refer=g) ，然后保存，八爪鱼自动打开这个网页。
+
+ <video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/db73c7e65145403695252287562/NNnaQI13GjcA.mp4" width="100%"></video>
+
+ 
+
+ 
+
+### 步骤四、使用自动识别，自动识别列表页和翻页
+
+ 
+
+1、使用自动识别，自动识别列表和翻页
+
+网页打开后，点击【自动识别网页内容】 ，等待一段时间，成功识别了文章列表中的数据和翻页。
+
+点击【生成采集设置】，将自动识别出的列表数据和翻页，生成为采集流程，方便我们使用和修改。
+
+ <video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/e6b1769f5145403695252728024/acBA2uu7APMA.mp4" width="100%"></video>
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 本文使用【自动识别】，自动识别网页上的列表、滚动和翻页。识别成功后会生成采集规则，再对采集规则调整，以采集目标数据。如果【自动识别】的结果与以上图片不同，可点击【取消识别】自行配置采集流程或联系客服反馈。详情点击查看 [【自动识别】教程](http://www.bazhuayu.com:8099/tutorial8/81zdypz)
+
+ 
+
+ 
+
+### 步骤五、编辑字段
+
+ 
+
+在【当前页面数据预览】面板中，可删除多余字段，修改字段名，移动字段顺序等。
+
+ <video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/25864b3f5145403695270763043/JjIe84arw8MA.mp4" width="100%"></video>
+
+ 
+
+### 步骤六、优化字段
+
+ 
+
+1、采集博文内容点击展开后的数据
+
+【博文内容】字段默认的XPath，无法精准定位到展开后的全部博文，但源码内有标签层直接提供完整文本，则可直接修改XPath定位完整数据。
+
+点击【提取列表数据】进入对应提取步骤的数据预览界面（采集器配置界面正下方区域），点击区域内右上方的纵向字段布局按钮，
+
+ ![【微博】搜索关键词采集](/assets/academy/case-studies/weibo-keyword-search/09-689ee4b2144a5.png)，双击博文内容字段的XPath区域
+
+修改XPath为：//div[@class="content"]//\*[@class='txt'][last()] ，然后应用
+
+ <video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/ba63e4765145403695272503121/FH6A4Af94hYA.mp4" width="100%"></video>
+
+ 
+
+2、格式化字段
+
+【转发数】、【评论数】和【点赞数】三个字段，默认会带上 转发 、评论、赞 的文本。
+
+如果需要去掉文本，只保留数字，可以通过格式化实现：
+
+点击【转发数】字段右上方的 【...】 按钮，选择【格式化数据】→ 【添加步骤】→【正则表达式匹配】，输入正则表达式【\d+】后保存。
+
+【评论数】、【点赞数】的格式化数据过程相同。
+
+ <video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/b63965285145403695272375492/AOaAt3gycY0A.mp4" width="100%"></video>
+
+ 
+
+### 步骤七、采集多个关键词的搜索结果数据
+
+ 
+
+回顾一下，步骤三中我们输入关键词【三体】，在【高级搜索】中选择条件：【原创】【2023-03-01 00时 至 2023-03-30 00时】，得到网址：[https://s.weibo.com/weibo?q=%E4%B8%89%E4%BD%93&scope=ori&suball=1&timescope=custom%3A2023-03-01-0%3A2023-03-30-0&Refer=g](https://s.weibo.com/weibo?q=%E4%B8%89%E4%BD%93&scope=ori&suball=1&timescope=custom%3A2023-03-01-0%3A2023-03-30-0&Refer=g)。
+
+如果保持【高级搜索】的条件不变，需要更换其他关键词进行采集，怎么办？以下为具体步骤：
+
+ 
+
+1、添加【循环-输入网址】步骤
+
+在【打开网页】步骤后，添加一个【循环】。
+
+进入【循环】设置页面。选择循环方式为【网址列表】，点击  <img src="/assets/academy/case-studies/weibo-keyword-search/10-654b5843875a0.png" alt="" className="academy-inline-icon" /> 按钮，进入网址输入页面。
+
+ <video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/c6f308e25145403695296520029/V6vtei7Su84A.mp4" width="100%"></video>
+
+ 
+
+2、根据网址中参数的规律，批量生成网址
+
+选择【批量生成】，输入一个带有关键词和【高级搜索】条件的网址：
+
+[https://s.weibo.com/weibo?q=%E4%B8%89%E4%BD%93&scope=ori&suball=1&timescope=custom%3A2023-03-01-0%3A2023-03-30-0&Refer=g](https://s.weibo.com/weibo?q=%E4%B8%89%E4%BD%93&scope=ori&suball=1&timescope=custom%3A2023-03-01-0%3A2023-03-30-0&Refer=g)。
+
+鼠标选中网址中 q= 和 & 中间的部分并将其删掉（这部分内容是关键词，示例中输入的是【三体】，复制进八爪鱼中时转码了），然后点击【添加参数】→ 选择参数类型为【自定义列表】→ 输入准备好的关键词（可同时输入多个关键词，一行一个即可），然后保存。
+
+点击【保存设置】后，八爪鱼自动打开网页。
+
+ ![](/assets/academy/case-studies/weibo-keyword-search/11-654b5844323c7.gif)
+
+> 注意事项：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 1、将【打开网页1】拖入到【循环】中，然后【打开网页1】步骤勾选【使用当前循环里的URL作为导航网址】
+> 
+> 2、将整块【循环翻页】拖入到【循环】中。
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 八爪鱼支持通过网址中参数的规律，自动批量生成网址，详情点击查看 [网址批量输入](/zh/academy/advanced-features/workflow-settings/bulk-url-input-extra)
+
+ 
+
+### 步骤八、启动采集
+
+ 
+
+1、单击【采集】并【启动本地采集】。启动后八爪鱼开始自动采集数据。
+
+ <video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/57de10ca5145403695298165426/bGGqagdYWroA.mp4" width="100%"></video>
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a.【本地采集】是使用自己的电脑进行采集，【云采集】是使用八爪鱼提供的云服务器采集，点击查看[本地采集与云采集详解](http://www.bazhuayu.com:8099/tutorial8/81xsrm8)。
+
+ 
+
+2、采集完成后，选择合适的导出方式导出数据。支持导出为Excel、CSV、HTML、数据库等。这里导出为Excel。
+
+![【微博】搜索关键词采集](/assets/academy/case-studies/weibo-keyword-search/12-689f08372283e.png)
+
+数据示例：
+
+ ![【微博】搜索关键词采集](/assets/academy/case-studies/weibo-keyword-search/13-689f08593bbb1.png)
+
+> 说明：\
+> 若网站改版导致采集问题，可扫码加群反馈\
+> ![【微博】搜索关键词采集](/assets/academy/case-studies/weibo-keyword-search/14-6707a992ea7e4.png)

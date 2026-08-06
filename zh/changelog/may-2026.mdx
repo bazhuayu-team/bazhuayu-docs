@@ -1,0 +1,105 @@
+---
+title: 2026 年 5 月更新日志
+description: 2026 年 5 月八爪鱼文档的更新与改进（OpenAPI、MCP、CLI、站点体验）。
+---
+
+# 2026 年 5 月发布说明
+
+> **更新日期：** 2026 年 5 月 29 日  
+> OpenAPI 交互式 Playground 全面上线；MCP / CLI 文档持续扩充；全站路由与首页结构优化；品牌与页面体验改进。
+
+## 新功能
+
+### OpenAPI — 交互式 Playground
+
+OpenAPI 参考文档现已支持 **试一试** 交互调试：
+
+- 覆盖接口调用凭证、任务组、任务、云采集、数据等分组下的主要端点
+- 支持 Bearer 授权、`Authorization` / `Content-Type` 等请求头配置
+- 右侧同步展示 cURL、Python 等多语言示例代码
+- 请求体示例对选填字段使用空值（`""`、`[]`、`null`），避免 `<string>`、`123` 等误导性占位符
+
+### OpenAPI — 任务分析
+
+新增 **任务分析** 分组及接口文档：
+
+- `POST /taskanalytics/queries` — 查询任务采集与执行分析
+- 支持按日 / 周 / 月粒度查询采集量、执行次数、成功率及资源消耗等指标
+- 提供独立 OpenAPI 规范与 Playground 示例（含完整请求体字段与请求头）
+
+### OpenAPI — 参考
+
+新增 **参考** 页面，集中说明：
+
+- 常见 HTTP 状态码与业务错误码（如 `MemberNotAllowed`、`TaskNotFound` 等）
+- 循环步骤、提取步骤等步骤属性及是否支持通过 API 更新
+
+### MCP 服务 — 文档模块重构
+
+MCP 文档按产品能力重新编排：
+
+- **概述** — [八爪鱼 MCP 服务](/zh/mcp/index)（服务地址 `https://mcp.bazhuayu.com`、能力范围、认证方式、工具列表）
+- **快速入门** — [获取 API Key](/zh/mcp/quick-start/api-key)、[工作流程示例](/zh/mcp/workflow)
+- **客户端配置** — [通用客户端接入指南](/zh/mcp/guides/clients)
+- **平台对接** — 分平台教程（含步骤截图与配置说明）：
+  - [Coze（扣子）](/zh/mcp/integrations/coze)、[Dify](/zh/mcp/integrations/dify)、[QClaw（小龙虾）](/zh/mcp/integrations/qclaw)
+  - [ChatGPT](/zh/mcp/integrations/chatgpt)、[Claude](/zh/mcp/integrations/claude)、[OpenClaw](/zh/mcp/integrations/openclaw)
+  - [Cursor](/zh/mcp/integrations/cursor)、[VS Code](/zh/mcp/integrations/vscode)、[Gemini](/zh/mcp/integrations/gemini)
+- **工具参考** — `search_templates`、`search_tasks`、`execute_task`、`export_data`、`start_or_stop_task`、`redeem_coupon_code` 等
+- **参考** — 速率限制响应头（`X-RateLimit-*`）与 [故障排查](/zh/mcp/troubleshooting)
+
+旧路径 `/zh/mcp/intro` 重定向至 `/zh/mcp/index`。
+
+### CLI — 文档模块上线与扩充
+
+CLI 文档按「概述 → 快速入门 → 核心命令 → 参考」分组：
+
+- [八爪鱼 CLI 概述](/zh/cli/index) — 能力说明、桌面客户端 vs CLI 流程对比、**CLI 适用人群**、与 MCP / 桌面客户端的选型对比
+- **快速入门** — [安装](/zh/cli/quick-start/installation)、[获取 API Key 并登录](/zh/cli/quick-start/get-api-key-and-log-in)、[运行第一个任务](/zh/cli/quick-start/run-your-first-task)
+- **CLI 核心命令详解** — 新增四个专题页：
+  - [任务管理](/zh/cli/core-commands/task-management)
+  - [运行采集任务](/zh/cli/core-commands/run-tasks)
+  - [导出数据](/zh/cli/core-commands/export-data)
+  - [环境诊断](/zh/cli/core-commands/diagnostics)
+- **参考** — [命令速查表](/zh/cli/reference/command-cheatsheet)、[输出与退出码](/zh/cli/reference/output-and-exit-codes)
+- 命令说明标签统一为 **命令描述**，与各命令页正文表述一致
+
+`/zh/cli/quick-start`、`/zh/cli/core-commands` 等旧入口已配置重定向至对应子页面。
+
+## 改进
+
+### 站点结构与路由
+
+- 全站内容路径由 `/en/` 迁移至 **`/zh/`**，旧英文路径自动 301 跳转
+- **首页** 合并原「概述」与「什么是八爪鱼采集器」为单一 [概述](/zh/overview) 页，涵盖产品简介、能力说明、工作原理、应用场景、集成入口、客户端下载与联系方式
+- `/zh/platform/intro` 重定向至 `/zh/overview`
+
+### 文档体验与品牌
+
+- 更新站点 **favicon**、社交分享图（`og:image`）为八爪鱼品牌图标
+- 隐藏页脚社交链接与 Mintlify 默认 branding，界面更简洁
+- 侧栏「On this page」标题本地化为 **本页目录**
+- CLI 文档中「创建 API Key」等链接统一指向 [MCP 获取 API Key](/zh/mcp/quick-start/api-key)
+
+### OpenAPI / MCP / CLI 内容
+
+- **首页** — MCP / OpenAPI / CLI 卡片文案与链接同步至新版模块入口；Windows / Mac **立即下载** 统一指向 [八爪鱼官方下载页](https://www.bazhuayu.com/download)
+- **MCP** — Coze、Dify、QClaw 等平台教程补充分步截图与操作说明
+- **OpenAPI** — 更新采集 URLs 文档与 Playground 支持 `multipart/form-data` 文件上传；补全批量获取任务状态等页面的请求 / 响应说明
+- 优化 API 页面布局：文档正文与 Playground 分区展示（`style.css`）
+- `docs.json` 配置 Playground 代理与多语言示例；导航改为分组 Tab 结构
+
+## 移除
+
+- 侧栏 **示例代码** 分组及 **Python 代码示例** 页面（示例已整合至各接口页的 Playground 与代码块中）
+- MCP 旧版 **intro** 独立页面（由 `index` 替代并重定向）
+- CLI 旧版 **intro** 页面（由 `index` 与快速入门分组替代）
+- 首页独立 **platform/intro** 页面（内容已并入概述）
+
+## Bug 修复
+
+- 修复部分接口页 Playground 缺少 `Authorization`、`Content-Type` 请求头的问题
+- 修复任务分析等页面请求体示例使用自动生成占位符的问题
+- 修复 favicon 缓存导致浏览器标签页仍显示旧图标的问题（预生成标准 favicon 套件并配置重定向）
+
+如有问题或反馈，请联系 [help@skieer.com](mailto:help@skieer.com)。

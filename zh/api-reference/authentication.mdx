@@ -1,0 +1,36 @@
+---
+title: 认证
+description: 业务 API 支持 API Key 或 Access Token 认证。
+---
+
+> 除获取和刷新 Access Token 的接口外，业务 API 可使用 API Key 或 Access Token 认证；每个请求任选一种即可。
+
+## 使用 API Key
+
+在请求头中传入：
+
+```http
+x-api-key: op_sk_xxxxxx
+```
+
+API Key 的创建方式与 MCP 相同：登录八爪鱼官网，在账户中心生成。完整步骤见 [获取 API Key](/zh/mcp/quick-start/api-key)。不要为 API Key 添加 `Bearer` 前缀，也不要同时传入 `Authorization` 与 `x-api-key`。
+
+## Token 获取
+
+调用 [获取新 Token](/zh/api-reference/access-token/obtain-a-new-token) 接口，使用八爪鱼平台的登录账号和密码来获取全新 Access Token。
+
+在 API 请求中通过 `Authorization` 请求头携带 Token：
+
+```
+Authorization: Bearer YOUR_ACCESS_TOKEN
+```
+
+## Token 刷新
+
+Access Token 过期后，使用 [刷新 Token](/zh/api-reference/access-token/refresh-token) 接口获取新的 Access Token。
+
+## 注意事项
+
+- 请将 API Key 和 Access Token 安全存储，切勿公开发布
+- 使用环境变量或密钥管理器管理凭据，切勿硬编码在代码中
+- 如怀疑凭据已泄露，请立即在账户中心作废并重新创建

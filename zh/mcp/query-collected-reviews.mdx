@@ -1,0 +1,42 @@
+---
+title: query_collected_reviews
+description: 查询 Temu 或 TikTok Shop 已采集的商品评论。
+---
+
+按商品 ID、发布时间、关键词或作者查询已经采集的电商评论。该工具只读取现有数据，不会启动新的采集任务。
+
+## 参数
+
+| 参数 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `dataset` | string | 是 | `temuComment` 或 `tiktokShopComment` |
+| `itemIds` | string[] | 是 | 商品 ID，数量 `1-100` |
+| `publishTimeFrom` | string | 否 | 起始日期，格式 `YYYY-MM-DD`，包含当天 |
+| `publishTimeTo` | string | 否 | 结束日期，格式 `YYYY-MM-DD`，包含当天 |
+| `keyword` | string | 否 | 评论内容关键词，最长 200 个字符 |
+| `authorId` | string | 否 | 作者 ID，最长 200 个字符 |
+| `sortBy` | string | 否 | `publishTime` 或 `likeCount` |
+| `sortDirection` | string | 否 | `asc` 或 `desc`，默认 `desc` |
+| `pageIndex` | integer | 否 | 页码，从 `1` 开始，默认 `1` |
+| `pageSize` | integer | 否 | 每页数量，范围 `1-100`，默认 `20` |
+| `includeDebugSql` | boolean | 否 | 是否返回调试 SQL，默认 `false` |
+
+```json
+{
+  "dataset": "temuComment",
+  "itemIds": ["<商品 ID>"],
+  "publishTimeFrom": "2026-07-01",
+  "sortBy": "publishTime",
+  "sortDirection": "desc",
+  "pageIndex": 1,
+  "pageSize": 20
+}
+```
+
+## 响应
+
+返回 `records` 以及 `pageIndex`、`pageSize`、`returnedCount`、`hasMore`。`query` 会说明实际使用的平台、任务类型和商品 ID 字段。只有明确排障时才应启用 `includeDebugSql` 并读取 `debugSql`。
+
+如果刚通过 `ecommerce_data_task` 提交采集而当前结果为空，任务可能仍在运行；等待一段时间后使用相同 `dataset` 和商品 ID 重试。
+
+另请参阅：[`ecommerce_data_task`](/zh/mcp/ecommerce-data-task)、[MCP 概览](/zh/mcp/index)

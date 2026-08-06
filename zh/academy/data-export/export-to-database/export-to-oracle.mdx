@@ -1,0 +1,156 @@
+---
+title: 导出到Oracle数据库
+description: 详细介绍如何将八爪鱼采集的数据手动或自动导出到Oracle数据库，包括Oracle依赖组件安装、数据库配置、字段映射和定时导出设置
+---
+
+八爪鱼采集到的数据，支持导出到Oracle数据库中。可手动导出，也按照设置的定时导出计划，自动导出。
+
+本教程将以云采集数据，演示手动/自动导出到Oracle数据库中的具体步骤。
+
+## 一、准备工作：安装Oracle依赖组件
+
+在正式导出到Oracle数据库前，需先安装Oracle依赖组件，否则点击【导出到Oracle】会提示：
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/data-export/export-to-database/export-to-oracle/6520c3d094da0.png" />
+</div>
+
+Oracle依赖组件安装步骤如下：
+
+Step1：下载Oracle依赖组件的ZIP文件
+
+64位：<a href="https://www.oracle.com/database/technologies/instant-client/winx64-64-downloads.html" target="_blank" rel="noopener">https://www.oracle.com/database/technologies/instant-client/winx64-64-downloads.html</a>
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/data-export/export-to-database/export-to-oracle/6520c3d0b8d0b.png" />
+</div>
+
+Step2：将下载下来的ZIP文件，解压到本地文件夹中，示例中为 D:\instantclient_19_6
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/data-export/export-to-database/export-to-oracle/6520c3d0a48f1.png" />
+</div>
+
+Step3：配置环境变量
+
+鼠标移动到【此电脑】上并右键，点击【属性】→ 点击【高级系统配置】→ 点击【环境变量（N）】→ 双击【Path】→ 点击【新建】并将Oracle依赖组件所在的本地路径复制进去（示例中为 D:\instantclient_19_6 ）→ 点击【确定】保存配置
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/data-export/export-to-database/export-to-oracle/65326b4260641.gif" />
+</div>
+
+特别说明：
+
+a. 如果进行以上设置后，在八爪鱼中点击【导出到Oracle】依旧提示【缺少相关依赖组件】，请将八爪鱼客户端重启一下。
+
+Oracle依赖组件配置好后，接下来就可以将八爪鱼采集到的数据，导出到Oracle数据库中。
+
+在任务采集完毕之后，将采集得到的数据，手动导出到数据库中。
+
+本地采集和云采集数据，均可手动导出。
+
+## 二、手动导出具体步骤
+
+我们具体看下如何手动导出数据到mysql数据库，以下是详细的步骤：
+
+Step1：在目标Oracle数据库中建好数据库和数据表。
+
+Step2：在【我的任务】中，将鼠标移动到任务上，任务采集状态右侧会出现全部按钮，点击即可进入查看采集到的数据，这里点击云采集右侧的全部，查看全部云采集数据。
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/data-export/export-to-database/export-to-oracle/65326bf9747a8.gif" />
+</div>
+
+Step3：选择【导出数据】，在弹出的操作界面上选择【导出所有数据】或者【未导出数据】。选择【导出到数据库】的【Oracle】，点击【确定】进入到数据库配置界面。
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/data-export/export-to-database/export-to-oracle/65326c5e5bcd6.gif" />
+</div>
+
+Step4：进入到这个数据库配置界面之后，对数据库的相关信息进行配置，这里的信息一定要正确而且能正常连接到数据库。
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/data-export/export-to-database/export-to-oracle/65326c9b042d3.png" />
+</div>
+
+服务器名称：Oracle服务器地址
+
+端口：Oracle实例的端口
+
+用户名：登录Oracle的用户名
+
+密码：登录Oracle的密码
+
+表所属用户：数据表所归属的用户
+
+数据库名称：选择已有的数据库
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/data-export/export-to-database/export-to-oracle/6520c3d098e03.png" />
+</div>
+
+配置好后可点击【测试连接】，验证配置是否正确。这里的配置都是正确的，因此显示 。如果配置不正确，将显示错误信息。
+
+Step5：在数据字段映射界面，选择数据表、目标数据字段（这里如果源数据字段和目标数据字段名称一样会自动进行配置，如果不一样就需要手动选择一下）。
+
+可为某个字段勾选【设置为唯一标识】，则导入的时候将根据这个字段确定是数据库新增记录还是覆盖原有的记录。
+
+如果这个任务的数据需多次导入，可以【输入配置名称】保存，下次再导出的时候直接选择这个配置即可。
+
+Step6：选择【导出】，等待一段时间后，提示【导出完成】，表示数据已导入指定数据库。
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/data-export/export-to-database/export-to-oracle/65326e9c282f7.gif" />
+</div>
+
+可在Oracle相应数据表中查看数据：
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/data-export/export-to-database/export-to-oracle/65326eb646847.png" />
+</div>
+
+## 三、自动导出具体步骤
+
+仅云采集数据可实现自动导出到数据库，可以实现边采集边导出，导出的是当前未导出过的数据。
+
+以下为云采集的数据自动导出数据到数据库的详细步骤：
+
+Step1和Step2同上面手动导出步骤的Step1、Step2一致；
+
+Step3：选择【配置自动导出】-【导出到数据库】-【Oracle】，其他同上。
+
+Step4：同手动导出步骤的Step4一致；
+
+Step5：进入到数据字段映射界面。此界面多了一个【设置执行计划】的选项。
+
+设置【导出计划名称】和【每次间隔】，每次导出最短间隔为【5分钟】。
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/data-export/export-to-database/export-to-oracle/65326feb833a5.gif" />
+</div>
+
+Step6：点击【完成】，弹出【定时入库工具】。点击启动后，系统会立即执行一次数据库导出，执行完毕之后再按照设置的时间间隔自动导出。
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/data-export/export-to-database/export-to-oracle/6532701e9b093.gif" />
+</div>
+
+也可在【工具箱】-【定时入库工具】中，找到我们的【定时导出计划】配置并启动/暂停它。
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/data-export/export-to-database/export-to-oracle/65326a54dfe4e.png" />
+</div>
+
+如数据不能正常导出，定时入库工具中出错日志显示为："Cannot read property 'xxxx' of undefined " 或 "Cannot locate a 64-bit Oracle Client"。可参考该教程进行解决。<a href="https://juejin.cn/post/6844904041701441549" target="_blank" rel="noopener">https://juejin.cn/post/6844904041701441549</a>
+
+### 特别说明
+
+8.7.6以下的版本 配置自动导出到数据库，定时入库工具和采集器不能关闭，否则定时导出会失效无法正常自动导出。
+
+8.7.6及更新的版本配置数据库时会默认可以选择导出云数据库，可实现云采集数据导出至云数据库，且可将入库工具托管到云端，关闭客户端也可以自动导出(选择本地采集任需要保持导出窗口不能关闭)。选择云端数据库时，用户导出数据库时需要添加以下IP白名单：
+
+- <a href="http://124.221.35.46" target="_blank" rel="noopener">124.221.35.46</a>
+- <a href="http://122.51.45.102" target="_blank" rel="noopener">122.51.45.102</a>
+- <a href="http://122.152.208.218" target="_blank" rel="noopener">122.152.208.218</a>
+- <a href="http://106.54.50.104" target="_blank" rel="noopener">106.54.50.104</a>
+- <a href="http://175.24.175.60" target="_blank" rel="noopener">175.24.175.60</a>

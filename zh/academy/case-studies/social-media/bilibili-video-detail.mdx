@@ -1,0 +1,163 @@
+---
+title: "【B站】视频详情页数据采集"
+source: "https://www.bazhuayu.com/helpcenter/docs/uOyBiq"
+---
+**一、采集场景**
+
+打开B站详情页，采集视频详情页数据。
+
+示例网址：
+
+[https://www.bilibili.com/video/BV1ai4y1x7bB](https://www.bilibili.com/video/BV1ai4y1x7bB)
+
+[https://www.bilibili.com/video/BV1Wv411172X](https://www.bilibili.com/video/BV1Wv411172X)
+
+[https://www.bilibili.com/video/BV17k4y117BJ](https://www.bilibili.com/video/BV17k4y117BJ)
+
+ 
+
+**二、采集字段**
+
+标题、时长、发布时间、总播放数、总弹幕数、发布者、硬币、收藏量、点赞数、分享数、视频介绍、视频标签
+
+![【B站】视频详情页数据采集](/assets/academy/case-studies/bilibili-video-detail/01-653f24fd6d922.png)
+
+*点击查看高清大图，**下文其他图片同理*  
+
+ 
+
+**三、采集结果**
+
+采集结果可导出为Excel、CSV、HTML、数据库等多种格式。导出为Excel示例：
+
+![【B站】视频详情页数据采集](/assets/academy/case-studies/bilibili-video-detail/02-66da654802266.png)
+
+ 
+
+**教程说明**
+
+本篇制作时间：2025/8/20   八爪鱼版本：V8.7.7
+
+如果因网页改版造成网址或步骤无效，无法收集到目标数据，请联系官方客服，我们将及时修正。
+
+ 
+
+**四、采集步骤**
+
+步骤一、打开网页
+
+步骤二、设置页面滚动
+
+步骤三、提取数据
+
+步骤四、规则优化
+
+步骤五、启动采集
+
+ 
+
+ 
+
+**以下为具体步骤：**
+
+ 
+
+#### 步骤一、打开网页
+
+ 
+
+1、打开网页
+
+首页左上角点击【新建】—【自定义任务】。网址输入界面默认的是【手动输入】，将复制好的一批同类网址，粘贴进网址输入框中，并点击【保存网址】，八爪鱼中内置的浏览器会自动打开网页。
+
+同时可以看到，流程中已自动创建【循环-打开网页】步骤。
+
+ 
+
+示例中输入的网址为：
+
+[https://www.bilibili.com/video/BV1ai4y1x7bB](https://www.bilibili.com/video/BV1ai4y1x7bB)
+
+[https://www.bilibili.com/video/BV1Wv411172X](https://www.bilibili.com/video/BV1Wv411172X)
+
+[https://www.bilibili.com/video/BV17k4y117BJ](https://www.bilibili.com/video/BV17k4y117BJ)
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/24b1d48c5145403695816754059/VFvY7eHZQq0A.mp4" width="100%"></video>
+
+特别说明：
+
+- a.  手动输入的url数量不得大于1万个，如有超过1万url，请选择【从文件导入】，具体请查看教程 [网址输入升级](https://www.bazhuayu.com/helpcenter/docs/ACG7OJ)
+- b.  打开网页后，如果开始开始【自动识别】，请点击【不再自动识别】或【取消识别】将其关掉。因为本文不适合使用【自动识别】。
+- c. 【自动识别】适用于自动识别网页上的列表、滚动和翻页，识别成功后直接启动采集即可获取数据。详情点击查看 [【自动识别】教程](https://www.bazhuayu.com/helpcenter/docs/eeI3gE)
+
+ 
+
+#### 步骤二、设置滚动
+
+ 
+
+选中【打开网页】设置，勾选【页面加载后向下滚动】，滚动方式为【滚动到底部】，滚动次数3，每次间隔1s，点击【应用】。
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/b9fb794f5145403695818553288/FGn8P5ugIVIA.mp4" width="100%"></video>
+
+特别说明：
+
+- a. 设置中的滚动次数和时间间隔，请根据采集需求和网页加载情况进行设置，并非是一成不变的，具体请点击查看 [处理滚动加载数据的网页教程](https://www.bazhuayu.com/helpcenter/docs/McMBHy)
+
+ 
+
+#### 步骤三、提取数据
+
+ 
+
+1、采集字段\
+\
+采集标题、时长、发布时间、播放数、弹幕数、发布者、收藏量、点赞数、视频介绍、页面链接等字段。
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/b640c6e75145403695825190735/6ge5qmtDaLgA.mp4" width="100%"></video>
+
+ 
+
+2、编辑字段
+
+在【当前数据预览】面板中，依次修改所需字段的字段名称。
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/b640c6e75145403695825190735/6ge5qmtDaLgA.mp4" width="100%"></video>
+
+特别说明：
+
+评论数字段因为网站的加密措施，暂不支持采集详情支持官方客服
+
+ 
+
+ 
+
+#### 步骤四、规则优化
+
+为【循环网址】、【打开循环中的网页】、【提取数据】设置执行前等待5s-10s，然后点击【应用】保存。
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/df0822a35145403695822809070/DBLsLvAOJPMA.mp4" width="100%"></video>
+
+ 
+
+#### 步骤五、启动采集
+
+1、单击【保存】并【启动本地采集】。启动后等待八爪鱼开始自动采集数据。
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/1be40d055145403695823138382/cWlOEPz6ONEA.mp4" width="100%"></video>
+
+特别说明：
+
+- a. 【本地采集】是使用自己的电脑进行采集，【云采集】是使用八爪鱼提供的云服务器采集，点击查看 [本地采集与云采集详解](https://www.bazhuayu.com/helpcenter/docs/FQjd1k)。
+
+ 
+
+2、采集完成后，选择合适的导出方式导出数据。支持导出为Excel、CSV、HTML、数据库等。这里导出为Excel。数据示例：
+
+![【B站】视频详情页数据采集](/assets/academy/case-studies/bilibili-video-detail/03-66da63adb92a4.png)
+
+ 
+
+作者：亦卡
+
+编辑：Aisling

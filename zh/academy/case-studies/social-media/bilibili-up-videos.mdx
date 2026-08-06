@@ -1,0 +1,265 @@
+---
+title: "【B站】UP主主页视频采集"
+source: "https://www.bazhuayu.com/helpcenter/docs/OcDG4q"
+---
+**采集场景**
+
+采集B站UP主主页的视频列表数据。
+
+示例网址：
+
+[https://space.bilibili.com/33775467?spm_id_from=333.337.0.0\](https://space.bilibili.com/33775467?spm_id_from=333.337.0.0\)
+[https://space.bilibili.com/946974?spm_id_from=333.337.0.0\](https://space.bilibili.com/946974?spm_id_from=333.337.0.0\)
+[https://space.bilibili.com/19577966?spm_id_from=333.337.0.0](https://space.bilibili.com/19577966?spm_id_from=333.337.0.0)
+
+ 
+
+**采集字段**
+
+up主名称    关注数    粉丝数    个人认证标签    uid    标题    发布时间    视频封面图片链接
+
+![【B站】UP主主页视频采集](/assets/academy/case-studies/bilibili-up-videos/01-68ad2c73eaba6.png)
+
+ 
+
+ 
+
+**采集结果**
+
+采集结果可导出为Excel、CSV、HTML、数据库等多种格式。导出为Excel示例：
+
+![【B站】UP主主页视频采集](/assets/academy/case-studies/bilibili-up-videos/02-68ad2c7ece706.png)
+
+ 
+
+**教程说明**
+
+本篇制作时间：2025/8/26 八爪鱼版本：V8.7.7
+
+如果因网页改版造成网址或步骤无效，无法收集到目标数据，请联系官方客服，我们将及时修正。
+
+ 
+
+**采集步骤**
+
+步骤一、打开网页
+
+步骤二、提取数据
+
+步骤三、点击查看更多视频
+
+步骤四、创建【循环列表】，采集数据
+
+步骤五、创建【循环翻页】，采集多页数据
+
+步骤六、规则优化
+
+步骤七、启动采集
+
+ 
+
+ 
+
+**以下为具体步骤：**
+
+ 
+
+### 步骤一、打开网页
+
+ 
+
+1、打开网页
+
+首页左上角点击【新建】—【自定义任务】。网址输入界面默认的是【手动输入】，将复制好的一批同类网址，粘贴进网址输入框中，并点击【保存网址】，八爪鱼中内置的浏览器会自动打开网页。
+
+同时可以看到，流程中已自动创建【循环-打开网页】步骤。
+
+ 
+
+示例中输入的网址为：
+
+[https://space.bilibili.com/33775467?spm_id_from=333.337.0.0\](https://space.bilibili.com/33775467?spm_id_from=333.337.0.0\)
+[https://space.bilibili.com/946974?spm_id_from=333.337.0.0\](https://space.bilibili.com/946974?spm_id_from=333.337.0.0\)
+[https://space.bilibili.com/19577966?spm_id_from=333.337.0.0](https://space.bilibili.com/19577966?spm_id_from=333.337.0.0)
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/6b4b4ef65145403696627198687/IeUDosyEafMA.mp4" width="100%"></video>
+
+ 
+
+特别说明：
+
+- a.  手动输入的url数量不得大于1万个，如有超过1万url，请选择【从文件导入】，具体请查看教程 [网址输入升级](https://www.bazhuayu.com/helpcenter/docs/ACG7OJ)
+- b.  打开网页后，如果开始开始【自动识别】，请点击【不再自动识别】或【取消识别】将其关掉。因为本文不适合使用【自动识别】。
+- c. 【自动识别】适用于自动识别网页上的列表、滚动和翻页，识别成功后直接启动采集即可获取数据。详情点击查看 [【自动识别】教程](https://www.bazhuayu.com/helpcenter/docs/eeI3gE)
+
+ 
+
+### 步骤二、提取数据
+
+ 
+
+1、采集字段
+
+采集视频列表前所需的字段：up主名称、关注数、粉丝数、个人认证标签、uid\
+等。
+
+这些都是文本型的字段，在网页中选中目标字段后，在操作提示框中点击【文本内容】即可。
+
+ 
+
+2、编辑字段
+
+在【当前页面数据预览】面板，依次修改所需字段的字段名称。
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/30c2e74d5145403696626966316/YLep6rPZy9cA.mp4" width="100%"></video>
+
+ 
+
+ 
+
+### 步骤三、点击查看更多视频
+
+点击更多生成【点击元素】流程
+
+首页直接展示的视频有限，需点击【查看更多】按钮以获取更多视频。
+
+选中【查看更多】按钮，在操作提示框中点击【点击该按钮】。
+
+然后进入【点击元素】设置步骤，取消【在新标签页中打开】，设置【Ajax超时】5s，执行前等待1s。
+
+ <video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/d5a6a80f5145403696625348595/CB5folHvAUgA.mp4" width="100%"></video>
+
+ 
+
+特别说明：
+
+评论中的翻页使用了Ajax技术，需设置Ajax超时。一般情况下，八爪鱼会自动判断并设置一定的【Ajax超时】。如果系统判断失误或者自动设置的【Ajax超时】过短，可根据采集需求和网页加载情况进行调整，详情点击查看 [Ajax教程](https://www.bazhuayu.com/helpcenter/docs/R01mM3) 。
+
+ 
+
+### 步骤四、创建【循环列表】
+
+ 
+
+1、创建【循环列表】
+
+通过以下连续4步，采集所有列表中的数据：
+
+① 选中页面上1个列表项的数据 
+
+② 点击【选中全部相似元素】，识别所有列表
+
+③ 点击【文本内容】，生成提取步骤
+
+④ 点击所需数据，并根据文本或链接相应点击【文本内容】、【图片链接】，补充所需提取字段
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/e37e13c95145403696625922294/QaBJk1RAAmMA.mp4" width="100%"></video>
+
+ 
+
+特别说明：
+
+- a. 经过以上连续4步，【循环-提取数据】创建完成。【循环】中的项，对应着页面上所有视频列表，【提取数据】中的字段，对应着每个视频列表中的字段。启动采集以后，八爪鱼就会按照循环中的顺序依次提取每个列表中的字段。
+- b. 为何通过以上4步，可建立【循环-提取数据】？详情点击查看 [列表数据采集教程 ](https://www.bazhuayu.com/helpcenter/docs/RXxvh9)。
+
+ 
+
+2、修改编辑字段
+
+进入【提取数据】设置页面，编辑字段名称，并格式化时间字段。
+
+ <video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/2c4de1595145403696626794995/3DnuBdhj934A.mp4" width="100%"></video>
+
+ 
+
+ 
+
+### 步骤五、创建翻页，采集多页数据
+
+ 
+
+1、创建循环翻页
+
+如果只是采集一页数据，可跳过此步骤。
+
+如果需要翻页以采集多页数据：选中网页上的”下一页“按钮，然后在操作提示框中，点击【循环点击下一页】，创建循环翻页以采集更多页的数据。
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/8afdabe45145403696624441168/9QRoECh5KHkA.mp4" width="100%"></video>
+
+ 
+
+特别说明：
+
+- a. 创建【循环翻页】后，八爪鱼会自动点击翻页按钮进行翻页，从第1页，第2页......直到最后1页。如果只需采集特定页的数据，可在八爪鱼中设置循环翻页的次数，详情点击查看 [翻页以采集多页数据教程](/zh/academy/basic-collection/pagination/next-page-button) 。
+
+ 
+
+ 
+
+### 步骤六、规则优化
+
+1、优化加载及等待时长
+
+为【循环网址】、【打开循环中的网页】、【循环翻页】、【循环列表】、【提取列表数据】设置执行前等待1s-3s
+
+【点击翻页】设置执行前等待1s，以及Ajax加载超时5s，然后点击【应用】保存。
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/206f70ef5145403696626267927/8ovmCvlCG20A.mp4" width="100%"></video>
+
+ 
+
+特别说明：
+
+- a. 执行前等待，即在执行此步骤前等待一段时间，可有效避免因网页未加载完全导致的漏数据，详情点击查看 [执行前等待使用场景与设置方法](https://www.bazhuayu.com/helpcenter/docs/zigIaV)
+
+ 
+
+2、优化【点击步骤】Xpath定位
+
+本次放入的三个网址，在打开后会发现主页有代表作，因有的up主没有代表作，则页面结构存在不一样的地方，这会使得在部分up主主页制作规则时自动生成的【点击元素】（即点击查看更多）XPath路径定位不到【查看更多】按钮，所以我们需要修改【点击元素】的Xpath，使得同一条Xpath可以定位多个UP主的【查看更多】视频。
+
+将【点击元素】的XPath修改为： //div[@class="section-wrap video-section"]//span[contains(text(),"查看更多")]] 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/30c2f3ed5145403696626966604/FOw7cKKyU2QA.mp4" width="100%"></video>
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 如何修改XPath？这需要一定的XPath知识。点击查看 [*XPath学习与实例教程*](https://www.bazhuayu.com/helpcenter/docs/V2h1Ec)
+
+### 
+
+### 步骤七、启动采集
+
+1、单击【采集】并【启动本地采集】。启动后八爪鱼开始自动采集数据。
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/d5d916055145403696625371445/a3hsk9gEMpsA.mp4" width="100%"></video>
+
+ 
+
+特别说明：
+
+- a. 【本地采集】是使用自己的电脑进行采集，【云采集】是使用八爪鱼提供的云服务器采集，点击查看 [本地采集与云采集详解](https://www.bazhuayu.com/helpcenter/docs/FQjd1k)。
+
+ 
+
+2、采集完成后，选择合适的导出方式导出数据。支持导出为Excel、CSV、HTML、数据库等。这里导出为Excel。数据示例：
+
+![【B站】UP主主页视频采集](/assets/academy/case-studies/bilibili-up-videos/03-68ad3126591d5.png)
+
+ 
+
+作者：Leon

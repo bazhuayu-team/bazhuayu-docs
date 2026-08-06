@@ -1,0 +1,273 @@
+---
+title: "本地加速同时运行任务-个人版及以上专享"
+description: "介绍八爪鱼采集器高版本功能：本地加速同时运行任务-个人版及以上专享。"
+source: "https://www.bazhuayu.com/helpcenter/docs/ben-di-jia-su-tong-shi-yun-xing-ren-wu"
+---
+
+### **一、功能介绍**
+
+**概念**
+
+本地采集加速模式，是指任务满足加速条件的任务，在启动本地采集的时候可以选择加速采集。
+
+ 
+
+![本地加速同时运行任务-个人版及以上专享](/assets/academy/premium-features/local-acceleration-multi-task/01-6909ba6a225ad.png)
+
+ 
+
+ 
+
+任务满足以下条件之一时才可以启动加速模式：循环网址、循环文本、固定元素。
+
+> 特别说明：
+>
+> a.区别是否满足条件非常简单，查看整个流程框架中的最大的循环是否是以上三种模式![本地加速同时运行任务-个人版及以上专享](/assets/academy/premium-features/local-acceleration-multi-task/02-6909dd46dcfe5.png)、![本地加速同时运行任务-个人版及以上专享](/assets/academy/premium-features/local-acceleration-multi-task/03-6909dd6c611ab.png)、![本地加速同时运行任务-个人版及以上专享](/assets/academy/premium-features/local-acceleration-multi-task/04-6909dda5d0c70.png)，或者直接采集查看是否能点击加速模式。
+>
+> b.固定元素列表循环中的 XPath 通常具有相同的特征，只有数字或索引部分不同,简单说就是一条xpath只能定位一个元素（不固定元素，即一条xpath可定位多个网页元素）。
+
+ 
+
+**普通采集vs加速采集——效果展示对比**
+
+本地加速最多将1个任务拆分成3个子任务（**即理论上3倍**）
+
+ 
+
+**1、普通采集模式**
+
+![本地加速同时运行任务-个人版及以上专享](/assets/academy/premium-features/local-acceleration-multi-task/05-6909a7ad2226c.png)
+
+ 
+
+**2、本地加速采集模式**
+
+![本地加速同时运行任务-个人版及以上专享](/assets/academy/premium-features/local-acceleration-multi-task/06-6909a7ad18772.png)
+
+ 
+
+> 特别说明：
+>
+> a. 这里以循环文本规则为例，具体实例介绍见【二、案例展示】
+>
+> b.理论加速是三倍，但是实际会存在偏差，仍需考虑规则优化设置和实际采集因素（网络，浏览器，ip环境等）
+
+ 
+
+ 
+
+***
+
+### **二、案例展示（以文本循环为例）**
+
+**采集场景**
+
+打开八爪鱼RPA资源中心博客（实例网址：[https://rpa.bazhuayu.com/blog](https://rpa.bazhuayu.com/blog)），通过输入不同关键词采集相关文章信息。为展示加速采集效果，这里会设置采集数据量一致，确保案例具有参照性（具体见步骤二）。
+
+ 
+
+![本地加速同时运行任务-个人版及以上专享](/assets/academy/premium-features/local-acceleration-multi-task/07-6909a7ad22e85.png)
+
+ 
+
+**采集字段**
+
+①关键词、②博客（标题、栏目、简介）。
+
+ 
+
+**采集结果**
+
+采集结果可导出为Excel、CSV、HTML、数据库等多种格式。导出为Excel示例：
+
+![本地加速同时运行任务-个人版及以上专享](/assets/academy/premium-features/local-acceleration-multi-task/08-6909a7ad24c1a.png)
+
+ 
+
+**教程说明**
+
+本篇制作时间：2025/11/14 八爪鱼版本：V8.7.7
+
+如果因网页改版造成网址或步骤无效，无法收集到目标数据，请联系官方客服，我们将及时修正。
+
+ 
+
+**采集步骤**
+
+**步骤一、打开网页**
+
+**步骤二、循环输入文本**
+
+**步骤三、循环提取相关博客列表数据**
+
+**步骤四、字段格式化处理**
+
+**步骤五、优化规则**
+
+**步骤六、启动采集**
+
+ 
+
+#### 步骤一、**打开网页**
+
+1、打开网址
+
+在首页输入框中，输入网址[https://rpa.bazhuayu.com/blog](https://rpa.bazhuayu.com/blog)，然后点击【开始采集】，八爪鱼自动打开网页,网站会自动跳到登录页面
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/0e9574615145403704458236393/Pz8RjjINel8A.mp4" width="100%"></video>
+
+#### 步骤二、循环输入文本
+
+1、设置批量文本 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/c46378985145403704464107561/L7aWByqsgCwA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> a. 观察发现，网页在未设置点击搜索元素时就自行跳转至新界面，同时点击循环列表不能跳回原界面，这会造成文本无法正常循环。具体方案见下文确定循环结构。
+>
+> b.[循环输入文本详解](/zh/academy/basic-collection/bulk-input/text-loop-keywords)
+
+2、确定循环结构
+
+①将网址拖入循环---具体原因见步骤二-1、设置批量文本-特别说明a
+
+②点击元素“搜索”
+
+③提取关键词数据
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/c46257375145403704464105355/bVfw7VjYU3wA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> a. 将网址拖入循环是为了保证每次关键词都能正确输入。
+
+ 
+
+#### 步骤三、**循环提取相关博客列表数据**
+
+1、循环获取当页列表信息
+
+①选中页面上随机一个博客列表
+
+②在黄色操作提示框中，选择【选中全部子元素】---确定要循环的xpath
+
+③选择【选中全部相似组】
+
+④提取【元素中相似内容】
+
+⑤删除多余字段
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/bc256e4c5145403704467878095/WkGlFpXATrUA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> a. [循环列表数据提取详解](/zh/academy/basic-collection/beginner/list-collection)
+>
+> b.[Xpath详解](https://www.bazhuayu.com/helpcenter/docs/pWdSFO)
+
+ 
+
+2、设置翻页
+
+①向下滑动点击下一页按钮
+
+②在黄色操作提示框中，选择【循环点击】
+
+③点击循环翻页流程，设置循环次数为2---为确保采集数据一致，方便做普通采集与加速采集对比
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/203a16795145403704472534451/ymQaS0qFUaEA.mp4" width="100%"></video>
+
+ 
+
+#### 步骤四、字段格式化处理
+
+①字段“文本框值”改为“关键词”
+
+②字段3拉至第二列，并改为“栏目”
+
+③字段1改为“标题”
+
+④字段4改为“简介”
+
+![本地加速同时运行任务-个人版及以上专享](/assets/academy/premium-features/local-acceleration-multi-task/09-6909a7ad42048.png)
+
+ 
+
+> 特别说明：
+>
+> a. 具体格式化详情[字段格式化](/zh/academy/advanced-features/data-processing/field-formatting)
+
+ 
+
+#### 步骤五、规则优化
+
+1、给点击元素/点击翻页设置Ajax加载超过7秒执行下一步
+
+2、给“组合输入文本”设置执行前等待3秒---为了输入文本更稳定
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/d7fc3f845145403704471744379/L61msCcRwPoA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> a. 设置完相关优化（高级设置）后一定要及时点击应用。
+>
+> ![本地加速同时运行任务-个人版及以上专享](/assets/academy/premium-features/local-acceleration-multi-task/10-6909a7ad1b105.png)
+>
+> b.规则优化的原则就是在不影响采集质量的前提下追求高效采集，具体规格优化参考：[规则优化](https://www.bazhuayu.com/helpcenter/docs/gui-ze-you-hua?search=1)
+
+ 
+
+#### 步骤六、启动采集
+
+1、普通采集，48秒完成60条数据采集 
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/da8598ff5145403704471870923/8ABYXJVkYN8A.mp4" width="100%"></video>
+
+ 
+
+2、本地加速采集：18秒完成60条数据采集 
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/6a23bcbf5145403704466623563/mC742MGwRaEA.mp4" width="100%"></video>
+
+ 
+
+3、采集完成后，选择合适的导出方式来导出数据。支持导出为Excel，CSV，HTML，数据库等。这里导出为Excel。
+
+ 
+
+![本地加速同时运行任务-个人版及以上专享](/assets/academy/premium-features/local-acceleration-multi-task/11-6909be20028e3.png)
+
+ 
+
+特别说明：
+
+a. 免费版支持每个月试用三次本地加速功能，个人版支持每个月同时使用1个任务进行本地加速功能
+
+b.团队版同时使用4个，企业版同时使用16个——团队版和企业版也支持6个/16个云节点并行运行云采集，如需要更快速度，可以购买云节点叠加包（注：仅支持云采集加速）；个人版以上可购买本地加速任务运行数量叠加包（注：仅支持本地采集）[具体版本服务介绍](https://www.bazhuayu.com/plan)
+
+ 
+
+作者：YfY

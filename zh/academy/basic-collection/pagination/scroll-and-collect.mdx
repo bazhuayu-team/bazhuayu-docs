@@ -1,0 +1,135 @@
+---
+title: "边滚动边采集数据"
+description: "边滚动边采集数据教程，来自八爪鱼帮助中心「操作指南 / 基本采集」。"
+source: "https://www.bazhuayu.com/helpcenter/docs/fHVc3P"
+---
+
+## **一、什么是【边滚动边采集数据】**
+
+ 
+
+有很多网站，需要向下滚动页面，才能加载出新数据，像 [今日头条首页](https://www.toutiao.com/)、[百度图片搜索](https://image.baidu.com/search/index?tn=baiduimage\&ipn=r\&ct=201326592\&cl=2\&lm=-1\&st=-1\&fm=result\&fr=\&sf=1\&fmq=1572935261090_R\&pv=\&ic=\&nc=1\&z=\&hd=\&latest=\&copyright=\&se=1\&showtab=0\&fb=0\&width=\&height=\&face=0\&istype=2\&ie=utf-8\&sid=\&word=%E5%A4%8F%E7%9B%AE%E5%8F%8B%E4%BA%BA%E5%B8%90)、[新浪微博首页](https://weibo.com/) 等页面都是这种情况。
+
+在采集这类网页数据时，相对应的在八爪鱼 https\://etax.shandong.chinatax.gov.cn/dzswj/zdsswfsxajgbl.jsp https\://etax.shandong.chinatax.gov.cn/dzswj/zdsswfsxajgbl.jsp中也需设置【页面滚动】。
+
+ 
+
+八爪鱼V8.2.0之前的版本，需按照设置的滚动次数，将页面全部滚动完成之后，才会开始采集数据。
+
+例：设置滚动20次，则需等页面滚动20次后，一次性采集前20次滚动后加载的全部数据。
+
+详情请看教程：[滚动加载数据采集方法](https://www.bazhuayu.com/helpcenter/docs/McMBHy)
+
+ 
+
+## **二、【边滚动边采集数据】的优点**
+
+ 
+
+与将页面全部滚动完成之后，才会开始采集数据相比，【边滚动边采集】极大地提高了滚动采集数据的稳定性，避免滚动多次却一条数据也采集不到的情况。
+
+ 
+
+## **三、****【边滚动边采集数据】****如何设置？**
+
+ 
+
+使用智能识别和自行配置的采集规则，都能实现【边滚动边采集】，具体设置方法如下。
+
+ 
+
+### 1、使用智能识别实现【边滚动边采集】
+
+示例网址：[新闻中心-腾讯网 (qq.com)](https://news.qq.com/)
+
+ 
+
+Step1：在首页输入框中，输入目标网址，点击【开始采集】，八爪鱼自动打开网页。
+
+打开网页后，选择【智能识别网页】，并给它一点时间，等待智能识别完成。
+
+智能识别结束后，可以看到它自动识别了页面的滚动和列表数据，选择生成采集设置，由于我们已经识别到滚动网页，就不需要继续点击【滚动加载】
+
+ 
+
+ 
+
+Step2：点开【滚动网页】流程，选择滚动方式【滚动到底部】，为了方便演示【循环次数】设置为3次，间隔时间1秒，点击【应用】
+
+注意：实际采集过程中，滚动次数和间隔时间可根据实际情况进行设置。
+
+  ![边滚动边采集数据](/assets/academy/basic-collection/scroll-and-collect/01-65bca2ddd81d0.gif)
+
+Step3：点击右上角【采集】，选择【普通采集】，打开采集页面，点击【显示网页】
+
+观察采集情况：八爪鱼滚动1次后，采集第1次滚动后加载的数据，继续滚动第2次，采集第2次滚动后加载的数据。
+
+因为我们只设置了滚动3次，所以采集第3次滚动后加载的数据，退出采集流程。
+
+最后导出数据即可.
+
+![边滚动边采集数据](/assets/academy/basic-collection/scroll-and-collect/02-65bca41aba4c4.gif)
+
+ 
+
+ 
+
+### 2、自行配置采集任务实现【边滚动边采集】
+
+ 
+
+如果不使用智能识别，如何自行配置采集任务，实现【边滚动边采集】呢？以下详细详解。
+
+示例网址：[新闻中心-腾讯网 (qq.com)](https://news.qq.com/)
+
+ 
+
+Step1：在首页输入框中，输入目标网址，点击【开始采集】，八爪鱼自动打开网页。关掉智能识别，我们自行配置采集任务。
+
+![边滚动边采集数据](/assets/academy/basic-collection/scroll-and-collect/03-65bca459e6b6c.gif)
+
+ 
+
+Step2：在首页选择一个包含我们想要数据的元素框，选中第二个元素框关联选中，点击文本创建循环，观察到右侧的规则出现【循环列表】流程和【提取列表数据】流程，接下来选择【滚动加载】，设置滚动模式为全局，滚动方式为滚动到底部，滚动次数为5次，点击确定，右侧就会出现【滚动网页】流程
+
+![边滚动边采集数据](/assets/academy/basic-collection/scroll-and-collect/04-65bca4d19c969.gif)
+
+Step3：接下来，就是按照需求配置提取数据，这里我们提取标题数据，选中流程中的【提取列表数据】，选中标题，点击文本内容，观察到底部的数据预览框里出现我们想要的标题数据，双击文本，对字段进行重命名，删除前面为了创建循环而建的字段，这样一个采集标题的流程就创建好了。
+
+![边滚动边采集数据](/assets/academy/basic-collection/scroll-and-collect/05-65bca5c0f1623.gif)
+
+ 
+
+Step4：点击左上角的【采集】，选择本地采集【普通模式】，八爪鱼就会开始全自动采集数据，点击显示网页观察网页页面。
+
+注意观察页面：八爪鱼滚动1次后，采集第1次滚动后加载的数据，继续滚动第2次，采集第2次滚动后加载的数据。
+
+因为我们只设置了滚动5次，所以采集第5次滚动后加载的数据，退出采集流程。
+
+ 
+
+ 
+
+### **3.局部滚动设置**
+
+**3.1、局部滚动xpath快速查找方法**
+
+1、首先需要安装Microsoft Edge浏览器\
+![边滚动边采集数据](/assets/academy/basic-collection/scroll-and-collect/06-69b91d78f1cb3.png)
+
+2、演示网址[douyin.com/video/7063388051535416614](https://www.douyin.com/video/7063388051535416614)
+
+3、在浏览器中打开演示的网址，然后键盘F12键，选择【控制台】![边滚动边采集数据](/assets/academy/basic-collection/scroll-and-collect/07-69b91d794d462.png)
+
+4、然后再下发复制粘贴输入以下代码，粘贴后按回车键\
+function findScroller(element) \{     element.onscroll = function() \{ console.log(element)\}     Array.from(element.children).forEach(findScroller); \} findScroller(document.body);
+
+![边滚动边采集数据](/assets/academy/basic-collection/scroll-and-collect/08-69b91d7aa18bb.png)
+
+5、滚动评论页面数据，这个时候出来的就是局部滚动区域的xpath，进行复制对应的xpath即可，整个流程视频如下：
+
+### <video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/bc380d2d5145403694832398851/QIl3ZxQXfSUA.mp4" width="100%"></video>
+
+ 
+
+作者：Y

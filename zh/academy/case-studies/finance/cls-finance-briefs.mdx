@@ -1,0 +1,695 @@
+---
+title: "【财联社】财经信息短报采集"
+source: "https://www.bazhuayu.com/helpcenter/docs/cai-lian-she-cai-jing-xin-xi-duan-bao-cai-ji"
+---
+场景介绍
+
+采集财经资讯，实时监控全网实时热点动向，财联社电报支持实时更新滚动，采集器配置定时运行可实现实时监控最新财经热点动向需求。固定短周期采集。
+
+ 
+
+**采集场景**
+
+打开财联社官网文献搜索界面（实例网址：[https://www.cls.cn/telegraph](https://www.cls.cn/telegraph)），设置**每半小时监控采集新增数据**。
+
+![【财联社】财经信息短报采集](/assets/academy/case-studies/cls-finance-briefs/01-6942852ac7aee.png)
+
+ 
+
+ 
+
+主要采集字段
+
+①发布时间，②标题，③短报内容，④关联话题，⑤阅读量。
+
+ 
+
+**采集结果**
+
+采集结果可导出为Excel、CSV、HTML、数据库等多种格式。 导出为Excel示例：
+
+![【财联社】财经信息短报采集](/assets/academy/case-studies/cls-finance-briefs/02-694285996b93b.png)
+
+ 
+
+**教程说明**
+
+本篇制作时间：2025/12/16 八爪鱼版本：V8.7.7
+
+如果因网页改版造成网址或步骤无效，无法收集到目标数据，请联系官方客服，我们将及时修正。
+
+ 
+
+**采集步骤**
+
+步骤一、打开网页
+
+步骤二、确定采集时间（当天）
+
+步骤三、确定循环列表并提取发布时间与短报信息
+
+步骤四、进入详情页提取相应数据
+
+步骤五、字段格式化处理
+
+步骤六、优化规则
+
+步骤七、启动采集
+
+ 
+
+**以下为具体步骤：**
+
+ 
+
+### 步骤一、打开网页
+
+ 
+
+1、打开网址
+
+在首页输入框中，输入网址[https://www.cls.cn/telegraph](https://www.cls.cn/telegraph)，然后点击【开始采集】，八爪鱼自动打开网页，网站会自动跳到登录页面
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/398ed8ce5145403709489486525/iaHfGFsOyScA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 打开网页后，如果开始开始【自动识别】，请等待自动识别完成。八爪鱼支持自动识别网页上的列表、滚动和翻页，识别成功后直接启动采集即可获取数据。如果【自动识别】的结果不是我们需要的，可点击【取消】关闭智能识别，自行配置采集流程。详情点击查看 【自动识别】
+> 
+> - b.如果打开发现存在网址异常，点击刷新即可。
+> 
+> ![【财联社】财经信息短报采集](/assets/academy/case-studies/cls-finance-briefs/03-6942852a4a505.png)
+> 
+> 
+
+ 
+
+ 
+
+### 步骤二、确定采集时间（当天）
+
+ 
+
+1、点击选择日期，确定今日
+
+① 选中日期元素
+
+② 在黄色操作提示框中，选择操作【点击一次】
+
+③ 再选择“今天”按钮
+
+④ 在黄色操作提示框中，选择操作【点击该链接】
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/74c8e23a5145403709503083255/Pdvyb9JYKbkA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 选择采集今日主要是将网页变为可控状态，保证采集数据获取更稳定。通过观察发现，首页数据格式过多，定位非常不准，效果差别展示如下： 变换前：
+> 
+> （1）时间只有时分秒，不利于后期时间定位触发器。
+> 
+> （2）存在展开按键，直接选取短报内容可能定位不准。
+> 
+> ![【财联社】财经信息短报采集](/assets/academy/case-studies/cls-finance-briefs/04-694358770d7cd.png)
+> 
+> 
+> 
+> 变换后：
+> 
+> （1）时间格式标准，后期触发器可准确识别。
+> 
+> （2）短报定位完整。
+> 
+> （3）点击进详情页后即可查看阅读量与关联话题，获取数据位置更稳定。
+> 
+> ![【财联社】财经信息短报采集](/assets/academy/case-studies/cls-finance-briefs/05-6942852a6679e.png)
+> 
+> ![【财联社】财经信息短报采集](/assets/academy/case-studies/cls-finance-briefs/06-694358a903eba.png)
+
+ 
+
+ 
+
+ 
+
+ 
+
+### 步骤三、确定循环列表并提取发布时间与短报信息
+
+ 
+
+1、确定循环列表
+
+① 点击选中列表
+
+② 在黄色操作提示框中，选择【选中全部相似元素】
+
+③ 在黄色操作提示框中，选择提取【文本内容】
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/7c54ec2b5145403709490938357/bVBE8rpimD8A.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a.此配置完获取到的数据是整个列表的文本，实际不具有实用性，仅仅是为了获取循环列表的xpath，便于后续选择具体字段采集/点击提供拼接条件，相关说明可参考：[绝对xpath、相对XPath学习与实例](https://www.bazhuayu.com/helpcenter/docs/bs4o6e)
+
+ 
+
+2、获取发布时间与短报内容
+
+①点击发布时间
+
+②在黄色操作提示框中，选择提取【文本内容】
+
+①点击短报内容
+
+②在黄色操作提示框中，选择提取【文本内容】
+
+③删除第一个字段
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/3e381ed55145403709489684883/pCUCspImhxwA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a.为何只点击一个列表的数据，整个循环列表都能正常采集呢？原因就是如果在已经生成的循环列表中选择点击/提取元素，系统会优先匹配相对xpath拼接，便于数据采集调试。可参考：[绝对xpath、相对XPath学习与实例](https://www.bazhuayu.com/helpcenter/docs/bs4o6e)
+> 
+> ![【财联社】财经信息短报采集](/assets/academy/case-studies/cls-finance-briefs/07-6942852a439d8.png)
+
+ 
+
+3、设置翻页
+
+①找到并点击翻页按钮（加载更多）
+
+②在黄色操作提示框中，选择提取【循环点击】
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/4a6709525145403709496965619/0Pz19HnfAvoA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a.某一元素选择循环点击，从流程角度来说都是循环翻页，当黄色提示框没有提示翻页按钮配置时，可以如上操作实现翻页。相关参考：[翻页以采集多页数据](/zh/academy/basic-collection/pagination/next-page-button#141a1e00d56ad162b1ca7eae995e64a0)
+
+ 
+
+### 步骤四、进入详情页提取相应数据
+
+ 
+
+1、点击短报内容进入详情页
+
+① 首先点击流程“循环列表1”-具体原因见步骤三-2、获取发布时间与短报内容-特殊说明a
+
+② 点击短报内容
+
+③在黄色操作提示框中，选择操作【点击一次】
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/0766f3fa5145403709485500270/PTdTVhJCSYsA.mp4" width="100%"></video>
+
+ 
+
+ 
+
+2、获取相关字段数据
+
+① 点击阅读量并采集
+
+② 在黄色操作提示框中，选择提取【文本内容】
+
+② 点击关联话题
+
+④ 在黄色操作提示框中，选择【选中全部相似元素】
+
+⑤在黄色操作提示框中，选择提取【文本内容】
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/c200500d5145403709484886642/IOEZHUlA6L8A.mp4" width="100%"></video>
+
+ 
+
+### 步骤五、字段格式化处理
+
+ 
+
+1、修改流程名
+
+①更改“点击元素”为“点击日期选择”
+
+②更改“点击元素1”为“选择当日”
+
+③更改“循环翻页”为“循环加载更多”
+
+④更改“提取列表数据”为“提取时间与短报内容”
+
+⑤更改“点击元素2”为“进入详情页”
+
+⑥更改“提取数据”为“提取阅读量”
+
+⑦更改“循环列表1”为“循环关联话题”
+
+⑧更改“提取列表数据1”为“采集关联话题”
+
+⑨更改“点击翻页”为“点击加载更多”
+
+![【财联社】财经信息短报采集](/assets/academy/case-studies/cls-finance-briefs/08-6942852a462b5.png)
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 修改流程名目的主要是规范流程，为后续排查问题打下便利基础。
+> 
+> - b.若是在基础设置中修改流程名。则改完后一定要点击应用。
+> 
+> ![【财联社】财经信息短报采集](/assets/academy/case-studies/cls-finance-briefs/09-6942852a40ffb.png)
+
+ 
+
+2、修改字段名
+
+①更改“文本”为“发布时间”
+
+②更改“文本1”为“短报详情”
+
+③更改“文本2”为“阅读量”
+
+④更改“字段1\_文本”为“关联话题”
+
+ 
+
+3、处理短报标题与短报详情
+
+①复制“短报详情”字段。
+
+②右键“短报详情”字段，选择格式化数据。
+
+③点击添加步骤，选择正则匹配。
+
+④使用正则工具匹配到标题。表达式：(?&lt;=【)(.+?)(?=】)
+
+⑤配置完成后点击应用。
+
+⑥更改“短报详情”为“短报标题”
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/3750ad7f5145403709496104822/LHlunNvLtnMA.mp4" width="100%"></video>
+
+ 
+
+⑦右键“短报详情\_复制”字段，选择格式化数据。
+
+⑧点击添加步骤，选择正则替换，使用正则工具匹配到标题，将其替换为“空白”。表达式：【(.+?)】
+
+⑨配置完成后点击应用。更改“短报详情\_复制”为“短报详情”。
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/00c3083b5145403709485252105/ebZXwhZ43TIA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 短报正文中将标题与详情结合，观察源码发现其就是一体的，所以说这边我们采取数据格式化的方式将其分开。
+> 
+> - b.正则匹配使用方法详细参考该教程：[字段格式化](/zh/academy/advanced-features/data-processing/field-formatting)
+
+ 
+
+4、修改翻页xpath 手动执行任务发现翻页xpath定位到其中一条列表中，排查发现自动识别的xpath是路径定位，此类定位及其不准确。
+
+![【财联社】财经信息短报采集](/assets/academy/case-studies/cls-finance-briefs/10-6942852a68c9e.png)
+
+修改xpath为：//div[@class="f-s-14 t-a-c m-auto m-t-24 m-b-24 w-162 h-38 c-222 l-h-38p b-w-1 b-s-s b-r-20 c-p bg-c-fff b-c-222 h-c-666 h-b-c-999"]
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/4a8b2d8d5145403709496985315/3MVFrEx5ZKAA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a.[Xpath详解](https://www.bazhuayu.com/helpcenter/docs/V2h1Ec)
+
+ 
+
+5、发布时间格式化
+
+观察到发布时间并不单纯时间，而是带有星期和来源，这边需要用字段格式化处理成标准格式，便于后续触发器匹配。
+
+![【财联社】财经信息短报采集](/assets/academy/case-studies/cls-finance-briefs/11-6942852a5b783.png)
+
+ 
+
+①首先将其星期使用正则替换掉
+
+②将来源也使用正则替换掉
+
+③将时间格式化为yyyy-MM-dd HH:mm:ss
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/5e4961f65145403709486985577/UZWAKQJfJUcA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a.①②中正则具体操作方式类比步骤五-3、处理短报标题与短报详情，③阶段具体配置方法详细参考该教程：[字段格式化](/zh/academy/advanced-features/data-processing/field-formatting)
+
+ 
+
+6、其他修改
+
+①调整阅读量字段，处理“阅”前缀。
+
+②将关联话题合并为同一字段。
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/3487d7e95145403709489232477/Xz5tpd5GstIA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a.将同一字段合并主要是解决同一类型循环元素占用数据采集行数的问题，具体请关注：[字段合并](/zh/academy/advanced-features/data-processing/field-merge)
+
+ 
+
+ 
+
+### 步骤六、优化规则
+
+实行主要配置触发器，保证任务只采集半小时内的新增数据，结合定时云采集可实现每半小时监控短报的需求。
+
+1、配置触发器
+
+①点击流程“提取时间与短报内容”-具体解释见本步骤特殊说明a
+
+②配置点击新增触发器
+
+③配置“发布时间”早于“”自定义
+
+④配置自定义为“当前采集时间-30分钟”
+
+⑤配置执行操作为“结束本次采集”-具体解释见本步骤特殊说明b
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/4e57e1e45145403709493049534/FaEHHcQA3ocA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 由于是采集半小时内的数据，所以需要以发布时间作为判断。
+> 
+> - b.整体逻辑就可以理解为按照时间降序采集时，发布时间如果比当前采集时间早半小时，则直接停止任务。配合云采集定时30分，即可实现每30分钟执行任务采集新增数据。
+> 
+> - c.设置完触发器后一定要及时点击应用。触发器具体讲解参考：[触发器功能说明](/zh/academy/advanced-features/workflow-settings/trigger)
+> 
+> ![【财联社】财经信息短报采集](/assets/academy/case-studies/cls-finance-briefs/12-6942852a45c66.png)
+> 
+> 
+
+ 
+
+2、设置当前时间字段
+
+①选中循环列表
+
+②添加流程，点击提取数据
+
+③选择添加字段：“添加采集时间”
+
+④点击应用
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/10e32b305145403709485926865/uL5bENO1AcYA.mp4" width="100%"></video>
+
+ 
+
+⑤设置字段格式化
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/e353bc365145403709488099687/kOvz8YGA7M8A.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 添加当前时间字段是为了与对比发布时间作为对比（便于证实每半小时新增采集），调整格式化是为了使对比更佳明显。
+
+ 
+
+3、常规规则优化
+
+①“点击日期选择”配置“执行前等待1秒”
+
+②“选择当日”配置“执行前等待1秒”
+
+③“提取阅读量”配置“执行前等待1秒”
+
+④“点击加载更多”配置“执行前等待1秒”
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/b175d1075145403709484156079/4f58qt7tLd4A.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 设置完相关优化（高级设置）后一定要及时点击应用。
+> 
+> ![【财联社】财经信息短报采集](/assets/academy/case-studies/cls-finance-briefs/13-6942852a4bb7d.png)
+> 
+> - b.具体规格优化参考：[规则优化-八爪鱼帮助中心](https://www.bazhuayu.com/helpcenter/docs/gui-ze-you-hua?search=1)
+
+ 
+
+ 
+
+### 步骤五、启动采集与下载
+
+ 
+
+1、设置任务定时
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/60ff8ed05145403709493846856/qfo3g4GTHrIA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 【本地采集】是使用自己的电脑进行采集，【云采集】是使用八爪鱼提供的云服务器采集，点击查看 [本地采集与云采集详解](https://www.bazhuayu.com/helpcenter/docs/2xF5Mz)
+> 
+> - b.这里我们使用云采集，每半小时启动启动任务，则理论上，采集的数据就是采集任务启动半小时内的。由于是每半小时都会启动任务，所以不存在漏抓数据的情况。
+
+ 
+
+2、定时新增采集效果展示
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/50e226015145403709493177034/jqk7aKppUHEA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 定时采集说明请参考：[定时任务（本地+云）](/zh/academy/premium-features/paid-features/scheduled-tasks)
+> 
+> - B. 这里采用云定时主要是因为云定时更佳稳定，执行时间更长（不会因为本地关机而停止任务执行），同时适配的功能更多，后续也可以定时入库。
+> 
+> - b.采集新增数据亦有其他方案（本教程使用的是方法一），可参考：[采集新增数据](/zh/academy/premium-features/paid-features/collect-new-data)
+
+ 
+
+3、采集完成后，选择合适的导出方式来导出数据。支持导出为Excel，CSV，HTML，数据库等。这里导出为Excel。
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/777224465145403709490704469/VsfPhUhCNDIA.mp4" width="100%"></video>
+
+ 
+
+4、设置自动导出
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/60ef020f5145403709493839268/ml7yr1AUlkwA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 定时自动导出可帮助我们周期性掌握新增短报数据，达到监控效果。
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+作者：YfY

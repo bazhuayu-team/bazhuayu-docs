@@ -1,0 +1,209 @@
+---
+title: "【百姓网】短租房源数据采集"
+source: "https://www.bazhuayu.com/helpcenter/docs/WecuLu"
+---
+**采集场景**
+
+采集某城市的百姓网日租短租房屋信息，示例网址（百姓网武汉日租房）：[https://wuhan.baixing.com/duanzu/](https://wuhan.baixing.com/duanzu/) 
+
+ 
+
+**采集字段**
+
+出租人名称、标题、价格、发布时间、详情介绍、房屋地址、页面网址等字段
+
+ 
+
+![【百姓网】短租房源数据采集](/assets/academy/case-studies/baixing-short-rental-listings/01-6684f7da37c58.png)
+
+ 
+
+ 
+
+**采集结果**
+
+采集结果可导出为Excel，CSV，HTML，数据库等多种格式。导出为Excel示例：
+
+ 
+
+ ![](/assets/academy/case-studies/baixing-short-rental-listings/02-653890353d2c3.png)
+
+ 
+
+**教程说明**
+
+本篇制作时间：2024/6/19    八爪鱼版本：V8.7.0
+
+如果因网页改版造成网址或步骤无效，无法采集到目标数据，请联系官方客服，我们将及时修正。
+
+ 
+
+**采集步骤**
+
+ 
+
+步骤一、打开网页
+
+步骤二、创建【循环点击】
+
+步骤三、创建【循环翻页】
+
+步骤四、配置采集字段
+
+步骤五、启动采集
+
+ 
+
+**以下为具体步骤：**
+
+ 
+
+### 步骤一、打开网页
+
+ 
+
+在首页【输入框】中输入目标网址 [https://dongying.baixing.com/duanzu/m5828/](https://wuhan.baixing.com/duanzu/)，点击【开始采集】，八爪鱼自动打开网页。
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/2ecb89d81253642700117364636/LaTltGn8WZkA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a.  打开网页后，如果开始开始【自动识别】，请点击【不再自动识别】或【取消识别】将其关掉。因为本文不适合使用【自动识别】
+> 
+> - b. 【自动识别】适用于自动识别网页上的列表、滚动和翻页，识别成功后直接启动采集即可获取数据。详情点击查看 [*【自动识别】教程*](https://www.bazhuayu.com/tutorial8/81zdypz)
+
+ 
+
+ 
+
+ 
+
+### 步骤二、创建【循环点击】
+
+通过以下几步，实现创建【循环点击】：
+
+① 点击房屋标题
+
+② 在操作提示框中点【击选中全部相似元素】
+
+③ 点击【循环点击每个链接】
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/1600abee1253642700110424771/7mNV4H2pzJMA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 为什么经过以上步骤能建立起循环列表步骤？详情请看 [采集列表数据教程](https://www.bazhuayu.com/helpcenter/docs/RXxvh9) 。
+
+ 
+
+ 
+
+### 步骤三、创建【循环翻页】，以采集多页数据
+
+如果只是采集一页数据，可跳过此步骤。
+
+如果需要翻页以采集多页数据：选择页面中的【下一页】按钮，在操作提示上单击【循环点击下一页】，创建【循环翻页】。
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/a91c9df21253642700112149814/Hh72sViCdcsA.mp4" width="100%"></video>
+
+ 
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a.  创建【循环翻页】后，八爪鱼会自动点击【下一页】按钮进行翻页，从第1页，第2页......直到最后1页。如果只需采集特定页的数据，可在八爪鱼中设置循环翻页的次数，详情点击查看  [*翻页以采集多页数据教程*](/zh/academy/basic-collection/pagination/next-page-button)。
+
+ 
+
+ 
+
+ 
+
+### 步骤四、配置采集字段
+
+ 
+
+1、采集房屋详情页中的字段
+
+选中页面中的文本，然后在操作提示框中，点击【文本内容】。
+
+文本类字段都可以按照这样的方式提取。
+
+示例中我们提取了标题、价格、发布时间、详情介绍、房屋地址、页面网址等字段。  
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/4562e0c91253642700114243331/5QhUtqtwwYMA.mp4" width="100%"></video>
+
+ 
+
+2、编辑字段
+
+字段采集完成后，我们可以进行修改字段名称、删除多余字段、调整字段顺序等操作。
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/e10574181253642700109546921/zBmKHEHwAsIA.mp4" width="100%"></video>
+
+ 
+
+ 
+
+### 步骤五、启动采集
+
+ 
+
+1、保存好任务之后，点击【采集】并选择【启动本地采集】。启动后八爪鱼开始自动采集数据。
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/e43ac87e1253642700116478853/HCh0pjwj1tMA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 【本地采集】是使用自己的电脑进行采集，【云采集】是使用八爪鱼提供的云服务器采集，点击查看 [本地采集与云采集详解](https://www.bazhuayu.com/helpcenter/docs/2xF5Mz)。
+> 
+> - b.  如果采集的时候弹出验证，需要手动点击验证后才能采集数据。
+
+ 
+
+2、采集完成后，选择合适的导出方式导出数据。支持导出为Excel、CSV、HTML、数据库等。这里导出为Excel。
+
+ ![【百姓网】短租房源数据采集](/assets/academy/case-studies/baixing-short-rental-listings/03-6684f9cbd8d40.png)

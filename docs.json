@@ -1,0 +1,682 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "mint",
+  "name": "八爪鱼文档",
+  "colors": {
+    "primary": "#0D47A1",
+    "light": "#1565C0",
+    "dark": "#0D47A1"
+  },
+  "favicon": "/assets/favicons/favicon.ico",
+  "logo": {
+    "light": "/assets/logo.png",
+    "dark": "/assets/logo.png"
+  },
+  "navigation": {
+    "languages": [
+      {
+        "language": "zh",
+        "default": true,
+        "hidden": true,
+        "tabs": [
+          {
+            "tab": "首页",
+            "groups": [
+              {
+                "group": "概述",
+                "pages": [
+                  "zh/overview"
+                ]
+              },
+              {
+                "group": "产品介绍",
+                "pages": [
+                  "zh/product/intro/what-is-octoparse",
+                  "zh/product/intro/features",
+                  "zh/product/intro/octoparse-vs-rpa",
+                  "zh/product/intro/usage-notice"
+                ]
+              },
+              {
+                "group": "产品计费",
+                "pages": [
+                  "zh/product/pricing/overview",
+                  "zh/product/pricing/plans",
+                  "zh/product/pricing/template",
+                  "zh/product/pricing/captcha",
+                  "zh/product/pricing/proxy-ip",
+                  "zh/product/pricing/remote-service",
+                  "zh/product/pricing/custom-service"
+                ]
+              }
+            ]
+          },
+          {
+            "tab": "采集学院",
+            "groups": [
+              {
+                "group": "概述",
+                "pages": [
+                  "zh/academy/index"
+                ]
+              },
+              {
+                "group": "快速入门",
+                "pages": [
+                  {
+                    "group": "注册安装",
+                    "pages": [
+                      "zh/academy/quick-start/registration-installation/windows-client-installation",
+                      "zh/academy/quick-start/registration-installation/mac-client-installation",
+                      "zh/academy/quick-start/registration-installation/free-account-registration"
+                    ]
+                  },
+                  {
+                    "group": "3分钟快速上手",
+                    "pages": [
+                      "zh/academy/quick-start/three-minute-quick-start/client-overview",
+                      "zh/academy/quick-start/three-minute-quick-start/collection-interface",
+                      "zh/academy/quick-start/three-minute-quick-start/beginner-guide",
+                      "zh/academy/quick-start/three-minute-quick-start/template-collection",
+                      "zh/academy/quick-start/three-minute-quick-start/auto-recognize-collection",
+                      "zh/academy/quick-start/three-minute-quick-start/build-first-rule-task",
+                      "zh/academy/quick-start/three-minute-quick-start/official-promo-benefits",
+                      "zh/academy/quick-start/three-minute-quick-start/beginner-faq-official"
+                    ]
+                  }
+                ]
+              },
+              {
+                "group": "操作指南",
+                "pages": [
+                  {
+                    "group": "基本采集",
+                    "pages": [
+                      {
+                        "group": "初级采集",
+                        "pages": [
+                          "zh/academy/basic-collection/beginner/custom-collection",
+                          "zh/academy/basic-collection/beginner/list-collection",
+                          "zh/academy/basic-collection/beginner/list-to-detail",
+                          "zh/academy/basic-collection/beginner/table-collection",
+                          "zh/academy/basic-collection/beginner/click-to-jump",
+                          "zh/academy/basic-collection/beginner/login-verification",
+                          "zh/academy/basic-collection/beginner/collection-logic",
+                          "zh/academy/basic-collection/beginner/local-collection"
+                        ]
+                      },
+                      {
+                        "group": "翻页采集多页数据",
+                        "pages": [
+                          "zh/academy/basic-collection/pagination/next-page-button",
+                          "zh/academy/basic-collection/pagination/scroll-loading-pagination",
+                          "zh/academy/basic-collection/pagination/load-more-button-pagination",
+                          "zh/academy/basic-collection/pagination/scroll-and-collect",
+                          "zh/academy/basic-collection/pagination/click-load-more-and-collect",
+                          "zh/academy/basic-collection/pagination/number-pagination"
+                        ]
+                      },
+                      {
+                        "group": "多关键词多网址采集",
+                        "pages": [
+                          "zh/academy/basic-collection/bulk-input/text-loop-keywords",
+                          "zh/academy/basic-collection/bulk-input/url-loop-similar-pages"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "group": "规则排错与优化",
+                    "pages": [
+                      "zh/academy/troubleshooting/local-debug",
+                      {
+                        "group": "流程优化",
+                        "pages": [
+                          "zh/academy/troubleshooting/rule-optimization",
+                          "zh/academy/troubleshooting/ajax-web-scraping",
+                          "zh/academy/troubleshooting/new-tab",
+                          "zh/academy/troubleshooting/auto-retry"
+                        ]
+                      },
+                      "zh/academy/troubleshooting/anti-scraping",
+                      "zh/academy/troubleshooting/cloud-debug"
+                    ]
+                  },
+                  {
+                    "group": "数据导出",
+                    "pages": [
+                      "zh/academy/data-export/start-and-export",
+                      "zh/academy/data-export/file-download",
+                      {
+                        "group": "导出到数据库",
+                        "pages": [
+                          "zh/academy/data-export/export-to-database/export-to-mysql",
+                          "zh/academy/data-export/export-to-database/export-to-sqlserver",
+                          "zh/academy/data-export/export-to-database/export-to-oracle",
+                          "zh/academy/data-export/export-to-database/export-to-database-faq"
+                        ]
+                      },
+                      "zh/academy/data-export/auto-export-local"
+                    ]
+                  },
+                  {
+                    "group": "XPath学习与案例",
+                    "pages": [
+                      {
+                        "group": "Xpath入门",
+                        "pages": [
+                          "zh/academy/xpath/getting-started/why-use-xpath",
+                          "zh/academy/xpath/getting-started/what-is-html-xpath",
+                          "zh/academy/xpath/getting-started/get-xpath",
+                          "zh/academy/xpath/getting-started/xpath-functions"
+                        ]
+                      },
+                      "zh/academy/xpath/relative-absolute-xpath",
+                      {
+                        "group": "修改Xpath元素",
+                        "pages": [
+                          "zh/academy/xpath/modify-element/locate-element",
+                          "zh/academy/xpath/modify-element/modify-loop-list",
+                          "zh/academy/xpath/modify-element/modify-loop-pagination"
+                        ]
+                      },
+                      {
+                        "group": "xpath案例",
+                        "pages": [
+                          "zh/academy/xpath/cases/missing-or-misaligned-fields",
+                          "zh/academy/xpath/cases/duplicate-pages",
+                          "zh/academy/xpath/cases/duplicate-last-page",
+                          "zh/academy/xpath/cases/loop-add-more-items",
+                          "zh/academy/xpath/cases/loop-filter-items"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "group": "进阶功能",
+                    "pages": [
+                      {
+                        "group": "数据处理（格式化）",
+                        "pages": [
+                          "zh/academy/advanced-features/data-processing/field-formatting",
+                          "zh/academy/advanced-features/data-processing/field-merge",
+                          "zh/academy/advanced-features/data-processing/add-special-fields",
+                          "zh/academy/advanced-features/data-processing/custom-extraction-method",
+                          "zh/academy/advanced-features/data-processing/missing-field-handling",
+                          "zh/academy/advanced-features/data-processing/backup-location",
+                          "zh/academy/advanced-features/data-processing/deduplicate-data",
+                          "zh/academy/advanced-features/data-processing/regular-expression"
+                        ]
+                      },
+                      {
+                        "group": "特殊流程步骤介绍",
+                        "pages": [
+                          "zh/academy/advanced-features/special-steps/return-to-previous-page",
+                          "zh/academy/advanced-features/special-steps/hover-to-load-data",
+                          "zh/academy/advanced-features/special-steps/loop-dropdown-options",
+                          "zh/academy/advanced-features/special-steps/conditions"
+                        ]
+                      },
+                      {
+                        "group": "流程设置",
+                        "pages": [
+                          "zh/academy/advanced-features/workflow-settings/browser-user-agent",
+                          "zh/academy/advanced-features/workflow-settings/trigger",
+                          "zh/academy/advanced-features/workflow-settings/bulk-url-input-extra",
+                          "zh/academy/advanced-features/workflow-settings/incremental-collection",
+                          "zh/academy/advanced-features/workflow-settings/iframe-page-handling",
+                          "zh/academy/advanced-features/workflow-settings/json-collection"
+                        ]
+                      },
+                      {
+                        "group": "技巧操作",
+                        "pages": [
+                          "zh/academy/advanced-features/tips/click-expand-full-text-weibo",
+                          "zh/academy/advanced-features/tips/resume-interrupted-collection",
+                          "zh/academy/advanced-features/tips/ajax-detail-return-list",
+                          {
+                            "group": "RPA相关",
+                            "pages": [
+                              "zh/academy/advanced-features/tips/rpa/import-data-to-feishu-rpa",
+                              "zh/academy/advanced-features/tips/rpa/batch-export-excel-rpa"
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "group": "高版本功能",
+                    "pages": [
+                      {
+                        "group": "付费功能",
+                        "pages": [
+                          "zh/academy/premium-features/paid-features/local-acceleration-multi-task",
+                          "zh/academy/premium-features/paid-features/proxy-ip",
+                          "zh/academy/premium-features/paid-features/collect-new-data",
+                          "zh/academy/premium-features/paid-features/scheduled-tasks",
+                          "zh/academy/premium-features/paid-features/auto-captcha",
+                          "zh/academy/premium-features/paid-features/cloudflare-verification"
+                        ]
+                      },
+                      {
+                        "group": "云采集",
+                        "pages": [
+                          "zh/academy/premium-features/cloud-extraction/cloud-extraction-intro",
+                          "zh/academy/premium-features/cloud-extraction/scheduled-cloud-extraction",
+                          "zh/academy/premium-features/cloud-extraction/cloud-extraction-principles",
+                          "zh/academy/premium-features/cloud-extraction/cloud-extraction-logs",
+                          "zh/academy/premium-features/cloud-extraction/cloud-extraction-history"
+                        ]
+                      },
+                      {
+                        "group": "企业版管理",
+                        "pages": [
+                          "zh/academy/premium-features/enterprise-management/enterprise-plan-intro",
+                          "zh/academy/premium-features/enterprise-management/enterprise-admin",
+                          "zh/academy/premium-features/enterprise-management/enterprise-member-accounts",
+                          "zh/academy/premium-features/enterprise-management/cloud-task-launch-optimization",
+                          "zh/academy/premium-features/enterprise-management/cloud-monitoring-alerts"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "group": "实战案例",
+                "pages": [
+                  {
+                    "group": "电商",
+                    "pages": [
+                      "zh/academy/case-studies/ecommerce/jd-product-list",
+                      "zh/academy/case-studies/ecommerce/jd-product-reviews",
+                      "zh/academy/case-studies/ecommerce/jd-product-detail",
+                      "zh/academy/case-studies/ecommerce/jd-product-list-alt",
+                      "zh/academy/case-studies/ecommerce/jd-scenarios-overview",
+                      "zh/academy/case-studies/ecommerce/jd-carousel-download",
+                      "zh/academy/case-studies/ecommerce/taobao-product-list",
+                      "zh/academy/case-studies/ecommerce/amazon-product-reviews",
+                      "zh/academy/case-studies/ecommerce/amazon-product-list",
+                      "zh/academy/case-studies/ecommerce/amazon-product-detail",
+                      "zh/academy/case-studies/ecommerce/aliexpress-keyword-products",
+                      "zh/academy/case-studies/ecommerce/baidu-aigou-suppliers",
+                      "zh/academy/case-studies/ecommerce/baidu-aigou-products",
+                      "zh/academy/case-studies/ecommerce/aliexpress-product-reviews"
+                    ]
+                  },
+                  {
+                    "group": "社交媒体",
+                    "pages": [
+                      "zh/academy/case-studies/social-media/weibo-first-level-comments",
+                      "zh/academy/case-studies/social-media/weibo-keyword-search",
+                      "zh/academy/case-studies/social-media/weibo-author-posts",
+                      "zh/academy/case-studies/social-media/sogou-wechat-keyword-search",
+                      "zh/academy/case-studies/social-media/sogou-wechat-list-and-detail",
+                      "zh/academy/case-studies/social-media/zhihu-keyword-search",
+                      "zh/academy/case-studies/social-media/zhihu-hot-ranking",
+                      "zh/academy/case-studies/social-media/bilibili-video-collection",
+                      "zh/academy/case-studies/social-media/bilibili-up-videos",
+                      "zh/academy/case-studies/social-media/bilibili-video-detail",
+                      "zh/academy/case-studies/social-media/bilibili-category-videos",
+                      "zh/academy/case-studies/social-media/douban-hot-movies",
+                      "zh/academy/case-studies/social-media/douban-book-reviews",
+                      "zh/academy/case-studies/social-media/douban-movie-short-reviews",
+                      "zh/academy/case-studies/social-media/kuaishou-keyword-videos",
+                      "zh/academy/case-studies/social-media/kuaishou-account-videos",
+                      "zh/academy/case-studies/social-media/wechat-articles-anti-crawl"
+                    ]
+                  },
+                  {
+                    "group": "新闻资讯",
+                    "pages": [
+                      "zh/academy/case-studies/news/toutiao-author-articles",
+                      "zh/academy/case-studies/news/public-resources-trigger-bids",
+                      "zh/academy/case-studies/news/toutiao-home-news",
+                      "zh/academy/case-studies/news/sohu-politics-news",
+                      "zh/academy/case-studies/news/jiemian-keyword-list-detail",
+                      "zh/academy/case-studies/news/thepaper-ordered-article-content",
+                      "zh/academy/case-studies/news/tencent-news-video-export",
+                      "zh/academy/case-studies/news/gov-article-and-attachments",
+                      "zh/academy/case-studies/news/cqvip-keyword-papers",
+                      "zh/academy/case-studies/news/people-home-news",
+                      "zh/academy/case-studies/news/xinhuanet-keyword-search",
+                      "zh/academy/case-studies/news/cctv-keyword-list"
+                    ]
+                  },
+                  {
+                    "group": "房产",
+                    "pages": [
+                      "zh/academy/case-studies/real-estate/baixing-short-rental-listings",
+                      "zh/academy/case-studies/real-estate/fang-home-listings",
+                      "zh/academy/case-studies/real-estate/58-short-rental-listings",
+                      "zh/academy/case-studies/real-estate/huanghekou-home-listings",
+                      "zh/academy/case-studies/real-estate/fang-second-hand-housing"
+                    ]
+                  },
+                  {
+                    "group": "生活服务",
+                    "pages": [
+                      "zh/academy/case-studies/life-services/baidu-images-export",
+                      "zh/academy/case-studies/life-services/baidu-map-list",
+                      "zh/academy/case-studies/life-services/58-job-listings",
+                      "zh/academy/case-studies/life-services/weather-china-data",
+                      "zh/academy/case-studies/life-services/tianyancha-company-info",
+                      "zh/academy/case-studies/life-services/ctrip-attraction-reviews",
+                      "zh/academy/case-studies/life-services/ctrip-travel-guides",
+                      "zh/academy/case-studies/life-services/zhaopin-job-listings",
+                      "zh/academy/case-studies/life-services/iguopin-job-listings",
+                      "zh/academy/case-studies/life-services/baidu-search-results"
+                    ]
+                  },
+                  {
+                    "group": "金融",
+                    "pages": [
+                      "zh/academy/case-studies/finance/eastmoney-private-placement",
+                      "zh/academy/case-studies/finance/10jqka-fund-nav",
+                      "zh/academy/case-studies/finance/cbirc-policy-announcements",
+                      "zh/academy/case-studies/finance/xueqiu-hot-post-comments",
+                      "zh/academy/case-studies/finance/guba-stock-comments",
+                      "zh/academy/case-studies/finance/cls-finance-briefs",
+                      "zh/academy/case-studies/finance/stats-monthly-indicators"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "tab": "MCP 服务",
+            "groups": [
+              {
+                "group": "概述",
+                "pages": [
+                  "zh/mcp/index"
+                ]
+              },
+              {
+                "group": "快速入门",
+                "pages": [
+                  "zh/mcp/quick-start/api-key",
+                  "zh/mcp/workflow"
+                ]
+              },
+              {
+                "group": "客户端配置",
+                "pages": [
+                  "zh/mcp/guides/clients"
+                ]
+              },
+              {
+                "group": "平台对接",
+                "pages": [
+                  "zh/mcp/integrations/coze",
+                  "zh/mcp/integrations/dify",
+                  "zh/mcp/integrations/qclaw",
+                  "zh/mcp/integrations/chatgpt",
+                  "zh/mcp/integrations/claude",
+                  "zh/mcp/integrations/openclaw",
+                  "zh/mcp/integrations/cursor",
+                  "zh/mcp/integrations/vscode",
+                  "zh/mcp/integrations/gemini"
+                ]
+              },
+              {
+                "group": "通用采集工具",
+                "pages": [
+                  "zh/mcp/search-templates",
+                  "zh/mcp/search-tasks",
+                  "zh/mcp/execute-task",
+                  "zh/mcp/export-data",
+                  "zh/mcp/start-or-stop-task",
+                  "zh/mcp/redeem-coupon"
+                ]
+              },
+              {
+                "group": "数据中心与电商数据",
+                "pages": [
+                  "zh/mcp/search-platform-content",
+                  "zh/mcp/list-platforms",
+                  "zh/mcp/ecommerce-data-task",
+                  "zh/mcp/query-collected-reviews"
+                ]
+              },
+              {
+                "group": "实战案例",
+                "pages": [
+                  "zh/mcp/cases/index"
+                ]
+              },
+              {
+                "group": "参考",
+                "pages": [
+                  "zh/mcp/rate-limits",
+                  "zh/mcp/troubleshooting"
+                ]
+              }
+            ]
+          },
+          {
+            "tab": "OpenAPI",
+            "groups": [
+              {
+                "group": "综述",
+                "pages": [
+                  "zh/api-reference/intro"
+                ]
+              },
+              {
+                "group": "接口调用凭证",
+                "pages": [
+                  "zh/api-reference/access-token/obtain-a-new-token",
+                  "zh/api-reference/access-token/refresh-token"
+                ]
+              },
+              {
+                "group": "任务组",
+                "pages": [
+                  "zh/api-reference/task-group/get-task-group-information",
+                  "zh/api-reference/task-group/delete-groups"
+                ]
+              },
+              {
+                "group": "任务",
+                "pages": [
+                  "zh/api-reference/task/search-task",
+                  "zh/api-reference/task/duplicate-task",
+                  "zh/api-reference/task/copy-tasks",
+                  "zh/api-reference/task/move-task",
+                  "zh/api-reference/task/delete-tasks",
+                  "zh/api-reference/task/get-actions",
+                  "zh/api-reference/task/update-task-parameters",
+                  "zh/api-reference/task/update-loop-items",
+                  "zh/api-reference/task/update-action-properties",
+                  "zh/api-reference/task/update-task-urls"
+                ]
+              },
+              {
+                "group": "云采集",
+                "pages": [
+                  "zh/api-reference/cloud-extraction/start-task",
+                  "zh/api-reference/cloud-extraction/stop-task",
+                  "zh/api-reference/cloud-extraction/start-subtasks",
+                  "zh/api-reference/cloud-extraction/stop-subtasks",
+                  "zh/api-reference/cloud-extraction/get-task-stats",
+                  "zh/api-reference/cloud-extraction/get-task-status",
+                  "zh/api-reference/cloud-extraction/get-statuses",
+                  "zh/api-reference/cloud-extraction/get-statuses-v2",
+                  "zh/api-reference/cloud-extraction/get-subtask-status"
+                ]
+              },
+              {
+                "group": "任务分析",
+                "pages": [
+                  "zh/api-reference/task-analytics/query-task-analytics"
+                ]
+              },
+              {
+                "group": "数据",
+                "pages": [
+                  "zh/api-reference/data/get-non-exported-data",
+                  "zh/api-reference/data/mark-data-as-exported",
+                  "zh/api-reference/data/get-data-by-offset",
+                  "zh/api-reference/data/remove-data",
+                  "zh/api-reference/data/get-batch-data"
+                ]
+              },
+              {
+                "group": "参考",
+                "pages": [
+                  "zh/api-reference/reference"
+                ]
+              }
+            ]
+          },
+          {
+            "tab": "CLI",
+            "groups": [
+              {
+                "group": "概述",
+                "pages": [
+                  "zh/cli/index"
+                ]
+              },
+              {
+                "group": "快速入门",
+                "pages": [
+                  "zh/cli/quick-start/installation",
+                  "zh/cli/quick-start/get-api-key-and-log-in",
+                  "zh/cli/quick-start/run-your-first-task"
+                ]
+              },
+              {
+                "group": "CLI核心命令详解",
+                "pages": [
+                  "zh/cli/core-commands/detect",
+                  "zh/cli/core-commands/browser-management",
+                  "zh/cli/core-commands/task-management",
+                  "zh/cli/core-commands/run-tasks",
+                  "zh/cli/core-commands/export-data",
+                  "zh/cli/core-commands/diagnostics"
+                ]
+              },
+              {
+                "group": "参考",
+                "pages": [
+                  "zh/cli/reference/command-cheatsheet",
+                  "zh/cli/reference/output-and-exit-codes"
+                ]
+              }
+            ]
+          },
+          {
+            "tab": "问题解答",
+            "pages": [
+              "zh/help/index"
+            ]
+          },
+          {
+            "tab": "更新日志",
+            "pages": [
+              "zh/changelog/august-2026",
+              "zh/changelog/july-2026",
+              "zh/changelog/june-2026",
+              "zh/changelog/may-2026",
+              "zh/changelog/april-2026"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/zh/overview"
+    },
+    {
+      "source": "/docs",
+      "destination": "/zh/overview"
+    },
+    {
+      "source": "/docs/:path*",
+      "destination": "/:path*"
+    },
+    {
+      "source": "/zh/changelog",
+      "destination": "/zh/changelog/august-2026"
+    },
+    {
+      "source": "/favicons/:path*",
+      "destination": "/assets/favicons/:path*"
+    },
+    {
+      "source": "/en/:path*",
+      "destination": "/zh/:path*"
+    },
+    {
+      "source": "/zh/platform/intro",
+      "destination": "/zh/overview"
+    },
+    {
+      "source": "/zh/mcp/intro",
+      "destination": "/zh/mcp/index"
+    },
+    {
+      "source": "/zh/cli/quick-start",
+      "destination": "/zh/cli/quick-start/installation"
+    },
+    {
+      "source": "/zh/cli/core-commands",
+      "destination": "/zh/cli/core-commands/task-management"
+    },
+    {
+      "source": "/zh/cli/core-commands/recognize",
+      "destination": "/zh/cli/core-commands/detect"
+    },
+    {
+      "source": "/zh/cli/core-commands/run-url",
+      "destination": "/zh/cli/core-commands/detect"
+    }
+  ],
+  "api": {
+    "openapi": "zh/api-reference/task-analytics/openapi.json",
+    "mdx": {
+      "server": "https://openapi.bazhuayu.com"
+    },
+    "playground": {
+      "display": "interactive",
+      "proxy": true
+    },
+    "examples": {
+      "languages": [
+        "curl",
+        "python",
+        "javascript",
+        "typescript",
+        "go",
+        "java",
+        "php",
+        "ruby",
+        "csharp",
+        "kotlin",
+        "rust"
+      ],
+      "defaults": "all",
+      "prefill": true,
+      "autogenerate": true
+    }
+  },
+  "styling": {
+    "css": "style.css"
+  },
+  "seo": {
+    "metatags": {
+      "og:image": "https://bazhuayu.mintlify.app/assets/og-image.png",
+      "twitter:image": "https://bazhuayu.mintlify.app/assets/og-image.png",
+      "twitter:card": "summary_large_image",
+      "apple-mobile-web-app-title": "八爪鱼文档"
+    },
+    "indexing": "navigable"
+  }
+}

@@ -1,0 +1,181 @@
+---
+title: MCP 对接 ChatGPT
+description: 在 ChatGPT 中通过 MCP 连接八爪鱼采集器，用自然语言搜索模板、创建任务、运行云采集并导出数据。
+---
+
+## 前置准备
+
+开始之前，请确认以下条件：
+
+- 已订阅 **ChatGPT Plus / Team / Enterprise**（免费版不支持此集成）
+- 已注册八爪鱼账户
+- MCP 地址：`https://mcp.bazhuayu.com`
+- 本集成目前为 **早期访问 / 技术预览**，建议具备一定技术背景的用户使用
+
+## 接入后可用的能力
+
+连接成功后，你可以在 ChatGPT 中用自然语言管理采集任务，例如：
+
+- 搜索八爪鱼采集模板
+- 校验模板参数并创建云采集任务
+- 启动与停止云采集任务
+- 查看任务执行状态
+- 导出数据（EXCEL / CSV / JSON / 数据库）
+- 查询数据中心的网页与媒体存量内容
+- 提交并查询 Temu、TikTok Shop 商品评论采集
+
+当前 MCP 不提供账户余额、版本或账单查询工具。连接后建议先让 ChatGPT 调用 `list_platforms`，或检查是否发现了[当前 10 个工具](/zh/mcp/guides/clients#验证连接)。
+
+## 八爪鱼 MCP 服务信息
+
+八爪鱼提供 MCP（Model Context Protocol）服务器，供 ChatGPT 调用采集相关工具。
+
+| 项目 | 内容 |
+| --- | --- |
+| 服务地址 | `https://mcp.bazhuayu.com` |
+| 推荐认证 | OAuth 2.1（浏览器登录八爪鱼账户） |
+| 备选认证 | API Key（Header：`x-api-key`，见 [获取 API Key](/zh/mcp/quick-start/api-key)） |
+
+该服务会将八爪鱼的模板、任务、导出等功能公开给 AI 助手。
+
+## 步骤一：在 ChatGPT 中配置八爪鱼 MCP
+
+<Steps>
+  <Step title="1.1 打开账户与个人化设置">
+    使用 Plus、Team 或 Enterprise 账户登录 [ChatGPT](https://chatgpt.com/)。
+
+    1. 点击左下角 **头像**
+    2. 选择 **Personalization**（个人化）
+
+    <img src="/assets/mcp/chatgpt/step-1-personalization.png" alt="在 ChatGPT 中打开 Personalization 设置" className="mcp-step-image" />
+  </Step>
+  <Step title="1.2 进入 Apps 应用管理">
+    1. 在左侧边栏点击 **Apps**（应用）
+    2. 在 **Enabled apps**（已启用应用）下选择 **Advanced settings**（高级设置）
+
+    <img src="/assets/mcp/chatgpt/step-2-apps.png" alt="在 ChatGPT 中进入 Apps 高级设置" className="mcp-step-image" />
+  </Step>
+  <Step title="1.3 开启开发者模式">
+    1. 在 Apps 页面点击 **Advanced settings**
+    2. 将 **Developer mode (Beta)**（开发者模式）切换为 **ON**
+    3. 阅读警告提示并确认继续
+
+    开发者模式允许添加未经验证的 MCP 服务器，请自行评估风险后使用。
+
+    <img src="/assets/mcp/chatgpt/step-3-developer-mode.png" alt="开启 ChatGPT 开发者模式" className="mcp-step-image" />
+  </Step>
+  <Step title="1.4 创建八爪鱼 MCP 应用">
+    1. 点击 **Create app**（创建应用）
+    2. 填写以下字段：
+
+    | 字段 | 填写内容 |
+    | --- | --- |
+    | Name（名称） | 八爪鱼 |
+    | MCP Server URL | `https://mcp.bazhuayu.com` |
+    | Authentication（认证） | **OAuth** |
+    | OAuth Client ID | 留空 |
+    | OAuth Client Secret | 留空 |
+
+    3. 勾选 **I understand and want to continue**（我理解并愿意继续）
+    4. 点击 **Create**（创建）
+
+    <img src="/assets/mcp/chatgpt/step-4-create-app.png" alt="在 ChatGPT 中创建八爪鱼 MCP 应用" className="mcp-step-image" />
+  </Step>
+  <Step title="1.5 完成 OAuth 授权">
+    1. ChatGPT 会跳转至八爪鱼授权页面
+    2. 查看请求的权限范围
+    3. 点击 **Yes, Allow**（允许）
+
+    授权完成后，ChatGPT 即可通过 OAuth 安全访问你的八爪鱼账户。
+  </Step>
+</Steps>
+
+### OAuth 认证流程说明
+
+首次在 ChatGPT 中调用八爪鱼工具时：
+
+1. ChatGPT 尝试调用八爪鱼 MCP 工具
+2. 浏览器自动打开八爪鱼登录 / 授权页面
+3. 你登录八爪鱼账户并批准访问
+4. OAuth 授权完成，后续可正常调用工具
+
+ChatGPT **不会**获取你的八爪鱼账户密码。
+
+## 步骤二：在对话中使用八爪鱼 MCP
+
+连接成功后，在新对话中启用八爪鱼 MCP 连接器，即可用自然语言操作采集任务。
+
+### 模板与任务创建
+
+```
+帮我找一个采集 Amazon 商品列表的模板
+用这个模板创建一个采集任务
+在云端启动这个任务
+```
+
+### 监控与导出
+
+```
+查看这个任务的执行状态
+把所有数据导出为 CSV
+```
+
+<AccordionGroup>
+  <Accordion title="展开查看更多提示词示例">
+
+  **搜索模板**
+
+  ```
+  搜索可用于采集 LinkedIn 公司信息的八爪鱼模板
+  ```
+
+  **创建并运行**
+
+  ```
+  使用模板 ID 12345 创建任务，然后启动云采集
+  ```
+
+  **导出数据**
+
+  ```
+  导出任务 abc123 的最新数据，格式为 JSON
+  ```
+
+  </Accordion>
+</AccordionGroup>
+
+## 重要使用说明
+
+- 仅 **支持云采集的模板** 可通过 ChatGPT 启动；纯本地任务请在八爪鱼桌面客户端运行
+- 云采集有可能会消耗**八爪鱼账户余额**，具体见具体使用的八爪鱼模板
+- 部分模板需要 **专业版及以上** 套餐，或额外消耗积分
+- 若工具调用失败，请确认对话中已启用八爪鱼 MCP 连接器，且 OAuth 授权未过期
+
+## 即将推出
+
+- 八爪鱼官方 ChatGPT 应用
+- 一键安装（无需手动配置）
+- 原生 ChatGPT 工具调用体验
+- 更完善的权限与数据控制
+
+<Note>
+  若教程截图与 ChatGPT 当前界面有出入，请以 OpenAI 官方界面为准；国际用户界面可能显示为英文。
+</Note>
+
+## 常见问题
+
+| 现象 | 处理建议 |
+| --- | --- |
+| 找不到 Apps / Developer mode | 确认已订阅 Plus / Team / Enterprise，并更新 ChatGPT 至最新版本 |
+| OAuth 授权失败 | 检查网络；确认八爪鱼账户可正常登录；重新创建应用并授权 |
+| 工具列表为空 | 删除应用后重新添加 MCP；确认 URL 为 `https://mcp.bazhuayu.com` |
+| 无法启动任务 | 确认模板支持云采集；检查账户额度与套餐权限 |
+| 本地任务无法运行 | 本地采集需在八爪鱼客户端操作，ChatGPT 仅支持云采集相关工具 |
+
+## 相关链接
+
+- [八爪鱼 MCP 概述](/zh/mcp/index)
+- [获取 API Key](/zh/mcp/quick-start/api-key)
+- [工作流程示例](/zh/mcp/workflow)
+- [故障排查](/zh/mcp/troubleshooting)
+- [客户端配置指南 — ChatGPT](/zh/mcp/guides/clients#chatgpt)

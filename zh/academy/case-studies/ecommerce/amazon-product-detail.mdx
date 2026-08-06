@@ -1,0 +1,260 @@
+---
+title: "【Amazon】商品详情页采集"
+source: "https://www.bazhuayu.com/helpcenter/docs/HDW4r2"
+---
+**采集场景**
+
+采集Amazon商品详情页数据。Amazon商品详情页实例网址：[https://www.amazon.com/dp/B07R7DY911](https://www.amazon.com/dp/B07R7DY911/)。
+
+ 
+
+**采集字段**
+
+title、brand、stars、ratings、questions、price、details、productdimensions、itemweight、shippingweight、asin、itemmodelnumber、bestsellerrank、stock 等。
+
+![](/assets/academy/case-studies/amazon-product-detail/01-65323e43ec242.png)
+
+**采集结果**
+
+采集结果可导出为Excel，CSV，HTML，数据库等多种格式。导出为Excel示例：
+
+![](/assets/academy/case-studies/amazon-product-detail/02-65323e437ccd8.png)
+
+ 
+
+**教程说明**
+
+本篇更新时间：2023/11/29   八爪鱼版本：V8.6.7
+
+如果因网页改版造成网址或步骤无效，无法采集到目标数据，请联系官方客服，我们将及时修正。
+
+ 
+
+**采集步骤**
+
+步骤一、打开网页
+
+步骤二、选择配送地区
+
+步骤三、创建【循环-打开网页】，以采集多个详情页数据
+
+步骤四、采集详情页中的字段
+
+步骤五、优化规则
+
+步骤六、启动采集&#xA0;
+
+ 
+
+示例网址：
+
+[https://www.amazon.com/dp/B07R7DY911](https://www.amazon.com/dp/B07R7DY911/)
+
+[https://www.amazon.com/dp/B07PXGQC1Q](https://www.amazon.com/dp/B07PXGQC1Q)
+
+ 
+
+## 步骤一、打开网页
+
+ 
+
+在首页输入框中，输入示例网址 [https://www.amazon.com](https://www.amazon.com)，然后点【开始采集】，八爪鱼自动打开网页。
+
+![](/assets/academy/case-studies/amazon-product-detail/03-65323e4465775.gif)
+
+ 
+
+## 步骤二、选择配送地区
+
+ 
+
+在Amazon中，选择不同的配送地址，输入关键词搜索后得到的商品列表是不一样的。
+
+示例中打开网页后，没有默认的配送地址为【中国大陆】。客户端如果有默认配送地址，且默认配送地址满足采集需求，可跳过此步骤。
+
+如果需要修改配送地址，Amazon支持通过【登录账户并确认地址簿】、【输入美国邮政编码】和【选择美国境外其他国家】修改配送地址。
+
+本文以【输入美国邮政编码】为例，输入 California (CA)的邮政编码：95136。具体操作如下：
+
+ 
+
+1、在页面中选中【Select your Address】，在操作提示框中点击【点击该元素】，页面弹出位置输入框
+
+2、选中位置输入框，在操作提示框中点击【输入文本】
+
+3、在操作提示框中输入【95136】后保存
+
+4、选中【设置】按钮，在操作提示框中点击【点击该元素】
+
+5、选中【完成】，在操作提示框中选择【点击该按钮】，完成配送地址的修改。
+
+<video controls src="https://resource-wangsu.helplook.net/docker_production/3mkuae/article/77G16M/video/656487c0227e7.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 【登录账户并确认地址簿】和【选择美国境外其他国家】来修改配送地址的方法，本文未讲解。如有需要请联系客服指导。
+> 
+> - b. 示例中输入的是California (CA)的邮政编码：95136，可按需求更换成美国其他州的邮政编码。
+
+ 
+
+ 
+
+## 步骤三、创建【循环-打开网页】，以采集多个详情页数据
+
+ 
+
+在【点击元素2】步骤后，添加一个【循环】。
+
+进入【循环】设置页面。选择循环方式为【网址列表】，点击  <img src="/assets/academy/case-studies/amazon-product-detail/04-65323e4390d64.png" alt="" className="academy-inline-icon" /> 按钮，将我们准备好的网址（可同时输入多个关键字，一行一个即可）后保存。
+
+ 
+
+![](/assets/academy/case-studies/amazon-product-detail/05-65323e4411644.gif)
+
+ 
+
+## 步骤四、采集详情页中的字段
+
+ 
+
+1、采集字段
+
+选中网页中的目标字段，在操作提示框中点击【采集该元素的文本】。
+
+所有文本类的字段都可这样提取，示例中提取了 title、brand、stars、ratings、questions、等。
+
+ <video controls src="https://resource-wangsu.helplook.net/docker_production/3mkuae/article/HDW4r2/video/656706e94a69e.mp4" width="100%"></video>
+
+ 
+
+ 
+
+2、编辑字段
+
+在【当前页面数据预览】面板中，可删除多余字段，修改字段名，移动字段顺序等。
+
+<video controls src="https://resource-wangsu.helplook.net/docker_production/3mkuae/article/HDW4r2/video/6567075c50800.mp4" width="100%"></video>
+
+ 
+
+3、修改字段XPath
+
+Product information栏目中的字段会出现数据错位，需手动修改字段XPath。\
+以【asin】字段为例，修改XPath为：**//th[contains(text(),'ASIN')]/../td** 。
+
+<video controls src="https://resource-wangsu.helplook.net/docker_production/3mkuae/article/HDW4r2/video/65670a9ac3ff7.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 修改字段XPath，需要一定的XPath知识。点击查看 [XPath学习与实例教程](https://www.bazhuayu.com/helpcenter/docs/V2h1Ec) 。
+> 
+> - b. 示例中以【asin】字段为例进行修改。其他字段的修改方法是类似的：\
+> 【itemModelNumber】XPath : **//th[contains(text(),'Item model number')]/../td**
+> 
+> 【Best Sellers Rank】XPath:**&#xA0;//th[contains(text(),'Best Sellers Rank')]/../td**
+> 
+> 【Shipping Weight】XPath: **//th[contains(text(),'Shipping Weight')]/../td**
+> 
+> 【Product Dimensions】XPath: **//th[contains(text(),'Product Dimensions')]/../td**
+> 
+> 【Item Weight】XPath : **//th[contains(text(),'Item Weight')]/../td**
+
+ 
+
+   
+
+## 步骤五、优化规则
+
+ 
+
+以上步骤可以完成基本的数据采集。但Amazon有防采集，如需稳定采集大量数据，需对采集规则进行优化。常见的优化方法如下：
+
+ 
+
+1、设置执行前等待 + 调整Ajax超时时间
+
+手动执行操作【打开网页】、【点击元素】和【输入文本】等步骤，在步骤下面的高级设置页面，设置【执行前等待】1-3s，【Ajax超时】15s。
+
+ 
+
+![](/assets/academy/case-studies/amazon-product-detail/06-65323e466e63a.gif)\
+ 
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 使用了Ajax技术的网页，八爪鱼会自动判断并设置一定的【Ajax超时】。如果系统自动设置的【Ajax超时】过短，可根据采集需求和网页加载情况进行调整，详情点击查看 [Ajax教程](https://www.bazhuayu.com/helpcenter/docs/R01mM3) 。
+> 
+> - b. 执行前等待，即在执行此步骤前等待一段时间，可有效避免因网页未加载完全导致的漏数据，详情点击查看 [执行前等待使用场景与设置方法](https://www.bazhuayu.com/helpcenter/docs/zigIaV)
+
+ 
+
+ 
+
+## 步骤六、启动采集
+
+ 
+
+1、单击【采集】并【启动本地采集】。启动后八爪鱼开始自动采集数据。 
+
+ 
+
+![](/assets/academy/case-studies/amazon-product-detail/07-65323e4681cf0.gif)
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 【本地采集】是使用自己的电脑进行采集，【云采集】是使用八爪鱼提供的云服务器采集
+
+ 
+
+2、采集完成后，选择合适的导出方式来导出数据。支持导出为Excel，CSV，HTML，数据库等。这里导出为Excel。示例数据：
+
+![](/assets/academy/case-studies/amazon-product-detail/08-65323e463665b.png)
+
+ 
+
+ 
+
+作者：Bin
+
+编辑：Aisling

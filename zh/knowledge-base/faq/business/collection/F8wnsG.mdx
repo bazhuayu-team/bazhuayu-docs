@@ -1,0 +1,15 @@
+---
+title: "没有采集到数据就提示采集完成了？运行采集后，马上提示采集完成？"
+description: "1）AJAX加载网页，网页没有翻页就采集完成。解决办法是设置ajax超时，具体参考教程：https\\://www\\.bazhuayu.com/helpcenter/docs/R01mM3 2）规则编写有误，循环没有加载循环列表，设置执行前等待和修改循环的xpath。排查过程： 首先观察停止时界面显示什么？…"
+hidden: true
+kbStatus: "unverified"
+kbSource: "faq"
+sourceSlug: "F8wnsG"
+source: "https://www.bazhuayu.com/helpcenter/docs/F8wnsG"
+---
+
+1）AJAX加载网页，网页没有翻页就采集完成。解决办法是设置ajax超时，具体参考教程：https\://www\.bazhuayu.com/helpcenter/docs/R01mM3
+
+ 
+
+2）规则编写有误，循环没有加载循环列表，设置执行前等待和修改循环的xpath。排查过程： 首先观察停止时界面显示什么？网页是否正常打开？需要根据页面情况来判定停止原因。要是在第一页就停止了，可以先考虑是翻页问题，然后手动执行规则去排查错误。具体可参考教程：https\://www\.bazhuayu.com/helpcenter/docs/YqLshX

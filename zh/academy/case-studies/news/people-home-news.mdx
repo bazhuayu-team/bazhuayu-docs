@@ -1,0 +1,101 @@
+---
+title: "【人民网】首页新闻采集"
+source: "https://www.bazhuayu.com/helpcenter/docs/ren-min-wang-shou-ye-xin-wen-cai-ji"
+---
+**一、采集场景**
+
+本教程旨在指导用户如何从人民网（[http://www.people.com.cn/](http://www.people.com.cn/)）采集“要闻热点”栏目的新闻数据。采集流程分为两步：首先获取列表页的新闻标题和链接，然后进入详情页提取正文、发布时间等字段
+
+ 
+
+**二、采集字段**
+
+新闻标题  板块标签  发布时间 来源 文章正文 作者 页面网址 当前时间
+
+![【人民网】首页新闻采集](/assets/academy/case-studies/people-home-news/01-69c3c43d61f1f.png)
+
+ 
+
+**三、采集结果**
+
+采集结果可导出为Excel，CSV，HTML，数据库等多种格式。导出为Excel示例：
+
+![【人民网】首页新闻采集](/assets/academy/case-studies/people-home-news/02-69c3c9b6cb5eb.png)
+
+ 
+
+**四、采集步骤**
+
+步骤一、打开网页
+
+步骤二、创建【循环列表】提取列表数据
+
+步骤三、点击进入详情提取详情字段
+
+步骤四、修改编辑字段
+
+步骤五、保存任务启动采集
+
+ 
+
+**以下为具体步骤：**
+
+ 
+
+#### 步骤一、打开网页
+
+在首页【输入框】中输入目标网址 ：[http://www.people.com.cn/](http://www.people.com.cn/)，点击【开始采集】，八爪鱼自动打开网页
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/71773a1d5145403721259273156/qzEJ29HaiUgA.mp4" width="100%"></video>
+
+ 
+
+ 
+
+#### 步骤二、创建【循环列表】提取列表数据
+
+采集列表的数据，创建一个循环列表进行提取列表数据，并且添加输入的关键词作为采集的字段
+
+通过以下步骤，采集所有商品列表中的数据：
+
+1、选中页面上1个新闻列表（注意一定要选中整个列表，包含所有所需字段） 
+
+2、在黄色操作提示框中，点击【选中全部相似元素】
+
+3、提取数据，点击【文本内容】\
+\
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/fcc396f55145403721261555422/KaqflIffZAEA.mp4" width="100%"></video>
+
+> 说明：如何实现采集列表数据？学习教程 *[03 采集列表数据](/zh/academy/basic-collection/beginner/list-collection)*
+
+ 
+
+#### 步骤三、点击进入详情提取详情字段
+
+点击新闻标题，根据提示选择点击进入详情页提取正文、发布时间、来源等字段
+
+1、选中页面上1个新闻列表标题，在操作提示框中【点击该链接 】
+
+2、选中页面中的文本，然后在操作提示框中，提取数据【文本内容】，示例中我们提取了作者 发布时间 来源 文章正文 板块标签 等字段
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/a3d625f65145403721260013876/Bso5PhdoHLUA.mp4" width="100%"></video>
+
+#### 步骤四、修改编辑字段
+
+依次修改编辑字段名，或调整字段顺序，在提取数据时，我们也可以添加一些特殊字段，比如【添加当前时间】：采集数据的时间，以电脑显示时间为准，【添加当前网页信息】：页面网址\
+\
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/7853247f5145403721259554642/Pp6PoN3EHHgA.mp4" width="100%"></video>
+
+#### 步骤五、保存任务启动采集
+
+1.配置好任务后，点击【保存】-【启动采集】
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/7a5e2c785145403721259611047/Oj0OCAo5vQwA.mp4" width="100%"></video>
+
+2、采集完成后，选择合适的导出方式导出数据。
+
+支持导出为Excel、CSV、HTML、数据库等。这里导出为Excel。数据示例：
+
+![【人民网】首页新闻采集](/assets/academy/case-studies/people-home-news/03-69c3cd6c6cbdb.png)

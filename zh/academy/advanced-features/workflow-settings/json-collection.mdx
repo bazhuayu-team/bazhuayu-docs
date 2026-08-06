@@ -1,0 +1,128 @@
+---
+title: "json采集"
+description: "介绍八爪鱼采集器进阶功能：json采集。"
+source: "https://www.bazhuayu.com/helpcenter/docs/NaoIII"
+---
+
+八爪鱼提供JSON采集功能，通过打开JSON网址，配置流程，能够进行JSON采集。
+
+ 
+
+### **一、JSON是什么**
+
+json是一种轻量的数据交换格式，由于一些优秀的特性比如比 XML 更小、更快，更易解析和阅读，并有效地提升网络传输效率，而得到广泛使用。
+
+ 
+
+### **二、JSON采集的优点**
+
+1、无需加载图片视频等信息，采集速度更快
+
+2、部分网站防采集限制减少，采集更加顺畅
+
+ 
+
+### **三、JSON采集实例**
+
+示例网址：https\://b2b.baidu.com/
+
+需求：采集关键词为机械设备的信息地址，包括：公司名、链接、地址等
+
+![json采集](/assets/academy/advanced-features/json-collection/01-659e6ea928402.png)
+
+采集步骤如下：
+
+#### 步骤一、通过火狐浏览器获取JSON网址
+
+JSON网址可以直接通过浏览器控制台获取。
+
+Step1：
+
+选择厂家，按F12或右键选择【使用查看元素】，在浏览器中浏览点击【网络】按钮，点击【XHR】，在输入关键词“机械设备”搜索后，,可以看见很多url。JSON网址一般在XHR下面，但如果XHR查找不到，则点击【全部】。
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/fddb10a25145403714765550852/R6MYWa7dMekA.mp4" width="100%"></video>
+
+ 
+
+Step2：
+
+先点开每一个url，查看是否有【JSON】对象查看，有的话则为JSON地址。
+
+这里可能有很多 JSON 网址，因此请再次点击【JSON】，查看里面的参数是否有目标数据，有数据的 JSON 网址找到。
+
+如下图所示，在【XHR】里面有一个JSON网址，里面有目标数据，我们很容易找到正确的JSON网址,然后【复制地址】。
+
+https\://b2b.baidu.com/c/a?ajax=1\&csrf\_token=53edad66312422d6a682dc7d6dd9c2b5\&logid=4052523241719793196\&fid=0%2C1697774921849&\_=1697774960514\&q=%E6%9C%BA%E6%A2%B0%E8%AE%BE%E5%A4%87\&p=1\&s=15\&o=0\&f=[%7B%22search\_location%22:[%22%22]%7D,%7B%22member\_type%22:[0]%7D,%7B%22safe\_buy%22:[0]%7D]
+
+ <video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/f94625e85145403714765366916/miQPIzQv3xAA.mp4" width="100%"></video>
+
+ 
+
+Step3：
+
+所有页面的JSON网址一般需要研究目标网站的翻页规律，进行url循环采集。
+
+在这个网站，我们点击【清除】，先清空网址，然后点击【翻页】到第二页、第三页......用同样的方法找到第二页、第三页.....的JSON网址，就可以得到该网站其他页面的JSON网址列表。
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/ac173d2b5145403714764339785/ZzW7mnbuSgUA.mp4" width="100%"></video>
+
+ 
+
+该网站的翻页规律为每一页的参数中“p=n”，第一页为1，第二页为2，第3页第为3……此列表可批量生成JSON网址。
+
+https\://b2b.baidu.com/c/a?ajax=1\&csrf\_token=aa404292f14038a12406de70076a8a99\&logid=2325547150862217302\&fid=0%2C1769513903102&\_=1769514631823\&q=%E6%9C%BA%E6%A2%B0%E8%AE%BE%E5%A4%87&**p=2**\&s=15\&o=0\&f=[%7B%22search\_location%22:[%22%22]%7D,%7B%22member\_type%22:[0]%7D,%7B%22safe\_buy%22:[0]%7D,%7B%22topictab%22:[0]%7D,%7B%22local\_merchant%22:[0]%7D]\
+https\://b2b.baidu.com/c/a?ajax=1\&csrf\_token=aa404292f14038a12406de70076a8a99\&logid=2325547150862217302\&fid=0,1769513903102&\_=1769514654205\&q=机械设备&**p=3**\&s=15\&o=0\&f=[\{"search\_location":[""]\},\{"member\_type":[0]\},\{"safe\_buy":[0]\},\{"topictab":[0]\},\{"local\_merchant":[0]\}]
+
+ 
+
+#### 步骤二、在八爪鱼中配置流程
+
+step1：
+
+使用八爪鱼批量生成网址的功能，生成多个JSON页面JSON网址。
+
+打开网页后，在打开网页的设置中勾选「JSON」。
+
+（JSON增加了参数，可将JSON网站为接口，要重新的重新理解参数也类似于接口页面中的参数。本站单独重新填写。）
+
+当前浏览器页面展示出树状视图，即JSON数据。[](https://resource-wangsu.helplook.net/docker_production/3mkuae/article/NaoIII/video/654a29400f1e8)
+
+ 
+
+Step2：
+
+如下图所示，示例网站中的数据数据—entList标签里，entList [15]表示有15条数据。
+
+点开列表项标签，​​再点开第1条数据，可以查看到里面的数据字段，接下来就可以提取数据字段啦。
+
+![json采集](/assets/academy/advanced-features/json-collection/02-6531febf48900.png)
+
+ 
+
+Step3：
+
+点击展开第一条数据，然后点击需要提取字段，根据提示点击【元素中的数据内容】，可以看到流程步骤自动生成了循环列表，循环列表会把15条数据对应的字段全部选中提取。其他字段也是同样的办法进行点击然后根据提示选择【元素中的数据内容】。[](https://resource-wangsu.helplook.net/docker_production/3mkuae/article/NaoIII/video/654a29dbe20d8)
+
+ 
+
+Step4：
+
+快开始采集，点击右上角的【采集】按钮，选择本地采集，数据就可以以极的速度采集了。
+
+![](/assets/academy/advanced-features/json-collection/03-65276a78dbc45.gif)
+
+> **注意事项：**
+>
+> JSON利用JSON路径，详情可查看以下资料
+>
+> JSONpath介绍：[https://www.cnblogs.com/aoyihuashao/p/8665873.html](https://www.cnblogs.com/aoyihuashao/p/8665873.html)
+>
+> JSONpath在线测试网页：[http://JSONpath.com/](http://JSONpath.com/)
+
+ 
+
+ 
+
+编辑：FAN、YfY

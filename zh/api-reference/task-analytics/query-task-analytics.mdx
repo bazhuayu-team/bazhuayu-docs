@@ -1,0 +1,178 @@
+---
+title: 查询任务采集与执行分析
+api: POST https://openapi.bazhuayu.com/taskanalytics/queries
+openapi: en/api-reference/task-analytics/openapi.json POST /taskanalytics/queries
+playground: interactive
+authMethod: apiKey
+---
+
+> **所需套餐：** 旗舰版、旗舰+、企业版
+
+## 端点
+
+```
+POST https://openapi.bazhuayu.com/taskanalytics/queries
+```
+
+## 描述
+
+按日/周/月粒度查询任务采集量、执行次数、成功率及资源消耗等指标。时间范围为 UTC 自然日，仅支持查询最近 3 个月内数据。
+
+未传 `memberNames` 或传空数组时，仅查询当前登录用户；传入成员名称时须为当前用户团队成员。
+
+选填字段未填写时应为空值（如 `""`、`[]`、`null`），不要使用 `<string>`、`123` 等自动生成的占位值。
+
+## 请求头
+
+| 参数 | 类型 | 必填 | 说明 |
+|------|------|------|------|
+| `x-api-key` | String | 是 | API Key，例如 `op_sk_xxxxxx`；创建方式见[获取 API Key](/zh/mcp/quick-start/api-key) |
+| `Content-Type` | String | 是 | application/json |
+
+**请求头示例**
+
+```json
+{
+  "x-api-key": "op_sk_xxxxxx",
+  "Content-Type": "application/json"
+}
+```
+
+## 请求体
+
+| 参数 | 类型 | 必填 | 说明 |
+|------|------|------|------|
+| `start` | String | 是 | 查询开始日期（含），格式 `yyyy-MM-dd`，如 `2026-02-01` |
+| `end` | String | 是 | 查询结束日期（含），格式 `yyyy-MM-dd`；不得晚于当前 UTC 日期，且不能早于 `start` |
+| `page` | Number | 选填 | 页码，≥1，默认 `1` |
+| `pageSize` | Number | 选填 | 每页条数，1～500，默认 `20` |
+| `taskIds` | String[] | 选填 | 任务 Id 列表，最多 100 个；不传表示不过滤任务 |
+| `memberNames` | String[] | 选填 | 团队成员名称，最多 100 个；不传或空数组表示仅查当前用户 |
+| `collectionMethod` | String | 选填 | 采集方式：`Cloud` / `Local` / `All`；不传或 `All` 表示不过滤 |
+| `timeGranularity` | String | 选填 | 时间粒度：`Day` / `Week` / `Month`，默认 `Day` |
+
+**请求体示例（仅必填参数）**
+
+```json
+{
+  "start": "2026-02-01",
+  "end": "2026-04-01"
+}
+```
+
+**请求体示例（含选填参数）**
+
+```json
+{
+  "start": "2026-02-01",
+  "end": "2026-04-01",
+  "page": 1,
+  "pageSize": 20,
+  "timeGranularity": "Week",
+  "collectionMethod": "All",
+  "taskIds": [
+    "task-id-1"
+  ],
+  "memberNames": []
+}
+```
+
+## 响应
+
+| 参数 | 类型 | 必填 | 说明 |
+|------|------|------|------|
+| `data` | Object | 是 | 响应数据 |
+| `total` | Number | 是 | 符合条件的总记录数（用于分页） |
+| `data` | Object[] | 是 | 当前页数据列表 |
+| `taskId` | String | 是 | 任务 Id |
+| `userId` | String | 是 | 用户 Id |
+| `taskName` | String | 否 | 任务名称（可能为 null） |
+| `dayKey` | String | 是 | 时间分桶键（日：`yyyy-MM-dd`；周：`YYYY-WW`；月：`yyyy-MM`） |
+| `weekStartDate` | String | 否 | 周开始日期 `yyyy-MM-dd`，仅 Week 粒度有值 |
+| `weekEndDate` | String | 否 | 周结束日期 `yyyy-MM-dd`，仅 Week 粒度有值 |
+| `collectionMethod` | String | 是 | 采集方式：`Cloud` / `Local` |
+| `dataVolumeMetrics` | Object | 是 | 数据量指标 |
+| `totalCollected` | Number | 否 | 采集总量；无数据为 null |
+| `deduplicatedVolume` | Number | 否 | 去重后保存量；无数据为 null |
+| `executionMetrics` | Object | 是 | 执行指标 |
+| `runCount` | Number | 否 | 运行次数 |
+| `successCount` | Number | 否 | 成功次数 |
+| `failureCount` | Number | 否 | 失败次数 |
+| `durationPerRunSeconds` | Number | 否 | 单次平均耗时（秒） |
+| `totalExecutionSeconds` | Number | 否 | 总耗时（秒） |
+| `successRate` | Number | 否 | 成功率，0～1 |
+| `failureRate` | Number | 否 | 失败率，0～1 |
+| `resourceUsageMetrics` | Object | 是 | 资源消耗指标 |
+| `captchaCount` | Number | 否 | 验证码次数 |
+| `simpleTemplateCount` | Number | 否 | 简易模板条数 |
+| `proxyIpCount` | Number | 否 | 代理 IP 用量 |
+| `balance` | Number | 否 | 资源消耗金额 |
+| `requestId` | String | 是 | 请求 Id |
+
+**成功示例**
+
+```json
+{
+  "data": {
+    "total": 42,
+    "data": [
+      {
+        "taskId": "abc123",
+        "userId": "user001",
+        "taskName": null,
+        "dayKey": "2026-11",
+        "weekStartDate": "2026-03-10",
+        "weekEndDate": "2026-03-16",
+        "collectionMethod": "Cloud",
+        "dataVolumeMetrics": {
+          "totalCollected": 10000,
+          "deduplicatedVolume": 8000
+        },
+        "executionMetrics": {
+          "runCount": 50,
+          "successCount": 48,
+          "failureCount": 2,
+          "durationPerRunSeconds": 12.5,
+          "totalExecutionSeconds": 625,
+          "successRate": 0.96,
+          "failureRate": 0.04
+        },
+        "resourceUsageMetrics": {
+          "captchaCount": 10,
+          "simpleTemplateCount": null,
+          "proxyIpCount": 1.5,
+          "balance": 3.2
+        }
+      }
+    ]
+  },
+  "requestId": "0HMD469L0I8Q1:00000001"
+}
+```
+
+## 错误响应
+
+| 参数 | 类型 | 必填 | 说明 |
+|------|------|------|------|
+| `requestId` | String | 是 | 请求Id |
+| `error` | Object | 是 | 错误信息，参考错误码 |
+| `code` | String | 是 | 错误码 |
+| `message` | String | 是 | 错误描述 |
+
+**错误示例**
+
+```json
+{
+  "error": {
+    "code": "MemberNotAllowed",
+    "message": "存在无权查询的成员名称"
+  },
+  "requestId": "0HMD469L0I8R0:00000001"
+}
+```
+
+<ParamField header="Authorization" type="string" required hidden>
+</ParamField>
+<ParamField header="Content-Type" type="string" default="application/json" required hidden>
+</ParamField>
+

@@ -1,0 +1,135 @@
+---
+title: "自定义抓取方式"
+description: "介绍八爪鱼采集器进阶功能：自定义抓取方式。"
+source: "https://www.bazhuayu.com/helpcenter/docs/WoDMcd"
+---
+
+网页上的数据类型十分丰富：文本、图片、链接、源码等。在数据采集过程中，不同类型的数据类型，对应的抓取方式是不同的。本文将讲解常见的数据类型与其抓取方式。
+
+示例网址：[https://movie.douban.com/explore#!type=movie&tag=%E7%BB%8F%E5%85%B8&sort=recommend&page_limit=20&page_start=0](https://movie.douban.com/explore#!type=movie&tag=%E7%BB%8F%E5%85%B8&sort=recommend&page_limit=20&page_start=0)
+
+**&#xA0;**
+
+### **1、抓取文本：抓取显示在页面中的文本**
+
+ 
+
+操作：鼠标选中页面中的文本，在弹出的操作提示框中选择【文本内容】，目标文本就被采集下来了。
+
+同时，将鼠标移动到字段名【文本】上，点击 <img src="/assets/academy/advanced-features/custom-extraction-method/01-65361850603f0.png" alt="" className="academy-inline-icon" /> 按钮，选择【元素抓取方式】，可以看到八爪鱼自动为我们选择了【元素文本】。
+
+ 
+
+<video controls src="https://resource-wangsu.helplook.net/docker_production/3mkuae/article/WoDMcd/video/654e0861dca72.mp4" width="100%"></video>
+
+ 
+
+ 
+
+### **2、抓取图片网址：抓取图片的网址**
+
+ 
+
+操作：鼠标选中页面中的图片，在弹出的操作提示框中选择【图片链接】，图片网址就被提取下来了。
+
+同时，将鼠标移动到字段名【图片地址】上，点击 <img src="/assets/academy/advanced-features/custom-extraction-method/02-6536184fe4d71.png" alt="" className="academy-inline-icon" /> 按钮，选择【元素抓取方式】，可以看到八爪鱼自动为我们选择了【抓取图片网址（IMG标签的src属性）】。
+
+ 
+
+<video controls src="https://resource-wangsu.helplook.net/docker_production/3mkuae/article/WoDMcd/video/654e093d6abb4.mp4" width="100%"></video>
+
+ 
+
+为什么是【IMG标签的src属性】？在 [XPath与Html](https://www.bazhuayu.com/helpcenter/docs/shen-me-shi-html-he-xpath) 中，我们讲过网页Html相关知识，网页上的图片一般都是用IMG标签表示，其图片地址会放在IMG标签的src属性中。
+
+所以，当我们要提取图片网址时，本质上是用XPath定位到Img标签，再从IMG标签中提取src属性，src属性的值，就是图片网址。
+
+这里演示的只是抓取图片时使用的抓取方式，具体的图片采集，请看教程[文件边采集边下载](https://www.bazhuayu.com/helpcenter/docs/K2lJPG)
+
+ 
+
+### **3、抓取链接网址，抓取网页上超链接的网址**
+
+操作：鼠标选中页面中的超链接（一般是放在标题文本、图片中，可点击跳转），在弹出的操作提示框中选择【链接地址】，超链接的网址就被提取下来了。
+
+同时，将鼠标移动到字段名【链接地址】上，点击 <img src="/assets/academy/advanced-features/custom-extraction-method/03-6536185266f3e.png" alt="" className="academy-inline-icon" /> 按钮，选择【元素抓取方式】，可以看到八爪鱼自动为我们选择了【元素链接网址】。
+
+ 
+
+<video controls src="https://resource-wangsu.helplook.net/docker_production/3mkuae/article/WoDMcd/video/654e0ab0efb65.mp4" width="100%"></video>
+
+ 
+
+在 [XPath与Html](https://www.bazhuayu.com/helpcenter/docs/shen-me-shi-html-he-xpath)  中，我们讲过网页Html相关知识，网页上的超链接一般都是用A标签表示，超链接会放在IMG标签的href属性中。
+
+所以，当我们要提取超链接网址时，本质上是用XPath定位到A标签，再从A标签中提取href属性，href属性的值，就是超链接网址。如果选择采集链接之后，字段显示为空，一般是xpath定位的元素没有链接，需要在源码里确认一下。
+
+ 
+
+### 4.抓取网页源码：抓取网页元素对应的源码
+
+ 
+
+抓取网页源码Outer Html 
+
+操作：鼠标选中页面中要抓取的元素，在弹出的操作提示框中选择【Outer Html】，该元素对应的源码（Outer Html）就被采集下来了。
+
+同时，将鼠标移动到字段名【OuterHtml】上，点击 <img src="/assets/academy/advanced-features/custom-extraction-method/04-653618528a508.png" alt="" className="academy-inline-icon" /> 按钮，选择【元素抓取方式】，可以看到八爪鱼自动为我们选择了【元素网页源码（Outer Html】。
+
+ 
+
+<video controls src="https://resource-wangsu.helplook.net/docker_production/3mkuae/article/WoDMcd/video/654e0ba46130d.mp4" width="100%"></video>
+
+ 
+
+ 
+
+### 5.抓取网页源码Inner Html
+
+操作：鼠标选中页面中要抓取的元素，在弹出的操作提示框中选择【Inner Html】，该元素对应的源码（Inner Html）就被采集下来了。
+
+同时，将鼠标移动到字段名【Inner Html】上，点击 <img src="/assets/academy/advanced-features/custom-extraction-method/05-653618530fc27.png" alt="" className="academy-inline-icon" /> 按钮，选择【元素抓取方式】，可以看到八爪鱼自动为我们选择了【元素内部网页源码（Inner Html】。
+
+ 
+
+<video controls src="https://resource-wangsu.helplook.net/docker_production/3mkuae/article/WoDMcd/video/654e0c0d431ec.mp4" width="100%"></video> 
+
+Outer Html 和 Inner Html有何区别？
+
+Outer Html：包含当前元素（如图红色框）
+
+Inner Html：不包含当前元素，从当前元素的下一级开始（如图橙色框）
+
+ 
+
+![](/assets/academy/advanced-features/custom-extraction-method/06-654e0ecb8773e.png)
+
+ 
+
+### 6、抓取元素属性值
+
+ 
+
+先用XPath找到当前元素的源码，观察当前源码中存在什么属性值、需要提取哪个属性值，然后提取存在且需要的属性值即可。
+
+示例网址：[https://search.jd.com/Search?keyword=%E6%89%8B%E6%9C%BA&enc=utf-8&qrst=1&rt=1&stop=1&vt=2&wq=%E6%89%8B%E6%9C%BA&page=7&s=177&click=0](https://search.jd.com/Search?keyword=%E6%89%8B%E6%9C%BA&enc=utf-8&qrst=1&rt=1&stop=1&vt=2&wq=%E6%89%8B%E6%9C%BA&page=7&s=177&click=0)
+
+ 
+
+操作步骤：
+
+如图，是一个京东商品列表页。每一个商品，都有一个商品ID，现在需要采集这个商品ID。
+
+第1个商品列表的定位XPath为.//\*[@id='J\_goodsList']/ul/li[1]，对应的网页源码中，有class、data-sku、data-spu、data-pid四个属性。我们需要抓取data-sku这个属性的属性值。
+
+ 
+
+![](/assets/academy/advanced-features/custom-extraction-method/07-654e11794244d.png)
+
+ 
+
+我们先选中第一个商品列表，在弹出的操作提示框中，选择【文本内容】，这个步骤只是为了获得定位到列表的XPath。
+
+我们真正想抓取的，是data-sku的属性值，所以将鼠标移动到字段名【文本】上，点击 <img src="/assets/academy/advanced-features/custom-extraction-method/08-653618536a123.png" alt="" className="academy-inline-icon" /> 按钮，选择【元素抓取方式】，将抓取方式更改为【抓取元素属性值】，并在下拉框中，选择【data-sku】，这样，我们就将data-sku属性的值采集下来了，这个值就是我们需要的数值。最后，点击【应用】，保存配置即可。
+
+ <video controls src="https://resource-wangsu.helplook.net/docker_production/3mkuae/article/WoDMcd/video/654e1286bfb47.mp4" width="100%"></video>

@@ -1,0 +1,189 @@
+---
+title: MCP 对接 Claude
+description: 在 Claude 中通过 MCP 连接八爪鱼采集器，用自然语言搜索模板、创建任务、运行云采集并导出数据。
+---
+
+## 前置准备
+
+开始之前，请确认以下条件：
+
+- Claude 支持通过 **自定义连接器（Custom Connector）** 接入远程 MCP（Beta）
+- **Pro / Max** 用户：可在 **Settings → Connectors** 中直接添加自定义连接器
+- **Team / Enterprise** 用户：需由 **工作区 Owner** 先在组织级别添加连接器，成员再各自连接授权
+- **Free** 用户：也可使用自定义连接器，但仅限 **1 个** 自定义连接器
+- 已注册八爪鱼账户
+- MCP 地址：`https://mcp.bazhuayu.com`
+
+## 接入后可用的能力
+
+连接成功后，你可以在 Claude 中用自然语言管理采集任务，例如：
+
+- 搜索八爪鱼采集模板
+- 校验模板参数并创建云采集任务
+- 启动与停止云采集任务
+- 查看任务执行状态
+- 导出数据（EXCEL / CSV / JSON / 数据库）
+- 查询数据中心的网页与媒体存量内容
+- 提交并查询 Temu、TikTok Shop 商品评论采集
+
+当前 MCP 不提供账户余额、版本或账单查询工具。连接后建议先让 Claude 调用 `list_platforms`，或检查是否发现了[当前 10 个工具](/zh/mcp/guides/clients#验证连接)。
+
+## 八爪鱼 MCP 服务信息
+
+八爪鱼提供 MCP（Model Context Protocol）服务器，供 Claude 通过自定义连接器框架调用。
+
+| 项目 | 内容 |
+| --- | --- |
+| 服务地址 | `https://mcp.bazhuayu.com` |
+| 推荐认证 | OAuth 2.1（浏览器登录八爪鱼账户） |
+| 备选认证 | API Key（Header：`x-api-key`，见 [获取 API Key](/zh/mcp/quick-start/api-key)） |
+
+该服务会将八爪鱼的模板、任务、导出等功能公开给 AI 助手。
+
+## 步骤一：在 Claude 中配置八爪鱼 MCP
+
+<Steps>
+  <Step title="1.1 打开 Claude 设置">
+    1. 登录 [Claude](https://claude.ai/)
+    2. 打开 **Settings**（设置）
+    3. 进入 **Connectors**（连接器）
+
+    Pro / Max 用户在此添加自定义连接器；Team / Enterprise 成员在此查看并连接 Owner 已配置的连接器。
+
+    <img src="/assets/mcp/claude/step-1-connectors.png" alt="在 Claude 设置中打开 Connectors" className="mcp-step-image" />
+  </Step>
+  <Step title="1.2 添加自定义连接器">
+    在 Connectors 页面：
+
+    1. 点击 **Add custom connector**（添加自定义连接器）
+    2. 填写八爪鱼 MCP 服务地址：`https://mcp.bazhuayu.com`
+
+    如需指定 OAuth 凭据，可在 **Advanced settings**（高级设置）中填写 Client ID / Client Secret；若八爪鱼支持动态客户端注册，通常可留空。
+  </Step>
+  <Step title="1.3 配置认证方式">
+    若出现认证配置项：
+
+    - 选择 **OAuth**
+    - 支持动态注册时，**OAuth Client ID / Client Secret** 可留空
+    - 若服务端要求固定 OAuth 凭据，在高级设置中填写
+
+    Claude 官方支持无认证与 OAuth 两种远程 MCP 接入方式。
+  </Step>
+  <Step title="1.4 保存连接器">
+    点击 **Add**（添加）保存配置。
+
+    添加成功后，八爪鱼会出现在可用连接器列表中。
+
+    **Team / Enterprise 说明：** Owner 在组织 **Settings → Connectors** 中添加后，成员可在自己的连接器列表中点击 **Connect** 完成个人授权。
+  </Step>
+  <Step title="1.5 完成 OAuth 授权">
+    连接或首次使用八爪鱼连接器时，Claude 会启动 OAuth 流程：
+
+    1. 浏览器打开八爪鱼登录 / 授权页面
+    2. 登录八爪鱼账户
+    3. 查看请求的权限范围
+    4. 点击批准访问
+
+    Claude **不会**获取你的八爪鱼账户密码。
+  </Step>
+  <Step title="1.6 在对话中启用连接器">
+    连接器配置完成后，在单次对话中启用：
+
+    1. 打开新对话
+    2. 点击左下角 **+** 按钮
+    3. 选择 **Connectors**（连接器）
+    4. 开启八爪鱼 MCP 连接器
+
+    每个对话可单独开关连接器，按需启用即可。
+  </Step>
+</Steps>
+
+### OAuth 认证流程说明
+
+首次在 Claude 中调用八爪鱼工具时：
+
+1. Claude 尝试调用八爪鱼 MCP 工具
+2. 可能跳转至八爪鱼完成登录与授权
+3. 你批准请求的权限
+4. OAuth 授权完成，后续可正常调用工具
+
+## 步骤二：在对话中使用八爪鱼 MCP
+
+在对话中启用八爪鱼连接器后，即可用自然语言操作采集任务。
+
+### 模板与任务创建
+
+```
+帮我找一个采集 Amazon 商品列表的八爪鱼模板
+用这个模板创建一个采集任务，并在云端启动
+```
+
+### 监控与导出
+
+```
+查看我最新的八爪鱼云采集任务状态
+把结果导出为 CSV
+```
+
+### 数据获取
+
+```
+列出这个八爪鱼任务的所有导出选项
+下载最新数据集，格式为 JSON
+```
+
+<AccordionGroup>
+  <Accordion title="展开查看更多提示词示例">
+
+  **搜索模板**
+
+  ```
+  搜索可用于采集 LinkedIn 公司信息的八爪鱼模板
+  ```
+
+  **创建并运行**
+
+  ```
+  使用模板 ID 12345 创建任务，然后启动云采集
+  ```
+
+  **导出数据**
+
+  ```
+  导出任务 abc123 的最新数据，格式为 JSON
+  ```
+
+  </Accordion>
+</AccordionGroup>
+
+## 重要使用说明
+
+- 仅 **支持云采集的模板** 可通过 Claude 启动；纯本地任务请在八爪鱼桌面客户端运行
+- 云采集有可能会消耗**八爪鱼账户余额**，具体见具体使用的八爪鱼模板
+- 部分模板需要 **专业版及以上** 套餐，或额外消耗积分
+- 自定义连接器可能读取、创建、修改或删除数据，连接前请仔细审查权限范围
+- 仅连接你信任的 MCP 服务器；远程 MCP 属于第三方服务，接入前请自行评估风险
+- **移动端：** Claude iOS / Android 可使用已在 claude.ai 添加的远程 MCP，但无法在移动端直接新增连接器
+
+## 常见问题
+
+| 现象 | 处理建议 |
+| --- | --- |
+| 找不到 Connectors 入口 | 确认账户为 Pro / Max，或 Team / Enterprise 成员；更新 Claude 至最新版本 |
+| Team 成员无法添加连接器 | 需由工作区 Owner 在组织设置中先添加八爪鱼连接器 |
+| OAuth 授权失败 | 检查网络；确认八爪鱼账户可正常登录；删除连接器后重新添加 |
+| 对话中无八爪鱼工具 | 确认已在当前对话左下角 **+ → Connectors** 中启用八爪鱼连接器 |
+| 无法启动任务 | 确认模板支持云采集；检查账户套餐与余额 |
+| 本地任务无法运行 | 本地采集需在八爪鱼客户端操作，Claude 仅支持云采集相关工具 |
+
+<Note>
+  若教程截图与 Claude 当前界面有出入，请以 Anthropic 官方界面为准；国际用户界面可能显示为英文。
+</Note>
+
+## 相关链接
+
+- [八爪鱼 MCP 概述](/zh/mcp/index)
+- [获取 API Key](/zh/mcp/quick-start/api-key)
+- [工作流程示例](/zh/mcp/workflow)
+- [故障排查](/zh/mcp/troubleshooting)
+- [客户端配置指南 — Claude](/zh/mcp/guides/clients#claude)

@@ -1,0 +1,76 @@
+---
+title: "断点采集（采集中断，需要采集后续数据）"
+description: "介绍八爪鱼采集器进阶功能：断点采集（采集中断，需要采集后续数据）。"
+source: "https://www.bazhuayu.com/helpcenter/docs/duan-dian-cai-ji-cai-ji-zhong-duan-xu-yao-cai-ji-hou-xu-shu-ju"
+---
+
+\
+在八爪鱼采集器中，当采集任务因网络中断、软件关闭或其他原因意外停止时，您可以使用一些小技巧，从停止的位置继续采集，无需重新开始。以基本配置采集可以参考该东方财富网教程进行配置 :[【东方财富】定向增发股数据采集](https://www.bazhuayu.com/helpcenter/docs/WXAzqs?search=1)
+
+## **方法一：启动暂停，手动跳转后继续采集**
+
+ 
+
+启动采集后中断，需要到指定页面继续采集
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/edc0e0455145403715931389255/wu7czXQMFa4A.mp4" width="100%"></video>
+
+以下步骤，进行详情说明：启动 → 暂停 → 跳转至目标页 → 继续采集
+
+1、配置好全部规则流程，您在启动采集后立即点击“显示网页”
+
+![断点采集（采集中断，需要采集后续数据）](/assets/academy/advanced-features/resume-interrupted-collection/01-69841ac9889fb.png)
+
+2、基本配置可以设置一定的执行前等待时间，以便在采集时能有更多的时间来【**暂停采集**】**自己手动完成翻页到指定页面，然后再继续采集**
+
+![断点采集（采集中断，需要采集后续数据）](/assets/academy/advanced-features/resume-interrupted-collection/02-69841ac98d016.png)
+
+3、【**暂停**】之后，可以往下滚动到翻页，手动点击到“某一页” 之后，再点击左上角【**继续**】，就会按照指定的“某一页” 进行采集数据
+
+![断点采集（采集中断，需要采集后续数据）](/assets/academy/advanced-features/resume-interrupted-collection/03-69841aca4263c.png)
+
+## 方法二：配置循环点击跳转指定页数
+
+在八爪鱼采集器中，当您需要从特定页码开始采集数据时，可以使用"精准分页跳转+循环列表采集"组合方案。该方案的核心思路是：先定位到目标页码，再启动数据采集，避免从第一页开始逐页翻页的时间消耗
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/24bf93dd5145403715864354025/bLkAQRLPFhwA.mp4" width="100%"></video>
+
+以下步骤，进行详情说明：
+
+1、先配置循环点击跳转指定页数，选择"循环执行次数"模式，比如这里是填写：循环执行次数等于5 次
+
+ 
+
+![断点采集（采集中断，需要采集后续数据）](/assets/academy/advanced-features/resume-interrupted-collection/04-69841aca0e659.png)
+
+2、您在启动采集后立即点击“显示网页”，打开任务日志可以看到，打开网站之后，先翻页执行5次之后，那就会从第6页再继续走下面的循环列表翻页采集
+
+![断点采集（采集中断，需要采集后续数据）](/assets/academy/advanced-features/resume-interrupted-collection/05-69841ac9d94f6.png)
+
+3、实现"先跳转后采集"的精准分页控制，第一个循环负责页码导航控制，第二个循环负责循环列表采集
+
+![断点采集（采集中断，需要采集后续数据）](/assets/academy/advanced-features/resume-interrupted-collection/06-69841aca49523.png)
+
+## 方法三：可直接输入页码，跳转采集
+
+当目标网站本身具有**页码输入框**功能时，能够进行输入指定页码搜索，您可以使用更高效、更精准的页码跳转方案。这种方案通过**直接输入目标页码**，实现快速定位，避免逐页翻页的时间消耗
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/2dcbede05145403715864714622/ytjTzoAE56EA.mp4" width="100%"></video>
+
+以下步骤，进行详情说明：
+
+1. 打开目标网页，找到分页区域的页码输入框
+
+![断点采集（采集中断，需要采集后续数据）](/assets/academy/advanced-features/resume-interrupted-collection/07-69841ac9a98e5.png)
+
+2、选中网页中的文本输入框，在提示框中选择【输入文本】，输入页码【5】，按【确定】保存
+
+![断点采集（采集中断，需要采集后续数据）](/assets/academy/advanced-features/resume-interrupted-collection/08-69841ac9d9d4c.png)\
+\
+3、点击“确定”“按钮，鼠标点击该按钮，进行跳转指定填写页码
+
+![断点采集（采集中断，需要采集后续数据）](/assets/academy/advanced-features/resume-interrupted-collection/09-69841ac99d41e.png)
+
+3、启动采集后点击右上角的【显示页面】后观察网页是否正常打开的，然后可结合日志排错检查，是否先按照输入文本输入到指定页码，再进行采集循环流程
+
+![断点采集（采集中断，需要采集后续数据）](/assets/academy/advanced-features/resume-interrupted-collection/10-69841ac98c353.png)

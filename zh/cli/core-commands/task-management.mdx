@@ -1,0 +1,132 @@
+---
+title: 任务管理
+description: 使用 bazhuayu task、task-group、template、template-task 与 schedule cloud 查找、查看、校验和管理八爪鱼任务。
+---
+
+> v0.1.28 起，CLI 不只负责运行任务，也可以管理远端任务、任务组、模板任务和云定时。会修改远端状态的命令都需要显式传入 `--yes`。
+
+## `bazhuayu task list`（查看采集任务）
+
+列出账号下的采集任务，并获取后续 `run`、`cloud start`、`data export` 等命令需要的 `taskId`。
+
+```bash
+bazhuayu task list
+bazhuayu task list --keyword 小红书
+bazhuayu task list --page 2 --page-size 20
+bazhuayu task list --limit 10
+bazhuayu task list --task-group <groupId>
+bazhuayu task list --template-id <templateRegistrationId>
+bazhuayu task list --template-version-id <templateVersionId>
+bazhuayu task list --scheduled true --json
+```
+
+可用筛选条件包括 `--keyword`、`--task-group`、`--status`、`--task-type`、`--scheduled true|false`、`--template-id` / `--template-registration-id` 和 `--template-version-id`。
+
+如果还没有现成任务，可以使用 [`bazhuayu detect`](/zh/cli/core-commands/detect) 检测新 URL 并生成任务文件。
+
+## 查看、复制、重命名、移动与删除任务
+
+```bash
+bazhuayu task show <taskId> --json
+bazhuayu task inspect <taskId>
+bazhuayu task copy <taskId> --task-group <groupId> --json
+bazhuayu task rename <taskId> --name "新任务名" --yes
+bazhuayu task move <taskId> --task-group <groupId> --yes
+bazhuayu task delete <taskId> --yes
+```
+
+`task show` 查询远端任务详情；`task inspect` 更偏向采集任务结构检查，也支持本地任务文件。`rename`、`move`、`delete` 会修改远端任务，必须带 `--yes`。
+
+运行前建议关注 `inspect` 输出中的 `runOnLabel`：
+
+| 显示值 | 含义 | 应使用的命令 |
+| --- | --- | --- |
+| 云端和本地 | 两种运行方式均可 | `bazhuayu run` 或 `bazhuayu cloud start` |
+| 仅云端 | 只能用云端运行 | `bazhuayu cloud start` |
+| 仅本地 | 只能用本地运行 | `bazhuayu run` |
+
+## `bazhuayu task validate`（校验任务定义）
+
+正式运行前建议先校验任务：
+
+```bash
+bazhuayu task validate <taskId>
+bazhuayu task validate <taskId> --task-file ./task.json
+```
+
+CLI 支持本地 `.json`、`.xml`、`.otd` 任务文件，可传给 `inspect`、`validate` 和 `run`：
+
+```bash
+bazhuayu task inspect <taskId> --task-file ./task.json
+bazhuayu run <taskId> --task-file ./task.json --max-rows 20
+```
+
+如果校验失败，请根据错误信息更新任务定义，或回到桌面客户端调整不兼容的采集规则。
+
+## `bazhuayu task-group`（任务组管理）
+
+```bash
+bazhuayu task-group list --json
+bazhuayu task-group create "项目任务组" --json
+bazhuayu task-group update <groupId> --name "新任务组名" --yes
+bazhuayu task-group delete <groupId> --yes
+bazhuayu task-group set-default <groupId> --yes
+```
+
+`update`、`delete` 和 `set-default` 会修改远端任务组状态，必须带 `--yes`。创建任务组后，可在 `task copy`、`task move`、`template-task create` 和 `task list --task-group` 中复用 `groupId`。
+
+## `bazhuayu template` 与 `template-task`
+
+浏览模板市场、查看模板详情和版本：
+
+```bash
+bazhuayu template search "电商" --page 1 --page-size 20 --json
+bazhuayu template search "评论" --kind-id <kindId> --free true --run-on <n> --scope <n> --json
+bazhuayu template view <templateRegistrationId> --json
+bazhuayu template version <templateRegistrationId> --json
+```
+
+使用模板创建或更新任务：
+
+```bash
+bazhuayu template-task create <templateRegistrationId> --name "模板采集任务" --task-group <groupId> --params-file params.json --json
+bazhuayu template-task update <taskId> --task-group <groupId> --params '{"UIParameters":[]}' --yes --json
+```
+
+`--params` / `--params-file` 需要传入国内模板接口使用的 `userInputParameters` JSON 对象。两者不能同时使用。`template-task update` 会修改远端模板任务映射，必须带 `--yes`。
+
+## `bazhuayu schedule cloud`（云定时）
+
+CLI v0.1.28 仅开放云定时管理；本地定时依赖桌面客户端的本机队列，仍请在客户端中设置。
+
+```bash
+bazhuayu schedule cloud get <taskId> --json
+bazhuayu schedule cloud update <taskId> --type daily --date 1 --time 09:00 --yes --json
+bazhuayu schedule cloud start <taskId> --yes --json
+bazhuayu schedule cloud stop <taskId> --yes --json
+bazhuayu schedule cloud next --type daily --date 1 --time 09:00 --json
+```
+
+`--type` 支持数字或类型名称：`1` / `date` / `once`、`2` / `weekly`、`3` / `monthly`、`4` / `interval-minute`、`5` / `every-hour`、`6` / `daily`。`update`、`start` 和 `stop` 会修改远端云定时状态，必须带 `--yes`。
+
+## 高风险操作确认
+
+以下命令会修改远端状态，需要显式确认：
+
+- `bazhuayu task rename/move/delete ... --yes`
+- `bazhuayu task-group update/delete/set-default ... --yes`
+- `bazhuayu template-task update ... --yes`
+- `bazhuayu schedule cloud update/start/stop ... --yes`
+
+`detect --agent` 的兼容 `--yes` 不是高风险确认；新 Agent 脚本仍可省略。
+
+## 下一步
+
+<CardGroup cols={2}>
+  <Card title="运行采集任务" icon="play" href="/zh/cli/core-commands/run-tasks">
+    本地、云端或任务文件运行。
+  </Card>
+  <Card title="网页检测与任务生成" icon="sparkles" href="/zh/cli/core-commands/detect">
+    从 URL 检测结构并生成本地任务文件。
+  </Card>
+</CardGroup>

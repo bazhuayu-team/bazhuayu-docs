@@ -1,0 +1,173 @@
+---
+title: "设置备用位置"
+description: "介绍八爪鱼采集器进阶功能：设置备用位置。"
+source: "https://www.bazhuayu.com/helpcenter/docs/diZtWC"
+---
+
+通常情况下我们在提取一批相似网址时，页面中的字段一般是在同一位置，通过同一条定位XPath可以将其全部匹配到。
+
+但是存在这样一种情况，同一字段在不同页面的位置略有不同。此时，我们可以尝试通过备用位置解决。例如，一个字段，在A页面和B页面的位置不同，那么可以用A页面字段的位置做规则提取字段，然后将B页面字段的位置设为备用位置。这样，AB两个页面的字段就都能被提取到。
+
+ 
+
+### 一、什么是备用元素
+
+备用元素，也就是在当前xpath元素找不到的时候，启动备用的xpath，可以通过备用元素解决网页结构不一致导致采集漏字段的问题。
+
+ 
+
+### 二、怎么设置备用元素
+
+#### 1.采集数据
+
+示例网站：
+
+https\://fgw\.sh.gov.cn/fgw\_zcjd/20220822/ab80c123e81840c688ade0caa2f21a11.html
+
+https\://fgw\.sh.gov.cn/fgw\_zcjd/20220728/8802ea2324a643cbbfee5fc3b87dfad3.html
+
+ 
+
+**Step1：**&#x6309;照需求，采集数据。这里我们采集这2个详情页文章的标题、时间、正文链接
+
+<video controls src="https://resource-wangsu.helplook.net/docker_production/3mkuae/article/diZtWC/video/654c817470c77.mp4" width="100%"></video>
+
+ 
+
+**Step2：**&#x542F;动采集看一下，第2个详情页的【时间】字段并未采集到。这是因为第2个详情页的网页结构和第1个不同，第1个详情页的【时间】定位XPath，不适用第2个详情页了。
+
+![设置备用位置](/assets/academy/advanced-features/backup-location/01-654c8363c3969.png)
+
+###  
+
+#### 2.设置备用位置
+
+我们可以通过设置备用位置，解决这个问题。
+
+**Step1：**&#x70B9;击【循环网址】步骤，点击 <img src="/assets/academy/advanced-features/backup-location/02-653618284e7ce.png" alt="" className="academy-inline-icon" /> 按钮，选择第2个网址，再点击【打开循环中的网页】，打开第2个详情页。
+
+点击【提取数据】步骤，在数据预览区域，找到【时间】字段，点击【时间】字段后的  <img src="/assets/academy/advanced-features/backup-location/03-653618284b4f0.png" alt="" className="academy-inline-icon" />按钮，点击【修改元素定位】，进入到修改元素定位界面，勾选【尝试备用位置】，点击<img src="/assets/academy/advanced-features/backup-location/04-653618284d845.png" alt="" className="academy-inline-icon" />按钮，然后选中页面中的【时间】字段，可以看到，输入框自动填充了定位XPath。点击【应用】保存。
+
+<video controls src="https://resource-wangsu.helplook.net/docker_production/3mkuae/article/diZtWC/video/654c85ce3af26.mp4" width="100%"></video>
+
+ 
+
+**Step2：**&#x542F;动采集看一下，2个详情页的【时间】字段都被正常采集下来了，备用位置设置成功。
+
+![设置备用位置](/assets/academy/advanced-features/backup-location/05-654c860c65a15.png)
+
+> 注意：备用位置仅适合变化情况较少的网页。若网页变化过多，情况复杂，建议通过修改XPath来解决漏字段问题。
+>
+> 以上示例也可以通过修改XPath解决。查看 [字段提取不到，字段提取错位如何处理？](https://www.bazhuayu.com/helpcenter/docs/OqpmQa)
+
+ 
+
+### 三、多元素并列设置
+
+当我们遇到集合类网站时，常常详情页数据来源于多个其他站点，此时，统一xpath就无法完全定位所需数据，遇到这种场景，我们该怎么办呢？
+
+场景示例网站：[https://www.shaanxi.gov.cn/sxsearch/search.html?tenantId=16711&code=1920ae4af69&searchWord=%E9%99%95%E8%A5%BF](https://www.shaanxi.gov.cn/sxsearch/search.html?tenantId=16711&code=1920ae4af69&searchWord=%E9%99%95%E8%A5%BF)
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/9e5b5a205145403715909921712/6bZZVH4bo4YA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> a. 我们发现这个政府网站下会集合其他网站公告，而且不止一个网站，备用元素设置一个是不够的。
+
+ 
+
+接下来我们跟随案例进行解析。
+
+#### 1. 列表进详情任务配置
+
+我们先初步手动配置好任务，目标字段是详情页标题，详情链接，发布时间，来源，正文。
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/06e2788c5145403715884798170/ge0fvAdxWgkA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> a. 详情页标题，详情链接，发布时间，来源字段都可以在列表页提取，由于列表页比较稳定，此些字段优先考虑列表页，后续正文再在详情页提取。
+>
+> b. 基础配置请参考：[初级采集](https://www.bazhuayu.com/helpcenter/docs/865xfpn6)
+
+ 
+
+初步执行。
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/0b522e0d5145403715884960558/WaQZCajKrNIA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> a. 通过执行任务发现，只有我们设置的详情页站点可以采集到，其他都无法采集。
+
+ 
+
+#### 2.记录xpath，巧用“|”符号
+
+首先解释“|”符号，这个在xpath语句中可以理解为并列，即用此符号连接xpath，则两xpath都可定位。
+
+按照此案例分析，我们只需要尽量将各个详情页的xpath定位到后用“|”拼接即可。
+
+①挨个点击进入详情页。
+
+②点击采集正文（目的识别界面正文的xpath）。
+
+③将xpath复制后用“|”拼接到原字段。
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/ccaf69185145403715951602243/FlktDT8tpvMA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> a. 由于子站点很多，这边目前就以前几条详情页作为案例展示。
+>
+> b.xpath是什么？请关注：[Xpath入门](https://www.bazhuayu.com/helpcenter/docs/NNq78SWX)
+
+ 
+
+ 
+
+#### 3.执行展示效果
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/0be229825145403715952034739/KaGqOE8cVcsA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> a. 此案例只以正文为例，后续扩展若是详情页多字段需要采集，可以类比操作。
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+作者：FAN、YfY

@@ -1,0 +1,121 @@
+# Mintlify Documentation Project
+
+## Project Context
+- This is a **Mintlify** documentation site for **八爪鱼采集器**
+- Documentation is written in **MDX** format in **Chinese (`/zh/`)**
+- Configuration file: `docs.json` (Mintlify v4+)
+
+## Directory Structure
+```
+my-docs/
+├── docs.json              # Mintlify configuration
+├── assets/               # Static assets (logos, images)
+├── style.css             # Custom styles
+└── zh/                   # Chinese documentation
+    ├── overview.mdx
+    ├── platform/        # Platform features
+    ├── academy/         # Tutorials & guides
+    ├── mcp/             # MCP server docs
+    ├── api-reference/    # API documentation
+    ├── cli/             # CLI tool docs
+    └── code-examples/   # Code examples
+```
+
+## Writing Guidelines
+
+### MDX Format Rules
+- Use Mintlify components: `<Card>`, `<CardGroup>`, `<Steps>`, `<CodeGroup>`
+- Code blocks: use language identifier + optional `{theme: "dark"}` for themed display
+- Internal links: use paths like `/zh/platform/overview`
+- External links: use full URLs
+
+### Content Style
+- **Chinese docs** (`/zh/`): Use simplified Chinese, professional tone
+- Maintain consistent terminology across all pages
+- Use **active voice** and **imperative mood** for instructions
+- Include code examples with expected output
+
+### Component Usage Examples
+
+**Card Group:**
+```mdx
+<CardGroup cols={3}>
+  <Card title="Getting Started" icon="rocket" href="/zh/platform/getting-started">
+    Quick start guide
+  </Card>
+</CardGroup>
+```
+
+**Steps:**
+```mdx
+<Steps>
+  <Step title="Install CLI">
+    Run: `npm install -g bazhuayu-cli@0.1.30`
+  </Step>
+</Steps>
+```
+
+**Code Group (multi-language):**
+```mdx
+<CodeGroup>
+  ```bash npm
+  npm install @octoparse/sdk
+  ```
+  ```bash yarn
+  yarn add @octoparse/sdk
+  ```
+</CodeGroup>
+```
+
+## API Documentation Standards
+- Use OpenAPI specification format
+- Include request/response examples
+- Document error codes and messages
+- Specify authentication requirements
+- Use consistent parameter naming (camelCase for JSON)
+
+## Common Tasks
+
+### Add a New Page
+1. Create `.mdx` file in appropriate directory
+2. Add frontmatter: `title` and `description`
+3. Add page to `docs.json` navigation array
+4. Test locally with `npx mintlify dev`
+
+### Update Navigation
+Edit `docs.json` → `navigation` array:
+```json
+{
+  "group": "Platform",
+  "pages": [
+    "platform/overview",
+    "platform/getting-started"
+  ]
+}
+```
+
+### Preview Changes
+```bash
+npx mintlify dev --port 3333
+```
+Open http://localhost:3333
+
+## Brand Guidelines
+- **Primary Color**: `#6C5CE7` (purple)
+- **Logo**: `/assets/logo-light.svg` (light mode), `/assets/logo-dark.svg` (dark mode)
+- **Favicon**: `/assets/favicon.svg`
+- **Product Name**: 八爪鱼采集器
+- **Website**: https://www.bazhuayu.com
+
+## Deployment
+- **Production URL**: https://bazhuayu.mintlify.dev
+- **GitHub Repo**: https://github.com/YANGskieer/bazhuayu-docs
+- **Branch**: `yangyifan` (your working branch)
+- **Auto-deploy**: Push to `master` triggers Mintlify deployment
+
+## Tips for AI Assistance
+- When generating content, match the existing tone and style
+- Preserve Mintlify component syntax exactly
+- Always validate internal links after generating content
+- Run `npx mintlify dev` to preview changes locally
+- Check `docs.json` for correct navigation structure before committing

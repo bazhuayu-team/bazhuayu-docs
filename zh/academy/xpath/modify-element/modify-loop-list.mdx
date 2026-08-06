@@ -1,0 +1,78 @@
+---
+title: 修改循环列表xpath
+description: 通过实例讲解如何修改循环列表 XPath 解决漏采、只采集到部分列表等问题，介绍固定元素列表与不固定元素列表的转换。
+---
+
+我们通过创建【循环列表】去采集多个列表或详情页的数据。创建【循环列表】的方式在 <a href="https://www.bazhuayu.com/helpcenter/docs/865xfpn6">初级采集</a>中有详细讲过。
+
+一般情况下，通过以上方法创建的【循环列表】不会出错，能够精准采集到我们想要的全部数据。但有时候也会遇到一些问题：比如滚动后加载出100个列表，为什么只采集到20个？有一些列表并不是我们需要的，如何将其排除掉？ 页面本来有30条列表，为什么却只能采集到10条？
+
+这时候，就需要手动修改XPath去精准定位列表。
+
+以下通过实例进行说明。
+
+实例网址：<a href="https://www.made-in-china.com/companysearch.do?word=led&file=&subaction=hunt&style=b&mode=and&code=0&comProvince=nolimit&order=0&isOpenCorrection=1">https://www.made-in-china.com/companysearch.do?word=led&file=&subaction=hunt&style=b&mode=and&code=0&comProvince=nolimit&order=0&isOpenCorrection=1</a>
+
+## Step1：按照常规操作创建流程
+
+这个网页我们点击每个公司名称进入详情页，去采集详情页的数据。先按照常规操作创建【循环列表】和【循环翻页】。
+
+## Step2：手动执行规则
+
+配置好后，手动执行规则发现：当页面处于第一页时，所有10个公司标题都被正常定位到，当翻页到第二页时，前10个公司标题被定位到，后面一些则没有定位到（用红色框框起来代表被定位到）。
+
+这就是因为【循环列表】定位XPath出错了，需要手动修改。如何修改？请看下文。
+
+## Step3：修改【循环列表】XPath
+
+进入【循环列表】的设置页面，发现默认生成的循环方式是【固定元素列表】，共有10条定位XPath。
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/xpath/modify-element/modify-loop-list/6566a61425459.png" />
+</div>
+
+看到这里大家肯定有疑问，什么是【固定元素列表】？
+
+【固定元素列表】就是一条XPath对应一个数据列表，像这个网页中，一条XPath对应着页面一个列表。因此，第一页有10个列表，都被定位到，第二页有>10的列表，却只能定位到前10个。
+
+这种情况我们有两种修改方式：① 手动增加XPath
+
+网页上的列表有多少个，增加多少条XPath即可。
+
+观察这些XPath的区别，发现它们极为相似，只在第二个DIV标签后面的数字不同，因此往后增加数字，则可定位到新的列表。
+
+这种方法有一定局限性，你得清楚网页最多有多少个列表才行，否则增加的XPath条数比实际列表少，还是会出现漏采现象。
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/xpath/modify-element/modify-loop-list/6566a61426e11.png" />
+</div>
+
+② 写一条通用的XPath（推荐！）
+
+通用XPath会将符合定位条件的列表都定位到，无需考虑每个页面到底有多少列表。
+
+还是观察这些XPath的区别，发现它们极为相似，只在第二个DIV标签后面的数字不同，因此猜想可以去掉该数字来得到一条通用XPath。在浏览器控制台中验证一下，果然页面上所有列表都被正常定位到。
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/xpath/modify-element/modify-loop-list/6566a61434bb7.png" />
+</div>
+
+接下来进入【循环列表】设置页面，循环方式改为【不固定元素列表】，并输入修改后的XPath：//h2[@class="company-name"]/a
+
+以上是一个将【固定元素列表】转化为【不固定元素列表】的例子，列表循环出错的根本原因还是在XPath没能正确定位，我们要结合网页情况来进行修改。
+
+最后总结一下：
+
+1、当发现列表定位不精准——漏采或者采集到不需要的列表时，就需要修改【循环列表】的定位XPath
+
+如何修改需要一定的XPath知识，请看之前的 <a href="https://www.bazhuayu.com/docs/zh/academy/xpath/getting-started/why-use-xpath">XPath系统学习教程</a> 。
+
+2、需选择合适的循环方式——【固定元素列表】或【不固定元素列表】。
+
+【固定元素列表】：有多条XPath，每一条XPath对应一个列表项。如果删掉其中一条XPath时，则网页中对应的列表项就定位不到了。适用于明确网页上到底有多个数据列表的情况，适用于列表数量固定的网页，比如京东商品列表页，每页就是固定60个商品。
+
+【不固定元素列表】：通过一条通用的XPath定位到所有列表项，由于XPath是通用的，因此无论网页中列表数量是否变化都可以适用，非常好用，比如有的网站第一页列表10条，第二页有8条，都可以定位到。
+
+【固定元素列表】和【不固定元素列表】是可以相互转换的，请大家根据实际情况选用。
+
+作者：Tina

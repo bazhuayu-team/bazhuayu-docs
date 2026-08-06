@@ -1,0 +1,129 @@
+---
+title: 批量获取任务步骤信息
+api: POST https://openapi.bazhuayu.com/task/getActions
+playground: interactive
+authMethod: apiKey
+---
+
+> **所需套餐：** 旗舰+、企业版、团队版
+
+## 端点
+
+```
+POST https://openapi.bazhuayu.com/task/getActions
+```
+
+## 描述
+
+此接口根据步骤类型，获取一批任务的步骤信息。
+
+## 请求头
+
+| 参数 | 类型 | 必填 | 说明 |
+|------|------|------|------|
+| `x-api-key` | String | 二选一 | API Key，例如 `op_sk_xxxxxx`；创建方式见 [获取 API Key](/zh/mcp/quick-start/api-key) |
+| `Authorization` | String | 二选一 | Access Token，格式 `Bearer <access_token>` |
+| `Content-Type` | String | 是 | application/json |
+
+**请求头示例**
+
+```json
+{
+  "Authorization": "Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6ImdXS3hWc0F4SHhaMDlDcWh6NkNJb3ciLCJ0eXAiOiJhdCtqd3QifQ.eyJuYmYiOjE2MzY0NjIyNzAsImV4cCI6MTYzNjU0ODY2OSwiaXNzIjoiaHR0cDovL3Rlc3QuaWRlbnRpdHkuYmF6aHVheXUuY29tIiwiY2xpZW50X2lkIjoiT2N0b3B1cyIsInN1YiI6IjllOGJiM2VhLWUwMWQtNGFlZC05ODM3LTVhMWUyODg0NWI5ZSIsImF1dGhfdGltZSI6MTYzNjQ2MjI3MCwiaWRwIjoibG9jYWwiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjllOGJiM2VhLWUwMWQtNGFlZC05ODM3LTVhMWUyODg0NWI5ZSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJ0ZXN0d2VuIiwicHJlZmVycmVkX3VzZXJuYW1lIjoidGVzdHdlbiIsInVuaXF1ZV9uYW1lIjoidGVzdHdlbiIsInJlZ2lzdGVyX2RhdGUiOiIxMS8wNC8yMDE2IDA4OjM4OjE2ICswODowMCIsImxhc3RfbG9naW5fZGF0ZSI6IjA0LzIyLzIwMTkgMDk6MDE6MDIgKzA4OjAwIiwibGFzdF9wYXNzd29yZF9jaGFuZ2VkX2RhdGUiOiIwMS8yMy8yMDE5IDA4OjMwOjMxICswODowMCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6IndlbmRpQHNraWVlci5jb20iLCJlbWFpbCI6IndlbmRpQHNraWVlci5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwic2NvcGUiOlsiZW1haWwiLCJvcGVuaWQiLCJyb2xlcyIsIm9mZmxpbmVfYWNjZXNzIl0sImFtciI6WyJwd2QiXX0.ARhbBfzI1xS6yo-Ue1CFHzMaUIfzw4gJlubNBOkUT4SSTlhuS4bVQ4t4UHuYGbE9VX6XgNVgkcDnx6XapqcPohSy7vPv9TIAsjtbrQSA3mj13SnVVAPWwfAVJ-I7g9HDnyPEEOVSvmZUJhiz-irH5L0ojbnt3ck2rQ9tIFuSd7j2eh5BS4ItjNoHY00rh_QPZltk66a9q-fNE33GrxOaXUdHH47WMlsENnh1gybB7QtGtd6bZ982Qa9JljpFnZWSdEf4VfkN4JmhkUTTC908DqS3stT-LD-9tpztFwB54sd0D4CyOBnESkKrUwjxchYYZo4l1O7auiZVGV48YhZYMw",
+  "Content-Type": "application/json"
+}
+```
+
+## 请求体
+
+| 参数 | 类型 | 必填 | 说明 |
+|------|------|------|------|
+| `taskIds` | String[] | 是 | 任务 Id 列表 |
+| `actionTypes` | String[] | 是 | 步骤类型列表，支持：LoopAction（循环列表）、NavigateAction（打开网页）、EnterTextAction（输入文本） |
+
+**请求体示例**
+
+```json
+{
+  "taskIds": [
+    "a3b9bdf7-9aaa-22f6-9ccf-b32790f6df8f"
+  ],
+  "actionTypes": [
+    "LoopAction",
+    "NavigateAction",
+    "EnterTextAction"
+  ]
+}
+```
+
+## 响应
+
+| 参数 | 类型 | 必填 | 说明 |
+|------|------|------|------|
+| `requestId` | String | 是 | 请求Id |
+| `data` | Object[] | 是 | 响应数据 |
+| `taskId` | String | 是 | 任务Id |
+| `actions` | Object[] | 是 | 步骤值信息，不同的步骤类型会有不同的响应数据模型，具体数据模型请参考给出的样例，步骤属性具体参考：步骤属性 |
+
+**成功示例**
+
+```json
+{
+  "data": [
+    {
+      "taskId": "a3b9bdf7-9aaa-22f6-9ccf-b32790f6df8f",
+      "actions": [
+        {
+          "actionType": "LoopAction",
+          "loopType": "URLList",
+          "loopItems": [
+            "http://www.octoparse"
+          ],
+          "name": "循环网址",
+          "actionId": "ce1wg4nytr"
+        },
+        {
+          "actionType": "LoopAction",
+          "loopType": "TextList",
+          "loopItems": [
+            "显示器"
+          ],
+          "name": "循环文本",
+          "actionId": "6l3bq70xaka"
+        }
+      ]
+    }
+  ],
+  "requestId": "0HMCVDHG1V3E6:00000002"
+}
+```
+
+## 错误响应
+
+| 参数 | 类型 | 必填 | 说明 |
+|------|------|------|------|
+| `error` | Object | 是 | 错误信息，参考错误码 |
+| `code` | String | 是 | 错误码 |
+| `message` | String | 是 | 错误详情 |
+| `requestId` | String | 是 | 请求Id |
+
+**错误示例**
+
+```json
+{
+  "error": {
+    "code": "ServerError",
+    "message": "Internal Server Error"
+  },
+  "requestId": "0HMD469L0I8R0:00000001"
+}
+```
+
+<ParamField header="Authorization" type="string" required hidden>
+</ParamField>
+<ParamField header="Content-Type" type="string" default="application/json" required hidden>
+</ParamField>
+<ParamField body="taskIds" type="string[]" required hidden>
+</ParamField>
+<ParamField body="actionTypes" type="string[]" required hidden>
+</ParamField>

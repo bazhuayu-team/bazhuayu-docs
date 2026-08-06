@@ -1,0 +1,51 @@
+---
+title: "返回上一级网页"
+description: "介绍八爪鱼采集器进阶功能：返回上一级网页。"
+source: "https://www.bazhuayu.com/helpcenter/docs/fan-hui-shang-yi-ji-wang-ye"
+---
+
+## **一、采集场景**
+
+     通过列表循环点击列表页进入下一级页面采集数据，进入下一级页面后，无法正常返回到列表页。从而导致只能采集一条数据就采集完成，无法采集全部的数据。本文讲解了此类场景下添加【返回上一级】功能步骤，解决此场景下的采集问题。示例网址[http://scm.wxmetro.net:3000/Purchase/PurchaseNotice](http://scm.wxmetro.net:3000/Purchase/PurchaseNotice)
+
+![](/assets/academy/advanced-features/return-to-previous-page/01-6552ef781459c.png)
+
+ 
+
+ 
+
+## **二、什么时候使用【返回上一级】**
+
+1、这里以一般的网站为例，建立循环点击列表进入详情。进入详情后我们点击循环列表步骤，页面会自动从详情页返回到列表页。此类场景下，网站可以实现采集所有列表页和详情页的数据。
+
+<video controls src="https://resource-wangsu.helplook.net/docker_production/3mkuae/article/4bd0N9/video/6552f1664d413.mp4" width="100%"></video>
+
+ 
+
+2、特殊情况下，列表进入详情页后无法正常返回到列表页，以网址：https\://xxgk.fengxian.gov.cn/dir/comm/3525
+
+ 为例，建立循环点击进入详情页面，通过点击【循环列表】可以发现无法返回到列表页。
+
+<video controls src="https://resource-wangsu.helplook.net/docker_production/3mkuae/article/4bd0N9/video/6552f49f3592c.mp4" width="100%"></video>
+
+这个时候可以加入【返回上一级网页】步骤，实现详情返回到列表。
+
+ 
+
+## 三、如何使&#x7528;**【返回上一级】**
+
+我们可以发现加入【返回上一级网页】步骤后，原本无法正常返回带列表页，点击【返回上一级网页】后，页面能正常从详情页返回到列表页了。
+
+<video controls src="https://resource-wangsu.helplook.net/docker_production/3mkuae/article/4bd0N9/video/6552f510ba606.mp4" width="100%"></video>
+
+> **注意：**
+>
+> 这里循环点击进入详情步骤的【点击元素】的高级设置设置需要取消默认勾选的【在新标签中打开】。
+
+ 
+
+ 
+
+作者：Jeffrey
+
+编辑：Jeffrey

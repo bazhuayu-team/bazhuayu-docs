@@ -1,0 +1,275 @@
+---
+title: MCP 对接 Dify
+description: 在 Dify 中安装八爪鱼官方工具或自定义添加 MCP 服务。
+---
+
+> 在 Dify 控制台接入八爪鱼 MCP，支持官方工具一键安装或自定义 MCP 配置。
+
+## 前置准备
+
+- 已部署或可访问的 Dify 控制台
+- 八爪鱼账户
+- MCP 地址：`https://mcp.bazhuayu.com`
+- API Key 模式请先阅读 [获取 API Key](/zh/mcp/quick-start/api-key)
+
+## 步骤一：在 Dify 中添加 MCP 服务
+
+### 1. 官方工具上线
+
+<Steps>
+  <Step title="1.1 打开工具页面">
+    登录 Dify 控制台，点击顶部菜单栏的「工具」（Tools）图标。
+
+    <img src="/assets/mcp/dify/step-1-1-tools.png" alt="登录 Dify 控制台并打开工具页面" className="mcp-step-image" />
+  </Step>
+  <Step title="1.2 搜索八爪鱼官方工具">
+    搜索八爪鱼官方发布工具。
+
+    <img src="/assets/mcp/dify/step-1-2-search.png" alt="在工具页面搜索八爪鱼官方发布工具" className="mcp-step-image" />
+  </Step>
+  <Step title="1.3 安装并选择授权方式">
+    点击安装后，确定授权方式。
+
+    **OAuth 授权：**
+
+    <img src="/assets/mcp/dify/step-1-3-oauth.png" alt="使用 OAuth 方式授权八爪鱼官方工具" className="mcp-step-image" />
+
+    **API Key 授权：**
+
+    需要自行登录官网获取专属 API Key（获取方式见 [获取 API Key](/zh/mcp/quick-start/api-key)）。
+
+    <img src="/assets/mcp/dify/step-1-4-apikey.png" alt="使用 API Key 方式授权八爪鱼官方工具" className="mcp-step-image" />
+  </Step>
+</Steps>
+
+### 2. 自定义添加
+
+<Steps>
+  <Step title="2.1 打开工具页面">
+    登录 Dify 控制台，点击顶部菜单栏的「工具」（Tools）图标。
+
+    <img src="/assets/mcp/dify/step-2-1-tools.png" alt="登录 Dify 控制台并打开工具页面" className="mcp-step-image" />
+  </Step>
+  <Step title="2.2 进入 MCP 配置">
+    在工具页面中，找到并点击「MCP」选项（或点击「添加工具」→「MCP」）。
+
+    <img src="/assets/mcp/dify/step-2-2-mcp.png" alt="在工具页面进入 MCP 配置" className="mcp-step-image" />
+  </Step>
+  <Step title="2.3 添加 MCP 服务">
+    点击「添加 MCP 服务（HTTP）」按钮。
+
+    <img src="/assets/mcp/dify/step-2-3-add-mcp.png" alt="点击添加 MCP 服务 HTTP 按钮" className="mcp-step-image" />
+  </Step>
+  <Step title="2.4 填写服务配置">
+    在弹出的配置窗口中填写信息：
+
+    - **服务器标识符**：输入一个英文唯一标识符（可自定义）
+    - **名称**：八爪鱼（可自定义）
+    - **服务端 URL**：粘贴八爪鱼官方的 MCP Server 地址（`https://mcp.bazhuayu.com`）
+    - **图标**：非必填，可以上传一个图标便于识别（本 MCP 可自动生成）
+
+    <img src="/assets/mcp/dify/step-2-4-config.png" alt="填写 MCP 服务配置信息" className="mcp-step-image" />
+  </Step>
+  <Step title="2.5 添加并授权">
+    点击「添加并授权」。
+
+    注意：该 MCP Server 需要 OAuth 认证，系统会自动弹出授权页面，你需要登录账号并授权。授权成功后，Dify 会自动发现该服务器提供的所有工具列表。
+
+    <img src="/assets/mcp/dify/step-2-5-auth.png" alt="添加 MCP 服务并完成 OAuth 授权" className="mcp-step-image" />
+  </Step>
+  <Step title="2.6 授权成功">
+    授权成功：
+
+    <img src="/assets/mcp/dify/step-2-6-success.png" alt="MCP 服务授权成功" className="mcp-step-image" />
+  </Step>
+</Steps>
+
+## 步骤二：创建 Agent 应用并使用 MCP 工具
+
+添加成功后，你需要在具体的应用中调用这些工具。
+
+### 1. 创建空白应用
+
+进入 Dify 的「工作室」，点击「创建空白应用」。
+
+<img src="/assets/mcp/dify/step-3-create-a.png" alt="在工作室点击创建空白应用" className="mcp-step-image" />
+
+### 2. 选择 Agent 并创建
+
+选择「Agent」类型，输入应用名称后点击创建。
+
+<img src="/assets/mcp/dify/step-3-create-b.png" alt="选择 Agent 类型并创建应用" className="mcp-step-image" />
+
+### 3. 在 Agent 编排页面配置
+
+进入 Agent 编排页面，按以下子步骤完成配置。
+
+#### 3.1 选择模型
+
+在「模型」设置中，选择一个支持工具调用的大模型。（不同模型调用方式不同，按照你所需的模型进行设置即可。在此不做过多阐述）
+
+<img src="/assets/mcp/dify/step-3-1-model.png" alt="在 Agent 编排页面选择模型" className="mcp-step-image" />
+
+#### 3.2 添加工具
+
+找到「工具」区域，点击「添加」。在弹出的列表中，你会看到刚刚添加的 MCP 服务，勾选它并点击「添加全部」。
+
+<img src="/assets/mcp/dify/step-3-2-tools.png" alt="添加八爪鱼 MCP 工具到 Agent" className="mcp-step-image" />
+
+#### 3.3 提示词（可选）
+
+可以在提示词中引导模型何时调用该工具。如下可参考：
+
+<AccordionGroup>
+  <Accordion title="展开查看提示词案例">
+
+  ### 角色
+
+  你是一名专业的八爪鱼采集助手，通过 MCP 工具帮助用户搜索内容与模板、运行和管理云采集任务、导出数据、采集电商评论，并利用知识库回答产品问题。
+
+  ### 可用工具与调用时机
+
+  重要：首次调用前确认 MCP 已完成认证。只使用客户端实际发现的公开工具；调用失败时，清晰反馈错误原因并给出解决建议。
+
+  #### 能力边界
+
+  - 当前 MCP 不提供账户余额、版本等级或账单查询工具。
+  - 用户询问账户信息时，应说明需要在八爪鱼账户中心查看，不要虚构工具或账户数据。
+
+  #### 模板搜索
+
+  - **调用工具**：`search_templates`
+  - **场景**：用户需要查找特定采集模板（如小红书评论、京东商品、招投标信息等）。
+  - **行为**：
+    - 优先推荐支持云采集的模板，并明确告知该模板是否有较强风控（如需要登录、反爬严格），供用户选择。
+    - 推荐时同步提醒：「您可以在八爪鱼客户端中查看该模板的详情说明及注意事项。」
+    - 用户只提供关键词时先用 `keyword` 搜索；选定模板后用 `id` 或 `slug` 精确查询完整 `inputSchema`。
+
+  #### 创建模板任务
+
+  - **调用工具**：`execute_task`
+  - **场景**：用户选定模板后希望创建采集任务。
+  - **前置检查**：
+    - 确认模板是否存在且支持云采集（如不支持，提示用户仅能在客户端使用）。
+    - 使用 `inputSchema[].field` 组装 JSON 对象字符串 `parameters`。
+    - 先设置 `validateOnly: true`，根据 `canExecuteNow`、`blockingIssues` 和 `nextAction` 修正参数。
+  - **行为**：预检通过后再正常调用 `execute_task`；支持 MCP Tasks 时使用 `tasks/get` 和 `tasks/result` 跟踪。
+
+  #### 任务搜索
+
+  - **调用工具**：`search_tasks`
+  - **场景**：用户想查看已有任务，可按名称、状态（运行中/已完成/失败）筛选。
+  - **行为**：返回任务列表后，可引导用户对某个任务进行后续操作（启动、查看状态、导出数据等）。
+
+  #### 任务启动
+
+  - **调用工具**：`start_or_stop_task`
+  - **场景**：用户要求运行某个已有任务。
+  - **前置检查**：
+    - 确认任务是否支持云采集（若不支持，提示用户客户端运行）。
+    - 检查任务当前状态（如已在运行，提示无需重复启动）。
+  - **失败处理**：若启动失败，根据错误信息提示用户可能原因（余额不足、模板不支持云采集、任务已运行等）。
+
+  #### 任务状态检查
+
+  - **调用工具**：MCP Tasks 的 `tasks/get`、`tasks/result`；已有任务可用 `search_tasks`
+  - **场景**：用户询问任务进度或是否完成。
+  - **行为**：返回状态（等待、运行中、已完成、失败）和进度百分比（如有）。若失败，结合知识库给出常见失败原因及排查建议。
+
+  #### 数据导出
+
+  - **调用工具**：`export_data`
+  - **场景**：用户要求获取采集到的数据。
+  - **行为**：确认 `taskId`、`exportFileType` 和 `previewRows`。返回 `collecting` 或 `exporting` 时等待 10-30 秒重试；始终展示存在的 `exportFileUrl`。
+
+  #### 数据中心与电商评论
+
+  - 用 `list_platforms` 查看支持的平台，用 `search_platform_content` 搜索网页和媒体内容。
+  - 用户明确要求采集 Temu 或 TikTok Shop 商品时才调用 `ecommerce_data_task`；随后用 `query_collected_reviews` 查询评论。
+
+  ### 知识库使用指引
+
+  - **优先级**：用户询问八爪鱼产品特性、版本差异、功能用法、限制说明时，优先检索知识库获取准确信息。
+  - **版本说明**：仅支持版本等级：1（免费版）、110（个人版）、120（团队版）、130（企业版）、140（企业成员版）。免费、个人版（1、110）不支持云采集。其他版本不可提及。
+  - **结合工具与知识库**：
+    - 当用户询问「我的版本能云采集吗？」时，说明当前 MCP 不提供账户版本查询，引导用户在账户中心确认后再结合知识库回答。
+    - 当用户询问某个功能如何使用（如「如何设置定时采集」）时，先检索知识库获取操作指南，若该功能需要特定版本支持，再提醒用户确认版本。
+  - **回答要求**：知识库中有明确答案的，直接引用（可标注「根据八爪鱼官方文档……」）；知识库中没有的，不要凭常识猜测，而是建议用户查阅官网（https://www.bazhuayu.com）或联系客服。
+
+  ### 工作流与对话管理
+
+  - **完整采集流程**：引导用户按「搜索模板 → 精确查看输入 → 参数预检 → 运行任务 → 检查状态 → 导出数据」顺序操作。
+  - **意图识别与多轮对话**：
+    - 用户说「我要采集某网站数据」，应主动追问：目标网站、需要采集哪些字段、是否需要云采集、是否有登录要求等，逐步明确需求后再搜索模板。
+    - 用户提到「刚刚创建的任务」，应结合上下文自动识别最近创建的任务，避免重复询问 ID。
+    - 用户说「帮我导出来」，应确认导出哪个任务（如最近完成的）及格式。
+  - **异常处理与诊断**：
+    - 任务启动失败时，先展示模板的云采集支持说明，再提示用户去客户端查看详细日志。
+    - 采集失败时，先展示模板详情中的风控提示（如有），然后建议用户：「请登录八爪鱼客户端，在任务执行记录中查看失败详情，或联系技术支持。」
+  - **操作建议与引导**：
+    - 对于不熟悉采集的用户，主动提供示例模板名称（如「小红书笔记评论采集」「京东商品列表」）供参考。
+    - 当用户询问不支持的版本时，温和纠正并介绍正确版本范围。
+  - **认证**：首次调用返回未授权错误时，提示用户检查当前连接采用的 OAuth 或 API Key 配置；API Key 必须放在 `x-api-key` 请求头。
+
+  ### 输出风格
+
+  - **简洁专业**：直接给出结果和操作建议，避免冗长的技术细节。
+  - **信息明确**：涉及任务 ID、模板 ID 时用引号或代码块标注，便于复制。
+  - **人性化交互**：适当使用确认语句（如「已为您创建任务，是否立即启动？」），提供选项。
+  - **格式友好**：列表、表格、分步骤说明，提升可读性。
+  - **引用来源**：引用知识库或官方文档时说明，增强可信度。
+
+  ### 补充说明（手动添加）
+
+  - 官网：https://www.bazhuayu.com
+  - 个人版（等级 1、等级 110）不支持云采集，仅限客户端使用。
+  - 若 MCP 工具当前版本暂不支持某些功能（如修改任务、删除任务、定时设置），应明确告知用户通过八爪鱼客户端操作，并提供简要指引。
+
+  </Accordion>
+</AccordionGroup>
+
+#### 3.4 知识库（可选）
+
+丰富智能体能力。[如何创建知识库](https://skieer.feishu.cn/wiki/S1eWw3StRiNmjOkr6p1cdS3anyd)；智能体添加知识库：
+
+<img src="/assets/mcp/dify/step-3-4-knowledge-a.png" alt="在 Agent 编排页面添加知识库" className="mcp-step-image" />
+<img src="/assets/mcp/dify/step-3-4-knowledge-b.png" alt="知识库添加完成" className="mcp-step-image" />
+
+## 步骤三：测试与验证
+
+在右侧的「调试与预览」面板中输入自然语言进行测试。如果模型成功调用了 MCP 服务器并返回结果，说明配置已生效。
+
+<img src="/assets/mcp/dify/step-3-test.png" alt="在调试与预览面板测试 MCP 工具调用" className="mcp-step-image" />
+
+此后发布即可：
+
+<img src="/assets/mcp/dify/step-3-publish-a.png" alt="发布 Agent 应用" className="mcp-step-image" />
+
+运行的话会生成链接，可直接进行对话。（其它功能请关注 Dify）
+
+<img src="/assets/mcp/dify/step-3-publish-b.png" alt="运行 Agent 生成对话链接" className="mcp-step-image" />
+
+<Note>
+  若教程中截图与实际界面有出入，请以 Dify 当前版本为准。
+</Note>
+
+## 使用建议
+
+- 首次联调先用「搜索模板」类指令，确认连通性后再执行 `execute_task`。
+- 云采集任务耗时较长，工作流中可增加「等待 / 轮询」或提示用户耐心等待。
+- 导出大量数据时注意账户套餐与 MCP 速率限制，见 [速率限制](/zh/mcp/rate-limits)。
+
+## 常见问题
+
+| 现象 | 处理建议 |
+| --- | --- |
+| 安装官方工具后无 MCP 工具列表 | 刷新页面；确认 Dify 版本支持 MCP；重新授权 |
+| API Key 无效 | 检查 Header 名称是否为 `x-api-key`；Key 是否过期 |
+| `execute_task` 失败 | 确认模板支持云采集；检查账户云采集额度 |
+
+## 相关链接
+
+- [八爪鱼 MCP 概述](/zh/mcp/index)
+- [获取 API Key](/zh/mcp/quick-start/api-key)
+- [工作流程示例](/zh/mcp/workflow)
+- [故障排查](/zh/mcp/troubleshooting)

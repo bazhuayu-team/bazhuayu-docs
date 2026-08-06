@@ -1,0 +1,161 @@
+---
+title: "【快手】关键词视频采集"
+source: "https://www.bazhuayu.com/helpcenter/docs/kuai-shou-guan-jian-ci-shi-pin-cai-ji"
+---
+**一、采集场景**
+
+快手：
+
+[https://www.kuaishou.com/?isHome=1](https://www.kuaishou.com/?isHome=1)
+
+通过批量输入多个关键词检索相关的视频数据
+
+ 
+
+ 
+
+**[二、采集字段](/zh/academy/case-studies/news/jiemian-keyword-list-detail#e5796071b2891dfd7209a3343ac8f7b8)**
+
+采集关键词、标题、来源、点赞数、图片链接
+
+![【快手】关键词视频采集](/assets/academy/case-studies/kuaishou-keyword-videos/01-69c3a25a50c98.png)
+
+ 
+
+**三、采集结果**
+
+采集结果可导出为Excel，CSV，HTML，数据库等多种格式。导出为Excel示例：
+
+![【快手】关键词视频采集](/assets/academy/case-studies/kuaishou-keyword-videos/02-69c39d0d8b231.png)
+
+ 
+
+**[四、采集步骤](/zh/academy/case-studies/news/jiemian-keyword-list-detail#6d9c1aa5fdd97aae3187c08c1f05f903)**
+
+步骤一、打开网页及设置cookie
+
+步骤二、批量输入关键词
+
+步骤三、采集列表数据
+
+步骤四、编辑字段
+
+步骤五、设置循环滚动网页
+
+步骤六、启动采集
+
+ 
+
+**以下为具体步骤：**
+
+ 
+
+**[步骤一、打开网页及设置cookie](/zh/academy/case-studies/news/jiemian-keyword-list-detail#eacbc190842df1942f165db4a2045a4a)**
+
+在首页【输入框】中输入目标网址：[https://www.kuaishou.com/?isHome=1](https://www.kuaishou.com/?isHome=1)，点击【开始采集】，八爪鱼自动打开网
+
+页
+
+![【快手】关键词视频采集](/assets/academy/case-studies/kuaishou-keyword-videos/03-69c39a03cc96d.png)
+
+ 
+
+然后设置cookie登录，用快手app进行扫码登录或者手机验证码登录
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/d07ac9ae5145403721240282007/QJL4iSanqf0A.mp4" width="100%"></video>
+
+ 
+
+ 
+
+**[步骤二、批量输入关键词](/zh/academy/case-studies/news/jiemian-keyword-list-detail#16d41ff166b2d54549adb63bfda58dc0)**
+
+打开网页后，通过以下几步，实现批量输入多个关键词
+
+① 选中新闻搜索框，在操作提示框中，点击【输入文本】
+
+②点击操作框的【批量输入文本】，输入要搜索的所有关键词：
+
+华为
+
+汽车
+
+ 
+
+并且勾选上【输入回车键Enter】
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/e061d8125145403721240921434/ytRHbWx6fBYA.mp4" width="100%"></video>
+
+ 
+
+ 
+
+#### 步骤三、采集列表数据
+
+通过以下步骤，采集所有商品列表中的数据：
+
+1、选中页面上1个新闻列表（注意一定要选中整个列表，包含所有所需字段） 
+
+2、在黄色操作提示框中，点击【选中全部子元素】
+
+3、点击【选择全部相似组】
+
+4、点击【元素中数据内容】\
+\
+5、创建一个循环列表进行提取列表数据
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/5279a5ef5145403721238502501/h6dojVcXdigA.mp4" width="100%"></video>
+
+ 
+
+#### 步骤四、编辑字段
+
+依次修改编辑字段名，或调整字段顺序，添加关键词字段以及图片链接，如下图所示
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/a2117a3b5145403721239642813/Wl3wFRVw95EA.mp4" width="100%"></video>
+
+ 
+
+ 
+
+ 
+
+#### 步骤五、设置循环滚动网页
+
+网页是滚动加载的，需要设置循环滚动设置如下
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/9f87b2455145403721239515977/eHq8NEcF0IoA.mp4" width="100%"></video>
+
+ 
+
+> 说明：网页滚动是局部滚动的，还需要设置局部滚动的xpath,局部xpath设置参考教程【[边滚动边采集数据](/zh/academy/basic-collection/pagination/scroll-and-collect#896eaf68b980977374a01c79ca9c5b1a)】
+>
+> ![【快手】关键词视频采集](/assets/academy/case-studies/kuaishou-keyword-videos/04-69c3a0e3d1557.png)
+
+ 
+
+#### 步骤六、启动采集
+
+1.配置好任务后，点击【保存】-【启动采集】
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/a455865b5145403721239734190/R1hFd6jD1L0A.mp4" width="100%"></video>
+
+ 
+
+ 
+
+采集到数据后，数据支持导出为Excel、CSV、HTML、数据库等。这里导出为Excel。数据示例：
+
+![【快手】关键词视频采集](/assets/academy/case-studies/kuaishou-keyword-videos/05-69c39fbf0a6df.png)
+
+ 
+
+ 
+
+ 
+
+模板推荐：更多字段信息采集，可到客户端搜索，模板【快手搜索关键词采集列表视频】进行使用
+
+ 
+
+![【快手】关键词视频采集](/assets/academy/case-studies/kuaishou-keyword-videos/06-69c3a01197d2d.png)

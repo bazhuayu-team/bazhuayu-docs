@@ -1,0 +1,31 @@
+---
+title: "如何用XPATH自定义抓取特定网页文字？"
+description: "在一些网页当中，有些列表信息的出现是不固定的，这里我们需要用到XPATH的下列函数来特殊定位抓取的字段信息： 1\\) contains(@attribute/text(),’文本字段’)，contains方法是指某属性或者标签文本包含某一连续固定字段。…"
+hidden: true
+kbStatus: "unverified"
+kbSource: "faq"
+sourceSlug: "JleRkS"
+source: "https://www.bazhuayu.com/helpcenter/docs/JleRkS"
+---
+
+在一些网页当中，有些列表信息的出现是不固定的，这里我们需要用到XPATH的下列函数来特殊定位抓取的字段信息：
+
+ 
+
+1\) contains(@attribute/text(),’文本字段’)，contains方法是指某属性或者标签文本包含某一连续固定字段。
+
+ 
+
+2\) starts-with(text(),’文本字段’)，指开头包含某些固定连续字段。
+
+ 
+
+3\) ends-with(text(),’文本字段’)，指结尾包含某些固定连续字段。利用网页中某些固定出现的标签，通过sibling和回退找到该字段。
+
+ 
+
+XPATH视频学习课程：[https://helpcenter.bazhuayu.com/helpcenter/docs/pWdSFO](https://www.bazhuayu.com/helpcenter/docs/pWdSFO)
+
+ 
+
+XPATH入门图文教程：[https://helpcenter.bazhuayu.com/helpcenter/docs/vFMWDY](https://www.bazhuayu.com/helpcenter/docs/vFMWDY)

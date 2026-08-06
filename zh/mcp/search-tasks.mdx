@@ -1,0 +1,32 @@
+---
+title: search_tasks
+description: 分页搜索八爪鱼账户下已有的任务。
+---
+
+按名称、状态或任务 ID 查询账户下已有任务。该工具是只读操作。
+
+## 参数
+
+| 参数 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `page` | integer | 否 | 页码，从 `1` 开始，默认 `1` |
+| `size` | integer | 否 | 每页数量，范围 `1-100`，默认 `10` |
+| `keyword` | string | 否 | 按任务名称或相关文本搜索 |
+| `status` | string | 否 | `Running`、`Stopped`、`Completed` 或 `Failed` |
+| `taskIds` | string[] | 否 | 精确查询一组任务 ID |
+
+```json
+{
+  "page": 1,
+  "size": 20,
+  "status": "Completed"
+}
+```
+
+## 响应
+
+返回 `tasks` 及 `page`、`size`、`total`、`currentTotal`、`totalPages`、`hasMore` 等分页信息，`filtersApplied` 用于确认服务端实际采用的筛选条件。
+
+取得任务 ID 后，可以调用 [`start_or_stop_task`](/zh/mcp/start-or-stop-task) 控制已有云任务，或调用 [`export_data`](/zh/mcp/export-data) 查询与导出数据。
+
+另请参阅：[MCP 概览](/zh/mcp/index)、[MCP 工作流程](/zh/mcp/workflow)

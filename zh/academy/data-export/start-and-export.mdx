@@ -1,0 +1,98 @@
+---
+title: 启动采集并导出
+description: 介绍八爪鱼采集器的本地采集和云采集启动方式，以及数据导出的多种格式（Excel、CSV、HTML、数据库、API）
+---
+
+经过前几课的学习，我们已经掌握了<a href="https://www.bazhuayu.com/docs/zh/academy/basic-collection/beginner/list-collection">列表数据</a>、<a href="https://www.bazhuayu.com/docs/zh/academy/basic-collection/beginner/list-to-detail">列表进入详情页数据</a>、<a href="https://www.bazhuayu.com/docs/zh/academy/basic-collection/beginner/table-collection">表格数据</a>、<a href="https://www.bazhuayu.com/docs/zh/academy/basic-collection/pagination/next-page-button">翻页</a> 的任务配置方法。
+
+任务配置完成后，即可启动采集任务，全自动的采集数据。配置好的任务可【启动本地采集】运行在本地电脑中，也可【启动云采集】运行在由八爪鱼提供的云服务器上。本地采集和云采集完成后得到的数据，可以Excel、CSV、HTML、数据库（SqlServer、MySql）、API等多种形式导出。
+
+## 一、【启动本地采集】和【启动云采集】
+
+### 1、【启动本地采集】
+
+【启动本地采集】即用自己的本地电脑进行数据采集。常用于任务调试或小规模数据采集。此外，本地采集现已添加加速模式，满足拆分条件即可使用。
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/data-export/start-and-export/6520c25f080cd.png" />
+</div>
+
+【启动本地采集】后，会新开一个任务采集窗口，采集过程中不可关闭此采集窗口，否则将中断采集任务。点击【暂停】采集会停下来，点击【继续】则恢复采集；点击【停止】采集则结束。注意：【暂停】期间点击页面、网页翻页、滚动页面、时间过长登录失效和网页内容更新会导致采集出错。
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/data-export/start-and-export/65360f2079c4b.gif" />
+</div>
+
+在任务采集窗口中，我们可以清楚看到八爪鱼的采集状态，进而判断采集任务是否正常执行。例：内置浏览器是否正常打开网页，是否正常翻页，是否正常提取数据...... 八爪鱼提取到的数据，会显示在浏览器下方的数据预览窗口中。为了更好的观察采集状态，可上下拖动光标，将数据预览窗口缩小放大。
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/data-export/start-and-export/65360f2ae10bc.gif" />
+</div>
+
+&nbsp;本地采集现已开放任务日志，可点击进行查看
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/data-export/start-and-export/65360f3312847.png" />
+</div>
+
+### 2、【启动云采集】
+
+【启动云采集】即用八爪鱼提供的云服务集群进行数据采集。在本地将任务配置完成，测试没有问题以后，可【启动云采集】，将任务交给八爪鱼的云服务集群去采集。
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/data-export/start-and-export/6520c25f06634.png" />
+</div>
+
+特别说明：
+
+a. 云采集是八爪鱼团队版以上用户才可使用的。点击查看<a href="https://www.bazhuayu.com/plan" target="_blank" rel="noopener">版本套餐</a>。
+
+与【本地采集】相比，【云采集】具有以下优势：
+
+1、提高采集速度。云集群采用分布式部署方式，多节点同时采集，有效提高采集速度。
+
+2、实现无人值守。可关闭电脑、软件进行数据采集，真正实现无人值守。
+
+3、定时采集。云采集集群是7*24小时工作，可设置任务的定时采集。
+
+4、配合【验证码自动识别】【优质代理IP】，突破网站防采集策略。
+
+5、数据自动入库。
+
+6、通过数据导出API接口，实现秒级导出，无缝对接内部系统。
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/data-export/start-and-export/6520c25f0833b.png" />
+</div>
+
+## 二、数据导出
+
+数据采集完成以后，可选择需要的格式导出。
+
+### 1、【本地采集】数据可导出为：
+
+Excel：① 导出为Excel时，一个Excel文件最多2W条数据。例：某个任务单次共采集到10W条数据，导出为Excel时，会有5个Excel文件，每个文件2W条数据。② Excel单元格最多可容纳32000个字符（包括任何中西文文字或字母以及数字、空格和非数字字符的组合），超过会被截断
+
+CSV：① 导出为CSV时，一个CSV文件最多2W条数据。例：某个任务单次共采集到10W条数据，导出为CSV时，会有5个CSV文件，每个文件2W条数据。② CSV单元格可容纳的字符数无限制。
+
+HTML：一条数据一个文件。
+
+数据库（SqlServer、MySql），本地采集数据需手动导出到数据库，单批次可导出1-2000条数据。
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/data-export/start-and-export/654a1ff027441.png" />
+</div>
+
+### 2、【云采集】数据可导出为：
+
+Excel、CSV、HTML，详情同上。
+
+数据库（SqlServer、MySql），可设置定时自动导出到数据库，时间间隔为1-24小时。单批次可导出1-2000条数据。
+
+API，通过数据导出API接口，实现秒级导出，无缝对接内部系统。
+
+注意：【云采集】数据默认保存3个月，之后将被永久删除。请及时导出【云采集】数据。
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/data-export/start-and-export/654a205fb84e2.png" />
+</div>

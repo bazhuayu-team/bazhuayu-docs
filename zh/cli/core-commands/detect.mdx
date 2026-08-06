@@ -1,0 +1,308 @@
+---
+title: 网页检测与任务生成
+description: 使用 bazhuayu detect 检测网页结构、选择采集区域，并生成可校验和运行的本地任务文件。
+---
+
+> `bazhuayu detect` 是网页检测与任务生成入口。v0.1.32 使用 `bazhuayu` 作为唯一命令入口，并继续兼容用户浏览器模式、Agent 计划、API 列表候选、可见 DOM 字段选择和自定义候选区能力。
+
+## v0.1.32 识别与命令更新
+
+- **命令改名**：所有当前调用改用 `bazhuayu detect`；`octopus` 可执行命令已删除。
+- **验证页提前终止**：检测到验证码、访问限制或安全验证页面时，`detect` 会在生成任务前失败退出，避免把验证页保存成无效任务。
+- **候选区判断优化**：弱候选和整页导航区域的判断得到优化，降低把导航栏、侧边栏误选为主数据区的概率。
+
+遇到验证页失败时，先完成网站要求的登录、验证或访问限制处理，再重新运行 `bazhuayu detect`。不要把失败输出当作已生成的任务继续执行 `run`。
+
+## v0.1.30 用户浏览器模式
+
+默认 `independent` 模式使用临时 Chrome for Testing Profile。需要检测后台、会员页或其他登录后页面时，可使用 v0.1.30 新增的 `user` 模式复用 Chrome / Edge 登录状态：
+
+```bash
+bazhuayu detect "https://example.com/account" --auto --browser user --browser-id chrome --profile "Default" --goal "提取账户数据" --output task.json
+bazhuayu detect "https://example.com/account" --manual --browser user --browser-id edge --profile "Profile 1" --output task.json
+bazhuayu detect "https://example.com/account" --agent --agent-command "node make-plan.mjs" --browser user --browser-id chrome --profile "Default" --goal "提取账户数据" --run-sample 3 --json
+```
+
+首次使用前必须通过 [`bazhuayu browser`](/zh/cli/core-commands/browser-management) 安装扩展，并确认 `browser status --json` 的 `readyForUserBrowserRun` 为 `true`。用户模式仅支持 Windows 和 macOS，不支持 `--headless`。日常 detect 会复用已打开的浏览器并创建专用会话窗口；只有 `browser install` 要求浏览器完全关闭。
+
+浏览器选择优先级为 `--browser` 参数、`OCTOPUS_BROWSER` 环境变量、`browser use` 保存的默认设置、`independent`。`--force-close-browser` 仅用于多开或 Profile 锁定等故障恢复，通常无需传入。
+
+## v0.1.28 更新要点（历史）
+
+v0.1.28 的主要新增能力集中在任务管理、任务组、模板任务、云定时和数据检查命令。新建任务的推荐流程保持为：
+
+```bash
+bazhuayu detect URL --agent --agent-command "node make-plan.mjs" --goal "采集目标" --run-sample 3 --json
+bazhuayu detect URL --auto --goal "采集目标" --task-id <taskId> --output task.json
+bazhuayu task validate <taskId> --task-file task.json
+bazhuayu run <taskId> --task-file task.json --max-rows 20
+```
+
+## v0.1.27 更新要点（历史）
+
+| 变更项 | 说明 |
+|--------|------|
+| 🧠 Agent 任务修正 | `--preview-agent-plan` 会返回风险、修复建议和 `repairInstruction`，可修正 plan 后重新 `--apply-agent-plan` 生成任务 |
+| 🔄 API 列表候选 | 当 DOM 候选弱、页面数据来自 JSON/XHR 或已知 API 搜索模式时，`detect` 可生成 `api_list` 本地任务 |
+| 👁️ Agent 视觉规划增强 | Agent context 新增 `visualElements` 与 `pageVisualElements`，可按可见 DOM 元素选择字段 |
+| 🧩 自定义候选区 | 当候选区不覆盖目标区域时，Agent 可用 `selection.customCandidate` 构造合成候选 |
+| 🐞 字段名规范化 | detector 会规范化部分不适合运行的字段名，减少特殊字符导致的运行失败 |
+
+`--agent` 当前不再需要 `--yes`。为了兼容旧脚本，CLI 仍接受 `--yes`，但新示例和新脚本请省略。
+
+API 列表任务会在 JSON 输出中标记 `generatedTask.mode: "api_list"` 与 `localOnly: true`。这类任务可以用 `bazhuayu run <taskId> --task-file task.json` 本地运行，当前不自动同步云端任务。
+
+## v0.1.26 更新要点（历史）
+
+| 变更项 | 说明 |
+|--------|------|
+| 📊 候选 ranking 改进 | `detect --auto` 的候选区排序算法持续优化，最匹配的候选区更稳定地排在第一位 |
+| 🐞 Windows 任务名异常修复 | 修复 v0.1.25 在 Windows 上使用含特殊字符的 URL 生成任务名称时异常报错的问题 |
+| 🖼️ Agent 截图标注增大 | Agent 模式下生成任务时截图标注区域增大，便于 LLM/Agent 更清晰地查看页面结构，提升视觉审查质量 |
+| 🔧 detect 命令实现拆分 | 按能力（自动识别、手动识别、Agent 模式、分页检测等）拆为独立模块，各子模块可独立迭代，CLI 命令语法和输出格式完全不变 |
+
+所有 v0.1.23~v0.1.25 的命令和脚本无需修改即可直接使用。
+
+## v0.1.25 更新要点（历史）
+
+| 变更项 | 说明 |
+|--------|------|
+| 🔧 detector 智能识别模块重构 | 底层 detector 模块整体重构，对外接口完全兼容 |
+| 📊 候选区排序改进 | AI 识别后候选区排序更精准，最匹配的候选区更稳定地排在第一位 |
+| 📄 分页识别改进 | 翻页逻辑识别准确率提升（加载更多 / 点击翻页 / 滚动加载 / 页码导航） |
+| ☁️ detect 任务同步客户端 | detect 生成的任务自动同步到八爪鱼客户端任务列表，可在客户端直接编辑 |
+| 🚫 弹窗筛选逻辑优化 | 网页弹窗（登录提示、广告弹层、cookie 同意等）过滤和关闭逻辑改进 |
+
+所有 v0.1.24 的命令和脚本无需修改即可直接使用。
+
+## Agent 最短路径
+
+LLM 或 Agent 创建任务时，应先运行 `bazhuayu capabilities --json`，再使用可信的本地 Agent 运行器：
+
+```bash
+bazhuayu detect https://movie.douban.com/explore --agent --agent-command "node make-plan.mjs" --goal "提取电影名称、评分、导演和年份" --task-id douban-movies --output task.json --run-sample 3 --json
+```
+
+<Warning>
+  `--agent-command` 会执行本地 shell 命令，参数值必须是可信的 Agent 运行器，例如 `node make-plan.mjs`。采集目标应传给 `--goal`，不能把自然语言目标直接写进 `--agent-command`。
+</Warning>
+
+`--run-sample <n>` 只支持 `--agent`，且 `n` 必须是正整数。它会使用生成的任务执行一次 `--max-rows <n>` 本地采集。可用 `--run-output <dir>` 指定样品产物目录。独立模式可用 `--headless` 控制样品采集；用户浏览器模式不支持无头运行。
+
+```bash
+bazhuayu detect URL --agent --agent-command "node make-plan.mjs" --goal "提取商品信息" --run-sample 5 --run-output ./sample-runs --keep-agent-files --json
+```
+
+结构化结果保持为单个 JSON envelope，其中可能包含：
+
+- `generatedTask`：任务文件、任务 ID、字段和候选区
+- `preview`：Agent plan 风险预览
+- `agentFiles`：使用 `--keep-agent-files` 时保留的上下文和计划文件
+- `sampleRun`：样品采集的退出码、运行结果和质量摘要
+
+`sampleRun.summary` 会提供 `sampledRows`、`fieldFillRates`、`missingFieldsByRow` 和 `judgment`。即使样品采集失败，任务文件仍可能已经成功生成，因此自动化程序应分别检查顶层 `ok` 和 `sampleRun.exitCode`。
+
+v0.1.27 的 Agent 计划可在 preview 未通过时根据 `repairInstruction` 修正后重新应用：
+
+```bash
+bazhuayu detect --preview-agent-plan plan.json --agent-context context.json --json
+# 修改 plan.json 中的候选区、字段、customCandidate 或 visualReview 后
+bazhuayu detect --apply-agent-plan plan.json --agent-context context.json --output task-fixed.json --json
+```
+
+## Agent 审计路径
+
+需要保留完整上下文和人工审查记录时，使用分步流程：
+
+```bash
+bazhuayu detect URL --prepare-agent --json --goal "提取用户评论" --output context.json
+bazhuayu detect --preview-agent-plan plan.json --agent-context context.json --json
+bazhuayu detect --apply-agent-plan plan.json --agent-context context.json --output task.json --json
+bazhuayu task validate <taskId> --task-file task.json --json
+```
+
+上下文可能包含全页截图、标注候选区的截图、候选区裁剪图、`visualElements`、`pageVisualElements` 和 `apiCandidates`，路径位于 `context.screenshot`、`context.visualArtifacts` 和 `context.decisionSummary`。Agent 写 `plan.json` 前必须：
+
+1. 打开标注截图或全页截图。
+2. 检查所选候选区的裁剪图。
+3. 根据用户目标、页面标题、首屏、当前导航/Tab、语义目的和主内容显著性判断主目标。
+4. 核对主数据区域、字段、详情链接和分页控件。
+5. 在 `visualReview` 中记录视觉证据。
+
+最小计划结构：
+
+```json
+{
+  "schemaVersion": "octopus.detect.agent-plan.v1",
+  "contextFile": "context.json",
+  "visualReview": {
+    "reviewed": true,
+    "screenshotPath": "<context.screenshot.path>",
+    "selectedCandidateId": "protected_smart_1",
+    "evidence": [
+      "候选区对应页面主列表，未包含侧栏和广告"
+    ],
+    "checks": {
+      "mainRegionVerified": true,
+      "fieldsVerified": true,
+      "paginationVerified": true,
+      "detailLinksVerified": false,
+      "excludedRegions": ["侧栏", "导航", "广告"]
+    }
+  },
+  "selection": {
+    "candidateId": "protected_smart_1",
+    "fields": [
+      { "elementId": "ve_1", "as": "标题" },
+      { "elementId": "ve_2", "as": "链接", "kind": "href" }
+    ],
+    "pagination": null
+  }
+}
+```
+
+`visualReview` 与 `selection` 均为必需对象。`visualReview` 至少需要 `reviewed: true`、`screenshotPath`、`selectedCandidateId` 和一条 `evidence`。缺少视觉证据、截图路径错误或候选 ID 不一致时，`--preview-agent-plan` 会判定计划不通过。
+
+字段选择优先使用 `context.visualElements[].id` 作为 `selection.fields[].elementId`。当截图中有标题、价格、图片、作者、指标或详情链接，但 deterministic detector 没有提升为字段时，可选择 `source=visible_dom` 的元素；需要链接或图片地址时设置 `kind: "href"` 或 `kind: "src"`。
+
+如果 `context.candidates` 都没有覆盖目标可见区域，可用 `context.pageVisualElements` 构造自定义候选区：
+
+```json
+{
+  "schemaVersion": "octopus.detect.agent-plan.v1",
+  "contextFile": "context.json",
+  "visualReview": {
+    "reviewed": true,
+    "screenshotPath": "<context.screenshot.path>",
+    "selectedCandidateId": "agent_custom_candidate",
+    "evidence": ["候选列表未覆盖正文区域，因此使用 pageVisualElements 自定义主内容候选"]
+  },
+  "selection": {
+    "customCandidate": {
+      "id": "agent_custom_candidate",
+      "type": "detail",
+      "xpath": "//main",
+      "itemXPath": "//main",
+      "fieldElementIds": ["pv_1", "pv_2", "pv_3"]
+    }
+  }
+}
+```
+
+`customCandidate` 至少需要 `xpath`，并需要 `fields` 或 `fieldElementIds`。引用的元素 ID 必须存在于 `context.pageVisualElements`，否则 preview/apply 会失败。
+
+当 `context.apiCandidates` 存在，且它清楚对应页面主列表、用户需要可扩展列表采集、DOM 候选又很弱时，Agent 可以选择 API 候选：
+
+```json
+{
+  "selection": {
+    "apiCandidateId": "api_list_1"
+  }
+}
+```
+
+API 候选生成的任务是 `api_list` 本地任务；输出会包含 `localOnly: true`。
+
+样品数据出现少量空字段不一定表示任务错误。广告、推荐卡、专题块或异构记录可能天然缺少可选字段；只有主数据区域选错、核心字段在多数代表性行中缺失、搜索或分页结构错误时，才应重新生成任务。
+
+## 自动模式
+
+`--auto` 适合用户直接操作 CLI，由确定性检测结果自动选择最佳候选区。它不是 LLM/Agent 创建任务的默认路径。
+
+```bash
+bazhuayu detect https://movie.douban.com/explore --auto --goal "提取电影名称、评分、简介、导演和年份" --task-id douban-movies --output task.json
+```
+
+如果省略 `--output`，CLI 会在当前目录自动创建 `detected_<host>.json`。带有 `&`、`?` 等 shell 特殊字符的 URL 应使用引号包裹。
+
+```bash
+bazhuayu detect "https://example.com/page?a=1&b=2" --auto --output task.json
+```
+
+提高检测质量：
+
+```bash
+# 使用 LLM 辅助候选排序
+bazhuayu detect URL --auto --goal "提取商品信息" --llm-rank --output task.json
+
+# 不自动关闭登录、Cookie 或广告弹窗
+bazhuayu detect URL --auto --no-dismiss-popups --output task.json
+```
+
+检测结果包含候选区域、字段、样例数据、匹配度以及分页信息。需要人工指定候选区域时：
+
+```bash
+bazhuayu detect URL
+bazhuayu detect URL --select protected_smart_1 --output task.json
+```
+
+## 手动与搜索模式
+
+```bash
+bazhuayu detect URL --manual --goal "提取商品详情" --output task.json
+bazhuayu detect https://www.example.com --auto --query "关键词" --output task.json
+bazhuayu detect https://www.example.com --auto --input keyword=关键词 --output task.json
+bazhuayu detect URL --manual --browser user --browser-id chrome --profile "Default" --output task.json
+```
+
+手动模式用于登录、处理验证、选择高亮区域、配置详情页采集方式和保存会话。搜索模式生成的任务会保留输入框与提交动作。遇到登录、验证码或付费墙时，改用手动模式，并按需使用 `--save-session` 与 `--session-name`。
+
+在无图形界面的 Linux 服务器上，非手动检测可在安装 Xvfb 后自动使用虚拟显示；手动模式需要桌面或 VNC 环境。
+
+## detect 任务同步到客户端
+
+v0.1.25 新增能力：`detect --auto` 或 `detect --agent` 生成的普通任务会自动同步到八爪鱼桌面客户端的任务列表，可在客户端直接查看和编辑。v0.1.27 的 `api_list` 任务当前为本地任务，不自动同步云端。
+
+```bash
+# detect 后，任务出现在客户端的"本地任务"列表中
+bazhuayu detect https://movie.douban.com/explore --auto --goal "提取电影名称"
+# → task.json 在本地，同时同步到客户端任务列表（可见可编辑）
+```
+
+适用场景：
+
+- CLI 生成任务 → 同事在客户端微调 → 大家一起用
+- 本地和云端任务打通，不再割裂
+
+```bash
+# CLI 查看同步后的任务
+bazhuayu task list --keyword "detected"
+```
+
+## 校验并运行
+
+`detect` 负责生成任务，不会直接执行采集。推荐流程：
+
+```bash
+bazhuayu detect URL --auto --goal "提取标题和链接" --task-id <taskId> --output task.json
+bazhuayu task validate <taskId> --task-file task.json
+bazhuayu run <taskId> --task-file task.json --max-rows 20
+bazhuayu data export <taskId> --source local --lot-id <lotId> --format xlsx --file result.xlsx
+```
+
+## 从旧命令迁移
+
+<Warning>
+  v0.1.32 起，`octopus` 命令已删除，当前命令统一使用 `bazhuayu`。更早的 `octopus recognize` 已在 v0.1.23 被移除；v0.1.32 之前的 `octopus run-url` 仅为隐藏兼容入口，新文档和新脚本不应继续依赖它。
+</Warning>
+
+| 旧用法 | 当前推荐用法 |
+| --- | --- |
+| `octopus recognize URL --auto` | `bazhuayu detect URL --auto` |
+| `octopus recognize URL --manual` | `bazhuayu detect URL --manual` |
+| `octopus recognize URL --prepare-agent` | `bazhuayu detect URL --prepare-agent` |
+| `octopus run-url URL --auto --max-rows 20` | 先 `bazhuayu detect --task-id <taskId> --output task.json`，再 `bazhuayu run <taskId> --task-file task.json --max-rows 20` |
+
+## 下一步
+
+<CardGroup cols={2}>
+  <Card title="运行采集任务" icon="play" href="/zh/cli/core-commands/run-tasks">
+    校验并运行 `detect` 生成的任务文件。
+  </Card>
+  <Card title="浏览器管理" icon="browser" href="/zh/cli/core-commands/browser-management">
+    配置用户 Profile、扩展和浏览器默认模式。
+  </Card>
+  <Card title="输出与退出码" icon="terminal" href="/zh/cli/reference/output-and-exit-codes">
+    在脚本、CI 和 Agent 中使用结构化输出。
+  </Card>
+</CardGroup>

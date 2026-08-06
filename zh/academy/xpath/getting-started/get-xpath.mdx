@@ -1,0 +1,90 @@
+---
+title: xpath获取方法
+description: 介绍如何通过浏览器开发者工具查看网页源码、定位元素、获取和验证 XPath 路径。
+---
+
+我们在上一篇章已经认识html和xpath，那么本篇教程将着重讲述如何获取xpath，在网页上写xpath路径验证
+
+那么xpath实质上就是网页源码的索引路径，要想写出正确的xpath，就需要先找到html源码
+
+我们日常浏览的网页本质上都是一个个HTML文档。打开网页后，鼠标右键打开菜单，选择【查看网页源代码】，就能看到该网站的HTML文档。网页上的数据，在其HTML文档中都有一个对应位置。
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/xpath/getting-started/get-xpath/656da5a32e656.png" />
+</div>
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/xpath/getting-started/get-xpath/656da5b60dca1.png" />
+</div>
+
+但是这样乱成一锅粥是肯定无法阅读的，所有浏览器都会提供一个简单轻便的工具，我们鼠标右击，选择检查
+
+可以看到在屏幕下方出现了熟悉的html代码（有的浏览器默认展开在右边）
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/xpath/getting-started/get-xpath/656da5e65e41a.png" />
+</div>
+
+接下来我们把鼠标移动到这些代码块上，可以看到屏幕有的地方高亮了
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/xpath/getting-started/get-xpath/656da6e995fcb.png" />
+</div>
+
+没错，此时这行代码所代表的网页区域即是高亮部分所显示的
+
+那么怎么找到我想要的代码块在哪呢，例如，我们想找到免费下载按钮的代码块
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/xpath/getting-started/get-xpath/65e1787a069fc.png" />
+</div>
+
+很简单，只需要点击控制台左上角的矩形框
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/xpath/getting-started/get-xpath/65e178ad3c980.png" />
+</div>
+
+此时，我们鼠标移动到网页区域内，相应的元素块就会高亮
+
+我们把鼠标移动到【免费下载】按钮上，点击一下
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/xpath/getting-started/get-xpath/65e178f51051d.png" />
+</div>
+
+此时控制台就定位到了该按钮的位置
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/xpath/getting-started/get-xpath/65e1791f848af.png" />
+</div>
+
+接下来右键该行代码就可以复制xpath了
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/xpath/getting-started/get-xpath/65e1794fe7031.png" />
+</div>
+
+当然了，这种方法虽然简单，但是有些情况下，不准确，为了准确无误，我们还是尽量选择手写xpath
+
+在有控制台的情况下，我们使用【ctrt+f】快捷键，唤出搜索框
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/xpath/getting-started/get-xpath/65e179acd9775.png" />
+</div>
+
+把刚才我们复制的xpath输入进去试试
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/xpath/getting-started/get-xpath/65e179c8d7adf.png" />
+</div>
+
+可以看到，代码块黄色高亮，同时我们按下回车，可以看到页面按钮也出现了高亮
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/xpath/getting-started/get-xpath/65e17a002cae9.png" />
+</div>
+
+此时，说明我们找到了，目标元素。
+
+我们可以在官网上试试找一下。

@@ -1,0 +1,50 @@
+---
+title: 数据字段缺失或错位
+description: 讲解当同一字段在不同页面位置不同时，如何通过设置备用位置 XPath 和修改字段 XPath 解决数据字段缺失或错位问题。
+---
+
+我们在提取一批相似网址时，页面中的字段一般是在同一位置，通过同一条定位XPath可以将其全部匹配到。但是存在这样一种情况，同一字段在不同页面的位置略有不同。这种情况会导致数据字段缺失或者错位的情况，这个时候可以通过修改字段的xpath进行解决。
+
+数据字段缺失：采集的某个字段，在A页可以正常采集，在B页采集为空。
+
+示例网站：
+
+https://fgw.sh.gov.cn/fgw_zcjd/20220822/ab80c123e81840c688ade0caa2f21a11.html
+
+https://fgw.sh.gov.cn/fgw_zcjd/20220728/8802ea2324a643cbbfee5fc3b87dfad3.html
+
+Step1：按照需求，采集数据。这里我们采集这2个详情页文章的标题、时间、正文链接
+
+Step2：启动采集看一下，第2个详情页的【时间】字段并未采集到。这是因为第2个详情页的网页结构和第1个不同，第1个详情页的【时间】定位XPath，不适用第2个详情页了。
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/xpath/cases/missing-or-misaligned-fields/6555cb3607867.png" />
+</div>
+
+Step3：我们可以通过设置备用位置xpath解决这个问题。
+
+说明：
+
+备用元素的设置可参考教程：<a href="https://www.bazhuayu.com/helpcenter/docs/diZtWC">设置备用位置</a>
+
+数据字段错位：采集页面的某个字段内容a，在A页可以正常采集到字段内容a，在B页采集的时候采集的时候，采集到的是字段内容b。
+
+示例网址：
+
+<a href="https://baike.baidu.com/item/%E9%A9%AC%E9%BE%99/35974?fromModule=lemma_search-box">https://baike.baidu.com/item/成龙/35974</a>
+
+<a href="https://baike.baidu.com/item/%E5%88%98%E5%BA%A6%E8%8F%B2/136156?fromModule=lemma_search-box">https://baike.baidu.com/item/刘亦菲/136156</a>
+
+采集百度百科搜索人名后的信息，采集字段姓名、国籍、出生日期。
+
+Step1：按照需求，采集数据。
+
+Step2：切换网址观察数据预览，切换网址后观察每个字段获取的数据，可以发现国籍字段获取到了性别内容
+
+Step3：修改【国籍】字段的xpath，用一个xpath准确唯一定的位到【国籍】内容，把国籍字段xpath修改为：//div[@data-pid="card"]//dt[contains(text(),"籍")]/following-sibling::dd[1]
+
+修改xpath之后，可以看到两个网页都可以正常定位到【国籍】字段内容了
+
+说明：
+
+这里修改xpath需要掌握xpath知识，xpath知识学习教程：<a href="https://www.bazhuayu.com/docs/zh/academy/xpath/getting-started/why-use-xpath">Xpath入门</a>

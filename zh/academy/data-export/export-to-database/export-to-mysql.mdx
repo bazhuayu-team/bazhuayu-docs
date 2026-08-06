@@ -1,0 +1,126 @@
+---
+title: 导出到Mysql数据库
+description: 详细介绍如何将八爪鱼采集的数据手动或自动导出到MySQL数据库，包括数据库配置、字段映射和定时导出设置
+---
+
+八爪鱼采集到的数据，支持导出到Mysql数据库中。可手动导出，也按照设置的定时导出计划，自动导出。
+
+本教程将以云采集数据，演示手动/自动导出到Mysql数据库中的具体步骤。
+
+在任务采集完毕之后，将采集得到的数据，手动导出到数据库中。
+
+本地采集和云采集数据，均可手动导出。
+
+## 一、手动导出具体步骤
+
+我们具体看下如何手动导出数据到mysql数据库，以下是详细的步骤：
+
+Step1：先在您的Mysql中，建好数据库和数据表。
+
+Step2：在【我的任务】中，将鼠标移动到任务上，任务采集状态右侧会出现全部按钮，点击即可进入查看采集到的数据，这里点击云采集右侧的全部，查看全部云采集数据。
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/data-export/export-to-database/export-to-mysql/6520c3f2c4290.gif" />
+</div>
+
+Step3：选择【导出数据】，在弹出的操作界面上可选择【导出所有数据】或者【未导出数据】。这里选择【导出所有数据】，选择【导出到数据库】的【Mysql】，点击【确定】进入到数据库配置界面。
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/data-export/export-to-database/export-to-mysql/6520c3f2e0d53.gif" />
+</div>
+
+Step4：进入到这个数据库配置界面之后，对数据库的相关信息进行配置，这里的信息一定要正确而且能正常连接到数据库。
+
+服务器名称：Mysql服务器地址
+
+端口：Mysql实例的端口
+
+用户名：登录Mysql的用户名
+
+密码：登录Mysql的密码
+
+数据编码：填写数据库的编码，不指定可能会出现导入后为乱码的情况 例如导出的是中文，可设置成utf8，另外用户自己的数据库表、字段都需设置成utf8
+
+数据库名称：选择已有的数据库
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/data-export/export-to-database/export-to-mysql/6520c3f257fad.png" />
+</div>
+
+配置好后可点击【测试连接】，验证配置是否正确。这里的配置都是正确的，因此显示 。如果配置不正确，将显示错误信息。
+
+连接可用后就可以开始进行数据字段映射了。
+
+Step5：在数据字段映射界面，选择数据表、目标数据字段（这里如果源数据字段和目标数据字段名称一样会自动进行配置，如果不一样就需要手动选择一下）。
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/data-export/export-to-database/export-to-mysql/65a72dcbb3fe5.png" />
+</div>
+
+可为某个字段勾选【设置为唯一标识】，则导入的时候将根据这个字段确定是数据库新增记录还是覆盖原有的记录。
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/data-export/export-to-database/export-to-mysql/65a72d9750fc5.png" />
+</div>
+
+如果这个任务的数据需多次导入，可以在【配置名称】下面为此次配置命名后保存，这里示例保存为"测试"，下次再导出的时候直接选择这个配置即可。
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/data-export/export-to-database/export-to-mysql/65a72d7887fdb.png" />
+</div>
+
+Step6：选择【导出】，等待一段时间后，提示【导出完成】，表示数据已导入指定数据库。
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/data-export/export-to-database/export-to-mysql/65a72de24cfa7.png" />
+</div>
+
+可在Mysql相应数据表中查看数据：
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/data-export/export-to-database/export-to-mysql/65323f8f64f1b.png" />
+</div>
+
+## 二、自动导出具体步骤
+
+仅云采集数据可实现自动导出到数据库，可以实现边采集边导出，导出的是当前未导出过的数据。云采集需要团队版和企业版才支持
+
+以下为云采集的数据自动导出数据到数据库的详细步骤：
+
+Step1和Step2同手动导出步骤的Step1、Step2一致；
+
+Step3：选择【配置自动导出】-【导出到数据库】-【Mysql】
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/data-export/export-to-database/export-to-mysql/653242af667e2.gif" />
+</div>
+
+Step4：同手动导出步骤的Step4一致；
+
+Step5：进行数据映射。此界面多了一个【设置执行计划】的选项。
+
+设置【导出计划名称】和【每次间隔】，每次导出最短间隔为【5分钟】。
+
+Step6：点击【完成】，弹出【定时入库工具】。
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/data-export/export-to-database/export-to-mysql/65325268869a0.gif" />
+</div>
+
+也可在【工具箱】-【定时入库工具】中，找到我们的【定时导出计划】配置并启动/暂停它。
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/data-export/export-to-database/export-to-mysql/653252fb47b61.png" />
+</div>
+
+### 特别说明
+
+8.7.6以下的版本 配置自动导出到数据库，定时入库工具和采集器不能关闭，否则定时导出会失效无法正常自动导出。
+
+8.7.6及更新的版本配置数据库时会默认可以选择导出云数据库，可实现云采集数据导出至云数据库，且可将入库工具托管到云端，关闭客户端也可以自动导出(选择本地采集任需要保持导出窗口不能关闭)。选择云端数据库时，用户导出数据库时需要添加以下IP白名单：
+
+- <a href="http://124.221.35.46" target="_blank" rel="noopener">124.221.35.46</a>
+- <a href="http://122.51.45.102" target="_blank" rel="noopener">122.51.45.102</a>
+- <a href="http://122.152.208.218" target="_blank" rel="noopener">122.152.208.218</a>
+- <a href="http://106.54.50.104" target="_blank" rel="noopener">106.54.50.104</a>
+- <a href="http://175.24.175.60" target="_blank" rel="noopener">175.24.175.60</a>

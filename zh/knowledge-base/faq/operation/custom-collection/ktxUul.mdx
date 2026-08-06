@@ -1,0 +1,17 @@
+---
+title: "什么是不固定元素列表？"
+description: "不固定元素列表，是一种模糊定位方式，以解决部分网页列表元素不是固定的数目，例如部分网页第一页存在同类元素7个、第二页存在同类元素15个。 示例：第一页：&amp;lt;a class='test'&amp;gt; 1 &amp;lt;/a&amp;gt; 第二页：&amp;lt;a class='test'&amp;…"
+hidden: true
+kbStatus: "unverified"
+kbSource: "faq"
+sourceSlug: "ktxUul"
+source: "https://www.bazhuayu.com/helpcenter/docs/ktxUul"
+---
+
+不固定元素列表，是一种模糊定位方式，以解决部分网页列表元素不是固定的数目，例如部分网页第一页存在同类元素7个、第二页存在同类元素15个。
+
+示例：第一页：&amp;lt;a class='test'&amp;gt; 1 &amp;lt;/a&amp;gt; 第二页：&amp;lt;a class='test'&amp;gt; 1 &amp;lt;/a&amp;gt;&amp;lt;a class='test'&amp;gt; 2 &amp;lt;/a&amp;gt; &amp;lt;a class='test'&amp;gt; 2 &amp;lt;/a&amp;gt;&amp;lt;a class='test'&amp;gt; 3 &amp;lt;/a&amp;gt; &amp;lt;a class='test'&amp;gt; 3 &amp;lt;/a&amp;gt; &amp;lt;a class='test'&amp;gt; 4 &amp;lt;/a&amp;gt; &amp;lt;a class='test'&amp;gt; 5 &amp;lt;/a&amp;gt;
+
+Xpath表达式：//a[@class='test'] 就可以直接把第一页的3个a标签都包含进去，翻到第二页的时候，也可以把第二页的5个a标签都包含进去。
+
+详情请查看 不固定元素列表教程[https://helpcenter.bazhuayu.com/helpcenter/docs/1ZWXml](https://www.bazhuayu.com/helpcenter/docs/1ZWXml)

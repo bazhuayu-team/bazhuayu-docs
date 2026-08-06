@@ -1,0 +1,65 @@
+---
+title: "采集有问题，如何进行排错？"
+description: "采集有问题，会有多种原因，请根据具体的情况来进行排查，首先按不同的采集方式。 本地采集涉及的问题点有： 采集到零数据，直接提示采集完成； 本地采集出现重复数据。 本地采集漏数据； 数据未采完即停止； 采集速度很慢，在某些步骤长时间等待 参考本地采集排错教程进行排查优化采集任务。…"
+hidden: true
+kbStatus: "unverified"
+kbSource: "faq"
+sourceSlug: "uFuI0u"
+source: "https://www.bazhuayu.com/helpcenter/docs/uFuI0u"
+---
+
+采集有问题，会有多种原因，请根据具体的情况来进行排查，首先按不同的采集方式。
+
+**本地采集涉及的问题点有：**
+
+1.采集到零数据，直接提示采集完成；
+
+2.本地采集出现重复数据。
+
+3.本地采集漏数据； 
+
+4.数据未采完即停止；
+
+5.采集速度很慢，在某些步骤长时间等待
+
+参考[本地采集排错教程](https://www.bazhuayu.com/helpcenter/docs/YqLshX)进行排查优化采集任务。
+
+ 
+
+**云采集涉及的问题点有：**
+
+1.本地采集正常，云采集出问题，一般有以下几种情况：
+
+(1) 网页防采集。 A. IP被封  B.出现验证码  C.云上要求登录
+
+(2) cookie访问限制； 
+
+(3) 云端问题-云服务器带宽较小
+
+(4) 规则问题-增量采集； 
+
+(5) 规则问题-勾选屏蔽图片和云采集不拆分任务
+
+参考[云采集排错](/zh/knowledge-base/faq/troubleshooting/c1tiHQ)教程进行排查优化规则
+
+ 
+
+2.云采集速度慢：
+
+(1) 任务分配节点少
+
+(2) 规则未进行优化
+
+参考[云采集原理与加速规则教程](https://www.bazhuayu.com/helpcenter/docs/96b1C4)和[云采集任务启动优化教程](/zh/academy/premium-features/enterprise-management/cloud-task-launch-optimization)进行排查优化规则。
+
+ 
+
+3.网站有防采集措施
+
+(1) 网页无法正常打开
+
+(2) 网站跳登录框需要进行登录
+
+(3) 网页有滑块验证，图文验证码等
+
+参考[常见防采集套路及解决方法教程](https://www.bazhuayu.com/helpcenter/docs/49488)进行排查优化规则。

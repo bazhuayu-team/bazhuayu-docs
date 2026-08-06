@@ -1,0 +1,84 @@
+---
+title: MCP 工作流程示例
+description: 从搜索模板、校验参数和运行云采集，到预览及导出结果的完整流程。
+---
+
+八爪鱼 MCP 推荐流程：
+
+```text
+search_templates
+  → execute_task(validateOnly)
+  → execute_task
+  → tasks/get / tasks/result（支持 MCP Tasks）或 export_data（兼容模式）
+  → export_data
+```
+
+## 第一步：发现模板
+
+用户提出采集、抓取或提取网页数据的需求时，先调用 `search_templates`，不要在缺少有效 `templateName` 和业务参数时直接执行任务。
+
+```json
+{
+  "keyword": "Amazon 商品列表",
+  "page": 1,
+  "limit": 10
+}
+```
+
+优先采用 `recommendedTemplateName`，或选择 `executionMode` 包含 `Cloud` 的模板。确定模板后用 `id` 或 `slug` 精确查询，取得完整 `inputSchema`、`outputSchema` 和可能存在的根级 `sourceOptions`。
+
+## 第二步：校验参数
+
+使用 `inputSchema[].field` 组装参数，并通过 `validateOnly: true` 预检：
+
+```json
+{
+  "templateName": "<模板名称>",
+  "taskName": "Amazon 商品采集",
+  "parameters": "{\"search_keyword\":[\"phone\"],\"site\":\"United States\"}",
+  "validateOnly": true
+}
+```
+
+检查响应中的 `canExecuteNow`、`blockingIssues` 和 `nextAction`。如果 `status` 为 `awaiting_source_selection`，根据返回的 `sourceOptions` 继续选择依赖项，再次预检。
+
+<Note>
+  source-backed 字段传选项的 `key`；`MultiInput` 字段始终传字符串数组。`parameters` 在原始 MCP 接口中是 JSON 对象字符串。
+</Note>
+
+## 第三步：运行任务
+
+预检通过后，以同一组参数调用 `execute_task`，移除 `validateOnly` 或设为 `false`。
+
+- 客户端支持 MCP Tasks：优先使用 Task 模式，并通过 `tasks/get` 跟踪状态、通过 `tasks/result` 获取最终执行结果。
+- 客户端不支持 MCP Tasks：调用会在创建并启动成功后返回 `accepted` 和八爪鱼 `taskId`；等待约 10-30 秒后使用 `export_data` 轮询。
+
+只有 MCP Tasks 模式支持正整数 `targetMaxRows`。它会在采集数量达到阈值后尽力停止，可能略有超出；`0` 或省略表示让任务自然结束。
+
+## 第四步：预览和导出
+
+支持 MCP Tasks 时，先等待 Task 达到成功终态，再调用：
+
+```json
+{
+  "taskId": "<任务 ID>",
+  "exportFileType": "CSV",
+  "previewRows": 5
+}
+```
+
+`export_data` 返回 `collecting` 或 `exporting` 时，等待 10-30 秒后重试。返回 `sampleData` 时以表格展示；存在 `exportFileUrl` 时始终向用户提供下载地址。
+
+## 模板串联
+
+模板的 `outputSchema` 描述可采集字段。这些字段可以作为后续模板的候选输入，用于构建多步采集流程；每一步仍应单独完成精确模板查询和 `validateOnly` 预检。
+
+## 其他工作流
+
+以下流程是同一个 MCP 服务针对不同任务场景的工具分工，可以按业务需要串联使用：
+
+- 已有任务：`search_tasks` → `start_or_stop_task` → `export_data`
+- 数据中心存量检索：`list_platforms` → 从实时清单选择 `domain` → `search_platform_content`。需要限定来源时，把域名传给 `include` 或 `exclude`，不要填写平台展示名称；该流程直接查询提前采集的数据，不会创建新的采集任务
+- 电商评论：`ecommerce_data_task` → `query_collected_reviews`
+
+另请参阅：[MCP 概览](/zh/mcp/index)、[`execute_task`](/zh/mcp/execute-task)、[`export_data`](/zh/mcp/export-data)

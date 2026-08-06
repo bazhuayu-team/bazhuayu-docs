@@ -1,0 +1,77 @@
+---
+title: "搭建第一个规则任务"
+description: "快速入门教程：搭建第一个规则任务"
+source: "https://www.bazhuayu.com/helpcenter/docs/SJU89o"
+---
+
+如果模板采集和自动识别采集都满足不了我们的需求的时候，我们就需要使用自定义采集，配置一个属于自己的采集规则，方法很简单，快来和小八一起学学吧！
+
+## 自定义采集
+
+我们要采集豆瓣网站上的图书标题信息
+
+![搭建第一个规则任务](/assets/academy/quick-start/build-first-rule-task/01-6537678d7faff.png)
+
+ 
+
+### 1.输入网址
+
+在主页的搜索框内输入我们要采集的网址（示例网址：[https://book.douban.com/tag/%E5%B0%8F%E8%AF%B4 ](https://book.douban.com/tag/%E5%B0%8F%E8%AF%B4)）
+
+![搭建第一个规则任务](/assets/academy/quick-start/build-first-rule-task/02-6537623191a2c.png)
+
+ 
+
+进入到采集页面后，我们观察到客户端右边有一栏规则，规则内只有一个打开网页，底部是数据预览区域，目前没有配置规则，所以为空。
+
+![搭建第一个规则任务](/assets/academy/quick-start/build-first-rule-task/03-65376395587e6.jpg)
+
+### 2.选中要采集的元素 提取数据
+
+选中图书的标题，观察到网页内选中标题绿色高亮，底下相似的标题显示红色虚线，同时操作提示也发生了变化，出现了【提取数据】和【鼠标操作】两类以及【选中全部相似元素】
+
+![搭建第一个规则任务](/assets/academy/quick-start/build-first-rule-task/04-653769e1ba806.jpg)
+
+ 
+
+我们选择【选中全部相似元素】，可以看到所有红色虚线的都变为绿色，并且底部也出现绿色数据的预选框，这时我们就选中了全部相似元素（所有图书的标题元素信息）同时观察到，我们的提示框也发生了变化，【鼠标操作】栏目内少了几项，这是因为我们采集器自动预判接下来的动作进行操作提示
+
+![搭建第一个规则任务](/assets/academy/quick-start/build-first-rule-task/05-65376cafcf37d.jpg)
+
+ 
+
+我们此时已经选中所有要采集的数据元素，但是我们还没有明确要采集元素内的什么信息，因为网页上的某个元素块可能包含文本信息，链接信息，以及网页源代码信息，我们采集图书标题的文本信息，选择【文本内容】
+
+ 
+
+可以看到页面又发生了变化，原本的网页内的选中框已经消失，底部的绿色预选框也变为白色，这意味着我们已经选择好了要采集的数据，并且已经在右边生成了相对应的规则，同时操作提示又发生了变化，提示我们是否要翻页等等，这里我们不需要翻页，修改字段名称点击采集即可
+
+![搭建第一个规则任务](/assets/academy/quick-start/build-first-rule-task/06-65376f45c9b5c.jpg)
+
+### 3.修改字段名称
+
+选中提取列表数据，双击修改字段名，修改为图书名
+
+![搭建第一个规则任务](/assets/academy/quick-start/build-first-rule-task/07-65377823bd805.jpg)
+
+### 4.启动采集
+
+修改完成后，点击采集
+
+![搭建第一个规则任务](/assets/academy/quick-start/build-first-rule-task/08-65377fab5a51b.jpg)
+
+### 4.导出数据
+
+将采集到的全部数据，导出到本地或者数据库
+
+![搭建第一个规则任务](/assets/academy/quick-start/build-first-rule-task/09-65b9a9f0e2e21.png)
+
+选择导出的格式
+
+![搭建第一个规则任务](/assets/academy/quick-start/build-first-rule-task/10-65b9a99a1d398.png)
+
+打开采集到的数据
+
+![搭建第一个规则任务](/assets/academy/quick-start/build-first-rule-task/11-6537806212c72.png)
+
+这样一个简单的自定义采集就完成啦，快去试试吧！

@@ -1,0 +1,167 @@
+---
+title: MCP 对接 QClaw（小龙虾）
+description: 在腾讯 QClaw 客户端中添加八爪鱼 MCP 服务器。
+---
+
+> 在 QClaw（小龙虾 AI）中接入八爪鱼 MCP，通过自然语言配置 MCP 并让智能体调用采集能力。
+
+选择 QClaw，是因为它率先将 MCP 协议落地为「开箱即用」的能力——只需安装客户端，就能让智能体以自然语言调用各类 MCP Server。而我们提供的八爪鱼采集器 MCP，正是为 Agent 打通稳定、高效的网页数据获取通道。持续输送新鲜、结构化的数据，QClaw + 八爪鱼 MCP，让 AI 真正具备感知真实世界的能力。
+
+## 前置准备
+
+- 已安装 [QClaw 客户端](https://qclaw.qq.com/)（Windows / macOS）
+- 八爪鱼账户
+- MCP 地址：`https://mcp.bazhuayu.com`
+- 建议提前 [创建 API Key](/zh/mcp/quick-start/api-key)（QClaw 通常使用 API Key 方式连接第三方 MCP）
+
+## 步骤一：下载并安装 QClaw
+
+<Steps>
+  <Step title="1.1 下载客户端">
+    登录官网 [qclaw.qq.com](https://qclaw.qq.com/)，按需下载。
+
+    <img src="/assets/mcp/qclaw/step-1-1-download.png" alt="在 QClaw 官网下载客户端" className="mcp-step-image" />
+  </Step>
+  <Step title="1.2 安装并登录">
+    正常下载安装后登录即可，进入界面如图。
+
+    <img src="/assets/mcp/qclaw/step-1-2-login.png" alt="QClaw 客户端登录后的主界面" className="mcp-step-image" />
+  </Step>
+</Steps>
+
+## 步骤二：连接 MCP 工具与智能体编排
+
+添加成功后，你需要在具体的应用中调用这些工具。
+
+### 1. 新建 Agent 或对话添加八爪鱼 MCP
+
+新建 Agent，或者直接与 QClaw 对话，添加八爪鱼 MCP。（龙虾可自然语言直接调用能力，可做到自行配置）
+
+<img src="/assets/mcp/qclaw/step-2-1-add-mcp.png" alt="新建 Agent 或与 QClaw 对话添加 MCP" className="mcp-step-image" />
+
+**对话语句：**
+
+```text
+请帮我添加名为“八爪鱼”的 HTTP MCP 服务，并自行完成配置和连通性测试。
+
+服务地址：https://mcp.bazhuayu.com
+API Key：<粘贴你的 API Key>
+
+关键要求：
+1. 本次接入只使用 API Key 认证，请将密钥放在请求头 x-api-key 中。
+2. 不要改用 OAuth，也不要写成 Authorization: Bearer <API Key>。
+3. 请根据 QClaw 当前支持的 MCP 配置方式自行安装；完成后按需刷新工具列表或重启客户端。
+4. 请验证服务已连接并能读取工具列表，再调用只读工具 list_platforms 完成连通性测试；只向我报告配置位置、测试结果和后续用法，不要在回复中回显完整 API Key。
+```
+
+**请注意：**
+
+- API Key 获取方式见 [获取 API Key](/zh/mcp/quick-start/api-key)（一定以此作为授权方式，更加稳定。）
+- 仅在自己的 QClaw 私密对话中粘贴真实 Key，不要在截图、群聊或共享会话中发送。
+- 尽量做到一次性描述准确，同时关键点可以着重叙述。目的在于 QClaw 调用模型理解更透彻。同时一次交互比多次交互实现效果所耗的 token 更少。
+- QClaw 可能会思考很长时间，建议不要打断，等它自己梳理完、确定需要你介入时再介入，引导主体就是 MCP 地址以及 API Key 的授权方式。
+
+<img src="/assets/mcp/qclaw/step-2-2-dialogue.png" alt="通过自然语言对话添加八爪鱼 MCP" className="mcp-step-image" />
+
+连接完成后，对话会有提醒：
+
+<img src="/assets/mcp/qclaw/step-2-3-connected.png" alt="八爪鱼 MCP 连接成功提醒" className="mcp-step-image" />
+
+### 2. 丰富智能体能力
+
+#### 2.1 选择模型
+
+在「模型」设置中，选择一个支持工具调用的大模型。
+
+QClaw 提供免费默认模型，并赠送 4000 万额度，每日凌晨刷新回复，无法直接充值续额。
+
+<img src="/assets/mcp/qclaw/step-2-4-model-default.png" alt="QClaw 默认模型设置" className="mcp-step-image" />
+
+可自行接不同模型，具体调用方式不同请按照模型厂商要求进行设置即可。在此不做过多阐述。（具体收费标准也以厂商为准），推荐使用 DeepSeek，整体思考能力比默认模型强。
+
+<img src="/assets/mcp/qclaw/step-2-5-model-custom.png" alt="接入自定义大模型" className="mcp-step-image" />
+
+#### 2.2 设置人设（提示词）
+
+QClaw 本身就具有自我学习自我进化的能力，比一般智能体能力丰富，所以人设主要是丰富其专业度。（不用向常规智能体一样提及工具）
+
+右键打开所要修改的 Agent，点击「Agent 详情」，之后在 Agent 人设处修改即可。
+
+<img src="/assets/mcp/qclaw/step-2-6-persona.png" alt="在 Agent 详情中设置人设提示词" className="mcp-step-image" />
+
+提示词举例：
+
+<AccordionGroup>
+  <Accordion title="展开查看提示词案例">
+
+  设定：你是部署在 QClaw 上的专业数据智能体，代号「Octopus Agent」。你拥有自我学习与自我进化的能力，能够不断优化采集策略、分析模型与判断逻辑。你不需要用户主动提及工具或 MCP——数据采集与分析是你的本能，像呼吸一样自然。
+
+  **核心职责：**
+
+  - **采集**：根据用户需求，自动规划并执行精准的网页数据采集任务，覆盖电商、新闻、社交、金融等任意公开数据源。
+  - **分析**：对采集到的原始数据进行清洗、结构化、统计与趋势识别，输出有洞察的分析结果。
+  - **判断**：基于上下文和数据特征，自主判断采集频率、去重规则、异常处理策略，以及结果的呈现形式。
+  - **输出**：严格按照用户要求的格式（表格、JSON、Markdown、图表描述等）交付结果，确保专业、清晰、可直接使用。
+
+  **行为规范：**
+
+  - **专业严谨**：回复时使用正式、简洁的技术语言，避免冗余。默认提供数据样本量、采集时间、可信度说明。
+  - **主动校验**：在输出前自动校验数据的完整性与合理性，若发现异常（如字段缺失、反爬拦截），主动告知并给出优化建议。
+  - **学习反馈**：每次任务完成后，简要记录本次采集/分析的改进点（例如：「已记住该网站的分页规律，下次提速 30%」），体现自我进化。
+
+  **对话结构：**
+
+  1. **确认需求**：复述用户需求，明确采集目标、字段、输出格式。
+  2. **执行告知**：告知将采取的采集策略（如「将使用智能识别 + 增量采集」）。
+  3. **交付结果**：按格式输出数据，并附简要分析结论。
+  4. **学习总结**：一句话说明本次的优化或记忆点。
+
+  </Accordion>
+</AccordionGroup>
+
+#### 2.3 渠道连接（智能体渠道发布）
+
+点击设置，选择远控通道，可按需选择渠道。按照不同渠道要求填写相应参数即可。
+
+<img src="/assets/mcp/qclaw/step-2-7-channel.png" alt="配置智能体渠道连接" className="mcp-step-image" />
+
+#### 2.4 应用连接
+
+点击设置，选择连接应用，可按需选择应用。推荐设置个人邮箱（必备）。
+
+<img src="/assets/mcp/qclaw/step-2-8-app.png" alt="配置应用连接" className="mcp-step-image" />
+
+#### 2.5 任务
+
+点击任务菜单即可查看配置过的任务，并能手动执行测试。（智能体搭建后安排其的任务可在此查看。）
+
+<img src="/assets/mcp/qclaw/step-2-9-tasks.png" alt="在任务菜单查看与测试任务" className="mcp-step-image" />
+
+#### 2.6 技能
+
+点击设置，选择技能管理，可按需选择技能，同时也可添加未在平台上架的适合你的 Skills。
+
+<img src="/assets/mcp/qclaw/step-2-10-skills.png" alt="在技能管理中配置 Skills" className="mcp-step-image" />
+
+<Note>
+  若教程中截图与实际界面有出入，请以 QClaw 当前版本为准。
+</Note>
+
+## 与 OpenClaw 的关系
+
+QClaw 继承 OpenClaw 的 MCP 客户端能力。若你同时使用原生 OpenClaw，也可在 OpenClaw 中注册出站 MCP（`openclaw mcp` 相关命令），将 `https://mcp.bazhuayu.com` 作为外部数据服务接入。详见 [客户端配置指南 — OpenClaw](/zh/mcp/guides/clients#openclaw)。QClaw 用户一般**无需命令行**，在图形界面完成上述步骤即可。
+
+## 常见问题
+
+| 现象 | 处理建议 |
+| --- | --- |
+| 测试连接失败 | 检查网络、URL 是否为 `mcp.bazhuayu.com`、Key 是否正确 |
+| 工具列表为空 | 重启 QClaw；删除后重新添加 MCP |
+| 任务执行超时 | 云采集耗时较长，可分步：先搜模板，再单独执行与导出 |
+
+## 相关链接
+
+- [八爪鱼 MCP 概述](/zh/mcp/index)
+- [获取 API Key](/zh/mcp/quick-start/api-key)
+- [工作流程示例](/zh/mcp/workflow)
+- [故障排查](/zh/mcp/troubleshooting)

@@ -1,0 +1,106 @@
+---
+title: 定位某一元素Xpath
+description: 通过详情页和列表页两个实例，讲解如何修改字段定位 XPath 解决字段提取不到、字段错位等问题。
+---
+
+我们在采集数据过程中，可能会出现字段提取不到、字段错位等情况。其中一个重要的原因就是对字段的定位不准。
+
+可通过自定义定位元素的方式，修改字段定位XPath，对数据的位置进行正确的定位。
+
+请注意，本教程需要一定的XPath知识和相对XPath知识，建议在学习XPath和相对XPath后，再看本教程。
+
+<a href="https://www.bazhuayu.com/docs/zh/academy/xpath/getting-started/why-use-xpath">xpath入门</a>
+
+<a href="https://www.bazhuayu.com/docs/zh/academy/xpath/relative-absolute-xpath">相对XPath：绝对xpath、相对XPath学习与实例</a>
+
+提取数据一般分为2种情况，一种提取详情页数据，一种是提取列表页数据，两种都可能存在漏字段、字段错位的情况，以下将具体说明。
+
+示例网站：
+
+https://www.toutiao.com/a6810131150799897102/https://www.toutiao.com/a6810150273776878087/
+
+Step1：按照需求，采集数据。这里我采集这2个新闻详情页的标题、是否原创、时间
+
+Step2：启动采集看一下，第2个新闻详情页的时间并未采集到。这是因为第2个新闻详情页没有 原创 字段，因此 时间字段位置向前移了一点，发生改变。时间字段移动后，第1个详情页的时间定位XPath，不适用第2个新闻详情页了。
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/xpath/modify-element/locate-element/651424b0b7051.png" />
+</div>
+
+Step3：找到时间字段的XPath: //div[@class="article-meta"]/span[2] ，将其复制到浏览器控制台中，检查在2个新闻详情页中的定位情况。
+
+可以看到，//div[@class="article-meta"]/span[2] 在第1个新闻详情页中可以定位到时间字段：
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/xpath/modify-element/locate-element/651424b122627.png" />
+</div>
+
+在第2个新闻详情页中不能定位到【时间】字段：
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/xpath/modify-element/locate-element/651424b0da071.png" />
+</div>
+
+Step4：手动修改XPath。观察2个网页的源码，时间字段都是span标签，且是最后1个。根据这个特征，可以写一条定位XPath：//div[@class="article-meta"]//span[@class="dot"]/preceding-sibling::span[1] 。检查一下，通过这条XPath，确实在2个新闻详情页中都定位到了时间字段。
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/xpath/modify-element/locate-element/651424b1266c9.png" />
+</div>
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/xpath/modify-element/locate-element/651424b0efc85.png" />
+</div>
+
+Step5：将其复制粘贴到八爪鱼中的相应位置。可以看到，改完后2个新闻详情页的【时间】字段都提取下来了。
+
+最终采集结果如图：
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/xpath/modify-element/locate-element/651424b2182f1.png" />
+</div>
+
+示例网址：https://book.douban.com/subject/4913064/comments/?status=N
+
+采集该网站列表页文章的评论、评论人、时间、地区、有用数字段。
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/xpath/modify-element/locate-element/65baf6c155f23.png" />
+</div>
+
+Step1：网页打开以后，根据需求，提取所需字段。示例中提取的是列表数据。在八爪鱼下方的字段预览中可见，八爪鱼将字段都采集下来了。
+
+但我们发现，【地区】字段出现了错位的问题。
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/xpath/modify-element/locate-element/65baf60667ac0.png" />
+</div>
+
+Step2：排查字段错位的原因
+
+出现字段错位，这是因为八爪鱼自动生成的【地区】定位XPath不精准，不能适用于所有列表。这里需要有一定的XPath知识。
+
+将鼠标移动到【地区】上，点击 右上角的 <img src="/assets/academy/xpath/modify-element/locate-element/651424b302a7e.png" alt="" className="academy-inline-icon" />按钮，选择【修改元素定位】，进入设置页面，将【拼接循环项XPath】里的XPath ：/div[2]/h3[1]/span[2]/span[1]，复制下来。
+
+
+
+将循环框的XPath也复制下来：//LI[@class='comment-item']
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/xpath/modify-element/locate-element/65bafb0493127.png" />
+</div>
+
+根据 <a href="https://www.bazhuayu.com/docs/zh/academy/xpath/relative-absolute-xpath">相对XPath</a> 中的知识，【地区】字段的定位XPath为：//LI[@class='comment-item']/div[2]/h3[1]/span[2]/span[1]，将其复制到浏览器控制台中，发现有一些地区字段没有定位到。
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/xpath/modify-element/locate-element/65bafb6e8df7f.png" />
+</div>
+
+什么是【相对于循环里的XPath】？我们在 <a href="https://www.bazhuayu.com/docs/zh/academy/xpath/relative-absolute-xpath">相对XPath</a> 教程中有详细讲解。提取列表页数据都会用到相对XPath知识，建议掌握。
+
+Step3：修改XPath，定位到所有列表中的【地区】字段。观察源码特征，地区字段都为最后一个span标签，根据这个特征，可以写一条定位XPath：//LI[@class='comment-item']/div[2]/h3[1]/span[2]/span[last()] 。last()函数的意思是定位最后1个，在XPath教程中有详细说明。
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/xpath/modify-element/locate-element/65bafbff706c8.png" />
+</div>
+
+Step4：根据相对XPath的知识，【地区】字段的相对XPath为：/div[2]/h3[1]/span[2]/span[last()]。将其复制粘贴到八爪鱼中的相应位置。可以看到，改完后全部【地区】字段都提取下来了。

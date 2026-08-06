@@ -1,0 +1,94 @@
+---
+title: 移动任务
+api: POST https://openapi.bazhuayu.com/task/moveToGroup
+playground: interactive
+authMethod: apiKey
+---
+
+> **所需套餐：** 旗舰+、企业版、团队版
+
+## 端点
+
+```
+POST https://openapi.bazhuayu.com/task/moveToGroup?taskId={taskId}&taskGroupId={taskGroupId}
+```
+
+## 描述
+
+移动任务到指定组
+
+## 请求头
+
+| 参数 | 类型 | 必填 | 说明 |
+|------|------|------|------|
+| `x-api-key` | String | 二选一 | API Key，例如 `op_sk_xxxxxx`；创建方式见 [获取 API Key](/zh/mcp/quick-start/api-key) |
+| `Authorization` | String | 二选一 | Access Token，格式 `Bearer <access_token>` |
+
+**请求头示例**
+
+```json
+{
+  "Authorization": "Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6ImdXS3hWc0F4SHhaMDlDcWh6NkNJb3ciLCJ0eXAiOiJhdCtqd3QifQ.eyJuYmYiOjE2MzY0NjIyNzAsImV4cCI6MTYzNjU0ODY2OSwiaXNzIjoiaHR0cDovL3Rlc3QuaWRlbnRpdHkuYmF6aHVheXUuY29tIiwiY2xpZW50X2lkIjoiT2N0b3B1cyIsInN1YiI6IjllOGJiM2VhLWUwMWQtNGFlZC05ODM3LTVhMWUyODg0NWI5ZSIsImF1dGhfdGltZSI6MTYzNjQ2MjI3MCwiaWRwIjoibG9jYWwiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjllOGJiM2VhLWUwMWQtNGFlZC05ODM3LTVhMWUyODg0NWI5ZSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJ0ZXN0d2VuIiwicHJlZmVycmVkX3VzZXJuYW1lIjoidGVzdHdlbiIsInVuaXF1ZV9uYW1lIjoidGVzdHdlbiIsInJlZ2lzdGVyX2RhdGUiOiIxMS8wNC8yMDE2IDA4OjM4OjE2ICswODowMCIsImxhc3RfbG9naW5fZGF0ZSI6IjA0LzIyLzIwMTkgMDk6MDE6MDIgKzA4OjAwIiwibGFzdF9wYXNzd29yZF9jaGFuZ2VkX2RhdGUiOiIwMS8yMy8yMDE5IDA4OjMwOjMxICswODowMCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6IndlbmRpQHNraWVlci5jb20iLCJlbWFpbCI6IndlbmRpQHNraWVlci5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwic2NvcGUiOlsiZW1haWwiLCJvcGVuaWQiLCJyb2xlcyIsIm9mZmxpbmVfYWNjZXNzIl0sImFtciI6WyJwd2QiXX0.ARhbBfzI1xS6yo-Ue1CFHzMaUIfzw4gJlubNBOkUT4SSTlhuS4bVQ4t4UHuYGbE9VX6XgNVgkcDnx6XapqcPohSy7vPv9TIAsjtbrQSA3mj13SnVVAPWwfAVJ-I7g9HDnyPEEOVSvmZUJhiz-irH5L0ojbnt3ck2rQ9tIFuSd7j2eh5BS4ItjNoHY00rh_QPZltk66a9q-fNE33GrxOaXUdHH47WMlsENnh1gybB7QtGtd6bZ982Qa9JljpFnZWSdEf4VfkN4JmhkUTTC908DqS3stT-LD-9tpztFwB54sd0D4CyOBnESkKrUwjxchYYZo4l1O7auiZVGV48YhZYMw"
+}
+```
+
+## 查询参数
+
+| 参数 | 类型 | 必填 | 说明 |
+|------|------|------|------|
+| `taskId` | string | 是 | 任务Id |
+| `taskGroupId` | int | 是 | 目标任务组Id |
+
+**请求示例**
+
+```
+POST https://openapi.bazhuayu.com/task/moveToGroup?taskId=49676b13-cfed-44f4-8985-b978c98c4085&taskGroupId=2648037
+```
+
+## 响应
+
+| 参数 | 类型 | 必填 | 说明 |
+|------|------|------|------|
+| `requestId` | String | 是 | 请求Id |
+| `data` | Object | 是 | 响应数据 |
+| `moved` | Bool | 是 | true:移动成功 |
+
+**成功示例**
+
+```json
+{
+ "data":{
+ "moved":true,
+ 
+ },
+ "requestId": "0HMCVDHG1V3E6:00000002"
+}
+```
+
+## 错误响应
+
+| 参数 | 类型 | 必填 | 说明 |
+|------|------|------|------|
+| `requestId` | String | 是 | 请求Id |
+| `error` | Object | 是 | 错误信息，参考错误码 |
+| `code` | String | 是 | 错误码 |
+| `message` | String | 是 | 错误描述 |
+
+**错误示例**
+
+```json
+{
+  "error": {
+    "code": "InvalidTaskId",
+    "message": "无效的任务Id"
+  },
+  "requestId": "0HMCVDHG1V3E6:00000002"
+}
+```
+
+<ParamField header="Authorization" type="string" required hidden>
+</ParamField>
+<ParamField query="taskId" type="string" required hidden>
+</ParamField>
+<ParamField query="taskGroupId" type="number" required hidden>
+</ParamField>

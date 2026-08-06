@@ -1,0 +1,85 @@
+---
+title: "滚动加载数据翻页"
+description: "滚动加载数据翻页教程，来自八爪鱼帮助中心「操作指南 / 基本采集」。"
+source: "https://www.bazhuayu.com/helpcenter/docs/iaUIik"
+---
+
+[](https://resource-wangsu.helplook.net/docker_production/3mkuae/article/iaUIik/video/653b143813417)
+
+有很多网站，需要向下滚动页面，才能加载出新数据。那相对应的，在八爪鱼中也需设置【页面滚动】。
+
+适用场景：将滚动条直接下来到网页底部，出现类似【加载中】字样，稍后马上有新数据出现，且滚动条变短回弹。
+
+常见的网页：[澎湃新闻首页](https://www.thepaper.cn/ "澎湃新闻首页")、[今日头条首页](https://www.toutiao.com/)、[百度图片搜索](https://image.baidu.com/search/index?tn=baiduimage\&ipn=r\&ct=201326592\&cl=2\&lm=-1\&st=-1\&fm=result\&fr=\&sf=1\&fmq=1572935261090_R\&pv=\&ic=\&nc=1\&z=\&hd=\&latest=\&copyright=\&se=1\&showtab=0\&fb=0\&width=\&height=\&face=0\&istype=2\&ie=utf-8\&sid=\&word=%E5%A4%8F%E7%9B%AE%E5%8F%8B%E4%BA%BA%E5%B8%90)、[新浪微博首页](https://weibo.com/)，都是这种情况。
+
+ 
+
+![滚动加载数据翻页](/assets/academy/basic-collection/scroll-loading-pagination/01-653610fdb9ac3.png)
+
+ 
+
+以澎湃新闻首页为例。https\://www\.thepaper.cn/，我们需采集新闻列表数据。就需要在打开网页后不断向下滚动，加载新数据。
+
+ 
+
+在八爪鱼中怎么实现呢？以下为具体操作步骤。
+
+ 
+
+#### 步骤一、进入自定义任务编辑页面
+
+把网址https\://www\.thepaper.cn/复制到八爪鱼客户端首页的输入框中，点击开始采集进入自定义任务配置页面。
+
+ 
+
+![滚动加载数据翻页](/assets/academy/basic-collection/scroll-loading-pagination/02-65bcae9dec424.gif)
+
+ 
+
+#### 步骤二、配置采集参数
+
+设置滚动方式，调整滚动次数、每次间隔时间
+
+点击打开网页步骤，在下方步骤设置区域点击高级设置，找到页面滚动，点击勾选页面滚动。此网页是无限滚动的，八爪鱼默认设置的【滚动方式】是滚动到底部，默认【滚动次数】100次、默认【每次间隔】1秒。大家可根据实际需求进行调整。【每次间隔】时间需稍大于网页上数据加载的时间（网页上数据加载的时间又跟网速等因素有关）。
+
+![滚动加载数据翻页](/assets/academy/basic-collection/scroll-loading-pagination/03-65bcafc6b9a94.gif)
+
+ 
+
+结合这个网站的加载特征，这里修改【滚动方式】为滚动到底部（一般情况滚动方式都建议大家选择滚动到底部）；为方便演示，在这里，设置【滚动次数】5次。
+
+ ![滚动加载数据翻页](/assets/academy/basic-collection/scroll-loading-pagination/04-65bcaff2aa6bd.png)
+
+ 
+
+#### 步骤三：配置采集规则
+
+用 [采集列表数据 ](/zh/academy/basic-collection/beginner/list-collection)中学到的方法，配置列表数据采集。
+
+ 
+
+启动采集来看一下采集结果。八爪鱼自动执行了【直接滚动到底部】5次，然后采集滚动5次后的数据。
+
+![滚动加载数据翻页](/assets/academy/basic-collection/scroll-loading-pagination/05-65bcb067381bb.gif)
+
+ 
+
+> 特别说明：
+>
+> 1、此网页是无限向下滚动加载数据的，八爪鱼无法一次采集到所有数据。上面示例是设置了滚动5次，实际采集过程中可根据需求来设置滚动次数。
+>
+> 2、此类网页常见于数据实时性高的新闻类网站，在八爪鱼中可以使用云采集，设置定时启动，少量多次采集最新数据。
+>
+> 3、有时候网页很快，类似【加载中】的提示不明显。【是否有新数据出现】、【观察滚动条的回弹次数】是比较好用的判断标准，请注意观察网页。
+>
+> 4.若设置滚动后启动采集不滚动的，可能是页面是局部滚动的，需要设置局部滚动不是全局滚动。局部滚动判断方式，在目标网页打开【调试控制台】输入：document.scrollingElement.scrollBy(0, 100) 回车运行。如果页面没有向下滚动，说明不是全局滚动。
+
+ 
+
+ 
+
+ 
+
+作者：Aisling
+
+编辑：Surely

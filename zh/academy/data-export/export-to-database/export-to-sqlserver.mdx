@@ -1,0 +1,106 @@
+---
+title: 导出到SqlServer数据库
+description: 详细介绍如何将八爪鱼采集的数据手动或自动导出到SqlServer数据库，包括数据库配置、字段映射和定时导出设置
+---
+
+八爪鱼采集到的数据，支持导出到SqlServer数据库中。可手动导出，也按照设置的定时导出计划，自动导出。
+
+本教程将以云采集数据，演示手动/自动导出到SqlServer数据库中的具体步骤。
+
+在任务采集完毕之后，将采集得到的数据，手动导出到数据库中。
+
+本地采集和云采集数据，均可手动导出。
+
+## 一、手动导出具体步骤
+
+我们具体看下如何手动导出数据到mysql数据库，以下是详细的步骤：
+
+Step1：先在您的SqlServer数据库中，建好数据表。
+
+Step2：在【我的任务】中，选择一个要导出的任务，点击查看云数据或者本地数据
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/data-export/export-to-database/export-to-sqlserver/653256e441942.gif" />
+</div>
+
+Step3：选择【导出数据】，在弹出的操作界面上选择【导出所有数据】或者【未导出数据】。选择【导出到数据库】的【SqlServer】，点击【确定】进入到数据库配置界面。
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/data-export/export-to-database/export-to-sqlserver/653264bdb6249.gif" />
+</div>
+
+Step4：进入到这个数据库配置界面之后，对数据库的相关信息进行配置，这里的信息一定要正确而且能正常连接到数据库。
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/data-export/export-to-database/export-to-sqlserver/6532650601280.png" />
+</div>
+
+服务器名称：SqlServer服务器地址
+
+身份验证：可选Windows身份验证(无需填写下方用户名和密码)和Sqlserver身份验证（需填写登录到Sqlserver的用户名和密码）
+
+用户名：登录SqlServer的用户名
+
+密码：登录SqlServer的密码
+
+数据库名称：选择已有的数据库
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/data-export/export-to-database/export-to-sqlserver/6520c3aa75d65.png" />
+</div>
+
+配置好后可点击【测试连接】，验证配置是否正确。这里的配置都是正确的，因此显示 。如果配置不正确，将显示错误信息。
+
+Step5：在数据字段映射界面，选择数据表、目标数据字段（如果源数据字段和目标数据字段名称一样会自动进行配置，如果不一样就需要手动选择一下）。
+
+可为某个字段勾选【设置为唯一标识】，则导入的时候将根据这个字段确定是数据库新增记录还是覆盖原有的记录。
+
+如果这个任务的数据需多次导入，可以【保存配置】，下次再导出的时候直接选择这个配置即可。
+
+Step6：选择【导出】，等待一段时间后，提示【导出完成】，表示数据已导入指定数据库。
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/data-export/export-to-database/export-to-sqlserver/653266e607d25.gif" />
+</div>
+
+## 二、自动导出具体步骤
+
+仅云采集数据可实现自动导出到数据库，可以实现边采集边导出，导出的是当前未导出过的数据。
+
+Step1和Step2和上述手动导出数据到sqlserver的步骤Step1、Step2一样，这里就不再重新讲解；
+
+Step3：选择【配置自动导出】-【导出到数据库】-【sqlserver】
+
+Step4：也是同手动导出的步骤Step4一致；
+
+Step5：进入到数据字段映射界面。此界面多了一个【设置执行计划】的选项。
+
+设置【导出计划名称】和【每次间隔】，每次导出最短间隔为【5分钟】。
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/data-export/export-to-database/export-to-sqlserver/65326983de32a.gif" />
+</div>
+
+Step6：点击【完成】，弹出【定时入库工具】。系统会立即执行一次数据库导出，执行完毕之后再按照设置的时间间隔自动导出。
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/data-export/export-to-database/export-to-sqlserver/653269db8c1e0.gif" />
+</div>
+
+也可在【工具箱】-【定时入库工具】中，找到我们的【定时导出计划】配置并启动/暂停它。
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/data-export/export-to-database/export-to-sqlserver/6532563eb6d09.png" />
+</div>
+
+### 特别说明
+
+8.7.6以下的版本 配置自动导出到数据库，定时入库工具和采集器不能关闭，否则定时导出会失效无法正常自动导出。
+
+8.7.6及更新的版本配置数据库时会默认可以选择导出云数据库，可实现云采集数据导出至云数据库，且可将入库工具托管到云端，关闭客户端也可以自动导出(选择本地采集任需要保持导出窗口不能关闭)。选择云端数据库时，用户导出数据库时需要添加以下IP白名单：
+
+- <a href="http://124.221.35.46" target="_blank" rel="noopener">124.221.35.46</a>
+- <a href="http://122.51.45.102" target="_blank" rel="noopener">122.51.45.102</a>
+- <a href="http://122.152.208.218" target="_blank" rel="noopener">122.152.208.218</a>
+- <a href="http://106.54.50.104" target="_blank" rel="noopener">106.54.50.104</a>
+- <a href="http://175.24.175.60" target="_blank" rel="noopener">175.24.175.60</a>

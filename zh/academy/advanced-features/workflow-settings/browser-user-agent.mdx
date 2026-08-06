@@ -1,0 +1,80 @@
+---
+title: "获取/修改浏览器UA"
+description: "介绍八爪鱼采集器进阶功能：获取/修改浏览器UA。"
+source: "https://www.bazhuayu.com/helpcenter/docs/qie-huan-liu-lan-qi-UA"
+---
+
+**User-Agent** 即用户代理，简称“**UA**”，它是一个特殊字符串头。网站服务器通过识别 “UA”来确定用户所使用的操作系统版本、CPU 类型、浏览器版本等信息。而网站服务器则通过判断 UA 来给客户端发送不同的页面。
+
+由于网站会对UA进行过滤，有些老旧的UA会打不开该网页。此时就可以通过切换不同的UA来打开网页。以下教程讲解如何获取浏览器中的UA，以及将获得的UA保存在八爪鱼中。
+
+ 
+
+## 一、查找浏览器的UA
+
+**方法一：**&#x4EE5;Chrome（谷歌）浏览器为例，在地址栏输入about:version，即可出现如下信息。图中的【用户代理】即【User-Agent】。可复制红框内信息，黏贴到八爪鱼中。
+
+![](/assets/academy/advanced-features/browser-user-agent/01-6565a9364f781.png)
+
+当然有的浏览器不支持使用about:version方法，例如Firefox（火狐），Edge浏览器。那么下方的用方法二即可，方法二也适用Chrome浏览器。
+
+ 
+
+**方法二：**&#x31;.打开浏览器后，任意打开一个网站，比如：www\.bazhuayu.com。
+
+2.敲击键盘上的 F12来打开控制台（也可以鼠标右键点击网页来调取控制台。不同浏览器操作选项有所不同，比如火狐浏览器右键后，是点击“查看元素”。谷歌浏览器右键后，是点击“检查”）。控制台如下：
+
+![](/assets/academy/advanced-features/browser-user-agent/02-6565a93687418.png)\
+（火狐浏览器）
+
+![](/assets/academy/advanced-features/browser-user-agent/03-6565a93725070.png)\
+（谷歌浏览器）
+
+3.打开控制台后，点击【网络】或【Network】选项，打开如下界面。
+
+![](/assets/academy/advanced-features/browser-user-agent/04-6565a939b89dd.png)\
+（火狐浏览器）
+
+![](/assets/academy/advanced-features/browser-user-agent/05-6565a936eb7af.png)\
+（谷歌浏览器）
+
+4.上图中红框的部分为浏览器发送的各种请求，随便点击一个，然后滚动右侧的滚动条，找到Headers里的User-Agent。
+
+Headers的意思为消息头，你可以在这部分内容中寻找User-Agent信息。当然，有的消息头不包含UA，则换个请求继续找。
+
+![](/assets/academy/advanced-features/browser-user-agent/06-6565a93856ed3.png)\
+![](/assets/academy/advanced-features/browser-user-agent/07-6565a93a809a3.png)（谷歌浏览器）
+
+ 
+
+ 
+
+## **二、将UA在八爪鱼中应用**
+
+ 
+
+1.打开任务，点击任务设置，进入设置页面。
+
+![](/assets/academy/advanced-features/browser-user-agent/08-6565a937bd230.png)
+
+ 
+
+2.点击【自定义UA】
+
+![获取/修改浏览器UA](/assets/academy/advanced-features/browser-user-agent/09-6565a93879432.png)
+
+然后在弹窗中填写UA名称（自己命名一个自己能区分的名称即可）,接着黏贴自己在浏览器中复制的UA；最后【添加】，然后视情况继续添加新UA或关闭该窗口。
+
+![获取/修改浏览器UA](/assets/academy/advanced-features/browser-user-agent/10-6565a93941322.png)
+
+3.添加好UA后，可在【浏览器版本】中切换使用该新UA。
+
+![获取/修改浏览器UA](/assets/academy/advanced-features/browser-user-agent/11-6565a93c1affa.png)
+
+ 
+
+ 
+
+ 
+
+编辑：FAN

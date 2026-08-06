@@ -1,0 +1,119 @@
+---
+title: 根据指定位置获取任务数据
+api: GET https://openapi.bazhuayu.com/data/all
+playground: interactive
+authMethod: apiKey
+---
+
+> **所需套餐：** 旗舰版、旗舰+、企业版、团队版
+
+## 端点
+
+```
+GET https://openapi.bazhuayu.com/data/all
+```
+
+## 描述
+
+将位置（offset）设置为 0，将从第一条数据的位置开始获取数据，并返回获取后续数据的实际起始位置（offset），您应该通过该返回的位置（offset）来获取下一批数据，以此类推。 例如： 第一次：offset = 0，size = 100， 返回：offset = 1024 第二次：offset = 1024，size = 100， 返回：offset = 1124 第三次：offset = 1124，size = 100 (200条以内单次导出不超过4M，200条以上单次导出不超过8M)
+
+## 请求头
+
+| 参数 | 类型 | 必填 | 说明 |
+|------|------|------|------|
+| `x-api-key` | String | 二选一 | API Key，例如 `op_sk_xxxxxx`；创建方式见 [获取 API Key](/zh/mcp/quick-start/api-key) |
+| `Authorization` | String | 二选一 | Access Token，格式 `Bearer <access_token>` |
+
+**请求头示例**
+
+```json
+{
+  "Authorization": "Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6ImdXS3hWc0F4SHhaMDlDcWh6NkNJb3ciLCJ0eXAiOiJhdCtqd3QifQ.eyJuYmYiOjE2MzY0NjIyNzAsImV4cCI6MTYzNjU0ODY2OSwiaXNzIjoiaHR0cDovL3Rlc3QuaWRlbnRpdHkuYmF6aHVheXUuY29tIiwiY2xpZW50X2lkIjoiT2N0b3B1cyIsInN1YiI6IjllOGJiM2VhLWUwMWQtNGFlZC05ODM3LTVhMWUyODg0NWI5ZSIsImF1dGhfdGltZSI6MTYzNjQ2MjI3MCwiaWRwIjoibG9jYWwiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjllOGJiM2VhLWUwMWQtNGFlZC05ODM3LTVhMWUyODg0NWI5ZSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJ0ZXN0d2VuIiwicHJlZmVycmVkX3VzZXJuYW1lIjoidGVzdHdlbiIsInVuaXF1ZV9uYW1lIjoidGVzdHdlbiIsInJlZ2lzdGVyX2RhdGUiOiIxMS8wNC8yMDE2IDA4OjM4OjE2ICswODowMCIsImxhc3RfbG9naW5fZGF0ZSI6IjA0LzIyLzIwMTkgMDk6MDE6MDIgKzA4OjAwIiwibGFzdF9wYXNzd29yZF9jaGFuZ2VkX2RhdGUiOiIwMS8yMy8yMDE5IDA4OjMwOjMxICswODowMCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6IndlbmRpQHNraWVlci5jb20iLCJlbWFpbCI6IndlbmRpQHNraWVlci5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwic2NvcGUiOlsiZW1haWwiLCJvcGVuaWQiLCJyb2xlcyIsIm9mZmxpbmVfYWNjZXNzIl0sImFtciI6WyJwd2QiXX0.ARhbBfzI1xS6yo-Ue1CFHzMaUIfzw4gJlubNBOkUT4SSTlhuS4bVQ4t4UHuYGbE9VX6XgNVgkcDnx6XapqcPohSy7vPv9TIAsjtbrQSA3mj13SnVVAPWwfAVJ-I7g9HDnyPEEOVSvmZUJhiz-irH5L0ojbnt3ck2rQ9tIFuSd7j2eh5BS4ItjNoHY00rh_QPZltk66a9q-fNE33GrxOaXUdHH47WMlsENnh1gybB7QtGtd6bZ982Qa9JljpFnZWSdEf4VfkN4JmhkUTTC908DqS3stT-LD-9tpztFwB54sd0D4CyOBnESkKrUwjxchYYZo4l1O7auiZVGV48YhZYMw"
+}
+```
+
+## 查询参数
+
+| 参数 | 类型 | 必填 | 说明 |
+|------|------|------|------|
+| `taskId` | String | 是 | 任务 Id |
+| `offset` | Number | 是 | 数据偏移量；当 offset ≤ 0 时从起始位置读取 |
+| `size` | Number | 是 | 获取的数据量，范围：1~1000 |
+
+**请求示例**
+
+```
+GET https://openapi.bazhuayu.com/data/all?taskId=a3b9bdf7-9aaa-22f6-9ccf-b32790f6df8f&offset=0&size=4
+```
+
+## 响应
+
+| 参数 | 类型 | 必填 | 说明 |
+|------|------|------|------|
+| `data` | Object | 是 | 响应数据 |
+| `data` | Object | 是 | 任务数据 |
+| `total` | Int | 是 | 数据总量 |
+| `restTotal` | Int | 是 | 剩余数据 |
+| `offset` | Int | 是 | 数据偏移量，当offset小等于0时，则从起始位置读取任务数据 |
+| `requestId` | String | 是 | 请求Id |
+
+**成功示例**
+
+```json
+{
+  "data": {
+    "offset": 4,
+    "total": 100000,
+    "restTotal": 99996,
+    "data": [
+      {
+        "词条": "深圳视界",
+        "简介": "领先的信息化解决方案提供商，致力于企业级数据整合，网页数据采集，整理，分析和挖掘。"
+      },
+      {
+        "词条": "八爪鱼",
+        "简介": "它彻底改变了大家对爬虫和采集器的认知，让网页数据采集变得前所未有的简单。"
+      },
+      {
+        "词条": "数多多",
+        "简介": "致力于打造大数据共享与交易平台。"
+      },
+      {
+        "词条": "微图",
+        "简介": "一款简单易用的数据分析及可视化工具，支持自然语言分析及文本挖掘。"
+      }
+    ]
+  },
+  "requestId": "0HMD469L0I8Q1:00000001"
+}
+```
+
+## 错误响应
+
+| 参数 | 类型 | 必填 | 说明 |
+|------|------|------|------|
+| `requestId` | String | 是 | 请求Id |
+| `error` | Object | 是 | 错误信息，参考错误码 |
+| `code` | String | 是 | 错误码 |
+| `message` | String | 是 | 错误描述 |
+
+**错误示例**
+
+```json
+{
+  "error": {
+    "code": "ServerError",
+    "message": "Internal Server Error"
+  },
+  "requestId": "0HMD469L0I8R0:00000001"
+}
+```
+
+<ParamField header="Authorization" type="string" required hidden>
+</ParamField>
+<ParamField query="taskId" type="string" required hidden>
+</ParamField>
+<ParamField query="offset" type="number" required hidden>
+</ParamField>
+<ParamField query="size" type="number" required hidden>
+</ParamField>

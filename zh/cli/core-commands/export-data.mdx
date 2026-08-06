@@ -1,0 +1,106 @@
+---
+title: 导出数据
+description: 使用 bazhuayu data history、count、preview 与 export 查看采集历史、检查行数、预览样例并导出 Excel、CSV、JSON 等格式。
+---
+
+> 采集完成后，通过统一的 `data` 命令查看历史批次、检查结果数量、预览数据并导出文件。v0.1.28 起新增 `data count`、`data preview` 和云端未导出数据读取能力。
+
+## 数据来源
+
+`data` 命令默认读取本地结果。读取云端结果时传 `--source cloud` 或 `--cloud`；读取本地结果时可传 `--source local` 或 `--local`。
+
+```bash
+bazhuayu data history <taskId> --source local
+bazhuayu data history <taskId> --source cloud
+```
+
+如果本地运行时使用了 `--output ./runs`，查看历史、计数、预览或导出时保持相同路径：
+
+```bash
+bazhuayu run <taskId> --output ./runs
+bazhuayu data history <taskId> --source local --output ./runs
+bazhuayu data export <taskId> --source local --output ./runs --format xlsx
+```
+
+## `bazhuayu data history`（查看采集历史）
+
+```bash
+bazhuayu data history <taskId>
+bazhuayu data history <taskId> --local
+bazhuayu data history <taskId> --cloud
+bazhuayu data history <taskId> --source cloud --json
+```
+
+历史列表用于获取批次 ID。导出或预览指定批次时传 `--lot-id <lotId>`。
+
+## `bazhuayu data count`（检查行数）
+
+```bash
+bazhuayu data count <taskId>
+bazhuayu data count <taskId> --source local --json
+bazhuayu data count <taskId> --source cloud --json
+bazhuayu data count <taskId> --source cloud --unexported --json
+```
+
+`--unexported` 只适用于云端未导出数据计数。
+
+## `bazhuayu data preview`（预览数据）
+
+```bash
+bazhuayu data preview <taskId>
+bazhuayu data preview <taskId> --source local --limit 20 --json
+bazhuayu data preview <taskId> --source cloud --limit 20 --offset 0 --json
+bazhuayu data preview <taskId> --source cloud --lot-id <lotId> --limit 20 --json
+bazhuayu data preview <taskId> --source cloud --unexported --limit 20 --json
+```
+
+未传 `--offset` 时，`preview` 默认返回最新的若干行。传 `--offset <n>` 可从指定偏移读取。
+
+## `bazhuayu data export`（导出采集结果）
+
+```bash
+# 导出为 Excel
+bazhuayu data export <taskId> --format xlsx --file result.xlsx
+
+# 导出本地结果为 CSV
+bazhuayu data export <taskId> --local --format csv --file result.csv
+
+# 按批次导出 JSON
+bazhuayu data export <taskId> --lot-id <lotId> --format json
+
+# 导出云端未导出数据
+bazhuayu data export <taskId> --source cloud --unexported --format csv --file unexported.csv
+```
+
+<Note>
+  `--unexported` 会读取云端未导出数据，但不会自动将这些数据标记为已导出。需要标记导出状态时，请使用对应 OpenAPI 或客户端能力处理。
+</Note>
+
+## 支持格式
+
+```bash
+bazhuayu data export <taskId> --format xlsx
+bazhuayu data export <taskId> --format csv
+bazhuayu data export <taskId> --format json
+bazhuayu data export <taskId> --format html
+bazhuayu data export <taskId> --format xml
+```
+
+| 格式 | 适合场景 |
+| --- | --- |
+| `xlsx` | Excel 查看、业务交付 |
+| `csv` | 数据分析、导入表格或数据库 |
+| `json` | 程序处理、API / Agent 流程 |
+| `html` | 浏览器快速预览 |
+| `xml` | 对接老系统或 XML 工作流 |
+
+## 下一步
+
+<CardGroup cols={2}>
+  <Card title="输出与退出码" icon="terminal" href="/zh/cli/reference/output-and-exit-codes">
+    在脚本与 CI 中处理 `--json` / `--jsonl`。
+  </Card>
+  <Card title="运行采集任务" icon="play" href="/zh/cli/core-commands/run-tasks">
+    返回运行命令说明。
+  </Card>
+</CardGroup>

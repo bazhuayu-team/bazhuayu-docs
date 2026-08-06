@@ -1,0 +1,33 @@
+---
+title: start_or_stop_task
+description: 通过任务 ID 启动或停止已有八爪鱼云任务。
+---
+
+控制账户下已有的八爪鱼云任务。该工具会改变任务运行状态，调用前应确认目标任务和操作方向。
+
+## 参数
+
+| 参数 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `taskId` | string | 是 | 要控制的已有任务 ID |
+| `action` | string | 是 | `start` 或 `stop` |
+
+```json
+{
+  "taskId": "<任务 ID>",
+  "action": "start"
+}
+```
+
+## 响应
+
+返回 `success`、`taskId`、`action`、`status`、`currentStatus`、`previousStatus`、`lot` 和 `message`。常见 `status` 包括：
+
+- `start_requested`：已请求启动
+- `already_running`：任务已经在运行
+- `stop_requested`：已请求停止
+- `already_stopped`：任务已经停止
+
+启动或停止请求是状态变更操作，不保证调用返回时云端任务已经完成最终转换。可使用 [`search_tasks`](/zh/mcp/search-tasks) 继续查询。
+
+另请参阅：[MCP 概览](/zh/mcp/index)、[MCP 工作流程](/zh/mcp/workflow)

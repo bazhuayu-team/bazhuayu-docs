@@ -1,0 +1,148 @@
+---
+title: "循环下拉框（切换下拉选项）"
+description: "介绍八爪鱼采集器进阶功能：循环下拉框（切换下拉选项）。"
+source: "https://www.bazhuayu.com/helpcenter/docs/GYA3P9"
+---
+
+有的网页内存在一个或多个下拉框，需要先点击下拉框中的选项，然后再采集数据。如下图所示,网页有一个或者多个下拉框可以进行条件筛选。
+
+![](/assets/academy/advanced-features/loop-dropdown-options/01-6513ef9bac3f7.png)
+
+针对这种网页，在八爪鱼中如何处理呢？我们来看一下。
+
+ 
+
+示例网址：[http://deal.ggzy.gov.cn/ds/deal/dealList.jsp](http://deal.ggzy.gov.cn/ds/deal/dealList.jsp)
+
+ 
+
+## 一、创建一个循环下拉框
+
+### 步骤一：输入网址
+
+在八爪鱼首页中输入网址，自动打开网页
+
+![循环下拉框（切换下拉选项）](/assets/academy/advanced-features/loop-dropdown-options/02-65360fe8177cb.gif)
+
+ 
+
+### 步骤二：建立【循环-切换下拉选项】
+
+在这里，我们想点击【省份】下拉框中的选项进行筛选。
+
+选中【省份】下拉框，在弹出的操作提示框中，选择【循环切换下拉列表选项】。
+
+进入【循环列表】的设置页面看一下，【省份】下拉框中的33个选项就包括在内了。<video controls src="https://resource-wangsu.helplook.net/docker_production/3mkuae/article/GYA3P9/video/6551ef6b33305.mp4" width="100%"></video>
+
+ 
+
+### 步骤三：手动验证并搜索
+
+在【循环列表】中选择【北京】，再点击流程中的【切换下拉选项】，可以看到右侧浏览器中【省份】下拉框相应变成【北京】，说明流程生效。
+
+在下拉框中点击选项后，接下来就是按照正常流程配置规则。这个网页在下拉框中点击选项后，点击【搜索按钮】，会出现相应选项的搜索结果。
+
+因此，我们选中【搜索】按钮，并在操作提示框中选择【点击该元素】，执行点击后页面中出现总搜索记录数、搜索结果列表等数据。<video controls src="https://resource-wangsu.helplook.net/docker_production/3mkuae/article/GYA3P9/video/6551f03b4733a.mp4" width="100%"></video>
+
+> 说明：如果选择省份北京筛选后没有数据，是因为默认近三天的没有新的数据，可以添加一个步骤点击筛选为近三个月的数据<video controls src="https://resource-wangsu.helplook.net/docker_production/3mkuae/article/GYA3P9/video/65727d856756e.mp4" width="100%"></video>
+>
+>  
+
+ 
+
+### 步骤四：提取数据
+
+这里我们简单地提取下拉框中的当前文本和对应的搜索记录数2个字段。
+
+如果还需采集搜索结果列表，请参考 [采集列表数据教程](/zh/academy/basic-collection/beginner/list-collection)。<video controls src="https://resource-wangsu.helplook.net/docker_production/3mkuae/article/GYA3P9/video/6551f17d94bb1.mp4" width="100%"></video>
+
+ 
+
+### 步骤五：再次手动验证
+
+选择【天津】和【山西】再次验证，发现下拉框中的选项可以和搜索结果一一对应，流程运行正常。
+
+<video controls src="https://resource-wangsu.helplook.net/docker_production/3mkuae/article/GYA3P9/video/6551f1c648ac8.mp4" width="100%"></video>
+
+ 
+
+### 步骤六：优化采集规则
+
+选择这个网页的【搜索】按钮是AJax点击，八爪鱼默认的Ajax超时时间是1秒。
+
+但我们观察网页发现，有时候在执行搜索操作后超过1秒，数据才加载出来，也就是说如果按照超时1秒的设置，是采集不到数据的。
+
+因此， 我们酌情将AJax超时时间调长一点，示例中为10秒，在实际操作过程中需观察数据加载时间进行调整。
+
+<video controls src="https://resource-wangsu.helplook.net/docker_production/3mkuae/article/GYA3P9/video/6551f1fc94a33.mp4" width="100%"></video>
+
+ 
+
+### 步骤七：启动采集
+
+启动采集来看一下采集效果：下拉框中的选项与搜索结果一一对应起来。<video controls src="https://resource-wangsu.helplook.net/docker_production/3mkuae/article/GYA3P9/video/6551f24457ef6.mp4" width="100%"></video>
+
+ 
+
+注意：以上默认选择了全部的下拉选项，如果只需要点击其中几个选项，比如只需要点击【北京】【河北】怎么办？
+
+【循环-切换下拉选项】也是使用XPath定位，默认生成的XPath：//SELECT[@id="provinceId"]/OPTION 能定位到所有下拉选项。
+
+如果只需点击其中几个下拉选项，相应修改XPath即可。
+
+例如：定位到北京的XPath是：//SELECT[@id="provinceId"]/OPTION[text()='北京']
+
+         定位到河北的XPath是：//SELECT[@id="provinceId"]/OPTION[text()='河北']
+
+![循环下拉框（切换下拉选项）](/assets/academy/advanced-features/loop-dropdown-options/03-6536101de90fc.gif)
+
+写好XPath后，将其复制进入八爪鱼中修改即可。
+
+![循环下拉框（切换下拉选项）](/assets/academy/advanced-features/loop-dropdown-options/04-6536102753dd9.gif)
+
+ 
+
+ 
+
+## **二、创建多个循环下拉框**
+
+上面讲的是在一个下拉框中点击选项的情况，如果网页中有多个下拉框需要建立多个循环下拉框呢？以下详细讲解。
+
+示例网址：[http://deal.ggzy.gov.cn/ds/deal/dealList.jsp](http://deal.ggzy.gov.cn/ds/deal/dealList.jsp)
+
+ 
+
+### 步骤一：创建多个循环下拉框
+
+这里打开网页步骤就不再重复做了。
+
+网页打开后，先选中其中一个下拉框，示例中选中【省份】，接着在操作提示框中点击【循环切换下拉列表选项】，生成【循环列表】。
+
+然后继续选择下一个下拉框，示例中选中【来源平台】，同样在操作提示框中点击【循环切换下拉列表选项】，生成【循环列表2】。
+
+观察发现，【循环列表2】嵌套在【循环列表】中。<video controls src="https://resource-wangsu.helplook.net/docker_production/3mkuae/article/GYA3P9/video/6551f3225c569.mp4" width="100%"></video>
+
+ 
+
+### 步骤二：手动验证
+
+手动执行规则发现，两个【循环-切换下拉选项】之家是可以联动的，流程正常。
+
+本示例演示的是两个下拉框的嵌套与手动验证，实际操作过程中，多个下拉框也是这样嵌套与验证的。
+
+![循环下拉框（切换下拉选项）](/assets/academy/advanced-features/loop-dropdown-options/05-65361035a191c.gif)
+
+ 
+
+### 步骤三：配置规则
+
+接下来，按照需求配置采集规则提取数据即可。<video controls src="https://resource-wangsu.helplook.net/docker_production/3mkuae/article/GYA3P9/video/6551f3a9593a5.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：\
+> 如果没有出现循环下拉框选项，利用教程[从列表进入详情](/zh/academy/basic-collection/beginner/list-to-detail)的方法手动配置循环点击
+
+ 
+
+编辑：FAN

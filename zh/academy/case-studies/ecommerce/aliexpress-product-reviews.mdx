@@ -1,0 +1,409 @@
+---
+title: "【速卖通】AliExpress(速卖通)商品评价"
+source: "https://www.bazhuayu.com/helpcenter/docs/VFrvAo"
+---
+**采集场景**
+
+在AliExpress(速卖通) 网站上进入商品详情页，采集商品的评论信息。
+
+示例网址：
+
+[http://www.aliexpress.com/item/4000093476853.html](http://www.aliexpress.com/item/4000093476853.html)
+
+[https://es.aliexpress.com/item/1005003334666560.html](https://es.aliexpress.com/item/1005003334666560.html)
+
+**采集字段**
+
+商品id、标题、价格、评论数、评分、五星率、四星率、三星率、两星率、一星率、评论者、国籍、商品属性、评论内容、评论时间
+
+ 
+
+![](/assets/academy/case-studies/aliexpress-product-reviews/01-66da6781e74ae.png)
+
+*点击查看高清大图，**下文其他图片同理*  
+
+ 
+
+**采集结果**
+
+采集结果可导出为Excel、CSV、HTML、数据库等多种格式。导出为Excel示例：
+
+ 
+
+![](/assets/academy/case-studies/aliexpress-product-reviews/02-66da678212f17.png)
+
+ 
+
+**教程说明**
+
+本篇制作时间：2021/10/28   八爪鱼版本：V8.4.2
+
+如果因网页改版造成网址或步骤无效，无法收集到目标数据，请联系官方客服，我们将及时修正。
+
+ 
+
+**采集步骤**
+
+步骤一、打开网页
+
+步骤二、提取评论前所需采集字段数据
+
+步骤三、创建【循环列表】，提取数据
+
+步骤四、创建【循环翻页】，采集多页数据
+
+步骤五、设置执行前等待
+
+步骤六、启动采集
+
+ 
+
+ 
+
+**以下为具体步骤：**
+
+ 
+
+## 步骤一、打开网页
+
+ 
+
+1、打开网页
+
+首页左上角点击【新建】—【自定义任务】。网址输入界面默认的是【手动输入】，将复制好的一批同类网址，粘贴进网址输入框中，并点击【保存网址】，八爪鱼中内置的浏览器会自动打开网页。
+
+同时可以看到，流程中已自动创建【循环-打开网页】步骤。
+
+ 
+
+![](/assets/academy/case-studies/aliexpress-product-reviews/03-66da6782634aa.gif)
+
+ 
+
+特别说明：
+
+- a. 打开网页后，如果开始开始【自动识别】，请点击【不再自动识别】或【取消识别】将其关掉。因为本文不适合使用【自动识别】。
+- b. 【自动识别】适用于自动识别网页上的列表、滚动和翻页，识别成功后直接启动采集即可获取数据。详情点击查看 [【自动识别】教程](http://www.bazhuayu.com:8099/tutorial8/81zdypz)
+
+ 
+
+2、添加网页滚动设置
+
+网页向下滚动才能加载出【CUSTOMER REVIEWS(733)】按钮，因此我们先设置合理的滚动时间和次数：
+
+进入【打开网页】设置页面，勾选【网页加载后向下滚动】，滚动方式为【向下滚动一屏】，滚动次数为5次，每次间隔2s。
+
+ 
+
+![](/assets/academy/case-studies/aliexpress-product-reviews/04-66da67825b5ee.gif)
+
+ 
+
+特别说明：
+
+- a. 设置中的滚动次数和时间间隔，请根据采集需求和网页加载情况进行设置，并非是一成不变的，具体请点击查看 [处理滚动加载数据的网页教程](http://www.bazhuayu.com:8099/tutorial8/81ymgd)
+
+ 
+
+ 
+
+ 
+
+ 
+
+## 步骤二、提取评论前所需采集页面字段
+
+ 
+
+1、采集标题、价格等字段
+
+采集评论数据前所需要采集的字段信息，包括页面网址、标题、价格等。
+
+选中目标字段，在操作提示框中选择【采集改元素的文本】即可。
+
+ 
+
+![](/assets/academy/case-studies/aliexpress-product-reviews/05-66da67824afeb.gif)
+
+ 
+
+2、采集评论数、评分、五星率、四星率、三星率、两星率、一星率等字段
+
+选中【CUSTOMER REVIEWS(733)】按钮，然后在操作提示框中选择【点击该元素】，以来到商品评论数据页面。这个点击是Ajax点击，八爪鱼已自动识别并设置了合理的Ajax超时时间。
+
+然后采集评论数、评分、五星率、四星率、三星率、两星率、一星率等字段：选中目标字段，在操作提示框中选择【采集改元素的文本】即可。
+
+为了更好地采集数据，第【点击元素1】步骤进行一些优化设置：超时7s，Ajax超时延长为7s，执行前等待3s。
+
+ 
+
+![](/assets/academy/case-studies/aliexpress-product-reviews/06-66da6782adcaf.gif)
+
+ 
+
+特别说明：
+
+- a. 使用了Ajax技术的网页，八爪鱼会自动识别并设置合理的Ajax超时时间，您也可以根据采集需求和网页加载情况，自行调整Ajax超时时间，详情点击查看 [Ajax教程](http://www.bazhuayu.com:8099/tutorial8/81ajax) 。
+- b. 执行前等待，即在执行此步骤前等待一段时间，可有效避免因网页未加载完全导致的漏数据，详情点击查看 [执行前等待使用场景与设置方法](http://www.bazhuayu.com:8099/tutorial8/81zsqdd)
+
+ 
+
+3、评论按【Sort by latest】排序
+
+点评论的排序方式有两种，默认的为【Sort by default】，还有一种为【Sort by latest】。
+
+如果无需调整评论的排序方式，可直接进入下一个步骤。
+
+ 
+
+如果需要按【Sort by latest】排序，请按以下步骤操作：
+
+① 选中【Sort by latest】按钮，在操作提示框中选择【点击该链接】
+
+② 然后修改【点击元素2】的Xpath为：//A[@class="fb-sort-list-href"] 
+
+③ 设置Ajax加载超时7s，执行前等待3s
+
+④ 勾选【页面加载后向下滚动】，滚动方式为【滚动到顶部】，滚动5次，间隔2s，最后点击【应用】保存。
+
+ 
+
+![](/assets/academy/case-studies/aliexpress-product-reviews/07-66da678350116.gif)
+
+ 
+
+特别说明：
+
+- a. 此处要选择筛选条件为Sort by default，默认的点击无法精准定位，需要手动修改Xpath。所以需要修改Xpath，需要一定的XPath知识。点击查看 [*XPath学习与实例教程*](http://www.bazhuayu.com:8099/tutorial8/81xpath)
+- b. 使用了Ajax技术的网页，八爪鱼会自动识别并设置合理的Ajax超时时间，您也可以根据采集需求和网页加载情况，自行调整Ajax超时时间，详情点击查看 [Ajax教程](http://www.bazhuayu.com:8099/tutorial8/81ajax) 。
+- c. 执行前等待，即在执行此步骤前等待一段时间，可有效避免因网页未加载完全导致的漏数据，详情点击查看 [执行前等待使用场景与设置方法](http://www.bazhuayu.com:8099/tutorial8/81zsqdd)
+
+ 
+
+4、编辑字段
+
+在【当前数据预览】界面，修改字段名称。
+
+ 
+
+![](/assets/academy/case-studies/aliexpress-product-reviews/08-66da678370204.gif)
+
+ 
+
+5、提取商品id
+
+商品id这个字段比较特别，在网页中未显示，隐藏在商品链接中。
+
+我们先采集商品链接，将其命名为【商品id】，再对其进行数据格式化即可。
+
+进入【提取数据】设置页面，找到【商品id】字段，之后选择【格式化数据】→【添加步骤】→【正则表达式匹配】→ 输入正则表达式 (?&lt;=item/)(.+?)(?=\\.html) ，点击【确定】保存。
+
+商品ID就从网页地址中提取出来了。
+
+ 
+
+![](/assets/academy/case-studies/aliexpress-product-reviews/09-66da6783f2e83.gif)
+
+ 
+
+特别说明：
+
+- a. 什么是数据格式化？数据采集下来之后，有时候格式不是我们想要的，或者只想从一段数据里提取特定数据，可通过八爪鱼的【格式化数据】功能实现。详情点击查看 [数据格式化教程](http://www.bazhuayu.com:8099/tutorial8/81gshsj) 。
+- b. 正则表达式是什么？怎么写？正则表达式是对字符串（包括普通字符（例如，a 到 z 之间的字母）和特殊字符（称为“元字符”））操作的一种逻辑公式，用来从文本中匹配/过滤信息。正则表达式有其特定写法，需要系统学习才能掌握，点击查看 [正则表达式教程](http://www.bazhuayu.com:8099/tutorial8/81zz) 。
+
+ 
+
+6、修改字段XPath
+
+为了精准采集到1-4星占比率，我们需要修改一下其XPath。
+
+进入【提取数据】设置页面，然后找到要修改的字段，点击 <img src="/assets/academy/case-studies/aliexpress-product-reviews/10-66da67840e49a.png" alt="" className="academy-inline-icon" /> 按钮，进入【自定义定位元素方式】设置页面，修改XPath，然后点击【应用】保存。
+
+以下为各个星级利率修改后的XPath：
+
+四星率：//span[@class="r-num fb-star-list-href"][@data="4 Stars"]
+
+三星率：//span[@class="r-num fb-star-list-href"][@data="3 Stars"]
+
+两星率：//span[@class="r-num fb-star-list-href"][@data="2 Stars"]
+
+一星率：//span[@class="r-num fb-star-list-href"][@data="1 Stars"]
+
+ 
+
+![](/assets/academy/case-studies/aliexpress-product-reviews/11-66da678426fd8.gif)
+
+ 
+
+特别说明：
+
+- a. 如何修改XPath？这需要一定的XPath知识。点击查看 [*XPath学习与实例教程*](http://www.bazhuayu.com:8099/tutorial8/81xpath)
+
+ 
+
+## 步骤四、创建【循环列表】
+
+ 
+
+1、创建【循环列表】
+
+通过以下连续4步，采集所有列表中的数据：
+
+① 选中页面上1个数据评价列表（注意一定要选中整个列表，包含所有所需字段） 
+
+② 再选中页面上另一个评价列表，这样页面中全部的评价都被识别到了
+
+③ 点击【选中全部子元素】
+
+④ 点击【采集数据】
+
+![](/assets/academy/case-studies/aliexpress-product-reviews/12-66da67842cbbe.gif)
+
+ 
+
+特别说明：
+
+- a. 经过以上连续4步，【循环-提取数据】创建完成。【循环】中的项，对应着页面上所有评价列表，【提取数据】中的字段，对应着每个评价列表中的字段。启动采集以后，八爪鱼就会按照循环中的顺序依次提取每个列表中的字段。
+- b. 为何通过以上4步，可建立【循环-提取数据】？详情点击查看 [列表数据采集教程 ](http://www.bazhuayu.com:8099/tutorial8/81xsrm4)。
+
+ 
+
+2、修改编辑字段
+
+进入【提取数据】设置页面，删除不需要的字段信息并编辑字段名称。
+
+ 
+
+![](/assets/academy/case-studies/aliexpress-product-reviews/13-66da6785232d0.gif)
+
+ 
+
+## 步骤五、创建翻页，采集多页数据
+
+ 
+
+1、创建循环翻页
+
+如果只是采集一页数据，可跳过此步骤。
+
+如果需要翻页以采集多页数据：选中网页上的 > 按钮，然后在操作提示框中，点击【循环点击下一页】，创建循环翻页以采集更多页的数据。
+
+ 
+
+![](/assets/academy/case-studies/aliexpress-product-reviews/14-66da6785527fd.gif)
+
+ 
+
+特别说明：
+
+- a. 创建【循环翻页】后，八爪鱼会自动点击翻页按钮进行翻页，从第1页，第2页......直到最后1页。如果只需采集特定页的数据，可在八爪鱼中设置循环翻页的次数，详情点击查看 [翻页以采集多页数据教程](http://www.bazhuayu.com:8099/tutorial8/81xsrm7) 。
+
+ 
+
+2、设置翻页次数
+
+如果不设置翻页次数，八爪鱼会一直采集到最后一页。
+
+此处为了演示采集结果，我们进入【循环翻页】设置页面，设置翻页次数为2，然后点击【应用】保存。
+
+ 
+
+![](/assets/academy/case-studies/aliexpress-product-reviews/15-66da67850d159.gif)
+
+ 
+
+## 步骤六、规则优化
+
+ 
+
+为【循环网址】、【打开循环中的网页】、【循环翻页】、【循环列表】、【提取列表数据】设置执行前等待5s-10s
+
+【点击翻页】设置执行前等待3s，以及Ajax加载超时7s，然后点击【应用】保存。
+
+ 
+
+![](/assets/academy/case-studies/aliexpress-product-reviews/16-66da678617311.gif)
+
+ 
+
+特别说明：
+
+- a. 执行前等待，即在执行此步骤前等待一段时间，可有效避免因网页未加载完全导致的漏数据，详情点击查看 [执行前等待使用场景与设置方法](http://www.bazhuayu.com:8099/tutorial8/81zsqdd)
+
+ 
+
+## 步骤七、启动采集
+
+ 
+
+1、单击【采集】并【启动本地采集】。启动后八爪鱼开始自动采集数据。
+
+ 
+
+![](/assets/academy/case-studies/aliexpress-product-reviews/17-66da678735071.gif)
+
+ 
+
+特别说明：
+
+- a. 【本地采集】是使用自己的电脑进行采集，【云采集】是使用八爪鱼提供的云服务器采集，点击查看 [本地采集与云采集详解](http://www.bazhuayu.com:8099/tutorial8/81xsrm8)。
+
+ 
+
+2、采集完成后，选择合适的导出方式导出数据。支持导出为Excel、CSV、HTML、数据库等。这里导出为Excel。数据示例：
+
+ 
+
+![](/assets/academy/case-studies/aliexpress-product-reviews/18-66da67865fbd6.png)
+
+ 
+
+ 
+
+补充说明：
+
+ 
+
+打开页面后有时会随机出现弹窗，需要在出现弹窗后将其关掉，再采集数据。
+
+我们可以通过判断条件实现：判断出现弹窗时，点击弹窗关掉；未出现弹窗时，直接开始采集数据。
+
+ 
+
+1、建立判断条件
+
+在【点击元素】后面添加【判断条件】步骤。
+
+选中左分支，在网页中选中弹窗，在操作提示框中点击【设置为分支判断条件】，意思是此弹窗出现时，则执行此分支。
+
+选择“当前页面包含元素”，把弹窗的xpath：//div[@class='poplayer-content']黏贴进去，点击应用，可以发现再次点击判断分支的时候显示的是“true”也就是正确的意思
+
+然后弹窗右上角的关闭按钮，在操作提示框中选择【点击该链接】将弹窗关掉，这个点击是Ajax点击，八爪鱼已自动识别并设置了合理的Ajax超时时间，可以先不管。
+
+ 
+
+![](/assets/academy/case-studies/aliexpress-product-reviews/19-66da67875587b.gif) 
+
+ 
+
+特别说明：
+
+- a. 使用了Ajax技术的网页，八爪鱼会自动识别并设置合理的Ajax超时时间，您也可以根据采集需求和网页加载情况，自行调整Ajax超时时间，详情点击查看 [Ajax教程](http://www.bazhuayu.com:8099/tutorial8/81ajax) 。
+- b. 判断条件是什么？如何设置判断条件？点击查看 [判断条件教程](http://www.bazhuayu.com:8099/tutorial8/81pdtj) 。
+
+ 
+
+2、设置执行前等待
+
+进入【判断条件】设置页面，设置执行前等待3s。
+
+进入【点击元素】设置页面，并将Ajax超时时间延长为7s，再设置执行前等待2s。
+
+ 
+
+ 
+
+特别说明：
+
+- a. 使用了Ajax技术的网页，八爪鱼会自动识别并设置合理的Ajax超时时间，您也可以根据采集需求和网页加载情况，自行调整Ajax超时时间，详情点击查看 [Ajax教程](http://www.bazhuayu.com:8099/tutorial8/81ajax) 。
+- b. 执行前等待，即在执行此步骤前等待一段时间，可有效避免因网页未加载完全导致的漏数据，详情点击查看 [执行前等待使用场景与设置方法](http://www.bazhuayu.com:8099/tutorial8/81zsqdd)

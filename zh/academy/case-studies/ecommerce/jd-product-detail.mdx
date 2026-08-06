@@ -1,0 +1,375 @@
+---
+title: "【京东】商品详情页采集"
+source: "https://www.bazhuayu.com/helpcenter/docs/eYW3hC"
+---
+**采集场景**
+
+打开京东商品详情页（实例网址：[https://item.jd.com/100068388547.html](https://item.jd.com/100142621662.html)），采集点击不同的参数（颜色、版本等）后得到的数据（商品编号、价格、主图链接等字段会随着参数变化而变化）。
+
+![【京东】商品详情页采集](/assets/academy/case-studies/jd-product-detail/01-68aed2004afbd.png)
+
+ 
+
+**采集字段**
+
+商品标题、外观、版本、价格、商品编号等。
+
+ 
+
+**采集结果**
+
+采集结果可导出为Excel、CSV、HTML、数据库等多种格式。导出为Excel示例：
+
+ 
+
+![【京东】商品详情页采集](/assets/academy/case-studies/jd-product-detail/02-68aed24a3aaca.png)
+
+ 
+
+ 
+
+**教程说明**
+
+本篇制作时间：2025/8/27    八爪鱼版本：V8.7.7
+
+如果因网页改版造成网址或步骤无效，无法收集到目标数据，请联系官方客服，我们将及时修正。
+
+ 
+
+**采集步骤**
+
+步骤一、打开网页
+
+步骤二、循环点击第一组选项，并提取对应文本
+
+步骤三、循环点击第二组选项，并提取对应文本
+
+步骤四、提取其他字段
+
+步骤五、优化规则
+
+步骤六、启动采集
+
+ 
+
+ 
+
+**以下为具体步骤：**
+
+ 
+
+### 步骤一、打开网页
+
+1、打开网址
+
+在首页输入框中，输入网址 [https://item.jd.com/100068388547.html](https://item.jd.com/100142621662.html)，然后点击【开始采集】，八爪鱼自动打开网页,网站会自动跳到登录页面，在右上角切换浏览模式采集，手动登录账号
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/2c717daa5145403696769200819/zScFkJ3iKU4A.mp4" width="100%"></video> 
+
+  
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 打开网页后，如果开始开始【自动识别】，请等待自动识别完成。八爪鱼支持自动识别网页上的列表、滚动和翻页，识别成功后直接启动采集即可获取数据。如果【自动识别】的结果不是我们需要的，可点击【取消】关闭智能识别，自行配置采集流程。详情点击查看 [【自动识别】](/zh/academy/basic-collection/beginner/custom-collection)
+
+ 
+
+如需批量打开多个详情页链接进行采集可参考视频操作，如不需要可跳过该步骤。
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/eff35d595145403696768927684/7o7LEu1mnFYA.mp4" width="100%"></video>
+
+> 说明：
+>
+> 循环打开网址可参考教程：[URL循环：批量采集同类网页](/zh/academy/basic-collection/bulk-input/url-loop-similar-pages) 
+
+2、登录账号
+
+1️⃣打开浏览模式
+
+点击 ![](/assets/academy/case-studies/jd-product-detail/03-68afd4c439d7e.png) 按钮，打开浏览模式。在浏览模式中，点击页面的登录按钮，输入账密或打开手机京东app扫码登录。
+
+2️⃣使用Cookie登录
+
+进入【打开网页】设置界面，勾选【使用指定的Cookie】，点击【获取当前页面Cookie】并保存。
+
+这样就获取到了登录后的Cookie，启动时直接以登录状态打开网页。
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/b9d9584d5145403696764847018/IekQQk4bJMMA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 什么是浏览器模式？在浏览器模式下，我们可以像在浏览器中一样点击操作网页，不会生成流程步骤。如需编辑流程步骤，需关闭浏览器模式。关闭状态：<img src="/assets/academy/case-studies/jd-product-detail/04-68afd50be6f2c.png" alt="" className="academy-inline-icon" />  ；打开状态：<img src="/assets/academy/case-studies/jd-product-detail/05-68afd50beedb2.png" alt="" className="academy-inline-icon" />
+> 
+> - b. Cookie是什么？通俗的说，Cookie是一些存储在用户电脑上的小文件，用来保存一些站点的用户数据，作用是让浏览器为用户定制内容。例如：用户第一次访问某网站，输入了账号密码登录。浏览器会问你是否需要【记住账号密码】。选择【是】以后，浏览器就会将这些账号密码信息存储在用户电脑上。下次再访问此网站，就无需再次输入账号密码。详情点击查看 [登录验证采集](/zh/academy/basic-collection/beginner/login-verification)）
+> 
+> - c. 怎么判断是否获取到Cookie？获取Cookie后 ![](/assets/academy/case-studies/jd-product-detail/06-68afd50bdbd45.png) 会变成  ![](/assets/academy/case-studies/jd-product-detail/07-68afd50bc99fc.png) ，点击 <img src="/assets/academy/case-studies/jd-product-detail/08-68afd50be4409.png" alt="" className="academy-inline-icon" /> ，可查看具体的Cookie内容。
+
+ 
+
+ 
+
+### 步骤二、循环点击第一组选项
+
+ 
+
+1、循环点击外观属性
+
+① 选中页面上第1个颜色属性
+
+② 在黄色操作提示框中，选择【选中全部相似元素】
+
+③ 选择【循环点击每个链接】
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 经过以上连续3步，【循环-点击元素】创建完成。【循环】中的项，对应着页面上所有颜色属性。启动采集以后，八爪鱼就会按照循环中的顺序依次点击每个颜色属性。
+> 
+> - b. 为何通过以上3步，可建立【循环-点击元素】？详情点击查看 [采集点击多个链接后的详情页数据教程](/zh/academy/basic-collection/beginner/list-to-detail) 。
+
+2、提取颜色属性的文本
+
+选中页面中的外观属性框，在操作提示框中选择【文本内容】，颜色属性的文本提取下来。
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/5edcf3ac5145403696763241588/Kt3mQ0TwCO0A.mp4" width="100%"></video>
+
+ 
+
+ 
+
+3、将循环点击颜色属性与提取颜色文本联动起来
+
+实际操作我们发现，这样子操作后提取的全部都是第一个颜色，并不会循环联动采集，这个时候我们需要优化下流程的设置：
+
+① 在火狐浏览器（谷歌浏览器也可以）重新写一条xpath定位到所有的颜色，把流程内的循环模式 “固定元素列表” 修改为 “不固定元素列表”，并把调试好的xpath：//div[@id="choose-attr-1"]/div[@class="dd"]/div，直接复制进来。
+
+② 选中 【点击元素】这个步骤，点击【高级选项】，取消“在新标签中打开”这个勾选，并勾选“Ajax加载”，选择 “超时5秒强制执行下一步”。
+
+③ 选择【提取数据】这个步骤，在下方的预览数据块点击右上角【更多字段操作】，选择【修改元素定位】，勾选【拼接循环项Xpath】,xpath输入框留空即可，点击 应用-保存。
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 什么是【相对于循环里的XPath】？点击查看 [相对XPath教程](https://www.bazhuayu.com/helpcenter/docs/pWdSFO)
+
+ 
+
+### 步骤三、循环点击第二组选项
+
+ 
+
+1、循环点击版本属性
+
+① 选中页面上第1个版本属性
+
+② 在黄色操作提示框中，选择【选中全部相似元素】
+
+③ 选择【循环点击每个链接】
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 经过以上连续3步，【循环-点击元素】创建完成。【循环】中的项，对应着页面上所有版本属性。启动采集以后，八爪鱼就会按照循环中的顺序依次点击每个版本属性。
+> 
+> - b. 为何通过以上3步，可建立【循环-点击元素】？详情点击查看 [采集点击多个链接后的详情页数据教程](/zh/academy/basic-collection/beginner/list-to-detail) 。
+
+ 
+
+2、提取版本属性的文本
+
+选中页面中的版本属性框，在操作提示框中选择【文本内容】，版本属性的文本提取下来。
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/35ea3c8b5145403696769620364/ymGZ1TwZwXcA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 经过步骤二和步骤三，版本属性的【循环-点击元素】内嵌在颜色属性的【循环-点击元素】中，根据 [采集原理与流程执行逻辑](https://www.bazhuayu.com/tutorial8/81xsrm9) 中学到的知识，我们知道它会从上到下，由内而外执行流程，展示出每种颜色属性和版本属性的组合，以采集其对应数据，如下图所示。如果有更多其他属性，则继续向内建立嵌套循环。
+
+![](/assets/academy/case-studies/jd-product-detail/09-65323cc0eebe1.png)
+
+ 
+
+### 步骤四、提取其他字段
+
+1、提取
+
+选中页面中的文本，然后在操作提示框中，点击【文本内容】。
+
+文本类字段都可以按照这样的方式提取。示例中我们提取了商品标题、商品价格、商品编号等多个字段。
+
+ 
+
+2、字段格式化
+
+1、点击数据预览区域添加字段按钮，提取当前详情页链接
+
+![【京东】商品详情页采集](/assets/academy/case-studies/jd-product-detail/10-68aed7d344086.png)
+
+【添加当前网页信息】：页面网址
+
+2、对提取的页面网址字段点击更多按钮【···】，需鼠标移动到字段命名上，选择【格式化数据】，添加步骤→正则匹配，点击【不懂正则？试试正则工具】，以&lt;.com/&gt;为开始，以&lt;.html&gt;为结束。
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/b7a48aed5145403696764760087/aKdVILd3i7MA.mp4" width="100%"></video>
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 文本、图片、视频、源码是不同的数据形式，在操作提示框选择提取方式时稍有不同。文本一般为【采集该元素文本】，图片一般为【采集该图片地址】，更多提取方式请点击查看  [不同数据类型（文本、图片、链接、源码等）的抓取方式 教程](/zh/academy/advanced-features/data-processing/custom-extraction-method)
+> 
+> - b.特殊字段提取可参考该教程：[添加特殊字段](/zh/academy/advanced-features/data-processing/add-special-fields#0d08fbf7bfdfacaef7f2128db06aa7bd)
+> 
+> - c.正则匹配使用方法详细参考该教程：[字段格式化](/zh/academy/advanced-features/data-processing/field-formatting)
+
+ 
+
+### 步骤五、优化规则
+
+ 
+
+1、编辑字段
+
+进入【提取数据】设置页面，在预览数据处 可删除多余字段，修改字段名，移动字段顺序等。
+
+ 
+
+ 2、设置等待时长
+
+为了采集效果更稳定一些，根据页面加载情况，对任务步骤设置等待时间进行优化。一般设置1-3S
+
+为【循环列表】、【点击元素】、【提取列表数据】设置执行前等待1s-3s，然后点击【应用】保存。
+
+ 
+
+2、优化提取步骤XPath
+
+实际操作我们发现，版本会跟提取颜色一样不会跟随点击的循环联动变化提取，也就是点击的哪个选择就一直提取哪个选项，这个时候我们需要再优化下流程的设置：
+
+① 在浏览器（任意也可以），可按键盘【F12】进入源码界面，重新写一条xpath定位到所有的版本，xpath：//div[@id="choose-attr-1"]//div[@class="item  selected"]。
+
+② 点击第一组选项的提取步骤，在数据预览区域点击【纵向字段布局】按钮
+
+![【京东】商品详情页采集](/assets/academy/case-studies/jd-product-detail/11-68aede084d680.png)
+
+ 将重写的XPath：//div[@id="choose-attr-1"]//div[@class="item  selected"]，修改进外观字段的XPath区域
+
+③点击第二组选项的提取步骤，在数据预览区域点击【纵向字段布局】按钮，
+
+将重写的XPath：//div[@id="choose-attr-2"]//div[@class="item  selected"]，修改进版本字段的XPath区域
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/7266fd5a5145403696770874799/2K5NWXI8WvIA.mp4" width="100%"></video>
+
+ 
+
+### 步骤六、启动采集
+
+ 
+
+1、单击【采集】并【启动本地采集】。启动后八爪鱼开始自动采集数据，开始采集之后点击暂停，登录京东账号后再点击开始采集。
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/1dd688b35145403696762784548/uKdJgYytzcQA.mp4" width="100%"></video>
+
+ 
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 【本地采集】是使用自己的电脑进行采集，【云采集】是使用八爪鱼提供的云服务器采集，点击查看 [本地采集与云采集详解](https://www.bazhuayu.com/helpcenter/docs/2xF5Mz)。
+
+ 
+
+2、采集完成后，选择合适的导出方式来导出数据。支持导出为Excel，CSV，HTML，数据库等。这里导出为Excel。
+
+![【京东】商品详情页采集](/assets/academy/case-studies/jd-product-detail/12-68afd576b9abd.png)
+
+ 
+
+![【京东】商品详情页采集](/assets/academy/case-studies/jd-product-detail/13-68aed24c7f579.png)
+
+ 
+
+> **拓展阅读**
+>
+> 以上教程详解了如何采集京东单个商品详情页数据，多个商品详情页怎么办呢？
+>
+> 如果已有一批京东商品详情页链接，可使用 [URL循环：批量采集同类网页](/zh/academy/basic-collection/bulk-input/url-loop-similar-pages) 
+>
+> 也可以通过  [京东商品列表数据采集（搜索关键词）](/zh/academy/case-studies/ecommerce/jd-product-list)和 [京东商品列表数据采集（分类目）](/zh/academy/case-studies/ecommerce/jd-product-list-alt)，先获得一批京东商品详情页链接，再使用[URL循环：批量采集同类网页](/zh/academy/basic-collection/bulk-input/url-loop-similar-pages) 
+
+ 
+
+作者：Leon

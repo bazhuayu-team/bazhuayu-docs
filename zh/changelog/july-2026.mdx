@@ -1,0 +1,211 @@
+---
+title: 2026 年 7 月更新日志
+description: 2026 年 7 月八爪鱼文档更新，包含 CLI v0.1.32 命令迁移与识别优化、MCP 实战案例、本地浏览器采集方式、数据中心与电商数据工具。
+---
+
+# MCP 数据中心平台目录同步
+
+> **核验日期：** 2026 年 7 月 29 日
+> 本次只读调用 `list_platforms`，按 MCP 服务实时返回同步文档；未创建采集任务。
+
+数据中心当前返回 **898 个平台条目**，映射到 **787 个去重域名**。条目数与域名数分别用于表示来源入口和可筛选域名的规模：同一域名可能对应多个入口，例如微头条、头条号、今日头条和今日头条客户端均映射到 `toutiao.com`，因此两种统计不能互相替代，也不表示固定的内容记录总量。
+
+平台目录覆盖社交社区、新闻资讯、财经证券、汽车、消费维权、招投标、公共资源和海外媒体等来源。本轮已核验示例包括小红书、微信、微信视频号、知乎、豆瓣、百度贴吧、Facebook、人民网、新华网、腾讯新闻、东方财富网、雪球网、懂车帝、汽车之家、中国政府采购网、Reuters、Bloomberg、The Guardian 和 Yahoo! JAPAN。
+
+同步更新了数据中心概览、平台清单、内容搜索、标准流程和排障说明。后续应始终先调用 [`list_platforms`](/zh/mcp/list-platforms)，并将返回的 `domain` 用于 `search_platform_content` 的 `include` 或 `exclude`；静态示例不构成完整或长期有效的支持名单。
+
+# CLI v0.1.32
+
+> **更新日期：** 2026 年 7 月 29 日
+> 当前安装版本：`bazhuayu-cli@0.1.32`
+
+本次版本将 CLI 命令入口从 `octopus` 统一为 `bazhuayu`。旧的 `octopus` 可执行命令已删除，所有脚本、CI、Agent 配置和文档示例均应改用新入口；子命令和参数保持兼容。
+
+```bash
+npm install -g bazhuayu-cli@0.1.32
+bazhuayu --version
+bazhuayu detect URL --auto
+```
+
+以下兼容接口保持不变：
+
+- npm 包名仍为 `bazhuayu-cli`
+- 环境变量仍为 `OCTOPUS_API_KEY`、`OCTOPUS_ACCESS_TOKEN`、`OCTOPUS_API_BASE_URL`
+- 配置与凭据目录仍为 `~/.octopus`
+- Agent plan Schema、任务文件格式和全部子命令参数保持兼容
+
+识别与运行体验同步更新：
+
+- `detect` 会提前识别验证码、访问限制和安全验证页面，并在生成任务前终止，避免把验证页保存为无效任务
+- 优化弱候选和整页导航区域判断，降低将导航栏或侧边栏误选为数据区域的概率
+- 修复本地 `run --max-rows <n>` 达到上限后部分任务无法正常结束的问题
+- 埋点上传增加退出等待与超时取消，避免网络缓慢时 CLI 退出卡住
+
+升级后如果旧脚本仍调用 `octopus`，请直接替换为 `bazhuayu`；不要把 `OCTOPUS_*` 环境变量改为其他前缀。完整迁移步骤见[安装与验证](/zh/cli/quick-start/installation)，命令清单见[命令速查表](/zh/cli/reference/command-cheatsheet)。
+
+# MCP 实战案例
+
+> **更新日期：** 2026 年 7 月 27 日
+> MCP 服务新增“实战案例”入口，通过案例卡片连接完整业务落地页。
+
+首批上线两个案例：
+
+- **企业监管风险监测**：从动态监管数据采集、企业适用性分析，到风险报告生成与自动送达的一体化工作流
+- **招投标采集与 29 字段清洗**：通过 MCP 调度八爪鱼采集任务或清洗本地文件，统一交付可分析、可复核的招投标数据
+
+案例落地页独立托管，MCP 文档站仅提供统一案例入口和卡片跳转，便于后续持续增加案例，同时保持技术文档与完整业务介绍相互独立。
+
+相关文档：[MCP 实战案例](/zh/mcp/cases)
+
+# 采集学院：本地浏览器采集方式
+
+> **文档同步日期：** 2026 年 7 月 23 日
+> 本次依据八爪鱼帮助中心的最新内容，同步更新采集学院“本地采集方式”教程。
+
+本地采集方式由内置浏览器、独立浏览器两种模式扩展为三种模式，新增**本地浏览器**：
+
+- 直接调用电脑上已经安装的 Chrome、Edge 等浏览器，复用浏览器指纹、缓存、Cookies 与登录状态
+- 支持扫码、短信验证码、滑动验证、弹窗处理和账号切换等人工干预，操作完成后可继续执行采集
+- 支持使用本地浏览器中已经安装的翻译、代理等插件，适合多级菜单、地图拖拽等复杂交互场景
+- 补充浏览器路径配置、启动采集、状态查看、运行控制和数据导出的完整操作流程
+- 更新三种模式的技术原理、反爬能力、适用场景、稳定性和运行窗口对比
+
+相关文档：[本地采集方式](/zh/academy/basic-collection/beginner/local-collection)
+
+# MCP 服务能力同步
+
+> **核验日期：** 2026 年 7 月 22 日
+> 本次文档依据 MCP 端点实际工具发现结果更新；核验时服务版本为 `0.8.3.3-85ef7c4b`，协议版本为 `2025-11-25`。
+
+当前服务公开 10 个工具。本次新增文档：
+
+- `search_platform_content`：按关键词、时间范围与域名搜索数据中心的网页、图片和视频存量内容
+- `list_platforms`：查询数据中心支持的平台和域名
+- `ecommerce_data_task`：提交 Temu 或 TikTok Shop 商品与评论采集任务
+- `query_collected_reviews`：查询已采集的电商评论
+
+现有采集工作流同步升级：`search_templates` 支持关键词和精确查询；`execute_task` 新增 `validateOnly` 参数预检与 MCP Tasks；`export_data` 支持进度轮询、数据预览和更多导出类型；`search_tasks` 更新分页与状态筛选参数。
+
+服务还公开 `octoparse://workflow` 工作流 Resource，以及模板搜索、任务搜索和导出预览 Widget。Widget 是否渲染取决于 MCP 客户端实现。
+
+数据中心通过对接各大平台的数据接口与公开内容源，提前采集、清洗并索引存量内容。平台目录会持续调整，当前支持范围应以 `list_platforms` 实时返回为准；最新同步见本页的 [MCP 数据中心平台目录同步](#mcp-数据中心平台目录同步)。相关文档：[MCP 概览](/zh/mcp/index)、[标准工作流程](/zh/mcp/workflow)、[数据中心内容搜索](/zh/mcp/search-platform-content)、[电商数据任务](/zh/mcp/ecommerce-data-task)
+
+# 知识库审核台（本地）
+
+- 新增隐藏 FAQ 知识库迁移流程：历史常见问题可完整保存在文档仓库中，图片同步到本地资源目录。
+- 本地“知识审核台”改为完整答案审核：运行 `npm run kb:review` 可直接编辑、预览并确认历史 FAQ，保存后自动重建客户问答索引，同时保留草稿、停用、稍后处理和撤销能力。
+- 新增“问题解答”入口：只展示采集学院、产品文档和人工确认的答案；未经确认、暂缓或停用的历史 FAQ 不会直接面向客户显示。
+- “问题解答”升级为受控知识 Agent：通过服务端使用 `deepseek-v4-flash` 生成结论、步骤、注意事项和站内引用；原始思维链与 API Key 不会进入前端。
+- 新增可信文档分段索引、服务端限流与来源校验；模型服务不可用时自动回退到本地可信教程。
+- MCP 问答新增正式协议 `2025-11-25` 基线，并将官方协议语义与八爪鱼产品能力分池检索；回答会经过第二次事实复核，未通过复核的初稿不会对外展示。
+
+# 2026 年 7 月 CLI 发布说明（历史）
+
+> **更新日期：** 2026 年 7 月 21 日
+> **历史版本：** 2026 年 7 月 21 日升级至 v0.1.30，新增用户浏览器模式并升级本地浏览器运行时；v0.1.28 的远端任务管理、模板、云定时和数据检查能力继续保留。
+
+## CLI 更新 v0.1.30
+
+安装或更新：
+
+```bash
+npm install -g bazhuayu-cli@0.1.30
+```
+
+本次更新：
+
+- **用户浏览器模式**：新增 `octopus browser` 命令族，可复用 Windows / macOS 上 Chrome 或 Edge 用户 Profile 的 Cookie 与登录状态
+- **浏览器选择**：`detect` 与本地 `run` 新增 `--browser independent|user`、`--browser-id chrome|edge`、`--profile <name>` 和可选的 `--force-close-browser`
+- **扩展与 Profile 管理**：支持查看状态、列出 Profile、安装扩展、关闭浏览器，以及保存 `detect` / `run` 共用的默认模式
+- **Agent 与识别增强**：优化自动建任务、截图和样品运行流程，并继续提升详情页、列表、Feed 分页与 XPath 识别准确率
+- **运行时升级**：本地引擎升级为 `@octopus/browser-runtime`，默认独立模式仍使用 Chrome for Testing
+- **修复与校验**：修复登录会话、Cookie 安全和复杂嵌套列表问题，并增强模板任务参数校验
+
+用户浏览器首次设置必须按顺序完成：
+
+```bash
+octopus browser status --browser-id chrome --json
+octopus browser profiles --browser-id chrome --json
+octopus browser install --browser-id chrome --profile "Default" --force-close --json
+# 重新打开 Chrome，确认八爪鱼扩展已启用
+octopus browser status --browser-id chrome --profile "Default" --json
+octopus browser use user --browser-id chrome --profile "Default" --json
+```
+
+只有 `browser status --json` 返回 `readyForUserBrowserRun: true` 后才应保存用户模式。安装扩展时浏览器必须关闭；正常 detect/run 可复用已打开的浏览器，不需要每次强制关闭。
+
+```bash
+octopus detect "https://example.com/account" --auto --browser user --browser-id chrome --profile "Default" --goal "提取账户数据" --output task.json
+octopus run <taskId> --task-file task.json --browser user --browser-id chrome --profile "Default" --max-rows 20
+```
+
+<Warning>
+  用户浏览器模式仅支持 Windows 和 macOS，并且不支持 `--headless`。Linux 继续使用独立浏览器模式。`--agent-command` 仍必须是可信的本地 shell 命令，自然语言采集目标应通过 `--goal` 传入。
+</Warning>
+
+## CLI 更新 v0.1.28
+
+> **历史版本日期：** 2026 年 7 月 9 日
+
+安装或更新：
+
+```bash
+npm install -g bazhuayu-cli@0.1.28
+```
+
+本次更新：
+
+- **任务管理扩展**：`octopus task list` 支持按任务组、模板注册 ID、模板版本、调度状态等条件筛选；新增 `task show`、`task copy`、`task rename`、`task move` 和 `task delete`
+- **任务组管理**：新增 `octopus task-group list/create/update/delete/set-default`
+- **模板与模板任务**：新增 `octopus template search/view/version` 和 `octopus template-task create/update`
+- **云定时管理**：新增 `octopus schedule cloud get/update/start/stop/next`，仅覆盖云定时；本地定时仍依赖桌面客户端
+- **数据检查增强**：新增 `octopus data count`、`octopus data preview`，并支持 `data export --unexported` 读取云端未导出数据
+- **高风险操作确认**：远端状态修改类命令需要显式传入 `--yes`，包括重命名、移动、删除任务，更新/删除/设置默认任务组，更新/启动/停止云定时，以及更新模板任务
+
+常用示例：
+
+```bash
+octopus task list --task-group <groupId> --template-id <templateRegistrationId> --json
+octopus task show <taskId> --json
+octopus task rename <taskId> --name "新任务名" --yes
+octopus task move <taskId> --task-group <groupId> --yes
+octopus task delete <taskId> --yes
+
+octopus task-group list --json
+octopus task-group create "项目任务组" --json
+octopus task-group set-default <groupId> --yes
+
+octopus template search "电商" --page 1 --page-size 20 --json
+octopus template view <templateRegistrationId> --json
+octopus template-task create <templateRegistrationId> --name "模板采集任务" --task-group <groupId> --params-file params.json --json
+
+octopus schedule cloud get <taskId> --json
+octopus schedule cloud update <taskId> --type daily --date 1 --time 09:00 --yes --json
+octopus schedule cloud next --type daily --date 1 --time 09:00 --json
+
+octopus data count <taskId> --source cloud --json
+octopus data preview <taskId> --source cloud --limit 20 --json
+octopus data export <taskId> --source cloud --unexported --format csv --file unexported.csv
+```
+
+<Warning>
+  `--unexported` 会读取云端未导出数据，但不会把这些数据标记为已导出。需要远端状态变更的命令必须带 `--yes`，脚本里不要省略确认参数。
+</Warning>
+
+## 保持兼容
+
+- `octopus detect`、Agent 计划、`--run-sample`、API 列表任务和本地 `run` 语法保持 v0.1.27 兼容
+- `octopus recognize` 仍不是当前命令；旧链接会跳转到 [`octopus detect`](/zh/cli/core-commands/detect)
+- `run-url` 仅作为隐藏兼容入口保留，新脚本继续使用 `detect` → `task validate` → `run` → `data export`
+
+## 同步更新的文档
+
+- [CLI 概述](/zh/cli/index)
+- [安装与验证](/zh/cli/quick-start/installation)
+- [运行第一个任务](/zh/cli/quick-start/run-your-first-task)
+- [浏览器管理](/zh/cli/core-commands/browser-management)
+- [任务管理](/zh/cli/core-commands/task-management)
+- [导出数据](/zh/cli/core-commands/export-data)
+- [环境诊断](/zh/cli/core-commands/diagnostics)
+- [命令速查表](/zh/cli/reference/command-cheatsheet)
+- [输出与退出码](/zh/cli/reference/output-and-exit-codes)

@@ -1,0 +1,111 @@
+---
+title: 批量复制任务到多个任务组
+api: POST https://openapi.bazhuayu.com/task/copies
+playground: interactive
+authMethod: apiKey
+---
+
+> **所需套餐：** 旗舰+、企业版、团队版
+
+## 端点
+
+```
+POST https://openapi.bazhuayu.com/task/copies
+```
+
+## 描述
+
+此接口用于批量复制多个任务到多个不同的任务组。用户可以选择多个任务，并将它们复制到多个任务组中。每个任务可以被复制到不同的任务组，从而实现灵活的任务分配和管理。
+
+## 请求头
+
+| 参数 | 类型 | 必填 | 说明 |
+|------|------|------|------|
+| `x-api-key` | String | 二选一 | API Key，例如 `op_sk_xxxxxx`；创建方式见 [获取 API Key](/zh/mcp/quick-start/api-key) |
+| `Authorization` | String | 二选一 | Access Token，格式 `Bearer <access_token>` |
+| `Content-Type` | String | 是 | application/json |
+
+**请求头示例**
+
+```json
+{
+  "Authorization": "Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6ImdXS3hWc0F4SHhaMDlDcWh6NkNJb3ciLCJ0eXAiOiJhdCtqd3QifQ.eyJuYmYiOjE2MzY0NjIyNzAsImV4cCI6MTYzNjU0ODY2OSwiaXNzIjoiaHR0cDovL3Rlc3QuaWRlbnRpdHkuYmF6aHVheXUuY29tIiwiY2xpZW50X2lkIjoiT2N0b3B1cyIsInN1YiI6IjllOGJiM2VhLWUwMWQtNGFlZC05ODM3LTVhMWUyODg0NWI5ZSIsImF1dGhfdGltZSI6MTYzNjQ2MjI3MCwiaWRwIjoibG9jYWwiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjllOGJiM2VhLWUwMWQtNGFlZC05ODM3LTVhMWUyODg0NWI5ZSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJ0ZXN0d2VuIiwicHJlZmVycmVkX3VzZXJuYW1lIjoidGVzdHdlbiIsInVuaXF1ZV9uYW1lIjoidGVzdHdlbiIsInJlZ2lzdGVyX2RhdGUiOiIxMS8wNC8yMDE2IDA4OjM4OjE2ICswODowMCIsImxhc3RfbG9naW5fZGF0ZSI6IjA0LzIyLzIwMTkgMDk6MDE6MDIgKzA4OjAwIiwibGFzdF9wYXNzd29yZF9jaGFuZ2VkX2RhdGUiOiIwMS8yMy8yMDE5IDA4OjMwOjMxICswODowMCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6IndlbmRpQHNraWVlci5jb20iLCJlbWFpbCI6IndlbmRpQHNraWVlci5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwic2NvcGUiOlsiZW1haWwiLCJvcGVuaWQiLCJyb2xlcyIsIm9mZmxpbmVfYWNjZXNzIl0sImFtciI6WyJwd2QiXX0.ARhbBfzI1xS6yo-Ue1CFHzMaUIfzw4gJlubNBOkUT4SSTlhuS4bVQ4t4UHuYGbE9VX6XgNVgkcDnx6XapqcPohSy7vPv9TIAsjtbrQSA3mj13SnVVAPWwfAVJ-I7g9HDnyPEEOVSvmZUJhiz-irH5L0ojbnt3ck2rQ9tIFuSd7j2eh5BS4ItjNoHY00rh_QPZltk66a9q-fNE33GrxOaXUdHH47WMlsENnh1gybB7QtGtd6bZ982Qa9JljpFnZWSdEf4VfkN4JmhkUTTC908DqS3stT-LD-9tpztFwB54sd0D4CyOBnESkKrUwjxchYYZo4l1O7auiZVGV48YhZYMw",
+  "Content-Type": "application/json"
+}
+```
+
+## 请求体
+
+| 参数 | 类型 | 必填 | 说明 |
+|------|------|------|------|
+| `taskIds` | String[] | 是 | 任务 Id 列表 |
+| `groupIds` | Int[] | 是 | 任务组 Id 列表 |
+
+**请求体示例**
+
+```json
+{
+  "taskIds": [
+    "6a138cbf-dcb0-47ff-a85e-491bbd6f1233",
+    "c247ac8f-47d7-4315-93a0-7b4d3f490ef3"
+  ],
+  "groupIds": [
+    2648037,
+    2786308
+  ]
+}
+```
+
+## 响应
+
+| 参数 | 类型 | 必填 | 说明 |
+|------|------|------|------|
+| `requestId` | String | 是 | 请求Id |
+| `data` | Object | 是 | 响应数据 |
+| `requestCount` | Int | 是 | 请求任务复制数量 |
+| `successCount` | Int | 是 | 请求成功任务数量 |
+| `failedTasks` | Object | 是 | 失败任务 |
+| `taskId` | Object | 是 | 请求失败的任务id |
+| `reason` | Object | 是 | 请求失败的任务的原因 |
+
+**成功示例**
+
+```json
+{
+  "data": {
+    "requestCount": 1,
+    "successCount": 1
+  },
+  "requestId": "0HMCVDHG1V3E6:00000002"
+}
+```
+
+## 错误响应
+
+| 参数 | 类型 | 必填 | 说明 |
+|------|------|------|------|
+| `requestId` | String | 是 | 请求Id |
+| `error` | Object | 是 | 错误信息，参考错误码 |
+| `code` | String | 是 | 错误码 |
+| `message` | String | 是 | 错误描述 |
+
+**错误示例**
+
+```json
+{
+  "error": {
+    "code": "InvalidTaskId",
+    "message": "无效的任务Id"
+  },
+  "requestId": "0HMCVDHG1V3E6:00000002"
+}
+```
+
+<ParamField header="Authorization" type="string" required hidden>
+</ParamField>
+<ParamField header="Content-Type" type="string" default="application/json" required hidden>
+</ParamField>
+<ParamField body="taskIds" type="string[]" required hidden>
+</ParamField>
+<ParamField body="groupIds" type="number[]" required hidden>
+</ParamField>

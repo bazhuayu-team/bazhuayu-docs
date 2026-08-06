@@ -1,0 +1,58 @@
+---
+title: "采集数据（通过RPA）批量任务导出excel"
+description: "介绍八爪鱼采集器进阶功能：采集数据（通过RPA）批量任务导出excel。"
+source: "https://www.bazhuayu.com/helpcenter/docs/cai-ji-shu-ju-tong-guo-RPA-pi-liang-ren-wu-dao-chu-excel"
+---
+
+## 一、背景与痛点
+
+采集器设置大量的任务自动获取云数据，想要批量任务的数据导出到excel表格进行汇总，但是采集器只能一个一个任务的进行导出数据到excel，导致业务人员不得不做重复的手工劳动。
+
+## 二、基本介绍
+
+本场景中借助八爪鱼rpa应用市场的三个应用实现把采集器云采集的数据进行批量导出excel文件，通过rpa一键实现采集器批量任务数据导出excel。
+
+ 
+
+## 三、rpa导出数据
+
+ 
+
+**1.获取rpa应用市场的应用**
+
+打开rpa应用市场，搜索“采集器”，获取以下三个应用\
+![采集数据（通过RPA）批量任务导出excel](/assets/academy/advanced-features/batch-export-excel-rpa/01-69856277d3942.png)
+
+应用1：用于获取采集器账号下所有任务组的信息，导出任务组信息的excel表格
+
+应用2：用于获取任务组下的所有任务id,导出任务id的excel表格
+
+应用3用于批量导出所有任务id对应未导出过的数据（已经导出过的不会重复导出）
+
+ 
+
+**2.获取任务组**
+
+点击运行，设置采集器的账号密码等，获取采集器账号下所有任务组的信息
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/01f034c25145403715907806381/LwtlLz3hyfQA.mp4" width="100%"></video>
+
+ 
+
+**3.获取任务id**
+
+通过应用1获取到的任务组信息作为参数，运行应用2获取全部任务信息
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/5eecf7cd5145403715882194894/Lh7g5IGYoFIA.mp4" width="100%"></video>
+
+ 
+
+**4.批量导出数据**
+
+通过应用2获取到的任务信息作为参数，运行应用3导出全部任务未导出过的数据
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/609e0d1b5145403715882202175/XE3pRaVXrGsA.mp4" width="100%"></video>
+
+ 
+
+通过以上rpa的三个应用，我们就可以把采集器内所有任务的未导出数据给一键导出为excel文件了

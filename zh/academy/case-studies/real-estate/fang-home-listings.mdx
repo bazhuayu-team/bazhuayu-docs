@@ -1,0 +1,181 @@
+---
+title: "【房天下】房源数据采集"
+source: "https://www.bazhuayu.com/helpcenter/docs/iVO0Zf"
+---
+**采集场景**
+
+采集采集游天下不同城市的租房信息。
+
+ 
+
+**采集字段**
+
+城市、标题、出租人、地址、价格、标题链接等。
+
+ 
+
+ 
+
+![【房天下】房源数据采集](/assets/academy/case-studies/fang-home-listings/01-65eddfdc7d2ef.png)
+
+**采集结果**
+
+采集结果可导出为Excel，CSV，HTML，数据库等多种格式。导出为Excel示例：
+
+ 
+
+![【房天下】房源数据采集](/assets/academy/case-studies/fang-home-listings/02-65eddfa67f4f2.png)
+
+ 
+
+**教程说明**
+
+本篇制作时间：2024/03/11    八爪鱼版本：V8.6.7
+
+目标数据，请联系官方客服，我们将及时修正。
+
+ 
+
+**采集步骤**
+
+ 
+
+步骤一、打开网页
+
+步骤二、提取数据
+
+步骤三、创建【循环列表】
+
+步骤四、循环翻页
+
+步骤五、编辑字段
+
+步骤六、启动采集
+
+ 
+
+**以下为具体步骤：**
+
+ 
+
+### 步骤一、打开网页
+
+ 
+
+首页左上角点击【新建】—【自定义任务】。网址输入界面默认的是【手动输入】。
+
+将复制好的一批同类网址，粘贴进网址输入框中，并点击【保存网址】。
+
+如：[https://newhouse.fang.com/house/s/](https://newhouse.fang.com/house/s/)
+
+[https://xian.newhouse.fang.com/house/s/](https://xian.newhouse.fang.com/house/s/)
+
+八爪鱼中内置的浏览器会自动打开网页。同时，可以看到，流程中已自动创建【循环-打开网页】步骤。
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/ffa2c6de1397757886832368374/VhnqaZS2ASYA.mp4" width="100%"></video>
+
+ 
+
+特别说明：
+
+- a. 打开网页后，如果开始开始【自动识别】，请等待自动识别完成。八爪鱼支持自动识别网页上的列表，滚动和翻页，识别成功后直接启动采集并获取数据。如果【自动识别】的结果不是我们需要的，可点击【取消】关闭智能识别，自行配置采集流程。详情点击查看[【自动识别】](/zh/academy/basic-collection/beginner/custom-collection)
+- b. 手动输入的url数量不得大于1万个，如有超过1万url，请选择【从文件导入】，具体请查看教程 [网址输入升级](/zh/academy/advanced-features/workflow-settings/bulk-url-input-extra)
+
+### 
+
+### 步骤二、提取数据
+
+ 
+
+提取字段【城市】：在网页中选中区域的位置，再在操作提示框中点击【采集该文本框的值】。\
+如果不需要此字段，可跳过此步骤。
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/faf4b3b21397757886832161830/9h8eIsbKR5IA.mp4" width="100%"></video>
+
+ 
+
+### 步骤三、创建【循环列表】
+
+ 
+
+通过以下连续3步，采集所有房源列表中的标题和链接：
+
+1、选中页面上一个房源列表
+
+2、选择【选择全部子元素】
+
+3、选中【选择全部相似元素组】，【元素中数据内容】，创建循环列表，八爪鱼将列表中的全部字段作为一个字段提取下来。
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/458af9da1397757886833057851/Fb73FMj9sOQA.mp4" width="100%"></video>
+
+ 
+
+特别说明：
+
+- a. 为什么经过以上步骤能建立起循环列表步骤？详情请看 [采集列表数据教程](https://www.bazhuayu.com/helpcenter/docs/RXxvh9) 。
+
+ 
+
+### 步骤四、循环翻页
+
+1、设置循环翻页
+
+选择页面的下一页按钮，选择【循环点击下一页】，创建循环翻页
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/a2a2783f1397757886834726708/2C7wG5OHK40A.mp4" width="100%"></video>
+
+ 
+
+2、修改循环翻页的xpath
+
+自动生成的翻页xpath,会导致翻页时重复翻第一，第二页，所以需要进行修改
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/c6253f831397757886838016959/1aXjrrQ2m5AA.mp4" width="100%"></video>
+
+特别说明：
+
+- a.  默认的定位不准确，需要修改Xpath,要用有一定的Xpath知识，[*【Xpath系统学习】*](https://www.bazhuayu.com/helpcenter/docs/V2h1Ec)
+- b.  要将目标字段从源码中提取出来，需要学习格式化数据，详情点击查看 [*【正则表达式】教程*](https://www.bazhuayu.com/helpcenter/docs/43CIS3)
+
+### 步骤五、编辑字段
+
+列表中的字段采集下来后，我们可以进行修改字段名称、删除多余字段、调整字段顺序等操&#x4F5C;**。**
+
+**<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/37eb88a21397757886836524776/Ayi73v8fRgAA.mp4" width="100%"></video>**
+
+### 步骤六、启动采集
+
+ 
+
+1、保存好任务之后，点击【采集】并选择【启动本地采集】。启动后八爪鱼开始自动采集数据。
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/a2a38d3c1397757886834728640/gytwEr9y05sA.mp4" width="100%"></video>
+
+ 
+
+特别说明：
+
+- a. 【本地采集】是使用自己的电脑进行采集，【云采集】是使用八爪鱼提供的云服务器采集，点击查看 [本地采集与云采集详解](https://www.bazhuayu.com/helpcenter/docs/2xF5Mz)。
+- b.  如果采集的时候弹出验证，需要手动点击验证后才能采集数据。
+
+ 
+
+2、采集完成后，选择合适的导出方式导出数据。支持导出为Excel、CSV、HTML、数据库等。这里导出为Excel。
+
+ 
+
+![【房天下】房源数据采集](/assets/academy/case-studies/fang-home-listings/03-65eddf99e4558.png)
+
+ 
+
+ 
+
+作者：妙卡

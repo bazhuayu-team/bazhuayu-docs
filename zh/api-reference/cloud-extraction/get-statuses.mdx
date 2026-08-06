@@ -1,0 +1,110 @@
+---
+title: 批量获取任务状态
+api: POST https://openapi.bazhuayu.com/cloudextraction/statuses
+playground: interactive
+authMethod: apiKey
+---
+
+> **所需套餐：** 旗舰+、企业版、团队版
+
+## 端点
+
+```
+POST https://openapi.bazhuayu.com/cloudextraction/statuses
+```
+
+## 描述
+
+根据任务 ID 批量获取任务状态信息。调用频率：5 秒 1 次请求。
+
+## 请求头
+
+| 参数 | 类型 | 必填 | 说明 |
+|------|------|------|------|
+| `x-api-key` | String | 二选一 | API Key，例如 `op_sk_xxxxxx`；创建方式见 [获取 API Key](/zh/mcp/quick-start/api-key) |
+| `Authorization` | String | 二选一 | Access Token，格式 `Bearer <access_token>` |
+| `Content-Type` | String | 是 | application/json |
+
+**请求头示例**
+
+```json
+{
+  "Authorization": "Bearer <access_token>",
+  "Content-Type": "application/json"
+}
+```
+
+## 请求体
+
+| 参数 | 类型 | 必填 | 说明 |
+|------|------|------|------|
+| `taskIds` | String[] | 是 | 任务 Id 列表 |
+
+**请求体示例**
+
+```json
+{
+  "taskIds": [
+    "a3b9bdf7-9aaa-22f6-9ccf-b32790f6df8f",
+    "86b9bdf7-9aaa-22236-9ccf-b3279469df01"
+  ]
+}
+```
+
+## 响应
+
+| 参数 | 类型 | 必填 | 说明 |
+|------|------|------|------|
+| `data` | Object[] | 是 | 响应数据 |
+| `taskId` | String | 是 | 任务Id |
+| `taskName` | String | 是 | 任务名 |
+| `status` | String | 是 | 任务状态：Unexecuted - 未执行，Waiting - 等待分配，Extracting - 采集中，Stopped - 已停止，Finished - 已完成 |
+| `requestId` | String | 是 | 请求Id |
+
+**成功示例**
+
+```json
+{
+  "data": [
+    {
+      "taskId": "a3b9bdf7-9aaa-22f6-9ccf-b32790f6df8f",
+      "taskName": "八爪鱼采集",
+      "status": "Extracting"
+    },
+    {
+      "taskId": "86b9bdf7-9aaa-22236-9ccf-b3279469df01",
+      "taskName": "八爪鱼采集2",
+      "status": "Stopped"
+    }
+  ],
+  "requestId": "0HMD469L0I8R0:00000001"
+}
+```
+
+## 错误响应
+
+| 参数 | 类型 | 必填 | 说明 |
+|------|------|------|------|
+| `requestId` | String | 是 | 请求Id |
+| `error` | Object | 是 | 错误信息，参考错误码 |
+| `code` | String | 是 | 错误码 |
+| `message` | String | 是 | 错误描述 |
+
+**错误示例**
+
+```json
+{
+  "error": {
+    "code": "ServerError",
+    "message": "Internal Server Error"
+  },
+  "requestId": "0HMD469L0I8R0:00000001"
+}
+```
+
+<ParamField header="Authorization" type="string" required hidden>
+</ParamField>
+<ParamField header="Content-Type" type="string" default="application/json" required hidden>
+</ParamField>
+<ParamField body="taskIds" type="string[]" required hidden>
+</ParamField>

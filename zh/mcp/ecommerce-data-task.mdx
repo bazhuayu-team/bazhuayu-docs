@@ -1,0 +1,44 @@
+---
+title: ecommerce_data_task
+description: 提交 Temu 或 TikTok Shop 商品与评论采集任务。
+---
+
+为指定商品 ID 提交电商数据采集任务，并可在提交后短时轮询已采集评论。该工具会创建外部采集任务，不应作为连通性测试使用。
+
+## 参数
+
+| 参数 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `platform` | string | 是 | `temu` 或 `tiktokShop` |
+| `items` | string[] | 是 | 商品 ID，数量 `1-100` |
+| `site` | string | Temu 必填 | `uk`、`us`、`es`、`fr`、`de`、`it`、`kr`、`br` 或 `mx`；TikTok Shop 当前默认美国站 |
+| `commentPages` | integer | 否 | 评论页数，范围 `1-50`，默认 `10` |
+| `commentSort` | string | 否 | `default` 或 `time`，默认 `time` |
+| `pollReviews` | boolean | 否 | 是否在提交后每 5 秒查询一次评论，最多 6 次，默认 `false` |
+
+```json
+{
+  "platform": "temu",
+  "items": ["<商品 ID 1>", "<商品 ID 2>"],
+  "site": "us",
+  "commentPages": 10,
+  "commentSort": "time",
+  "pollReviews": true
+}
+```
+
+## 响应
+
+返回 `success`、`submittedCount`、`failedItems`、`jobId` 和 `message`。启用 `pollReviews` 时还会返回：
+
+- `reviewPolling.dataset`：`temuComment` 或 `tiktokShopComment`
+- `intervalSeconds`、`maxAttempts`、`attempts`：轮询配置与实际次数
+- `stoppedReason`：`records_found` 或 `max_attempts_reached`
+- `attemptsDetail`：每次轮询的等待时间、返回数量和是否还有更多数据
+- `collectedReviews`：轮询期间已经取得的评论
+
+<Warning>
+  `pollReviews` 最多只等待约 30 秒。`max_attempts_reached` 不表示任务失败，只表示短时轮询期间尚未取得评论；稍后可使用 `query_collected_reviews` 再次查询。
+</Warning>
+
+另请参阅：[`query_collected_reviews`](/zh/mcp/query-collected-reviews)、[MCP 概览](/zh/mcp/index)

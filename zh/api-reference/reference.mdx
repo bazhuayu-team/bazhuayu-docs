@@ -1,0 +1,63 @@
+---
+title: 参考
+description: 八爪鱼开放 API 错误码与步骤属性参考。
+---
+
+## 错误码
+
+| 状态码 | 错误码 | 错误信息 |
+| --- | --- | --- |
+| 400 | InvalidParameter | 字段错误 |
+| 400 | InvalidTaskId | taskId 不能为空 |
+| 400 | InvalidSize | size 应该在 1 和 1000 之间 |
+| 400 | InvalidActions | actions 必须大于 0 |
+| 400 | InvalidTasks | tasks 不能超过 100 |
+| 401 | Unauthorized | access_token 无效 |
+| 403 | PermissionDenied | 没有接口访问权限 |
+| 429 | TooManyRequests | 调用频率过快 |
+| 500 | ServerError | 服务内部错误 |
+| 503 | ServiceUnavailable | 服务器繁忙 |
+| 400 | InvalidGrant | 授权异常具体见错误详情 |
+| 400 | GroupNotFound | 不存在此任务组 |
+| 400 | TemplateNotFound | 模板不存在 |
+| 400 | LimitTraffic | 超出流量限制，将 size 参数设置小一些再请求 |
+| 400 | TemplateNotOpen | 该模板不对您开放 |
+| 400 | UseTemplatePermissionDenied | 该任务模板仅适用于 {level} 或更高级别的版本 |
+| 400 | CannotCreateTaskForOthers | 无法为其他用户创建任务 |
+| 400 | TaskNotFound | TaskId:{taskId} 任务不存在 |
+| 400 | TaskNotBelongToYou | 该任务不属于您 |
+| 400 | TaskSettingsNotFound | 任务更新失败，步骤设置无效或无法找到对应的步骤 |
+| 400 | RequestModelNull | 请求参数不能为空 |
+| 400 | TaskNotFoundForUpdate | 任务不存在 |
+| 400 | UnsupportedTaskContentType | 不支持的任务内容类型 |
+| 500 | UpdateTaskParametersUnexpectedError | 更新任务参数时发生未预期的错误 |
+| 400 | MemberNotAllowed | 存在无权查询的成员名称 |
+
+## 步骤属性
+
+### 循环步骤（LoopAction）
+
+| 属性名 | 类型 | 描述 | 支持更新 |
+| --- | --- | --- | --- |
+| `actionId` | String | 步骤唯一标识 | 否 |
+| `actionType` | String | LoopAction | 否 |
+| `loopType` | String | 目前支持：UrlList（网页列表）、TextList（文本列表） | 否 |
+| `loopItems` | Object[] | 循环列表内容 | 是 |
+
+### 打开网页（NavigateAction）
+
+| 属性名 | 类型 | 描述 | 支持更新 |
+| --- | --- | --- | --- |
+| `actionId` | String | 步骤唯一标识 | 否 |
+| `actionType` | String | NavigateAction | 否 |
+| `name` | String | 步骤显示名称，目前支持：Url | 否 |
+| `url` | String | 网址 | 是 |
+
+### 输入文本（EnterTextAction）
+
+| 属性名 | 类型 | 描述 | 支持更新 |
+| --- | --- | --- | --- |
+| `actionId` | String | 步骤唯一标识 | 否 |
+| `actionType` | String | EnterTextAction | 否 |
+| `name` | String | 步骤显示名称，目前支持：TextToSet | 否 |
+| `text` | String | 文本内容 | 是 |

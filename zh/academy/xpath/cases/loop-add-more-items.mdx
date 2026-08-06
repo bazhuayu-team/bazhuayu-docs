@@ -1,0 +1,66 @@
+---
+title: 循环列表-添加更多的项
+description: 通过好大夫在线医院列表采集案例，讲解如何手动修改 XPath 让循环列表定位到全部所需数据项。
+---
+
+我们通过创建【循环列表】去采集多个列表或详情页的数据。创建【循环列表】的方式在<a href="https://www.bazhuayu.com/docs/zh/academy/basic-collection/beginner/custom-collection">初级采集课程</a>中有详细讲过。
+
+一般情况下，通过以上方法创建的【循环列表】不会出错，能够精准采集到全部数据。
+
+但有时候我们点击了列表页某一项数据之后，点击"选中全部"，但是循环定位到的数据并没有包含咱们要的所有数据项，这个时候可以通过手动修改xpath，让循环定位到咱们所有需要的数据，
+
+这就是我们本节课所要讲的内容。
+
+实例网址：<a href="https://www.haodf.com/hospital/list.html">https://www.haodf.com/hospital/list.html</a>
+
+基础操作：输入网址 —— 开始采集 —— 点击'朝阳区某一个医院' —— 选中全部 —— 采集以下链接文本+链接
+
+可以看到，这样操作下来后只是定位到了朝阳区的所有医院，并没有定位到我们所要的其他区的医院。
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/xpath/cases/loop-add-more-items/6566af9c50b42.gif" />
+</div>
+
+这个时候我们就可以通过自己写一条xpath，来让循环定位到全部的医院。
+
+注意： 如何修改需要一定的XPath知识，请看之前的 <a href="https://www.bazhuayu.com/docs/zh/academy/xpath/getting-started/why-use-xpath">XPath系统学习教程</a> 。
+
+第一步入手我们可以先定位到我们所需的中间包含我们所需要数据的区域。通过观察属性可以很快写
+
+出//div[@id="el_result_content"]//div[@class="ct"]来定位到这块区域的内容
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/xpath/cases/loop-add-more-items/6566af9c0af5f.png" />
+</div>
+
+第二步我们需要再深层定位到每个北京市每个城区的区域块，通过观察可以发现，每个数据块div层级都有一个共同的属性
+
+class="m_ctt_green"，我们继续通过绝对路径的写法'//'，把//div[@class="m_ctt_green"]与第一步我们的出的大区域xpath连接起来，
+
+也就是//div[@id="el_result_content"]//div[@class="ct"]//div[@class="m_ctt_green"]
+
+在浏览器输入xpath,可以发现已经定位到了北京市17个城区的医院区块了
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/xpath/cases/loop-add-more-items/6566af9befc1e.png" />
+</div>
+
+但是我们的需求是精准定位到每个医院的名称，所以需要再继续往深层挖掘。
+
+第三步，展开"朝阳区"这块的div层级，再点击展开"ul"层级，通过鼠标移动可以发现，每一个"li"层级就是一个医院名称了，
+
+所以此时只要再添加一个层级//li，就可以定位到所有的医院了，得出最终我们所要的
+
+xpath：//div[@id="el_result_content"]//div[@class="ct"]//div[@class="m_ctt_green"]//li，定位到了所有医院。
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/xpath/cases/loop-add-more-items/6566af9c1c861.png" />
+</div>
+
+把第三步所获得的最终xpath复制到八爪鱼内，点击循环列表，覆盖掉原来默认生成的xpath，点击"应用"，再重新点击下列表循环，可以发现正确的定位到了340条数据了。
+
+启动采集后 可以采集到全部的数据：
+
+<div style={{ textAlign: "center" }}>
+  <img src="/assets/academy/xpath/cases/loop-add-more-items/6566af9bdcfab.png" />
+</div>

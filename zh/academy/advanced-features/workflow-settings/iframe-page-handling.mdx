@@ -1,0 +1,79 @@
+---
+title: "网页包含iframe框架处理办法"
+description: "介绍八爪鱼采集器进阶功能：网页包含iframe框架处理办法。"
+source: "https://www.bazhuayu.com/helpcenter/docs/t3auZp"
+---
+
+有的网页包含iframe框架，在八爪鱼中也需进行相应设置，本教程将详细讲解。
+
+ 
+
+## **1、什么是iframe框架**
+
+通俗来说，iframe框架就是在同一个页面中有多个网页，也就是网页中嵌套了其他的网页。
+
+iframe框架可能有一层，也可能有多层。
+
+如何判断网页有几层iframe框架？
+
+通过浏览器控制台，我们可以很容易地判断出网页有几层iframe框架。
+
+ 
+
+## **2、网页具有一层iframe框架的采集方法**
+
+八爪鱼支持自动识别一层iframe框架，因此按照正常流程配置流程即可。
+
+示例网址：http\://www\.weather.com.cn/alarm/alarm\_list.shtml
+
+示例网址具有一层iframe框架：【iframe】，即搜索结果列表是一个独立的网页，嵌套在整个大网页中。
+
+![网页包含iframe框架处理办法](/assets/academy/advanced-features/iframe-page-handling/01-6552ddf0b26a0.png)
+
+ 
+
+这个iframe框架里的数据，正是我们需要采集的。
+
+按照正常流程，配置列表数据采集的规则，配置好后点开【循环列表】设置页面，发现八爪鱼自动识别了iframe框架，无需手动修改什么。
+
+<video controls src="https://resource-wangsu.helplook.net/docker_production/3mkuae/article/t3auZp/video/6552e19d92094.mp4" width="100%"></video>
+
+ 
+
+## **3、网页具有2层以上Iframe框架的采集方法**
+
+网页包含2层或以上Iframe框架时，在八爪鱼进行点击动作时，可能会发生无法产生相应跳转，也就无法正常配置规则。
+
+示例网址：http\://ggzyjyzx.yangzhou.gov.cn/qtyy/ggzyjyzx/jyxx\_listn.html?shownode=0
+
+示例网址具有三层Iframe框架：【iframe】、【iframe】和【iframe#right\_list】，我们要采集的是【iframe#right\_list】框架中的列表数据。
+
+####  
+
+![网页包含iframe框架处理办法](/assets/academy/advanced-features/iframe-page-handling/02-66bd7632bd491.png)
+
+这时候，我们就需要将要采集的这层iframe框架的真实地址提取出来：
+
+① 将鼠标移动到目标iframe框架的范围内
+
+② 点击鼠标右键
+
+③ 鼠标移动到【查看框架的源代码】上
+
+④新开的标签页的网址就是此框架的真实地址。
+
+示例中我们要采集的iframe框架的真实地址为：*https\://ggzyjyzx.yangzhou.gov.cn/qtyy/ggzyjyzx/right\_list/right\_list\_jsgc.jsp?t=1723694636616*
+
+ 
+
+ 
+
+ 
+
+ 
+
+#### 将取到的链接复制到八爪鱼
+
+然后将提取出来的iframe框架真实地址输入八爪鱼中，然后再按正常流程配置规则即可。
+
+<video controls src="https://resource-wangsu.helplook.net/docker_production/3mkuae/article/t3auZp/video/6552e2f59ef31.mp4" width="100%"></video>\

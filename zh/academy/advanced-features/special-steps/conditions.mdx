@@ -1,0 +1,171 @@
+---
+title: "判断条件"
+description: "介绍八爪鱼采集器进阶功能：判断条件。"
+source: "https://www.bazhuayu.com/helpcenter/docs/EiGV1Z"
+---
+
+本教程为大家讲解【判断条件】的使用场景与设置方法。
+
+**&#xA0;**
+
+## **一、【判断条件】常见使用场景** 
+
+1、判断某一条件（如关键词）是否存在，存在就采集，不存在则不采。
+
+例：采集京东商品信息，只想采集自营商品。可以通过【判断条件】判断是否为自营商品，是则采集，不是则不采。
+
+2、要采集的数据有多种情况，网页源码存在多种样式，需分开收集。
+
+例：网页正文有的是图片有的文字，两者的数据提取方法不同。可以通过【判断条件】判断是图片还是文字，是图片走图片采集分支，是文字则走文字采集分支。
+
+ 
+
+3、判断页面是否出现验证码，出现则自动识别，未出现则进入下一个流程步骤。
+
+例：京东url打开之后，可能会出现点选验证或者滑块拼图验证，这个时候可以通过【判断条件】判断是否出现验证，如果有验证就进行自动打码验证，没有就直接继续往下运行采集。或者判断是点选验证还是滑块拼图的验证，如果是点选验证的就 走点选验证的自动打码，如果是滑块验证的就走分支滑块拼图的自动打码。
+
+ 
+
+## **二、【判断条件】具体案例**
+
+ 
+
+案例1、判断某一条件（如关键词）是否存在，存在就采集，不存在则不采。
+
+示例网址：[https://search.jd.com/Search?keyword=%E6%89%8B%E6%9C%BA&enc=utf-8&qrst=1&rt=1&stop=1&vt=2&wq=%E6%89%8B%E6%9C%BA&page=9&s=226&click=0](https://search.jd.com/Search?keyword=%E6%89%8B%E6%9C%BA&enc=utf-8&qrst=1&rt=1&stop=1&vt=2&wq=%E6%89%8B%E6%9C%BA&page=9&s=226&click=0)
+
+采集需求：判断商品是否为京东自营 <img src="/assets/academy/advanced-features/conditions/01-6520d30f0dc96.png" alt="" className="academy-inline-icon" />。是，则采集商品列表数据，字段包括商品标题、价格、店铺名。不是，则跳过不采集。
+
+![](/assets/academy/advanced-features/conditions/02-6520d30fede01.png)
+
+ 
+
+ 
+
+## **三、配置判断条件步骤**
+
+步骤1、设置登录
+
+京东需要登录才能采集数据，设置cookie登录
+
+<video controls src="https://resource-wangsu.helplook.net/docker_production/3mkuae/article/EiGV1Z/video/6572d64a2fc3d.mp4" width="100%"></video>
+
+ 
+
+步骤2、登录后按[ 列表数据采集方法](/zh/academy/basic-collection/beginner/list-collection)，配置采集流程。
+
+<video controls src="https://resource-wangsu.helplook.net/docker_production/3mkuae/article/EiGV1Z/video/6572d6cbd1e16.mp4" width="100%"></video>
+
+ 
+
+步骤3、添加【判断条件】步骤。将鼠标移动到流程中【循环列表】与【提取列表数据】中间的 <img src="/assets/academy/advanced-features/conditions/03-6520d30f35c43.png" alt="" className="academy-inline-icon" />位置，出现 <img src="/assets/academy/advanced-features/conditions/04-6520d30f42645.png" alt="" className="academy-inline-icon" /> 按钮。点击 <img src="/assets/academy/advanced-features/conditions/05-6520d30f34c9e.png" alt="" className="academy-inline-icon" />按钮，添加步骤【判断条件】 。<video controls src="https://resource-wangsu.helplook.net/docker_production/3mkuae/article/EiGV1Z/video/6572d71de4d51.mp4" width="100%"></video>
+
+ 
+
+接下来，开始设置判断条件。将鼠标移动到左侧的【判断条件-分支】上并双击，进入设置界面。选择判断方式为【当前循环项中包含文本】，并在矩形框中输入文字【自营】作为判断依据，然后点击【应用】。右侧的【判断条件-分支1】，判断方式默认为【不判断，总是执行该分支】。
+
+<video controls src="https://resource-wangsu.helplook.net/docker_production/3mkuae/article/EiGV1Z/video/6572ddc76e043.mp4" width="100%"></video>
+
+ 
+
+这里有几个地方需要特别注意：
+
+ 
+
+1、如何放置【判断条件】的位置？根据需求来，紧跟在需要判断的步骤后面。本示例中，我们是需要判断每一个循环项（即每一个商品列表）是否包含【自营】文本，包含【自营】就提取字段，不包含则不采集。因此，将【判断条件】放到【循环】中的【提取数据】前。
+
+2、如何选择【判断方式】？选中【条件分支】后，可以看到，共有5个判断方式，根据需求选择合适的判断方式。
+
+    【不判断，总是执行该分支】：不设置判断条件，默认勾选。一般最右侧的【条件分支】勾选此方式。
+
+    【当前页面包含文本】：判断当前页面，使用文本作为判断依据。
+
+    【当前页面包含元素】：判断当前页面，使用XPath作为判断依据。
+
+    【当前循环项包含文本】：判断循环项，使用文本作为判断依据。
+
+    【当前循环项包含元素】：判断循环项目，使用XPath作为判断依据。
+
+ ![](/assets/academy/advanced-features/conditions/06-6520d3101ce65.png)
+
+3、为什么对左侧的【条件分支】设置判断方式？【条件分支】至少2个，可以有多个，默认从左至右执行。先判断左边的条件，若左边的分支均不满足条件，最右边的分支将不做判断直接执行。如下图：
+
+ 
+
+![](/assets/academy/advanced-features/conditions/07-6520d3110eca5.png)
+
+ 
+
+4、默认为2个【条件分支】。如有多个判断条件，可添加多个【条件分支】。点击【条件分支】的号，即可快速新增1个分支。如需删除多余分支，将鼠标移到 <img src="/assets/academy/advanced-features/conditions/08-6520d31141a40.png" alt="" className="academy-inline-icon" /> 并右键，即可删除此步骤。<video controls src="https://resource-wangsu.helplook.net/docker_production/3mkuae/article/EiGV1Z/video/6572dc9566ea2.mp4" width="100%"></video>
+
+ 
+
+步骤3：设置判断后的操作。本示例的需求是 **判断商品是否为京东自营 <img src="/assets/academy/advanced-features/conditions/09-6520d312231aa.png" alt="" className="academy-inline-icon" />。是，则采集商品列表数据 。**&#x56E0;此，在判断是自营后，需要有1个【提取数据】步骤。将【提取数据】步骤拖入【判断条件-分支】内。<video controls src="https://resource-wangsu.helplook.net/docker_production/3mkuae/article/EiGV1Z/video/6572dcdb1d66c.mp4" width="100%"></video>\
+ 
+
+上面流程配置完成以后，手动执行规则来看一下，判断条件是否设置正确。如下图，选中一个非自营的商品，判断提示【检测包未含文本，不执行该分支】；选中一个自营的商品，判断提示【检测包含文本，执行该分支】。测试没有问题，可以正常判断是否为自营商品。<video controls src="https://resource-wangsu.helplook.net/docker_production/3mkuae/article/EiGV1Z/video/6572de0d38bc2.mp4" width="100%"></video>
+
+ 
+
+步骤4、所有操作设置完毕后，点击【保存】。然后进行【本地采集】，观察采集结果。可以看到，只有【自营】的商品被采集下来了。
+
+![](/assets/academy/advanced-features/conditions/10-6520d312c1109.png)
+
+ 
+
+ 
+
+2、要采集的数据有多种情况，网页源码存在多种样式，需分开收集。
+
+网页正文有的是图片有的文字，两者的数据提取方法不同。可以通过【判断条件】判断是图片还是文字，是图片走图片采集分支，是文字则走文字采集分支，详情可参考教程：[携程游记攻略](https://www.bazhuayu.com/helpcenter/docs/xie-cheng-you-ji-gong-lyue-cai-ji)
+
+ 
+
+## **四、关于【判断条件】的重要说明**
+
+ 
+
+1、允许某个分支中无任何操作步骤。
+
+2、对于需要同时判断多个条件，则需要嵌套使用多个分支判断。但建议将已选好判断条件后的网址放入八爪鱼中采集数据。
+
+3、八爪鱼中分支判断对 【存在】 或【不存在】的是非判断，其操作性更为简单便捷。对大小的比较判断操作繁琐，需利用XPath实现。
+
+4、判断条件的【与】用【&】 实现，【或】用【|】实现。
+
+5、如果不同的分支内有不同的【提取元素】步骤，则每个分支内全部【提取元素】步骤中的 字段总个数 和 字段名 需保持一致。
+
+情况1：
+
+分支1内有提取数据步骤，提取的字段为字段1，字段2，字段3
+
+分支2内没有提取数据步骤
+
+这个流程可以正常执行
+
+ 
+
+情况2：
+
+分支1内有提取数据步骤，提取的字段为字段1，字段2，字段3
+
+分支2内有【提取数据】步骤，提取的字段为字段a，字段b，字段c
+
+此时流程将不能正常执行
+
+因为八爪鱼采集器执行分支1时提取不到字段abc，分支2的提取步骤都无法提取到数据，八爪鱼采集器判断此条数据不完整，将此条数据作废不保存
+
+解决方法：在分支1的提取步骤增加字段abc，且在分支2的提取数据步骤增加字段123。分支1和分支2的字段名称和个数必须一致，可以设置为空数据也可设为固定值。八爪鱼采集器就会认为字段都提取到了，此时数据不会作废，而是执行分支1时，字段123有数据，字段abc为空白，执行分支2时，字段123为空白，字段abc有数据
+
+ 
+
+情况3：\
+多个分支内有多个不同的【提取数据】步骤，请参考情况2，保证每个分支判断中的字段，字段名及字段数量一致即可
+
+ 
+
+ 
+
+作者：ViVi
+
+编辑：Nancy LI

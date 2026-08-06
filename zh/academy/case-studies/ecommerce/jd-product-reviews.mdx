@@ -1,0 +1,186 @@
+---
+title: "【京东】商品评价采集"
+source: "https://www.bazhuayu.com/helpcenter/docs/GbAlIH"
+---
+**一、采集场景**
+
+京东商品详情页中的评价，有多个分类：【全部评价】、【晒图】、【追评】、【回头客】、【好评】、【中评】、【差评】。其中【全部评价】默认展现，其他需点击后展现。本文以按【全部评价】采集为例讲解。实例网址：[https://item.jd.com/100005185609.html](https://item.jd.com/100005185609.html)；[https://item.jd.com/100006607505.html](https://item.jd.com/100006607505.html)；[https://item.jd.com/100004770263.html](https://item.jd.com/100004770263.html)。
+
+ 
+
+**二、采集字段**
+
+评论人、评论时间、商品名称、评论内容、回复评论、评论留言、点赞。
+
+![【京东】商品评价采集](/assets/academy/case-studies/jd-product-reviews/01-68afbf37e456e.png)
+
+  
+
+**三、采集结果**
+
+采集结果可导出为Excel、CSV、HTML、数据库等多种格式。导出为Excel示例：
+
+![【京东】商品评价采集](/assets/academy/case-studies/jd-product-reviews/02-68afbac22c8ea.png)
+
+ 
+
+ 
+
+**教程说明**
+
+本篇更新时间：2025/08/27    八爪鱼版本：v8.7.7
+
+如果因网页改版造成网址或步骤无效，无法收集到目标数据，请联系官方客服，我们将及时修正。
+
+ 
+
+**四、采集步骤**
+
+\
+
+步骤一、打开网页
+
+步骤二、设置滚动
+
+步骤三、创建【循环列表】，采集所有评价
+
+步骤四、编辑字段
+
+步骤五、优化规则
+
+**步骤&#x516D;**、启动采集****
+
+ 
+
+**以下为具体步骤：**
+
+ 
+
+#### 步骤一、打开网页
+
+ 
+
+1、在首页选择【自定义任务】，输入一批京东商品详情页网址，点击【开始采集】，八爪鱼自动打开第1个网址。网址打开后会弹出【验证一下，购物无忧】界面，我们右上角切换成浏览模式，手动点击验证，验证之后弹出登录界面，完成登录即可
+
+目标网址：[https://item.jd.com/100005185609.html\](https://item.jd.com/100005185609.html\)
+                  [https://item.jd.com/100006607505.html\](https://item.jd.com/100006607505.html\)
+                  [https://item.jd.com/100004770263.html](https://item.jd.com/100004770263.html)
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/6c3ca82f5145403696834991148/WM9bDEaFVtIA.mp4" width="100%"></video>
+
+ 
+
+特别说明：
+
+- a. 打开网页后，如果开始开始【自动识别】，请等待自动识别完成。八爪鱼支持自动识别网页上的列表，滚动和翻页，识别成功后直接启动采集并获取数据。如果【自动识别】的结果不是我们需要的，可点击【取消】关闭智能识别，自行配置采集流程。详情点击查看[【自动识别】](/zh/academy/basic-collection/beginner/custom-collection)
+- b. 以上操作会自动生成一个【循环网址】，启动采集后，八爪鱼会自动打开每个网址，采集每个网址中的数据。
+- c. 示例中输入了3个商品详情页网址，可根据需求更换。支持批量导入，详情见 [从本地文件导入网址教程](/zh/academy/advanced-features/workflow-settings/bulk-url-input-extra) 。
+
+ 
+
+#### 步骤二、设置滚动
+
+ 
+
+1、【商品评价】按钮需向下滚动页面才会真正加载出来，在八爪鱼中也需设置滚动。选中【打开循环中的网页】步骤，点击高级设置页面，勾选【页面滚动】，设置滚动模式为【全局】，滚动方式为【向下滚动一屏】，【每次间隔】2秒，【滚动次数】为3次，勾选【无内容更新时结束滚动】，并保存。
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/84aeec485145403696831908164/i2fMPC4Rq2QA.mp4" width="100%"></video>
+
+特别说明：
+
+- a. 设置中的滚动次数和时间间隔，请根据采集需求和网页加载情况进行设置，并非是一成不变的，具体请点击查看 [处理滚动加载数据的网页教程](/zh/academy/basic-collection/pagination/scroll-loading-pagination)
+
+ 
+
+#### 步骤三、创建【循环列表】，采集所有评价
+
+ 
+
+1、向下滚动页面至评论区域，选中【全部评价】，在操作提示框中鼠标操作【点击一次】，页面默认展示【全部评价】，点击全部评价元素XPATH：//\*[@id='comment-count']/a|//DIV[@id='detail']/DIV[1]/UL[1]/LI[contains(text(),"商品评价")]|(//div[@class="all-btn"])[1]
+
+采集评论列表数据：\
+\
+①选中页面上1个评论列表（注意一定要选中单条评论整个列表，包括所有需要的信息）
+
+②在黄色操作提示框，点击【选中全部子元素】
+
+③点击【选中全部相似组】
+
+④点击提取【元素中数据内容】
+
+因为京东网页结构的原因：网页需要滚动加载，所以需要设置边滚动边采集。\
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/bccdcf405145403696832026056/N9BGwkxvTzgA.mp4" width="100%"></video>
+
+特别说明：
+
+- a.【晒图】、【视频晒单】、【追评】、【好评】、【中评】、【差评】的筛选方法也是一样的，需要筛选哪个分类，在八爪鱼中做一个点击哪个分类的步骤。
+- b. 经过以上连续3步，【循环-提取数据】创建完成。【循环】中的项，对应着页面上所有评价列表。此时是将整个评价列表作为整个字段提取下来，如手动将列表中的字段一一提取出来。
+- c. 为何通过以上3步，可建立【循环-提取数据】？详情点击查看 [列表数据采集教程 ](/zh/academy/basic-collection/beginner/list-collection)。
+
+ 
+
+2、设置【滚动】方式
+
+① 选中【滚动网页】步骤，点击基础设置页面，勾选【页面滚动】，设置滚动模式为【局部】\
+② 滚动区域XPATH修改为：//div[@class="\_rateListContainer\_1ygkr\_45"]\
+③ 滚动方式为【向下滚动一屏】，【每次间隔】2秒，【滚动次数】为10000000次\
+④ 勾选【滚动时循环列表不自动去重】，并保存应用。
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/b3fd92ca5145403696835714860/c8iVomRmVE4A.mp4" width="100%"></video>
+
+特别说明：
+
+- a. 设置中的滚动次数和时间间隔，请根据采集需求和网页加载情况进行设置，并非是一成不变的，具体请点击查看 [处理滚动加载数据的网页教程](/zh/academy/basic-collection/pagination/scroll-loading-pagination)
+- b.为什么默认的XPath，无法精准定位到所有的字段？这是因为默认生成的xpath只能定位其中一部分，需要手动修改xpath实现定位全部的字段。如何写精准定位到所有字段的XPath？这需要一定的XPath知识。点击查看 [XPath学习与实例教程](https://www.bazhuayu.com/helpcenter/docs/V2h1Ec) 。
+
+ 
+
+#### 步骤四、编辑字段
+
+ 
+
+ 1、在【当前页面数据预览】页面，可删除多余字段，修改字段名，移动字段顺序等
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/7260ade25145403696831159142/oLkHHawUmLEA.mp4" width="100%"></video>
+
+a. 在提取数据时，我们可以添加、可删除多余字段，修改字段名，移动字段顺序、特殊字段：[添加特殊字段](https://www.bazhuayu.com/helpcenter/docs/tian-jia-te-shu-zi-duan?search=1)
+
+ 
+
+#### 步骤五、优化规则
+
+ 
+
+1、配置好任务后，为了采集效果更稳定一些，对任步骤务设置等待时间进行优化
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/b1cc790b5145403696835634059/zas5bU4EP8IA.mp4" width="100%"></video>
+
+特别说明：
+
+- a.优化规则：\
+1\. 点击元素，输入文本，提取数据步骤设置执行前等待3秒；\
+2\. 点击元素/点击翻页，设置ajax加载7秒；\
+3\. 点击元素如果是进入详情页的都要勾选开新标签，其他的看情况勾选；\
+4\. 滚动页面，在点击元素、打开网页根据网页加载情况设置滚动（常用滚动一屏），滚动次数和滚动间隔不能设置为0；\
+5\. 每个循环框设置执行前等待3秒；\
+具体可参考[优化规则采集教程](https://www.bazhuayu.com/helpcenter/docs/ZGoL4g)。
+
+ 
+
+#### 步骤六、启动采集
+
+ 
+
+1、单击【采集】并【启动本地采集】。启动后八爪鱼开始自动采集数据。开始采集之后，我们需要点击暂停按钮，网址打开后会弹出【验证一下，购物无忧】界面，手动点击验证，验证之后弹出登录界面，扫码登录之后点击继续按钮采集。
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/cf9821895145403696832840970/nJ2aoAOEQV0A.mp4" width="100%"></video>
+
+特别说明：
+
+- a. 【本地采集】是使用自己的电脑进行采集，【云采集】是使用八爪鱼提供的云服务器采集，点击查看 [本地采集与云采集详解](https://www.bazhuayu.com/helpcenter/docs/2xF5Mz)。
+
+ 
+
+2、采集完成后，选择合适的导出方式导出数据。支持导出为Excel、CSV、HTML、数据库等。这里导出为Excel。
+
+![【京东】商品评价采集](/assets/academy/case-studies/jd-product-reviews/03-68afbac22c8ea.png)

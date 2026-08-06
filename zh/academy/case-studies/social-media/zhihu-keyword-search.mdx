@@ -1,0 +1,356 @@
+---
+title: "【知乎】关键词搜索采集"
+source: "https://www.bazhuayu.com/helpcenter/docs/SkL3fZ"
+---
+**采集场景**
+
+在知乎首页 [https://www.zhihu.com/](https://www.zhihu.com/)， 输入关键词搜索，得到相关问题列表。然后，点击问题链接进入详情页，采集该问题下的多个回答数据。
+
+ 
+
+**采集字段**
+
+问题名称、问题描述、评论数、问题网址、回答ID、回答ID描述、回答ID头像、回答正文等字段。
+
+ 
+
+![【知乎】关键词搜索采集](/assets/academy/case-studies/zhihu-keyword-search/01-653b648668f9e.png)
+
+ 
+
+*鼠标放到图片上，右键，选择【在新标签页中打开图片】可查看高清大图*
+
+*下文其他图片同理*  
+
+ 
+
+**采集结果**
+
+采集结果可导出为Excel、CSV、HTML、数据库等多种格式。导出为Excel示例：
+
+![【知乎】关键词搜索采集](/assets/academy/case-studies/zhihu-keyword-search/02-653b6492af12a.png)
+
+**教程说明**
+
+本篇制作时间：2025/8/1    八爪鱼版本：V8.7.7
+
+如果因网页改版造成网址或步骤无效，无法收集到目标数据，请联系官方客服，我们将及时修正。
+
+ 
+
+**采集步骤**
+
+步骤一：打开网页
+
+步骤二、使用Cookie登录知乎
+
+步骤三、批量输入多个关键词
+
+步骤四、向下滚动页面，以加载更多问题列表
+
+步骤五、建立【循环-点击元素】，进入每个问题的详情页
+
+步骤六、提取问题相关字段
+
+步骤七、展开全部回答，滚动加载更多回答
+
+步骤八、建立【循环列表】，采集所有回答列表中的数据
+
+步骤九、启动采集
+
+ 
+
+**以下为具体步骤：**
+
+ 
+
+## 步骤一、打开网页
+
+ 
+
+在首页【输入框】中输入目标网址 [https://www.zhihu.com/](https://www.zhihu.com/)，点击【开始采集】，八爪鱼自动打开网页。
+
+ 
+
+![](/assets/academy/case-studies/zhihu-keyword-search/03-688c80f67b277.png)
+
+ 
+
+ 
+
+特别说明：
+
+- a. 打开网页后，如果开始开始【自动识别】，请点击【不再自动识别】或【取消识别】将其关掉。因为本文不适合使用【自动识别】。
+- b. 【自动识别】适用于自动识别网页上的列表、滚动和翻页，识别成功后直接启动采集即可获取数据。详情点击查看 [【自动识别】教程](https://www.bazhuayu.com/helpcenter/docs/eeI3gE)
+
+ 
+
+## 步骤二、使用Cookie登录知乎
+
+ 
+
+要采集知乎数据，首先需要登录。如果没有先登录，无法进行搜索关键词、采集搜索后得到的问题相关数据。因此，我们需要先在八爪鱼中登录，通过以下几步实现：
+
+ 
+
+1、打开浏览器模式
+
+点击 ![【知乎】关键词搜索采集](/assets/academy/case-studies/zhihu-keyword-search/04-653b64d7b7eea.png) 按钮，打开浏览器模式。在浏览器模式中，扫码或者输入账号密码并登录。
+
+ 
+
+2、使用Cookie登录知乎
+
+进入【打开网页】设置界面，勾选【使用指定的Cookie】，点击【获取当前页面Cookie】并保存。这样就获取到了登录后的Cookie，启动时直接以登录状态打开网页。
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/a10f762d5145403693693198561/EOVAdgNCF1MA.mp4" width="100%"></video>
+
+ 
+
+特别说明：
+
+- a. 什么是浏览器模式？在浏览器模式下，我们可以像在浏览器中一样点击操作网页，不会生成流程步骤。如需编辑流程步骤，需关闭浏览器模式。关闭状态：<img src="/assets/academy/case-studies/zhihu-keyword-search/05-653b650e93dca.png" alt="【知乎】关键词搜索采集" className="academy-inline-icon" /> ；打开状态：<img src="/assets/academy/case-studies/zhihu-keyword-search/06-653b6516f1027.png" alt="【知乎】关键词搜索采集" className="academy-inline-icon" />
+- b. Cookie是什么？通俗的说，Cookie是一些存储在用户电脑上的小文件，用来保存一些站点的用户数据，作用是让浏览器为用户定制内容。例如：用户第一次访问某网站，输入了账号密码登录。浏览器会问你是否需要【记住账号密码】。选择【是】以后，浏览器就会将这些账号密码信息存储在用户电脑上。下次再访问此网站，就无需再次输入账号密码。详情点击查看 [登录验证采集](/zh/academy/basic-collection/beginner/login-verification)）
+- c. 怎么判断是否获取到Cookie？获取Cookie后![【知乎】关键词搜索采集](/assets/academy/case-studies/zhihu-keyword-search/07-653b6520a1635.png) 会变成![【知乎】关键词搜索采集](/assets/academy/case-studies/zhihu-keyword-search/08-653b65292d834.png)，点击 <img src="/assets/academy/case-studies/zhihu-keyword-search/09-653b6540579e2.png" alt="【知乎】关键词搜索采集" className="academy-inline-icon" /> ，可查看具体的Cookie内容。
+
+ 
+
+## 步骤三、批量输入多个关键词
+
+ 
+
+在【打开网页】步骤后，点击页面输入文本的位置，一般定位到INPUT标签层上，点击操作提示内的【输入文本】
+
+![](/assets/academy/case-studies/zhihu-keyword-search/10-689d9f4bb4cde.png)
+
+ 
+
+点击操作提示内的【批量输入文本】
+
+![【知乎】关键词搜索采集](/assets/academy/case-studies/zhihu-keyword-search/11-689d9fd23871c.png)
+
+将我们准备好的关键字粘贴进去（可同时输入多个关键字，**隔行输入**，一行一个即可）。
+
+输入后勾选【输入回车键Enter】，点击确定生成配置。
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/d903f6e15145403695174229324/nbSARU8i0mwA.mp4" width="100%"></video>
+
+ 
+
+特别说明：
+
+- a. 示例中输入的关键词是【八爪鱼】和【大数据】等，可根据自身需要进行替换。
+- b. 一次最多输入2W个关键字。可先准备一个包含多个关键字的文档，然后将其复制粘贴进八爪鱼中。
+
+ 
+
+ ​
+
+## 步骤四、向下滚动页面，以加载更多问题列表
+
+ 
+
+点击搜索按钮后，根据需要，配置向下滚动页面加载出更多问题列表，在八爪鱼中也需进行滚动设置。一般情况下，如流程需要循环点击进入详情页可不配置。
+
+进入关键词搜索后列表页面，可参考教程操作：[边滚动边采集数据的方法](/zh/academy/basic-collection/pagination/scroll-and-collect)
+
+ 
+
+特别说明：
+
+- a. 设置中的滚动次数和时间间隔，请根据采集需求和网页加载情况进行设置，并非是一成不变的，具体请点击查看 [处理滚动加载数据的网页教程](/zh/academy/basic-collection/pagination/scroll-loading-pagination)
+
+ 
+
+## 步骤五、建立【循环-点击元素】，进入每个问题的详情页
+
+ 
+
+1、建立【循环-点击元素】，进入每个问题详情页
+
+ 
+
+通过以下3步，实现循环点击每个问题项的链接，进入问题详情页：
+
+① 选中页面上第1个问题链接（**注意是问题链接**），注意XPath定位返回到A标签层上
+
+② 对第二个问题项的列表操作同样步骤
+
+③ 点击【循环点击每个链接】，进入第1个问题的详情页
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/9a955cfe5145403693696988649/L7pIaFkJvFoA.mp4" width="100%"></video>
+
+  
+
+特别说明：
+
+- a. 经过以上连续3步，【循环-点击元素】创建完成。【循环】中的项，对应着页面上所有问题链接。启动采集以后，八爪鱼就会按照循环中的顺序依次点击每个问题链接，进入问题详情页，以采集每个问题下的回答数据。
+- b. 为何通过以上3步，可建立【循环-点击元素】？详情点击查看 [从列表进入详情页采集](/zh/academy/basic-collection/beginner/list-to-detail) 。
+- c. 在搜索关键词后，出现的搜索结果有多类数据：话题、专栏、Live、电子书、文章和问题。本文仅采集问题类数据，其他类别的不考虑在内。
+- d. 默认生成的循环方式为【固定元素列表循环】，无法精准定位到所有的问题链接，所以我们需要手动修改XPath，使之定位到所有的问题链接。这里需要一定的XPath知识。点击查看 [XPath学习与实例教程](https://www.bazhuayu.com/helpcenter/docs/V2h1Ec) 。
+
+ 
+
+## 步骤六、提取问题相关字段
+
+ 
+
+1、展开问题描述，并提取问题名称、问题描述
+
+问题描述过长，会被折叠起来。选中【显示全部】按钮，在弹出的操作提示框中，选择【点击该元素】，将问题描述全部展开。
+
+如果无需采集问题描述，可跳过这一步。
+
+ 
+
+选中页面中需要采集的文本，然后在操作提示框中，点击【文本内容】。
+
+文本类字段都可以按照这样的方式提取。示例中我们提取问题名称、问题描述等字段。
+
+ 
+
+![【知乎】关键词搜索采集](/assets/academy/case-studies/zhihu-keyword-search/12-688c866339bc4.png)
+
+ 
+
+特别说明：
+
+- a. 文本、图片、视频、源码是不同的数据形式，在操作提示框选择提取方式时稍有不同。文本一般为【文本内容】，图片一般为【图片链接】，更多提取方式请点击查看 [自定义抓取方式](/zh/academy/advanced-features/data-processing/custom-extraction-method)
+
+ 
+
+2、编辑字段
+
+进入【提取数据】设置界面，可删除多余字段，修改字段名，移动字段顺序、增加字段等。
+
+点击 <img src="/assets/academy/case-studies/zhihu-keyword-search/13-653b65a8a04a6.png" alt="【知乎】关键词搜索采集" className="academy-inline-icon" /> ，选择【添加当前网址信息】-【页面网址】，以采集当前问题的页面链接。
+
+![【知乎】关键词搜索采集](/assets/academy/case-studies/zhihu-keyword-search/14-688c871b14419.png)
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/d912d6865145403695174233757/o8n9Ltv5pA0A.mp4" width="100%"></video>
+
+ 
+
+## 步骤七、展开全部回答，滚动加载更多回答
+
+ 
+
+1、展开回答
+
+一个问题下回答过多时，默认展示3个回答，其他的会被折叠起来。选中【查看全部X个回答】按钮，在操作提示框中，选择【点击该链接】，将回答展开。
+
+如果无需采集全部回答，可跳过这一步。
+
+ 
+
+2、滚动加载更多回答
+
+点击【查看全部X个回答】后，向下滚动页面会加载出更多回答，在八爪鱼中也需设置滚动。
+
+进入【点击元素3】设置页面，**不勾选【在新标签中打开】，**&#x41;jax加载设置5-7秒，勾选【页面滚动】，设置滚动方式为【滚动到底部】，**【滚动次数】为6次，【每次间隔】2秒 并点击应用。**
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/eb6b186f5145403693694056794/RjXWrDK3CbIA.mp4" width="100%"></video>
+
+ 
+
+特别说明：
+
+- a. 为什么不勾选新标签？因为【查看全部X个回答】按钮是Ajax点击，勾选新标签后，采集会出问题。具体请点击查看 [Ajax网页采集方法](https://www.bazhuayu.com/helpcenter/docs/R01mM3)
+- b. 设置中的滚动次数和时间间隔，请根据采集需求和网页加载情况进行设置，并非是一成不变的，具体请点击查看 [处理滚动加载数据的网页教程](https://www.bazhuayu.com/helpcenter/docs/McMBHy)
+
+ 
+
+## 步骤八、建立【循环列表】，采集所有回答列表中的数据
+
+ 
+
+1、建立【循环列表】
+
+通过以下连续3步，采集所有回答列表中的数据：
+
+① 选中页面上1个回答列表（注意一定要选中整个列表，包含所有所需字段）
+
+② 选中页面上第2个问题列表
+
+③ 在黄色操作提示框中，选择【文本内容】
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/b0ef1cdf5145403693713063860/OeTgR8Ive0kA.mp4" width="100%"></video>
+
+ 
+
+特别说明：
+
+- a. 经过以上连续3步，【循环-提取数据】创建完成。【循环】中的项，对应着页面上所有问题列表。但是这样会将整个列表作为一个字段提取下来，如果需要分开提取字段，请看下面的操作。
+- b. 为何通过以上3步，可建立【循环-提取数据】。详情点击查看 [列表数据采集教程 ](https://www.bazhuayu.com/helpcenter/docs/RXxvh9)。
+- c. 【循环列表】中默认只有5个问题列表。在八爪鱼中滚动页面后，问题列表就会增多。
+
+ 
+
+2、提取问题列表中的字段
+
+在当前选中页面中的文本，然后在操作提示框中，点击【文本内容】进行提取。
+
+文本类字段都可以按照这样的方式提取。可根据需要点选所需字段，如回答ID、回答ID描述、回答ID头像、回答正文等多个字段。
+
+ 
+
+特别说明：
+
+- a. 文本、图片、视频、源码是不同的数据形式，在操作提示框选择提取方式时稍有不同。文本一般为【采集该元素文本】，图片一般为【采集该图片地址】，更多提取方式请点击查看  [不同数据类型（文本、图片、链接、源码等）的抓取方式 教程](/zh/academy/advanced-features/data-processing/custom-extraction-method)
+
+ 
+
+3、编辑字段
+
+进入【提取数据】设置页面，可删除多余字段，修改字段名，移动字段顺序等。
+
+ 
+
+ 
+
+## 步骤九、启动采集
+
+ 
+
+1、单击【采集】并【启动本地采集】。启动后八爪鱼开始自动采集数据。
+
+ 
+
+![【知乎】关键词搜索采集](/assets/academy/case-studies/zhihu-keyword-search/15-653b65da51e42.png)
+
+ 
+
+特别说明：
+
+- a. 【本地采集】是使用自己的电脑进行采集，【云采集】是使用八爪鱼提供的云服务器采集，点击查看 [本地采集与云采集详解](https://www.bazhuayu.com/helpcenter/docs/FQjd1k)。
+
+ 
+
+2、采集完成后，选择合适的导出方式来导出数据。支持导出为Excel，CSV，HTML，数据库等。这里导出为Excel。
+
+ 
+
+![【知乎】关键词搜索采集](/assets/academy/case-studies/zhihu-keyword-search/16-653b65e1a6a69.png)
+
+ 
+
+ 
+
+ 
+
+> 说明：若是网站改版导致无法采集，或者遇到其他问题，可扫码加群咨询反馈\
+> ![【知乎】关键词搜索采集](/assets/academy/case-studies/zhihu-keyword-search/17-6707a6eb81bde.png)
+
+ 作者：Leon
+
+ 编辑：Leon

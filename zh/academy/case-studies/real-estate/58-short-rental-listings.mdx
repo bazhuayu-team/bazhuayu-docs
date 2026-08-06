@@ -1,0 +1,225 @@
+---
+title: "【58同城】民宿短租数据采集"
+source: "https://www.bazhuayu.com/helpcenter/docs/9o4uKv"
+---
+**采集场景**
+
+58同城的民宿短租版块，发布民宿短租的房源信息。本篇教程将详细讲解如何采集这些房源信息，并支持切换城市采集。
+
+ 
+
+**采集字段**
+
+城市、标题、出租人、位置、价格、标题链接、坐标等。
+
+ 
+
+![【58同城】民宿短租数据采集](/assets/academy/case-studies/58-short-rental-listings/01-653f2f801815f.png)
+
+ 
+
+**采集结果**
+
+采集结果可导出为Excel，CSV，HTML，数据库等多种格式。导出为Excel示例：
+
+ 
+
+![【58同城】民宿短租数据采集](/assets/academy/case-studies/58-short-rental-listings/02-653f2f87688f5.png)
+
+ 
+
+**教程说明**
+
+本篇更新时间：2021/1/13   八爪鱼版本：V8.2.6
+
+如果因网页改版造成网址或步骤无效，无法收集到目标数据，请联系官方客服，我们将及时修正。
+
+ 
+
+**采集步骤**
+
+步骤一：打开网页
+
+步骤二、提取数据
+
+步骤三、创建【循环列表】，提取标题和链接
+
+步骤四、设置点击步骤，进入详情页
+
+步骤五、采集字段
+
+步骤六、启动采集
+
+ 
+
+**以下为具体步骤：**
+
+ 
+
+## 步骤一、打开网页
+
+ 
+
+在首页【输入框】中输入目标网址  ，点击【开始采集】，八爪鱼自动打开网页。
+
+同时可以看到，流程中已自动创建【循环-打开网页】步骤。
+
+这里输入的网址是 [https://bh.58.com/minsuduanzu/\](https://bh.58.com/minsuduanzu/\)
+                        [https://dy.58.com/minsuduanzu/](https://dy.58.com/minsuduanzu/)
+
+ 
+
+![【58同城】民宿短租数据采集](/assets/academy/case-studies/58-short-rental-listings/03-653f2f8f3b982.gif)
+
+ 
+
+特别说明：
+
+- a. 打开网页后，如果开始开始【自动识别】，请等待自动识别完成。八爪鱼支持自动识别网页上的列表，滚动和翻页，识别成功后直接启动采集并获取数据。如果【自动识别】的结果不是我们需要的，可点击【取消】关闭智能识别，自行配置采集流程。详情点击查看[【自动识别】](/zh/academy/basic-collection/beginner/custom-collection)
+- b. 手动输入的url数量不得大于1万个，如有超过1万url，请选择【从文件导入】，具体请查看教程 [网址输入升级](/zh/academy/advanced-features/workflow-settings/bulk-url-input-extra)
+- c.  示例中输入的是北海（[https://bh.58.com/minsuduanzu/）和东营（https://dy.58.com/minsuduanzu/）的网址](https://bh.58.com/minsuduanzu/）和东营（https://dy.58.com/minsuduanzu/）的网址)，如需采集其他城市的短租房源数据，请点击网页中相应位置，获取目标城市的对应网址后，再进行后续采集操作。
+
+![【58同城】民宿短租数据采集](/assets/academy/case-studies/58-short-rental-listings/04-653f2f97c1cbf.png)
+
+ 
+
+## 步骤二、提取数据
+
+ 
+
+提取字段【城市】：在网页中选中城市的位置，再在操作提示框中点击【采集该元素的文本】。\
+如果不需要此字段，可跳过此步骤。
+
+![【58同城】民宿短租数据采集](/assets/academy/case-studies/58-short-rental-listings/05-653f2f9d7953c.gif)
+
+ 
+
+## 步骤三、创建【循环列表】，提取标题和链接
+
+ 
+
+通过以下连续4步，采集所有房源列表中的标题和链接：
+
+1、选中页面上列表的一个标题
+
+2、选择标签 A（我们需要采集详情页的链接，一般链接都是在A标签里边）
+
+3、选中【选择全部】
+
+4、在操作提示框中，选择【采集以下链接文本+链接】
+
+ 
+
+![【58同城】民宿短租数据采集](/assets/academy/case-studies/58-short-rental-listings/06-653f2fa4c814f.gif)
+
+ 
+
+特别说明：
+
+- a. 经过以上步骤，就建起了一个循环列表，列表中的项，对应页面中的所有房源列表，同时列表中所有的标题和链接字段被采集下来。
+- b. 为什么经过以上步骤能建立起循环列表步骤？详情请看[ 采集列表数据教程](https://www.bazhuayu.com/helpcenter/docs/RXxvh9) 。
+
+ 
+
+## 步骤四、设置点击步骤，进入详情页
+
+ 
+
+房源列表中的标题和链接已经采集到，下一步就是点击链接进入详情页，采集详情页数据了。
+
+在操作提示框中，选择【采集下一级网页数据】，选择字段【字段1\_链接】，可以看到八爪鱼自动点击进入详情页，并在流程中生成一个步骤【点击列表链接】。
+
+ 
+
+![【58同城】民宿短租数据采集](/assets/academy/case-studies/58-short-rental-listings/07-653f2fab6ebb4.gif)
+
+ 
+
+特别说明：
+
+- a. 如果您有采集下一页数据的需求，在操作提示框中点击【采集下一页数据】并选择要点击的字段即可。注意选择的字段是可以点击进入详情页的链接，一般在标题中。
+
+ 
+
+## 步骤五、采集字段
+
+ 
+
+1、采集页面上可见的字段
+
+包括价格、设施等字段，采集方式为：在网页中选中字段所在位置，然后在操作提示框中选择【采集该元素的文本】即可。
+
+ 
+
+![【58同城】民宿短租数据采集](/assets/academy/case-studies/58-short-rental-listings/08-653f2fcde10a7.gif)
+
+ 
+
+2、采集源码中的字段
+
+此网站部分字段没有在页面中直接显示出来，但藏在网站的源码里，比如【房源位置】和【坐标】字段。
+
+这种情况下，通过在八爪鱼中进行特殊设置可将字段采集下来。
+
+ 
+
+【房源位置】采集方法：先将鼠标移动到【房源位置】整块区域，然后在操作提示框中，选择【采集该元素的文本】，可以看到这样采集到的是空白，还需进行一些设置：点击字段后的【...】，选择【修改元素定位】，修改XPath为：//div[@class="detail-page-location-map"] ，然后修改元素抓取方式为【元素属性】-【data-address】，这样就抓取到了【房源位置】的文本。
+
+ 
+
+【坐标】采集方法：同样的先采集一个空白字段，然后修改XPath为：//div[@class="detail-page-location-map"] ，然后修改元素抓取方式为【元素属性】-【data-latlng】，这样就抓取到了【坐标】的文本。
+
+ 
+
+![【58同城】民宿短租数据采集](/assets/academy/case-studies/58-short-rental-listings/09-653f2ff9937d6.gif)
+
+ 
+
+特别说明：
+
+- a.  修改XPath需要学些一定的XPath知识，请看 [XPath系列教程](https://www.bazhuayu.com/helpcenter/docs/V2h1Ec) 。
+- b. 如何选择合适的元素抓取方式？请看 [自定义抓取方式教程 ](/zh/academy/advanced-features/data-processing/custom-extraction-method)。
+
+ 
+
+## 步骤六、编辑字段
+
+字段采集完成后，可对字段进行自定义编辑。
+
+八爪鱼可以修改字段名称、删除多余字段、调整字段顺序等。动图展示了修改字段名称的操作。
+
+ 
+
+![【58同城】民宿短租数据采集](/assets/academy/case-studies/58-short-rental-listings/10-653f300467ea2.gif)
+
+ 
+
+## 步骤七、启动采集
+
+1、保存好任务之后，点击【采集】并选择【启动本地采集】。启动后八爪鱼开始自动采集数据。
+
+ 
+
+![【58同城】民宿短租数据采集](/assets/academy/case-studies/58-short-rental-listings/11-653f300ab0c19.gif)
+
+ 
+
+特别说明：
+
+- a. 【本地采集】是使用自己的电脑进行采集，【云采集】是使用八爪鱼提供的云服务器采集，点击查看 [本地采集与云采集详解](https://www.bazhuayu.com/helpcenter/docs/2xF5Mz)。
+
+ 
+
+2、采集完成后，选择合适的导出方式导出数据。支持导出为Excel、CSV、HTML、数据库等。这里导出为Excel。
+
+ 
+
+![【58同城】民宿短租数据采集](/assets/academy/case-studies/58-short-rental-listings/12-653f30109bec6.png)
+
+ 
+
+ 
+
+作者：Tom
+
+编辑：Aisling

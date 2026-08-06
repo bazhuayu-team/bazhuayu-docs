@@ -1,0 +1,337 @@
+---
+title: "【政府网站】采集正文及下载文中附件"
+source: "https://www.bazhuayu.com/helpcenter/docs/zheng-fu-wang-zhan-fu-jian-xia-zai"
+---
+**一、采集场景**
+
+打开宝学教育广东考试网其中一篇公告（实例网址：[http://www.gdgwyw.com/html/gdzk/sz/202204/76_62407.html](http://www.gdgwyw.com/html/gdzk/sz/202204/76_62407.html)），采集正文以及相关附件链接（并且下载）。
+
+![【政府网站】采集正文及下载文中附件](/assets/academy/case-studies/gov-article-and-attachments/01-6909f2a3e4ba2.png)
+
+ 
+
+![【政府网站】采集正文及下载文中附件](/assets/academy/case-studies/gov-article-and-attachments/02-6909f6e05431e.png)
+
+ 
+
+**二、采集字段**
+
+①标题，②文本，③附件链接，附件链接\_保存位置。
+
+ 
+
+**三、采集结果**
+
+采集结果可导出为Excel、CSV、HTML、数据库等多种格式。
+
+导出为Excel示例：
+
+ 
+
+![【政府网站】采集正文及下载文中附件](/assets/academy/case-studies/gov-article-and-attachments/03-6909f2a48f293.png)
+
+ 
+
+下载文件示例：
+
+ 
+
+![【政府网站】采集正文及下载文中附件](/assets/academy/case-studies/gov-article-and-attachments/04-6909f2a3db306.png)
+
+ 
+
+**四、教程说明**
+
+本篇制作时间：2025/11/14 八爪鱼版本：V8.7.7
+
+如果因网页改版造成网址或步骤无效，无法收集到目标数据，请联系官方客服，我们将及时修正。
+
+ 
+
+### 
+
+**五、采集步骤**
+
+ 
+
+步骤一、打开网页
+
+步骤二、提取标题与正文
+
+步骤三、确定附件xpath，采集并下载
+
+步骤四、字段格式化处理（设置多个URL分开下载）
+
+步骤五、启动采集与下载
+
+ 
+
+ 
+
+**以下为具体步骤：**
+
+ 
+
+#### 步骤一、打开网页
+
+1、打开网址
+
+在首页输入框中，输入网址[http://www.gdgwyw.com/html/gdzk/sz/202204/76_62407.html](http://www.gdgwyw.com/html/gdzk/sz/202204/76_62407.html)，然后点击【开始采集】，八爪鱼自动打开网页,网站会自动跳到登录页面
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/538b92de5145403704490093825/TrHxrafqvVcA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 打开网页后，如果开始开始【自动识别】，请等待自动识别完成。八爪鱼支持自动识别网页上的列表、滚动和翻页，识别成功后直接启动采集即可获取数据。如果【自动识别】的结果不是我们需要的，可点击【取消】关闭智能识别，自行配置采集流程。详情点击查看 【[自动识别](/zh/academy/basic-collection/beginner/custom-collection)】
+
+ 
+
+如需批量打开多个详情页链接进行采集可参考视频操作，如不需要可跳过该步骤。
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/e7078c535145403704495886669/QRX353bGI9AA.mp4" width="100%"></video>
+
+ 
+
+> 说明：
+>
+> 循环打开网址可参考教程：[URL循环：批量采集同类网页](/zh/academy/basic-collection/bulk-input/url-loop-similar-pages)
+
+ 
+
+***
+
+### 
+
+#### 步骤二、提取标题与正文
+
+ 
+
+1、点击标题、正文
+
+① 选中标题与正文
+
+② 在黄色操作提示框中，选择【元素中数据内容】
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/3414f5485145403704496898501/5GgCBZnEE54A.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 本教程主要展示附件下载，所以正文处没有规范字段，具体规范请结合[xpath过滤](https://www.bazhuayu.com/helpcenter/docs/OPbWHC?search=1)和[合并同一字段](/zh/academy/advanced-features/data-processing/field-merge)处理。
+
+ 
+
+***
+
+ 
+
+#### 步骤三、确定附件xpath，采集并下载
+
+ 
+
+1、新增循环流程
+
+① 添加流程-循环
+
+② 选择循环，修改循环方式为“不固定元素列表”
+
+③ 输入定位附件的xpath： //div[@id="Zoom"]//a[contains(@href,"http")]
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/72d699db5145403704497262133/lbp7aSxdu74A.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. xpath定位原则就是准确且不同网址可复制定位，具体思路是先在网页定位所需元素，找相应有代表性的父标签以及其独特属性。具体指南：[xpath基础学习](https://www.bazhuayu.com/helpcenter/docs/V2h1Ec)
+> 
+> - b.应用完配置之后，可以点到流程空白处，再点击循环，即可看到其xpath定位到的具体列表。
+
+ 
+
+2、设置采集附件链接与确定下载路径
+
+①在循环流程中添加-提取数据
+
+②设置添加页面元素
+
+③设置拼接循环项xpath
+
+④更改字段抓取方式为“链接地址”
+
+⑤右击字段1，选择下载文件，生成下载路径
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/4f31e0865145403704493956237/ezPx29Zcmz8A.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a.设置提取数据直接拼接循环项目的是什么？主要是循环项已经是标准的附件定位xpath，不需要再写相对xpath拼接。具体相对/绝对xpath解析：[绝对xpath、相对XPath学习](https://www.bazhuayu.com/helpcenter/docs/bs4o6e)
+
+ 
+
+ 
+
+ 
+
+#### 步骤四、字段格式化处理（设置多个URL分开下载）
+
+1、调整字段位置并完善字段名称
+
+①更改“提取数据-字段1”为“标题”
+
+②更改“字段2”为“正文”
+
+③更改“提取数据2-字段1”为“附件链接”
+
+④路径名自动变化
+
+![【政府网站】采集正文及下载文中附件](/assets/academy/case-studies/gov-article-and-attachments/05-6909f2a3ef56b.png)
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a.由于给“提取数据1-字段1设置过下载文件选项，则更改相关的字段名称，后面下载路径名称自己会变。
+
+ 
+
+2、附件链接修改下载设置
+
+①右击字段，点击“同一字段多行合并”
+
+②点击字段下载设置，开启下载包含多个URL
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/fd9e70275145403704492764944/qEuHtmUuUuIA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 由于此前我们一个网址只采集了标题和正文（并非循环），遇到网页多附件时，循环采集附件会导致正文和标题字段重复显示，为后续数据处理造成难度（尤其是多网址循环时），现在通过合并字段解决非附件重复问题：[合并同一字段](/zh/academy/advanced-features/data-processing/field-merge)。
+> 
+> - b.由于字段合并，所以文件链接多条无法下载，这时开启包含多个URL（当字段单元格内容包含多个文件下载URL链接时，需要把链接分隔符设置一致否则链接拆分出错会导致下载失败。同时对应的“文件位置“字段内容也会同步使用相应的分隔符划分），同时合并字段就是换行符连接字段，这里不用更改![【政府网站】采集正文及下载文中附件](/assets/academy/case-studies/gov-article-and-attachments/06-6909f2a3d983b.png)。
+
+ 
+
+***
+
+ 
+
+#### 步骤五、启动采集与下载
+
+ 
+
+1、单击【采集】并【启动本地采集】。涉及到数据下载会跳出窗口确认是否下载。
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/4d11f9ca5145403704493884646/qPnwDzsA2awA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 【本地采集】是使用自己的电脑进行采集，【云采集】是使用八爪鱼提供的云服务器采集，点击查看 [本地采集与云采集详解](https://www.bazhuayu.com/helpcenter/docs/2xF5Mz)，文件下载不支持云采集。
+
+ 
+
+2、采集完成后，选择合适的导出方式来导出数据。支持导出为Excel，CSV，HTML，数据库等。这里导出为Excel。
+
+![【政府网站】采集正文及下载文中附件](/assets/academy/case-studies/gov-article-and-attachments/07-6909f2d3dc178.png)
+
+ 
+
+ 
+
+3、查看下载路径中文件下载情况。
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/bff3eebc5145403704498280124/iBD0YrhaaBoA.mp4" width="100%"></video>
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+作者：YfY

@@ -1,0 +1,29 @@
+---
+title: "本地采集数据一直不增加？"
+description: "先观察页面情况，每种情况处理方法略有不同。 a.一直显示正在打开网页。原因是采集的网站打开缓慢，可以设置ajax加载时间，时间根据需要提取的数据加载出所需要的时间来设置，网站加载快，时间可以设置短一点；网站加载慢，时间就设置长一些，具体可根据网页情况调试ajax超时的时间。 b.出现验证码。…"
+hidden: true
+kbStatus: "unverified"
+kbSource: "faq"
+sourceSlug: "nT3joS"
+source: "https://www.bazhuayu.com/helpcenter/docs/nT3joS"
+---
+
+先观察页面情况，每种情况处理方法略有不同。
+
+ 
+
+a.一直显示正在打开网页。原因是采集的网站打开缓慢，可以设置ajax加载时间，时间根据需要提取的数据加载出所需要的时间来设置，网站加载快，时间可以设置短一点；网站加载慢，时间就设置长一些，具体可根据网页情况调试ajax超时的时间。
+
+ 
+
+b.出现验证码。在规则中增加识别验证码的操作，进行自动识别验证码。
+
+ 
+
+c.卡住不动。重新启动任务，最好先手动执行排查一下。
+
+ 
+
+d.不断翻页但不采集数据。检查循环提取数据列表和提取数据的xpath定位是否正确，若均正确，调试ajax超时时间和在新标签中打开、滚动页面。手动排错请参考以下教程：
+
+[https://www.bazhuayu.com/helpcenter/docs/YqLshX](https://www.bazhuayu.com/helpcenter/docs/YqLshX)

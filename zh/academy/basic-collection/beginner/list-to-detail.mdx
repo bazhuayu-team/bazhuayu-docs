@@ -1,0 +1,211 @@
+---
+title: "列表进入详情页采集"
+description: "列表进入详情页采集教程，来自八爪鱼帮助中心「操作指南 / 基本采集」。"
+source: "https://www.bazhuayu.com/helpcenter/docs/uMCrEt"
+---
+
+通过上一节课的学习，我们已经学会了 [采集列表数据](/zh/academy/basic-collection/beginner/list-collection)、如果一个页面上很多同类链接，需要依次点击每个链接进入详情页，然后采集每个详情页中的数据呢？
+
+ 
+
+以豆瓣图书网页为例：[*https://book.douban.com/tag/%E5%B0%8F%E8%AF%B4*](https://book.douban.com/tag/%E5%B0%8F%E8%AF%B4)
+
+ 
+
+如果我们需要按照网页上图书列表的顺序，自动依次点击链接进入详情页，然后采集详情页中的字段，并保存为Excel等结构化的数据，如下图所示：
+
+ 
+
+![列表进入详情页采集](/assets/academy/basic-collection/list-to-detail/01-6575e7bd3e053.png)
+
+在八爪鱼中该如何操作？以下为具体步骤。
+
+示例网址：[*https://book.douban.com/tag/%E5%B0%8F%E8%AF%B4*](https://book.douban.com/tag/%E5%B0%8F%E8%AF%B4)
+
+## 一、列表进入详情
+
+### **步骤一、输入网址**
+
+在首页【输入框】中输入目标网址，点击【开始采集】。
+
+ <video controls src="https://resource-wangsu.helplook.net/docker_production/3mkuae/article/uMCrEt/video/6575e344f3e9c.mp4" width="100%"></video>
+
+ 
+
+### **步骤二、建立【循环-点击元素-提取数据】**
+
+ 
+
+观察网页，此网页上是通过点击图书标题，进入详情页的。在八爪鱼中，通过建立【循环-点击元素-提取数据】的步骤，可实现识别页面上所有标题链接，并按顺序依次点击以进入详情页，然后再提取每个详情页中的数据。
+
+建立【循环-点击元素-提取数据】需特定步骤，下面为具体步骤。
+
+ 
+
+先看一个包含所有具体步骤的视频：
+
+<video controls src="https://resource-wangsu.helplook.net/docker_production/3mkuae/article/uMCrEt/video/6575e44c51830.mp4" width="100%"></video>
+
+ 
+
+再拆分每个步骤，进行详情说明：
+
+ 
+
+1、选中页面上第1个链接。选中后的第一个标题链接会被绿色框框起来。同时出现黄色操作提示框，提示我们发现了同类链接（同类链接会被红色虚线框框起来）
+
+![列表进入详情页采集](/assets/academy/basic-collection/list-to-detail/02-6575e4a0b9f2f.png)
+
+ 
+
+> **特别说明：**
+>
+> a. 选中1个链接即可，第几个无所谓，第1个，第2个，第3个，都行。
+>
+> b. 选中的需是可进入详情页的链接。一般的网页，链接会放在标题里，但是也有例外。
+
+2、在黄色操作提示框中，选择【选中全部相似元素】。我们是想要按顺序点击每个链接的，所以选择【选中全部相似元素】，可以看到全部标题链接都被选中了，被绿色框框起来。
+
+![列表进入详情页采集](/assets/academy/basic-collection/list-to-detail/03-6575e578efb6f.png)
+
+3、在黄色操作提示框中，选择【循环点击每个链接】。选择以后，发现页面跳转到了第1个链接的详情页。
+
+![列表进入详情页采集](/assets/academy/basic-collection/list-to-detail/04-6575e5a435767.png)
+
+ 
+
+ 
+
+> **特别说明：**
+>
+> a. 有时候操作提示框中出现的不是【循环点击每个链接】，而是【循环点击每个元素】，或者【循环点击每个图片】，本质是一样的。
+
+![](/assets/academy/basic-collection/list-to-detail/05-6513ee5182769.png)
+
+ 
+
+4、提取数据。将页面中的标题，图书评分，图书简介，图书版本内容提取下来。
+
+<video controls src="https://resource-wangsu.helplook.net/docker_production/3mkuae/article/uMCrEt/video/6575e64e1717d.mp4" width="100%"></video>
+
+> **特别说明：**
+>
+> a. 步骤1-4是连续指令，连续不中断，才能建立【循环列表】。如果 1、选中页面上第1个链接 后，没有出现 2、【选中全部】怎么办？请下拉至文末查看解决方法。
+
+ 
+
+经过以上4步，循环列表创建完成。可以看到，流程图中自动生成了1个循环步骤。循环中的项，对应着页面上所有标题链接。启动采集以后，八爪鱼就会按照循环中的顺序，依次点击每个链接进入详情页，再提取每个详情页中的字段。
+
+ 
+
+ 
+
+### **步骤三、编辑字段**
+
+ 
+
+八爪鱼自动为我们提取了列表中的所有字段，我们可以对这些字段进行删除、修改字段名称等操作。编辑字段有两种布局（横向布局和纵向布局）点击如下按钮可以切换：
+
+![](/assets/academy/basic-collection/list-to-detail/06-65338762ac4fb.png)
+
+**横向布局下编辑字段：**
+
+鼠标双击字段名，可修改字段名称。
+
+鼠标移动到 <img src="/assets/academy/basic-collection/list-to-detail/07-6513ee526693a.png" alt="" className="academy-inline-icon" /> 按钮上，可对字段进行更多操作：删除、复制、格式化等。
+
+![](/assets/academy/basic-collection/list-to-detail/08-653387f88006b.png)
+
+ 
+
+**纵向布局下编辑字段：**
+
+在字段名称处双击即可修改字段名；在右侧更多操作里面可以对字段进行删除、复制、格式化等操作：
+
+![](/assets/academy/basic-collection/list-to-detail/09-65338878bc3e0.png)
+
+ 
+
+### **步骤四**、启动采集
+
+ 
+
+1、修改完字段名后，整个规则编辑完成，点击【保存】，然后【采集】，再点击【启动本地采集】启动后八爪鱼开始全自动采集数据。（本地采集是使用自己的电脑进行采集，云采集是使用八爪鱼提供的云服务器采集，[点击查看详情](https://www.bazhuayu.com/docs/zh/academy/data-export/start-and-export)）
+
+![](/assets/academy/basic-collection/list-to-detail/10-6533960a6faa0.png)
+
+2、采集完成后，选择合适的导出方式导出数据。支持导出为Excel、CSV、HTML。这里导出为Excel。
+
+![列表进入详情页采集](/assets/academy/basic-collection/list-to-detail/11-653388e954d18.png)
+
+数据示例：
+
+![列表进入详情页采集](/assets/academy/basic-collection/list-to-detail/12-6575e7ae218ca.png)
+
+## **二、没有出现【选中全部】的解决办法**
+
+**在 步骤二、建立【循环-点击元素-提取数据】步骤时，1、选中页面上第1个链接 后，没有出现 2、【选中全部】的解决办法：**
+
+ 
+
+示例网址：[*http://www.haerbin.ccoo.cn/post/cheliang*](http://www.haerbin.ccoo.cn/post/cheliang)
+
+ 
+
+先看一个建立【循环列表】的完整步骤：
+
+ 
+
+[](https://resource-wangsu.helplook.net/docker_production/3mkuae/article/uMCrEt/video/65338b0c615c9)
+
+ 
+
+再拆分每个步骤，详细说明：
+
+ 
+
+1、选中页面上第1个链接 。
+
+2、继续选中页面上的另1个链接（目的是帮助八爪鱼识别页面中的所有同类链接，作用相当于【选中全部】）。
+
+3、在黄色操作提示框中，选择【循环点击每个链接】。八爪鱼自动跳转到详情页。
+
+4、在详情页中按需提取字段。
+
+ 
+
+通过上面的4步，【循环-点击元素-提取数据】也能够创建完成。接下来的步骤与上面相同，不再赘述。
+
+ 
+
+## 三、**既采集列表数据，又采集详情页采集数据**
+
+以下介绍既要采集列表数据，又要点击列表中的链接进入详情页采集数据的解决方法：
+
+1、先用[列表采集数据课教程 ](/zh/academy/basic-collection/beginner/list-collection)中提取数据的方法，建立一个【循环提取数据】步骤提取列表数据
+
+2、再在循环的当前项（用红色框起来）中找到需要点击进入详情的链接，然后鼠标左键单击，在弹出的操作提示框里选择【点击该链接】，流程就会生成一个【点击元素】步骤了，八爪自动鱼跳转到了详情页，然后就可以提取详情页数据。（这里需要注意不能选择点击【循环点击】）
+
+ [](https://resource-wangsu.helplook.net/docker_production/3mkuae/article/XVRM9w/video/65337402db6da)
+
+ 
+
+> 特别说明：
+>
+> 一定要 选中流程中的循环列表再选择进入详情的链接做【点击元素】步骤，否则会重复点击某个链接导致采集错误。
+
+ ![列表进入详情页采集](/assets/academy/basic-collection/list-to-detail/13-66d92e79c6016.png)
+
+ 
+
+ 
+
+## 注意事项
+
+点击进入详情后，再点击循环列表是可以自动返回到列表页的，不需要再设置返回。如果点击进入详情后再点击循环列表，无法正常返回到列表页，请检查点【点击元素】步骤高级设置是否勾选新标签，如果没有勾选，请勾选上新标签后再点击【应用】。如果勾选新标签也无法返回到列表页，请参考教程[返回上一级网页](https://www.bazhuayu.com/helpcenter/docs/fan-hui-shang-yi-ji-wang-ye?search=1)
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/02cb6a751397757894922260384/KDiimwSjgtsA.mp4" width="100%"></video>
+
+ 
+
+编辑：Mia

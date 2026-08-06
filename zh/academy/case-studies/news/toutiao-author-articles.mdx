@@ -1,0 +1,184 @@
+---
+title: "【今日头条】头条号文章采集"
+source: "https://www.bazhuayu.com/helpcenter/docs/SCdWQP"
+---
+**采集场景**
+
+今日头条上有很多头条号，实例网址:[https://www.toutiao.com/c/user/token/MS4wLjABAAAAjtBwvR3OD0QmhA9w_LoIHcbufaw2GM6-i2fNvseUEL0/?tab=article](https://www.toutiao.com/c/user/token/MS4wLjABAAAAjtBwvR3OD0QmhA9w_LoIHcbufaw2GM6-i2fNvseUEL0/?tab=article)，是头条号【红星新闻】的主页。主页上展示其发布的文章列表。点击文章标题链接，可进入文章详情页，查看文章正文。
+
+ 
+
+**采集字段**
+
+文章标题、文章链接、发布时间、阅读数、评论数等字段。
+
+ 
+
+![【今日头条】头条号文章采集](/assets/academy/case-studies/toutiao-author-articles/01-68a6c46b7fb6e.png)
+
+ 
+
+ 
+
+**采集结果**
+
+采集结果可导出为Excel，CSV，HTML，数据库等多种格式。导出为Excel示例：
+
+![【今日头条】头条号文章采集](/assets/academy/case-studies/toutiao-author-articles/02-68a6c3e07327c.png)
+
+ 
+
+**教程说明**
+
+本篇制作时间：2025/8/21    八爪鱼版本：V8.7.7
+
+如果因网页改版造成网址或步骤无效，无法收集到目标数据，请联系官方客服，我们将及时修正。
+
+ 
+
+**采集步骤**
+
+步骤一：打开网页
+
+步骤二、创建【循环点击列表】
+
+步骤三、进入文章详情，采集文章正文
+
+步骤四、编辑字段
+
+步骤五、设置页面滚动
+
+步骤六、启动采集
+
+ 
+
+**以下为具体步骤：**
+
+ 
+
+### 步骤一、打开网页
+
+在首页【输入框】中输入目标网址 [https://www.toutiao.com/c/user/token/MS4wLjABAAAAjtBwvR3OD0QmhA9w_LoIHcbufaw2GM6-i2fNvseUEL0/?tab=article](https://www.toutiao.com/c/user/token/MS4wLjABAAAAjtBwvR3OD0QmhA9w_LoIHcbufaw2GM6-i2fNvseUEL0/?tab=article)，点击【开始采集】，八爪鱼自动打开网页。
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/d02632225145403695927662120/wEvBe2U8aScA.mp4" width="100%"></video>
+
+ 
+
+特别说明：
+
+- a. 打开网页后，如果开始开始【自动识别】，请点击【不再自动识别】或【取消识别】将其关掉。因为本文不适合使用【自动识别】。
+- b. 【自动识别】适用于自动识别网页上的列表、滚动和翻页，识别成功后直接启动采集即可获取数据。详情点击查看 [【自动识别】教程](/zh/academy/basic-collection/beginner/custom-collection)。
+- c. 可以根据需求，更换头条号的网址。
+
+ 
+
+### 步骤二、创建【循环点击列表】
+
+ 
+
+通过以下连续4步完成：
+
+1、选中页面上1个文章列表（注意一定要选中整个列表，包含所有所需字段）
+
+2、在黄色操作提示框中，点击【选中全部子元素】
+
+3、点击【选择全部相似组】
+
+4、点击【元素中数据内容】
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/97b9f24a5145403695923487640/wa8V6W9CGXkA.mp4" width="100%"></video>
+
+ 
+
+特别说明：
+
+- a. 经过以上连续4步，【循环-提取数据】创建完成。【循环】中的项，对应着页面上所有文章列表，【提取数据】中的字段，对应着每个文章列表中的字段。启动采集以后，八爪鱼就会按照循环中的顺序依次提取每个列表中的字段。
+- b. 为何通过以上4步，可建立【循环-提取数据】？详情点击查看 [列表数据采集教程 ](https://www.bazhuayu.com/helpcenter/docs/RXxvh9)。
+
+ 
+
+### 步骤三、设置页面滚动
+
+打开头条号网页后，向下滚动页面加载出更多文章列表，在八爪鱼中也需进行滚动设置。
+
+进入【操作提示】下，点击【滚动加载】，滚动方式为【滚动到底部】，【滚动次数】为100次。\
+\
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/7be6588f5145403695926326488/ae2oAVGEZyAA.mp4" width="100%"></video>
+
+ 
+
+特别说明：
+
+- a. 设置中的滚动次数和时间间隔，请根据采集需求和网页加载情况进行设置，并非是一成不变的，具体请点击查看 [处理滚动加载数据的网页教程](/zh/academy/basic-collection/pagination/scroll-loading-pagination)
+
+### 步骤四、点击文章链接进入详情页
+
+1、点击文章链接进入详情页
+
+从网页选择选中文章标题，在操作提示框中（下一级网页设置)从采集字段中选择【标题链接】，点击后自动进入该文章详情页。
+
+2、采集文章详情页中的字段
+
+选中页面中的文本，然后在操作提示框中，提取数据【文本内容】。
+
+文本类字段都可以按照这样的方式提取。示例中我们提取了作者、发布时间、正文等字段。在【当前页面数据预览】页面，可删除多余字段，修改字段名，移动字段顺序等，
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/74c1156a5145403695926003797/WcGqGvQoZhoA.mp4" width="100%"></video>
+
+特别说明：
+
+- a. 一定要在当前文章列表中选中文章链接做【点击该链接】，否则【点击元素】步骤无法与【循环】中的文章列表产生联动，会一直重复点击某一条文章链接，进入其文章详情页，无法实现依次点击每个文章链接。
+- b. 如何找到当前文章列表？在【循环列表】中查看当前项（蓝色背景），然后点击【提取列表数据】，网页中被红色框框起来的就是当前文章列表。
+
+ 
+
+ 3、编辑添加特殊字段
+
+ 在【当前页面数据预览】页面，可以添加当前采集时间、网址、源码等
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/15c68b625145403695928312514/5Hnd5HQ6fGMA.mp4" width="100%"></video>
+
+特别说明\
+a、可删除多余字段，修改字段名，移动字段顺序，添加特殊字段等：[添加特殊字段](https://www.bazhuayu.com/helpcenter/docs/tian-jia-te-shu-zi-duan?search=1 "添加特殊字段")
+
+ 
+
+### 步骤五、优化规则
+
+配置好任务后，为了采集效果更稳定一些，根据页面加载情况，对任务步骤设置等待时间进行优化
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/e46c598b5145403695924448652/6N8eiL0UQIEA.mp4" width="100%"></video>
+
+特别说明：
+
+优化规则：\
+1\. 点击元素，输入文本，提取数据步骤设置执行前等待3秒；\
+2\. 点击元素/点击翻页，设置ajax加载7秒；\
+3\. 点击元素如果是进入详情页的都要勾选开新标签，其他的看情况勾选；\
+4\. 滚动页面，在点击元素、打开网页根据网页加载情况设置滚动（常用滚动一屏），滚动次数和滚动间隔不能设置为0；\
+5\. 每个循环框设置执行前等待3秒；\
+具体可参考[优化规则采集教程](https://www.bazhuayu.com/helpcenter/docs/ZGoL4g)
+
+ 
+
+### 步骤六、启动采集
+
+1、单击【采集】并【启动本地采集】。启动后八爪鱼开始自动采集数据。今日头条可能会出现滑块验证等情况，建议结合左上角的【暂停】功能，手动验证后，点击【继续】，即可开始采集。
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/74c0801d5145403695926002560/KZ1mWE2opNsA.mp4" width="100%"></video>
+
+  
+
+特别说明：
+
+- a. 【本地采集】是使用自己的电脑进行采集，【云采集】是使用八爪鱼提供的云服务器采集，点击查看 [本地采集与云采集详解](https://www.bazhuayu.com/helpcenter/docs/2xF5Mz)。
+
+ 
+
+2、采集完成后，选择合适的导出方式导出数据。支持导出为Excel、CSV、HTML、数据库等。这里导出为Excel。数据示例：
+
+![【今日头条】头条号文章采集](/assets/academy/case-studies/toutiao-author-articles/03-68a6c3e07327c.png)

@@ -1,0 +1,209 @@
+---
+title: MCP 对接 Cursor
+description: 在 Cursor 中通过 MCP 连接八爪鱼采集器，用自然语言搜索模板、创建任务、运行云采集并导出数据。
+---
+
+## 前置准备
+
+开始之前，请确认以下条件：
+
+- 已安装 **Cursor 桌面版**
+- Cursor 支持 MCP 服务器，可在编辑器内让 AI 助手调用外部工具
+- 已注册八爪鱼账户
+- MCP 地址：`https://mcp.bazhuayu.com`
+- 连接过程中可能需要在浏览器中完成八爪鱼授权
+
+## 接入后可用的能力
+
+连接成功后，你可以在 Cursor 中用自然语言管理采集任务，例如：
+
+- 搜索八爪鱼采集模板
+- 校验模板参数并创建云采集任务
+- 启动与停止云采集任务
+- 查看任务执行状态
+- 导出数据（EXCEL / CSV / JSON / 数据库）
+- 查询数据中心的网页与媒体存量内容
+- 提交并查询 Temu、TikTok Shop 商品评论采集
+
+当前 MCP 不提供账户余额、版本或账单查询工具。连接后建议先让 Cursor 调用 `list_platforms`，或检查是否发现了[当前 10 个工具](/zh/mcp/guides/clients#验证连接)。
+
+## 八爪鱼 MCP 服务信息
+
+八爪鱼提供 MCP（Model Context Protocol）服务器，供 Cursor 在 IDE 内调用采集相关工具。
+
+| 项目 | 内容 |
+| --- | --- |
+| 服务地址 | `https://mcp.bazhuayu.com` |
+| 推荐认证 | OAuth 2.1（浏览器登录八爪鱼账户） |
+| 备选认证 | API Key（Header：`x-api-key`，见 [获取 API Key](/zh/mcp/quick-start/api-key)） |
+
+该服务会将八爪鱼的模板、任务、导出等功能公开给 AI 助手。
+
+## 步骤一：在 Cursor 中配置八爪鱼 MCP
+
+<Steps>
+  <Step title="1.1 打开 Cursor 设置">
+    1. 在电脑上打开 [Cursor](https://cursor.com/)
+    2. 点击右上角的 **Cursor Settings**（设置）图标
+    3. 进入 **MCP** 相关配置区域
+
+    <img src="/assets/mcp/cursor/step-1-settings.png" alt="打开 Cursor 设置" className="mcp-step-image" />
+  </Step>
+  <Step title="1.2 进入 Tools & MCP">
+    在 Cursor Settings 左侧边栏，点击 **Tools & MCP**。
+
+    此处可管理已安装的 MCP 服务器。
+
+    <img src="/assets/mcp/cursor/step-2-tools-mcp.png" alt="在 Cursor 设置中打开 Tools and MCP" className="mcp-step-image" />
+  </Step>
+  <Step title="1.3 添加自定义 MCP 服务器">
+    在 **Installed MCP Servers**（已安装的 MCP 服务器）下，点击 **Add Custom MCP**（添加自定义 MCP）。
+
+    Cursor 会自动打开 MCP 配置文件 `mcp.json`。
+
+    <img src="/assets/mcp/cursor/step-3-add-mcp.png" alt="点击 Add Custom MCP 添加服务器" className="mcp-step-image" />
+  </Step>
+  <Step title="1.4 填写八爪鱼 MCP 配置">
+    在 `mcp.json` 中添加八爪鱼 MCP 服务器配置，例如：
+
+    ```json
+    {
+      "mcpServers": {
+        "octoparse": {
+          "url": "https://mcp.bazhuayu.com"
+        }
+      }
+    }
+    ```
+
+    若使用 API Key 认证，可参考以下配置（见 [获取 API Key](/zh/mcp/quick-start/api-key)）：
+
+    ```json
+    {
+      "mcpServers": {
+        "octoparse": {
+          "type": "http",
+          "url": "https://mcp.bazhuayu.com",
+          "headers": {
+            "x-api-key": "你的APIKey"
+          }
+        }
+      }
+    }
+    ```
+
+    确认 JSON 格式正确后保存文件。
+
+    <img src="/assets/mcp/cursor/step-4-mcp-json.png" alt="在 mcp.json 中配置八爪鱼 MCP 地址" className="mcp-step-image" />
+  </Step>
+  <Step title="1.5 返回 Tools & MCP 查看状态">
+    返回 **Cursor Settings → Tools & MCP**。
+
+    保存配置后，Cursor 会自动识别八爪鱼 MCP 服务器。初次连接时，状态可能显示 **Needs authentication**（需要认证）。
+  </Step>
+  <Step title="1.6 连接服务器">
+    点击 **octoparse** 旁的 **Connect**（连接）按钮。
+
+    Cursor 将启动八爪鱼 MCP 的认证流程。
+  </Step>
+  <Step title="1.7 完成授权">
+    1. 浏览器会打开权限 / 授权页面
+    2. 查看请求的权限范围
+    3. 点击 **Yes, Allow**（允许）完成授权
+    4. 可勾选 **Remember My Decision**（记住我的决定），避免下次重复确认
+  </Step>
+  <Step title="1.8 完成配置">
+    授权完成后返回 Cursor，八爪鱼 MCP 服务器应显示为已连接，可在编辑器内正常使用。
+  </Step>
+</Steps>
+
+### 认证流程说明
+
+首次在 Cursor 中连接八爪鱼 MCP 时：
+
+1. Cursor 从 `mcp.json` 读取 MCP 服务器配置
+2. 服务器出现在 **Tools & MCP** 列表中
+3. 状态显示 **Needs authentication**
+4. 点击 **Connect** 启动认证
+5. 在浏览器中批准访问权限
+6. 八爪鱼 MCP 在 Cursor 中变为可用
+
+## 步骤二：在 Cursor 中使用八爪鱼 MCP
+
+连接成功后，在 Cursor 的 AI 对话（Chat / Agent）中即可用自然语言操作采集任务。
+
+### 模板与任务创建
+
+```
+帮我找一个采集 Amazon 商品列表的八爪鱼模板
+用这个模板创建一个采集任务，并在云端启动
+```
+
+### 监控与导出
+
+```
+查看我最新的八爪鱼云采集任务状态
+把结果导出为 CSV
+```
+
+### 数据获取
+
+```
+列出这个八爪鱼任务的所有导出选项
+下载最新数据集，格式为 JSON
+```
+
+<AccordionGroup>
+  <Accordion title="展开查看更多提示词示例">
+
+  **搜索模板**
+
+  ```
+  搜索可用于采集 LinkedIn 公司信息的八爪鱼模板
+  ```
+
+  **创建并运行**
+
+  ```
+  使用模板 ID 12345 创建任务，然后启动云采集
+  ```
+
+  **导出数据**
+
+  ```
+  导出任务 abc123 的最新数据，格式为 JSON
+  ```
+
+  </Accordion>
+</AccordionGroup>
+
+## 重要使用说明
+
+- 配置文件路径：Windows 为 `%USERPROFILE%\.cursor\mcp.json`，macOS / Linux 为 `~/.cursor/mcp.json`
+- 修改 `mcp.json` 后若未生效，可重启 Cursor 或在 **Tools & MCP** 中刷新连接状态
+- 仅 **支持云采集的模板** 可通过 Cursor 启动；纯本地任务请在八爪鱼桌面客户端运行
+- 云采集有可能会消耗**八爪鱼账户余额**，具体见具体使用的八爪鱼模板
+- 部分模板需要 **专业版及以上** 套餐，或额外消耗积分
+
+## 常见问题
+
+| 现象 | 处理建议 |
+| --- | --- |
+| 找不到 Tools & MCP | 更新 Cursor 至最新版本；在 Settings 中搜索 MCP |
+| 保存后服务器未出现 | 检查 `mcp.json` JSON 格式是否正确；确认文件路径无误 |
+| 状态一直 Needs authentication | 点击 Connect 完成 OAuth；或改用 API Key 配置后重启 Cursor |
+| AI 对话中无法调用工具 | 确认 MCP 服务器已连接；在 Agent 模式下重试 |
+| 无法启动任务 | 确认模板支持云采集；检查账户套餐与余额 |
+| 本地任务无法运行 | 本地采集需在八爪鱼客户端操作，Cursor 仅支持云采集相关工具 |
+
+<Note>
+  若教程截图与 Cursor 当前界面有出入，请以 Cursor 官方界面为准。
+</Note>
+
+## 相关链接
+
+- [八爪鱼 MCP 概述](/zh/mcp/index)
+- [获取 API Key](/zh/mcp/quick-start/api-key)
+- [工作流程示例](/zh/mcp/workflow)
+- [故障排查](/zh/mcp/troubleshooting)
+- [客户端配置指南 — Cursor](/zh/mcp/guides/clients#cursor)

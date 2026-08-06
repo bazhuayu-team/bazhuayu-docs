@@ -1,0 +1,147 @@
+---
+title: "云采集监控预警平台"
+description: "介绍八爪鱼采集器高版本功能：云采集监控预警平台。"
+source: "https://www.bazhuayu.com/helpcenter/docs/8LFzSk"
+---
+
+**平台简介**
+
+ 八爪鱼「云采集监控预警」上线，通过平台可查看账号节点使用情况、采集数据量等，同时可对任务设置监控，从而实现对任务的监控预警。
+
+ 
+
+**使用版本限制**
+
+仅限企业版用户使用。
+
+ 
+
+### 一、进入**云采集监控预警平台**
+
+ 
+
+**1.进入平台**
+
+a.可直接访问[https://jk.bazhuayu.com/](https://jk.bazhuayu.com/)后登录账号密码
+
+b.下载官网的8.5.1以上的版本安装打开，点击客户端左侧【工具】-【云采集监控预警】按钮进入
+
+![](/assets/academy/premium-features/cloud-monitoring-alerts/01-654a19cd58541.png)
+
+ 
+
+ 
+
+### 二、功能说明
+
+ 
+
+云采集监控预警平台主要实时监控任务运行数据情况（采集中、等待中、已完成）。包括子任务运行数据（最多同时运行数量、采集中、等待中），从而更加清楚的了解子任务任务运行中资源的分配，能够友好提醒资源优化。
+
+![](/assets/academy/premium-features/cloud-monitoring-alerts/02-6538dacd56db2.png)
+
+ 
+
+####    1.主任务：
+
+1. 1. 采集中：当前正在采集的任务（支持点击数量进入任务列表）
+   2. 等待中：在等待启动的任务（支持点击数量进入任务列表）
+   3. 已完成：当天完成采集的任务数（按任务算，非完成次数），如：1个任务今天采集完成2次只显示1（00：00-24时）。（支持点击数量进入任务列表） ![云采集监控预警平台](/assets/academy/premium-features/cloud-monitoring-alerts/03-65b1ff9b8a56a.png)
+
+ 
+
+####     2.任务数据列表
+
+              a. 从主任务数的数值点击进入
+
+              b.列表内容：任务名、启动时间、等待时间、开始采集时间、采集用时、今日采集量、本次采集数据量、今日采集次数、详情
+
+![](/assets/academy/premium-features/cloud-monitoring-alerts/04-6538dacd95dee.png)
+
+ 
+
+ 
+
+#### **3.任务详情**
+
+1. 从任务数据列表点击进入
+2. 查看内容为采集实况页面
+
+ ![](/assets/academy/premium-features/cloud-monitoring-alerts/05-6538dacdb5395.png)
+
+ 
+
+ 
+
+### 三、监控预警
+
+监控对象任务为当前启动的任务包括：采集中、等待中、近24小时内完成的任务。预警显示数值为任务数量（非次数）。
+
+1. 预警指标：默认显示指标为产品提供，可以跟进默认指标进行参数配置和创建新的参数指标。预警指标分三个等级，高、中、低每个等级设计特定标识并按等级优先向前排列
+2. 预警数量：预警数量以任务数为基准，点击可展开具体的预警信息
+
+以上模块的指标都可以根据自己的需求设置具体的指标参数，以【超过\*\*分钟采集数据为0】指标为例
+
+第一步：点击指标模块右上角的【...】，打开预警开关按钮![](/assets/academy/premium-features/cloud-monitoring-alerts/06-654a1b7315d38.png)
+
+第二步、点击【预警设置】进设置弹窗，设置对应的参数，如时间、预警等级、任务等
+
+![](/assets/academy/premium-features/cloud-monitoring-alerts/07-6538dace8e9a5.png)
+
+ 
+
+如果需要微信预警通知，再点击勾选微信通知，然后绑定微信。绑定微信后预警信息将通过微信公众号通知。![](/assets/academy/premium-features/cloud-monitoring-alerts/08-654a1c796fc67.png)
+
+全部设置好之后点击保存即可。
+
+ 
+
+注意：如果不同的任务需要不同的预警时间应该怎么设置呢？
+
+原理同上进入设置弹窗后，点击【创建预警副本】
+
+![](/assets/academy/premium-features/cloud-monitoring-alerts/09-654a1d26bd1ef.png)
+
+然后就可以看到我没创建好的预警副本了
+
+![](/assets/academy/premium-features/cloud-monitoring-alerts/10-6538dacf950f4.png)
+
+当有预警信息时预警模块会有红点提示，然后可以点击模块查看任务情况
+
+ ![](/assets/academy/premium-features/cloud-monitoring-alerts/11-654a1e5fa4271.png)
+
+ 
+
+ 
+
+ 
+
+### **四、数据看板**
+
+ 
+
+数据看板主要跟进实时>当天>每天，三个递进关系的数据满足对数据的信息的了解情况
+
+ 
+
+#### 1.实时采集量（实时数据）
+
+按分钟级别体现当前采集数据实况，可以切换选择实时或者24小时
+
+ 
+
+![](/assets/academy/premium-features/cloud-monitoring-alerts/12-6538dad01b2df.png)
+
+#### 2.今日采集量
+
+可以设置指定的任务组进行显示今日采集量，今日0点开始的每个时间点的采集数据量走势，昨日整天的采集数据量的走势图。
+
+![](/assets/academy/premium-features/cloud-monitoring-alerts/13-6538dad052c51.png)
+
+ 
+
+#### 3.每日采集量
+
+提供近7天、15天、30天的数据量柱状图，图表右上角显示总数据量
+
+![](/assets/academy/premium-features/cloud-monitoring-alerts/14-6538dad082a62.png)

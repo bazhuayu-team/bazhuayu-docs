@@ -1,0 +1,81 @@
+---
+title: "网页空白的排错方法"
+description: "一、如何解决网页空白 在编辑采集流程步骤中，我们可能会遇到浏览器窗口的网页变成空白的页面。例如从列表页面点击进入详情页，在详情页提取数据时，浏览器中的网页就变成空白页 about:blank。 （浏览器窗口空白01） 这是因为【点击元素】（或【点击列表链接】）的【高级设置】中勾选了【在新标签中打开】，而导致的。…"
+hidden: true
+kbStatus: "unverified"
+kbSource: "faq"
+sourceSlug: "dzinjv"
+source: "https://www.bazhuayu.com/helpcenter/docs/dzinjv"
+---
+
+**一、如何解决网页空白**
+
+ 
+
+在编辑采集流程步骤中，我们可能会遇到浏览器窗口的网页变成空白的页面。例如从列表页面点击进入详情页，在详情页提取数据时，浏览器中的网页就变成空白页 about:blank。
+
+ 
+
+ ![](/assets/knowledge-base/faq/dzinjv/01-6520d2db86857.png)
+
+（浏览器窗口空白01）
+
+ 
+
+这是因为【点击元素】（或【点击列表链接】）的【高级设置】中**勾选了【在新标签中打开】**，而导致的。
+
+ 
+
+![](/assets/knowledge-base/faq/dzinjv/02-6520d2dbc9143.png)
+
+（浏览器窗口空白02）
+
+ 
+
+有些网页的点击并不是开标签的，而ajax加载的（什么是ajax，请参考：[Ajax网页设置方法](https://www.bazhuayu.com/tutorial8/81spajax "Ajax网页设置方法")）。
+
+ 
+
+所以对这类**网页空白**的情况，我们可以**通过不勾选【在新标签中打开】，只勾选【ajax加载】来解决；**
+
+ 
+
+ajax超时时间根据网页加载情况来设置，一般5秒左右，调整好后，点击【应用】按钮即可。
+
+ 
+
+![](/assets/knowledge-base/faq/dzinjv/03-6520d2dba6a07.png)
+
+（浏览器窗口空白03）
+
+ 
+
+ 
+
+ 
+
+**二、注意事项**
+
+ 
+
+小部分网站的点击元素勾选【ajax加载】后，会出现点击循环无法再回到列表页（上一级页面）的情况。
+
+ 
+
+![](/assets/knowledge-base/faq/dzinjv/04-6520d2dbb6de7.png)
+
+（返回上一级网页01）
+
+ 
+
+此时，可以通过添加一个【返回上一级网页】的步骤来解决该问题。如图提取数据步骤下方添加【返回上一级网页】。
+
+ 
+
+![](/assets/knowledge-base/faq/dzinjv/05-6520d2dbafaf1.png)
+
+（返回上一级网页02）
+
+ 
+
+[返回上一级网页 功能详情说明，请参考：https://www.bazhuayu.com/tutorial8/81zdfh](https://www.bazhuayu.com/tutorial8/81zdfh "https://www.bazhuayu.com/tutorial8/81zdfh")

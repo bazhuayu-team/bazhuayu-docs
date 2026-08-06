@@ -1,0 +1,641 @@
+---
+title: "【微信公众号】文章采集（反爬较严重）"
+source: "https://www.bazhuayu.com/helpcenter/docs/wei-xin-gong-zhong-hao-wen-zhang-cai-ji-fan-pa-jiao-yan-zhong"
+---
+**采集需求**
+
+如果需要采集确定公众号的文章，在网页上是无法直接获取。同时**移动端的数据采集器又无法直接获取**，本教程展示如何配置流程采集所需公众号的文章信息。
+
+![【微信公众号】文章采集（反爬较严重）](/assets/academy/case-studies/wechat-articles-anti-crawl/01-69c64338ac42b.png)
+
+ 
+
+**采集场景**
+
+搜索所需公众号的文章信息。通过登录微信公众平台（[https://mp.weixin.qq.com/cgi-bin/appmsg?t=media/appmsg_edit_v2&action=edit&isNew=1&type=77&createType=0&token=1561052443&lang=zh_CN&timestamp=1744763411940](https://mp.weixin.qq.com/cgi-bin/appmsg?t=media/appmsg_edit_v2&action=edit&isNew=1&type=77&createType=0&token=1561052443&lang=zh_CN&timestamp=1744763411940)）采集。
+
+![【微信公众号】文章采集（反爬较严重）](/assets/academy/case-studies/wechat-articles-anti-crawl/02-69c64338b49c9.png)
+
+ 
+
+![【微信公众号】文章采集（反爬较严重）](/assets/academy/case-studies/wechat-articles-anti-crawl/03-69c64338de275.png)
+
+ 
+
+![【微信公众号】文章采集（反爬较严重）](/assets/academy/case-studies/wechat-articles-anti-crawl/04-69c6433943739.png)
+
+主要采集字段
+
+①公众号、微信号、类型。②文章标题、文章链接、发布时间。③来源、地区。④正文、正文html。⑤图片。
+
+**采集结果**
+
+采集结果可导出为Excel、CSV、HTML、数据库等多种格式。 导出为Excel示例：
+
+![【微信公众号】文章采集（反爬较严重）](/assets/academy/case-studies/wechat-articles-anti-crawl/05-69c643396c13a.png)
+
+**教程说明**
+
+本篇制作时间：2026/3/23-2026/3/27 八爪鱼版本：V8.9.0
+
+如果因网页改版造成网址或步骤无效，无法收集到目标数据，请联系官方客服，我们将及时修正。
+
+ 
+
+**采集步骤**
+
+步骤一、打开网页
+
+步骤二、登录并保存cookie
+
+步骤三、操作进入公众号文章列表
+
+步骤四、确定文章循环列表并提取相关信息
+
+步骤五、进入详情页提取相应详情数据
+
+步骤六、字段格式化处理
+
+步骤七、优化规则
+
+步骤八、启动采集
+
+ 
+
+**以下为具体步骤：**
+
+ 
+
+### 步骤一、打开网页
+
+ 
+
+1、打开网址
+
+在首页输入框中，输入网址[https://mp.weixin.qq.com/cgi-bin/appmsg?t=media/appmsg_edit_v2&action=edit&isNew=1&type=77&createType=0&token=1561052443&lang=zh_CN&timestamp=1744763411940](https://mp.weixin.qq.com/cgi-bin/appmsg?t=media/appmsg_edit_v2&action=edit&isNew=1&type=77&createType=0&token=1561052443&lang=zh_CN&timestamp=1744763411940)，然后点击【开始采集】，八爪鱼自动打开网页,网站会自动跳到登录页面。
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/befc78385145403721029063357/XNPGGk2OObMA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 打开网页后，如果开始开始【自动识别】，请等待自动识别完成。八爪鱼支持自动识别网页上的列表、滚动和翻页，识别成功后直接启动采集即可获取数据。如果【自动识别】的结果不是我们需要的，可点击【取消】关闭智能识别，自行配置采集流程。详情点击查看 【自动识别】
+
+ 
+
+### 步骤二、登录并保存cookie
+
+1、登录
+
+①点击开启“浏览模式”
+
+②点击登录按钮
+
+③扫描二维码登录
+
+2、确定并保存cookie
+
+①点击高级设置
+
+②点击使用指定cookie
+
+③点击获取当前页cookie
+
+④点击应用
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/beeda9f95145403721029059353/yIlBTUC6tIsA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. **采集公众号的前提时你需要有自己的公众号**，因为获取数据的原理是通过新增文章时引用搜索确定数据的（此流程后续会展示）。
+> 
+> - b. 其他登录相关说明请关注：[登录验证采集](/zh/academy/basic-collection/beginner/login-verification)
+> 
+> - c. 配置完高级设置后，**请一定点击“应用”。**
+> 
+> - d. 登录完后记得关闭浏览模式，否则无法正常配置流程。
+
+ 
+
+### 步骤三、操作进入公众号文章列表
+
+ 
+
+1、进入编辑界面
+
+①点击新的创作-文章
+
+②在黄色操作提示框中，选择【点击一次】
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/ffdc493b5145403721030479960/z3AuR67JTn0A.mp4" width="100%"></video>
+
+ 
+
+2、进入“引用”模块
+
+① 点击选中引用按钮
+
+②在黄色操作提示框中，选择【点击一次】
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/94436e525145403721025442435/OK9mdI0vpdYA.mp4" width="100%"></video>
+
+ 
+
+3、确定所需公众号列表
+
+①点击查找公众号文章
+
+②在黄色操作提示框中，选择【点击一次】
+
+③点击输入框
+
+④在黄色操作提示框中，点击【输入文本】
+
+⑤输入你所需采集的公众号名称（案例：央视新闻）
+
+⑥点击搜索按钮
+
+⑦在黄色操作提示框中，点击【点击该按钮】
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/4bd2257c5145403721024627972/EuahHhCp3ZwA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 通过引用方式即可确定目标公众号信息。
+> 
+> - b. 点击元素按键说明请关注：[点击元素跳转](/zh/academy/basic-collection/beginner/click-to-jump)
+> 
+> - c. 如果需要一次性采集多个公众号内容，可以点击批量输入文本，具体请参考：[文本循环：批量输入关键词](/zh/academy/basic-collection/bulk-input/text-loop-keywords)，不过由于公众号风控原因，极可能触发验证，需要手动处理，请及时关注。
+
+ 
+
+4、提取公众号基础信息
+
+① 点击第一行的公众号名、微信名、账号类型。
+
+② 依次在黄色操作提示框中，选择提取【文本内容】
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/2c3e4ebb5145403721027394373/xWUefdEGBIcA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 只点击第一列是因为我们正常搜索的公众号在确定名称正确的情况下只会在第一列显示，选择采集第一列即可。
+
+ 
+
+### 步骤四、确定文章循环列表并提取相关信息
+
+ 
+
+1、跳转进文章循环列表
+
+①点击文章标题
+
+②在黄色操作提示框中，选择【点击一次】
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/befc73515145403721029063206/jpnXnzgzj0cA.mp4" width="100%"></video>
+
+ 
+
+2、确定文章循环列表
+
+①点击选中其中之一的文章列表元素
+
+②在黄色操作提示框中，点击【选中全部元素】
+
+③在黄色操作提示框中，选提取数据，点击【文本内容】
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/251cd5785145403721027078380/yG6YwtO7MEoA.mp4" width="100%"></video>
+
+ 
+
+3、设置列表翻页
+
+①点击下一页按钮
+
+②在黄色操作提示框中，点击【循环点击下一页】
+
+③点击流程框“循环翻页”，验证是否准确定位。——见下方特殊说明a
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/2bc1d8d95145403721027328464/RlXSzFgSL0cA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 注意视频中最后验证，发现识别到的翻页按钮指向错误（指向上一页），这是xpath定位错误，后续会说明并处理解决此问题——见步骤六-3、给翻页修改xpath。
+
+ 
+
+4、获取文章列表字段
+
+①点击流程框“循环列表”
+
+②点击相应字段：文章标题、发布时间。
+
+③ 依次在黄色操作提示框中，选择提取【文本内容】
+
+⑤删除第一个字段。
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/2c3e68435145403721027394975/9Ca3nThsjnIA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 为何只点击一个元素，整个循环列表都能正常采集呢？原因就是如果在已经生成的循环列表中选择点击/提取元素，系统会优先匹配相对xpath拼接，便于数据采集调试。可参考：[绝对xpath、相对XPath学习与实例](https://www.bazhuayu.com/helpcenter/docs/bs4o6e)
+> 
+> - b. 删除第一个字段主要原因是首字段是我们确定循环结构时生成的字段，此字段包含循环列表中的全部数据，没有使用价值，删除即可。
+
+ 
+
+### 步骤五、进入详情页提取相应详情数据
+
+ 
+
+1、点击文章标题进入详情页
+
+① 首先点击流程“循环列表”-具体原因见步骤三-4、获取文章列表字段-特殊说明a
+
+② 点击文章标题
+
+③在黄色操作提示框中，选择操作【点击一次】
+
+④如果进入详情页时出现验证，请配置点击
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/84e3f3445145403721028897175/LzZt8Snhx0YA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 由于列表页没有相关链接，所以需要进入详情页，直接获取当前网页地址。
+> 
+> - b. 采集时会出现验证，风控原因配置流程点击可能失效，请暂停手动点击。
+
+ 
+
+2、获取详情页数据
+
+①点击选中全部正文。
+
+②在黄色操作提示框中，选择提取【文本内容】
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/9446b4585145403721025448336/l96dKi2qTj0A.mp4" width="100%"></video>
+
+ 
+
+③右键点击“文本5”字段，复制
+
+④点击复制出的字段，修改拉取方式为“获取html”
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/beed33455145403721029058888/iWU2rYNKVk4A.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. ③、④主要时为了获取公众号正文html，其中修改拉取方式说明请参考：[自定义抓取方式](/zh/academy/advanced-features/data-processing/custom-extraction-method)
+
+ 
+
+3、循环获取图片链接
+
+①选择符合配置要求的详情页——见特殊说明a
+
+②选择点击两个图片。
+
+③在黄色操作提示框中，选择提取【图片链接】
+
+④右键生成的字段1，点击【同一字段多行合并】
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/e39591dd5145403721026547457/OQILa5mPenYA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 因为有些文章无图或只有单图，并不能循环，我们先选择能循环的文章，进入其详情页。具体操作请参考如下：
+> 
+> 
+> 
+> <video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/60155f0b5145403721021408313/3kXdgAbGs8gA.mp4" width="100%"></video>
+> 
+> 
+> 
+> - b. 点击两张图片的原因主要是循环列表没有准确识别，我们多点击一个，即可帮助其识别。具体说明请关注：[列表进入详情页采集](/zh/academy/basic-collection/beginner/list-to-detail#44607904244435bc9eec718871b488c6)
+> 
+> - c. 点击多行合并主要是方式前面数据重复采集，采集器逻辑是内部循环执行时此前采集的数据自动补充，合并成一行即可避免。合并成一行具体操作请关注：[字段合并](/zh/academy/advanced-features/data-processing/field-merge)
+
+ 
+
+### 步骤六、字段格式化处理
+
+ 
+
+1、修改流程名
+
+更改“点击元素”为“点击新增文章”
+
+更改“点击元素1”为“点击引用按钮”
+
+更改“点击元素2”为“点击查找公众号”
+
+更改“点击元素3”为“点击搜索”
+
+更改“提取数据”为“提取公众号信息”
+
+更改“点击元素4”为“点击进入文章列表”
+
+更改“提取列表数据”为“提取文章基础信息”
+
+更改“点击元素5”为“点击进入详情页”
+
+更改“点击元素6”为“点击验证（有验证时触发）”
+
+更改“提取数据1”为“提取正文数据”
+
+更改“循环列表1”为“循环图片列表”
+
+更改“提取列表数据1”为“提取图片链接”
+
+ 
+
+![【微信公众号】文章采集（反爬较严重）](/assets/academy/case-studies/wechat-articles-anti-crawl/06-69c64338ce0c9.png)
+
+![【微信公众号】文章采集（反爬较严重）](/assets/academy/case-studies/wechat-articles-anti-crawl/07-69c643387c440.png)
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 修改流程名目的主要是规范流程，为后续排查问题打下便利基础。
+> 
+> - b.若是在基础设置中修改流程名。则改完后一定要点击应用。
+> 
+> ![【微信公众号】文章采集（反爬较严重）](/assets/academy/case-studies/wechat-articles-anti-crawl/08-69c64338d6bc7.png)
+
+ 
+
+2、修改字段名
+
+①更改“文本”为“公众号”
+
+②更改“文本1”为“微信号”
+
+③更改“文本1”为“类型”
+
+④更改“文本3”为“文章标题”
+
+⑤更改“文本4”为“发布时间”
+
+⑥更改“文本5”为“正文”
+
+⑦更改“文本5\_复制”为“正文html”
+
+⑧更改“字段1”为“图片链接”
+
+ 
+
+3、格式化字段
+
+①点击“微信号”字段，右键点击格式化字段，使用替换，将“微信号：”选中，然后替换成空（即，不填）。
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/78b8d8375145403721028322773/F1qc7TDBjbsA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 具体更多格式化请关注：[字段格式化](/zh/academy/advanced-features/data-processing/field-formatting)
+
+ 
+
+ 
+
+### 步骤七、优化规则
+
+公众号风控严重，为确保更佳顺畅，需要进行规则优化。
+
+1、给每个**点击**流程，都添加执行前等待：7秒
+
+2、给每个**点击**流程，都添加Ajax加载超时：15秒
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 设置完相关优化（高级设置）后一定要及时点击应用。
+> 
+> ![【微信公众号】文章采集（反爬较严重）](/assets/academy/case-studies/wechat-articles-anti-crawl/09-69c64338adf67.png)
+> 
+> - b. 具体规格优化参考：[规则优化](https://www.bazhuayu.com/helpcenter/docs/gui-ze-you-hua?search=1)
+> 
+> - c. 相关Ajax网页设置：[ajax网页采集方法](https://www.bazhuayu.com/helpcenter/docs/R01mM3#ddaf632fa6acc222f916f4d065e660fe)
+> 
+> - d. 所有**点击**流程为：“点击新增文章”、“点击引用按钮”、“点击查找公众号”、“点击搜索”、“点击进入文章列表”、“点击进入详情页”、“点击验证（有验证时触发）”。
+
+ 
+
+3、给翻页修改xpath
+
+①点击循环翻页流程框
+
+②将元素xpath改为：//a[text()="下一页"]
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 具体xpath说明请参考：[Xpath入门](https://www.bazhuayu.com/helpcenter/docs/NNq78SWX)
+
+ 
+
+### 步骤八、启动采集
+
+ 
+
+1、单击【采集】并【启动本地采集】。
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/2bd13f6e5145403721027333700/Z5lOcv1bJlcA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 点击进入采集界面后，会跳出验证，***请暂停手动验证***。此验证无法被识别点击。
+> 
+> ![【微信公众号】文章采集（反爬较严重）](/assets/academy/case-studies/wechat-articles-anti-crawl/10-69c643390c1a4.png)
+> 
+> - b.【本地采集】是使用自己的电脑进行采集，【云采集】是使用八爪鱼提供的云服务器采集，点击查看 [本地采集与云采集详解](https://www.bazhuayu.com/helpcenter/docs/2xF5Mz)，本案例无法使用云采集。
+> 
+> - c. 视频经过加速。
+
+ 
+
+2、采集完成后，选择合适的导出方式来导出数据。支持导出为Excel，CSV，HTML，数据库等。这里导出为Excel。
+
+![【微信公众号】文章采集（反爬较严重）](/assets/academy/case-studies/wechat-articles-anti-crawl/11-69c64339d961d.png)
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+作者：YfY

@@ -1,0 +1,206 @@
+---
+title: 八爪鱼 MCP 服务
+description: 通过 MCP 协议查询数据中心存量内容、搜索采集模板、运行云采集任务并导出数据。
+---
+
+将八爪鱼采集能力接入 Coze（扣子）、Dify、QClaw（小龙虾）、ChatGPT、Claude、Cursor、Gemini 等兼容 MCP 的 AI 智能体。
+
+八爪鱼 MCP 是面向 AI 智能体的**标准化数据连接器**。在对话中可以直接查询数据中心已经积累的存量内容，也可以搜索预置模板、触发云端采集、导出多种格式的数据，或按需采集 Temu、TikTok Shop 电商数据，无需手写爬虫代码。
+
+截至 2026 年 7 月 22 日，实测服务版本为 `0.8.3.3-85ef7c4b`，协商协议版本为 `2025-11-25`，公开 10 个工具。服务端会持续更新，客户端实际可用能力应以连接后的工具发现结果为准。
+
+## 前置条件
+
+- **八爪鱼账户** — 免费版也可连接；免费 / 基础版用户每周可通过 MCP 获得 **2,000 条**免费采集额度
+- **兼容 MCP 的客户端** — 见下方 [平台对接](#平台对接)，或 [客户端配置指南](/zh/mcp/guides/clients)
+
+## 让 Agent 自动添加（推荐）
+
+WorkBuddy、QClaw、豆包专业版等具备工具配置能力的 Agent，通常可以根据一段对话自行添加 MCP 服务。先在账户中心[创建 API Key](/zh/mcp/quick-start/api-key)，再将下面的内容发给 Agent，并把占位符替换为你的真实 Key：
+
+```text
+请帮我添加名为“八爪鱼”的 HTTP MCP 服务，并自行完成配置和连通性测试。
+
+服务地址：https://mcp.bazhuayu.com
+API Key：<粘贴你的 API Key>
+
+关键要求：
+1. 本次接入只使用 API Key 认证，请将密钥放在请求头 x-api-key 中。
+2. 不要改用 OAuth，也不要写成 Authorization: Bearer <API Key>。
+3. 请根据当前客户端支持的 MCP 配置方式自行安装；完成后按需刷新工具列表或重启客户端。
+4. 请验证服务已连接并能读取工具列表，再调用只读工具 list_platforms 完成连通性测试；只向我报告配置位置、测试结果和后续用法，不要在回复中回显完整 API Key。
+```
+
+<Warning>
+  仅在可信的本地 Agent 或私密对话中提供 API Key。不要把真实 Key 发送到群聊、公开对话或截图中；安装完成后也不要让 Agent 回显密钥。
+</Warning>
+
+这里的“只使用 API Key”是针对上述 Agent 自动配置场景，用于避免客户端误判鉴权方式。ChatGPT、Claude、Cursor 等平台教程中明确支持的 OAuth 流程仍可正常使用。若 Agent 无权修改配置，请按[客户端配置指南](/zh/mcp/guides/clients)手动添加。
+
+## 能力范围
+
+<CardGroup cols={2}>
+  <Card title="支持" icon="check">
+    - 搜索预置采集模板
+    - 触发并监控云采集任务
+    - 预览并导出多种格式的数据
+    - 列出 / 搜索已有任务
+    - 启动或停止云端任务
+    - 查询数据中心的网页与媒体存量内容
+    - 提交并查询电商评论采集
+    - 兑换优惠码
+  </Card>
+  <Card title="不支持" icon="x">
+    - 仅支持本地运行的任务（需桌面客户端）
+    - 创建或编辑任务配置
+    - 上传自定义模板
+    - 访问账户设置或账单
+    - 无预置模板时自动生成任意网页采集规则
+  </Card>
+</CardGroup>
+
+## 认证方式
+
+<CardGroup cols={2}>
+  <Card title="OAuth 2.1（推荐）" icon="key">
+    浏览器登录八爪鱼账户，无需手动复制 API Key。适合 ChatGPT、Claude、Cursor、Gemini、Coze、Dify 等支持 OAuth 的客户端。
+  </Card>
+  <Card title="API Key" icon="lock">
+    使用请求头 `x-api-key` 直连。适合 Dify、Coze 自定义 MCP、QClaw、无头环境等。详见 [获取 API Key](/zh/mcp/quick-start/api-key)。
+  </Card>
+</CardGroup>
+
+<Warning>
+  请勿将 API Key 写入公开仓库、截图或群聊。泄露后请立即在账户中心作废并重新创建。
+</Warning>
+
+## 按场景拆分数据任务
+
+八爪鱼只提供一个 MCP 服务。为了让 Agent 更准确地选择工具，服务将完整的数据任务拆分为以下具体场景；它们不是三套彼此独立的产品，同一个业务任务可以组合使用多组工具。
+
+| 场景 | Agent 要完成的任务 | 推荐工具 |
+| --- | --- | --- |
+| **直接查询已有内容** | 从数据中心检索提前采集的跨平台存量数据 | `list_platforms`、`search_platform_content` |
+| **按需采集电商数据** | 提交 Temu、TikTok Shop 采集任务，再查询入库结果 | `ecommerce_data_task`、`query_collected_reviews` |
+| **运行通用网站采集** | 选择模板、校验参数、运行云任务并导出结果 | `search_templates`、`execute_task`、`export_data` 等 |
+
+例如，Agent 可以先从数据中心做跨平台检索，发现重点商品或网站后，再转入电商实时采集或模板化采集流程补充数据。
+
+数据中心交付的是**提前采集的存量数据**：用户发起查询时直接检索已有内容，不必等待临时创建网页采集任务。一次于 2026 年 7 月 29 日进行的只读核验中，`list_platforms` 返回 **898 个平台条目**，映射到 **787 个去重域名**。这是当前可检索来源目录的规模口径，不是内容记录总数或固定服务承诺；同一域名可以对应多个产品入口或客户端形态，例如 `toutiao.com` 对应微头条、头条号、今日头条等多个条目。
+
+目录覆盖社交社区、新闻资讯、财经证券、汽车、消费维权、招投标、政务公开资源和海外媒体等来源，数据形态包括网页、图片与视频。已核验的示例包括小红书、微信、微信视频号、知乎、豆瓣、百度贴吧、Facebook、人民网、新华网、腾讯新闻、东方财富网、雪球网、懂车帝、汽车之家、中国政府采购网、Reuters、Bloomberg、The Guardian 和 Yahoo! JAPAN。实际记录总量、可检索时间范围和平台目录都会持续变化；查询前应以 [`list_platforms`](/zh/mcp/list-platforms) 的实时返回为准。
+
+## 通用采集工具
+
+| 工具 | 说明 |
+| --- | --- |
+| `search_templates` | 搜索模板，并查看输入字段、输出字段与数据源选项 |
+| `search_tasks` | 列出并搜索账户下已有任务 |
+| `start_or_stop_task` | 按任务 ID 启动或停止云采集 |
+| `execute_task` | 预检参数，或创建并启动模板云采集任务 |
+| `export_data` | 查询采集/导出进度，预览数据并取得下载地址 |
+| `redeem_coupon_code` | 兑换促销或资源优惠码 |
+
+## 数据中心与电商数据工具
+
+| 工具 | 说明 |
+| --- | --- |
+| `search_platform_content` | 按关键词、时间与域名搜索网页、图片和视频内容 |
+| `list_platforms` | 查看数据中心当前支持的平台与域名 |
+| `ecommerce_data_task` | 提交 Temu 或 TikTok Shop 商品与评论采集任务 |
+| `query_collected_reviews` | 查询已采集的 Temu 或 TikTok Shop 商品评论 |
+
+各工具参数见侧栏 **通用采集工具** 和 **数据中心与电商数据** 分组。
+
+## 快速开始
+
+<Steps>
+  <Step title="确认客户端支持 MCP">
+    在 AI 产品中找到「MCP / 连接器 / 工具」配置入口。
+  </Step>
+  <Step title="让 Agent 添加或手动填写">
+    优先将上方对话发送给支持自主配置的 Agent；也可以手动填写 `https://mcp.bazhuayu.com`（国际环境使用 `https://mcp.octoparse.com`）。
+  </Step>
+  <Step title="完成认证">
+    选择 OAuth 登录，或配置 [API Key](/zh/mcp/quick-start/api-key)。
+  </Step>
+  <Step title="在对话中试用">
+    先用只读请求验证连接，例如：「列出数据中心当前支持的平台」，或「帮我找一个采集电商商品列表的八爪鱼模板」。
+  </Step>
+</Steps>
+
+## 示例工作流
+
+完整流程见 [工作流程示例](/zh/mcp/workflow)：
+
+1. `search_templates` — 发现模板
+2. `execute_task(validateOnly)` — 校验参数和数据源选择
+3. `execute_task` — 通过 MCP Tasks 或兼容模式运行云采集
+4. `tasks/get` / `tasks/result` — 支持 MCP Tasks 时跟踪状态
+5. `export_data` — 预览数据并取得导出文件
+
+## 协议能力与 Resources
+
+当前服务协商得到以下能力：
+
+- `tools.listChanged`：工具列表变化时可通知客户端刷新
+- `resources.listChanged`：资源列表变化时可通知客户端刷新
+- MCP Tasks：支持列出、取消和跟踪工具任务；`execute_task` 可选支持 Task 模式
+- Completions 与 Logging：可供兼容客户端使用
+
+服务提供 `octoparse://workflow` 工作流说明，以及模板搜索、任务搜索和导出预览三个 `ui://widget/...` 资源。Widget 面向支持 OpenAI Apps SDK 等 UI 资源的客户端；普通 MCP 客户端仍可正常调用工具，但不一定渲染这些界面。
+
+## 平台对接 {#平台对接}
+
+<div className="mcp-platform-grid">
+  <a href="/docs/zh/mcp/integrations/coze" className="mcp-platform-card">
+    <img src="/assets/mcp/platforms/coze.svg" alt="" width="24" height="24" />
+    <span>Coze（扣子）</span>
+  </a>
+  <a href="/docs/zh/mcp/integrations/dify" className="mcp-platform-card">
+    <img src="/assets/mcp/platforms/dify.svg" alt="" width="24" height="24" />
+    <span>Dify</span>
+  </a>
+  <a href="/docs/zh/mcp/integrations/qclaw" className="mcp-platform-card">
+    <img src="/assets/mcp/platforms/qclaw.svg" alt="" width="24" height="24" />
+    <span>QClaw（小龙虾）</span>
+  </a>
+  <a href="/docs/zh/mcp/integrations/chatgpt" className="mcp-platform-card">
+    <img src="/assets/mcp/platforms/chatgpt.svg" alt="" width="24" height="24" />
+    <span>ChatGPT</span>
+  </a>
+  <a href="/docs/zh/mcp/integrations/claude" className="mcp-platform-card">
+    <img src="/assets/mcp/platforms/claude.svg" alt="" width="24" height="24" />
+    <span>Claude</span>
+  </a>
+  <a href="/docs/zh/mcp/integrations/openclaw" className="mcp-platform-card">
+    <img src="/assets/mcp/platforms/openclaw.svg" alt="" width="24" height="24" />
+    <span>OpenClaw</span>
+  </a>
+  <a href="/docs/zh/mcp/integrations/cursor" className="mcp-platform-card">
+    <img src="/assets/mcp/platforms/cursor.svg" alt="" width="24" height="24" />
+    <span>Cursor</span>
+  </a>
+  <a href="/docs/zh/mcp/integrations/vscode" className="mcp-platform-card">
+    <img src="/assets/mcp/platforms/vscode.svg" alt="" width="24" height="24" />
+    <span>VS Code</span>
+  </a>
+  <a href="/docs/zh/mcp/integrations/gemini" className="mcp-platform-card">
+    <img src="/assets/mcp/platforms/gemini.svg" alt="" width="24" height="24" />
+    <span>Gemini</span>
+  </a>
+</div>
+
+## 下一步
+
+<CardGroup cols={2}>
+  <Card title="获取 API Key" href="/zh/mcp/quick-start/api-key">
+    API Key 创建与 `x-api-key` 配置说明。
+  </Card>
+  <Card title="速率限制" href="/zh/mcp/rate-limits">
+    请求配额与 429 重试建议。
+  </Card>
+  <Card title="故障排查" href="/zh/mcp/troubleshooting">
+    连接、授权与任务执行常见问题。
+  </Card>
+</CardGroup>

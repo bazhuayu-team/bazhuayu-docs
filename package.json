@@ -1,0 +1,16 @@
+{
+  "scripts": {
+    "kb:check": "node scripts/import-helplook-faq-kb.mjs --check",
+    "kb:import": "node scripts/import-helplook-faq-kb.mjs",
+    "kb:build": "node scripts/build-knowledge-index.mjs",
+    "kb:validate": "node scripts/validate-knowledge-base.mjs",
+    "kb:review": "node scripts/kb-review-server.mjs",
+    "kb:review:test": "node --test scripts/test/**/*.test.mjs",
+    "kb:mcp:check": "node scripts/check-mcp-protocol-version.mjs",
+    "kb:agent": "node services/kb-agent/server.mjs",
+    "kb:agent:test": "node --test services/kb-agent/test/**/*.test.mjs"
+  },
+  "dependencies": {
+    "mintlify": "^4.2.571"
+  }
+}

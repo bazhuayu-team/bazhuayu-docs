@@ -1,0 +1,490 @@
+---
+title: "采集学院"
+sidebarTitle: "采集学院"
+description: "这里收录八爪鱼采集器的操作教程与实战案例。内容覆盖快速入门、基本采集、进阶功能、规则排错与优化、数据导出、XPath 学习案例，以及电商、社交媒体、新闻资讯、房产、生活服务、金融等业务场景案例，适合从注册安装、三分钟快速上手、自定义采集、列表采集、翻页采集开始系统学习，并继续掌握字段处理、流程设置、技巧操作、排错优化、数据导出、XPath 定位和业务场景落地能力。"
+---
+
+
+## 快速入门
+
+从注册安装到第一个采集任务，这一栏适合第一次接触八爪鱼采集器的用户，先熟悉客户端、采集界面和基础任务流程，再进入后续的操作指南。
+
+注册安装
+
+<CardGroup cols={2}>
+<Card title="Windows客户端安装方法" href="/zh/academy/quick-start/registration-installation/windows-client-installation">
+  介绍 Windows 客户端下载安装步骤、系统要求和登录前准备。
+</Card>
+
+<Card title="Mac客户端安装方法" href="/zh/academy/quick-start/registration-installation/mac-client-installation">
+  介绍 Mac 客户端下载安装步骤、系统要求和启动注意事项。
+</Card>
+
+<Card title="免费注册账号" href="/zh/academy/quick-start/registration-installation/free-account-registration">
+  说明八爪鱼账号注册入口、注册流程和首次登录准备。
+</Card>
+
+</CardGroup>
+
+3分钟快速上手
+
+<CardGroup cols={2}>
+<Card title="客户端" href="/zh/academy/quick-start/three-minute-quick-start/client-overview">
+  快速认识八爪鱼客户端的主要区域和核心入口。
+</Card>
+
+<Card title="采集界面" href="/zh/academy/quick-start/three-minute-quick-start/collection-interface">
+  熟悉采集界面的布局、常用按钮和任务配置区域。
+</Card>
+
+<Card title="新手指引" href="/zh/academy/quick-start/three-minute-quick-start/beginner-guide">
+  通过官方新手引导快速理解基础采集流程和常用概念。
+</Card>
+
+<Card title="模板采集" href="/zh/academy/quick-start/three-minute-quick-start/template-collection">
+  使用现成模板快速启动采集任务，适合低门槛入门。
+</Card>
+
+<Card title="自动识别采集" href="/zh/academy/quick-start/three-minute-quick-start/auto-recognize-collection">
+  了解自动识别网页内容的方式，快速生成基础采集流程。
+</Card>
+
+<Card title="搭建第一个规则任务" href="/zh/academy/quick-start/three-minute-quick-start/build-first-rule-task">
+  从零搭建第一个规则任务，理解字段、步骤和导出的关系。
+</Card>
+
+<Card title="八爪鱼采集器：官方推广福利" href="/zh/academy/quick-start/three-minute-quick-start/official-promo-benefits">
+  查看新手福利、活动说明和适用方式。
+</Card>
+
+<Card title="【八爪鱼新手入门】常见问题清单-官方版" href="/zh/academy/quick-start/three-minute-quick-start/beginner-faq-official">
+  汇总新手常见问题与官方解答，适合边上手边排查。
+</Card>
+
+</CardGroup>
+
+## 基本采集
+
+初级采集
+
+<CardGroup cols={2}>
+<Card title="自定义采集（含智能识别）" href="/zh/academy/basic-collection/beginner/custom-collection">
+  介绍自定义采集界面、智能识别能力和基础配置流程。
+</Card>
+
+<Card title="列表采集" href="/zh/academy/basic-collection/beginner/list-collection">
+  学习从列表页提取多条结构化数据的基础方法。
+</Card>
+
+<Card title="列表进入详情页采集" href="/zh/academy/basic-collection/beginner/list-to-detail">
+  从列表进入详情页并采集详情内容，适合图文详情场景。
+</Card>
+
+<Card title="表格采集" href="/zh/academy/basic-collection/beginner/table-collection">
+  面向网页表格结构采集行列数据，适合规整列表页面。
+</Card>
+
+<Card title="点击元素跳转" href="/zh/academy/basic-collection/beginner/click-to-jump">
+  通过点击页面元素进入新页面或新内容区域后继续采集。
+</Card>
+
+<Card title="登录验证" href="/zh/academy/basic-collection/beginner/login-verification">
+  处理需要登录后才能访问和采集的数据页面。
+</Card>
+
+<Card title="采集原理/逻辑" href="/zh/academy/basic-collection/beginner/collection-logic">
+  梳理采集流程的基本逻辑，帮助理解任务步骤之间的关系。
+</Card>
+
+<Card title="本地采集方式" href="/zh/academy/basic-collection/beginner/local-collection">
+  说明本地运行采集任务的方式、场景和注意事项。
+</Card>
+
+</CardGroup>
+
+
+
+翻页采集多页数据
+
+<CardGroup cols={2}>
+<Card title="点击“下一页按钮翻页”" href="/zh/academy/basic-collection/pagination/next-page-button">
+  适用于存在明确下一页按钮的常见翻页采集场景。
+</Card>
+
+<Card title="滚动加载数据翻页" href="/zh/academy/basic-collection/pagination/scroll-loading-pagination">
+  处理下拉滚动后自动加载更多数据的页面。
+</Card>
+
+<Card title="点击【加载更多】或【再显示20条】等按钮翻页" href="/zh/academy/basic-collection/pagination/load-more-button-pagination">
+  通过点击加载更多类按钮，逐步拉取后续列表数据。
+</Card>
+
+<Card title="边滚动边采集数据" href="/zh/academy/basic-collection/pagination/scroll-and-collect">
+  一边滚动页面一边提取数据，适合瀑布流和长列表。
+</Card>
+
+<Card title="边点击加载更多边采集数据" href="/zh/academy/basic-collection/pagination/click-load-more-and-collect">
+  在点击加载更多的同时持续提取新增数据，减少重复采集。
+</Card>
+
+<Card title="无【下一页】按钮，点击数字进行翻页" href="/zh/academy/basic-collection/pagination/number-pagination">
+  适用于通过页码数字切换页面的翻页采集任务。
+</Card>
+
+</CardGroup>
+
+
+多关键词多网址采集
+
+<CardGroup cols={2}>
+<Card title="文本循环：批量输入关键词" href="/zh/academy/basic-collection/bulk-input/text-loop-keywords">
+  批量输入多组关键词，循环执行同一套采集流程。
+</Card>
+
+<Card title="URL循环：批量采集同类网页" href="/zh/academy/basic-collection/bulk-input/url-loop-similar-pages">
+  批量导入多个网址，对同类页面执行统一采集规则。
+</Card>
+
+</CardGroup>
+
+
+
+## 规则排错与优化
+
+采集数据异常时的排查思路，涵盖本地排错、流程优化、防采集应对和云采集排错。
+
+<CardGroup cols={2}>
+<Card title="本地排错" href="/zh/academy/troubleshooting/local-debug">
+  手动执行规则排查，解决无数据、速度慢、数据重复/错位/漏采等问题。
+</Card>
+
+<Card title="规则优化" href="/zh/academy/troubleshooting/rule-optimization">
+  执行前等待、Ajax 超时、页面滚动等流程优化配置。
+</Card>
+
+<Card title="Ajax 网页采集方法" href="/zh/academy/troubleshooting/ajax-web-scraping">
+  判断 Ajax 网页并正确设置 Ajax 点击与超时。
+</Card>
+
+<Card title="新标签页处理" href="/zh/academy/troubleshooting/new-tab">
+  识别和配置新标签页中的采集流程。
+</Card>
+
+<Card title="自动重试" href="/zh/academy/troubleshooting/auto-retry">
+  重试条件、次数、代理 IP 和浏览器版本切换。
+</Card>
+
+<Card title="常见防采集套路及解决" href="/zh/academy/troubleshooting/anti-scraping">
+  验证码、IP 封锁、数据加密等防采套路的识别与应对。
+</Card>
+
+<Card title="云采集排错" href="/zh/academy/troubleshooting/cloud-debug">
+  本地有数据但云采集无数据的排查与解决。
+</Card>
+
+</CardGroup>
+
+## 数据导出
+
+采集完成后数据的导出方式，涵盖启动采集与导出格式说明、文件下载、导出到数据库及自动导出到本地。
+
+<CardGroup cols={2}>
+<Card title="启动采集并导出" href="/zh/academy/data-export/start-and-export">
+  本地采集与云采集的启动方式，以及 Excel、CSV、HTML、数据库、API 等导出格式。
+</Card>
+
+<Card title="文件下载" href="/zh/academy/data-export/file-download">
+  采集过程中下载网页中的图片、音频、视频、文档等文件（个人版及以上专享）。
+</Card>
+
+<Card title="导出到MySQL数据库" href="/zh/academy/data-export/export-to-database/export-to-mysql">
+  手动/自动导出数据到 MySQL，含数据库配置、字段映射和定时导出设置。
+</Card>
+
+<Card title="导出到SqlServer数据库" href="/zh/academy/data-export/export-to-database/export-to-sqlserver">
+  手动/自动导出数据到 SqlServer，支持 Windows 身份验证和 Sqlserver 身份验证。
+</Card>
+
+<Card title="导出到Oracle数据库" href="/zh/academy/data-export/export-to-database/export-to-oracle">
+  Oracle 依赖组件安装及手动/自动导出数据到 Oracle 的完整配置流程。
+</Card>
+
+<Card title="导出到数据库常见问题" href="/zh/academy/data-export/export-to-database/export-to-database-faq">
+  数据库导出时的常见错误及解决方案（连接失败、字符编码、字段长度等）。
+</Card>
+
+<Card title="自动导出到本地" href="/zh/academy/data-export/auto-export-local">
+  团队版及以上专享，自动将采集数据保存为 Excel、CSV、HTML、JSON、XML 到本地。
+</Card>
+
+</CardGroup>
+
+## XPath学习与案例
+
+XPath 定位是采集数据的关键技能，80% 以上采集难题可通过一条正确的 XPath 解决。本栏目从 XPath 入门到实战案例，系统讲解 XPath 函数、相对与绝对 XPath、修改循环列表/翻页 XPath 等核心知识。
+
+Xpath入门
+
+<CardGroup cols={2}>
+<Card title="为什么要用xpath？" href="/zh/academy/xpath/getting-started/why-use-xpath">
+  通过百度搜索采集案例说明学习 XPath 的重要性，以及 XPath 在采集流程中的作用。
+</Card>
+
+<Card title="什么是html和xpath？" href="/zh/academy/xpath/getting-started/what-is-html-xpath">
+  HTML 基本结构与常用标签，XPath 概念与表达式写法入门。
+</Card>
+
+<Card title="xpath获取方法" href="/zh/academy/xpath/getting-started/get-xpath">
+  通过浏览器开发者工具查看网页源码、定位元素、获取和验证 XPath。
+</Card>
+
+<Card title="xpath函数" href="/zh/academy/xpath/getting-started/xpath-functions">
+  text、contains、position、last、following-sibling 等常用 XPath 函数及实战演练。
+</Card>
+
+</CardGroup>
+
+相对xpath、绝对XPath / 修改Xpath元素
+
+<CardGroup cols={2}>
+<Card title="相对xpath、绝对XPath" href="/zh/academy/xpath/relative-absolute-xpath">
+  绝对 XPath 与相对 XPath 的概念、循环框 XPath 与相对 XPath 的关系及修改实例。
+</Card>
+
+<Card title="定位某一元素Xpath" href="/zh/academy/xpath/modify-element/locate-element">
+  通过详情页和列表页实例，修改字段定位 XPath 解决字段提取不到、错位等问题。
+</Card>
+
+<Card title="修改循环列表xpath" href="/zh/academy/xpath/modify-element/modify-loop-list">
+  修改循环列表 XPath 解决漏采、只采集到部分列表等问题，固定与不固定元素列表的转换。
+</Card>
+
+<Card title="修改循环翻页xpath" href="/zh/academy/xpath/modify-element/modify-loop-pagination">
+  观察翻页确定问题并修改循环翻页 XPath，解决一二页重复循环的问题。
+</Card>
+
+</CardGroup>
+
+xpath案例
+
+<CardGroup cols={2}>
+<Card title="数据字段缺失或错位" href="/zh/academy/xpath/cases/missing-or-misaligned-fields">
+  同一字段在不同页面位置不同时，通过设置备用位置和修改 XPath 解决字段缺失或错位。
+</Card>
+
+<Card title="重复采集某几页数据" href="/zh/academy/xpath/cases/duplicate-pages">
+  分析翻页 XPath 在第二页同时定位到上一页和下一页导致重复采集的原因及解决办法。
+</Card>
+
+<Card title="重复采集最后一页数据" href="/zh/academy/xpath/cases/duplicate-last-page">
+  采集到最后一页后不停止、一直循环采集的原因分析及 XPath 修改方案。
+</Card>
+
+<Card title="循环列表-添加更多的项" href="/zh/academy/xpath/cases/loop-add-more-items">
+  手动修改 XPath 让循环列表定位到全部所需数据项，解决只采集到部分列表的问题。
+</Card>
+
+<Card title="循环列表-过滤多余的项" href="/zh/academy/xpath/cases/loop-filter-items">
+  两种过滤循环列表多余项的方法：修改 XPath 筛选和分支判断丢弃。
+</Card>
+
+</CardGroup>
+
+## 进阶功能
+
+进阶功能适合在掌握基本采集后继续学习，覆盖字段格式化、字段合并、特殊字段、流程步骤、流程设置、增量采集、iframe/json 采集、断点采集和 RPA 自动化导出等内容。
+
+数据处理（格式化）
+
+<CardGroup cols={2}>
+<Card title="字段格式化" href="/zh/academy/advanced-features/data-processing/field-formatting">
+  对采集字段进行替换、正则匹配、时间格式化、HTML 处理等格式化操作。
+</Card>
+
+<Card title="字段合并" href="/zh/academy/advanced-features/data-processing/field-merge">
+  将多个字段按指定格式合并成一个字段，便于后续导出和使用。
+</Card>
+
+<Card title="添加特殊字段" href="/zh/academy/advanced-features/data-processing/add-special-fields">
+  添加当前时间、当前网页信息、固定值等特殊字段。
+</Card>
+
+<Card title="自定义抓取方式" href="/zh/academy/advanced-features/data-processing/custom-extraction-method">
+  根据网页结构调整字段抓取方式，提高复杂页面的数据提取准确度。
+</Card>
+
+<Card title="无此字段时如何处理" href="/zh/academy/advanced-features/data-processing/missing-field-handling">
+  处理部分页面缺少字段时的数据错位、空值和兼容问题。
+</Card>
+
+<Card title="设置备用位置" href="/zh/academy/advanced-features/data-processing/backup-location">
+  为字段配置备用提取位置，解决不同页面结构不一致导致的字段缺失。
+</Card>
+
+<Card title="数据去重" href="/zh/academy/advanced-features/data-processing/deduplicate-data">
+  配置去重字段和去重规则，避免重复采集或重复导出数据。
+</Card>
+
+<Card title="正则表达式" href="/zh/academy/advanced-features/data-processing/regular-expression">
+  学习常用正则表达式写法，并用于字段提取、替换和文本清洗。
+</Card>
+
+</CardGroup>
+
+特殊流程步骤介绍
+
+<CardGroup cols={2}>
+<Card title="返回上一级网页" href="/zh/academy/advanced-features/special-steps/return-to-previous-page">
+  在详情页采集后返回列表页，继续执行后续循环采集。
+</Card>
+
+<Card title="鼠标移动出现新数据" href="/zh/academy/advanced-features/special-steps/hover-to-load-data">
+  处理鼠标悬停后才出现的新数据、菜单或详情内容。
+</Card>
+
+<Card title="循环下拉框（切换下拉选项）" href="/zh/academy/advanced-features/special-steps/loop-dropdown-options">
+  循环切换下拉框选项，批量采集不同筛选条件下的数据。
+</Card>
+
+<Card title="判断条件" href="/zh/academy/advanced-features/special-steps/conditions">
+  根据页面内容或流程状态设置分支判断，让采集流程更灵活。
+</Card>
+
+</CardGroup>
+
+流程设置
+
+<CardGroup cols={2}>
+<Card title="获取/修改浏览器UA" href="/zh/academy/advanced-features/workflow-settings/browser-user-agent">
+  获取或切换浏览器 User-Agent，应对不同网页访问环境。
+</Card>
+
+<Card title="触发器" href="/zh/academy/advanced-features/workflow-settings/trigger">
+  使用触发器自动启动任务或串联流程，减少手动操作。
+</Card>
+
+<Card title="网址批量输入（补充用法）" href="/zh/academy/advanced-features/workflow-settings/bulk-url-input-extra">
+  补充说明 URL 批量输入的更多使用方式和适用场景。
+</Card>
+
+<Card title="增量采集" href="/zh/academy/advanced-features/workflow-settings/incremental-collection">
+  配置增量采集，只采集新增数据或避免重复采集历史内容。
+</Card>
+
+<Card title="网页包含iframe框架处理办法" href="/zh/academy/advanced-features/workflow-settings/iframe-page-handling">
+  处理网页中嵌套 iframe 导致元素无法直接定位或采集的问题。
+</Card>
+
+<Card title="json采集" href="/zh/academy/advanced-features/workflow-settings/json-collection">
+  面向 JSON 数据源或接口响应进行数据提取和采集配置。
+</Card>
+
+</CardGroup>
+
+技巧操作
+
+<CardGroup cols={2}>
+<Card title="点击展开获取全文-微博为例" href="/zh/academy/advanced-features/tips/click-expand-full-text-weibo">
+  以微博为例，点击展开按钮后采集完整正文内容。
+</Card>
+
+<Card title="断点采集（采集中断，需要采集后续数据）" href="/zh/academy/advanced-features/tips/resume-interrupted-collection">
+  采集中断后从指定位置继续采集，减少重复工作。
+</Card>
+
+<Card title="ajax加载网页进入详情页无法正常返回到列表" href="/zh/academy/advanced-features/tips/ajax-detail-return-list">
+  处理 Ajax 页面进入详情页后无法正常返回列表继续采集的问题。
+</Card>
+
+<Card title="采集器数据导入飞书表格（RPA实现）" href="/zh/academy/advanced-features/tips/rpa/import-data-to-feishu-rpa">
+  通过 RPA 将采集器数据写入飞书表格。
+</Card>
+
+<Card title="采集数据（通过RPA）批量任务导出excel" href="/zh/academy/advanced-features/tips/rpa/batch-export-excel-rpa">
+  使用 RPA 批量导出任务采集数据为 Excel。
+</Card>
+
+</CardGroup>
+
+## 高版本功能
+
+高版本功能面向个人版、团队版和企业版中的增强能力，覆盖付费能力、云采集与企业版管理，适合在采集流程稳定后继续提升并发效率、自动化能力和团队协作能力。
+
+付费功能
+
+<CardGroup cols={2}>
+<Card title="本地加速同时运行任务-个人版及以上专享" href="/zh/academy/premium-features/paid-features/local-acceleration-multi-task">
+  提升本地任务并发能力，同时运行多个采集任务以提高效率。
+</Card>
+
+<Card title="代理IP-个人版及以上专享" href="/zh/academy/premium-features/paid-features/proxy-ip">
+  使用代理 IP 访问目标网站，降低限制并提升采集稳定性。
+</Card>
+
+<Card title="采集新增数据-团队版及以上参考" href="/zh/academy/premium-features/paid-features/collect-new-data">
+  仅采集新增内容，减少重复抓取历史数据。
+</Card>
+
+<Card title="定时任务-个人版（本地）及以上（云）专享" href="/zh/academy/premium-features/paid-features/scheduled-tasks">
+  按设定时间自动执行本地或云端采集任务。
+</Card>
+
+<Card title="自动识别验证码-团队版及以上专享" href="/zh/academy/premium-features/paid-features/auto-captcha">
+  自动识别和处理验证码，减少人工介入。
+</Card>
+
+<Card title="Cloudflare验证" href="/zh/academy/premium-features/paid-features/cloudflare-verification">
+  处理 Cloudflare 防护验证，提高受保护站点的访问成功率。
+</Card>
+
+</CardGroup>
+
+云采集
+
+<CardGroup cols={2}>
+<Card title="云采集介绍" href="/zh/academy/premium-features/cloud-extraction/cloud-extraction-intro">
+  了解云采集的基本能力、适用场景和运行方式。
+</Card>
+
+<Card title="定时云采集" href="/zh/academy/premium-features/cloud-extraction/scheduled-cloud-extraction">
+  在云端按计划自动启动任务，实现无人值守采集。
+</Card>
+
+<Card title="云采集原理及规则加速原理" href="/zh/academy/premium-features/cloud-extraction/cloud-extraction-principles">
+  讲解云采集的执行原理以及规则加速机制。
+</Card>
+
+<Card title="云采集日志" href="/zh/academy/premium-features/cloud-extraction/cloud-extraction-logs">
+  查看云采集日志，定位任务异常和运行细节。
+</Card>
+
+<Card title="云采集实况与历史运行记录" href="/zh/academy/premium-features/cloud-extraction/cloud-extraction-history">
+  查看任务运行实况与历史记录，便于跟踪采集状态。
+</Card>
+
+</CardGroup>
+
+企业版管理
+
+<CardGroup cols={2}>
+<Card title="八爪鱼企业版本套餐介绍" href="/zh/academy/premium-features/enterprise-management/enterprise-plan-intro">
+  了解企业版套餐能力、适用团队和版本差异。
+</Card>
+
+<Card title="企业版管理" href="/zh/academy/premium-features/enterprise-management/enterprise-admin">
+  配置企业版后台、权限和常用管理功能。
+</Card>
+
+<Card title="企业成员账号管理" href="/zh/academy/premium-features/enterprise-management/enterprise-member-accounts">
+  管理企业成员账号、角色分配和协作权限。
+</Card>
+
+<Card title="云采集任务启动优化" href="/zh/academy/premium-features/enterprise-management/cloud-task-launch-optimization">
+  优化云采集任务启动流程，提升批量执行效率。
+</Card>
+
+<Card title="云采集监控预警平台" href="/zh/academy/premium-features/enterprise-management/cloud-monitoring-alerts">
+  通过监控与预警平台实时掌握任务状态并及时处理异常。
+</Card>
+
+</CardGroup>

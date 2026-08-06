@@ -1,0 +1,147 @@
+---
+title: 八爪鱼 CLI
+description: 在终端中识别网页、生成任务、运行采集并导出数据，适用于脚本化、CI/CD、服务器与 Agent 自动化场景。
+---
+
+> 使用八爪鱼 CLI，在命令行中完成网页检测、任务生成、已有任务运行、云采集控制和数据导出。
+
+八爪鱼 CLI 是面向开发者、数据团队、运维和 AI Agent 场景的命令行工具。v0.1.32 将命令入口统一为 `bazhuayu`，保留用户浏览器模式、任务管理、Agent 视觉规划和数据检查能力；同时增强验证页识别和候选区判断。
+
+<Warning>
+  v0.1.32 起，`octopus` 命令已删除。所有新脚本、CI 和 Agent 调用都应使用 `bazhuayu`。环境变量 `OCTOPUS_API_KEY`、`OCTOPUS_ACCESS_TOKEN`、`OCTOPUS_API_BASE_URL` 与配置目录 `~/.octopus` 保持不变。
+</Warning>
+
+## CLI 能做什么
+
+<CardGroup cols={2}>
+  <Card title="网页检测与任务生成" icon="sparkles" href="/zh/cli/core-commands/detect">
+    使用 `bazhuayu detect` 检测列表页、详情页与分页逻辑，生成可复用本地任务文件；普通任务会同步到客户端任务列表。
+  </Card>
+  <Card title="运行生成的任务" icon="wand-magic-sparkles" href="/zh/cli/core-commands/run-tasks">
+    使用 `bazhuayu run <taskId> --task-file task.json` 执行检测生成的任务，并通过 `--max-rows` 控制条数。
+  </Card>
+  <Card title="运行已有任务" icon="play" href="/zh/cli/core-commands/run-tasks">
+    使用 `bazhuayu run <taskId>` 本地运行，或用 `bazhuayu cloud start <taskId>` 在云端运行。
+  </Card>
+  <Card title="导出采集数据" icon="download" href="/zh/cli/core-commands/export-data">
+    通过 `bazhuayu data history/count/preview/export` 查看批次、预览数据并导出 XLSX、CSV、HTML、JSON、XML。
+  </Card>
+  <Card title="管理远端资源" icon="folder-tree" href="/zh/cli/core-commands/task-management">
+    使用 `task-group`、`template`、`template-task` 和 `schedule cloud` 管理任务组、模板任务与云定时。
+  </Card>
+  <Card title="复用浏览器登录状态" icon="browser" href="/zh/cli/core-commands/browser-management">
+    使用 `bazhuayu browser` 配置 Chrome / Edge 用户 Profile，采集需要登录的页面。
+  </Card>
+</CardGroup>
+
+## 安装
+
+```bash
+npm install -g bazhuayu-cli@0.1.32
+bazhuayu --version
+```
+
+环境要求：
+
+- Node.js 20 或更高版本（推荐 22 LTS）
+- npm 8 或更高版本
+- Windows x64、macOS x64 / arm64、Linux x64
+- 默认使用 CLI 管理的 Chrome for Testing；Windows / macOS 可切换到系统 Chrome 或 Edge 用户 Profile
+
+Linux x64 从 v0.1.22 起支持本地采集；Linux arm64 暂不支持本地执行，可使用云采集。
+
+## 常见工作流
+
+<Steps>
+  <Step title="安装 CLI">
+    使用 `npm install -g bazhuayu-cli@0.1.32` 安装，并运行 `bazhuayu doctor` 检查环境。
+  </Step>
+  <Step title="登录认证">
+    通过 `bazhuayu auth login`、`--oauth`、`--stdin` 或环境变量完成认证。
+  </Step>
+  <Step title="按需配置用户浏览器">
+    公开网页可继续使用默认独立模式；需要登录状态时，按 `browser status` → `profiles` → `install` → `use user` 配置 Chrome / Edge Profile。
+  </Step>
+  <Step title="选择采集路径">
+    LLM / Agent 使用 `detect --agent` 生成并审查任务；用户直接操作 CLI 时可用 `detect --auto`，已有任务或任务文件用 `run` 执行。
+  </Step>
+  <Step title="运行与监控">
+    本地运行可使用 `--detach` 后台执行，并用 `bazhuayu local status` 查看进度。
+  </Step>
+  <Step title="导出数据">
+    使用 `bazhuayu data count/preview/export` 检查并导出 Excel、CSV、JSON 等格式。
+  </Step>
+</Steps>
+
+## 快速命令示例
+
+```bash
+bazhuayu --help
+bazhuayu doctor
+bazhuayu browser status --browser-id chrome --json
+bazhuayu auth login
+bazhuayu detect https://example.com --agent --agent-command "node make-plan.mjs" --goal "提取列表数据" --task-id example-list --output task.json --run-sample 3 --json
+bazhuayu detect https://example.com --auto --goal "提取列表数据" --task-id example-list --output task.json
+bazhuayu task validate example-list --task-file task.json
+bazhuayu run example-list --task-file task.json --max-rows 20
+bazhuayu task list
+bazhuayu task-group list --json
+bazhuayu data preview <taskId> --source cloud --limit 20 --json
+bazhuayu run <taskId> --detach
+bazhuayu data export <taskId> --format xlsx --file result.xlsx
+```
+
+## CLI、MCP / 客户端功能对比
+
+| 功能 | MCP / 客户端 | CLI |
+| --- | --- | --- |
+| 浏览和搜索采集模板 | 可以 | 可以，使用 `bazhuayu template search/view/version` |
+| 通过模板创建任务 | 可以 | 可以，使用 `bazhuayu template-task create/update` |
+| 管理任务组 | 可以 | 可以，使用 `bazhuayu task-group` |
+| 管理云定时 | 可以 | 可以，使用 `bazhuayu schedule cloud`；本地定时仍在客户端中设置 |
+| 从 URL 新建采集任务 | 客户端可以 | 可以，使用 `bazhuayu detect` |
+| 从 URL 执行采集 | 客户端可以 | 先用 `detect` 生成任务，再使用 `run <taskId> --task-file` |
+| 修改复杂采集规则 | 客户端更适合 | 部分支持，复杂规则建议客户端调整 |
+| 运行已有任务 | 可以 | 可以 |
+| 停止正在运行的任务 | 可以 | 可以 |
+| 查看任务状态 | 可以 | 可以 |
+| 导出采集数据 | 可以 | 可以 |
+| 写成脚本自动执行 | 不适合 | 可以 |
+| 接入 AI Agent | MCP 更自然 | 可以，通过 JSON / JSONL 与 Agent 模式 |
+
+## CLI、MCP 与桌面客户端怎么选
+
+| 场景 | 推荐方式 |
+| --- | --- |
+| 在 ChatGPT、Claude、Cursor、Gemini、QClaw 等 AI 中用自然语言操作 | [MCP 服务](/zh/mcp/index) |
+| 新 URL 快速试采、命令行自动化、服务器 / CI 定时采集 | 八爪鱼 CLI |
+| 可视化搭建复杂规则、精细调整流程 | 八爪鱼桌面客户端 |
+
+CLI 与 MCP 可配合使用：例如在 AI 中通过 MCP 找到任务或生成需求，再在终端用 CLI 做批量运行、导出或 Agent 流程。
+
+## 当前限制
+
+- CLI v1 不支持内核浏览器（Kernel browser）及旧版工作流（Legacy workflow）。
+- Linux arm64 暂不支持本地执行。
+- 用户浏览器模式仅支持 Windows 和 macOS，且不支持 `--headless`；Linux 使用独立浏览器模式。
+- `detect` 与本地 `run` 依赖浏览器环境；网页结构复杂、登录墙或强风控页面可能需要在客户端中进一步调整规则。
+
+## 下一步
+
+<CardGroup cols={2}>
+  <Card title="安装与验证" icon="download" href="/zh/cli/quick-start/installation">
+    安装 CLI、检查 Node.js / Chrome 环境与平台支持。
+  </Card>
+  <Card title="运行第一个任务" icon="rocket" href="/zh/cli/quick-start/run-your-first-task">
+    从新 URL 生成任务并运行，或运行已有任务并导出数据。
+  </Card>
+  <Card title="网页检测与任务生成" icon="sparkles" href="/zh/cli/core-commands/detect">
+    从 URL 检测结构并生成可复用任务文件。
+  </Card>
+  <Card title="浏览器管理" icon="browser" href="/zh/cli/core-commands/browser-management">
+    配置独立浏览器或复用 Chrome / Edge 登录状态。
+  </Card>
+  <Card title="命令速查表" icon="book" href="/zh/cli/reference/command-cheatsheet">
+    认证、识别、运行、导出命令一览。
+  </Card>
+</CardGroup>

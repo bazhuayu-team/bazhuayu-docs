@@ -1,0 +1,111 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Task Analytics",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://openapi.bazhuayu.com"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "description": "Access Token，格式 Bearer <access_token>"
+      },
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "x-api-key",
+        "description": "八爪鱼 API Key，格式 op_sk_xxxxxx；创建方式见 /zh/mcp/quick-start/api-key"
+      }
+    }
+  },
+  "paths": {
+    "/taskanalytics/queries": {
+      "post": {
+        "summary": "查询任务采集与执行分析",
+        "operationId": "taskAnalyticsQueries",
+        "security": [{ "apiKeyAuth": [] }, { "bearerAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["start", "end"],
+                "properties": {
+                  "start": {
+                    "type": "string",
+                    "description": "查询开始日期（含），格式 yyyy-MM-dd"
+                  },
+                  "end": {
+                    "type": "string",
+                    "description": "查询结束日期（含），格式 yyyy-MM-dd"
+                  },
+                  "page": {
+                    "type": "integer",
+                    "description": "页码，≥1，默认 1"
+                  },
+                  "pageSize": {
+                    "type": "integer",
+                    "description": "每页条数，1～500，默认 20"
+                  },
+                  "taskIds": {
+                    "type": "array",
+                    "items": { "type": "string" },
+                    "description": "任务 Id 列表，最多 100 个"
+                  },
+                  "memberNames": {
+                    "type": "array",
+                    "items": { "type": "string" },
+                    "description": "团队成员名称，最多 100 个"
+                  },
+                  "collectionMethod": {
+                    "type": "string",
+                    "description": "采集方式：Cloud / Local / All"
+                  },
+                  "timeGranularity": {
+                    "type": "string",
+                    "description": "时间粒度：Day / Week / Month"
+                  }
+                }
+              },
+              "example": {
+                "start": "",
+                "end": "",
+                "page": null,
+                "pageSize": null,
+                "taskIds": [],
+                "memberNames": [],
+                "collectionMethod": "",
+                "timeGranularity": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "python",
+            "label": "Python",
+            "source": "import requests\n\nurl = \"https://openapi.bazhuayu.com/taskanalytics/queries\"\nheaders = {\n    \"x-api-key\": \"op_sk_xxxxxx\",\n    \"Content-Type\": \"application/json\",\n}\npayload = {\n    \"start\": \"\",\n    \"end\": \"\",\n    \"page\": None,\n    \"pageSize\": None,\n    \"taskIds\": [],\n    \"memberNames\": [],\n    \"collectionMethod\": \"\",\n    \"timeGranularity\": \"\",\n}\n\nresponse = requests.post(url, json=payload, headers=headers)\nprint(response.json())"
+          },
+          {
+            "lang": "curl",
+            "label": "cURL",
+            "source": "curl -X POST \"https://openapi.bazhuayu.com/taskanalytics/queries\" \\\n  -H \"x-api-key: op_sk_xxxxxx\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"start\":\"\",\"end\":\"\",\"page\":null,\"pageSize\":null,\"taskIds\":[],\"memberNames\":[],\"collectionMethod\":\"\",\"timeGranularity\":\"\"}'"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,194 @@
+---
+title: "【哔哩哔哩】视频采集"
+source: "https://www.bazhuayu.com/helpcenter/docs/kLsdjN"
+---
+**采集场景**
+
+在B站首页（[https://www.bilibili.com/](https://www.bilibili.com/)），输入关键词搜索，得到相关视频列表页，然后点击视频链接进入其详情页，采集视频详情页中的详细信息。
+
+示例在首页输入关键词【vlog】搜索，得到搜索结果列表页网址：[https://search.bilibili.com/all?keyword=vlog](https://search.bilibili.com/all?keyword=vlog) 。
+
+ 
+
+**采集字段**
+
+视频标题、总播放数、总弹幕数、发布时间、视频时长、点赞数、硬币数、收藏数、视频介绍、页面网址等字段。
+
+ 
+
+![【哔哩哔哩】视频采集](/assets/academy/case-studies/bilibili-video-collection/01-6537baf570fc9.png)
+
+ 
+
+ 
+
+ 
+
+**采集结果**
+
+采集结果可导出为Excel、CSV、HTML、数据库等多种格式。导出为Excel示例：
+
+ 
+
+![【哔哩哔哩】视频采集](/assets/academy/case-studies/bilibili-video-collection/02-68a6df9a1aac3.png)
+
+ 
+
+**教程说明**
+
+本篇更新时间：2025/8/21    八爪鱼版本：V8.7.7
+
+如果因网页改版造成网址或步骤无效，无法收集到目标数据，请联系官方客服，我们将及时修正。
+
+ 
+
+**采集步骤**
+
+步骤一：打开网页
+
+步骤二、建立【循环-点击元素】，进入每个视频的详情页
+
+步骤三、提取详情页中的字段
+
+步骤四、创建【循环翻页】，采集多页数据
+
+步骤五、启动采集
+
+ 
+
+**以下为具体步骤：**
+
+ 
+
+### 步骤一、打开网页
+
+ 
+
+在首页【输入框】中输入目标网址 [https://search.bilibili.com/all?keyword=vlog](https://search.bilibili.com/all?keyword=vlog)，点击【开始采集】，八爪鱼自动打开网页。
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/7fc254c25145403695940054652/nAN9QXspnT8A.mp4" width="100%"></video>
+
+ 
+
+特别说明：
+
+- a. 打开网页后，如果开始开始【自动识别】，请等待自动识别完成。八爪鱼支持自动识别网页上的列表，滚动和翻页，识别成功后直接启动采集并获取数据。如果【自动识别】的结果不是我们需要的，可点击【取消】关闭智能识别，自行配置采集流程。详情点击查看[【自动识别】](https://www.bazhuayu.com/helpcenter/docs/wduVyb)
+- b. 示例网址是在B站首页输入关键词【vlog】搜索后得到的网址。可根据需要，输入其他关键词搜索，得到对应网址，然后将网址输入八爪鱼中进行采集。
+
+ 
+
+ 
+
+### 步骤二、建立【循环-点击元素】，进入每个视频的详情页
+
+ 
+
+通过以下几步，实现循环点击每个视频链接，进入视频详情页
+
+① 选中页面上第1个视频标题，返回标签层到A标签层上![【哔哩哔哩】视频采集](/assets/academy/case-studies/bilibili-video-collection/03-68a6e04441f56.png)
+
+② 在黄色操作提示框中，点击【选中全部相似元素】，以选中全部视频链接
+
+③ 点击【循环点击每个链接】，根据定位到的循环列表逐个点击进入详情页
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/8fcf0e045145403695940716028/2WpbRoAK3sgA.mp4" width="100%"></video>
+
+ 
+
+特别说明：
+
+- a. 经过以上连续3步，【循环-点击元素】创建完成。【循环】中的项，对应着页面上所有视频链接。启动采集以后，八爪鱼就会按照循环中的顺序依次点击每个视频链接，进入视频详情页，以采集每个视频具体数据。
+- b. 为何通过以上3步，可建立【循环-点击元素】？详情点击查看 [从列表进入详情页采集](/zh/academy/basic-collection/beginner/list-to-detail) 。
+
+ 
+
+由于自动生成的循环点击步骤为固定元素列表，如每一页的视频个数不固定，则会有遗漏，所以需要修改循环列表的循环方式为不固定元素列表，同时修改xpath为：//div[@class="video-list row"]/div[not(@class="to\_hide\_xs to\_hide\_md to\_hide\_xl video-list-item col\_3 col\_xs\_1\_5 col\_md\_2 col\_xl\_1\_7")]//div[@class="bili-video-card"]//h3
+
+步骤：点击【循环列表】框，在下方设置里面，点击【循环方式】，修改为【不固定元素列表】，在下方xpath路径框，输入xpath：//div[@class="video-list row"]/div[not(@class="to\_hide\_xs to\_hide\_md to\_hide\_xl video-list-item col\_3 col\_xs\_1\_5 col\_md\_2 col\_xl\_1\_7")]//div[@class="bili-video-card"]//h3
+
+点击应用。
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/19dc1c085145403695942076733/nqHAdMpPf94A.mp4" width="100%"></video>
+
+ 
+
+### 步骤三、提取详情页中的字段
+
+ 
+
+进入详情页后，手动提取我们需要采集的字段。
+
+选中页面中的目标文本，然后在操作提示框中点击【文本内容】。
+
+生成字段配置后可修改字段命名。
+
+标题、发布时间、视频时长、总播放数、总弹幕数、硬币数、收藏数、视频介绍、视频标签、发布者等文本类型的字段。
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/7fb271685145403695940048709/WZq76KNH9m0A.mp4" width="100%"></video>
+
+> 注意：
+>
+> B站详情页弹出登录弹窗，可切换浏览模式进行关闭继续配置。该站点不登陆不影响采集，如其他网站必须登录后才可查看到数据的则需配置对应登录步骤，参考：[登录验证采集](/zh/academy/basic-collection/beginner/login-verification)
+
+ 
+
+### 步骤四、创建【循环翻页】，采集多页数据
+
+ 
+
+如果只是采集一页数据，可跳过此步骤。
+
+如果需要翻页以采集多页数据：点击【循环列表】框，回到列表页面，选择页面中的【下一页】按钮，在操作提示上单击【循环点击下一页】，创建【循环翻页】。
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/65bfe48f5145403695936214887/qubjcFVj9NoA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 创建【循环翻页】后，八爪鱼会自动点击【下一页】按钮进行翻页，从第1页，第2页......直到最后1页。如果只需采集特定页的数据，可在八爪鱼中设置循环翻页的次数，详情点击查看  [翻页以采集多页数据教程](/zh/academy/basic-collection/pagination/next-page-button)。
+
+ 
+
+### 步骤五、启动采集
+
+ 
+
+1、点击【采集】并【启动本地采集】。启动后八爪鱼开始自动采集数据。
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/cc754c225145403695941016725/k6kX0tA8NWoA.mp4" width="100%"></video>
+
+ 
+
+特别说明：
+
+1. a. 【本地采集】是使用自己的电脑进行采集，【云采集】是使用八爪鱼提供的云服务器采集，点击查看 [本地采集与云采集详解](https://www.bazhuayu.com/helpcenter/docs/FQjd1k)。
+2. B站列表页会穿插【课堂】类集锦视频，但因页面排版与普通视频详情页不同，会采集不到，如需采集可参考教程优化XPath定位：[XPath系统学习与实例](https://www.bazhuayu.com/helpcenter/docs/V2h1Ec)
+
+ 
+
+2、采集完成后，选择合适的导出方式来导出数据。支持导出为Excel，CSV，HTML，数据库等。这里导出为Excel。示例数据： 
+
+![【哔哩哔哩】视频采集](/assets/academy/case-studies/bilibili-video-collection/04-68a6e420cde1d.png)
+
+ 
+
+作者：yangyang
+
+编辑：Aisling

@@ -1,0 +1,195 @@
+---
+title: "问题解答"
+description: "基于已确认教程整理八爪鱼采集器的操作建议与相关文档。"
+mode: "custom"
+---
+
+export const publicAgentConfig = {
+  enabled: true,
+  endpoint: 'https://docs-api.bazhuayu.com/v1/ask',
+  feedbackEndpoint: 'https://docs-api.bazhuayu.com/v1/feedback',
+  localEndpoint: 'http://127.0.0.1:8787/v1/ask',
+  localFeedbackEndpoint: 'http://127.0.0.1:8787/v1/feedback',
+}
+
+export const KnowledgeAgent = () => {
+  const [config, setConfig] = useState(publicAgentConfig)
+  const [fallbackIndex, setFallbackIndex] = useState(null)
+  const [question, setQuestion] = useState('')
+  const [answer, setAnswer] = useState(null)
+  const [history, setHistory] = useState([])
+  const [phase, setPhase] = useState('')
+  const [error, setError] = useState('')
+  const [fallbackAnswers, setFallbackAnswers] = useState([])
+  const [feedback, setFeedback] = useState('')
+
+  useEffect(() => {
+    fetch('/assets/knowledge-base/agent-config.json.txt')
+      .then((response) => response.ok ? response.json() : null)
+      .then((data) => setConfig(data ? { ...publicAgentConfig, ...data } : publicAgentConfig))
+      .catch(() => setConfig(publicAgentConfig))
+    fetch('/assets/knowledge-base/search-index.json.txt')
+      .then((response) => response.ok ? response.json() : null)
+      .then((data) => setFallbackIndex(data))
+      .catch(() => setFallbackIndex(null))
+  }, [])
+
+  const normalize = (value) => String(value || '').toLowerCase().replace(/\s+/g, '').trim()
+  const tokens = (value) => {
+    const words = normalize(value).match(/[\u4e00-\u9fff]+|[a-z0-9]+/g) || []
+    const output = []
+    words.forEach((word) => {
+      if (/^[\u4e00-\u9fff]+$/.test(word)) {
+        for (let index = 0; index < word.length - 1; index += 1) output.push(word.slice(index, index + 2))
+      } else if (word.length > 1) output.push(word)
+    })
+    return output
+  }
+
+  const findFallbackAnswers = (value) => {
+    if (!fallbackIndex) return []
+    const query = normalize(value)
+    const queryTokens = tokens(value)
+    return Object.values(fallbackIndex.answers || {})
+      .map((item) => {
+        const titleTokens = tokens(item.title)
+        const summaryTokens = tokens(item.summary)
+        let score = 0
+        queryTokens.forEach((token) => {
+          if (titleTokens.includes(token)) score += 6
+          else if (summaryTokens.includes(token)) score += 1
+        })
+        if (query && normalize(item.title).includes(query)) score += 10
+        return { ...item, score }
+      })
+      .filter((item) => item.score >= 2 && item.route)
+      .sort((left, right) => right.score - left.score)
+      .slice(0, 3)
+  }
+
+  const agentEndpoint = () => {
+    const local = typeof window !== 'undefined' && ['localhost', '127.0.0.1'].includes(window.location.hostname)
+    return local && config?.localEndpoint ? config.localEndpoint : config?.endpoint
+  }
+
+  const feedbackEndpoint = () => {
+    const local = typeof window !== 'undefined' && ['localhost', '127.0.0.1'].includes(window.location.hostname)
+    return local && config?.localFeedbackEndpoint ? config.localFeedbackEndpoint : config?.feedbackEndpoint
+  }
+
+  const ask = async (input) => {
+    const cleanQuestion = String(input || '').trim()
+    if (!cleanQuestion || phase) return
+    setQuestion(cleanQuestion)
+    setAnswer(null)
+    setError('')
+    setFeedback('')
+    setFallbackAnswers([])
+    const endpoint = agentEndpoint()
+    if (!config?.enabled || !endpoint) {
+      setError('智能问答服务正在配置中，先为你列出可能相关的可信教程。')
+      setFallbackAnswers(findFallbackAnswers(cleanQuestion))
+      return
+    }
+    setPhase('正在检索可信资料')
+    const analyzing = setTimeout(() => setPhase('正在分析问题'), 500)
+    const composing = setTimeout(() => setPhase('正在整理答案'), 1300)
+    try {
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ question: cleanQuestion, messages: history }),
+      })
+      const data = await response.json().catch(() => ({}))
+      if (!response.ok) throw new Error(data.message || '智能问答服务暂时不可用。')
+      setAnswer(data)
+      setHistory((current) => [...current, { role: 'user', content: cleanQuestion }, { role: 'assistant', content: data.answer || '' }].slice(-6))
+    } catch (requestError) {
+      setError(`${requestError.message || '智能问答服务暂时不可用。'} 已切换到本地可信教程。`)
+      setFallbackAnswers(findFallbackAnswers(cleanQuestion))
+    } finally {
+      clearTimeout(analyzing)
+      clearTimeout(composing)
+      setPhase('')
+    }
+  }
+
+  const submit = (event) => {
+    event.preventDefault()
+    ask(question)
+  }
+
+  const sendFeedback = async (rating) => {
+    const endpoint = feedbackEndpoint()
+    if (!answer || !endpoint) return
+    setFeedback('正在保存反馈…')
+    try {
+      await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ rating, question, sources: (answer.sources || []).map((source) => source.route) }),
+      })
+      setFeedback('感谢反馈，已记录。')
+    } catch {
+      setFeedback('反馈暂时未能保存。')
+    }
+  }
+
+  return (
+    <section className="kb-agent not-prose">
+      <div className="kb-agent-intro">
+        <h1>八爪鱼智能助手</h1>
+        <p>描述采集目标、异常现象或已尝试的操作，我会基于已确认的资料给出处理建议。</p>
+      </div>
+
+      <form className="kb-agent-form" onSubmit={submit}>
+        <div className="kb-agent-composer">
+          <textarea id="kb-agent-question" aria-label="输入你的问题" value={question} onChange={(event) => setQuestion(event.target.value)} placeholder="例如：列表页可以采集，但第二页开始重复采集第一页的数据，应该怎么排查？" autoComplete="off" maxLength="1000" rows="3" />
+          <div className="kb-agent-composer-footer"><span className="kb-agent-trust">可信资料模式</span><div><small>{question.length}/1000</small><button className="kb-agent-send" type="submit" disabled={!question.trim() || Boolean(phase)} aria-label={phase ? '正在分析问题' : '发送问题'} title={phase ? '正在分析问题' : '发送问题'}>{phase ? '…' : '↑'}</button></div></div>
+        </div>
+      </form>
+
+      <div className="kb-agent-examples" aria-label="常见问题">
+        <span>你也可以这样问</span>
+        {['如何安装 Windows 客户端？', '列表采集如何翻页？', '云采集失败该怎么排查？'].map((item) => (
+          <button type="button" key={item} onClick={() => ask(item)} disabled={Boolean(phase)}>{item}</button>
+        ))}
+      </div>
+
+      {phase ? <div className="kb-agent-progress" role="status">{phase}</div> : null}
+      {error ? <div className="kb-agent-notice" role="alert">{error}</div> : null}
+
+      {answer ? (
+        <article className="kb-agent-answer" aria-live="polite">
+          <header className="kb-agent-answer-heading">
+            <div><p><span></span>八爪鱼智能助手</p><h2>分析结果</h2></div>
+            <span className={answer.confidence === 'review' ? 'kb-status-review' : 'kb-status-trusted'}>
+              {answer.validation?.mode === 'mcp_double_check'
+                ? (answer.validation.passed ? '已通过协议与产品资料校验' : '建议人工确认')
+                : (answer.confidence === 'review' ? '建议人工确认' : '基于可信资料')}
+            </span>
+          </header>
+          <div className="kb-agent-question-preview"><span>你的问题</span><p>{question}</p></div>
+          <p className="kb-agent-conclusion">{answer.answer}</p>
+
+          {answer.steps && answer.steps.length ? <section><h2>操作步骤</h2><ol>{answer.steps.map((step, index) => <li key={index}>{step}</li>)}</ol></section> : null}
+          {answer.cautions && answer.cautions.length ? <section><h2>注意事项</h2><ul>{answer.cautions.map((item, index) => <li key={index}>{item}</li>)}</ul></section> : null}
+          {answer.needsHumanReview ? <p className="kb-agent-review-note">这类信息可能受版本、套餐或账号状态影响，请以对应说明页和实际账户信息为准。</p> : null}
+
+          {answer.sources && answer.sources.length ? (
+            <section className="kb-agent-sources"><h2>分析依据</h2><p>以下资料用于整理本次回答：</p><ul>{answer.sources.map((source) => <li key={`${source.route}-${source.title}-${source.heading}`}>{source.route ? <a href={source.route}>{source.title}</a> : <strong>{source.title}</strong>}{source.heading && source.heading !== source.title ? <span> · {source.heading}</span> : null}</li>)}</ul></section>
+          ) : null}
+
+          {answer.followUps && answer.followUps.length ? <section className="kb-agent-followups"><h2>继续问</h2><div>{answer.followUps.map((item) => <button type="button" key={item} onClick={() => ask(item)}>{item}</button>)}</div></section> : null}
+          <div className="kb-agent-feedback"><span>这份回答有帮助吗？</span><button type="button" onClick={() => sendFeedback('helpful')}>有帮助</button><button type="button" onClick={() => sendFeedback('unhelpful')}>需要改进</button>{feedback ? <em>{feedback}</em> : null}</div>
+        </article>
+      ) : null}
+
+      {fallbackAnswers.length ? (
+        <section className="kb-agent-fallback"><h2>本地可信教程</h2><p>智能服务暂时不可用，以下是可能相关的已确认教程。</p><div>{fallbackAnswers.map((item) => <a href={item.route} key={item.route}><strong>{item.title}</strong><span>{item.summary}</span></a>)}</div></section>
+      ) : null}
+    </section>
+  )
+}
+
+<KnowledgeAgent />

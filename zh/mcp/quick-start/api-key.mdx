@@ -1,0 +1,138 @@
+---
+title: 获取 API Key
+description: 在八爪鱼账户中心创建 API Key，供 MCP 以 x-api-key 方式认证。
+---
+
+## 何时使用 API Key
+
+| 认证方式 | 适用场景 |
+| --- | --- |
+| **OAuth 2.1** | ChatGPT、Claude、Cursor、Gemini 等支持浏览器登录的客户端；Coze、Dify 安装官方工具时 |
+| **API Key** | Coze 自定义 MCP、Dify API Key 模式、QClaw、Cursor、Claude Code、脚本 / 无头环境 |
+
+## 创建 API Key
+
+<Steps>
+  <Step title="登录并打开账号信息">
+    登录 [https://www.bazhuayu.com/](https://www.bazhuayu.com/) 后点击账号信息。
+
+    <img src="/assets/mcp/api-key/step-1.png" alt="登录八爪鱼官网后点击账号信息" className="mcp-step-image" />
+  </Step>
+  <Step title="进入 API 密钥并新增">
+    点击 API 密钥，新增密钥。（建议每个连接的智能体都有独立的密钥便于管理）
+
+    <img src="/assets/mcp/api-key/step-2.png" alt="在账户中心点击 API 密钥并新增密钥" className="mcp-step-image" />
+  </Step>
+  <Step title="自定义名称并生成">
+    自定义密钥名称，点击生成。
+
+    <img src="/assets/mcp/api-key/step-3.png" alt="填写密钥名称并点击生成密钥" className="mcp-step-image" />
+  </Step>
+  <Step title="复制并妥善保存密钥">
+    此后便获取到密钥。（注意！！！密钥只会在这个界面显示一次，后续无法获取，一定妥善保存。同时建议每次连接新载体都新建密钥，便于管理）
+
+    <img src="/assets/mcp/api-key/step-4.png" alt="生成后复制 API 密钥并妥善保存" className="mcp-step-image" />
+  </Step>
+</Steps>
+
+<Warning>
+  不要将 API Key 提交到 Git、飞书文档公开页、截图或客服群。仅在 MCP 客户端的「密钥 / Headers」配置项中填写。
+</Warning>
+
+## 方式一：交给 Agent 自动配置（推荐）
+
+WorkBuddy、QClaw、豆包专业版等能够管理工具配置的 Agent，可以自行选择当前客户端支持的配置方式、写入 MCP 设置并测试连接。将下面的内容发给 Agent，并把占位符替换为刚刚创建的 Key：
+
+```text
+请帮我添加名为“八爪鱼”的 HTTP MCP 服务，并自行完成配置和连通性测试。
+
+服务地址：https://mcp.bazhuayu.com
+API Key：<粘贴你的 API Key>
+
+关键要求：
+1. 本次接入只使用 API Key 认证，请将密钥放在请求头 x-api-key 中。
+2. 不要改用 OAuth，也不要写成 Authorization: Bearer <API Key>。
+3. 请根据当前客户端支持的 MCP 配置方式自行安装；完成后按需刷新工具列表或重启客户端。
+4. 请验证服务已连接并能读取工具列表，再调用只读工具 list_platforms 完成连通性测试；只向我报告配置位置、测试结果和后续用法，不要在回复中回显完整 API Key。
+```
+
+<Tip>
+  Agent 若要求确认写入配置文件、重启客户端或执行连接测试，可以在核对目标路径和命令后授权。若它尝试启动 OAuth，请提醒它严格使用 `x-api-key` 请求头。
+</Tip>
+
+仅在可信的本地 Agent 或私密对话中粘贴真实 Key。Agent 不具备配置权限或自动安装失败时，改用下面的手动配置。
+
+## 方式二：手动配置
+
+### 通用 HTTP MCP 配置
+
+```json
+{
+  "type": "http",
+  "url": "https://mcp.bazhuayu.com",
+  "headers": {
+    "x-api-key": "你的APIKey"
+  }
+}
+```
+
+### Cursor 示例（`~/.cursor/mcp.json`）
+
+```json
+{
+  "mcpServers": {
+    "octoparse": {
+      "type": "http",
+      "url": "https://mcp.bazhuayu.com",
+      "headers": {
+        "x-api-key": "你的APIKey"
+      }
+    }
+  }
+}
+```
+
+### Claude Code 示例（`~/.claude/settings.json`）
+
+```json
+{
+  "mcpServers": {
+    "octoparse": {
+      "type": "http",
+      "url": "https://mcp.bazhuayu.com",
+      "headers": {
+        "x-api-key": "你的APIKey"
+      }
+    }
+  }
+}
+```
+
+保存后重启客户端，在 MCP 工具列表中应能看到八爪鱼相关工具。
+
+更多客户端（ChatGPT、Gemini、OpenClaw、VS Code）见 [客户端配置指南](/zh/mcp/guides/clients)。
+
+## 验证是否生效
+
+连接成功后，可在对话中尝试：
+
+- 「用八爪鱼搜索一个采集新闻标题的模板」
+- 「列出我账户下的八爪鱼任务」
+
+若返回 `401` / `403`，请检查 Key 是否有效、是否填在 `x-api-key` 字段，以及 URL 是否正确。
+
+## 与各平台教程的关系
+
+- **Coze / Dify / QClaw** — [平台对接](/zh/mcp/index#平台对接) 分组中的分平台教程
+- **ChatGPT / Claude / Cursor / Gemini / OpenClaw / VS Code** — [客户端配置指南](/zh/mcp/guides/clients)
+
+## 下一步
+
+<CardGroup cols={2}>
+  <Card title="工作流程示例" href="/zh/mcp/workflow">
+    从搜模板到导出数据的完整示例。
+  </Card>
+  <Card title="故障排查" href="/zh/mcp/troubleshooting">
+    授权失败、工具不可见等问题。
+  </Card>
+</CardGroup>

@@ -1,0 +1,208 @@
+---
+title: "【微博】博主主页的博文"
+source: "https://www.bazhuayu.com/helpcenter/docs/WFEMUY"
+---
+**采集场景**
+
+采集某个微博博主主页的博文数据，实例地址
+
+[[https://weibo.com/u/3261134763](https://weibo.com/u/3261134763) \
+https://weibo.com/2656274875?refer\_flag=1001030103\_](https://weibo.com/u/3261134763)
+
+[![](/assets/academy/case-studies/weibo-author-posts/01-68a6da913ca5f.png)](https://weibo.com/u/3261134763)
+
+ 
+
+ 
+
+ 
+
+ 
+
+**采集字段**
+
+博主、粉丝数、关注数、转评赞数、简介、发布时间、来源、博文内容、转发数、评论数、点赞数
+
+ 
+
+**采集结果**
+
+采集结果可导出为Excel、CSV、HTML、数据库等多种格式。
+
+![【微博】博主主页的博文](/assets/academy/case-studies/weibo-author-posts/02-68a6dac280add.png)
+
+ 
+
+**教程说明**
+
+本篇更新时间：2025/08/20 八爪鱼版本：V8.7.7
+
+如因网页改版导致网址或步骤无效，无法收集到目标数据，请联系官方客服，我们会及时处理。
+
+ 
+
+ 
+
+**采集步骤**
+
+步骤一：创建循环网页
+
+步骤二、设置cookie登录
+
+步骤三、提取微博字段
+
+步骤四、创建【循环列表】，提取博文列表数据
+
+步骤五、创建循环滚动
+
+步骤六、启动采集
+
+ 
+
+**&#xA0;**
+
+ 
+
+下面为具体步骤：
+
+ 
+
+### 步骤一、创建循环网页
+
+ 
+
+在首页选择【新建】，然后点击【自定义任务】-输入所需采集的网址后点击【保存设置】
+
+ <video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/586848095145403695939720732/mHVmm9Ui02gA.mp4" width="100%"></video>
+
+ 
+
+ 
+
+ 
+
+### 步骤二、设置cookie登录
+
+ 
+
+点击右上角的【浏览模式】后
+
+1、点击立即登录。
+
+2、根据提示用手机app端扫码登录。
+
+3、关闭浏览模式设置cookie登录
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/55eef28c5145403695939600828/3OszRE5UmgEA.mp4" width="100%"></video>
+
+ 
+
+ 
+
+ 
+
+### 步骤三、提取微博字段
+
+ 
+
+选中网页中的目标字段，在操作提示点击【文本内容】，依次设置获取所需的博主字段数据。
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/cbb9e2445145403695934205914/AovxiIgSAOkA.mp4" width="100%"></video>
+
+ 
+
+ 
+
+ 
+
+ 
+
+### 步骤四、创建【循环列表】，提取博文列表数据
+
+ 
+
+1.创建循环列表提取博文列表数据
+
+1）选中一整个博文列表项，<img src="/assets/academy/case-studies/weibo-author-posts/03-68a6dbee9f279.png" alt="【微博】博主主页的博文" className="academy-inline-icon" />标签层返回到ARTICLE上，
+
+2）再选中下一个博文列表项，重复操作
+
+3\)  操作提示点选文本内容
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/7f2cbc885145403695933266723/G9HAj7aivBYA.mp4" width="100%"></video>
+
+ 
+
+ 
+
+2.编辑字段
+
+删除不需要的字段、修改字段名
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/94e2b1075145403695940970263/35mr72vIEsAA.mp4" width="100%"></video>
+
+ 
+
+ 
+
+3.修改xpath
+
+优化字段的xpath，定位所有列表项的指定字段
+
+ 
+
+发布时间：//div[@class="woo-box-item-flex \_main\_ygi5b\_20"]/div/div[2]/a
+
+来源：//div[@class="woo-box-item-flex \_main\_ygi5b\_20"]/div/div[2]/div
+
+博文内容：//div[@class="wbpro-feed-content"]/div[1]
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/fb084dde5145403695938011261/w1fgXBia7VMA.mp4" width="100%"></video>
+
+ 
+
+ 
+
+### 步骤五、创建循环滚动
+
+ 
+
+因为微博博主网页结构的原因：网页需要往下滚动，同时不管滚动多少次都只能定位几条数据。所以这里需要设置边滚动边采集，同时勾选上【滚动时循环列表不自动去重】。
+
+微博特殊网页结构问题会导致采集会有大量重复数据，这个属于正常现象，采集完成后，可以选择导出去重后的数据。
+
+ 
+
+1.添加循环框，选择循环的方式为循环滚动；
+
+2.设置滚动方式-向下滚动一屏；
+
+3.勾选上【滚动时循环列表不自动去重】；
+
+4.把【循环列表-提取列表数据】整个拖拽放到【循环】里面进行内嵌套，如动图所示。
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/0da09b065145403695938803413/evfeM2Ge04IA.mp4" width="100%"></video>
+
+ 
+
+ 
+
+ 
+
+### 步骤六、启动采集
+
+ 
+
+点击【保存】-【采集】，选择本地采集或者云采集，等待采集完成。
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/6fa65ab45145403695936696635/K7AvIa8qliIA.mp4" width="100%"></video>
+
+ 
+
+ 
+
+> 说明：\
+> 若网站改版导致采集问题，可扫码加群反馈\
+> ![【微博】博主主页的博文](/assets/academy/case-studies/weibo-author-posts/04-6707a9f661506.png)

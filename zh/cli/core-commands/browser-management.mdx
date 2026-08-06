@@ -1,0 +1,149 @@
+---
+title: 浏览器管理
+description: 使用 bazhuayu browser 配置独立浏览器或复用 Chrome、Edge 用户 Profile 的登录状态。
+---
+
+> v0.1.30 新增用户浏览器模式。默认的独立模式使用临时 Chrome for Testing Profile；用户模式可在 Windows 和 macOS 上复用系统 Chrome 或 Edge 的 Profile、Cookie 与登录状态。
+
+## 两种浏览器模式
+
+| 模式 | 浏览器与 Profile | 登录状态 | 支持平台 | 适用场景 |
+| --- | --- | --- | --- | --- |
+| `independent` | CLI 管理的 Chrome for Testing 和临时 Profile | 不复用日常浏览器状态 | Windows x64、macOS x64 / arm64、Linux x64 | 公开网页、隔离运行、无头采集 |
+| `user` | 系统 Chrome / Edge 和指定 Profile | 复用该 Profile 的 Cookie 与登录状态 | Windows、macOS | 后台系统、会员页、多账号页面 |
+
+Linux 继续使用 `independent`。Linux arm64 因 Chrome for Testing 没有对应浏览器包，暂不支持本地 `detect` 和 `run`。
+
+## 首次启用用户浏览器
+
+按下面顺序执行，不要在扩展尚未就绪时直接保存用户模式：
+
+<Steps>
+  <Step title="检查浏览器状态">
+    ```bash
+    bazhuayu browser status --browser-id chrome --json
+    ```
+
+    使用 Edge 时把 `chrome` 改为 `edge`。脚本和 Agent 应读取 `data.nextActions`；失败响应中的建议位于 `error.details.nextActions`。
+  </Step>
+  <Step title="选择 Profile">
+    ```bash
+    bazhuayu browser profiles --browser-id chrome --json
+    ```
+
+    `--profile` 需要传入输出中的准确 `profileName`，并区分大小写。
+  </Step>
+  <Step title="安装浏览器扩展">
+    ```bash
+    bazhuayu browser install --browser-id chrome --profile "Default" --json
+    ```
+
+    安装时浏览器必须完全关闭。若希望 CLI 关闭正在运行的浏览器，可追加 `--force-close`。
+  </Step>
+  <Step title="重新打开并验证">
+    重新打开 Chrome 或 Edge 一次，确认八爪鱼扩展已启用，然后再次检查：
+
+    ```bash
+    bazhuayu browser status --browser-id chrome --profile "Default" --json
+    ```
+
+    只有 `data.readyForUserBrowserRun` 为 `true` 时才继续。
+  </Step>
+  <Step title="保存为默认模式">
+    ```bash
+    bazhuayu browser use user --browser-id chrome --profile "Default" --json
+    ```
+
+    该设置同时应用于后续的 `detect` 和 `run`。
+  </Step>
+</Steps>
+
+<Warning>
+  用户浏览器模式会使用真实 Profile 中的登录状态。只选择你信任的任务和网站，不要把 Profile 名、Cookie、状态输出或本地配置文件提交到仓库。
+</Warning>
+
+## 查看与切换默认模式
+
+```bash
+# 查看已保存的默认模式
+bazhuayu browser use status --json
+
+# 使用 Chrome 用户 Profile
+bazhuayu browser use user --browser-id chrome --profile "Default"
+
+# 使用 Edge 用户 Profile
+bazhuayu browser use user --browser-id edge --profile "Profile 1"
+
+# 切回独立浏览器
+bazhuayu browser use independent
+```
+
+默认设置保存在 `~/.octopus/config.json`。浏览器选择优先级为：
+
+```text
+--browser 参数 > OCTOPUS_BROWSER 环境变量 > browser use 保存的设置 > independent
+```
+
+也可以使用环境变量临时覆盖：
+
+```bash
+OCTOPUS_BROWSER=user OCTOPUS_BROWSER_ID=chrome OCTOPUS_BROWSER_PROFILE=Default bazhuayu run <taskId>
+```
+
+## 单次覆盖 detect 与 run
+
+不修改默认设置时，可只为当前命令指定浏览器：
+
+```bash
+bazhuayu detect "https://example.com/account" --auto --browser user --browser-id chrome --profile "Default" --goal "提取账户数据" --output task.json
+bazhuayu run <taskId> --task-file task.json --browser user --browser-id chrome --profile "Default" --max-rows 20
+```
+
+如果任务依赖登录状态，detect 和 run 都应选择同一个浏览器与 Profile。用户模式会复用正在运行的浏览器，并打开专用会话窗口；日常 detect/run 不要求先关闭整个浏览器。
+
+<Warning>
+  用户浏览器模式不支持 `--headless`。需要无头运行时请使用 `--browser independent --headless`。
+</Warning>
+
+`--force-close-browser` 是 detect/run 的可选故障恢复参数，通常不需要：
+
+```bash
+bazhuayu run <taskId> --browser user --force-close-browser --max-rows 20
+```
+
+## 其他管理命令
+
+```bash
+# 查看浏览器与扩展就绪状态
+bazhuayu browser status --browser-id chrome --profile "Default" --json
+
+# 列出 Profile
+bazhuayu browser profiles --browser-id chrome --json
+
+# 关闭 CLI 使用的用户浏览器
+bazhuayu browser close --browser-id chrome --profile "Default" --json
+```
+
+`browser` 命令无需 API Key。运行 `detect`、`run` 等功能命令仍需要完成 CLI 认证。
+
+## 常见问题
+
+| 现象或错误码 | 处理方式 |
+| --- | --- |
+| `BROWSER_RUNNING` / `PROFILE_RUNNING` | 关闭浏览器后重试安装，或给 `browser install` 添加 `--force-close` |
+| `PROFILE_NOT_FOUND` | 运行 `browser profiles --json`，使用准确的 `profileName` |
+| `BROWSER_NOT_INSTALLED` | 先安装所选 Chrome 或 Edge |
+| `EXTENSION_NOT_READY` | 重新打开浏览器并确认扩展已启用，再检查 `readyForUserBrowserRun` |
+| `USER_BROWSER_HEADLESS_UNSUPPORTED` | 移除 `--headless`，或改用 `--browser independent` |
+| Linux 上无法使用 `--browser user` | 用户模式仅支持 Windows 和 macOS；Linux 使用独立模式 |
+
+## 下一步
+
+<CardGroup cols={2}>
+  <Card title="网页检测与任务生成" icon="sparkles" href="/zh/cli/core-commands/detect">
+    使用登录后的页面生成任务文件。
+  </Card>
+  <Card title="运行采集任务" icon="play" href="/zh/cli/core-commands/run-tasks">
+    使用相同 Profile 运行依赖登录状态的任务。
+  </Card>
+</CardGroup>

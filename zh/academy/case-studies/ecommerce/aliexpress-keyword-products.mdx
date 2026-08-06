@@ -1,0 +1,257 @@
+---
+title: "【速卖通】 AliExpress(速卖通)关键词搜索采集商品信息"
+source: "https://www.bazhuayu.com/helpcenter/docs/QLu99s"
+---
+**采集场景**
+
+在AliExpress(速卖通) 首页中 [http://www.aliexpress.com](http://www.aliexpress.com) 中输入关键词，采集关键词搜索后得到的商品列表信息。
+
+ 
+
+**采集字段**
+
+关键词、标题、图片链接、商品详情链接、现价、原价、优惠、店铺名、店铺链接
+
+ 
+
+**![【速卖通】 AliExpress(速卖通)关键词搜索采集商品信息](/assets/academy/case-studies/aliexpress-keyword-products/01-66ebfaf1260d6.png)**
+
+ 
+
+**采集结果**
+
+采集结果可导出为Excel、CSV、HTML、数据库等多种格式。导出为Excel示例：
+
+![【速卖通】 AliExpress(速卖通)关键词搜索采集商品信息](/assets/academy/case-studies/aliexpress-keyword-products/02-66ebfb84d8212.png)
+
+ 
+
+ 
+
+**教程说明**
+
+如果因网页改版造成网址或步骤无效，无法收集到目标数据，请联系官方客服，我们将及时修正。
+
+ 
+
+**采集步骤**
+
+步骤一、打开网页
+
+步骤二、批量输入多个关键词
+
+步骤三、采集字段数据
+
+步骤四、创建【循环翻页】
+
+步骤五、启动采集
+
+ 
+
+ 
+
+**以下为具体步骤：**
+
+ 
+
+### 步骤一、打开网页
+
+在首页【输入框】中输入目标网址 [http://www.aliexpress.com](http://www.aliexpress.com)，点击【开始采集】，八爪鱼自动打开网页，此处会默认跳到登录页面，需要右上角切换到浏览模式之后，手动的登录网站，并在打开网页步骤勾选上记住cookie
+
+ <video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/bffe26331397757893368109314/QM3tTsRpcjoA.mp4" width="100%"></video>
+
+ 
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 打开网页后，如果开始开始【自动识别】，请点击【不再自动识别】或【取消识别】将其关掉。因为本文不适合使用【自动识别】。
+> 
+> - b. 【自动识别】适用于自动识别网页上的列表、滚动和翻页，识别成功后直接启动采集即可获取数据。详情点击查看 [【自动识别】教程](https://www.bazhuayu.com/helpcenter/docs/wduVyb)
+
+ 
+
+### 步骤二、批量输入多个关键词
+
+打开网页后，通过以下几步，实现批量输入多个关键词。
+
+① 选中速卖通搜索框，在操作提示框中，点击【输入文本】
+
+②点击操作框的【批量输入文本】，输入要搜索的所有关键词，点击确定，及在右侧生成一个循环输入文本的步骤
+
+③ 选中【搜索】按钮，在操作提示框中，点击【点击一次】，出现关键词的搜索结果。
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/8353b0181397757893367801654/OqtmAbcElXcA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 示例中输入的关键词是【iphone】和【dress】可根据自身需求进行替换。
+> 
+> - b.一次最多输入2W个关键字。可先准备一个包含多个关键字的文档，然后将其复制粘贴进八爪鱼中。
+
+ 
+
+### 步骤三、采集字段数据
+
+ 
+
+1、提取搜索框内的关键词
+
+在网页中选中搜索框，然后在操作提示框中选择【文本框内的值】。
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/e283548d1397757893365520350/37pj4UjawAAA.mp4" width="100%"></video>
+
+ 
+
+2、自动识别，创建【循环列表】
+
+①设置点击元素，切换商品的展示方式，确保启动后的展示方式和配置采集时的一致
+
+②点击【自动识别】，等待识别完成之后，点击生成采集设置，生成循环列表、滚动网页和翻页步骤
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/2ab26ebe1397757893366306868/ExVjft8T9scA.mp4" width="100%"></video>
+
+ 
+
+ 
+
+3、提取列表中的字段
+
+对于自动识别没有识别到的原价和现价的字段，需要手动的在循环里进行提取
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/b3b2eedb1397757893361783429/d7qa1DQyxxcA.mp4" width="100%"></video>
+
+ 
+
+4、编辑xpath及编辑字段
+
+①对于现价和原价字段，需要修改字段的xpath进行精确的定位。现价的xpath://div[contains(@class,"price-sale")],原价的
+
+xpath://div[contains(@class,"price-original")]
+
+②在【当前数据预览】页面，依次编辑字段名以及删掉不需要的字段
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/050d8af61397757893362940923/iMoLQRH9HaQA.mp4" width="100%"></video>
+
+ 
+
+ 
+
+ 
+
+ 
+
+### 步骤四、规则优化
+
+ 
+
+采集数据过快会导致部分数据未加载出来就采集，导致没有数据，需要优化规则：
+
+ 
+
+1、设置执行前等待
+
+为【循环】、【输入文本】、【点击元素】、【提取数据】等步骤设置合理的执行前等待时间。
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/beaa6cee1397757893415762410/BThMOgBF2mMA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 执行前等待，即在执行此步骤前等待一段时间，可有效避免因网页未加载完全导致的漏数据，详情点击查看 [执行前等待使用场景与设置方法](https://www.bazhuayu.com/helpcenter/docs/zigIaV)
+
+ 
+
+2、设置页面滚动
+
+为了完整地采集到图片地址，需先滚动鼠标将页面全部加载一遍，然后再提取数据。
+
+进入【点击元素】和【点击翻页】设置页面，勾选【页面加载后向下滚动】，滚动方式为【向下滚动一屏】，滚动10次，每次间隔1s。
+
+ <video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/fd72bfbb1397757893416138659/zim3lxmbyD0A.mp4" width="100%"></video>
+
+ 
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 设置中的滚动次数和时间间隔，请根据采集需求和网页加载情况进行设置，并非是一成不变的，具体请点击查看 [处理滚动加载数据的网页教程](/zh/academy/basic-collection/pagination/click-load-more-and-collect)
+
+ 
+
+### 步骤五、启动采集
+
+ 
+
+1、单击【采集】并【启动本地采集】。启动后八爪鱼开始自动采集数据。
+
+ <video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/3d6d65101397757893410713970/3wAUvpJxOrgA.mp4" width="100%"></video>
+
+ 
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 【本地采集】是使用自己的电脑进行采集，【云采集】是使用八爪鱼提供的云服务器采集
+
+ 
+
+2、采集完成后，选择合适的导出方式导出数据。支持导出为Excel、CSV、HTML、数据库等。这里导出为Excel。数据示例：
+
+ ![【速卖通】 AliExpress(速卖通)关键词搜索采集商品信息](/assets/academy/case-studies/aliexpress-keyword-products/03-66ebfb84d8212.png)

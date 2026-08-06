@@ -1,0 +1,210 @@
+---
+title: "【天眼查】企业信息采集"
+source: "https://www.bazhuayu.com/helpcenter/docs/SZ51ko"
+---
+**采集场景**
+
+在天眼查搜索页面（[https://www.tianyancha.com/search）](https://www.tianyancha.com/search）)，选择条件查询，得到条件查询后的结果列表页。实例网址：[https://www.tianyancha.com/search?base=bj&companyType=normal_company](https://www.tianyancha.com/search?base=bj&companyType=normal_company)，是选择了2个查询条件（省份地区：北京市；机构类型：企业）后得到的列表页。然后点击企业链接进入详情页，采集企业详情页的数据。
+
+![【天眼查】企业信息采集](/assets/academy/case-studies/tianyancha-company-info/01-653b5f92677a5.gif)
+
+ 
+
+ 
+
+**采集字段**
+
+公司名称、公司网址、公司简介、浏览量、更新时间、公司法人、公司注册资金、统一社会信用代码，纳税人识别号、公司类型等字段。
+
+![【天眼查】企业信息采集](/assets/academy/case-studies/tianyancha-company-info/02-653b5faa242cd.png)
+
+ 
+
+**采集结果**
+
+采集结果可导出为Excel、CSV、HTML、数据库等多种格式。导出为Excel示例：
+
+![【天眼查】企业信息采集](/assets/academy/case-studies/tianyancha-company-info/03-653b5fb18da25.png)
+
+ 
+
+**教程说明**
+
+本篇制作时间：2022/6/17    八爪鱼版本：V8.5.2
+
+如果因网页改版造成网址或步骤无效，无法收集到目标数据，请联系官方客服，我们将及时修正。
+
+ 
+
+**采集步骤**
+
+步骤一：打开网页
+
+步骤二、天眼查登录
+
+步骤三、建立【循环翻页】，采集多页数据
+
+步骤四、建立【循环-点击元素】，进入每个企业详情页
+
+步骤五、提取目标字段并编辑字段
+
+步骤六、启动采集
+
+ 
+
+**以下为具体步骤：**
+
+ 
+
+## 步骤一、打开网页
+
+ 
+
+在首页【输入框】中输入目标网址 [https://www.tianyancha.com/search?base=bj&companyType=normal_company](https://www.tianyancha.com/search?base=bj&companyType=normal_company)，点击【开始采集】，八爪鱼自动打开网页。
+
+ ![【天眼查】企业信息采集](/assets/academy/case-studies/tianyancha-company-info/04-653b5fbde7f56.gif)
+
+ 
+
+特别说明：
+
+- a. 打开网页后，如果开始开始【自动识别】，请等待自动识别完成。八爪鱼支持自动识别网页上的列表、滚动和翻页，此网页正是列表型网页。识别成功后直接启动采集即可获取数据。如果【自动识别】的结果不是我们需要的，可点击【取消识别】自行配置采集流程。详情点击查看 [【自动识别】教程](../tutorial8/81zdypz)
+- b.  示例网址：[https://www.tianyancha.com/search?base=bj&companyType=normal_company](https://www.tianyancha.com/search?base=bj&companyType=normal_company) ，是 [https://www.tianyancha.com/search](https://www.tianyancha.com/search) 打开后，选择了2个查询条件（省份地区：北京市；机构类型：企业）后得到的网址，请根据需求更换筛选条件，然后输入筛选条件后得到的网址进行采集。
+
+![【天眼查】企业信息采集](/assets/academy/case-studies/tianyancha-company-info/05-653b5fcb2a76d.png)
+
+ 
+
+## 步骤二、天眼查登录
+
+ 
+
+要采集天眼查数据，首先需要登录。如果没有先登录，会比较容易遇到防采集。因此，我们需要先在八爪鱼中登录，通过以下几步实现：
+
+ 
+
+1、打开浏览器模式
+
+点击 ![data-id=](/assets/academy/case-studies/tianyancha-company-info/06--E5-BE-AE-E4-BF-A1-E6-88-AA-E5-9B-BE_20200311181211.png) 按钮，打开浏览器模式。在浏览器模式中，扫码登录。
+
+ 
+
+2、使用Cookie登录天眼查
+
+进入【打开网页1】设置界面，勾选【使用指定的Cookie】，点击【获取当前页面Cookie】并保存。这样就获取到了登录后的Cookie，启动时直接以登录状态打开网页。
+
+ 
+
+![【天眼查】企业信息采集](/assets/academy/case-studies/tianyancha-company-info/07-653b5fdb4d59f.gif)
+
+特别说明：
+
+- a. 什么是浏览器模式？在浏览器模式下，我们可以像在浏览器中一样点击操作网页，不会生成流程步骤。如需编辑流程步骤，需关闭浏览器模式。关闭状态：<img src="/assets/academy/case-studies/tianyancha-company-info/08-653b5fe85fd6a.png" alt="【天眼查】企业信息采集" className="academy-inline-icon" /> ；打开状态：<img src="/assets/academy/case-studies/tianyancha-company-info/09-653b5ff3d968d.png" alt="【天眼查】企业信息采集" className="academy-inline-icon" />
+- b. Cookie是什么？通俗的说，Cookie是一些存储在用户电脑上的小文件，用来保存一些站点的用户数据，作用是让浏览器为用户定制内容。例如：用户第一次访问某网站，输入了账号密码登录。浏览器会问你是否需要【记住账号密码】。选择【是】以后，浏览器就会将这些账号密码信息存储在用户电脑上。下次再访问此网站，就无需再次输入账号密码。详情点击查看 [处理需要登录的网页（含登录时有验证码](../tutorial8/81dl)）
+- c. 怎么判断是否获取到Cookie？获取Cookie后 ![【天眼查】企业信息采集](/assets/academy/case-studies/tianyancha-company-info/10-653b5ffcf0aab.png)会变成  ![【天眼查】企业信息采集](/assets/academy/case-studies/tianyancha-company-info/11-653b60045ace0.png) ，点击 <img src="/assets/academy/case-studies/tianyancha-company-info/12-653b600d78401.png" alt="【天眼查】企业信息采集" className="academy-inline-icon" /> ，可查看具体的Cookie内容。
+
+ 
+
+## 步骤三、建立【循环翻页】，采集多页数据
+
+ 
+
+如果只是采集一页数据，可跳过此步骤。
+
+如果需要翻页以采集多页数据：关闭浏览器模式，选择页面中的【>】按钮，在操作提示上单击【循环点击下一页】，创建【循环翻页】。
+
+ ![【天眼查】企业信息采集](/assets/academy/case-studies/tianyancha-company-info/13-653b601f12b7a.gif)
+
+ 
+
+特别说明：
+
+- a. 创建【循环翻页】后，八爪鱼会自动点击【下一页】按钮进行翻页，从第1页，第2页......直到最后1页。如果只需采集特定页的数据，可在八爪鱼中设置循环翻页的次数，详情点击查看  [翻页以采集多页数据教程](../tutorial8/81xsrm7)。
+
+ 
+
+## 步骤四、建立【循环-点击元素】，进入每个企业详情页
+
+ 
+
+通过以下几步，实现循环点击每个企业链接，进入企业详情页
+
+① 选中页面上第1个企业链接
+
+② 在黄色操作提示框中，点击【选中全部】
+
+③ 点击【循环点击每个链接】，进入第1个企业的详情页
+
+ ![【天眼查】企业信息采集](/assets/academy/case-studies/tianyancha-company-info/14-653b60293c758.gif)
+
+ 
+
+## 步骤五、提取目标字段并编辑字段
+
+ 
+
+1、提取目标字段
+
+选中页面中的文本，然后在操作提示框中，点击【采集该元素文本】。
+
+文本类字段都可以按照这样的方式提取。示例中我们提取了公司名称、公司网址、公司简介、更新时间、公司法人、统一社会信用代码，纳税人识别号、等多个字段。
+
+ ![【天眼查】企业信息采集](/assets/academy/case-studies/tianyancha-company-info/15-653b6031c8905.gif)
+
+ 
+
+特别说明：
+
+- a. 文本、图片、视频、源码是不同的数据形式，在操作提示框选择提取方式时稍有不同。文本一般为【采集该元素文本】，图片一般为【采集该图片地址】，更多提取方式请点击查看  [不同数据类型（文本、图片、链接、源码等）的抓取方式 教程](../tutorial8/81zdyzqfs)
+
+  
+
+2、编辑字段
+
+进入【提取数据】设置界面，可删除多余字段，修改字段名，移动字段顺序、增加字段等。
+
+ ![【天眼查】企业信息采集](/assets/academy/case-studies/tianyancha-company-info/16-653b603ee46d7.gif)
+
+ 
+
+## 步骤六、启动采集
+
+ 
+
+1、单击【采集】并【启动本地采集】。启动后八爪鱼开始自动采集数据。
+
+ ![【天眼查】企业信息采集](/assets/academy/case-studies/tianyancha-company-info/17-653b6047ce3ad.gif)
+
+ 
+
+特别说明：
+
+- a. 【本地采集】是使用自己的电脑进行采集，【云采集】是使用八爪鱼提供的云服务器采集，点击查看 [本地采集与云采集详解](../tutorial8/81xsrm8)。
+
+ 
+
+2、采集完成后，选择合适的导出方式导出数据。支持导出为Excel、CSV、HTML。这里导出为Excel。
+
+ 
+
+ 
+
+数据示例：
+
+ 
+
+![【天眼查】企业信息采集](/assets/academy/case-studies/tianyancha-company-info/18-653b604fc38df.png)
+
+ 
+
+> 说明：\
+> 若网站改版导致无法采集或其他问题，可扫码加群反馈\
+> ![【天眼查】企业信息采集](/assets/academy/case-studies/tianyancha-company-info/19-6707aa588e08c.png)
+
+ 
+
+ 
+
+作者：DJacky
+
+编辑：Aisling

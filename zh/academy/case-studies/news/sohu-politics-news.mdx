@@ -1,0 +1,207 @@
+---
+title: "【搜狐】时政新闻采集"
+source: "https://www.bazhuayu.com/helpcenter/docs/sou-hu-shi-zheng-xin-wen-cai-ji"
+---
+**采集场景**
+
+搜狐网站上有时政新闻的板块，实例网址：[https://www.sohu.com/xchannel/tag?key=%E6%96%B0%E9%97%BB-%E6%97%B6%E6%94%BF\&scm=10001.457*14-201000.0.10005.0\&spm=smpc.channel*258.block2*225*ZJhqAx*1*nav.2.1713258424926eLlkrRU\_1090](https://www.sohu.com/xchannel/tag?key=%E6%96%B0%E9%97%BB-%E6%97%B6%E6%94%BF\&scm=10001.45714-201000.0.10005.0\&spm=smpc.channel258.block2225ZJhqAx1nav.2.1713258424926eLlkrRU_1090)，是搜狐时政新闻主页。主页上展示实时的文章列表，点击文章标题链接，可进入文章详情页，查看文章正文（文字+图片）。
+
+ 
+
+**采集字段**
+
+标题、标题链接、发布时间、发布者、主页信息、封面图片、阅读量、发布地、正文提取等字段。
+
+ 
+
+![【搜狐】时政新闻采集](/assets/academy/case-studies/sohu-politics-news/01-662b8c7dc3a63.png)
+
+ 
+
+ 
+
+**采集结果**
+
+采集结果可导出为Excel，CSV，HTML，数据库等多种格式。导出为Excel示例：
+
+ 
+
+![【搜狐】时政新闻采集](/assets/academy/case-studies/sohu-politics-news/02-662db5cb1a7ac.png)
+
+ 
+
+**教程说明**
+
+本篇制作时间：2024/4/26    八爪鱼版本：V8.6.8
+
+如果因网页改版造成网址或步骤无效，无法收集到目标数据，请联系官方客服，我们将及时修正。
+
+ 
+
+**采集步骤**
+
+步骤一：打开网页
+
+步骤二、自动识别，创建【循环点击列表】
+
+步骤三、进入文章详情，采集文章正文
+
+步骤四、编辑字段
+
+步骤五、启动采集
+
+ 
+
+**以下为具体步骤：**
+
+ 
+
+### 步骤一、打开网页
+
+ 
+
+在首页【输入框】中输入目标网址 [https://www.sohu.com/xchannel/tag?key=%E6%96%B0%E9%97%BB-%E6%97%B6%E6%94%BF\&scm=10001.457*14-201000.0.10005.0\&spm=smpc.channel*258.block2*225*ZJhqAx*1*nav.2.1713258424926eLlkrRU\_1090](https://www.sohu.com/xchannel/tag?key=%E6%96%B0%E9%97%BB-%E6%97%B6%E6%94%BF\&scm=10001.45714-201000.0.10005.0\&spm=smpc.channel258.block2225ZJhqAx1nav.2.1713258424926eLlkrRU_1090)，点击【开始采集】，八爪鱼自动打开网页。
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/e3f8c0f41253642695939811858/djBffVp2BTUA.mp4" width="100%"></video>
+
+ 
+
+特别说明：
+
+- a. 打开网页后，如果开始开始【自动识别】，请点击【不再自动识别】或【取消识别】将其关掉。因为本文不适合使用【自动识别】。
+- b. 【自动识别】适用于自动识别网页上的列表、滚动和翻页，识别成功后直接启动采集即可获取数据。详情点击查看 [【自动识别】教程](/zh/academy/basic-collection/beginner/custom-collection)。
+- c. 可以根据需求，更换头条号的网址。
+
+ 
+
+### 步骤二、自动识别，创建【循环点击列表】
+
+ 
+
+1.点击自动识别，识别完成后点击生成采集规则，会自动生成滚动采集列表的采集步骤
+
+ <video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/e3ea65af1253642695939808262/BW3Z4eGxIAYA.mp4" width="100%"></video>
+
+ 
+
+ 2.修改循环列表的xpath
+
+自动生成的循环列表xpath不足够精准，需要手动的进行修改，修改为：//DIV[contains(@class,"recommend-content-wrap")]/div/div/div[@class="TPLImageTextFeedItem"]
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/b09ff86a1253642695935890521/QARHtfp11t0A.mp4" width="100%"></video>
+
+ 
+
+### 步骤三、点击文章链接进入详情页
+
+ 
+
+1、点击文章链接进入详情页
+
+在当前文章列表中（在网页中用红色框框起来），选中文章标题，在操作提示框中点击【点击该链接】，点击后自动进入该文章详情页。
+
+ <video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/02ef74901253642695943894146/A9MNKaDfdngA.mp4" width="100%"></video>
+
+ 
+
+特别说明：
+
+- a. 一定要在当前文章列表中选中文章链接做【点击该链接】，否则【点击元素】步骤无法与【循环】中的文章列表产生联动，会一直重复点击某一条文章链接，进入其文章详情页，无法实现依次点击每个文章链接。
+
+ 
+
+2、采集文章详情页中的字段
+
+选中页面中的文本，然后在操作提示框中，点击【文本内容】。
+
+文本类字段都可以按照这样的方式提取。示例中我们提取了文章标题、作者、发布时间等字段。
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/561937661253642695941060099/bRxunoAohHAA.mp4" width="100%"></video>
+
+ 
+
+特别说明：
+
+- a. 文本、图片、视频、源码是不同的数据形式，在操作提示框选择提取方式时稍有不同。文本一般为【采集该元素文本】，图片一般为【采集该图片地址】，更多提取方式请点击查看  [不同数据类型（文本、图片、链接、源码等）的抓取方式 教程](/zh/academy/advanced-features/data-processing/custom-extraction-method)
+
+ 
+
+3、建立【循环列表】，提取正文内所有正文字段
+
+① 选中页面上一个文章段落（注意一定要选中整个段落，而不是一行），八爪鱼会自动识别其他同类段落
+
+② 在黄色操作提示框中，选择【选中全部相似元素】
+
+③ 选择【文本内容】
+
+ <video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/92e4fa951253642695938691908/7AEHuL7ZD5QA.mp4" width="100%"></video>
+
+ 
+
+ 
+
+4、设置判断条件
+
+由于文本和图片是不同的采集方式，因此我们要设置判断分支，不同的分支采集不同类型的数据。
+
+① 在流程图中添加一个【判断条件】步骤，默认为两个分支。
+
+② 为左分支设置【分支执行条件】为【当前循环项包含元素】，填入XPath: //img ，用来判断并采集图片地址，该分支的提取数据的字段xpath设置为//img，元素抓取方式修改为采集图片链接
+
+③ 右分支不做设置，默认执行，用来采集文本，注意两个分支的字段名称都要设置成一样的
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/fb3384691253642695936781601/WhdKpzBro94A.mp4" width="100%"></video>
+
+ 
+
+### 步骤四、编辑字段
+
+如果要将一篇文章采集到一个单元格里，要将两个字段都勾选上【同一字段的多行合并采集】
+
+进入【提取数据】设置页面，可删除多余字段，修改字段名，移动字段顺序等。
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/e3f8b7ee1253642695939811618/3IVio0eXntQA.mp4" width="100%"></video>
+
+ 
+
+ 
+
+ 
+
+特别说明：
+
+- a. 设置中的滚动次数和时间间隔，请根据采集需求和网页加载情况进行设置，并非是一成不变的，具体请点击查看 [处理滚动加载数据的网页教程](/zh/academy/basic-collection/pagination/scroll-loading-pagination)
+
+ 
+
+### 步骤五、启动采集
+
+ 
+
+1、单击【采集】并【启动本地采集】。
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/9db3340b1253642695935059228/ymfc1JcMuPMA.mp4" width="100%"></video>
+
+  
+
+特别说明：
+
+- a. 【本地采集】是使用自己的电脑进行采集，【云采集】是使用八爪鱼提供的云服务器采集，点击查看 [本地采集与云采集详解](https://www.bazhuayu.com/helpcenter/docs/2xF5Mz)。
+
+ 
+
+2、采集完成后，选择合适的导出方式导出数据。
+
+支持导出为Excel、CSV、HTML、数据库等。这里导出为Excel。数据示例：
+
+ 
+
+![【搜狐】时政新闻采集](/assets/academy/case-studies/sohu-politics-news/03-662db5a3008a7.png)

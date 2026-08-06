@@ -1,0 +1,123 @@
+---
+title: "Ajax 网页采集方法"
+---
+
+很多网页使用了Ajax 技术，针对这种网页，我们需在八爪鱼中进行Ajax设置。
+
+## 一、什么是Ajax？
+
+Ajax (Asynchronous JavaScript and XML) ：异步JavaScript 和XML。
+
+Ajax是一种在无需重新加载整个网页的情况下，更新部分网页的技术。 通过在后台与服务器进行少量数据交换，Ajax 可以使网页实现异步更新。传统的网页（不使用 Ajax）如果需要更新内容，必须重新加载整个网页页面。
+
+## 二、如何判断网页是否使用了Ajax技术
+
+Ajax网页有2个明显特征：点击后【不重新加载整个网页】，且【网页局部出现新数据】。【不重新加载整个网页】是指：点击后观察网页的标签位置，不会转圈。如下图所示，百度地图搜索关键词'火锅'然后点击检索按钮，点击搜索后标签栏的状态没有发生变化。
+
+<div style={{ textAlign: "center" }}>
+
+![ajax-web-scraping](/assets/academy/troubleshooting/ajax-web-scraping/650d2f0aa251a.png)
+
+</div>
+
+不是Ajax点击：点击后整个页面重新加载（网页的标签位置开始转圈），然后开启新的标签加载数据。如下图所示：点击热门新闻的列表，然后进入到新闻详情页。
+
+<div style={{ textAlign: "center" }}>
+
+![ajax-web-scraping](/assets/academy/troubleshooting/ajax-web-scraping/6551e9329b0b3.png)
+
+</div>
+
+八爪鱼是通过内置Chrome浏览器访问网页采集数据的。在八爪鱼中，判断网页是否使用了Ajax技术的方法，与普通浏览器一致。
+
+是Ajax点击：点击后【不重新加载整个网页】（点击后浏览器网址栏无转圈状态，保持 <img src="/assets/academy/troubleshooting/ajax-web-scraping/650d2f0a8cbca.png" alt="" className="academy-inline-icon" /> 不变），且【网页局部出现新数据】。示例网址：https://map.baidu.com/@12688265,2566101,13z
+
+<div style={{ textAlign: "center" }}>
+
+![ajax-web-scraping](/assets/academy/troubleshooting/ajax-web-scraping/6551e9f38f0ad.png)
+
+</div>
+
+不是Ajax点击：点击后整个页面重新加载（点击后浏览器网址栏开始转圈 <img src="/assets/academy/troubleshooting/ajax-web-scraping/650d2f0b47c8b.png" alt="" className="academy-inline-icon" /> ，等待一段时间后转圈停止变成 <img src="/assets/academy/troubleshooting/ajax-web-scraping/650d2f0a657b9.png" alt="" className="academy-inline-icon" />），转圈停止后有新的数据出现。示例网址：https://weixin.sogou.com/weixin?ie=utf8&s_from=input&_sug_=n&_sug_type_=1&type=2&query=%E8%83%BD%E6%BA%90&w=01015002&oq=&ri=2&sourceid=sugg&sut=0&sst0=1699866616906&lkt=0%2C0%2C0&p=40040108<img src="/assets/academy/troubleshooting/ajax-web-scraping/6551eafd0f6a3.png" alt="" className="academy-inline-icon" />
+
+<div style={{ textAlign: "center" }}>
+
+![ajax-web-scraping](/assets/academy/troubleshooting/ajax-web-scraping/6551eac9c7a53.png)
+
+</div>
+
+**练习**：判断以下网页的点击，是否是Ajax点击？（先自行判断，第4个后有答案）：
+
+① 点击百度地图【搜索】按钮  https://map.baidu.com
+
+<div style={{ textAlign: "center" }}>
+
+![ajax-web-scraping](/assets/academy/troubleshooting/ajax-web-scraping/650d2f0a5d898.png)
+
+</div>
+
+② 点击京东【商品评论】按钮  https://item.jd.com/100004069493.html
+
+<div style={{ textAlign: "center" }}>
+
+![ajax-web-scraping](/assets/academy/troubleshooting/ajax-web-scraping/650d2f0b6dd70.png)
+
+</div>
+
+③ 点击京东商品评论【下一页】按钮  https://item.jd.com/100004069493.html
+
+<div style={{ textAlign: "center" }}>
+
+![ajax-web-scraping](/assets/academy/troubleshooting/ajax-web-scraping/650d2f0bb2d09.png)
+
+</div>
+
+④ 点击搜狗微信【文章链接】 https://weixin.sogou.com
+
+<div style={{ textAlign: "center" }}>
+
+![ajax-web-scraping](/assets/academy/troubleshooting/ajax-web-scraping/650d2f0c62be3.png)
+
+</div>
+
+答案：1是；2是；3是；4不是。
+
+## 三、怎么设置Ajax点击
+
+1、八爪鱼自行判断网页是Ajax
+
+判断是Ajax点击后，会自动勾选【Ajax加载数据】，并设置一定的【Ajax超时】时间。
+
+什么是【Ajax超时】？在点击后等待的时间，超过这个时间即进行下一个步骤。
+
+【Ajax超时】设置为几秒合适？大于【点击后新数据加载完成所需的时间】即可，请注意观察网页本身点击后新数据加载完成所需的时间。
+
+如果八爪鱼自动设置的【Ajax超时】过短，导致采不到数据，可相应的将【Ajax超时】延长，推荐5-10秒，具体根据网页情况进行调整。
+
+<div style={{ textAlign: "center" }}>
+
+<video width="640" height="360" controls>
+  <source src="https://resource-wangsu.helplook.net/docker_production/3mkuae/article/R01mM3/video/6551ebee03a4e.mp4" type="video/mp4" />
+</video>
+
+</div>
+
+如果是Ajax点击，但是在八爪鱼中没有设置【Ajax加载数据】会怎样？
+
+对于【点击】【翻页】等会造成页面变化的步骤，八爪鱼是通过网页是否加载完成，来决定是否进行下一个步骤的：加载完成，进行下一个步骤；没有完成，等待完成再进行下一个步骤。
+
+非Ajax网页，点击后有网页重新加载过程过程。当加载结束后，八爪鱼知道网页加载完成了，可以进行下一个步骤了。
+
+Ajax网页，点击后网页不重新加载，无变化，八爪鱼无法判断网页是否加载完成，就默认在点击后等待120秒。但实际上Ajax点击后，局部数据几秒内就会出现，默认等待120秒会极大的影响采集速度。
+
+2、是Ajax网页网页，但八爪鱼没有自动判断出来
+
+需要我们手动为相应步骤进行Ajax设置：勾选【Ajax加载数据】，并设置一定的【Ajax超时】时间。
+
+目前自动判断的很精准，很少出现此种情况，暂无实例演示。
+
+## 四、非Ajax点击的设置【Ajax超时】
+
+有的网页不是Ajax点击，点击后重新加载，要采集的数据已经出现在页面上了，但网址栏还没有加载完成。八爪鱼会等待加载完成后才进行下一个步骤，就会拖慢采集速度。
+
+针对这种情况，可以设置【Ajax超时】，强制停止网页加载。但需要注意，【Ajax超时】的时间，一定要略多于要采集的数据实际加载出来的时间。例如，要采集的数据实际5秒内加载出来，那将【Ajax超时】设为7秒，7秒后即使网址栏还在加载，八爪鱼也会强制停止其加载，进入下一个步骤，进而提高采集速度。

@@ -1,0 +1,50 @@
+---
+title: "点击展开获取全文-微博为例"
+description: "介绍八爪鱼采集器进阶功能：点击展开获取全文-微博为例。"
+source: "https://www.bazhuayu.com/helpcenter/docs/dian-ji-zhan-kai-huo-qu-quan-wen-wei-bo-wei-li"
+---
+
+### 一、场景需求
+
+我们在采集某些网站数据的时候，网页上的数据可能是“半隐藏”的，即&#x6709;**【展开】**、**【查看全部】**、**【展开全部】**&#x7B49;形式的展开按钮，我们需要先点击这种【展开】按钮后，采集采集完整的文字内容，那么这种我么应该怎么设置？
+
+以微博为例![点击展开获取全文-微博为例](/assets/academy/advanced-features/click-expand-full-text-weibo/01-6982fbe9b6bf8.png)
+
+###  
+
+### 二、处理方法
+
+我们在实操案例教程[【微博】博主主页的博文](https://www.bazhuayu.com/helpcenter/docs/WFEMUY) 中学习了去采集微博博主的博文，通过教程我们已经掌握了配置一个流程采集对应的博文，教程并没有点击对应的【展开】进行采集博文，那么遇到这里需要点击【展开】才能采集完整的文字的网站，我们需要的的是在提取数据前设置一个点击步骤进行点【展开】就可以了。
+
+首先我们可以发现并不是每个博文都有【展开】按钮，因此我们可以设置一个判断条件，只有存在【展开】的时候我们才进行点击展开，否则就不进行点击操作，判断条件设置为以下条件![点击展开获取全文-微博为例](/assets/academy/advanced-features/click-expand-full-text-weibo/02-6983157ac3eb9.png)
+
+ 
+
+点击元素和判断条件的xpath都设置为：//span[contains(text(),'展开')]
+
+ 
+
+以下是完整的设置判断点击展开流程演示：
+
+首先，我们在提取数据之间进行判断是否点击展开的操作，我们需要进行添加判断步骤，然后判断条件设为【当前循环项包含元素】，对应的元素xpath设置为：//span[contains(text(),'展开')]
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/1514375e5145403715952417514/XCY4Q0DTlxIA.mp4" width="100%"></video>
+
+然后，再此判断分支条件内添加点击元素步骤，进行点击【展开】的操作，点击元素的xpath设置为相对xpath并且设置为：//span[contains(text(),'展开')]
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/45da83625145403715885192423/6GxY9gdUOAcA.mp4" width="100%"></video>
+
+ 
+
+添加完成后，我们选择一条带有【展开】的博文进行测试，如果判断这条博文有【展开】按钮就进入第一个分支条件执行点击展开，否则就是没有【展开】按钮，进入执行第二个分支条件，不进行任务点击操作\
+如下视频所示，我们选择其中一条包含【展开】的博文进行反击规则步骤验证的时候，判断为存在，那么就会进入该分支下的点击操作
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/1514375e5145403715952417514/XCY4Q0DTlxIA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> a.xpath是什么？怎么写xpath？我们需要学习掌握xpath的知识，[xpath入门](https://www.bazhuayu.com/helpcenter/docs/NNq78SWX)
+>
+> b.判断分支条件详细的讲解查看教程：[判断条件](/zh/academy/advanced-features/special-steps/conditions)

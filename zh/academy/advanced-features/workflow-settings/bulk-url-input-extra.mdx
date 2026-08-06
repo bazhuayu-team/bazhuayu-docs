@@ -1,0 +1,157 @@
+---
+title: "网址批量输入（补充用法）"
+description: "介绍八爪鱼采集器进阶功能：网址批量输入（补充用法）。"
+source: "https://www.bazhuayu.com/helpcenter/docs/I0LCzr"
+---
+
+八爪鱼是基于网址进行数据采集的，可以支持输入多个网址生成网址循环采集每个网址上的数据，批量的网址输入支持从本地文件导入网址、根据规律批量生成网址、从已有任务导入网址。
+
+ 
+
+## **一、从本地文件导入网址**
+
+新建【自定义任务】，选择从【文件导入】，再选择已有的网址文件，就可以大批量导入。导入之后，可以预览前100条网址。
+
+再点击【保存设置】，即可开始任务配置。
+
+![](/assets/academy/advanced-features/bulk-url-input-extra/01-653667147c89b.gif)
+
+> 注意：
+>
+> ① 支持csv、xls、xlsx、txt文件格式批量导入网址
+>
+> ② 支持100w以内网址 ，超过的自动删除
+
+ 
+
+## **二、批量生成网址**
+
+网址中一般有很多参数，根据网址参数的变化规律，可批量生成网址。
+
+1、网址参数中出现数字变化，常见于翻页
+
+示例网址：[https://book.douban.com/tag/%E5%B0%8F%E8%AF%B4?start=0&type=T](https://book.douban.com/tag/%E5%B0%8F%E8%AF%B4?start=0&type=T)
+
+第1页：[https://book.douban.com/tag/%E5%B0%8F%E8%AF%B4?start=0&type=T](https://book.douban.com/tag/%E5%B0%8F%E8%AF%B4?start=0&type=T)
+
+第2页：[https://book.douban.com/tag/%E5%B0%8F%E8%AF%B4?start=20\&type=T](https://book.douban.com/tag/%E5%B0%8F%E8%AF%B4?start=0\&type=T)
+
+第3页：[https://book.douban.com/tag/%E5%B0%8F%E8%AF%B4?start=40\&type=T](https://book.douban.com/tag/%E5%B0%8F%E8%AF%B4?start=0\&type=T)
+
+我们发现，第1页【start=】后面的值为0， 每递增一页，【start=】后面的值递增20，根据这个规律，可批量生成网址。
+
+ 
+
+如下图所示：选中【start=】后面的值，点击【添加参数】，选择参数类型为【数字变更】，【开始值】为0，【每次动作递增】20，共10项，共批量生成10条网址。
+
+第1页：[https://book.douban.com/tag/%E5%B0%8F%E8%AF%B4?start=0&type=T](https://book.douban.com/tag/%E5%B0%8F%E8%AF%B4?start=0&type=T)
+
+第2页：[https://book.douban.com/tag/%E5%B0%8F%E8%AF%B4?start=20\&type=T](https://book.douban.com/tag/%E5%B0%8F%E8%AF%B4?start=0\&type=T)
+
+第3页：[https://book.douban.com/tag/%E5%B0%8F%E8%AF%B4?start=40\&type=T](https://book.douban.com/tag/%E5%B0%8F%E8%AF%B4?start=0\&type=T)
+
+......
+
+第9页：[https://book.douban.com/tag/%E5%B0%8F%E8%AF%B4?start=160\&type=T](https://book.douban.com/tag/%E5%B0%8F%E8%AF%B4?start=0\&type=T)
+
+第10页：[https://book.douban.com/tag/%E5%B0%8F%E8%AF%B4?start=180\&type=T](https://book.douban.com/tag/%E5%B0%8F%E8%AF%B4?start=0\&type=T)
+
+再点击【保存设置】，即可开始任务配置。
+
+![](/assets/academy/advanced-features/bulk-url-input-extra/02-653667141b506.gif)
+
+ 
+
+2、网址参数中出现字母变化，这个比较少见
+
+![](/assets/academy/advanced-features/bulk-url-input-extra/03-6536671382d4d.png)
+
+ 
+
+3、网址参数中出现时间变化，这个也比较少见
+
+![](/assets/academy/advanced-features/bulk-url-input-extra/04-6536671370efd.png)
+
+ 
+
+4、网址参数中出现关键词变化，常见于需要输入关键词搜索的网站
+
+示例网址：[https://www.jd.com/](https://www.jd.com/)
+
+在首页输入关键词【手机】：https\://search.jd.com/Search?keyword=手机\&enc=utf-8\&wq=%E6%89%8B%E6%9C%BA\&pvid=070d13546be04c9cb9d78ba6d3c67438
+
+在首页输入关键词【电脑】：https\://search.jd.com/Search?keyword=电脑\&enc=utf-8\&wq=%E6%89%8B%E6%9C%BA\&pvid=070d13546be04c9cb9d78ba6d3c6743
+
+ 
+
+我们发现，【keyword=】后面的值决定了搜索的是什么关键词，根据这个规律，可批量生成网址。
+
+如下图所示：选中【keyword=】后面的值，点击【添加参数】，选择参数类型为【自定义列表】，输入我们准备好的关键词。
+
+批量生成了含有所有关键词的网址，再点击【保存设置】，即可开始任务配置：
+
+![](/assets/academy/advanced-features/bulk-url-input-extra/05-6536671425fdd.gif)
+
+> **注意：**
+>
+> ① 支持100W以内网址批量生成，超过100W部分自动去掉。
+>
+> ② 批量生成的网址，前100条存储在本地，显示在界面上；>100条的网址存储在云端，不显示在界面上，本地采集或云采集的时候，直接调用存储在云端的网址采集数据。
+>
+> ③ 如果复制此规则，复制后得到的规则仅包含前100条网址，仅采集前100条网址的数据。
+
+**&#xA0;**
+
+## **三、从已有任务导入网址（适用于云采集）**
+
+**云采集为团队版以上才有的功能。[升级团队版](https://www.bazhuayu.com/plan "升级团队版")**
+
+常用场景：
+
+A任务和B任务都在云上进行采集，A任务采集列表数据（含链接，可点击进入详情页），B任务调用A任务已采集到的链接，采集详情页数据。
+
+B任务跟随A任务启动，A任务不断采集到新链接，B任务不断调用A任务中的链接，采集详情页数据。配合云采集拆分，多节点同时采集，极大提高采集效率。
+
+A任务采集到网址：
+
+![](/assets/academy/advanced-features/bulk-url-input-extra/06-6536671528d27.gif)
+
+ 
+
+B任务直接调用A任务中采集到的网址：
+
+此时，我们称A任务为【源任务】，B任务为【跟随任务】。
+
+![](/assets/academy/advanced-features/bulk-url-input-extra/07-65366714597b1.gif)
+
+ 
+
+调用完成后，点击【保存设置】，即可开始任务配置。本示例提取一下结果详情页的项目名称、面积。
+
+配置完成后启动【采集】，选择【跟随启动设置】。
+
+[](https://resource-wangsu.helplook.net/docker_production/3mkuae/article/I0LCzr/video/6544587b458e2)
+
+跟随任务无法单独启动【本地采集】或【云采集】，它只能通过源任务触发启动。触发条件有以下4个。
+
+当源任务启动云采集后，跟随启动
+
+当源任务云采集完成后，跟随启动
+
+当源任务完成或者停止云采集后，跟随启动
+
+手动启动（保证源任务云采集已有数据）
+
+> 请注意：跟随任务是调用源任务的云采集采集到的网址进行采集的。只有源任务的云采集有一定数据后，跟随任务才能启动并采集到数据。
+
+ 
+
+也可以在【我的任务】列表里，设置跟随启动。
+
+![网址批量输入（补充用法）](/assets/academy/advanced-features/bulk-url-input-extra/08-654458cf6c856.png)
+
+ 
+
+ 
+
+编辑：FAN

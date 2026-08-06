@@ -1,0 +1,315 @@
+---
+title: "增量采集"
+description: "介绍八爪鱼采集器进阶功能：增量采集。"
+source: "https://www.bazhuayu.com/helpcenter/docs/zeng-liang-cai-ji"
+---
+
+### 一、基本介绍
+
+ 
+
+在采集数据过程中，我们可能有以下情况：
+
+①第一次采集所有数据，下次采集的时候只需要采集该网页新添加的数据。
+
+②输入循环网址采集时，由于疏忽，当下输入的部分网址在历史采集中输入过，新采集时会造成重复。
+
+此时就可以考虑八爪鱼的【增量采集】功能去解决此类问题。
+
+ 
+
+【增量采集】通过对比URL来实现增量数据的采集：
+
+将当前URL与历史URL对比，如果相同，则跳过不采集。反之则采集。
+
+ 
+
+#### **1、功能说明**
+
+在任务配置页面，点击【采集配置】按钮，进入配置页面：
+
+![增量采集](/assets/academy/advanced-features/incremental-collection/01-69128f87e5898.png)
+
+ 
+
+进入设置页面后，可以看到：
+
+【启用增量采集】的选项。同时提供两种网址对比方式：
+
+【对比整个URL，包含所有参数】：当前整条网址与之前采集过的网址做对比，如果是完整的网址，则跳过不采集。
+
+【仅对比URL及以下参数】：对比URL中的特定参数，如果指定参数相同，则跳过不采集。
+
+ 
+
+勾选【启用增量采集】后，默认使用【对比整个URL】，然后点击【保存】，即可对该任务启用增量采集。
+
+![增量采集](/assets/academy/advanced-features/incremental-collection/02-69128f87bab78.png)
+
+ 
+
+> 特别说明：
+>
+> a. 什么是网址参数？简单说就是网页链接“#”之前，"="左右两端的为参数名与参数值，如下参数为【SlJfApAfmEBp】 案例链接：
+>
+> https\://ec.chng.com.cn/channel/home/?SlJfApAfmEBp=1762327589782#/purchase?checked=3
+>
+> https\://ec.chng.com.cn/channel/home/?SlJfApAfmEBp=1752477558330#/purchase?checked=3
+>
+> b.注意到这上述两条链接的【SlJfApAfmEBp】的值并不一致，但是打开的网址却是一样，这是怎么回事呢？ 具体说明如下，简单说就是区别缓存，这也是我们增量采集的基本原理。[其他URL字符解析](https://blog.csdn.net/weixin_44231544/article/details/124940034)
+>
+> ![增量采集](/assets/academy/advanced-features/incremental-collection/03-69128f87ba2a3.png)
+>
+> c.如果说链接中不带参数，则一般情况下网址是不会变化的，无法识别到增量，做不到所谓增量采集效果，那【对比整个URL，包含所有参数】配置是否就无意义呢？
+>
+> 事实并非如此，【对比整个URL，包含所有参数】此功能可以解决：输入循环网址采集时，由于疏忽，当下输入的部分网址在历史采集中输入，造成重复采集的情况。
+>
+> d.那如果确实网址中不带参数，也并非特殊说明c的情况，我们还是想实现只采集新增数据该如何操作呢？
+>
+> 可以参考教程：[采集新增数据](https://www.bazhuayu.com/helpcenter/docs/cai-ji-xin-zeng-shu-ju)
+
+ 
+
+ 
+
+#### **2、限制条件**
+
+2.1【增量采集】只能用于云采集，不能用于本地采集。
+
+因采集是单次采集，每次停止后都从头开始采集，因此不能使用【增量采集】功能。
+
+ 
+
+2.2【增量采集】只能用于非AJAX的网页。
+
+AJAX网页点击后，网址链接发生改变，无法通过对比URL实现原生采集。
+
+ 
+
+2.3 网址有参数，才能使用【仅对比网址及以下参数】
+
+例如：
+
+以下规则是【循环-点击元素】类规则，每次点击后会跳转到新的页面。
+
+![增量采集](/assets/academy/advanced-features/incremental-collection/04-69128f87c4e77.png)
+
+ 
+
+观察发现，点击后页面链接是不带参数的，因此无法选择【仅对比网址及以下参数】这种方式。
+
+ 
+
+![增量采集](/assets/academy/advanced-features/incremental-collection/05-69128f87c8f8b.png)
+
+ 
+
+换一个点击后页面链接带参数的网址，如下图所示有【spm】【id】【skuId】多个参数，这时候就可以根据参数设置增量采集了。
+
+示例网址：https\://detail.tmall.com/item.htm?spm=a221t.1710963.goodlist.10.48711135LWXP9U\&id=657774926583\&skuId=4920053579722
+
+所有参数设置增量：
+
+![增量采集](/assets/academy/advanced-features/incremental-collection/06-69128f87cc955.png)
+
+ 
+
+> 特别说明：
+>
+> a. 如果确实网址中不带参数，则无法实现：第一次采集所有数据，下次采集的时只需要采集网页新添加数据的情况。建议查看：[采集新增数据](https://www.bazhuayu.com/helpcenter/docs/cai-ji-xin-zeng-shu-ju)
+
+ 
+
+ 
+
+2.4【提取数据】步骤数限制
+
+规则中只有一个【提取数据】一步一步实现【增量采集】。如果有两个或以上的【提取数据】，是不支持增量采集的。
+
+ 
+
+![增量采集](/assets/academy/advanced-features/incremental-collection/07-69128f87c16fc.png)
+
+ 
+
+2.5 整体流程中必须包含【点击元素】
+
+即需要点击进入详情页。
+
+![增量采集](/assets/academy/advanced-features/incremental-collection/08-69128f87c89c0.png)
+
+### 二、效果展示
+
+#### 1、常规增量采集
+
+常规增量采集案例网址：[https://ec.chng.com.cn/channel/home/?SlJfApAfmEBp=1752477558330#/purchase?checked=3](https://ec.chng.com.cn/channel/home/?SlJfApAfmEBp=1752477558330#/purchase?checked=3)
+
+ 
+
+案例需求：通过列表采集详情页标题与链接。每次启动任务只采集新增的数据。
+
+ 
+
+完整效果展示与对比：
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/47b0f4c45145403705177531975/5OFbCnneA2MA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> a. 云采集本身就会对采集的数据去重，如果是使用云采集后导出到本地在效果上是否使用增量采集并无区别，这里增量主要适用范围是在API接口上。
+>
+> b.基础配置方式：[从列表进入详情页采集](/zh/academy/basic-collection/beginner/list-to-detail)
+>
+> c.[云采集去重简析](https://www.bazhuayu.com/helpcenter/docs/E6yql8?search=1)
+
+ 
+
+#### 2、链接去重
+
+##### **案例网址（京东商品详情页）**
+
+第一次采集链接：
+
+https\://item.jd.com/100008051545.html
+
+https\://item.jd.com/100278751452.html
+
+https\://item.jd.com/100288035454.html
+
+https\://item.jd.com/100166027765.html
+
+https\://item.jd.com/100006061653.html
+
+ 
+
+第二此采集的链接：
+
+https\://item.jd.com/100006061653.html
+
+https\://item.jd.com/100108936755.html
+
+https\://item.jd.com/10137933056696.html
+
+> 特别说明：
+>
+> a. 其中链接https\://item.jd.com/100006061653.html为重复链接。则理论对比效果为二次采集能采到2条新数据。具体验证效果请关注配置任务⑤⑥
+
+ 
+
+##### **案例场景需求**
+
+京东商品详情数据采集，调整任务链接采集数据时，去重链接，保证采集数据不重复。
+
+ 
+
+##### **配置任务**
+
+①输入多网址，开启任务。
+
+②登录账号，并保存cookie。
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/ab7da7de5145403705175449072/AsTJFTNHKScA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> a.配置多网址循环参考：[URL循环：批量采集同类网页](/zh/academy/basic-collection/bulk-input/url-loop-similar-pages)
+>
+> b.登录账号详情点击查看 [登录验证采集](/zh/academy/basic-collection/beginner/login-verification)
+
+ 
+
+③点击元素
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/11f7f0115145403705180212516/2uOYSFFJKyYA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> a. 根据功能规则限制，流程中需要有“点击元素”，此案例本身没有点击跳转需求，此处随机点击一处即可。
+
+ 
+
+③提取元素并做初始化
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/e62b67995145403705179711026/rQLj5qnaDaMA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> a. 根据功能规则限制，流程中需要有且只能有一处“提取数据”。
+
+ 
+
+④开启增量
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/dab8fe985145403705179243016/BgWE3WFkXy0A.mp4" width="100%"></video>
+
+ 
+
+⑤首次采集
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/b813bab95145403705182780215/QWeqC2J2iHsA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> a. 由于输入5条链接，按照流程，采集5条数据。
+>
+>  b.其中一条明细没有价格，后续排查观察那条链接的价格字段是否与其他链接界面不同（即xpath定位不准），确定后按照[xpath教程](https://www.bazhuayu.com/helpcenter/docs/pWdSFO)修改即可。
+
+ 
+
+⑥更换链接，二次采集
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/6b0c5d435145403705181779407/YHixqoUagwIA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> a. 二次输入的链接为3条，其中1条链接重复，理论上显示新增采集2条。
+
+ 
+
+⑥关闭增量，重复二次采集
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/eb6616835145403705179990900/jmhW4Ad0NAsA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> a. 云采集会自动去重，理论采集会显示新增2条，重复1条。不过此前已经采集过，则显示重复3条。
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+作者：YfY

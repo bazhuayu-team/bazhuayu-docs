@@ -1,0 +1,89 @@
+---
+title: "点击【加载更多】或【再显示20条】等按钮翻页"
+description: "点击【加载更多】或【再显示20条】等按钮翻页教程，来自八爪鱼帮助中心「操作指南 / 基本采集」。"
+source: "https://www.bazhuayu.com/helpcenter/docs/8TVujR"
+---
+
+有的网页没有下一页按钮，但是有【加载更多】或【再显示20条】等按钮，通过不断点击这些按钮，可以实现翻页，加载出新数据。
+
+像[果壳网 ](https://www.guokr.com/)、[百度贴吧官网 ](https://tieba.baidu.com/)等页面都是这种情况。
+
+ 
+
+针对这类网页，使用智能识别和自行配置的采集规则，都能实现翻页，具体设置方法如下：
+
+ 
+
+![点击【加载更多】或【再显示20条】等按钮翻页](/assets/academy/basic-collection/load-more-button-pagination/01-653a0bf0b82a2.png)
+
+ 
+
+## 一、智能识别实现【点击加载更多翻页】
+
+示例网址如：[果壳网](https://www.guokr.com/)
+
+ 
+
+ 
+
+八爪鱼的智能识别，支持【加载更多内容】这种翻页的智能识别，如下图所示：
+
+ 
+
+ 
+
+在[采集原理/逻辑](/zh/academy/basic-collection/beginner/collection-logic) 中，我们讲过，流程的执行逻辑是先从上至下、再由内而外。那上图中的流程的执行逻辑是：先打开网页，然后不断点击【加载更多内容】进行翻页，翻页全部完成以后，再提取所有列表数据。
+
+ 
+
+这里有一个问题，如果网页【加载更多内容】这个按钮是可以无限点击的，那八爪鱼就会一直点击它，容易导致程序崩溃，采集不到数据。因此，我们可以设置一定的点击次数，让八爪鱼执行设置的翻页次数后，就开始采集数据。建议点击次数不超过500次，具体可根据网页情况和采集需求来。
+
+ 
+
+在部分网站，在点击5次【加载更多内容】后就到底了，不再出现新内容了，因此，我们可以将它的翻页次数设为5，设置方法如下图所示：
+
+ ![点击【加载更多】或【再显示20条】等按钮翻页](/assets/academy/basic-collection/load-more-button-pagination/02-65bca07917ca9.gif)
+
+ 
+
+启动本地采集，来看一下采集结果：八爪鱼先点击了5次【加载更多内容】，到达底部，此时页面中有100个文章列表。随后，八爪鱼将这100个文章列表的数据都采集下来了。
+
+ ![点击【加载更多】或【再显示20条】等按钮翻页](/assets/academy/basic-collection/load-more-button-pagination/03-65bca026e0323.gif)
+
+ 
+
+## 二、配置采集流程实现【点击加载更多翻页】
+
+如果不用智能识别 ，可自己配置采集流程。
+
+[](https://resource-wangsu.helplook.net/docker_production/3mkuae/article/8TVujR/video/653a2090ce650)
+
+按照 [列表采集](/zh/academy/basic-collection/beginner/list-collection) 中的方法，配置一个【循环列表】。
+
+再依次点击提示里的【加载更多按钮】，点击网页内的【加载更多】
+
+ 这样在右边就会建立起采集规则
+
+![点击【加载更多】或【再显示20条】等按钮翻页](/assets/academy/basic-collection/load-more-button-pagination/04-653a225923223.png)
+
+ 
+
+同样的，我们根据网页情况，设置合适的翻页次数：
+
+1、选择循环流程
+
+2、在设置栏目内输入要翻页的次数
+
+ ![点击【加载更多】或【再显示20条】等按钮翻页](/assets/academy/basic-collection/load-more-button-pagination/05-653a21dd1b9e4.png)
+
+ 
+
+ 
+
+特别说明：
+
+八爪鱼在导出数据时，支持数据去重。如果不介意采集过程中有重复数据，也可不调整流程逻辑。
+
+ 
+
+作者：Y

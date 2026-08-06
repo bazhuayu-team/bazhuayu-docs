@@ -1,0 +1,240 @@
+---
+title: "【国家统计局】筛选指定年份下月度指标数据"
+source: "https://www.bazhuayu.com/helpcenter/docs/guo-jia-tong-ji-ju-shai-xuan-zhi-ding-nian-fen-xia-yue-du-zhi-biao-shu-ju"
+---
+**采集场景**
+
+在国家统计局月度数据（[https://data.stats.gov.cn/easyquery.htm?cn=A01）](https://data.stats.gov.cn/easyquery.htm?cn=A01）)， 筛选输入指定年份，循环采集各级指标及年度下各月份数据。
+
+ 
+
+**采集字段**
+
+各级指标名称、11月数据、10月数据、9月数据等。
+
+![【国家统计局】筛选指定年份下月度指标数据](/assets/academy/case-studies/stats-monthly-indicators/01-6944cfc8d62b2.png)
+
+ 
+
+ 
+
+**采集结果**
+
+采集结果可导出为Excel、CSV、HTML、数据库等多种格式。导出为Excel示例：
+
+![【国家统计局】筛选指定年份下月度指标数据](/assets/academy/case-studies/stats-monthly-indicators/02-6944d0373dff8.png)
+
+ 
+
+ 
+
+**采集步骤**
+
+步骤一、打开网页
+
+步骤二、筛选时间条件
+
+步骤三、循环点击各级指标及提取指标名称
+
+步骤四、月度指标数据提取
+
+步骤五、规则优化
+
+步骤六、启动采集
+
+ 
+
+ 
+
+**以下为具体步骤：**
+
+ 
+
+## 步骤一、打开网页
+
+ 
+
+在首页【输入框】中输入目标网址 [https://data.stats.gov.cn/easyquery.htm?cn=A01](https://data.stats.gov.cn/easyquery.htm?cn=A01)，点击【开始采集】，八爪鱼自动打开网页。
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/89d5c32d5145403709639674906/HfQEolEcaBUA.mp4" width="100%"></video>
+
+ 
+
+特别说明：
+
+- a. 打开网页后，如果开始开始【自动识别】，请点击【不再自动识别】或【取消识别】将其关掉。因为本文不适合使用【自动识别】。
+- b. 【自动识别】适用于自动识别网页上的列表、滚动和翻页，识别成功后直接启动采集即可获取数据。详情点击查看 [【自动识别】教程](../tutorial8/81zdypz)
+
+ 
+
+## 步骤二、筛选时间条件
+
+1.  点击页面中展开下拉框位置，如：'最近13个月'，在黄色操作提示框中点击【点击一次】
+2. 点击输入框位置，，在黄色操作提示框中点击【输入文本】，输入：‘2025’，点击确定生成配置
+3. 再对页面确定按钮进行点击，在黄色操作提示框中点击【点击一次】
+
+ 
+
+ <video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/2d7d83c65145403709648831139/zSOj8mY3x98A.mp4" width="100%"></video>
+
+ 
+
+## 步骤三、循环点击各级指标及提取指标名称
+
+因栏目位置有多级指标列表需循环点击，采集器内需内嵌多层循环步骤
+
+通过以下几步，实现循环点击每级指标列表
+
+① 选中一级指标第1个列表项，在黄色操作提示框内，定位到A标签层下，![【国家统计局】筛选指定年份下月度指标数据](/assets/academy/case-studies/stats-monthly-indicators/03-6944f065da64f.png)
+
+②黄色操作提示框内点击【选中全部相似元素】，接着点击【循环点击每个链接】，以生成逐个点击一级指标的配置
+
+③黄色操作提示框内提示是否需要设置翻页，这里选择不需要
+
+④继续选中一级指标第1个列表项，在黄色操作提示框内选择【文本内容】，以生成提取目前所选指标名称的配置
+
+⑤选中二级指标第1个列表项，重复操作步骤①\~④
+
+⑥选中三级指标第1个列表项，重复操作步骤①\~④
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/d5130b255145403709647367018/i6zFNIhngfYA.mp4" width="100%"></video>
+
+ 
+
+特别说明：
+
+- a. 经过以上连续3步，【循环-点击元素】创建完成。【循环】中的项，对应着页面上所有职位链接。启动采集以后，八爪鱼就会按照循环中的顺序依次点击每个职位链接，进入情页，以采集每个职位的具体数据。
+- b. 为何通过以上3步，可建立【循环-点击元素】？详情点击查看 [采集点击多个链接后的详情页数据教程](../tutorial8/81xsrm6) 。
+- c. 当前栏目循环点击不需要打开新标签页，则点击步骤的高级设置不需要勾选打开新标签页
+
+ 
+
+## 步骤四、月度指标数据提取
+
+ 
+
+① 先选中页面表格数据内第一行的中间任一一个单元格（不点第一个），再点击黄色操作提示框右下角的【tr】按钮扩选，选中至一整行。
+
+②在黄色操作提示框中，点击【选中全部子元素】
+
+③在黄色操作提示框中，点击【选中全部相似组】
+
+④在黄色操作提示框中，点击【元素中数据内容】，确认采集配置
+
+⑤对提取的字段进行命名
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/015358675145403709651949280/xmeiRmdq8FMA.mp4" width="100%"></video>
+
+ 
+
+ 
+
+## 步骤五、规则优化
+
+1、表格数据提取优化
+
+经检查，发现有两列字段提取遗漏，这里做下补充提取
+
+①点击遗漏列第一行单元格
+
+②黄色操作提示框内，点击【文本内容】
+
+③点击第二个遗漏列第一行单元格
+
+④黄色操作提示框内，点击【文本内容】
+
+⑤修改字段名称
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/4ce5ded75145403709642023407/hLHeUETBxpUA.mp4" width="100%"></video> 
+
+ 
+
+ 
+
+2、分级指标名称提取优化
+
+①点击【提取数据】步骤
+
+②点击纵向字段布局![【国家统计局】筛选指定年份下月度指标数据](/assets/academy/case-studies/stats-monthly-indicators/04-6944fe9ae25a2.png)
+
+③修改字段XPath，
+
+④点击【提取数据1】步骤，修改字段XPath
+
+⑤点击【提取数据2】步骤，修改字段XPath
+
+ 
+
+因每个分级指标选中后源码属性变化不一致，为精准提取所点击分级指标字段名称，修改字段XPath，
+
+如：
+
+一级指标字段→XPath：//a[@class="level1 curSelectedNode"]
+
+二级指标字段→XPath：//a[@class="level2 curSelectedNode"]
+
+三级指标字段→XPath：//a[@class="level3 curSelectedNode"]
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/46fc0f945145403709645892986/900qzO3ODpAA.mp4" width="100%"></video> 
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 什么是XPath？如何写一条正确的XPath？点击查看 [XPath学习与实例教程](../tutorial8/81xpath) 。
+
+ 
+
+ 
+
+ 
+
+3、时间条件筛选步骤优化
+
+因循环点击切换分级指标后，表格数据页面的时间筛选会自动重置，所以需要调整下步骤执行位置。
+
+ ①将步骤【点击元素】、【输入文本】、【点击元素1】，拖拽至步骤【提取数据2】与框架【循环列表3】之间
+
+ ②点击步骤【点击元素】，基础设置内元素XPath如有变动，需改成【绝对XPath】，![【国家统计局】筛选指定年份下月度指标数据](/assets/academy/case-studies/stats-monthly-indicators/05-694502ca79136.png)
+
+ ③点击步骤【点击元素1】，与操作②同理
+
+ 
+
+ <video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/fd5d05a25145403709634188612/IXa6zbbLwgMA.mp4" width="100%"></video>
+
+ 
+
+## 步骤七、启动采集
+
+ 
+
+1、点击【采集】并【启动本地采集】。启动后八爪鱼开始自动采集数据。
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/266c13035145403709648521905/an3AG0lJkTAA.mp4" width="100%"></video>
+
+ 
+
+2、采集完成后，选择合适的导出方式来导出数据。支持导出为Excel，CSV，HTML，数据库等。这里导出为Excel。
+
+![【国家统计局】筛选指定年份下月度指标数据](/assets/academy/case-studies/stats-monthly-indicators/06-6945035163705.png)
+
+ 
+
+示例数据：
+
+![【国家统计局】筛选指定年份下月度指标数据](/assets/academy/case-studies/stats-monthly-indicators/07-6944d0373dff8.png)

@@ -1,0 +1,279 @@
+---
+title: "【携程】景点评价采集"
+source: "https://www.bazhuayu.com/helpcenter/docs/TT3Kzl"
+---
+**采集场景**
+
+在携程网点击【攻略】-【目的地攻略】- 【选择目的地】-【选择景点】，采集目的地景点下的评论。
+
+示例网址：[https://you.ctrip.com/sight/bole922/5500.html](https://you.ctrip.com/sight/bole922/5500.html)
+
+             [ https://you.ctrip.com/sight/lijiang32/3049.html](https://you.ctrip.com/sight/lijiang32/3049.html)
+
+ 
+
+**采集字段**
+
+景点名、级别、总评分、评论数、景点地址、开放时间、景点介绍、用户名、评分、景色、性价比、评论正文、评论时间。
+
+ 
+
+![](/assets/academy/case-studies/ctrip-attraction-reviews/01-656ff620dc92f.png)
+
+ 
+
+ 
+
+**采集结果**
+
+采集结果可导出为Excel、CSV、HTML、数据库等多种格式。导出为Excel示例：
+
+ 
+
+![](/assets/academy/case-studies/ctrip-attraction-reviews/02-656ff620abf8c.png)
+
+ 
+
+**教程说明**
+
+本篇制作时间：2024/3/18   八爪鱼版本：V8.6.7
+
+如果因网页改版造成网址或步骤无效，无法收集到目标数据，请联系官方客服，我们将及时修正。
+
+ 
+
+**采集步骤**
+
+ 
+
+步骤一、打开网页
+
+步骤二、提取评论前所需字段
+
+步骤三、创建【循环列表】，提取评价
+
+步骤四、创建【循环翻页】，采集多页数据
+
+步骤五、设置执行前等待
+
+步骤六、启动采集
+
+ 
+
+ 
+
+**以下为具体步骤：**
+
+ 
+
+### 步骤一、打开网页
+
+ 
+
+在首页左上角点击【新建】—【自定义任务】，将复制好的一批同类网址，粘贴进网址输入框中，并点击【保存网址】，八爪鱼中内置的浏览器会自动打开第一个网页。同时可以看到，流程中已自动创建【循环-打开网页】步骤。
+
+ 
+
+示例中输入的网址为：[https://you.ctrip.com/sight/bole922/5500.html](https://you.ctrip.com/sight/bole922/5500.html)
+
+                                     [https://you.ctrip.com/sight/lijiang32/3049.html](https://you.ctrip.com/sight/lijiang32/3049.html)
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/ffa2c6de1397757886832368374/VhnqaZS2ASYA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a.  手动输入的url数量不得大于1万个，如有超过1万url，请选择【从文件导入】，具体请查看教程 [网址输入升级](https://v1.bazhuayu.com/tutorial/urlshengji)
+> 
+> - b. 打开网页后，如果开始开始【自动识别】，请点击【不再自动识别】或【取消识别】将其关掉。因为本文不适合使用【自动识别】。
+> 
+> - c. 【自动识别】适用于自动识别网页上的列表、滚动和翻页，识别成功后直接启动采集即可获取数据。详情点击查看 [【自动识别】教程](https://v1.bazhuayu.com/tutorial8/81zdypz)
+
+ 
+
+### 步骤二、提取评论前所需字段
+
+ 
+
+1、采集字段
+
+打开网页后，提取评论前所需的字段（评论稍后再提取。），包括景点名、总评分、评论数、景点地址、开放时间、景点介绍。
+
+它们都是文本类型的字段：选中页面中的文本，然后再选择【文本内容】，即可提取。
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/d117c58d1397757887203381225/A0DLCtoI5CoA.mp4" width="100%"></video>
+
+ 
+
+ 2、编辑字段
+
+在【数据预览】面板，双击字段名称，依次修改所需字段的字段名称。
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/7afe0b821397757887199468244/FGmOKsUTIi0A.mp4" width="100%"></video>
+
+### 
+
+### 步骤三、创建【循环列表】，提取评价
+
+ 
+
+1、创建【循环列表】
+
+① 选中页面上1个评价列表（注意一定要选中整个列表，包含所有所需字段） 
+
+② 点击【选中全部子元素】
+
+③选中【全部相似组】
+
+④ 点击【元素中数据内容】
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/e3071ef21397757887200064739/A1xK7SasFWUA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a.  经过以上4步，【循环列表】创建完成。【循环】中的项，对应着页面上所有评价列表，【提取数据】中的字段，对应着评价列表中的每个字段。启动采集以后，八爪鱼就会按照循环中的顺序依次提取每个评价列表中的字段。
+> 
+> - b. 为何通过以上4步，可建立【循环列表】？详情点击查看 [*采集列表数据的教程*](https://v1.bazhuayu.com/tutorial8/81xsrm4) 。
+
+ 
+
+2、修改编辑字段
+
+在【当前页面数据预览】面板，删除不需要的字段并修改字段名称。
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/7afe0b821397757887199468244/FGmOKsUTIi0A.mp4" width="100%"></video>
+
+### 
+
+### 步骤四、创建【循环翻页】采集多页数据
+
+ 
+
+1、创建循环翻页
+
+如果只是采集一页数据，可跳过此步骤。
+
+如果需要翻页以采集多页数据：选择页面中的【下一页】按钮，在操作提示上单击【循环点击下一页】，创建【循环翻页】。
+
+如果翻页是Ajax，八爪鱼会自动检测出来并设置合理的Ajax超时时间，一般情况下不用调整。
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/e305f94a1397757887200062427/yzGJ2fLkLpsA.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 创建【循环翻页】后，八爪鱼会自动点击【下一页】按钮进行翻页，从第1页，第2页......直到最后1页。如果只需采集特定页的数据，可在八爪鱼中设置循环翻页的次数，详情点击查看  翻页以采集多页数据教程。
+> 
+> - b. 什么是Ajax ？点击查看教程 [ajax网页采集方法](https://v1.bazhuayu.com/tutorial8/81ajax) 。
+
+ 
+
+2、设置翻页次数
+
+如果不设置翻页次数，八爪鱼会一直采集到最后一页。
+
+此处为了演示采集结果，我们设置翻页次数为2，在实际采集过程中大家可以不设置或者按需设置。
+
+<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/3945754b1397757887201457212/Nua3uZrka20A.mp4" width="100%"></video>
+
+ 
+
+### 步骤五、设置执行前等待
+
+ 
+
+为了更好地采集数据，我们为【循环翻页】、【循环列表】等步骤，设置执行前等待3s。
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/2fcc1ecb1397757887201036480/awe6a8iTFY8A.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 执行前等待，即在执行此步骤前等待一段时间，可有效避免因网页未加载完全导致的漏数据，详情点击查看 [执行前等待使用场景与设置方法](https://v1.bazhuayu.com/tutorial8/81zsqdd)
+
+ 
+
+### 步骤六、启动采集
+
+ 
+
+1、点击右上角的【保存】，单击【采集】并点击【普通模式】。启动后八爪鱼开始自动采集数据。
+
+ 
+
+<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/e57f4f2c1397757887200182363/dTFDhFUhX54A.mp4" width="100%"></video>
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 【本地采集】是使用自己的电脑进行采集，【云采集】是使用八爪鱼提供的云服务器采集，点击查看 [本地采集与云采集详解](https://v1.bazhuayu.com/tutorial8/81xsrm8)。
+
+ 
+
+2、采集完成后，选择合适的导出方式来导出数据。支持导出为Excel，CSV，HTML，数据库等。这里导出为Excel。数据示例：
+
+ 
+
+![](/assets/academy/case-studies/ctrip-attraction-reviews/03-656ff6221329a.png)
+
+ 
+
+ 作者：妙卡

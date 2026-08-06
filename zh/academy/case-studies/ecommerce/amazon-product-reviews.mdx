@@ -1,0 +1,251 @@
+---
+title: "【Amazon】商品评论采集"
+source: "https://www.bazhuayu.com/helpcenter/docs/jtJjlo"
+---
+**采集场景**
+
+采集Amazon商品评价数据，实例网址：[https://www.amazon.com/product-reviews/B07211W6X2/](https://www.amazon.com/product-reviews/B07211W6X2/) 。
+
+ 
+
+**采集字段**
+
+评论标题、评论星级、评论时间、评论内容、有用数、ASIN等字段。
+
+ 
+
+![](/assets/academy/case-studies/amazon-product-reviews/01-65323d9c4fd9d.png)
+
+*鼠标放到图片上，右键，选择【在新标签页中打开图片】可查看高清大图*
+
+*下文其他图片同理*
+
+ 
+
+**采集结果**
+
+采集结果可导出为Excel、CSV、HTML、数据库等多种格式。导出为Excel示例：
+
+![](/assets/academy/case-studies/amazon-product-reviews/02-65323d9c4c071.png)
+
+**教程说明**
+
+本篇更新时间：2023/11/24   八爪鱼版本：V8.6.7
+
+如果因网页改版造成网址或步骤无效，无法收集到目标数据，请联系官方客服，我们将及时修正。
+
+ 
+
+**采集步骤**
+
+步骤一：使用【智能识别】建立循环列表和翻页循环
+
+步骤二、调整通过【智能识别】生成的规则
+
+步骤三、优化规则
+
+步骤四、启动采集
+
+ 
+
+示例网址：
+
+[https://www.amazon.com/product-reviews/B07211W6X2/](https://www.amazon.com/product-reviews/B07211W6X2/) 
+
+[https://www.amazon.com/product-reviews/B07S1YPSGT/](https://www.amazon.com/dp/B07S1YPSGT/)
+
+ 
+
+## 步骤一、使用【智能识别】建立循环列表和翻页循环
+
+ 
+
+1、在首页点击左上角 <img src="/assets/academy/case-studies/amazon-product-reviews/03-65323d9c2051d.png" alt="" className="academy-inline-icon" /> 按钮，选择【自定义任务】，输入示例网址，然后点【保存设置】，八爪鱼自动打开网页。
+
+点击【自动识别网页】，成功识别了文章列表中的数据和翻页。
+
+点击【生成采集设置】，将自动识别出的列表数据和翻页，生成为采集流程，方便我们使用和修改。
+
+<video controls src="https://resource-wangsu.helplook.net/docker_production/3mkuae/article/jtJjlo/video/65604f650fbce.mp4" width="100%"></video>  
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 本文使用【自动识别】，自动识别网页上的列表、滚动和翻页。识别成功后会生成采集规则，再对采集规则调整，以采集目标数据。如果【自动识别】的结果与以上图片不同，可点击【取消识别】自行配置采集流程或联系客服反馈。详情点击查看 [【自动识别】教程](https://www.bazhuayu.com/helpcenter/docs/wduVyb)
+> 
+> - b. 示例中输入的是2个Amazon商品评论的网址，大家可以根据需要，更换成自己需要的。Amazon商品详情页和评论页面的网址都由 **主域名/参数/ASIN编码** 拼接而成，适用于Amazon各个国家的站点。
+> 
+> 评论页的网址参数固定为：product-reviews，商品ASIN编码为 B07211W6X2 ，则评论页的网址是：[https://www.amazon.com/product-reviews/B07211W6X2/](https://www.amazon.com/product-reviews/B07211W6X2/) 。
+> 
+> 详情页的网址参数固定为：dp，商品ASIN编码为 B07211W6X2，则详情页的网址是：[https://www.amazon.com/dp/B07211W6X2/](https://www.amazon.com/product-reviews/B07211W6X2/) 。
+> 
+> 因此，只要有目标Amazon商品的ASIN编码，就可批量生成评论页网址，提取全部评论数据。
+> 
+> 如何获得商品的ASIN编码？通过 [Amazon商品列表页数据采集](/zh/academy/case-studies/ecommerce/amazon-product-list) 可获得大批ASIN编码。
+> 
+> - c. 如果一打开网页后就出现验证码，无法正常配置规则，可点击【浏览模式】手动输入验证码进行验证。
+> 
+> ![【Amazon】商品评论采集](/assets/academy/case-studies/amazon-product-reviews/04-65604be9e9266.png)
+
+ 
+
+ 
+
+## 步骤二、调整通过【智能识别】生成的规则
+
+ 
+
+【智能识别】很好的辅助我们建立了采集规则，我们可以对规则进行调整和优化。
+
+ 
+
+1、删除不需要字段
+
+在【数据预览】中，删除不需要的字段。
+
+<video controls src="https://resource-wangsu.helplook.net/docker_production/3mkuae/article/jtJjlo/video/656051b6897d4.mp4" width="100%"></video>
+
+ 
+
+2、对字段进行重命名
+
+在【数据预览】中，编辑字段名称。
+
+<video controls src="https://resource-wangsu.helplook.net/docker_production/3mkuae/article/jtJjlo/video/656053222c209.mp4" width="100%"></video>
+
+ 
+
+3、添加特殊字段：采集时间、当前页面网址
+
+有一些字段，八爪鱼无法自动提取到，需要我们手动添加。
+
+在【数据预览】中，点击右上角的【+】，添加【当前时间】和【页面网址】字段。
+
+![](/assets/academy/case-studies/amazon-product-reviews/05-65323d9e2b896.gif)
+
+ 
+
+4、提取ASIN编码
+
+每个商品具有唯一的ASIN编码，将其提取下来，以标识评论属于哪个商品。如有无需ASIN编码，可跳过此步骤。
+
+ASIN编码在当前商品评论网址中，对采集到的当前商品评论网址进行格式化处理，得到ASIN编码。
+
+在【数据预览】中，点击【页面网址】字段后的【...】→【格式化数据】→【添加步骤】→【正则表达式匹配】，输入正则表达式 **(?&lt;=/product-reviews/)(.+?)\{10\}&#xA0;**，然后点击【确定】保存即可。
+
+可以看到，在【数据预览】中，ASIN编码从【页面网址】中提取出来，最后将【页面网址】字段改名为【ASIN】即可。
+
+![](/assets/academy/case-studies/amazon-product-reviews/06-65323d9f7cf9d.gif)
+
+ 
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 什么是数据格式化？数据采集下来之后，有时候格式不是我们想要的，或者只想从一段数据里提取特定数据，可通过八爪鱼的【格式化数据】功能实现。详情点击查看 [数据格式化教程](/zh/academy/advanced-features/data-processing/field-formatting) 。
+> 
+> - b. 正则表达式是什么？怎么写？正则表达式是对字符串（包括普通字符（例如，a 到 z 之间的字母）和特殊字符（称为“元字符”））操作的一种逻辑公式，用来从文本中匹配/过滤信息。正则表达式有其特定写法，需要系统学习才能掌握，点击查看 [正则表达式 教程 。](/zh/academy/advanced-features/data-processing/regular-expression)
+
+ 
+
+ 
+
+## 步骤三、优化规则
+
+以上步骤可以完成基本的数据采集。但Amazon有防采集，如需稳定采集大量数据，需对采集规则进行优化。常见的优化方法如下：
+
+1、设置执行前等待，页面滚动，Ajax加载Amazon打开商品评论网页和翻页后，需向下一屏一屏滚动，才能加载出全部评论列表，在八爪鱼中也需进行这样设置。并且翻页使用了Ajax技术，需设置Ajax超时。同时为了应对Amazon的防采集措施，需要在【点击步骤】和【循环列表】适当的设置一些执行前等待。
+
+(1) 点击【打开循环中的网页】步骤，点击下方的【高级设置】，往下勾选【页面滚动】，滚动模式设置为【全局】，滚动方式为【向下滚动一屏】，每隔【1s】滚动一次，【滚动次数】为5次 ，取消勾选【无内容更新时结束滚动】，设置好之后，点击【应用】。
+
+(2) 点击【点击翻页】，点击下方的【高级设置】。勾选设置【执行前等待】为3s，勾选设置【Ajax加载】为30s。继续往下勾选【页面滚动】，滚动模式设置为【全局】，滚动方式为【向下滚动一屏】，每隔【1s】滚动一次，【滚动次数】为5次 ，取消勾选【无内容更新时结束滚动】，设置好之后，点击【应用】。
+
+(3) 点击【循环列表】，点击下方的【高级设置】。勾选设置【执行前等待】为5s，设置好之后，点击【应用】。
+
+![](/assets/academy/case-studies/amazon-product-reviews/07-65323d9e3d259.gif)
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 设置中的滚动次数和时间间隔，请根据采集需求和网页加载情况进行设置，并非是一成不变的，具体请点击查看 [处理滚动加载数据的网页教程](https://www.bazhuayu.com/helpcenter/docs/McMBHy)
+> 
+> - b. 评论中的翻页使用了Ajax技术，需设置Ajax加载。一般情况下，八爪鱼会自动判断并设置一定的【Ajax加载】。如果系统判断失误或者自动设置的【Ajax加载】过短，可根据采集需求和网页加载情况进行调整，详情点击查看 [Ajax教程](https://www.bazhuayu.com/helpcenter/docs/VNUXDW) 。
+
+ 
+
+步骤四、启动采集
+
+1、点击【采集】，这里选择【启动本地采集】。启动后八爪鱼开始自动采集数据。 
+
+ 
+
+![](/assets/academy/case-studies/amazon-product-reviews/08-65323da05292d.gif)
+
+> 特别说明：
+>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> - a. 【本地采集】是使用自己的电脑进行采集，【云采集】是使用八爪鱼提供的云服务器采集
+> 
+> 2、采集完成后，选择合适的导出方式来导出数据。支持导出为Excel，CSV，HTML，数据库等。这里导出为Excel。
+
+ 
+
+![](/assets/academy/case-studies/amazon-product-reviews/09-65323d9f89c5d.png)
+
+ 
+
+**示例数据：**
+
+ 
+
+![](/assets/academy/case-studies/amazon-product-reviews/10-65323d9fc7ac8.png)
+
+ 
+
+ 
+
+特别说明：
+
+配置自动打码**
+
+亚马逊网站有反爬验证，改验证可以配置自动打码实现采集的时候自动打码验证，该功能需要团队版和企业版才能支持。
+
+具体的配置如下：
+
+<video controls src="https://resource-wangsu.helplook.net/docker_production/3mkuae/article/jtJjlo/video/656055ed7c056.mp4" width="100%"></video>
+
+ 
+
+ 
+
+作者：Tina
+
+编辑：FAN

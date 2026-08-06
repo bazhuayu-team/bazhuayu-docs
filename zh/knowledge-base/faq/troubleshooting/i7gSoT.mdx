@@ -1,0 +1,163 @@
+---
+title: "规则出错排查方法"
+description: "如果用八爪鱼配置规则，采集数据出现异常，我们如何快速找出并解决问题？如何更好与客服沟通？ 完善的排查视频教程参考问题排查-八爪鱼帮助中心 (bazhuayu.com) 本教程将讲解本地采集的规则排错的基本思路与方法。 一、手动执行规则 做好采集规则以后，我们最好手动执行一下规则，检查规则是否满足采集需求。…"
+hidden: true
+kbStatus: "unverified"
+kbSource: "faq"
+sourceSlug: "i7gSoT"
+source: "https://www.bazhuayu.com/helpcenter/docs/i7gSoT"
+---
+
+如果用八爪鱼配置规则，采集数据出现异常，我们如何快速找出并解决问题？如何更好与客服沟通？
+
+完善的排查视频教程参考[问题排查-八爪鱼帮助中心 (bazhuayu.com)](https://www.bazhuayu.com/helpcenter/docs/Uk79nt)
+
+本教程将讲解本地采集的规则排错的基本思路与方法。
+
+ 
+
+### **一、手动执行规则**
+
+ 
+
+做好采集规则以后，我们最好手动执行一下规则，检查规则是否满足采集需求。
+
+手动执行规则是什么意思？打开流程图界面，按照从上至下，由内而外的逻辑（点击查看 [流程执行逻辑教程](/zh/academy/basic-collection/beginner/collection-logic)），将每个步骤都点击一遍，并观察点击步骤后的页面情况。如果符合预期，没问题。如果不符合预期，则需要修改。
+
+ 
+
+1、手动执行规则，符合预期
+
+特别说明：
+
+a. 在点击【循环列表】时，最好选择除第1项以外的项，防止循环只对第1个项有效。
+
+b. 在【打开网页】和【点击元素】后，如果数据已经出现了，但浏览器还在转圈<img src="/assets/knowledge-base/faq/i7gSoT/01-65b07ac45a0b2.png" alt="" className="academy-inline-icon" />，可按 <img src="/assets/knowledge-base/faq/i7gSoT/02-65b07ac484ba9.png" alt="" className="academy-inline-icon" />强制停止加载，方便进入下一个步骤。
+
+ 
+
+![规则出错排查方法](/assets/knowledge-base/faq/i7gSoT/03-65b07ac482fab.png)
+
+ 
+
+例：采集豆瓣图书列表数据。手动执行一下规则，运行顺畅并采集到数据。没问题。
+
+ ![](/assets/knowledge-base/faq/i7gSoT/04-65b07ac512fab.gif)
+
+ 
+
+ 
+
+2、手动执行规则，不符合预期，可能有以下几种现象：
+
+ 
+
+2.1、点击某个步骤后无响应
+
+原因①：XPath定位不准，需修改定位XPath，点击查看 [XPath教程](https://www.bazhuayu.com/helpcenter/docs/V2h1Ec)。
+
+原因②：多次修改此步骤导致底层代码错乱，需删掉此步骤重做一遍。
+
+ 
+
+2.2、提取到的数据不精准
+
+表现为数据重复、数据错位、数据漏采等多种情况。提取数据不精准一般是在运行本地采集，拿到一些数据后更容易发现的。
+
+因此，我们在下文 **二、运行本地采集&#xA0;**&#x4E2D;详细讲。
+
+ 
+
+ 
+
+### **二、运行本地采集**
+
+ 
+
+将任务启动本地采集。观察任务的采集状态，进而分析问题、解决问题。下面是一些常见的问题和解决方法汇总。
+
+ 
+
+#### 1、采集数据为0
+
+手动执行规则有数据，启动本地采集后，很快提示：【没有采集到任何数据】
+
+ 
+
+![规则出错排查方法](/assets/knowledge-base/faq/i7gSoT/05-65b07ac4a57c0.png)
+
+ 
+
+原因①：网页没有正常打开。需要点击采集窗口右上角的【显示网页】按钮查看网页是否正常显示，有的网页可能会弹出登录页面或者弹出验证码等，需要显示网页登录网站或者手动验证验证码。
+
+如下图，显示网页后查看该网页停在了登录页面，需要在规则里配置相应的登录流程之后再开始采集，详情查看[登录验证采集](/zh/academy/basic-collection/beginner/login-verification)
+
+![规则出错排查方法](/assets/knowledge-base/faq/i7gSoT/06-65b07ac491168.png)
+
+ 
+
+ 
+
+如下图，显示网页后查看该网页停在了验证码校验页面，需要暂停采集，手动通过验证之后再开始采集。
+
+![规则出错排查方法](/assets/knowledge-base/faq/i7gSoT/07-65b22cfa32c51.png)
+
+ 
+
+原因②：网页打开过快，但实际要采集的数据还未出现。需为【打开网页】后的步骤设置【执行前等待】，具体请参考 [执行前等待教程](https://www.bazhuayu.com/helpcenter/docs/zigIaV)。
+
+ 
+
+ 
+
+#### 2、采集速度过慢
+
+手动执行规则有数据，采集速度很慢，在某些步骤长时间等待
+
+原因①：网页本身打开很慢，例如一些国外网站。如果打开慢且数据出现慢，没办法只能等。如果打开慢但数据出现快，可利用Ajax超时强制结束加载。具体请参考 [Ajax教程](https://www.bazhuayu.com/helpcenter/docs/R01mM3)。
+
+原因②：Ajax网页未设置Ajax超时。需在相应步骤设置Ajax超时。具体请参考[Ajax教程](https://www.bazhuayu.com/helpcenter/docs/R01mM3)。
+
+原因③：流程中层级过多，有很多点击元素或执行前等待。可根据网页采集需求和加载状况进行规则优化。
+
+ 
+
+#### 3、数据重复
+
+ 
+
+3.1、【循环-提取数据】类规则，重复采集每页第1条数据
+
+原因①：循环中的【提取数据】步骤，未勾选【采集当前循环中设置的元素】，需勾选上
+
+原因②：采集的字段未勾选【相对XPath】，需勾选上且写对，查看 [相对XPath教程](https://www.bazhuayu.com/helpcenter/docs/bs4o6e)
+
+ 
+
+3.2、【循环-点击元素-提取数据】类规则，重复点击每页第1个链接
+
+原因①：【点击元素】步骤，未勾选【点击当前循环中设置的元素】，需勾选上    
+
+ 
+
+3.3、重复采集某几页
+
+原因①：翻页的定位XPath有问题，需手动修改定位XPath。具体可参考 [XPath教程](https://www.bazhuayu.com/helpcenter/docs/V2h1Ec)。
+
+ 
+
+#### 4、数据错位
+
+原因①：字段的定位XPath有问题，需手动修改定位XPath。具体可参考 [字段提取不到，字段提取错位如何处理](https://www.bazhuayu.com/helpcenter/docs/OqpmQa) 
+
+ 
+
+#### 5、数据漏采
+
+（部分字段漏、部分循环项漏、整页漏）
+
+原因①：网页上的字段/循环项/翻页按钮没加载出来。需设置执行前等待，让其加载出来。具体请参考 [执行前等待教程](https://www.bazhuayu.com/helpcenter/docs/zigIaV)
+
+原因②：字段/循环项/翻页的XPath定位不准。需修改定位XPath，使得XPath适用于所有同类网页。具体可参考 [XPath教程](https://www.bazhuayu.com/helpcenter/docs/V2h1Ec) 。
+
+原因③：网页未设置【页面滚动】。有的网页数据需设置【页面滚动】才会加载完全，具体请查看 [页面滚动教程](https://www.bazhuayu.com/tutorial8/81ymgd)。

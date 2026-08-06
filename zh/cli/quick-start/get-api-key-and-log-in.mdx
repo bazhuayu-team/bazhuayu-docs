@@ -1,0 +1,130 @@
+---
+title: 获取 API Key 并登录
+description: 创建八爪鱼 API Key，并通过 API Key、OAuth、stdin 或环境变量完成八爪鱼 CLI 认证。
+---
+
+> CLI 功能命令通常需要先完成认证。你可以使用 API Key、OAuth、stdin 或环境变量登录。
+
+## 认证说明
+
+需要认证的操作包括：列出任务、网页 `detect`、本地 / 云端运行、`--task-file` 本地运行、数据历史与导出等。
+
+无需认证即可运行的诊断命令包括：
+
+```bash
+bazhuayu --help
+bazhuayu --version
+bazhuayu capabilities
+bazhuayu doctor
+bazhuayu browser status --json
+bazhuayu auth
+```
+
+## 创建 API Key
+
+在八爪鱼账户中心 [创建 API Key](/zh/mcp/quick-start/api-key)，复制并妥善保存。Key 通常只显示一次。
+
+<Warning>
+  请勿将 API Key 写入 Git 仓库、公开脚本、文档截图、共享日志或 CI 输出。
+</Warning>
+
+## 登录方式
+
+### 交互式登录
+
+```bash
+bazhuayu auth login
+```
+
+交互式登录会引导你选择 OAuth 或 API Key 登录方式。
+
+### OAuth 登录
+
+```bash
+bazhuayu auth login --oauth
+```
+
+适合可打开浏览器的桌面环境。
+
+### 直接传入 API Key
+
+```bash
+bazhuayu auth login <你的APIKey>
+```
+
+### 从 stdin 读取
+
+适合 CI/CD 或密钥管理系统：
+
+```bash
+echo <你的APIKey> | bazhuayu auth login --stdin
+```
+
+### 不自动打开浏览器
+
+```bash
+bazhuayu auth login --no-open
+```
+
+适合无 GUI 服务器或需要手动复制授权地址的环境。
+
+### 环境变量
+
+v0.1.32 虽将命令入口改为 `bazhuayu`，但认证环境变量仍使用 `OCTOPUS_*` 前缀：
+
+```bash
+# Windows PowerShell
+$env:OCTOPUS_API_KEY="你的APIKey"
+bazhuayu task list --json
+
+# Linux / macOS
+OCTOPUS_API_KEY=你的APIKey bazhuayu task list --json
+```
+
+如果你使用 Access Token：
+
+```bash
+OCTOPUS_ACCESS_TOKEN=你的AccessToken bazhuayu task list --json
+```
+
+私有化或代理环境可覆盖 API 地址：
+
+```bash
+OCTOPUS_API_BASE_URL=https://example.com bazhuayu task list --json
+bazhuayu auth status --api-base-url https://example.com --json
+```
+
+## 凭据优先级
+
+CLI 会优先读取环境变量，其次读取本地凭据文件：
+
+```text
+1. OCTOPUS_ACCESS_TOKEN / OCTOPUS_API_KEY
+2. 本地凭据文件 ~/.octopus/credentials.json
+```
+
+`bazhuayu auth login` 会自动创建本地凭据文件。默认路径：
+
+| 系统 | 路径 |
+| --- | --- |
+| Windows | `%USERPROFILE%\.octopus\credentials.json` |
+| macOS / Linux | `~/.octopus/credentials.json` |
+
+## 查看与退出登录
+
+```bash
+bazhuayu auth status
+bazhuayu auth status --json
+bazhuayu auth logout
+```
+
+## 下一步
+
+<CardGroup cols={2}>
+  <Card title="运行第一个任务" href="/zh/cli/quick-start/run-your-first-task">
+    从新 URL 快速采集，或运行已有任务。
+  </Card>
+  <Card title="命令速查表" href="/zh/cli/reference/command-cheatsheet">
+    浏览全部常用命令。
+  </Card>
+</CardGroup>
