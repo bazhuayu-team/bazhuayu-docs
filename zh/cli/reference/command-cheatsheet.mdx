@@ -1,6 +1,6 @@
 ---
 title: 命令速查表
-description: 八爪鱼 CLI v0.1.32 常用命令快速参考。
+description: 八爪鱼 CLI v0.1.33 常用命令快速参考。
 ---
 
 > 八爪鱼 CLI 常用命令一览。尖括号 `<taskId>`、`<apiKey>`、`<url>` 表示需替换为实际值。
@@ -8,7 +8,7 @@ description: 八爪鱼 CLI v0.1.32 常用命令快速参考。
 除特别说明外，功能命令均需先完成 `bazhuayu auth login`。脚本、CI、Codex 或 Agent 调用时优先使用 `--json` / `--jsonl`。
 
 <Warning>
-  v0.1.32 起所有命令均以 `bazhuayu` 开头，`octopus` 已不再可用。`OCTOPUS_*` 环境变量和 `~/.octopus` 配置目录不变。
+  v0.1.32 起所有命令均以 `bazhuayu` 开头，`octopus` 已不再可用。v0.1.33 的帮助按功能分类展示命令；`OCTOPUS_*` 环境变量和 `~/.octopus` 配置目录不变。
 </Warning>
 
 ## 帮助与诊断
@@ -17,6 +17,7 @@ description: 八爪鱼 CLI v0.1.32 常用命令快速参考。
 bazhuayu --help
 bazhuayu --version
 bazhuayu capabilities
+bazhuayu capabilities --help
 bazhuayu doctor
 bazhuayu browser status --browser-id chrome --json
 
@@ -24,6 +25,8 @@ bazhuayu capabilities --json
 bazhuayu doctor --json
 bazhuayu doctor --output ./runs --api-base-url https://api.example.com --json
 ```
+
+`capabilities --help` 仅显示帮助说明；Agent、脚本和自动化流程需要读取机器契约时，使用 `bazhuayu capabilities --json`。
 
 ## 浏览器管理
 
@@ -103,7 +106,9 @@ bazhuayu task list --page 2 --page-size 20
 bazhuayu task list --limit 10
 bazhuayu task list --keyword 关键词
 bazhuayu task list --task-group <groupId>
-bazhuayu task list --template-id <templateRegistrationId>
+bazhuayu task list --status <status>
+bazhuayu task list --task-type <taskType>
+bazhuayu task list --template-id <templateId>
 bazhuayu task list --template-version-id <templateVersionId>
 bazhuayu task list --scheduled true --json
 
@@ -138,12 +143,14 @@ bazhuayu task-group set-default <groupId> --yes
 ```bash
 bazhuayu template search "电商" --page 1 --page-size 20 --json
 bazhuayu template search "评论" --kind-id <kindId> --free true --run-on <n> --scope <n> --json
-bazhuayu template view <templateRegistrationId> --json
-bazhuayu template version <templateRegistrationId> --json
+bazhuayu template view <templateId> --json
+bazhuayu template version <templateId> --json
 
-bazhuayu template-task create <templateRegistrationId> --name "模板采集任务" --task-group <groupId> --params-file params.json --json
+bazhuayu template-task create <templateId> --name "模板采集任务" --task-group <groupId> --params-file params.json --json
 bazhuayu template-task update <taskId> --task-group <groupId> --params '{"UIParameters":[]}' --yes --json
 ```
+
+v0.1.33 的模板搜索会按 `templateId` 全局去重并在去重后分页，因此跨页不再重复；脚本应使用返回的公开 `templateId`，不要依赖旧的 `templateRegistrationId`、`status` 或原始后端记录字段。
 
 ## 本地采集
 

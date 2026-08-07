@@ -1,11 +1,11 @@
 ---
 title: 安装与验证
-description: 安装 bazhuayu-cli@0.1.32，并验证 bazhuayu 命令、Node.js 环境与本地采集运行时。
+description: 安装 bazhuayu-cli@0.1.33，并验证 bazhuayu 命令、Node.js 环境与本地采集运行时。
 ---
 
 > 通过 npm 安装八爪鱼 CLI，并确认 `bazhuayu` 命令、浏览器依赖与本地运行环境可用。
 
-八爪鱼 CLI 以 npm 包形式发布。v0.1.32 将命令入口从 `octopus` 统一为 `bazhuayu`；既有子命令、Agent 契约、任务管理、云定时和数据检查接口保持兼容。本地运行时包名仍为 `@octopus/browser-runtime`。
+八爪鱼 CLI 以 npm 包形式发布。v0.1.32 将命令入口从 `octopus` 统一为 `bazhuayu`；v0.1.33 进一步按创建、运行、管理、数据和配置重新组织帮助信息。本地运行时包名仍为 `@octopus/browser-runtime`。
 
 ## 环境要求
 
@@ -69,10 +69,10 @@ Linux x64 从 CLI v0.1.22 起支持本地采集；Linux arm64 目前仅建议使
 
 ## 安装八爪鱼 CLI
 
-安装或更新到 v0.1.32：
+安装或更新到 v0.1.33：
 
 ```bash
-npm install -g bazhuayu-cli@0.1.32
+npm install -g bazhuayu-cli@0.1.33
 ```
 
 安装完成后，命令名为：
@@ -88,13 +88,14 @@ bazhuayu --version
 bazhuayu --help
 ```
 
-v0.1.32 应能看到 `browser`、`detect`、`task-group`、`template`、`schedule` 和 `data preview` 等命令：
+v0.1.33 的 `bazhuayu --help` 会按 **Create**、**Run**、**Manage**、**Data** 和 **Config** 分类显示命令。可继续检查常用子命令：
 
 ```bash
 bazhuayu browser --help
 bazhuayu detect --help
 bazhuayu task-group --help
 bazhuayu data preview --help
+bazhuayu capabilities --help
 ```
 
 ## 从 `octopus` 迁移
@@ -126,7 +127,7 @@ bazhuayu browser status --browser-id chrome --json
 更新到指定版本：
 
 ```bash
-npm install -g bazhuayu-cli@0.1.32
+npm install -g bazhuayu-cli@0.1.33
 bazhuayu --version
 ```
 
@@ -146,7 +147,7 @@ npm uninstall -g bazhuayu-cli
 | PowerShell 多行命令报错 | 使用反引号 `` ` `` 续行，或优先写成单行 |
 | URL 无法打开 | 检查是否写完整协议，例如 `https://example.com` |
 | `--output task.json` 写到意外目录 | 先 `cd` 到工作目录，或使用绝对路径 |
-| `npm install -g ...@latest` 卡住或被终止 | 使用固定版本：`npm install -g bazhuayu-cli@0.1.32` |
+| `npm install -g ...@latest` 卡住或被终止 | 使用固定版本：`npm install -g bazhuayu-cli@0.1.33` |
 | `doctor` 某项失败 | 根据 `ok: false` 的检查项修复 Node.js、本地运行时或浏览器依赖 |
 | 用户浏览器扩展未就绪 | 按 [`browser` 首次配置流程](/zh/cli/core-commands/browser-management) 安装扩展、重开浏览器并再次检查状态 |
 

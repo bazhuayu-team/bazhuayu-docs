@@ -15,12 +15,14 @@ bazhuayu task list --keyword 小红书
 bazhuayu task list --page 2 --page-size 20
 bazhuayu task list --limit 10
 bazhuayu task list --task-group <groupId>
-bazhuayu task list --template-id <templateRegistrationId>
+bazhuayu task list --status <status>
+bazhuayu task list --task-type <taskType>
+bazhuayu task list --template-id <templateId>
 bazhuayu task list --template-version-id <templateVersionId>
 bazhuayu task list --scheduled true --json
 ```
 
-可用筛选条件包括 `--keyword`、`--task-group`、`--status`、`--task-type`、`--scheduled true|false`、`--template-id` / `--template-registration-id` 和 `--template-version-id`。
+可用筛选条件包括 `--keyword`、`--task-group`、`--status`、`--task-type`、`--scheduled true|false`、`--template-id` 和 `--template-version-id`。v0.1.33 不再将 `--template-registration-id` 作为公开参数；新脚本统一使用 `--template-id`。
 
 如果还没有现成任务，可以使用 [`bazhuayu detect`](/zh/cli/core-commands/detect) 检测新 URL 并生成任务文件。
 
@@ -82,16 +84,18 @@ bazhuayu task-group set-default <groupId> --yes
 ```bash
 bazhuayu template search "电商" --page 1 --page-size 20 --json
 bazhuayu template search "评论" --kind-id <kindId> --free true --run-on <n> --scope <n> --json
-bazhuayu template view <templateRegistrationId> --json
-bazhuayu template version <templateRegistrationId> --json
+bazhuayu template view <templateId> --json
+bazhuayu template version <templateId> --json
 ```
 
 使用模板创建或更新任务：
 
 ```bash
-bazhuayu template-task create <templateRegistrationId> --name "模板采集任务" --task-group <groupId> --params-file params.json --json
+bazhuayu template-task create <templateId> --name "模板采集任务" --task-group <groupId> --params-file params.json --json
 bazhuayu template-task update <taskId> --task-group <groupId> --params '{"UIParameters":[]}' --yes --json
 ```
+
+`template search` 会按公开的 `templateId` 去重后再分页，同一模板的多语言记录只保留排序靠前的名称。`template view`、`template version` 和 `template-task create` 都使用该公开 ID；CLI 会在内部完成与平台 `templateRegistrationId` 的映射，不应依赖内部字段。
 
 `--params` / `--params-file` 需要传入国内模板接口使用的 `userInputParameters` JSON 对象。两者不能同时使用。`template-task update` 会修改远端模板任务映射，必须带 `--yes`。
 

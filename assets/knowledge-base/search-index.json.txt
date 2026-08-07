@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-08-03T03:35:41.948Z",
+  "generatedAt": "2026-08-07T03:38:17.538Z",
   "counts": {
     "faqIntents": 413,
     "publicAnswers": 662
@@ -6124,7 +6124,7 @@
     },
     "doc:/zh/cli/quick-start/installation": {
       "title": "安装与验证",
-      "summary": "安装 bazhuayu-cli@0.1.32，并验证 bazhuayu 命令、Node.js 环境与本地采集运行时。",
+      "summary": "安装 bazhuayu-cli@0.1.33，并验证 bazhuayu 命令、Node.js 环境与本地采集运行时。",
       "steps": [
         "Node.js 20 或更高（推荐 22 LTS）",
         "npm 8 或更高",
@@ -6146,7 +6146,7 @@
     },
     "doc:/zh/cli/reference/command-cheatsheet": {
       "title": "命令速查表",
-      "summary": "八爪鱼 CLI v0.1.32 常用命令快速参考。",
+      "summary": "八爪鱼 CLI v0.1.33 常用命令快速参考。",
       "steps": [],
       "route": "/zh/cli/reference/command-cheatsheet",
       "sourceType": "CLI"

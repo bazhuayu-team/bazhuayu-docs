@@ -58,7 +58,10 @@ bazhuayu auth status --json
 | `data preview --unexported` 没有标记数据为已导出 | 这是预期行为；`--unexported` 只读取云端未导出数据，不改变导出状态 |
 | API 列表任务无法同步到云端 | API 列表任务当前 `localOnly: true`，使用 `bazhuayu run <taskId> --task-file task.json` 本地运行 |
 | `run --max-rows <n>` 到上限后未退出 | 升级到 v0.1.32；该版本已修复部分任务达到上限后无法正常结束的问题 |
-| 安装 `@latest` 卡住 | 使用固定版本：`npm install -g bazhuayu-cli@0.1.32` |
+| `capabilities --help` 输出不是 JSON | v0.1.33 已修复为显示帮助；需要机器可读能力清单时使用 `bazhuayu capabilities --json` |
+| `--template-registration-id` 无法用于新脚本 | v0.1.33 统一使用 `--template-id`；模板公开输出也以 `templateId` 为准 |
+| 模板搜索结果数量或跨页结果变化 | v0.1.33 会按 `templateId` 去重后再分页；结果减少或不再重复是预期行为 |
+| 安装 `@latest` 卡住 | 使用固定版本：`npm install -g bazhuayu-cli@0.1.33` |
 
 ## 下一步
 

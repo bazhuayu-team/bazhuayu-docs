@@ -1,7 +1,23 @@
 ---
 title: 2026 年 8 月更新日志
-description: 2026 年 8 月八爪鱼文档更新，包含 OpenAPI API Key 认证说明。
+description: 2026 年 8 月八爪鱼文档更新，包含 CLI v0.1.33 与 OpenAPI API Key 认证说明。
 ---
+
+# CLI v0.1.33
+
+> **更新日期：** 2026 年 8 月 7 日
+> 当前安装版本：`bazhuayu-cli@0.1.33`
+
+```bash
+npm install -g bazhuayu-cli@0.1.33
+bazhuayu --help
+```
+
+本次更新重写了 `bazhuayu --help`：命令按 Create、Run、Manage、Data 和 Config 分类展示，发布版不再在帮助中暴露 `env`、`runs` 等内部开发命令。`bazhuayu capabilities --help` 现在只显示帮助文字；Agent 和自动化流程应继续使用稳定的 `bazhuayu capabilities --json` 读取机器契约。
+
+模板市场同步更新：搜索结果按公开 `templateId` 全局去重并在去重后分页，同一模板的多语言记录只保留排序靠前的名称；总数表示唯一模板数量。CLI 参数、帮助和公开 JSON 输出统一使用 `templateId`，新脚本不应再使用 `--template-registration-id`，也不应依赖 `templateRegistrationId`、`status`、`raw` 等内部字段。后端所需的注册 ID 映射由 CLI 在内部处理。
+
+`task list` 新增 `--status`、`--task-type` 和 `--scheduled true|false` 筛选，可与 `--template-id`、关键词和任务组筛选组合使用。相关文档：[CLI 概述](/zh/cli/index)、[安装与验证](/zh/cli/quick-start/installation)、[任务管理](/zh/cli/core-commands/task-management)、[命令速查表](/zh/cli/reference/command-cheatsheet)。
 
 # OpenAPI 支持 API Key 认证
 
