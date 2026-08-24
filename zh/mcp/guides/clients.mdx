@@ -9,11 +9,11 @@ description: 在 ChatGPT、Claude、Cursor、Gemini、OpenClaw、VS Code 等客�
 https://mcp.bazhuayu.com
 ```
 
-认证方式：**OAuth 2.1**（推荐）或 **API Key**（Header：`x-api-key`）。API Key 创建见 [获取 API Key](/zh/mcp/quick-start/api-key)。
+认证方式：**OAuth 2.1**（推荐）或 **API Key**（Header：`x-api-key`）。API Key 创建见 <a href="/zh/mcp/quick-start/api-key" target="_blank" rel="noopener noreferrer">获取 API Key</a>。
 
 ## Agent 对话安装
 
-WorkBuddy、QClaw、豆包专业版等能够自行管理工具配置的 Agent，可直接通过对话添加八爪鱼 MCP。推荐使用[获取 API Key](/zh/mcp/quick-start/api-key)页面提供的完整提示词，让 Agent 写入 `x-api-key` 请求头、刷新工具列表并完成连接测试。
+WorkBuddy、QClaw、豆包专业版等能够自行管理工具配置的 Agent，可直接通过对话添加八爪鱼 MCP。推荐使用<a href="/zh/mcp/quick-start/api-key" target="_blank" rel="noopener noreferrer">获取 API Key</a>页面提供的完整提示词，让 Agent 写入 `x-api-key` 请求头、刷新工具列表并完成连接测试。
 
 <Note>
   对这类 Agent，应明确要求本次接入仅使用 API Key，不要把 Key 配置成 OAuth 凭据或 `Authorization: Bearer`。不支持自主配置的客户端，请继续按下方平台步骤手动操作。
@@ -51,7 +51,7 @@ WorkBuddy、QClaw、豆包专业版等能够自行管理工具配置的 Agent，
 }
 ```
 
-或使用 OAuth 流程（以 Claude Code 当前版本文档为准）。详见 [获取 API Key](/zh/mcp/quick-start/api-key)。
+或使用 OAuth 流程（以 Claude Code 当前版本文档为准）。详见 <a href="/zh/mcp/quick-start/api-key" target="_blank" rel="noopener noreferrer">获取 API Key</a>。
 
 ## Cursor
 
@@ -98,7 +98,7 @@ OpenClaw 可作为 MCP **客户端**连接八爪鱼（出站 MCP），命令形�
 2. 注册八爪鱼 MCP 服务（URL：`https://mcp.bazhuayu.com`，并配置 API Key）。
 3. 使用 `openclaw mcp list` 确认工具已加载。
 
-QClaw 用户也可使用 [QClaw 图形界面配置](/zh/mcp/integrations/qclaw)，无需命令行。
+QClaw 用户也可使用 <a href="/zh/mcp/integrations/qclaw" target="_blank" rel="noopener noreferrer">QClaw 图形界面配置</a>，无需命令行。
 
 ## 验证连接
 

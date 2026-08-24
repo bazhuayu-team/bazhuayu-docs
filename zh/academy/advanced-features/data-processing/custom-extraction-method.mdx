@@ -6,7 +6,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/WoDMcd"
 
 网页上的数据类型十分丰富：文本、图片、链接、源码等。在数据采集过程中，不同类型的数据类型，对应的抓取方式是不同的。本文将讲解常见的数据类型与其抓取方式。
 
-示例网址：[https://movie.douban.com/explore#!type=movie&tag=%E7%BB%8F%E5%85%B8&sort=recommend&page_limit=20&page_start=0](https://movie.douban.com/explore#!type=movie&tag=%E7%BB%8F%E5%85%B8&sort=recommend&page_limit=20&page_start=0)
+示例网址：<a href="https://movie.douban.com/explore#!type=movie&tag=%E7%BB%8F%E5%85%B8&sort=recommend&page_limit=20&page_start=0" target="_blank" rel="noopener noreferrer">https://movie.douban.com/explore#!type=movie&tag=%E7%BB%8F%E5%85%B8&sort=recommend&page_limit=20&page_start=0</a>
 
 **&#xA0;**
 
@@ -40,11 +40,11 @@ source: "https://www.bazhuayu.com/helpcenter/docs/WoDMcd"
 
  
 
-为什么是【IMG标签的src属性】？在 [XPath与Html](https://www.bazhuayu.com/helpcenter/docs/shen-me-shi-html-he-xpath) 中，我们讲过网页Html相关知识，网页上的图片一般都是用IMG标签表示，其图片地址会放在IMG标签的src属性中。
+为什么是【IMG标签的src属性】？在 <a href="/zh/academy/xpath/getting-started/what-is-html-xpath" target="_blank" rel="noopener noreferrer">XPath与Html</a> 中，我们讲过网页Html相关知识，网页上的图片一般都是用IMG标签表示，其图片地址会放在IMG标签的src属性中。
 
 所以，当我们要提取图片网址时，本质上是用XPath定位到Img标签，再从IMG标签中提取src属性，src属性的值，就是图片网址。
 
-这里演示的只是抓取图片时使用的抓取方式，具体的图片采集，请看教程[文件边采集边下载](https://www.bazhuayu.com/helpcenter/docs/K2lJPG)
+这里演示的只是抓取图片时使用的抓取方式，具体的图片采集，请看教程<a href="/zh/academy/data-export/file-download" target="_blank" rel="noopener noreferrer">文件边采集边下载</a>
 
  
 
@@ -60,7 +60,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/WoDMcd"
 
  
 
-在 [XPath与Html](https://www.bazhuayu.com/helpcenter/docs/shen-me-shi-html-he-xpath)  中，我们讲过网页Html相关知识，网页上的超链接一般都是用A标签表示，超链接会放在IMG标签的href属性中。
+在 <a href="/zh/academy/xpath/getting-started/what-is-html-xpath" target="_blank" rel="noopener noreferrer">XPath与Html</a>  中，我们讲过网页Html相关知识，网页上的超链接一般都是用A标签表示，超链接会放在IMG标签的href属性中。
 
 所以，当我们要提取超链接网址时，本质上是用XPath定位到A标签，再从A标签中提取href属性，href属性的值，就是超链接网址。如果选择采集链接之后，字段显示为空，一般是xpath定位的元素没有链接，需要在源码里确认一下。
 
@@ -112,7 +112,7 @@ Inner Html：不包含当前元素，从当前元素的下一级开始（如图�
 
 先用XPath找到当前元素的源码，观察当前源码中存在什么属性值、需要提取哪个属性值，然后提取存在且需要的属性值即可。
 
-示例网址：[https://search.jd.com/Search?keyword=%E6%89%8B%E6%9C%BA&enc=utf-8&qrst=1&rt=1&stop=1&vt=2&wq=%E6%89%8B%E6%9C%BA&page=7&s=177&click=0](https://search.jd.com/Search?keyword=%E6%89%8B%E6%9C%BA&enc=utf-8&qrst=1&rt=1&stop=1&vt=2&wq=%E6%89%8B%E6%9C%BA&page=7&s=177&click=0)
+示例网址：<a href="https://search.jd.com/Search?keyword=%E6%89%8B%E6%9C%BA&enc=utf-8&qrst=1&rt=1&stop=1&vt=2&wq=%E6%89%8B%E6%9C%BA&page=7&s=177&click=0" target="_blank" rel="noopener noreferrer">https://search.jd.com/Search?keyword=%E6%89%8B%E6%9C%BA&enc=utf-8&qrst=1&rt=1&stop=1&vt=2&wq=%E6%89%8B%E6%9C%BA&page=7&s=177&click=0</a>
 
  
 

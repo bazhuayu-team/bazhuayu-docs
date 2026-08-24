@@ -13,11 +13,11 @@ description: 业务 API 支持 API Key 或 Access Token 认证。
 x-api-key: op_sk_xxxxxx
 ```
 
-API Key 的创建方式与 MCP 相同：登录八爪鱼官网，在账户中心生成。完整步骤见 [获取 API Key](/zh/mcp/quick-start/api-key)。不要为 API Key 添加 `Bearer` 前缀，也不要同时传入 `Authorization` 与 `x-api-key`。
+API Key 的创建方式与 MCP 相同：登录八爪鱼官网，在账户中心生成。完整步骤见 <a href="/zh/mcp/quick-start/api-key" target="_blank" rel="noopener noreferrer">获取 API Key</a>。不要为 API Key 添加 `Bearer` 前缀，也不要同时传入 `Authorization` 与 `x-api-key`。
 
 ## Token 获取
 
-调用 [获取新 Token](/zh/api-reference/access-token/obtain-a-new-token) 接口，使用八爪鱼平台的登录账号和密码来获取全新 Access Token。
+调用 <a href="/zh/api-reference/access-token/obtain-a-new-token" target="_blank" rel="noopener noreferrer">获取新 Token</a> 接口，使用八爪鱼平台的登录账号和密码来获取全新 Access Token。
 
 在 API 请求中通过 `Authorization` 请求头携带 Token：
 
@@ -27,7 +27,7 @@ Authorization: Bearer YOUR_ACCESS_TOKEN
 
 ## Token 刷新
 
-Access Token 过期后，使用 [刷新 Token](/zh/api-reference/access-token/refresh-token) 接口获取新的 Access Token。
+Access Token 过期后，使用 <a href="/zh/api-reference/access-token/refresh-token" target="_blank" rel="noopener noreferrer">刷新 Token</a> 接口获取新的 Access Token。
 
 ## 注意事项
 

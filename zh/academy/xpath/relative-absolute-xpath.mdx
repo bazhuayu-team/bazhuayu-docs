@@ -5,9 +5,9 @@ description: 通过实例讲解绝对 XPath 和相对 XPath 的概念、循环�
 
 在学习本教程之前，您需要具备八爪鱼基础操作和XPath相关知识，如果还未掌握，请先学习以下课程。
 
-<a href="https://www.bazhuayu.com/docs/zh/academy/basic-collection/beginner/custom-collection">自定义配置</a>
+<a href="/zh/academy/basic-collection/beginner/custom-collection" target="_blank" rel="noopener noreferrer">自定义配置</a>
 
-<a href="https://www.bazhuayu.com/docs/zh/academy/xpath/getting-started/why-use-xpath">XPath入门</a>
+<a href="/zh/academy/xpath/getting-started/why-use-xpath" target="_blank" rel="noopener noreferrer">XPath入门</a>
 
 什么是绝对xpath？
 
@@ -19,7 +19,7 @@ HTML的基本结构如下，无论浏览器里的页面多么的千奇百怪，�
 
 如上图网址所示：http://www.ggzy.gov.cn/information/html/a/320000/0102/202310/17/003247de6607be5d405a868dc34a1e0c591b.shtml该网页标题字段的绝对xpath是：html/body/div[5]/h4
 
-说明：xpath需要掌握xpath基础知识，详情可学习<a href="https://www.bazhuayu.com/docs/zh/academy/xpath/getting-started/why-use-xpath">xpath知识</a>
+说明：xpath需要掌握xpath基础知识，详情可学习<a href="/zh/academy/xpath/getting-started/why-use-xpath" target="_blank" rel="noopener noreferrer">xpath知识</a>
 
 相对Xpath，即相对于循环框的Xpath，有两个典型特征：跟随循环联动；与循环框的XPath合并成一条完整的定位XPath。
 
@@ -27,7 +27,7 @@ HTML的基本结构如下，无论浏览器里的页面多么的千奇百怪，�
 
 以下将具体说明。
 
-示例网址：<a href="http://deal.ggzy.gov.cn/ds/deal/dealList.jsp">http://deal.ggzy.gov.cn/ds/deal/dealList.jsp</a>
+示例网址：<a href="http://deal.ggzy.gov.cn/ds/deal/dealList.jsp" target="_blank" rel="noopener noreferrer">http://deal.ggzy.gov.cn/ds/deal/dealList.jsp</a>
 
 需求：采集这个网址列表的 项目标题，省份，来源平台，业务类型，时间等字段
 
@@ -35,7 +35,7 @@ HTML的基本结构如下，无论浏览器里的页面多么的千奇百怪，�
   <img src="/assets/academy/xpath/relative-absolute-xpath/6535e358b0f39.png" />
 </div>
 
-Step1：用 <a href="https://www.bazhuayu.com/docs/zh/academy/basic-collection/beginner/list-collection">采集列表数据</a> 中学到的方法，配置列表数据采集；
+Step1：用 <a href="/zh/academy/basic-collection/beginner/list-collection" target="_blank" rel="noopener noreferrer">采集列表数据</a> 中学到的方法，配置列表数据采集；
 
 <div style={{ textAlign: "center" }}>
   <img src="/assets/academy/xpath/relative-absolute-xpath/6535e4d0ab586.gif" />
@@ -137,13 +137,13 @@ Step3：根据前面学到的知识，循环框的XPath是 //DIV[@id="toview"]/D
   <img src="/assets/academy/xpath/relative-absolute-xpath/6535ef7687c0d.gif" />
 </div>
 
-示例网址：<a href="http://zu.wuhan.fang.com/cities.aspx">http://zu.wuhan.fang.com/cities.aspx</a>
+示例网址：<a href="http://zu.wuhan.fang.com/cities.aspx" target="_blank" rel="noopener noreferrer">http://zu.wuhan.fang.com/cities.aspx</a>
 
 需求：采集整个城市列表和其所对应的省份。
 
 以下为详细的步骤：
 
-Step1：先按<a href="https://www.bazhuayu.com/docs/zh/academy/basic-collection/beginner/list-collection">列表数据采集的方法</a>，选中所有【城市】，创建一个循环。
+Step1：先按<a href="/zh/academy/basic-collection/beginner/list-collection" target="_blank" rel="noopener noreferrer">列表数据采集的方法</a>，选中所有【城市】，创建一个循环。
 
 同时，我们还想将每一个城市对应的省份采集下来。所以选中第1个省份，在操作提示框中选择【采集该元素的文本】。
 
@@ -159,7 +159,7 @@ Step2：先来解决没定位到直辖市的4个城市的问题。
 
 将循环列表的 XPath //HTML/BODY[1]/DIV[4]/DIV[4]/UL[1]/LI[position()>1]/A ，复制到浏览器控制台中。可以看到，除第一行4个直辖市外，其他城市都定位到了。
 
-在<a href="https://www.bazhuayu.com/docs/zh/academy/xpath/getting-started/xpath-functions">XPath函数</a>中，我们讲过position函数，它可以限制定位到的列表数。这里的[position()>1]就将第一个li列表（4个直辖市的列表）筛掉了。我们想将4个直辖市也定位到，去掉[position()>1]即可：//HTML/BODY[1]/DIV[4]/DIV[4]/UL[1]/LI/A。
+在<a href="/zh/academy/xpath/getting-started/xpath-functions" target="_blank" rel="noopener noreferrer">XPath函数</a>中，我们讲过position函数，它可以限制定位到的列表数。这里的[position()>1]就将第一个li列表（4个直辖市的列表）筛掉了。我们想将4个直辖市也定位到，去掉[position()>1]即可：//HTML/BODY[1]/DIV[4]/DIV[4]/UL[1]/LI/A。
 
 <div style={{ textAlign: "center" }}>
   <img src="/assets/academy/xpath/relative-absolute-xpath/6535f39c22311.png" />
@@ -191,7 +191,7 @@ strong标签和b标签与a标签为同级标签，并都在a标签之前。
 
 循环框的XPath：定位到列表项（所有城市）相对XPath：字段相对于循环框的位置（省份相对于城市的位置）循环框的XPath + 相对XPath = 每一个循环项外字段的XPath（省份的定位XPath）
 
-根据源码特征，写出根据城市列表定位到省份（含直辖市）的定位XPath。城市列表定位XPath为/HTML/BODY[1]/DIV[4]/DIV[4]/UL[1]/LI/A，要定位a标签之前的同级元素，需用到preceding-sibling这个函数，在 <a href="https://www.bazhuayu.com/docs/zh/academy/xpath/getting-started/xpath-functions">XPath函数</a> 中有详细讲到。故：
+根据源码特征，写出根据城市列表定位到省份（含直辖市）的定位XPath。城市列表定位XPath为/HTML/BODY[1]/DIV[4]/DIV[4]/UL[1]/LI/A，要定位a标签之前的同级元素，需用到preceding-sibling这个函数，在 <a href="/zh/academy/xpath/getting-started/xpath-functions" target="_blank" rel="noopener noreferrer">XPath函数</a> 中有详细讲到。故：
 
 (1) 【省份】相对于【城市】的XPath：
 

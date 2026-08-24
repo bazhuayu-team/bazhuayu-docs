@@ -4,7 +4,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/V8f8zt"
 ---
 **一、采集场景**
 
-在百度首页 [https://www.baidu.com/](https://www.baidu.com/)  输入关键词搜索，采集搜索后得到的搜索结果。
+在百度首页 <a href="https://www.baidu.com/" target="_blank" rel="noopener noreferrer">https://www.baidu.com/</a>  输入关键词搜索，采集搜索后得到的搜索结果。
 
 ![【百度】搜索结果采集](/assets/academy/case-studies/baidu-search-results/01-653b711d59bf0.png)
 
@@ -58,14 +58,14 @@ source: "https://www.bazhuayu.com/helpcenter/docs/V8f8zt"
 
  
 
-在首页【输入框】中输入目标网址 [https://www.baidu.com/](https://www.baidu.com/)，点击【开始采集】，八爪鱼自动打开网页。
+在首页【输入框】中输入目标网址 <a href="https://www.baidu.com/" target="_blank" rel="noopener noreferrer">https://www.baidu.com/</a>，点击【开始采集】，八爪鱼自动打开网页。
 
 ![【百度】搜索结果采集](/assets/academy/case-studies/baidu-search-results/03-653b71458269c.gif)
 
 特别说明：
 
 - a. 打开网页后，如果开始开始【自动识别】，请点击【不再自动识别】或【取消识别】将其关掉。因为本文不适合使用【自动识别】。
-- b. 【自动识别】适用于自动识别网页上的列表、滚动和翻页，识别成功后直接启动采集即可获取数据。详情点击查看 [【自动识别】教程](https://www.bazhuayu.com/helpcenter/docs/eeI3gE)
+- b. 【自动识别】适用于自动识别网页上的列表、滚动和翻页，识别成功后直接启动采集即可获取数据。详情点击查看 <a href="/zh/academy/video/operation-guidance/basic-collection/eeI3gE" target="_blank" rel="noopener noreferrer">【自动识别】教程</a>
 
  
 
@@ -101,8 +101,8 @@ source: "https://www.bazhuayu.com/helpcenter/docs/V8f8zt"
 
 特别说明：
 
-- a. 创建【循环翻页】后，八爪鱼会自动点击【下一页】按钮进行翻页，从第1页，第2页......直到最后1页。如果只需采集特定页的数据，可在八爪鱼中设置循环翻页的次数，详情点击查看  [翻页以采集多页数据教程](/zh/academy/basic-collection/pagination/next-page-button)。
-- b. 执行前等待，即在执行此步骤前等待一段时间，可有效避免因网页未加载完全导致的漏数据，详情点击查看 [执行前等待使用场景与设置方法](https://www.bazhuayu.com/helpcenter/docs/zigIaV)
+- a. 创建【循环翻页】后，八爪鱼会自动点击【下一页】按钮进行翻页，从第1页，第2页......直到最后1页。如果只需采集特定页的数据，可在八爪鱼中设置循环翻页的次数，详情点击查看  <a href="/zh/academy/basic-collection/pagination/next-page-button" target="_blank" rel="noopener noreferrer">翻页以采集多页数据教程</a>。
+- b. 执行前等待，即在执行此步骤前等待一段时间，可有效避免因网页未加载完全导致的漏数据，详情点击查看 <a href="/zh/academy/index" target="_blank" rel="noopener noreferrer">执行前等待使用场景与设置方法</a>
 
  
 
@@ -118,7 +118,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/V8f8zt"
 
 特别说明：
 
-- a.为什么要修改【循环翻页】的XPath？这是因为，当翻到第2页的时候，软件自动生成的 XPath `//A[@class="n"]` 定位到的是 `【&lt;上一页】` 按钮。那么，八爪鱼采集器在执行的时候，会点击 `【&lt;上一页】` 按钮，回到第一页，然后又点击 `【下一页&gt;】` 按钮翻到第2页，造成的现象就是会重复采集第一页和第二页的数据。这么修改 XPath，需要一定的 XPath 知识，点击查看 [XPath学习与实例教程](https://www.bazhuayu.com/helpcenter/docs/V2h1Ec) 。
+- a.为什么要修改【循环翻页】的XPath？这是因为，当翻到第2页的时候，软件自动生成的 XPath `//A[@class="n"]` 定位到的是 `【&lt;上一页】` 按钮。那么，八爪鱼采集器在执行的时候，会点击 `【&lt;上一页】` 按钮，回到第一页，然后又点击 `【下一页&gt;】` 按钮翻到第2页，造成的现象就是会重复采集第一页和第二页的数据。这么修改 XPath，需要一定的 XPath 知识，点击查看 <a href="/zh/academy/xpath/getting-started/why-use-xpath" target="_blank" rel="noopener noreferrer">XPath学习与实例教程</a> 。
 
  
 
@@ -143,7 +143,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/V8f8zt"
 特别说明：
 
 - a. 经过以上连续4步，【循环-提取数据】创建完成。【循环】中的项，对应着页面上所有评价列表，【提取数据】中的字段，对应着每个评价列表中的字段。启动采集以后，八爪鱼就会按照循环中的顺序依次提取每个列表中的字段。
-- b. 为何通过以上4步，可建立【循环-提取数据】？详情点击查看 [列表数据采集教程 ](https://www.bazhuayu.com/helpcenter/docs/RXxvh9)。
+- b. 为何通过以上4步，可建立【循环-提取数据】？详情点击查看 <a href="/zh/academy/video/operation-guidance/basic-collection/RXxvh9" target="_blank" rel="noopener noreferrer">列表数据采集教程 </a>。
 
  
 
@@ -196,7 +196,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/V8f8zt"
 
 特别说明：
 
-- a. 在【提取列表数据】步骤里面的【简介】字段。在采集时发现有问题，有字段错位的现象存在，即采集的内容不是【简介】的内容，这是由于字段的XPath定位不准确的缘故，需修改其定位XPath。这里需要一定的XPath知识。点击查看 [XPath学习与实例教程](https://www.bazhuayu.com/helpcenter/docs/V2h1Ec) 。
+- a. 在【提取列表数据】步骤里面的【简介】字段。在采集时发现有问题，有字段错位的现象存在，即采集的内容不是【简介】的内容，这是由于字段的XPath定位不准确的缘故，需修改其定位XPath。这里需要一定的XPath知识。点击查看 <a href="/zh/academy/xpath/getting-started/why-use-xpath" target="_blank" rel="noopener noreferrer">XPath学习与实例教程</a> 。
 
  
 
@@ -210,7 +210,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/V8f8zt"
 
 特别说明：
 
-- a.【本地采集】是使用自己的电脑进行采集，【云采集】是使用八爪鱼提供的云服务器采集，点击查看[本地采集与云采集详解](https://www.bazhuayu.com/helpcenter/docs/2xF5Mz)。
+- a.【本地采集】是使用自己的电脑进行采集，【云采集】是使用八爪鱼提供的云服务器采集，点击查看<a href="/zh/academy/data-export/start-and-export" target="_blank" rel="noopener noreferrer">本地采集与云采集详解</a>。
 
  
 

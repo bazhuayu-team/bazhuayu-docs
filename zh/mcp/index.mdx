@@ -12,11 +12,11 @@ description: 通过 MCP 协议查询数据中心存量内容、搜索采集模�
 ## 前置条件
 
 - **八爪鱼账户** — 免费版也可连接；免费 / 基础版用户每周可通过 MCP 获得 **2,000 条**免费采集额度
-- **兼容 MCP 的客户端** — 见下方 [平台对接](#平台对接)，或 [客户端配置指南](/zh/mcp/guides/clients)
+- **兼容 MCP 的客户端** — 见下方 [平台对接](#平台对接)，或 <a href="/zh/mcp/guides/clients" target="_blank" rel="noopener noreferrer">客户端配置指南</a>
 
 ## 让 Agent 自动添加（推荐）
 
-WorkBuddy、QClaw、豆包专业版等具备工具配置能力的 Agent，通常可以根据一段对话自行添加 MCP 服务。先在账户中心[创建 API Key](/zh/mcp/quick-start/api-key)，再将下面的内容发给 Agent，并把占位符替换为你的真实 Key：
+WorkBuddy、QClaw、豆包专业版等具备工具配置能力的 Agent，通常可以根据一段对话自行添加 MCP 服务。先在账户中心<a href="/zh/mcp/quick-start/api-key" target="_blank" rel="noopener noreferrer">创建 API Key</a>，再将下面的内容发给 Agent，并把占位符替换为你的真实 Key：
 
 ```text
 请帮我添加名为“八爪鱼”的 HTTP MCP 服务，并自行完成配置和连通性测试。
@@ -35,7 +35,7 @@ API Key：<粘贴你的 API Key>
   仅在可信的本地 Agent 或私密对话中提供 API Key。不要把真实 Key 发送到群聊、公开对话或截图中；安装完成后也不要让 Agent 回显密钥。
 </Warning>
 
-这里的“只使用 API Key”是针对上述 Agent 自动配置场景，用于避免客户端误判鉴权方式。ChatGPT、Claude、Cursor 等平台教程中明确支持的 OAuth 流程仍可正常使用。若 Agent 无权修改配置，请按[客户端配置指南](/zh/mcp/guides/clients)手动添加。
+这里的“只使用 API Key”是针对上述 Agent 自动配置场景，用于避免客户端误判鉴权方式。ChatGPT、Claude、Cursor 等平台教程中明确支持的 OAuth 流程仍可正常使用。若 Agent 无权修改配置，请按<a href="/zh/mcp/guides/clients" target="_blank" rel="noopener noreferrer">客户端配置指南</a>手动添加。
 
 ## 能力范围
 
@@ -66,7 +66,7 @@ API Key：<粘贴你的 API Key>
     浏览器登录八爪鱼账户，无需手动复制 API Key。适合 ChatGPT、Claude、Cursor、Gemini、Coze、Dify 等支持 OAuth 的客户端。
   </Card>
   <Card title="API Key" icon="lock">
-    使用请求头 `x-api-key` 直连。适合 Dify、Coze 自定义 MCP、QClaw、无头环境等。详见 [获取 API Key](/zh/mcp/quick-start/api-key)。
+    使用请求头 `x-api-key` 直连。适合 Dify、Coze 自定义 MCP、QClaw、无头环境等。详见 <a href="/zh/mcp/quick-start/api-key" target="_blank" rel="noopener noreferrer">获取 API Key</a>。
   </Card>
 </CardGroup>
 
@@ -122,7 +122,7 @@ API Key：<粘贴你的 API Key>
     优先将上方对话发送给支持自主配置的 Agent；也可以手动填写 `https://mcp.bazhuayu.com`（国际环境使用 `https://mcp.octoparse.com`）。
   </Step>
   <Step title="完成认证">
-    选择 OAuth 登录，或配置 [API Key](/zh/mcp/quick-start/api-key)。
+    选择 OAuth 登录，或配置 <a href="/zh/mcp/quick-start/api-key" target="_blank" rel="noopener noreferrer">API Key</a>。
   </Step>
   <Step title="在对话中试用">
     先用只读请求验证连接，例如：「列出数据中心当前支持的平台」，或「帮我找一个采集电商商品列表的八爪鱼模板」。
@@ -131,7 +131,7 @@ API Key：<粘贴你的 API Key>
 
 ## 示例工作流
 
-完整流程见 [工作流程示例](/zh/mcp/workflow)：
+完整流程见 <a href="/zh/mcp/workflow" target="_blank" rel="noopener noreferrer">工作流程示例</a>：
 
 1. `search_templates` — 发现模板
 2. `execute_task(validateOnly)` — 校验参数和数据源选择

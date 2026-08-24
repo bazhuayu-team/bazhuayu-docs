@@ -4,7 +4,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/LJDdmk"
 ---
 **采集场景**
 
-在百度地图首页（[https://map.baidu.com）输入【城市+关键词】搜索](https://map.baidu.com）输入【城市+关键词】搜索)，采集搜索结果列表页。示例中关键词为【深圳 火锅】，可根据需求进行更换，同时支持自动批量输入多个关键词。
+在百度地图首页（<a href="https://map.baidu.com）输入【城市+关键词】搜索" target="_blank" rel="noopener noreferrer">https://map.baidu.com）输入【城市+关键词】搜索</a>，采集搜索结果列表页。示例中关键词为【深圳 火锅】，可根据需求进行更换，同时支持自动批量输入多个关键词。
 
  
 
@@ -60,7 +60,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/LJDdmk"
 
  
 
-1.在首页输入框中，输入百度地图首页的网址：[https://map.baidu.com](https://map.baidu.com)，然后点击【开始采集】，可以看到八爪鱼自动打开了网页。
+1.在首页输入框中，输入百度地图首页的网址：<a href="https://map.baidu.com" target="_blank" rel="noopener noreferrer">https://map.baidu.com</a>，然后点击【开始采集】，可以看到八爪鱼自动打开了网页。
 
 <video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/5e17bf375145403694193112422/3I0weyh56LAA.mp4" width="100%"></video>
 
@@ -68,7 +68,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/LJDdmk"
 
 特别说明：
 
-- a. 打开网页后，如果开始开始【自动识别】，请等待自动识别完成。八爪鱼支持自动识别网页上的列表，滚动和翻页，识别成功后直接启动采集并获取数据。如果【自动识别】的结果不是我们需要的，可点击【取消】关闭智能识别，自行配置采集流程。详情点击查看[【自动识别】](https://www.bazhuayu.com/helpcenter/docs/eeI3gE)
+- a. 打开网页后，如果开始开始【自动识别】，请等待自动识别完成。八爪鱼支持自动识别网页上的列表，滚动和翻页，识别成功后直接启动采集并获取数据。如果【自动识别】的结果不是我们需要的，可点击【取消】关闭智能识别，自行配置采集流程。详情点击查看<a href="/zh/academy/video/operation-guidance/basic-collection/eeI3gE" target="_blank" rel="noopener noreferrer">【自动识别】</a>
 
  
 
@@ -115,7 +115,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/LJDdmk"
 特别说明：
 
 - a. 经过以上连续4步，【循环-提取数据】创建完成。【循环】中的项，对应着页面上所有商家列表，【提取数据】中的字段，对应着每个商家列表中的字段。启动采集以后，八爪鱼就会按照循环中的顺序依次提取每个列表中的字段。
-- b. 为何通过以上4步，可建立【循环-提取数据】？详情点击查看 [列表数据采集教程 ](https://www.bazhuayu.com/helpcenter/docs/RXxvh9)。
+- b. 为何通过以上4步，可建立【循环-提取数据】？详情点击查看 <a href="/zh/academy/video/operation-guidance/basic-collection/RXxvh9" target="_blank" rel="noopener noreferrer">列表数据采集教程 </a>。
 
  
 
@@ -151,7 +151,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/LJDdmk"
 
 特别说明：
 
-- a. 创建【循环翻页】后，八爪鱼会自动点击【下一页】按钮进行翻页，从第1页，第2页......直到最后1页。如果只需采集特定页的数据，可在八爪鱼中设置循环翻页的次数，详情点击查看  [翻页以采集多页数据教程](/zh/academy/basic-collection/pagination/next-page-button)。
+- a. 创建【循环翻页】后，八爪鱼会自动点击【下一页】按钮进行翻页，从第1页，第2页......直到最后1页。如果只需采集特定页的数据，可在八爪鱼中设置循环翻页的次数，详情点击查看  <a href="/zh/academy/basic-collection/pagination/next-page-button" target="_blank" rel="noopener noreferrer">翻页以采集多页数据教程</a>。
 
  
 
@@ -169,7 +169,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/LJDdmk"
 
 特别说明：
 
-- a. 为什么会不结束翻页？这是因为【循环翻页】默认生成的XPath，在最后1页时，仍然能定位到【下一页】按钮，这就会导致其一直点击【下一页】按钮，不结束翻页。为了解决这个问题，我们需要手动写一条XPath，使之在当前页为非最后一页时，都能定位到【下一页】按钮，以实现不断点击【下一页】按钮进行翻页。同时在当前页为最后一页时，不定位到【下一页】按钮，以结束翻页。这里需要一定的XPath知识。点击查看 [XPath学习与实例教程](https://www.bazhuayu.com/helpcenter/docs/V2h1Ec) 。
+- a. 为什么会不结束翻页？这是因为【循环翻页】默认生成的XPath，在最后1页时，仍然能定位到【下一页】按钮，这就会导致其一直点击【下一页】按钮，不结束翻页。为了解决这个问题，我们需要手动写一条XPath，使之在当前页为非最后一页时，都能定位到【下一页】按钮，以实现不断点击【下一页】按钮进行翻页。同时在当前页为最后一页时，不定位到【下一页】按钮，以结束翻页。这里需要一定的XPath知识。点击查看 <a href="/zh/academy/xpath/getting-started/why-use-xpath" target="_blank" rel="noopener noreferrer">XPath学习与实例教程</a> 。
 
  
 
@@ -187,7 +187,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/LJDdmk"
 
 特别说明：
 
-- a. 【本地采集】是使用自己的电脑进行采集，【云采集】是使用八爪鱼提供的云服务器采集，点击查看 [本地采集与云采集详解](https://www.bazhuayu.com/helpcenter/docs/2xF5Mz)。
+- a. 【本地采集】是使用自己的电脑进行采集，【云采集】是使用八爪鱼提供的云服务器采集，点击查看 <a href="/zh/academy/data-export/start-and-export" target="_blank" rel="noopener noreferrer">本地采集与云采集详解</a>。
 - b. 启动采集后，请保持采集窗口网页显示区域的最大化，如果采集窗口网页显示区域过小，将会产生很多重复数据（因为网页显示区域过小时，非常容易触发重新加载，一重新加载就从第1页开始采集，进而重复采集前几页数据，无法正常翻页）。
 
  

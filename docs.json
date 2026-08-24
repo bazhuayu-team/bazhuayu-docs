@@ -53,7 +53,10 @@
           },
           {
             "tab": "采集学院",
-            "groups": [
+            "menu": [
+              {
+                "item": "图文",
+                "groups": [
               {
                 "group": "概述",
                 "pages": [
@@ -379,6 +382,131 @@
                       "zh/academy/case-studies/finance/guba-stock-comments",
                       "zh/academy/case-studies/finance/cls-finance-briefs",
                       "zh/academy/case-studies/finance/stats-monthly-indicators"
+                    ]
+                  }
+                ]
+              }
+                ]
+              },
+              {
+                "item": "视频",
+                "groups": [
+                  {
+                    "group": "界面介绍",
+                    "pages": [
+                      "zh/academy/video/interface-introduction/software-interface",
+                      "zh/academy/video/interface-introduction/custom-task-editor-interface",
+                      "zh/academy/video/interface-introduction/local-collection-interface"
+                    ]
+                  },
+                  {
+                    "group": "操作指导",
+                    "pages": [
+                      {
+                        "group": "基本采集",
+                        "pages": [
+                          "zh/academy/video/operation-guidance/basic-collection/nnKmj4",
+                          "zh/academy/video/operation-guidance/basic-collection/eeI3gE",
+                          "zh/academy/video/operation-guidance/basic-collection/mtooro",
+                          "zh/academy/video/operation-guidance/basic-collection/RXxvh9",
+                          "zh/academy/video/operation-guidance/basic-collection/AxAPjR",
+                          "zh/academy/video/operation-guidance/basic-collection/PPvZaN",
+                          "zh/academy/video/operation-guidance/basic-collection/kyr90q",
+                          "zh/academy/video/operation-guidance/basic-collection/FQjd1k",
+                          "zh/academy/video/operation-guidance/basic-collection/DgCT5c"
+                        ]
+                      },
+                      {
+                        "group": "循环",
+                        "pages": [
+                          "zh/academy/video/operation-guidance/loop/FnOh8l",
+                          "zh/academy/video/operation-guidance/loop/LGfMnL"
+                        ]
+                      },
+                      {
+                        "group": "Ajax与新标签",
+                        "pages": [
+                          "zh/academy/video/operation-guidance/ajax-and-new-tabs/gBYHKT",
+                          "zh/academy/video/operation-guidance/ajax-and-new-tabs/McMBHy",
+                          "zh/academy/video/operation-guidance/ajax-and-new-tabs/VNUXDW"
+                        ]
+                      },
+                      {
+                        "group": "特殊翻页",
+                        "pages": [
+                          "zh/academy/video/operation-guidance/special-pagination/EuhHoA",
+                          "zh/academy/video/operation-guidance/special-pagination/632Kyf",
+                          "zh/academy/video/operation-guidance/special-pagination/Qkras0"
+                        ]
+                      },
+                      {
+                        "group": "数据格式",
+                        "pages": [
+                          "zh/academy/video/operation-guidance/data-formatting/ohUzyg",
+                          "zh/academy/video/operation-guidance/data-formatting/8IsO0d",
+                          "zh/academy/video/operation-guidance/data-formatting/RclzGh",
+                          "zh/academy/video/operation-guidance/data-formatting/43CIS3",
+                          "zh/academy/video/operation-guidance/data-formatting/Ba0t8y",
+                          "zh/academy/video/operation-guidance/data-formatting/SxJGxi"
+                        ]
+                      },
+                      {
+                        "group": "云采集",
+                        "pages": [
+                          "zh/academy/video/operation-guidance/cloud-collection/UQwI5M",
+                          "zh/academy/video/operation-guidance/cloud-collection/94TVRX",
+                          "zh/academy/video/operation-guidance/cloud-collection/96b1C4"
+                        ]
+                      },
+                      {
+                        "group": "特殊采集",
+                        "pages": [
+                          "zh/academy/video/operation-guidance/special-collection/s3wimX",
+                          "zh/academy/video/operation-guidance/special-collection/5lvvAl",
+                          "zh/academy/video/operation-guidance/special-collection/zVfInA"
+                        ]
+                      },
+                      {
+                        "group": "其他功能点",
+                        "pages": [
+                          "zh/academy/video/operation-guidance/other-features/uODMGl",
+                          "zh/academy/video/operation-guidance/other-features/ypeaRe",
+                          "zh/academy/video/operation-guidance/other-features/AIEmWP",
+                          "zh/academy/video/operation-guidance/other-features/zcHG9D",
+                          "zh/academy/video/operation-guidance/other-features/ACG7OJ"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "group": "问题排查",
+                    "pages": [
+                      "zh/academy/video/troubleshooting/ZGoL4g",
+                      "zh/academy/video/troubleshooting/Yz1QAb",
+                      "zh/academy/video/troubleshooting/YqLshX",
+                      "zh/academy/video/troubleshooting/vrSVmL",
+                      "zh/academy/video/troubleshooting/PfjkIv"
+                    ]
+                  },
+                  {
+                    "group": "操作实践",
+                    "pages": [
+                      "zh/academy/video/practice/Unq8tx",
+                      "zh/academy/video/practice/3xzMDM",
+                      "zh/academy/video/practice/jing-dong-mu-ban-cookie-huo-qu-fang-fa"
+                    ]
+                  },
+                  {
+                    "group": "直播回放",
+                    "pages": [
+                      "zh/academy/video/live-replays/lXmVmK",
+                      "zh/academy/video/live-replays/m0Lz39",
+                      "zh/academy/video/live-replays/1ksPHS",
+                      "zh/academy/video/live-replays/j8rCdl",
+                      "zh/academy/video/live-replays/x5L27t",
+                      "zh/academy/video/live-replays/OyiCS4",
+                      "zh/academy/video/live-replays/bm4y2y",
+                      "zh/academy/video/live-replays/RwYmL6"
                     ]
                   }
                 ]

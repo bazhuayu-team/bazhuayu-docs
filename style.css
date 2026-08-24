@@ -1013,3 +1013,26 @@ h2.m-0.font-normal button span::after {
   .mcp-case-card-image { min-height: 190px; max-height: 230px; }
   .mcp-case-card-body { padding: 1.5rem; }
 }
+
+/* Academy video tutorials use cloud-hosted MP4 files. */
+.video-tutorial-player {
+  width: min(100%, 58rem);
+  margin: 1.5rem 0;
+  overflow: hidden;
+  border: 1px solid #dbe7f5;
+  border-radius: 14px;
+  background: #0f172a;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.12);
+}
+
+.video-tutorial-player video {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #0f172a;
+}
+
+.dark .video-tutorial-player {
+  border-color: #2d4664;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.28);
+}

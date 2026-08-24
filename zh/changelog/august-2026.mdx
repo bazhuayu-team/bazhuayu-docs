@@ -3,6 +3,22 @@ title: 2026 年 8 月更新日志
 description: 2026 年 8 月八爪鱼文档更新，包含 CLI v0.1.33 与 OpenAPI API Key 认证说明。
 ---
 
+# 采集学院视频专区
+
+> **文档同步日期：** 2026 年 8 月 24 日
+
+“采集学院”顶部导航现使用原生菜单区分“图文”和“视频”。视频内容按“界面介绍、操作指导、问题排查、操作实践、直播回放”分层展示；各视频保留独立详情页和云端 HTML5 播放器，无需将视频文件提交到文档仓库。
+
+本轮已迁移视频专区中除 XPath 相关内容以外的现有教程。详情页已移除标题下方的重复教程说明，仅保留视频播放器与返回分类页的链接，使页面阅读更简洁。
+
+# 文档链接审核与跳转修复
+
+> **文档同步日期：** 2026 年 8 月 24 日
+
+中文文档正文中的本站、旧帮助中心和外站链接现统一在新标签页打开，并使用 `noopener noreferrer` 安全属性。旧帮助中心可点击链接已映射至当前文档站的对应教程、视频详情页或已存在的学院入口，不再跳转到旧站；导航、Card、代码示例和 `source` 追溯元数据保持原有行为。
+
+后续可运行 `npm run docs:links:check` 审核链接，运行 `npm run docs:links:fix` 执行修复。映射报告输出至 `reports/document-link-audit.json`，用于复核未能一对一对应的历史教程链接。
+
 # CLI v0.1.33
 
 > **更新日期：** 2026 年 8 月 7 日
@@ -17,7 +33,7 @@ bazhuayu --help
 
 模板市场同步更新：搜索结果按公开 `templateId` 全局去重并在去重后分页，同一模板的多语言记录只保留排序靠前的名称；总数表示唯一模板数量。CLI 参数、帮助和公开 JSON 输出统一使用 `templateId`，新脚本不应再使用 `--template-registration-id`，也不应依赖 `templateRegistrationId`、`status`、`raw` 等内部字段。后端所需的注册 ID 映射由 CLI 在内部处理。
 
-`task list` 新增 `--status`、`--task-type` 和 `--scheduled true|false` 筛选，可与 `--template-id`、关键词和任务组筛选组合使用。相关文档：[CLI 概述](/zh/cli/index)、[安装与验证](/zh/cli/quick-start/installation)、[任务管理](/zh/cli/core-commands/task-management)、[命令速查表](/zh/cli/reference/command-cheatsheet)。
+`task list` 新增 `--status`、`--task-type` 和 `--scheduled true|false` 筛选，可与 `--template-id`、关键词和任务组筛选组合使用。相关文档：<a href="/zh/cli/index" target="_blank" rel="noopener noreferrer">CLI 概述</a>、<a href="/zh/cli/quick-start/installation" target="_blank" rel="noopener noreferrer">安装与验证</a>、<a href="/zh/cli/core-commands/task-management" target="_blank" rel="noopener noreferrer">任务管理</a>、<a href="/zh/cli/reference/command-cheatsheet" target="_blank" rel="noopener noreferrer">命令速查表</a>。
 
 # OpenAPI 支持 API Key 认证
 
@@ -27,4 +43,4 @@ OpenAPI 业务接口现补充 API Key 授权说明。调用时在请求头中传
 
 交互式 OpenAPI 界面现声明 `x-api-key` 的 API-key security scheme，并保留既有 Access Token 作为兼容认证方式。每个请求只需选择其中一种，不要把 API Key 写成 Bearer Token，也不要将真实密钥提交到代码、截图或日志中。
 
-相关文档：[OpenAPI 概述](/zh/api-reference/intro)、[认证](/zh/api-reference/authentication)、[获取 API Key](/zh/mcp/quick-start/api-key)
+相关文档：<a href="/zh/api-reference/intro" target="_blank" rel="noopener noreferrer">OpenAPI 概述</a>、<a href="/zh/api-reference/authentication" target="_blank" rel="noopener noreferrer">认证</a>、<a href="/zh/mcp/quick-start/api-key" target="_blank" rel="noopener noreferrer">获取 API Key</a>

@@ -9,9 +9,9 @@ description: 通过详情页和列表页两个实例，讲解如何修改字段�
 
 请注意，本教程需要一定的XPath知识和相对XPath知识，建议在学习XPath和相对XPath后，再看本教程。
 
-<a href="https://www.bazhuayu.com/docs/zh/academy/xpath/getting-started/why-use-xpath">xpath入门</a>
+<a href="/zh/academy/xpath/getting-started/why-use-xpath" target="_blank" rel="noopener noreferrer">xpath入门</a>
 
-<a href="https://www.bazhuayu.com/docs/zh/academy/xpath/relative-absolute-xpath">相对XPath：绝对xpath、相对XPath学习与实例</a>
+<a href="/zh/academy/xpath/relative-absolute-xpath" target="_blank" rel="noopener noreferrer">相对XPath：绝对xpath、相对XPath学习与实例</a>
 
 提取数据一般分为2种情况，一种提取详情页数据，一种是提取列表页数据，两种都可能存在漏字段、字段错位的情况，以下将具体说明。
 
@@ -89,13 +89,13 @@ Step2：排查字段错位的原因
   <img src="/assets/academy/xpath/modify-element/locate-element/65bafb0493127.png" />
 </div>
 
-根据 <a href="https://www.bazhuayu.com/docs/zh/academy/xpath/relative-absolute-xpath">相对XPath</a> 中的知识，【地区】字段的定位XPath为：//LI[@class='comment-item']/div[2]/h3[1]/span[2]/span[1]，将其复制到浏览器控制台中，发现有一些地区字段没有定位到。
+根据 <a href="/zh/academy/xpath/relative-absolute-xpath" target="_blank" rel="noopener noreferrer">相对XPath</a> 中的知识，【地区】字段的定位XPath为：//LI[@class='comment-item']/div[2]/h3[1]/span[2]/span[1]，将其复制到浏览器控制台中，发现有一些地区字段没有定位到。
 
 <div style={{ textAlign: "center" }}>
   <img src="/assets/academy/xpath/modify-element/locate-element/65bafb6e8df7f.png" />
 </div>
 
-什么是【相对于循环里的XPath】？我们在 <a href="https://www.bazhuayu.com/docs/zh/academy/xpath/relative-absolute-xpath">相对XPath</a> 教程中有详细讲解。提取列表页数据都会用到相对XPath知识，建议掌握。
+什么是【相对于循环里的XPath】？我们在 <a href="/zh/academy/xpath/relative-absolute-xpath" target="_blank" rel="noopener noreferrer">相对XPath</a> 教程中有详细讲解。提取列表页数据都会用到相对XPath知识，建议掌握。
 
 Step3：修改XPath，定位到所有列表中的【地区】字段。观察源码特征，地区字段都为最后一个span标签，根据这个特征，可以写一条定位XPath：//LI[@class='comment-item']/div[2]/h3[1]/span[2]/span[last()] 。last()函数的意思是定位最后1个，在XPath教程中有详细说明。
 

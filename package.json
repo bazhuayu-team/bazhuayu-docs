@@ -8,7 +8,10 @@
     "kb:review:test": "node --test scripts/test/**/*.test.mjs",
     "kb:mcp:check": "node scripts/check-mcp-protocol-version.mjs",
     "kb:agent": "node services/kb-agent/server.mjs",
-    "kb:agent:test": "node --test services/kb-agent/test/**/*.test.mjs"
+    "kb:agent:test": "node --test services/kb-agent/test/**/*.test.mjs",
+    "docs:links:check": "node scripts/audit-document-links.mjs",
+    "docs:links:fix": "node scripts/audit-document-links.mjs --write",
+    "docs:links:repair": "node scripts/audit-document-links.mjs --repair-report"
   },
   "dependencies": {
     "mintlify": "^4.2.571"

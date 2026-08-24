@@ -114,7 +114,7 @@ java.sql.SQLException: Incorrect string value: '\xF0\x9F\x92\xAA",...' for colum
 
 问题原因：由提示可知，插入的字段里面包含emoji表情符。基本可以判定是字符编码的问题。我们的数据库里面使用的是utf8编码，普通的字符串或者表情都是占位3个字节，所以utf8足够用了，但是移动端的表情符号占位是4个字节，普通的utf8就不够用了，为了避免 emoji 表情符号带来的问题、涉及无线相关的 MySQL 数据库建议都提前采用utf8mb4 字符集。
 
-解决方法参考链接：<a href="https://www.cnblogs.com/janehoo/archive/2016/04/06/5359800.html" target="_blank" rel="noopener">https://www.cnblogs.com/janehoo/archive/2016/04/06/5359800.html</a>
+解决方法参考链接：<a href="https://www.cnblogs.com/janehoo/archive/2016/04/06/5359800.html" target="_blank" rel="noopener noreferrer">https://www.cnblogs.com/janehoo/archive/2016/04/06/5359800.html</a>
 
 解决方法：更换字符集utf8-->utf8mb4，数据库和数据表字段都要同时修改。
 
@@ -130,7 +130,7 @@ java.sql.SQLException: Incorrect string value: '\xF0\x9F\x92\xAA",...' for colum
 
 解决方法：将每批导出"1000"条改为100或10条，若无法导出正常，判断是数据库的问题参考以下链接修改数据库的参数：
 
-<a href="https://www.cnblogs.com/clnchanpin/p/6882001.html" target="_blank" rel="noopener">https://www.cnblogs.com/clnchanpin/p/6882001.html</a>
+<a href="https://www.cnblogs.com/clnchanpin/p/6882001.html" target="_blank" rel="noopener noreferrer">https://www.cnblogs.com/clnchanpin/p/6882001.html</a>
 
 ### 5、导出数据提示：获取数据遇到网络故障，第[retryCount]次失败，read ECONNRESET
 
