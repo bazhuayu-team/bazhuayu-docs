@@ -1,0 +1,124 @@
+---
+title: DataHub
+description: 了解 DataHub 如何将数据能力封装为标准化 Data App，供 AI Agent、业务系统和用户按需发现、体验与调用。
+---
+
+DataHub 是八爪鱼面向 AI 与业务场景的数据能力平台。它将采集模板、采集脚本、存量数据库、第三方数据接口和数据处理程序统一封装为标准化的 **Data App**，让人可以在线体验，让 Agent 和业务系统能够按需发现、理解并调用数据能力。
+
+<Card title="浏览 Data App 市场" href="https://www.bazhuayu.com/data-hub">
+  查看已上线的 Data App，按能力、行业、平台和内容类型寻找适合的服务。
+</Card>
+
+## 为什么需要 DataHub
+
+过去，数据产品主要服务于人：浏览网站、下载报表、整理结果。现在，AI Agent 也需要直接使用外部数据。它们需要的不是人工阅读后再转述的页面，而是能够被机器理解、结构化调用和按量计费的数据服务。
+
+DataHub 从这一变化出发设计：人可以用，Agent 更好用。使用者无需为每一个数据源单独寻找供应商、编写采集脚本或适配不同接口；数据能力以统一方式被发现和调用。
+
+## DataHub 如何工作
+
+<img src="/assets/datahub/standardized-data-app-flow.png" alt="不同数据来源经标准化封装为 Data App，再通过网站门户、API、MCP 或 SDK 服务于 Agent、业务系统和用户" />
+
+无论底层来自网页采集、已有数据集、第三方接口还是数据清洗程序，DataHub 都以 Data App 作为统一产品形态。数据能力可以持续增加，而使用者的接入方式保持稳定。
+
+## 什么是 Data App
+
+Data App 是 DataHub 上可被发现和调用的一项数据能力，可以理解为平台上的“商品”。例如，按关键词获取新闻内容、查询商品评论、获取视频详情，或对文本做数据处理，都可以被封装为一个 Data App。
+
+<img src="/assets/datahub/data-app-anatomy.png" alt="Data App 包含发布者和应用名、机器可读说明、输入输出字段、公开价格与在线体验入口" />
+
+| 要素 | 说明 |
+| --- | --- |
+| **发布者 / 应用名** | Data App 的唯一标识，便于定位具体能力与提供方。 |
+| **机器可读说明** | 描述用途、输入参数、输出字段和使用边界，供 Agent 或系统理解。 |
+| **标准输入输出** | 以结构化参数发起调用，并获得结构化结果。 |
+| **在线体验** | 登录后可先试跑真实数据，确认效果后再接入流程。 |
+| **公开价格** | 在详情页展示计费规则，按应用实际使用情况结算。 |
+
+## 面向谁
+
+<CardGroup cols={2}>
+  <Card title="数据使用者">
+    AI 应用与 Agent 团队、企业数据分析、市场、电商运营，以及需要将外部数据接入业务系统的技术团队。找到合适能力后，可在线体验，再按自己的工作流接入。
+  </Card>
+  <Card title="数据开发者">
+    平台官方数据团队，或拥有数据资源、采集能力和处理能力的开发者或企业。可将能力封装为 Data App，按平台规则发布、定价并服务使用者。
+  </Card>
+</CardGroup>
+
+平台通过发布与可见性管理、内容治理和分类维护保障市场中 Data App 的质量与可用性。
+
+## 典型使用场景
+
+<CardGroup cols={2}>
+  <Card title="公开商品价格监测">
+    定期获取竞品价格和促销信息，接入企业自己的比价看板或分析流程。
+  </Card>
+  <Card title="内容趋势分析">
+    获取社交平台的话题、账号和内容数据，辅助舆情、热点与营销研究。
+  </Card>
+  <Card title="招投标信息整理">
+    自动汇集目标行业的招投标公告，帮助销售和业务团队及时发现商机。
+  </Card>
+  <Card title="招聘市场研究">
+    获取职位发布等公开数据，用于人才供需和行业趋势分析。
+  </Card>
+  <Card title="周期性经营报表">
+    将外部数据接入固定报表流程，减少人工搜索、复制和粘贴。
+  </Card>
+  <Card title="AI 应用的数据工具">
+    将 Data App 接入 AI 助手或 Agent，使其在对话和自动化任务中直接使用数据。
+  </Card>
+</CardGroup>
+
+## 四种接入方式
+
+<img src="/assets/datahub/datahub-access-methods.png" alt="DataHub 支持网站门户、API、MCP 和 SDK 四种接入方式" />
+
+<CardGroup cols={2}>
+  <Card title="网站门户" href="/zh/datahub/getting-started#在线使用-data-app">
+    适合评估和试用。浏览市场、查看详情、在线运行后在控制台查看或导出结果。
+  </Card>
+  <Card title="API">
+    适合有研发能力的团队，以 API 密钥和标准接口将数据接入业务系统与数据管道。
+  </Card>
+  <Card title="MCP" href="/zh/datahub/getting-started#通过-mcp-接入-agent">
+    适合使用 AI 助手与 Agent 的用户。可按教程将单个或多个 Data App 接入支持 MCP 的客户端。
+  </Card>
+  <Card title="SDK">
+    适合开发者快速集成，以官方 SDK 调用能力并处理分页取数等常见流程。
+  </Card>
+</CardGroup>
+
+四种方式使用同一账号体系和同一套 Data App 能力，选择取决于你的工作流，而不是数据能力本身。
+
+## 按量计费
+
+DataHub 采用按量结算：可以先浏览和体验，实际调用后再按 Data App 详情页公开的规则计费。不同应用的价格由发布者设定，常见计费方式包括：
+
+- **起步价**：每次提交任务收取固定费用，与返回条数无关。
+- **按条计费**：按成功返回的数据条数结算；也可以按固定条数打包为一个计费单位。
+- **自定义单位**：针对特定能力按适合的单位计费，例如分钟音频。
+
+任务失败不产生数据费用；部分成功则按实际成功返回的数据结算。费用从账户余额中扣除，余额不足时会阻止新的调用；使用者可在开放平台控制台核对用量与账单。
+
+## 从这里开始
+
+<Steps>
+  <Step title="明确数据范围">
+    确认要解决的业务问题、目标来源、字段和更新频率。
+  </Step>
+  <Step title="选择 Data App">
+    在 <a href="https://www.bazhuayu.com/data-hub" target="_blank" rel="noopener noreferrer">Data Hub 市场</a> 搜索并查看能力说明、输入输出和价格。
+  </Step>
+  <Step title="在线试跑">
+    登录后填入参数运行，先确认返回数据是否符合预期。
+  </Step>
+  <Step title="接入下游流程">
+    根据团队习惯，通过网站门户、API、MCP 或 SDK 将数据接入后续工作流。
+  </Step>
+</Steps>
+
+<Note>
+  DataHub 是数据能力市场；现有 MCP 服务中的“数据中心”内容搜索是另一类具体能力。需要了解数据中心的存量内容检索，请前往 <a href="/zh/mcp/index" target="_blank" rel="noopener noreferrer">MCP 服务</a>；需要接入 Data App，请参阅 <a href="/zh/datahub/getting-started" target="_blank" rel="noopener noreferrer">DataHub 新手入门</a>。
+</Note>

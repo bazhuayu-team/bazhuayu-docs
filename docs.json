@@ -514,6 +514,23 @@
             ]
           },
           {
+            "tab": "DataHub",
+            "groups": [
+              {
+                "group": "概述",
+                "pages": [
+                  "zh/datahub/index"
+                ]
+              },
+              {
+                "group": "快速入门",
+                "pages": [
+                  "zh/datahub/getting-started"
+                ]
+              }
+            ]
+          },
+          {
             "tab": "MCP 服务",
             "groups": [
               {

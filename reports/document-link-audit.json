@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-08-24T03:37:16.522Z",
-  "mode": "repair-report",
-  "filesScanned": 856,
-  "changedFiles": 17,
+  "generatedAt": "2026-08-26T07:53:07.043Z",
+  "mode": "write",
+  "filesScanned": 858,
+  "changedFiles": 2,
   "converted": {
     "currentDocs": 0,
     "oldHelpCenter": 0,
-    "external": 544,
-    "internalRelative": 1049
+    "external": 547,
+    "internalRelative": 1054
   },
   "oldHelpCenter": {
     "uniqueUrls": 24,
@@ -21,6 +21,5 @@
     },
     "nonExactMappings": [],
     "mappings": []
-  },
-  "repairedFiles": 0
+  }
 }

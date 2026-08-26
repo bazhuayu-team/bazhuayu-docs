@@ -1,0 +1,191 @@
+---
+title: DataHub 新手入门
+description: 从登录 DataHub、在线体验 Data App，到通过 MCP 将单个或多个 Data App 接入 AI Agent。
+---
+
+本教程面向第一次使用 DataHub 的用户。完成后，你可以先在网页中验证一个 Data App 的输入和输出，再根据需要将单个或多个 Data App 接入支持 MCP 的 AI Agent。
+
+<CardGroup cols={2}>
+  <Card title="在线体验 Data App" href="#在线使用-data-app">
+    不需要编写代码，适合先确认数据范围、字段和结果质量。
+  </Card>
+  <Card title="接入 AI Agent" href="#通过-mcp-接入-agent">
+    使用 MCP 将 Data App 连接到 WorkBuddy、QClaw、Codex、Claude Code、Cursor 等兼容客户端。
+  </Card>
+</CardGroup>
+
+## 开始前
+
+请准备好以下内容：
+
+- 一个可正常登录的八爪鱼账号。
+- 需要验证的数据目标，例如平台、关键词、商品或内容链接。
+- 如需通过 MCP 接入 Agent，请确认客户端支持 Streamable HTTP MCP，并准备一个在用户中心生成的 API Key。
+
+<Info>
+  仅在使用 MCP、API 或 SDK 等外部调用方式时需要 API Key。只在 DataHub 网页中在线体验 Data App，不需要单独配置 API Key。
+</Info>
+
+## 访问并登录 DataHub
+
+<Steps>
+  <Step title="打开 Data Hub 市场">
+    访问 <a href="https://www.bazhuayu.com/data-hub" target="_blank" rel="noopener noreferrer">Data Hub 市场</a>。你可以通过搜索和分类筛选查找所需的数据能力；市场中的应用数量、分类和价格会持续更新，请以页面实时信息为准。
+
+    <img src="/assets/datahub/getting-started/open-datahub-market.png" alt="打开 Data Hub 市场并浏览 Data App" width="820" />
+  </Step>
+  <Step title="登录八爪鱼账号">
+    点击页面右上角的账号入口，使用手机号、密码或页面提供的其他方式登录。登录后才能提交在线体验、查看运行结果，以及进入开放平台管理 API Key 和 MCP 连接。
+
+    <img src="/assets/datahub/getting-started/sign-in-to-account.png" alt="登录八爪鱼账号" width="560" />
+  </Step>
+</Steps>
+
+## 在线使用 Data App
+
+网页在线体验适合第一次验证 Data App。建议先确认应用是否覆盖你的目标平台、输入参数和输出字段，再提交少量数据试跑。
+
+<Steps>
+  <Step title="选择 Data App">
+    在市场中点击符合目标的 Data App。不要只根据应用名称判断，进入详情页后还需要核对数据说明和适用范围。
+
+    <img src="/assets/datahub/getting-started/select-data-app.png" alt="在 Data Hub 市场选择一个 Data App" width="820" />
+  </Step>
+  <Step title="阅读能力说明">
+    依次查看“概览”“输入参数”“输出数据”“调用方式”和“价格”。重点确认数据来源与时效、必填参数、返回字段、单次调用限制和计费单位，避免在不符合预期时直接批量运行。
+
+    <img src="/assets/datahub/getting-started/review-data-app-details.png" alt="查看 Data App 的能力、输入输出和价格说明" width="780" />
+  </Step>
+  <Step title="填写参数并提交运行">
+    点击“立即体验”，按照表单提示填写参数。带星号的字段为必填项；列表、分页或数量参数应遵循页面给出的格式和上限。首次使用建议从较小范围开始，确认无误后再扩大数据量。
+
+    <img src="/assets/datahub/getting-started/run-data-app-online.png" alt="填写 Data App 参数并提交运行" width="760" />
+  </Step>
+  <Step title="检查运行结果">
+    等待任务完成后，在页面查看表格或 JSON 结果。先核对运行状态、返回条数和关键字段；确认结果符合预期后，再按页面支持的格式导出或进入下一步接入。
+
+    <img src="/assets/datahub/getting-started/review-online-results.png" alt="查看 Data App 在线运行结果" width="760" />
+  </Step>
+</Steps>
+
+<Tip>
+  在线体验成功，只代表当前输入能够正常返回结果。正式接入业务流程前，还应使用接近真实场景的参数验证边界情况、数据完整性和实际费用。
+</Tip>
+
+## 通过 MCP 接入 Agent
+
+DataHub 提供两种常见的 MCP 接入范围：
+
+| 接入方式 | 适合场景 | 特点 |
+| --- | --- | --- |
+| 单个 Data App | 目标明确、只需一种数据能力 | 工具范围更小，便于控制 Agent 的调用边界 |
+| 多个 Data App 组合 | 同一工作流需要多种数据能力 | 使用一个 MCP 连接管理多个已选 Data App |
+
+<Warning>
+  API Key 属于敏感凭证。只应在可信客户端的本地配置或安全凭证输入框中使用，不要写入公开文档、共享聊天记录或代码仓库。生成新的 Key 后请立即妥善保存；怀疑泄露时应及时禁用并重新生成。
+</Warning>
+
+### 接入单个 Data App
+
+<Steps>
+  <Step title="打开调用方式">
+    在 Data App 详情页切换到“调用方式”，再选择“MCP”。你也可以在详情页右侧“支持的调用方式”中点击 MCP 快速进入。
+
+    <img src="/assets/datahub/getting-started/open-data-app-call-methods.png" alt="在 Data App 详情页打开 MCP 调用方式" width="760" />
+
+    <img src="/assets/datahub/getting-started/open-mcp-from-app-sidebar.png" alt="从 Data App 侧栏进入 MCP 调用方式" width="360" />
+  </Step>
+  <Step title="选择客户端并复制安装提示词">
+    页面会按客户端提供配置示例。对于支持自行修改本地配置的 Agent，可以点击“复制安装提示词”，让 Agent 按当前 Data App 的服务地址和工具范围完成配置。执行前应确认客户端可信，并检查提示词中的服务域名和应用名称。
+
+    <img src="/assets/datahub/getting-started/copy-agent-install-prompt.png" alt="复制单个 Data App 的 Agent 安装提示词" width="700" />
+  </Step>
+  <Step title="把提示词发送给 Agent">
+    将提示词粘贴到 Agent 对话中。Agent 通常会先检查 MCP 配置文件，再向你索取 API Key。允许它修改配置前，请确认目标是当前客户端的本地 MCP 配置，而不是项目中的共享代码文件。
+
+    <img src="/assets/datahub/getting-started/paste-install-prompt-into-agent.png" alt="将 DataHub MCP 安装提示词发送给 Agent" width="760" />
+  </Step>
+  <Step title="提供 API Key">
+    在 Agent 明确请求凭证后，通过客户端提供的敏感信息输入方式填写 API Key。获取方法请参阅 <a href="/zh/mcp/quick-start/api-key" target="_blank" rel="noopener noreferrer">获取 API Key</a>；也可以点击 Data App 调用方式页面中的“查看我的 API Key”进入管理页。
+
+    <img src="/assets/datahub/getting-started/provide-api-key-to-agent.png" alt="通过安全输入框向 Agent 提供 DataHub API Key" width="720" />
+
+    <img src="/assets/datahub/getting-started/create-datahub-api-key.png" alt="在用户中心创建 DataHub API Key" width="760" />
+  </Step>
+  <Step title="重新加载客户端并信任连接器">
+    配置完成后，按客户端提示重新启动或重新加载 MCP 服务。WorkBuddy 等客户端可能还会要求启用并信任连接器；请核对连接器名称和服务地址后再授权。
+
+    <img src="/assets/datahub/getting-started/trust-workbuddy-connector.png" alt="在 WorkBuddy 中启用并信任 DataHub MCP 连接器" width="760" />
+  </Step>
+  <Step title="用真实问题验证结果">
+    向 Agent 提出一个范围清晰的问题，并提供 Data App 所需的参数。成功时，Agent 应能调用对应工具并返回结构化结果；如果只回复文字而没有工具调用，请检查客户端是否已加载新连接、API Key 是否有效，以及参数是否满足应用要求。
+
+    <img src="/assets/datahub/getting-started/verify-agent-data-result.png" alt="Agent 调用 Data App 后返回结构化数据结果" width="760" />
+  </Step>
+</Steps>
+
+<Note>
+  DataHub MCP 使用的是用户中心生成的 **API Key**。当平台生成的配置显示 `Authorization: Bearer &lt;YOUR_API_KEY&gt;` 时，`Bearer` 是请求头中的传递格式，凭证本身仍是 API Key，不代表使用 OAuth 登录。请以当前 Data App 页面生成的配置为准。
+</Note>
+
+### 组合接入多个 Data App
+
+当一个 Agent 需要同时使用多个 Data App 时，可以在开放平台建立自定义工具集。这样只需维护一个 MCP 连接，所选 Data App 会作为同一连接下的工具提供给 Agent。
+
+<Steps>
+  <Step title="进入 Data Hub 开放平台">
+    在官网顶部 Data Hub 菜单中打开“Data Hub 开放平台”，然后在左侧选择“MCP 连接”。
+
+    <img src="/assets/datahub/getting-started/open-datahub-platform.png" alt="从官网进入 Data Hub 开放平台" width="820" />
+
+    <img src="/assets/datahub/getting-started/open-mcp-connections.png" alt="在 Data Hub 开放平台打开 MCP 连接" width="820" />
+  </Step>
+  <Step title="添加所需 Data App">
+    在“自定义工具集”中点击“添加 App”，只选择当前工作流真正需要的能力。工具过多会增加 Agent 选择工具的难度，也会让权限范围更难审查。
+
+    <img src="/assets/datahub/getting-started/add-data-app-to-toolset.png" alt="向 DataHub MCP 自定义工具集添加 Data App" width="780" />
+
+    <Tip>
+      也可以从任一 Data App 的“调用方式”页面点击“MCP 连接”，跳转到开放平台继续组合配置。
+    </Tip>
+
+    <img src="/assets/datahub/getting-started/jump-to-mcp-toolset.png" alt="从 Data App 调用方式跳转到 MCP 连接配置" width="700" />
+  </Step>
+  <Step title="确认工具集并复制提示词">
+    核对已选 Data App 是否与业务目标一致，然后选择客户端并复制安装提示词。以后增加或移除 App 时，应重新检查开放平台生成的服务地址和客户端配置，确保工具范围已经同步。
+
+    <img src="/assets/datahub/getting-started/copy-multi-app-install-prompt.png" alt="确认多个 Data App 并复制 MCP 安装提示词" width="780" />
+  </Step>
+  <Step title="交给 Agent 完成配置">
+    将提示词发送给 Agent，按前述方式提供 API Key、重新加载客户端并完成连接器信任。配置后可以先让 Agent 列出当前可用的数据能力，再分别执行一次小范围调用，确认多个 App 都能被正确发现。
+
+    <img src="/assets/datahub/getting-started/verify-multi-app-install-prompt.png" alt="向 Agent 发送包含多个 Data App 的 MCP 安装提示词" width="720" />
+  </Step>
+</Steps>
+
+## 常见问题
+
+<AccordionGroup>
+  <Accordion title="Agent 提示配置成功，但看不到新工具">
+    先重新启动或重新加载客户端，再检查 MCP 连接是否启用。对于带连接器信任机制的客户端，还需要手动授权。若仍不可用，请核对服务地址、API Key 和配置文件位置。
+  </Accordion>
+  <Accordion title="Agent 能看到工具，但调用失败">
+    先在网页“立即体验”中用相同参数试跑。如果网页也失败，优先检查必填参数、格式和数据范围；如果网页成功而 Agent 失败，再检查 API Key、客户端日志和 MCP 服务地址。
+  </Accordion>
+  <Accordion title="添加了新的 Data App，但 Agent 仍只能使用旧工具">
+    回到开放平台确认自定义工具集已经保存，再按页面当前生成的配置更新客户端并重新加载。不要假设客户端会自动同步工具范围。
+  </Accordion>
+  <Accordion title="应该选择单 App 还是多 App 连接">
+    目标固定、权限边界清晰时优先使用单 App；同一流程确实需要多种能力时再建立组合连接。这样更容易排错，也更便于审查 Agent 能调用的工具范围。
+  </Accordion>
+</AccordionGroup>
+
+## 完成检查
+
+接入完成后，建议逐项确认：
+
+- 网页在线体验能够使用同一组核心参数返回预期结果。
+- 客户端中的 MCP 连接已启用，服务地址来自 DataHub 当前页面。
+- API Key 只保存在可信的本地配置或凭证存储中。
+- Agent 能识别正确的 Data App，并在调用时传入完整参数。
+- 多 App 连接的工具范围与开放平台中已选的 App 一致。
