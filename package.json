@@ -11,7 +11,10 @@
     "kb:agent:test": "node --test services/kb-agent/test/**/*.test.mjs",
     "docs:links:check": "node scripts/audit-document-links.mjs",
     "docs:links:fix": "node scripts/audit-document-links.mjs --write",
-    "docs:links:repair": "node scripts/audit-document-links.mjs --repair-report"
+    "docs:links:repair": "node scripts/audit-document-links.mjs --repair-report",
+    "docs:media:check": "node scripts/optimize-doc-media.mjs",
+    "docs:media:normalize": "node scripts/optimize-doc-media.mjs --normalize",
+    "docs:media:optimize": "node scripts/optimize-doc-media.mjs --write"
   },
   "dependencies": {
     "mintlify": "^4.2.571"

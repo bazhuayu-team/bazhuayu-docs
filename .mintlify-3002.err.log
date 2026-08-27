@@ -1,0 +1,262 @@
+[ResponseAborted: ]
+
+ ⨯ Error: No docs config
+    at o (C:\Users\16934\.mintlify\mint\apps\client\.next\server\app\(local)\[[...slug]]\page.js:2:15645) {
+  digest: '169043468'
+}
+ ⨯ Error: No docs config
+    at o (C:\Users\16934\.mintlify\mint\apps\client\.next\server\app\(local)\[[...slug]]\page.js:2:15645) {
+  digest: '169043468'
+}
+ ⨯ Error: No docs config
+    at o (C:\Users\16934\.mintlify\mint\apps\client\.next\server\app\(local)\[[...slug]]\page.js:2:15645) {
+  digest: '169043468'
+}
+ ⨯ Error: No docs config
+    at o (C:\Users\16934\.mintlify\mint\apps\client\.next\server\app\(local)\[[...slug]]\page.js:2:15645) {
+  digest: '169043468'
+}
+ ⨯ Error: No docs config
+    at o (C:\Users\16934\.mintlify\mint\apps\client\.next\server\app\(local)\[[...slug]]\page.js:2:15645) {
+  digest: '169043468'
+}
+ ⨯ Error: No docs config
+    at o (C:\Users\16934\.mintlify\mint\apps\client\.next\server\app\(local)\[[...slug]]\page.js:2:15645) {
+  digest: '169043468'
+}
+ ⨯ Error: No docs config
+    at o (C:\Users\16934\.mintlify\mint\apps\client\.next\server\app\(local)\[[...slug]]\page.js:2:15645) {
+  digest: '169043468'
+}
+ ⨯ Error: No docs config
+    at o (C:\Users\16934\.mintlify\mint\apps\client\.next\server\app\(local)\[[...slug]]\page.js:2:15645) {
+  digest: '169043468'
+}
+[Error: EBUSY: resource busy or locked, watch 'D:\AI\yangskieer-bazhuayu-docs-https-github-com\bazhuayu-docs\assets\academy\basic-collection\local-collection\16-6a3b4e0595a36.png'] {
+  errno: -4082,
+  syscall: 'watch',
+  code: 'EBUSY',
+  path: 'D:\\AI\\yangskieer-bazhuayu-docs-https-github-com\\bazhuayu-docs\\assets\\academy\\basic-collection\\local-collection\\16-6a3b4e0595a36.png',
+  filename: 'D:\\AI\\yangskieer-bazhuayu-docs-https-github-com\\bazhuayu-docs\\assets\\academy\\basic-collection\\local-collection\\16-6a3b4e0595a36.png'
+}
+ ⨯ unhandledRejection:  [Error: EBUSY: resource busy or locked, watch 'D:\AI\yangskieer-bazhuayu-docs-https-github-com\bazhuayu-docs\assets\academy\basic-collection\local-collection\16-6a3b4e0595a36.png'] {
+  errno: -4082,
+  syscall: 'watch',
+  code: 'EBUSY',
+  path: 'D:\\AI\\yangskieer-bazhuayu-docs-https-github-com\\bazhuayu-docs\\assets\\academy\\basic-collection\\local-collection\\16-6a3b4e0595a36.png',
+  filename: 'D:\\AI\\yangskieer-bazhuayu-docs-https-github-com\\bazhuayu-docs\\assets\\academy\\basic-collection\\local-collection\\16-6a3b4e0595a36.png'
+}
+[Error: EBUSY: resource busy or locked, watch 'D:\AI\yangskieer-bazhuayu-docs-https-github-com\bazhuayu-docs\assets\academy\basic-collection\local-collection\17-6a3b5467381e2.png'] {
+  errno: -4082,
+  syscall: 'watch',
+  code: 'EBUSY',
+  path: 'D:\\AI\\yangskieer-bazhuayu-docs-https-github-com\\bazhuayu-docs\\assets\\academy\\basic-collection\\local-collection\\17-6a3b5467381e2.png',
+  filename: 'D:\\AI\\yangskieer-bazhuayu-docs-https-github-com\\bazhuayu-docs\\assets\\academy\\basic-collection\\local-collection\\17-6a3b5467381e2.png'
+}
+ ⨯ unhandledRejection:  [Error: EBUSY: resource busy or locked, watch 'D:\AI\yangskieer-bazhuayu-docs-https-github-com\bazhuayu-docs\assets\academy\basic-collection\local-collection\17-6a3b5467381e2.png'] {
+  errno: -4082,
+  syscall: 'watch',
+  code: 'EBUSY',
+  path: 'D:\\AI\\yangskieer-bazhuayu-docs-https-github-com\\bazhuayu-docs\\assets\\academy\\basic-collection\\local-collection\\17-6a3b5467381e2.png',
+  filename: 'D:\\AI\\yangskieer-bazhuayu-docs-https-github-com\\bazhuayu-docs\\assets\\academy\\basic-collection\\local-collection\\17-6a3b5467381e2.png'
+}
+[Error: EBUSY: resource busy or locked, watch 'D:\AI\yangskieer-bazhuayu-docs-https-github-com\bazhuayu-docs\assets\academy\basic-collection\local-collection\18-6a3b54705525f.png'] {
+  errno: -4082,
+  syscall: 'watch',
+  code: 'EBUSY',
+  path: 'D:\\AI\\yangskieer-bazhuayu-docs-https-github-com\\bazhuayu-docs\\assets\\academy\\basic-collection\\local-collection\\18-6a3b54705525f.png',
+  filename: 'D:\\AI\\yangskieer-bazhuayu-docs-https-github-com\\bazhuayu-docs\\assets\\academy\\basic-collection\\local-collection\\18-6a3b54705525f.png'
+}
+ ⨯ unhandledRejection:  [Error: EBUSY: resource busy or locked, watch 'D:\AI\yangskieer-bazhuayu-docs-https-github-com\bazhuayu-docs\assets\academy\basic-collection\local-collection\18-6a3b54705525f.png'] {
+  errno: -4082,
+  syscall: 'watch',
+  code: 'EBUSY',
+  path: 'D:\\AI\\yangskieer-bazhuayu-docs-https-github-com\\bazhuayu-docs\\assets\\academy\\basic-collection\\local-collection\\18-6a3b54705525f.png',
+  filename: 'D:\\AI\\yangskieer-bazhuayu-docs-https-github-com\\bazhuayu-docs\\assets\\academy\\basic-collection\\local-collection\\18-6a3b54705525f.png'
+}
+[Error: EBUSY: resource busy or locked, watch 'D:\AI\yangskieer-bazhuayu-docs-https-github-com\bazhuayu-docs\assets\academy\basic-collection\local-collection\19-6a3b5d4641ce9.png'] {
+  errno: -4082,
+  syscall: 'watch',
+  code: 'EBUSY',
+  path: 'D:\\AI\\yangskieer-bazhuayu-docs-https-github-com\\bazhuayu-docs\\assets\\academy\\basic-collection\\local-collection\\19-6a3b5d4641ce9.png',
+  filename: 'D:\\AI\\yangskieer-bazhuayu-docs-https-github-com\\bazhuayu-docs\\assets\\academy\\basic-collection\\local-collection\\19-6a3b5d4641ce9.png'
+}
+ ⨯ unhandledRejection:  [Error: EBUSY: resource busy or locked, watch 'D:\AI\yangskieer-bazhuayu-docs-https-github-com\bazhuayu-docs\assets\academy\basic-collection\local-collection\19-6a3b5d4641ce9.png'] {
+  errno: -4082,
+  syscall: 'watch',
+  code: 'EBUSY',
+  path: 'D:\\AI\\yangskieer-bazhuayu-docs-https-github-com\\bazhuayu-docs\\assets\\academy\\basic-collection\\local-collection\\19-6a3b5d4641ce9.png',
+  filename: 'D:\\AI\\yangskieer-bazhuayu-docs-https-github-com\\bazhuayu-docs\\assets\\academy\\basic-collection\\local-collection\\19-6a3b5d4641ce9.png'
+}
+[Error: EBUSY: resource busy or locked, watch 'D:\AI\yangskieer-bazhuayu-docs-https-github-com\bazhuayu-docs\assets\academy\basic-collection\local-collection\20-6a3b548f82f72.png'] {
+  errno: -4082,
+  syscall: 'watch',
+  code: 'EBUSY',
+  path: 'D:\\AI\\yangskieer-bazhuayu-docs-https-github-com\\bazhuayu-docs\\assets\\academy\\basic-collection\\local-collection\\20-6a3b548f82f72.png',
+  filename: 'D:\\AI\\yangskieer-bazhuayu-docs-https-github-com\\bazhuayu-docs\\assets\\academy\\basic-collection\\local-collection\\20-6a3b548f82f72.png'
+}
+ ⨯ unhandledRejection:  [Error: EBUSY: resource busy or locked, watch 'D:\AI\yangskieer-bazhuayu-docs-https-github-com\bazhuayu-docs\assets\academy\basic-collection\local-collection\20-6a3b548f82f72.png'] {
+  errno: -4082,
+  syscall: 'watch',
+  code: 'EBUSY',
+  path: 'D:\\AI\\yangskieer-bazhuayu-docs-https-github-com\\bazhuayu-docs\\assets\\academy\\basic-collection\\local-collection\\20-6a3b548f82f72.png',
+  filename: 'D:\\AI\\yangskieer-bazhuayu-docs-https-github-com\\bazhuayu-docs\\assets\\academy\\basic-collection\\local-collection\\20-6a3b548f82f72.png'
+}
+[Error: EBUSY: resource busy or locked, watch 'D:\AI\yangskieer-bazhuayu-docs-https-github-com\bazhuayu-docs\assets\academy\basic-collection\local-collection\21-6a3b552224838.png'] {
+  errno: -4082,
+  syscall: 'watch',
+  code: 'EBUSY',
+  path: 'D:\\AI\\yangskieer-bazhuayu-docs-https-github-com\\bazhuayu-docs\\assets\\academy\\basic-collection\\local-collection\\21-6a3b552224838.png',
+  filename: 'D:\\AI\\yangskieer-bazhuayu-docs-https-github-com\\bazhuayu-docs\\assets\\academy\\basic-collection\\local-collection\\21-6a3b552224838.png'
+}
+ ⨯ unhandledRejection:  [Error: EBUSY: resource busy or locked, watch 'D:\AI\yangskieer-bazhuayu-docs-https-github-com\bazhuayu-docs\assets\academy\basic-collection\local-collection\21-6a3b552224838.png'] {
+  errno: -4082,
+  syscall: 'watch',
+  code: 'EBUSY',
+  path: 'D:\\AI\\yangskieer-bazhuayu-docs-https-github-com\\bazhuayu-docs\\assets\\academy\\basic-collection\\local-collection\\21-6a3b552224838.png',
+  filename: 'D:\\AI\\yangskieer-bazhuayu-docs-https-github-com\\bazhuayu-docs\\assets\\academy\\basic-collection\\local-collection\\21-6a3b552224838.png'
+}
+[Error: EBUSY: resource busy or locked, watch 'D:\AI\yangskieer-bazhuayu-docs-https-github-com\bazhuayu-docs\assets\academy\basic-collection\local-collection\22-6a3b58a0bf9c0.png'] {
+  errno: -4082,
+  syscall: 'watch',
+  code: 'EBUSY',
+  path: 'D:\\AI\\yangskieer-bazhuayu-docs-https-github-com\\bazhuayu-docs\\assets\\academy\\basic-collection\\local-collection\\22-6a3b58a0bf9c0.png',
+  filename: 'D:\\AI\\yangskieer-bazhuayu-docs-https-github-com\\bazhuayu-docs\\assets\\academy\\basic-collection\\local-collection\\22-6a3b58a0bf9c0.png'
+}
+ ⨯ unhandledRejection:  [Error: EBUSY: resource busy or locked, watch 'D:\AI\yangskieer-bazhuayu-docs-https-github-com\bazhuayu-docs\assets\academy\basic-collection\local-collection\22-6a3b58a0bf9c0.png'] {
+  errno: -4082,
+  syscall: 'watch',
+  code: 'EBUSY',
+  path: 'D:\\AI\\yangskieer-bazhuayu-docs-https-github-com\\bazhuayu-docs\\assets\\academy\\basic-collection\\local-collection\\22-6a3b58a0bf9c0.png',
+  filename: 'D:\\AI\\yangskieer-bazhuayu-docs-https-github-com\\bazhuayu-docs\\assets\\academy\\basic-collection\\local-collection\\22-6a3b58a0bf9c0.png'
+}
+[Error: EBUSY: resource busy or locked, watch 'D:\AI\yangskieer-bazhuayu-docs-https-github-com\bazhuayu-docs\assets\academy\basic-collection\local-collection\23-6a3b58dd3f066.png'] {
+  errno: -4082,
+  syscall: 'watch',
+  code: 'EBUSY',
+  path: 'D:\\AI\\yangskieer-bazhuayu-docs-https-github-com\\bazhuayu-docs\\assets\\academy\\basic-collection\\local-collection\\23-6a3b58dd3f066.png',
+  filename: 'D:\\AI\\yangskieer-bazhuayu-docs-https-github-com\\bazhuayu-docs\\assets\\academy\\basic-collection\\local-collection\\23-6a3b58dd3f066.png'
+}
+ ⨯ unhandledRejection:  [Error: EBUSY: resource busy or locked, watch 'D:\AI\yangskieer-bazhuayu-docs-https-github-com\bazhuayu-docs\assets\academy\basic-collection\local-collection\23-6a3b58dd3f066.png'] {
+  errno: -4082,
+  syscall: 'watch',
+  code: 'EBUSY',
+  path: 'D:\\AI\\yangskieer-bazhuayu-docs-https-github-com\\bazhuayu-docs\\assets\\academy\\basic-collection\\local-collection\\23-6a3b58dd3f066.png',
+  filename: 'D:\\AI\\yangskieer-bazhuayu-docs-https-github-com\\bazhuayu-docs\\assets\\academy\\basic-collection\\local-collection\\23-6a3b58dd3f066.png'
+}
+[Error: EBUSY: resource busy or locked, watch 'D:\AI\yangskieer-bazhuayu-docs-https-github-com\bazhuayu-docs\assets\academy\basic-collection\local-collection\24-6a3b58ef3fd62.png'] {
+  errno: -4082,
+  syscall: 'watch',
+  code: 'EBUSY',
+  path: 'D:\\AI\\yangskieer-bazhuayu-docs-https-github-com\\bazhuayu-docs\\assets\\academy\\basic-collection\\local-collection\\24-6a3b58ef3fd62.png',
+  filename: 'D:\\AI\\yangskieer-bazhuayu-docs-https-github-com\\bazhuayu-docs\\assets\\academy\\basic-collection\\local-collection\\24-6a3b58ef3fd62.png'
+}
+ ⨯ unhandledRejection:  [Error: EBUSY: resource busy or locked, watch 'D:\AI\yangskieer-bazhuayu-docs-https-github-com\bazhuayu-docs\assets\academy\basic-collection\local-collection\24-6a3b58ef3fd62.png'] {
+  errno: -4082,
+  syscall: 'watch',
+  code: 'EBUSY',
+  path: 'D:\\AI\\yangskieer-bazhuayu-docs-https-github-com\\bazhuayu-docs\\assets\\academy\\basic-collection\\local-collection\\24-6a3b58ef3fd62.png',
+  filename: 'D:\\AI\\yangskieer-bazhuayu-docs-https-github-com\\bazhuayu-docs\\assets\\academy\\basic-collection\\local-collection\\24-6a3b58ef3fd62.png'
+}
+[Error: EBUSY: resource busy or locked, watch 'D:\AI\yangskieer-bazhuayu-docs-https-github-com\bazhuayu-docs\assets\academy\basic-collection\local-collection\25-6a3b5cc872973.png'] {
+  errno: -4082,
+  syscall: 'watch',
+  code: 'EBUSY',
+  path: 'D:\\AI\\yangskieer-bazhuayu-docs-https-github-com\\bazhuayu-docs\\assets\\academy\\basic-collection\\local-collection\\25-6a3b5cc872973.png',
+  filename: 'D:\\AI\\yangskieer-bazhuayu-docs-https-github-com\\bazhuayu-docs\\assets\\academy\\basic-collection\\local-collection\\25-6a3b5cc872973.png'
+}
+ ⨯ unhandledRejection:  [Error: EBUSY: resource busy or locked, watch 'D:\AI\yangskieer-bazhuayu-docs-https-github-com\bazhuayu-docs\assets\academy\basic-collection\local-collection\25-6a3b5cc872973.png'] {
+  errno: -4082,
+  syscall: 'watch',
+  code: 'EBUSY',
+  path: 'D:\\AI\\yangskieer-bazhuayu-docs-https-github-com\\bazhuayu-docs\\assets\\academy\\basic-collection\\local-collection\\25-6a3b5cc872973.png',
+  filename: 'D:\\AI\\yangskieer-bazhuayu-docs-https-github-com\\bazhuayu-docs\\assets\\academy\\basic-collection\\local-collection\\25-6a3b5cc872973.png'
+}
+ENOENT: no such file or directory, open 'C:\Users\16934\.mintlify\mint\apps\client\src\_props\customLanguages.json'
+ENOENT: no such file or directory, open 'C:\Users\16934\.mintlify\mint\apps\client\src\_props\customLanguages.json'
+ ⨯ Error: ENOENT: no such file or directory, scandir 'C:\Users\16934\.mintlify\mint\apps\client\public\assets\academy\case-studies\cls-finance-briefs'
+    at async i (C:\Users\16934\.mintlify\mint\apps\client\.next\server\app\(local)\[[...slug]]\page.js:1:940)
+    at async i (C:\Users\16934\.mintlify\mint\apps\client\.next\server\app\(local)\[[...slug]]\page.js:1:1066)
+    at async i (C:\Users\16934\.mintlify\mint\apps\client\.next\server\app\(local)\[[...slug]]\page.js:1:1066)
+    at async i (C:\Users\16934\.mintlify\mint\apps\client\.next\server\app\(local)\[[...slug]]\page.js:1:1066)
+    at async i (C:\Users\16934\.mintlify\mint\apps\client\.next\server\app\(local)\[[...slug]]\page.js:1:1066)
+    at async n (C:\Users\16934\.mintlify\mint\apps\client\.next\server\app\(local)\[[...slug]]\page.js:2:19783)
+    at async n (C:\Users\16934\.mintlify\mint\apps\client\.next\server\app\(local)\[[...slug]]\page.js:2:29410)
+    at async q (C:\Users\16934\.mintlify\mint\apps\client\.next\server\app\(local)\[[...slug]]\page.js:2:26581)
+    at async s (C:\Users\16934\.mintlify\mint\apps\client\.next\server\app\(local)\[[...slug]]\page.js:2:28467) {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'scandir',
+  path: 'C:\\Users\\16934\\.mintlify\\mint\\apps\\client\\public\\assets\\academy\\case-studies\\cls-finance-briefs',
+  digest: '3835493100'
+}
+ ⨯ Error: ENOENT: no such file or directory, open 'C:\Users\16934\.mintlify\mint\apps\client\src\_props\generatedDocsNav.json'
+    at async s (C:\Users\16934\.mintlify\mint\apps\client\.next\server\app\(local)\[[...slug]]\page.js:2:18773)
+    at async t (C:\Users\16934\.mintlify\mint\apps\client\.next\server\app\(local)\[[...slug]]\page.js:2:18818)
+    at async o (C:\Users\16934\.mintlify\mint\apps\client\.next\server\app\(local)\[[...slug]]\page.js:2:15675) {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\16934\\.mintlify\\mint\\apps\\client\\src\\_props\\generatedDocsNav.json',
+  digest: '3077641232'
+}
+ ⨯ Error: ENOENT: no such file or directory, open 'C:\Users\16934\.mintlify\mint\apps\client\src\_props\generatedDocsNav.json'
+    at async s (C:\Users\16934\.mintlify\mint\apps\client\.next\server\app\(local)\[[...slug]]\page.js:2:18773)
+    at async t (C:\Users\16934\.mintlify\mint\apps\client\.next\server\app\(local)\[[...slug]]\page.js:2:18818)
+    at async o (C:\Users\16934\.mintlify\mint\apps\client\.next\server\app\(local)\[[...slug]]\page.js:2:15675) {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\16934\\.mintlify\\mint\\apps\\client\\src\\_props\\generatedDocsNav.json',
+  digest: '3077641232'
+}
+ ⨯ Error: ENOENT: no such file or directory, open 'C:\Users\16934\.mintlify\mint\apps\client\src\_props\generatedDocsNav.json'
+    at async s (C:\Users\16934\.mintlify\mint\apps\client\.next\server\app\(local)\[[...slug]]\page.js:2:18773)
+    at async t (C:\Users\16934\.mintlify\mint\apps\client\.next\server\app\(local)\[[...slug]]\page.js:2:18818)
+    at async o (C:\Users\16934\.mintlify\mint\apps\client\.next\server\app\(local)\[[...slug]]\page.js:2:15675) {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\16934\\.mintlify\\mint\\apps\\client\\src\\_props\\generatedDocsNav.json',
+  digest: '3077641232'
+}
+ ⨯ Error: ENOENT: no such file or directory, open 'C:\Users\16934\.mintlify\mint\apps\client\src\_props\generatedDocsNav.json'
+    at async s (C:\Users\16934\.mintlify\mint\apps\client\.next\server\app\(local)\[[...slug]]\page.js:2:18773)
+    at async t (C:\Users\16934\.mintlify\mint\apps\client\.next\server\app\(local)\[[...slug]]\page.js:2:18818)
+    at async o (C:\Users\16934\.mintlify\mint\apps\client\.next\server\app\(local)\[[...slug]]\page.js:2:15675) {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\16934\\.mintlify\\mint\\apps\\client\\src\\_props\\generatedDocsNav.json',
+  digest: '3077641232'
+}
+ ⨯ Error: ENOENT: no such file or directory, open 'C:\Users\16934\.mintlify\mint\apps\client\src\_props\generatedDocsNav.json'
+    at async s (C:\Users\16934\.mintlify\mint\apps\client\.next\server\app\(local)\[[...slug]]\page.js:2:18773)
+    at async t (C:\Users\16934\.mintlify\mint\apps\client\.next\server\app\(local)\[[...slug]]\page.js:2:18818)
+    at async o (C:\Users\16934\.mintlify\mint\apps\client\.next\server\app\(local)\[[...slug]]\page.js:2:15675) {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\16934\\.mintlify\\mint\\apps\\client\\src\\_props\\generatedDocsNav.json',
+  digest: '3077641232'
+}
+ ⨯ Error: ENOENT: no such file or directory, open 'C:\Users\16934\.mintlify\mint\apps\client\src\_props\generatedDocsNav.json'
+    at async s (C:\Users\16934\.mintlify\mint\apps\client\.next\server\app\(local)\[[...slug]]\page.js:2:18773)
+    at async t (C:\Users\16934\.mintlify\mint\apps\client\.next\server\app\(local)\[[...slug]]\page.js:2:18818)
+    at async o (C:\Users\16934\.mintlify\mint\apps\client\.next\server\app\(local)\[[...slug]]\page.js:2:15675) {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\16934\\.mintlify\\mint\\apps\\client\\src\\_props\\generatedDocsNav.json',
+  digest: '3077641232'
+}
+ ⨯ Error: ENOENT: no such file or directory, open 'C:\Users\16934\.mintlify\mint\apps\client\src\_props\generatedDocsNav.json'
+    at async s (C:\Users\16934\.mintlify\mint\apps\client\.next\server\app\(local)\[[...slug]]\page.js:2:18773)
+    at async t (C:\Users\16934\.mintlify\mint\apps\client\.next\server\app\(local)\[[...slug]]\page.js:2:18818)
+    at async o (C:\Users\16934\.mintlify\mint\apps\client\.next\server\app\(local)\[[...slug]]\page.js:2:15675) {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\16934\\.mintlify\\mint\\apps\\client\\src\\_props\\generatedDocsNav.json',
+  digest: '3077641232'
+}

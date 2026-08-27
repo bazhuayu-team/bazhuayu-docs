@@ -1,11 +1,11 @@
 {
-    "schema_version": 1,
-    "commit": "",
-    "indexed_at": "2026-07-14T09:36:10Z",
+    "schema_version": 2,
+    "commit": "bc4a649c2d1609f9c8be303959f7a62caae56acd",
+    "indexed_at": "2026-08-27T03:46:29Z",
     "project": "D-AI-yangskieer-bazhuayu-docs-https-github-com-bazhuayu-docs",
-    "nodes": 3299,
-    "edges": 3320,
-    "original_size": 4259840,
-    "compressed_size": 285131,
+    "nodes": 3602,
+    "edges": 3681,
+    "original_size": 8781824,
+    "compressed_size": 396361,
     "compression_level": 9
 }

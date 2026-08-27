@@ -1036,3 +1036,17 @@ h2.m-0.font-normal button span::after {
   border-color: #2d4664;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.28);
 }
+
+.tutorial-animation {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 1.5rem 0;
+  border: 1px solid #dbe7f5;
+  border-radius: 14px;
+  background: #0f172a;
+}
+
+.dark .tutorial-animation {
+  border-color: #2d4664;
+}
