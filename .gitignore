@@ -17,5 +17,6 @@ services/kb-agent/.env
 services/kb-agent/data/
 .kb-review-local*.log
 .mintlify-local*.log
+.mintlify-*.log
 assets/knowledge-base/*.tmp
 scripts/data/*.tmp

@@ -1,5 +1,0 @@
-[ResponseAborted: ]
-
-ENOENT: no such file or directory, unlink 'C:\Users\16934\.mintlify\mint\apps\client\public\assets\knowledge-base\search-index.json.txt'
-ENOENT: no such file or directory, open 'C:\Users\16934\.mintlify\mint\apps\client\src\_props\customLanguages.json'
-ENOENT: no such file or directory, unlink 'C:\Users\16934\.mintlify\mint\apps\client\public\assets\knowledge-base\search-index.json.txt'
