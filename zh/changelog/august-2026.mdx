@@ -3,6 +3,14 @@ title: 2026 年 8 月更新日志
 description: 2026 年 8 月八爪鱼文档更新，包含 DataHub 产品介绍与新手教程、CLI v0.1.33 与 OpenAPI API Key 认证说明。
 ---
 
+# 八爪鱼采集器 MCP 工具与工作流同步
+
+> **文档同步日期：** 2026 年 8 月 28 日
+
+八爪鱼采集器 MCP 当前主入口实测公开 12 个工具。文档新增 [`get_task_status`](/zh/mcp/get-task-status) 和 [`describe_ecommerce_dataset`](/zh/mcp/describe-ecommerce-dataset) 页面，并将模板云采集主流程更新为：`search_templates` 精确读取实时模板契约 → `execute_task` 自动检查并启动 → `get_task_status` 获取状态与 `lotNo` → `export_data` 分页读取或使用签名链接下载。
+
+同步修正了模板搜索的 `query` 参数和 `sourceTree` 选项规则、导出的 `taskId + lotNo + page/pageSize` 契约，以及 Temu / TikTok Shop 从任务提交、结果集描述到查询的流程。客户端验证、Coze / Dify 提示词、速率限制与故障排查不再将 `validateOnly`、MCP Tasks 或旧导出字段描述为当前接口。
+
 # DataHub 通用 MCP 连接与选 App 模式
 
 > **文档同步日期：** 2026 年 8 月 28 日

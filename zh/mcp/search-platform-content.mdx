@@ -15,7 +15,7 @@ description: 从八爪鱼数据中心的存量数据中搜索网页、图片和�
 - **广度**：覆盖社交社区、新闻资讯、财经证券、汽车、消费维权、招投标、公共资源和海外媒体等内容源；当前目录示例包括小红书、微信、知乎、人民网、东方财富网、懂车帝、中国政府采购网、Reuters 和 Bloomberg
 - **宽度**：同一入口可检索网页、图片和视频，并按域名、时间范围、关键词组合筛选
 
-具体记录总量会随持续采集变化。平台示例和当前可查询域名见 [`list_platforms`](/zh/mcp/list-platforms)，实时范围以工具返回为准。
+具体记录总量会随持续采集变化。平台示例和当前可查询的平台代码见 [`list_platforms`](/zh/mcp/list-platforms)，实时范围以工具返回为准。
 
 ## 适用场景
 
@@ -31,8 +31,8 @@ description: 从八爪鱼数据中心的存量数据中搜索网页、图片和�
 | `query` | string | 是 | 搜索词，长度 `1-500` |
 | `freshness` | string | 否 | 时间范围，格式见下方 |
 | `summary` | boolean | 否 | 是否返回网页摘要，默认 `true` |
-| `include` | string | 否 | 仅搜索指定域名；多个域名用 `\|` 或逗号分隔 |
-| `exclude` | string | 否 | 排除指定域名；多个域名用 `\|` 或逗号分隔 |
+| `include` | string | 否 | 仅搜索指定站点；多个站点标识用 `\|` 或逗号分隔 |
+| `exclude` | string | 否 | 排除指定站点；多个站点标识用 `\|` 或逗号分隔 |
 | `count` | integer | 否 | 最大结果数，范围 `1-50`，默认 `10` |
 | `roleCode` | string | 否 | 搜索角色代码，默认 `test1`；没有明确要求时建议省略 |
 | `needCount` | boolean | 否 | 是否请求精确结果总数，默认 `false` |
@@ -43,7 +43,7 @@ description: 从八爪鱼数据中心的存量数据中搜索网页、图片和�
 {
   "query": "人工智能行业动态",
   "freshness": "oneWeek",
-  "include": "sina.com.cn|news.qq.com",
+  "include": "<平台代码 1>|<平台代码 2>",
   "count": 10,
   "summary": true
 }
@@ -54,7 +54,7 @@ description: 从八爪鱼数据中心的存量数据中搜索网页、图片和�
 返回 `success`、`code`、`message`、`data` 和 `timestamp`。`data` 可包含网页、图片或视频结果，具体字段随上游内容类型扩展，客户端应先检查实际返回结构，再展示标题、来源、链接、摘要和媒体信息。
 
 <Note>
-  搜索范围会随数据中心索引变化。需要确认支持的平台或域名时，先调用 [`list_platforms`](/zh/mcp/list-platforms)，再将返回的 `domain` 传给 `include` 或 `exclude`；不要使用平台展示名称替代域名。
+  搜索范围会随数据中心索引变化。需要确认支持的平台时，先调用 [`list_platforms`](/zh/mcp/list-platforms)，再使用本次响应中的平台代码或站点标识配置 `include` 或 `exclude`；不要根据展示名称猜测参数值。
 </Note>
 
 另请参阅：<a href="/zh/mcp/index" target="_blank" rel="noopener noreferrer">MCP 概览</a>、[`list_platforms`](/zh/mcp/list-platforms)

@@ -578,9 +578,10 @@
                 "group": "通用采集工具",
                 "pages": [
                   "zh/mcp/search-templates",
-                  "zh/mcp/search-tasks",
                   "zh/mcp/execute-task",
+                  "zh/mcp/get-task-status",
                   "zh/mcp/export-data",
+                  "zh/mcp/search-tasks",
                   "zh/mcp/start-or-stop-task",
                   "zh/mcp/redeem-coupon"
                 ]
@@ -591,6 +592,7 @@
                   "zh/mcp/search-platform-content",
                   "zh/mcp/list-platforms",
                   "zh/mcp/ecommerce-data-task",
+                  "zh/mcp/describe-ecommerce-dataset",
                   "zh/mcp/query-collected-reviews"
                 ]
               },

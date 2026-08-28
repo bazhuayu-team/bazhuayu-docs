@@ -3,12 +3,9 @@ title: 获取 API Key
 description: 在八爪鱼账户中心创建 API Key，供 MCP 以 x-api-key 方式认证。
 ---
 
-## 何时使用 API Key
+## 认证方式
 
-| 认证方式 | 适用场景 |
-| --- | --- |
-| **OAuth 2.1** | ChatGPT、Claude、Cursor、Gemini 等支持浏览器登录的客户端；Coze、Dify 安装官方工具时 |
-| **API Key** | Coze 自定义 MCP、Dify API Key 模式、QClaw、Cursor、Claude Code、脚本 / 无头环境 |
+八爪鱼采集器 MCP 仅使用 API Key。无论使用 Coze、Dify、QClaw、Cursor、Claude Code 还是脚本环境，都将密钥放入请求头 `x-api-key`；不要使用 OAuth、Bearer Token 或 `Authorization` 请求头替代。
 
 ## 创建 API Key
 

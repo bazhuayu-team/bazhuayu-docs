@@ -1,42 +1,34 @@
 ---
 title: query_collected_reviews
-description: 查询 Temu 或 TikTok Shop 已采集的商品评论。
+description: 查询 Temu 和 TikTok Shop 已采集的评论、商品详情或关键词搜索结果。
 ---
 
-按商品 ID、发布时间、关键词或作者查询已经采集的电商评论。该工具只读取现有数据，不会启动新的采集任务。
+工具名称保留为 `query_collected_reviews`，但当前可查询的不只有评论，也包括商品详情和关键词搜索结果。该工具只读取已进入电商结果集的数据，不会启动新的采集任务。
 
-## 参数
+## 查询前先确认数据集
 
-| 参数 | 类型 | 必填 | 说明 |
-| --- | --- | --- | --- |
-| `dataset` | string | 是 | `temuComment` 或 `tiktokShopComment` |
-| `itemIds` | string[] | 是 | 商品 ID，数量 `1-100` |
-| `publishTimeFrom` | string | 否 | 起始日期，格式 `YYYY-MM-DD`，包含当天 |
-| `publishTimeTo` | string | 否 | 结束日期，格式 `YYYY-MM-DD`，包含当天 |
-| `keyword` | string | 否 | 评论内容关键词，最长 200 个字符 |
-| `authorId` | string | 否 | 作者 ID，最长 200 个字符 |
-| `sortBy` | string | 否 | `publishTime` 或 `likeCount` |
-| `sortDirection` | string | 否 | `asc` 或 `desc`，默认 `desc` |
-| `pageIndex` | integer | 否 | 页码，从 `1` 开始，默认 `1` |
-| `pageSize` | integer | 否 | 每页数量，范围 `1-100`，默认 `20` |
-| `includeDebugSql` | boolean | 否 | 是否返回调试 SQL，默认 `false` |
+可查询的数据集为：
 
-```json
-{
-  "dataset": "temuComment",
-  "itemIds": ["<商品 ID>"],
-  "publishTimeFrom": "2026-07-01",
-  "sortBy": "publishTime",
-  "sortDirection": "desc",
-  "pageIndex": 1,
-  "pageSize": 20
-}
+- Temu：`temuComment`、`temuProductDetail`、`temuKeywordSearch`
+- TikTok Shop：`tiktokShopComment`、`tiktokShopProductDetail`、`tiktokShopKeywordSearch`
+
+优先使用 [`describe_ecommerce_dataset`](/zh/mcp/describe-ecommerce-dataset) 核对每个 `dataset` 的字段、稳定 item ID 字段和筛选提示，再传入 `dataset + itemIds` 查询。不要沿用历史页面或别的结果集中的字段名。
+
+## 筛选与分页
+
+查询可加入字段过滤、排序和分页；单页 `pageSize` 最大为 `100`。服务支持的过滤操作符包括：
+
+`eq`、`neq`、`gt`、`gte`、`lt`、`lte`、`like`、`in`、`notin`
+
+字段名必须来自 `describe_ecommerce_dataset` 的实时返回。刚提交采集时，应等待 `ecommerce_data_task` 响应中的 `resultAvailability.nextAvailableAt`；结果为空不一定表示任务失败。
+
+## 推荐流程
+
+```text
+ecommerce_data_task
+  → 读取 nextStep / resultAvailability
+  → describe_ecommerce_dataset
+  → query_collected_reviews
 ```
 
-## 响应
-
-返回 `records` 以及 `pageIndex`、`pageSize`、`returnedCount`、`hasMore`。`query` 会说明实际使用的平台、任务类型和商品 ID 字段。只有明确排障时才应启用 `includeDebugSql` 并读取 `debugSql`。
-
-如果刚通过 `ecommerce_data_task` 提交采集而当前结果为空，任务可能仍在运行；等待一段时间后使用相同 `dataset` 和商品 ID 重试。
-
-另请参阅：[`ecommerce_data_task`](/zh/mcp/ecommerce-data-task)、<a href="/zh/mcp/index" target="_blank" rel="noopener noreferrer">MCP 概览</a>
+另请参阅：[`ecommerce_data_task`](/zh/mcp/ecommerce-data-task)、[`describe_ecommerce_dataset`](/zh/mcp/describe-ecommerce-dataset)

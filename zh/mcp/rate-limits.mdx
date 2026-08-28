@@ -153,7 +153,7 @@ public static <T> T callWithRetry(Callable<T> fn, int maxRetries) throws Excepti
 
 - **尽量批量操作** — 将多个操作合并为更少的请求
 - **缓存模板结果** — `search_templates` 的结果很少变化，可以缓存
-- **长任务使用 MCP Tasks** — 客户端支持时通过 `tasks/get` / `tasks/result` 跟踪；兼容模式按 10-30 秒间隔调用 `export_data`
+- **长任务查询状态** — 通过 `get_task_status` 获取状态和 `lotNo`；完成或停止后再调用 `export_data`
 - **监控用量** — 追踪每周提取的记录数，保持在限制范围内
 
 另请参阅：<a href="/zh/mcp/index" target="_blank" rel="noopener noreferrer">MCP 概览</a>、<a href="/zh/mcp/troubleshooting" target="_blank" rel="noopener noreferrer">故障排查</a>

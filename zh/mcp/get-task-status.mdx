@@ -1,0 +1,33 @@
+---
+title: get_task_status
+description: 查询模板云采集任务的实时状态、采集批次和已采集行数。
+---
+
+`get_task_status` 用于确认由 `execute_task` 创建的云任务是否已完成，并取得后续导出所需的采集批次号。
+
+## 参数
+
+| 参数 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `taskId` | string | 是 | `execute_task` 返回的任务 ID，或通过 `search_tasks` 找回的已有任务 ID |
+
+```json
+{
+  "taskId": "<任务 ID>"
+}
+```
+
+## 响应与下一步
+
+响应会返回任务状态，并在可用时返回 `lotNo` 和 `collectedRows`：
+
+| 状态 | 含义 | 建议操作 |
+| --- | --- | --- |
+| `unexecuted` | 任务尚未开始 | 确认是否需要用 `start_or_stop_task` 启动已有任务 |
+| `running` | 正在采集 | 等待后再次查询，不要重复创建任务 |
+| `completed` | 已完成 | 使用 `taskId` 和 `lotNo` 调用 [`export_data`](/zh/mcp/export-data) |
+| `stopped` | 已停止 | 根据已有结果决定导出，或确认后重新启动 |
+
+`collectedRows: 0` 本身不表示失败，应结合状态和任务返回信息判断。若 `execute_task` 超时或返回失败信息中已包含 `taskId`，先用本工具查询该任务，不要立即创建重复任务。
+
+另请参阅：[`execute_task`](/zh/mcp/execute-task)、[`export_data`](/zh/mcp/export-data)、[`search_tasks`](/zh/mcp/search-tasks)

@@ -1,46 +1,28 @@
 ---
 title: search_templates
-description: 搜索并查看八爪鱼预置采集模板、输入字段和数据源选项。
+description: 搜索采集模板，并读取实时输入、输出与数据源选项契约。
 ---
 
-在执行 `execute_task` 前查找合适的模板。一次调用必须且只能使用 `keyword`、`id`、`slug` 中的一种查询方式。
+先用 `search_templates` 发现模板；确定目标后必须再次精确查询模板，读取本次运行的字段和选项。模板参数会更新，不能复用旧任务里的 `field`、`field_2` 或 `url` 等猜测字段名。
 
 ## 参数
 
-| 参数 | 类型 | 必填 | 说明 |
-| --- | --- | --- | --- |
-| `keyword` | string | 三选一 | 按主题、网站或使用场景搜索模板 |
-| `id` | integer | 三选一 | 按正整数模板 ID 精确查询 |
-| `slug` | string | 三选一 | 按模板别名精确查询 |
-| `page` | integer | 否 | 关键词模式的页码，从 `1` 开始 |
-| `limit` | integer | 否 | 关键词模式每页数量，范围 `1-50`，默认 `10` |
+三种检索方式一次只能使用一种：
 
-<Note>
-  关键词模式适合发现模板；确定模板后，再用 `id` 或 `slug` 精确查询，以取得完整 `inputSchema` 和可能存在的根级 `sourceOptions`。
-</Note>
-
-## 响应
-
-关键词模式可能返回：
-
-- `recommendedTemplateName`：建议传给 `execute_task` 的模板名称
-- `templates`：标准化模板列表，包含 `templateName`、`executionMode` 和输入/输出摘要
-- `page`、`pageSize`、`totalMatchingTemplates`、`totalPages`：分页信息
-- `localCollectionGuidance`：最佳匹配仅支持本地采集时的处理建议
-
-精确查询通过 `template` 返回模板详情，其中 `inputSchema[].field` 是后续 `parameters` 的字段契约。若模板包含数据源选择字段，根级 `sourceOptions` 会提供可选项；应将选项的 `key` 作为字段值。
-
-## 调用示例
+| 参数 | 用途 | 约束 |
+| --- | --- | --- |
+| `query` | 语义搜索，例如“Amazon 德国站关键词列表” | 可选 `limit`，范围 `1-20` |
+| `id` | 精确查询模板 ID | 不可与其他选择器并用 |
+| `slug` | 精确查询模板别名 | 不可与其他选择器并用 |
 
 ```json
 {
-  "keyword": "电商商品",
-  "page": 1,
+  "query": "Amazon 德国站关键词列表",
   "limit": 10
 }
 ```
 
-精确查看已选模板：
+确定模板后，按 `id` 或 `slug` 再查一次：
 
 ```json
 {
@@ -48,6 +30,16 @@ description: 搜索并查看八爪鱼预置采集模板、输入字段和数据�
 }
 ```
 
-优先选择 `executionMode` 包含 `Cloud` 的模板。标记为 `Local only` 的模板需要在八爪鱼桌面客户端中运行。
+## 读取实时契约
 
-另请参阅：<a href="/zh/mcp/index" target="_blank" rel="noopener noreferrer">MCP 概览</a>、<a href="/zh/mcp/workflow" target="_blank" rel="noopener noreferrer">工作流程示例</a>、[`execute_task`](/zh/mcp/execute-task)
+精确查询的重点是：
+
+- `templateName`：后续传给 `execute_task` 的精确名称。
+- `inputSchema`：参数的真实 `field`、控件类型、必填状态和示例。
+- `sourceTree`：下拉或多选字段的候选值；应传其中 option 的 `key`，不能传展示文字。
+- `executionMode`：优先选择包含 `Cloud` 的模板。
+- `outputSchema`：如有提供，可先确认可采集的输出字段。
+
+若是 `Input` 或 `Dropdown`，通常传字符串；`MultiInput` 或 `CheckboxList` 即使只有一个值也传字符串数组。依赖前一项选择的字段会在参数不足时以 `input_required` 和 `sourceOptions` 引导补齐，补齐后用同一模板重新执行。
+
+另请参阅：<a href="/zh/mcp/workflow" target="_blank" rel="noopener noreferrer">工作流程示例</a>、[`execute_task`](/zh/mcp/execute-task)

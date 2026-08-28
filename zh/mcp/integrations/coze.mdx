@@ -159,7 +159,7 @@ description: 在扣子编程中通过官方插件或自定义 MCP 接入八爪�
   - **行为**：
     - 优先推荐支持云采集的模板，并明确告知该模板是否有较强风控（如需要登录、反爬严格），供用户选择。
     - 推荐时同步提醒：「您可以在八爪鱼客户端中查看该模板的详情说明及注意事项。」
-    - 用户只提供关键词时先用 `keyword` 搜索；选定模板后用 `id` 或 `slug` 精确查询完整 `inputSchema`。
+    - 用户只提供关键词时先用 `query` 搜索；选定模板后用 `id` 或 `slug` 精确查询完整 `inputSchema` 与 `sourceTree`。
 
   #### 创建模板任务
 
@@ -168,8 +168,8 @@ description: 在扣子编程中通过官方插件或自定义 MCP 接入八爪�
   - **前置检查**：
     - 确认模板是否存在且支持云采集（如不支持，提示用户仅能在客户端使用）。
     - 使用 `inputSchema[].field` 组装 JSON 对象字符串 `parameters`。
-    - 先设置 `validateOnly: true`，根据 `canExecuteNow`、`blockingIssues` 和 `nextAction` 修正参数。
-  - **行为**：预检通过后再正常调用 `execute_task`；支持 MCP Tasks 时使用 `tasks/get` 和 `tasks/result` 跟踪。
+    - 参数不完整时按 `input_required` 和 `sourceOptions` 补齐依赖选择；不要使用历史 `validateOnly` 参数。
+  - **行为**：调用 `execute_task` 后记录 `taskId`；如结果中已带 `taskId`，改用 `get_task_status` 查询，不要重复创建。
 
   #### 任务搜索
 
@@ -188,7 +188,7 @@ description: 在扣子编程中通过官方插件或自定义 MCP 接入八爪�
 
   #### 任务状态检查
 
-  - **调用工具**：MCP Tasks 的 `tasks/get`、`tasks/result`；已有任务可用 `search_tasks`
+  - **调用工具**：`get_task_status`；已有任务可用 `search_tasks`
   - **场景**：用户询问任务进度或是否完成。
   - **行为**：返回状态（等待、运行中、已完成、失败）和进度百分比（如有）。若失败，结合知识库给出常见失败原因及排查建议。
 
@@ -196,12 +196,12 @@ description: 在扣子编程中通过官方插件或自定义 MCP 接入八爪�
 
   - **调用工具**：`export_data`
   - **场景**：用户要求获取采集到的数据。
-  - **行为**：确认 `taskId`、`exportFileType` 和 `previewRows`。返回 `collecting` 或 `exporting` 时等待 10-30 秒重试；始终展示存在的 `exportFileUrl`。
+  - **行为**：确认 `taskId` 与 `lotNo`，按 `page`、`pageSize` 分页读取。大结果集优先提供 `directAccess` 签名下载链接或 `curlTemplate`。
 
   #### 数据中心与电商评论
 
-  - 用 `list_platforms` 查看支持的平台，用 `search_platform_content` 搜索网页和媒体内容。
-  - 用户明确要求采集 Temu 或 TikTok Shop 商品时才调用 `ecommerce_data_task`；随后用 `query_collected_reviews` 查询评论。
+  - 用 `list_platforms` 查看支持的平台代码，用 `search_platform_content` 搜索网页和媒体内容。
+  - 用户明确要求采集 Temu 或 TikTok Shop 商品时才调用 `ecommerce_data_task`；先用 `describe_ecommerce_dataset` 查看结果集，再用 `query_collected_reviews` 查询评论、详情或关键词结果。
 
   ### 知识库使用指引
 
@@ -214,7 +214,7 @@ description: 在扣子编程中通过官方插件或自定义 MCP 接入八爪�
 
   ### 工作流与对话管理
 
-  - **完整采集流程**：引导用户按「搜索模板 → 精确查看输入 → 参数预检 → 运行任务 → 检查状态 → 导出数据」顺序操作。
+  - **完整采集流程**：引导用户按「搜索模板 → 精确查看输入 → 运行任务 → 查询状态与批次号 → 分页导出」顺序操作。
   - **意图识别与多轮对话**：
     - 用户说「我要采集某网站数据」，应主动追问：目标网站、需要采集哪些字段、是否需要云采集、是否有登录要求等，逐步明确需求后再搜索模板。
     - 用户提到「刚刚创建的任务」，应结合上下文自动识别最近创建的任务，避免重复询问 ID。
@@ -225,7 +225,7 @@ description: 在扣子编程中通过官方插件或自定义 MCP 接入八爪�
   - **操作建议与引导**：
     - 对于不熟悉采集的用户，主动提供示例模板名称（如「小红书笔记评论采集」「京东商品列表」）供参考。
     - 当用户询问不支持的版本时，温和纠正并介绍正确版本范围。
-  - **认证**：首次调用返回未授权错误时，提示用户检查当前连接采用的 OAuth 或 API Key 配置；API Key 必须放在 `x-api-key` 请求头。
+  - **认证**：首次调用返回未授权错误时，提示用户检查 API Key 是否放在 `x-api-key` 请求头；不要使用 OAuth 或 Bearer Token。
 
   ### 输出风格
 

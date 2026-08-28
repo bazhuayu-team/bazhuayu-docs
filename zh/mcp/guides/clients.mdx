@@ -9,7 +9,7 @@ description: 在 ChatGPT、Claude、Cursor、Gemini、OpenClaw、VS Code 等客�
 https://mcp.bazhuayu.com
 ```
 
-认证方式：**OAuth 2.1**（推荐）或 **API Key**（Header：`x-api-key`）。API Key 创建见 <a href="/zh/mcp/quick-start/api-key" target="_blank" rel="noopener noreferrer">获取 API Key</a>。
+认证方式：**API Key**（Header：`x-api-key`）。API Key 创建见 <a href="/zh/mcp/quick-start/api-key" target="_blank" rel="noopener noreferrer">获取 API Key</a>；不要使用 OAuth 或 `Authorization: Bearer`。
 
 ## Agent 对话安装
 
@@ -23,14 +23,14 @@ WorkBuddy、QClaw、豆包专业版等能够自行管理工具配置的 Agent，
 
 1. 打开 ChatGPT → **Settings** → **Connectors**（或「连接器」）。
 2. 添加 MCP 连接器，URL 填写 `https://mcp.bazhuayu.com` 或 `https://mcp.octoparse.com`。
-3. 选择 **OAuth** 完成八爪鱼登录，或使用 API Key（若界面支持自定义 Header）。
+3. 在自定义 Headers 中填写 `x-api-key` 和你的 API Key；若该入口不支持自定义 Header，请使用该产品支持 HTTP MCP Headers 的配置方式。
 4. 在新对话中启用该连接器后测试搜索模板。
 
 ## Claude（桌面 / Web）
 
 1. **Settings** → **Connectors** → **Add connector**。
 2. 输入 MCP URL：`https://mcp.bazhuayu.com` 或 `https://mcp.octoparse.com`。
-3. 通过 OAuth 授权八爪鱼账户。
+3. 在连接器的 Headers / API Key 配置中填写 `x-api-key`；若当前入口不能配置 Header，请改用该客户端的本地 MCP 配置方式。
 4. 在对话中确认已勾选八爪鱼 MCP 工具。
 
 ## Claude Code
@@ -51,7 +51,7 @@ WorkBuddy、QClaw、豆包专业版等能够自行管理工具配置的 Agent，
 }
 ```
 
-或使用 OAuth 流程（以 Claude Code 当前版本文档为准）。详见 <a href="/zh/mcp/quick-start/api-key" target="_blank" rel="noopener noreferrer">获取 API Key</a>。
+详见 <a href="/zh/mcp/quick-start/api-key" target="_blank" rel="noopener noreferrer">获取 API Key</a>。
 
 ## Cursor
 
@@ -79,7 +79,7 @@ WorkBuddy、QClaw、豆包专业版等能够自行管理工具配置的 Agent，
 
 1. 在 **Settings → MCP / Extensions / Connectors** 中添加 HTTP MCP 服务。
 2. URL：`https://mcp.bazhuayu.com` 或 `https://mcp.octoparse.com`。
-3. OAuth 登录八爪鱼，或在 Headers 中配置 `x-api-key`。
+3. 在 Headers 中配置 `x-api-key`。
 4. 在对话中启用八爪鱼工具后测试 `list_platforms` 或 `search_templates`。
 
 具体入口名称因 Gemini 集成产品（Google AI Studio、第三方 IDE 插件等）而异，以当前客户端文档为准。
@@ -102,22 +102,24 @@ QClaw 用户也可使用 <a href="/zh/mcp/integrations/qclaw" target="_blank" re
 
 ## 验证连接
 
-连接成功后，服务端应公开以下 10 个工具。部分客户端会翻译显示名称，但工具标识应保持不变：
+连接成功后，当前主入口应公开以下 12 个工具。部分客户端会翻译显示名称，但工具标识应保持不变：
 
 - `search_templates`
-- `search_tasks`
 - `execute_task`
+- `get_task_status`
 - `export_data`
+- `search_tasks`
 - `start_or_stop_task`
 - `redeem_coupon_code`
 - `search_platform_content`
 - `list_platforms`
 - `ecommerce_data_task`
+- `describe_ecommerce_dataset`
 - `query_collected_reviews`
 
 建议先发送「列出数据中心当前支持的平台」进行只读联调。也可以搜索模板；不要用创建任务、启停任务或兑换优惠码来测试连接。
 
-如果仍只看到旧的 6 个工具，请刷新 MCP 工具列表、断开后重新连接，或重启客户端。服务支持 `tools.listChanged`，但客户端是否自动响应更新取决于其实现。
+如果工具列表不完整，请刷新 MCP 工具列表、断开后重新连接或重启客户端。实际可用工具以当前连接后的发现结果为准。
 
 ## 下一步
 
@@ -126,6 +128,6 @@ QClaw 用户也可使用 <a href="/zh/mcp/integrations/qclaw" target="_blank" re
     搜模板 → 运行 → 导出完整示例。
   </Card>
   <Card title="故障排查" href="/zh/mcp/troubleshooting">
-    OAuth 循环、工具不可见等问题。
+    API Key、工具不可见和任务执行问题。
   </Card>
 </CardGroup>

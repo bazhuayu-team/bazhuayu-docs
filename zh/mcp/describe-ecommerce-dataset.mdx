@@ -1,0 +1,26 @@
+---
+title: describe_ecommerce_dataset
+description: 查看 Temu 和 TikTok Shop 电商结果集的字段、类型与稳定 ID 映射。
+---
+
+在查询电商结果前，先调用 `describe_ecommerce_dataset` 了解该结果集的字段契约、可用于定位记录的稳定 ID，以及支持的筛选和排序提示。不要根据旧示例猜测字段名。
+
+## 可查询的数据集
+
+| 平台 | 数据集 |
+| --- | --- |
+| Temu | `temuComment`、`temuProductDetail`、`temuKeywordSearch` |
+| TikTok Shop | `tiktokShopComment`、`tiktokShopProductDetail`、`tiktokShopKeywordSearch` |
+
+将要查询的 `dataset` 传入工具后，响应会说明字段名、字段类型、稳定 item ID 字段及适用的查询提示。
+
+## 推荐流程
+
+1. 用 [`ecommerce_data_task`](/zh/mcp/ecommerce-data-task) 提交关键词、商品详情或评论采集。
+2. 从返回的 `nextStep` 和 `resultAvailability.nextAvailableAt` 获取建议的数据集、`itemIds` 和可查询时间。
+3. 调用 `describe_ecommerce_dataset` 核对字段与稳定 ID。
+4. 使用 [`query_collected_reviews`](/zh/mcp/query-collected-reviews) 查询对应结果集；需要筛选时，仅使用本工具返回的字段名。
+
+支持的过滤操作符包括 `eq`、`neq`、`gt`、`gte`、`lt`、`lte`、`like`、`in` 和 `notin`。具体字段和可用组合以实时响应为准。
+
+另请参阅：[`ecommerce_data_task`](/zh/mcp/ecommerce-data-task)、[`query_collected_reviews`](/zh/mcp/query-collected-reviews)

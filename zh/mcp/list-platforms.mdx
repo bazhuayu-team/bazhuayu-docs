@@ -1,9 +1,9 @@
 ---
 title: list_platforms
-description: 查看八爪鱼数据中心内容搜索当前支持的平台和域名。
+description: 查看八爪鱼数据中心内容搜索当前支持的平台代码。
 ---
 
-列出 [`search_platform_content`](/zh/mcp/search-platform-content) 当前可使用的平台和域名。该工具无输入参数，是适合用于连接验证的只读调用。
+列出 [`search_platform_content`](/zh/mcp/search-platform-content) 当前可使用的平台代码。该工具无输入参数，是适合用于连接验证的只读调用。
 
 ## 数据中心覆盖范围
 
@@ -32,12 +32,8 @@ description: 查看八爪鱼数据中心内容搜索当前支持的平台和域�
 
 ## 响应
 
-返回 `success`、`code`、`message`、`data` 和 `timestamp`。平台条目至少包含用于识别来源的 `platform` 与 `domain`，服务还可能返回 `platformCode`、`platformName`、`sortOrder` 或总数等扩展字段。将某个来源传给内容搜索时，应使用返回的 `domain`，而不是展示名称。
+响应会返回内容搜索支持的平台代码。平台目录和包装字段可能随服务更新；集成时应以本次返回的实际字段为准，不要把历史响应中的 `domain`、`platformName`、`sortOrder` 或固定包装层当作必需接口。
 
-<Note>
-  当前服务声明的 Schema 与部分实时响应包装形式存在差异。集成时应以 `data` 中实际返回的平台条目为准，不要依赖固定的额外包装层或扩展字段。
-</Note>
-
-平台清单可能随数据中心能力变化。需要限制内容搜索范围时，把返回的域名传给 `search_platform_content` 的 `include` 或 `exclude`。
+平台清单可能随数据中心能力变化。需要限制内容搜索范围时，使用当前返回的站点标识配置 `search_platform_content` 的包含或排除条件。
 
 另请参阅：<a href="/zh/mcp/index" target="_blank" rel="noopener noreferrer">MCP 概览</a>、[`search_platform_content`](/zh/mcp/search-platform-content)

@@ -1,13 +1,13 @@
 ---
 title: 八爪鱼 MCP 服务
-description: 通过 MCP 协议查询数据中心存量内容、搜索采集模板、运行云采集任务并导出数据。
+description: 通过 MCP 协议搜索模板、运行云采集、查询任务状态、导出数据并检索数据中心内容。
 ---
 
 将八爪鱼采集能力接入 Coze（扣子）、Dify、QClaw（小龙虾）、ChatGPT、Claude、Cursor、Gemini 等兼容 MCP 的 AI 智能体。
 
 八爪鱼 MCP 是面向 AI 智能体的**标准化数据连接器**。在对话中可以直接查询数据中心已经积累的存量内容，也可以搜索预置模板、触发云端采集、导出多种格式的数据，或按需采集 Temu、TikTok Shop 电商数据，无需手写爬虫代码。
 
-截至 2026 年 7 月 22 日，实测服务版本为 `0.8.3.3-85ef7c4b`，协商协议版本为 `2025-11-25`，公开 10 个工具。服务端会持续更新，客户端实际可用能力应以连接后的工具发现结果为准。
+截至 2026 年 8 月 28 日，八爪鱼采集器 MCP 主入口实测公开 **12 个工具**。服务端、模板和字段契约会持续更新；客户端实际可用能力应以连接后的工具发现结果与 `search_templates` 的精确查询结果为准。
 
 ## 前置条件
 
@@ -35,15 +35,15 @@ API Key：<粘贴你的 API Key>
   仅在可信的本地 Agent 或私密对话中提供 API Key。不要把真实 Key 发送到群聊、公开对话或截图中；安装完成后也不要让 Agent 回显密钥。
 </Warning>
 
-这里的“只使用 API Key”是针对上述 Agent 自动配置场景，用于避免客户端误判鉴权方式。ChatGPT、Claude、Cursor 等平台教程中明确支持的 OAuth 流程仍可正常使用。若 Agent 无权修改配置，请按<a href="/zh/mcp/guides/clients" target="_blank" rel="noopener noreferrer">客户端配置指南</a>手动添加。
+八爪鱼采集器 MCP 使用 API Key 认证：将 Key 放入 `x-api-key` 请求头。若 Agent 无权修改配置，请按<a href="/zh/mcp/guides/clients" target="_blank" rel="noopener noreferrer">客户端配置指南</a>手动添加。
 
 ## 能力范围
 
 <CardGroup cols={2}>
   <Card title="支持" icon="check">
     - 搜索预置采集模板
-    - 触发并监控云采集任务
-    - 预览并导出多种格式的数据
+    - 触发云采集、查询实时状态和采集批次
+    - 分页读取结果或获取签名下载链接
     - 列出 / 搜索已有任务
     - 启动或停止云端任务
     - 查询数据中心的网页与媒体存量内容
@@ -61,14 +61,7 @@ API Key：<粘贴你的 API Key>
 
 ## 认证方式
 
-<CardGroup cols={2}>
-  <Card title="OAuth 2.1（推荐）" icon="key">
-    浏览器登录八爪鱼账户，无需手动复制 API Key。适合 ChatGPT、Claude、Cursor、Gemini、Coze、Dify 等支持 OAuth 的客户端。
-  </Card>
-  <Card title="API Key" icon="lock">
-    使用请求头 `x-api-key` 直连。适合 Dify、Coze 自定义 MCP、QClaw、无头环境等。详见 <a href="/zh/mcp/quick-start/api-key" target="_blank" rel="noopener noreferrer">获取 API Key</a>。
-  </Card>
-</CardGroup>
+使用请求头 `x-api-key` 认证。API Key 在<a href="/zh/mcp/quick-start/api-key" target="_blank" rel="noopener noreferrer">八爪鱼账户中心创建</a>；不要改写为 OAuth 或 `Authorization: Bearer <API Key>`。
 
 <Warning>
   请勿将 API Key 写入公开仓库、截图或群聊。泄露后请立即在账户中心作废并重新创建。
@@ -81,8 +74,8 @@ API Key：<粘贴你的 API Key>
 | 场景 | Agent 要完成的任务 | 推荐工具 |
 | --- | --- | --- |
 | **直接查询已有内容** | 从数据中心检索提前采集的跨平台存量数据 | `list_platforms`、`search_platform_content` |
-| **按需采集电商数据** | 提交 Temu、TikTok Shop 采集任务，再查询入库结果 | `ecommerce_data_task`、`query_collected_reviews` |
-| **运行通用网站采集** | 选择模板、校验参数、运行云任务并导出结果 | `search_templates`、`execute_task`、`export_data` 等 |
+| **按需采集电商数据** | 提交 Temu、TikTok Shop 任务，确认结果集后查询 | `ecommerce_data_task`、`describe_ecommerce_dataset`、`query_collected_reviews` |
+| **运行通用网站采集** | 选择模板、自动检查参数、查询状态并导出结果 | `search_templates`、`execute_task`、`get_task_status`、`export_data` |
 
 例如，Agent 可以先从数据中心做跨平台检索，发现重点商品或网站后，再转入电商实时采集或模板化采集流程补充数据。
 
@@ -95,20 +88,22 @@ API Key：<粘贴你的 API Key>
 | 工具 | 说明 |
 | --- | --- |
 | `search_templates` | 搜索模板，并查看输入字段、输出字段与数据源选项 |
+| `execute_task` | 自动检查参数，并创建及启动模板云采集任务 |
+| `get_task_status` | 查询任务状态、采集批次号和已采集行数 |
+| `export_data` | 按任务和批次号分页读取数据或获取签名下载链接 |
 | `search_tasks` | 列出并搜索账户下已有任务 |
 | `start_or_stop_task` | 按任务 ID 启动或停止云采集 |
-| `execute_task` | 预检参数，或创建并启动模板云采集任务 |
-| `export_data` | 查询采集/导出进度，预览数据并取得下载地址 |
 | `redeem_coupon_code` | 兑换促销或资源优惠码 |
 
 ## 数据中心与电商数据工具
 
 | 工具 | 说明 |
 | --- | --- |
-| `search_platform_content` | 按关键词、时间与域名搜索网页、图片和视频内容 |
-| `list_platforms` | 查看数据中心当前支持的平台与域名 |
-| `ecommerce_data_task` | 提交 Temu 或 TikTok Shop 商品与评论采集任务 |
-| `query_collected_reviews` | 查询已采集的 Temu 或 TikTok Shop 商品评论 |
+| `search_platform_content` | 按关键词、时间与站点条件搜索网页、图片和视频内容 |
+| `list_platforms` | 查看数据中心内容搜索支持的平台代码 |
+| `ecommerce_data_task` | 提交 Temu 或 TikTok Shop 关键词、详情或评论采集任务 |
+| `describe_ecommerce_dataset` | 查看电商结果集的字段和稳定 ID 映射 |
+| `query_collected_reviews` | 查询已采集的评论、商品详情或关键词搜索结果 |
 
 各工具参数见侧栏 **通用采集工具** 和 **数据中心与电商数据** 分组。
 
@@ -122,7 +117,7 @@ API Key：<粘贴你的 API Key>
     优先将上方对话发送给支持自主配置的 Agent；也可以手动填写 `https://mcp.bazhuayu.com`（国际环境使用 `https://mcp.octoparse.com`）。
   </Step>
   <Step title="完成认证">
-    选择 OAuth 登录，或配置 <a href="/zh/mcp/quick-start/api-key" target="_blank" rel="noopener noreferrer">API Key</a>。
+    在 Headers 中配置 <a href="/zh/mcp/quick-start/api-key" target="_blank" rel="noopener noreferrer">API Key</a> 的 `x-api-key`。
   </Step>
   <Step title="在对话中试用">
     先用只读请求验证连接，例如：「列出数据中心当前支持的平台」，或「帮我找一个采集电商商品列表的八爪鱼模板」。
@@ -134,21 +129,14 @@ API Key：<粘贴你的 API Key>
 完整流程见 <a href="/zh/mcp/workflow" target="_blank" rel="noopener noreferrer">工作流程示例</a>：
 
 1. `search_templates` — 发现模板
-2. `execute_task(validateOnly)` — 校验参数和数据源选择
-3. `execute_task` — 通过 MCP Tasks 或兼容模式运行云采集
-4. `tasks/get` / `tasks/result` — 支持 MCP Tasks 时跟踪状态
-5. `export_data` — 预览数据并取得导出文件
+2. 再次 `search_templates(id / slug)` — 读取本次运行的字段与选项
+3. `execute_task` — 自动检查参数后启动云采集
+4. `get_task_status` — 确认任务状态并获取 `lotNo`
+5. `export_data` — 用 `taskId + lotNo` 分页读取或下载结果
 
-## 协议能力与 Resources
+## 使用实时工具契约
 
-当前服务协商得到以下能力：
-
-- `tools.listChanged`：工具列表变化时可通知客户端刷新
-- `resources.listChanged`：资源列表变化时可通知客户端刷新
-- MCP Tasks：支持列出、取消和跟踪工具任务；`execute_task` 可选支持 Task 模式
-- Completions 与 Logging：可供兼容客户端使用
-
-服务提供 `octoparse://workflow` 工作流说明，以及模板搜索、任务搜索和导出预览三个 `ui://widget/...` 资源。Widget 面向支持 OpenAI Apps SDK 等 UI 资源的客户端；普通 MCP 客户端仍可正常调用工具，但不一定渲染这些界面。
+模板输入、数据源选项和电商结果集字段都可能随服务更新。建议每次任务都按以下原则处理：先精确读取模板或数据集契约，再传值；工具列表变化时，断开并重新连接或刷新客户端工具列表。不要把历史示例中的字段名、导出格式或旧工具数当作固定接口。
 
 ## 平台对接 {#平台对接}
 
