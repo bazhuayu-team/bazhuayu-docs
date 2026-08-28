@@ -1,0 +1,104 @@
+---
+title: DataHub MCP 能力说明
+description: 了解 DataHub 通用 MCP 的六个稳定工具，以及搜索、运行和取回 Data App 结果的标准流程。
+---
+
+这页介绍的是 **DataHub 通用 MCP**：它先帮助 Agent 发现合适的 Data App，再读取 App 的实时契约并运行。它和“先选择一个指定 App 再连接”的教程使用同一套 DataHub 能力，区别只是选 App 的时间不同。
+
+<Note>
+  Data App 的数量、名称、发布者、价格和输入输出会持续更新；MCP 协议工具则相对稳定。因此，本页重点说明工具契约和通用流程，不把某次市场目录当成长期清单。
+</Note>
+
+## 两层能力
+
+| 层级 | 内容 | 如何使用 |
+| --- | --- | --- |
+| **协议层** | 搜索、查看详情、运行、查状态、取结果、取消运行共 6 个工具 | 可作为 Agent 或系统接入的稳定流程 |
+| **数据层** | 各个 Data App 的能力、价格、字段、可见范围和运行模式 | 每次调用前实时搜索并读取详情 |
+
+长期集成某个固定 App 时，优先记录它的 `app_id`；`namespace/app_name` 也可以引用 App，但发布者或应用改名后可能失效。
+
+## 六个 MCP 工具
+
+### `search_data_apps`：搜索目录
+
+用业务关键词发现 Data App。`query` 支持中英文关键词；留空可分页查看当前可见目录。还可用 `type` 过滤取数 / 查询类 `data` 或加工类 `transform`，用 `scope` 选择 `all`、`public`、`private` 或 `shared`。
+
+| 参数 | 说明 |
+| --- | --- |
+| `query` | 可选的业务关键词；为空时列出目录 |
+| `type` | 可选：`data` 或 `transform` |
+| `scope` | 可选的可见性范围，默认 `all` |
+| `offset`、`limit` | 分页；`limit` 为 `1-20`，默认 `5` |
+
+结果卡片会给出 `app_id`、名称、简介、运行模式（`sync` / `async`）、输入输出提示、起始价格和可见范围。先搜索和比较，未确认前不要直接运行。
+
+### `get_data_app_details`：读取完整契约
+
+在运行前调用。传入 `app_id` 或 `<namespace>/<app_name>` 后，可取得：
+
+- `input_schema`：本次运行必须满足的标准 JSON Schema。
+- `output_schema`：可能返回的字段。
+- `knowledge`：能力边界、预期延迟和注意事项。
+- `pricing`：计费说明。
+- `examples`：可作为起点的输入示例。
+
+<Tip>
+  最稳的方式是从 `examples` 复制一份 `input` 再按需求调整。不要从页面标题、聊天描述或旧任务中猜测字段名。
+</Tip>
+
+### `run_data_app`：发起运行
+
+传入 `app`、满足 `input_schema` 的 `input`，必要时设置 `max_records` 控制最大结果数。输入不符合契约时会立即返回 `[invalid-input]` 并指出字段问题。
+
+常见返回包括 `run_id`、`state`、`progress`、`usage`、`billing` 和 `next_step`。首次尝试建议使用较小的 `max_records`，先确认数据、耗时与费用。
+
+### `get_run_status`：查询运行状态
+
+传入 `run_id` 查询进度、失败信息、用量与费用，但不读取数据。异步任务可用 `wait_seconds`（`0-60`）进行长轮询；建议一次等待 60 秒，不要无间隔高频请求。
+
+常见状态为：`QUEUED`、`RUNNING`、`SUCCEEDED`、`PARTIALLY_SUCCEEDED`、`FAILED`、`CANCELLED`。失败时重点查看 `error.code`、`error.category`、`error.message` 和 `error.retryable`。
+
+### `get_run_result`：读取结果
+
+单次最多读取 50 条。可通过 `offset` 分页，通过 `fields` 指定逗号分隔的字段子集，例如 `title,price,url`，避免把不需要的大量字段带入对话。
+
+当响应出现 `handoff`，表示结果较大或不适合继续在对话中翻页。此时应按 `handoff` 给出的 SDK / REST 命令导出文件，而不是让 Agent 反复搬运全部 JSON。
+
+### `cancel_run`：取消运行
+
+传入 `run_id` 可取消排队或正在执行的任务。执行中的任务可能需要数秒协作停止；已成功产出的部分结果会保留，并可继续通过 `get_run_result` 读取。只按已产出的数据计费。
+
+## 标准工作流
+
+```text
+search_data_apps
+  → get_data_app_details
+  → run_data_app
+  → get_run_status（仅 async，长轮询）
+  → get_run_result
+  → cancel_run（需要中止时）
+```
+
+### 同步与异步 App
+
+| 运行模式 | 行为 | 建议 |
+| --- | --- | --- |
+| `sync` | 秒级完成；少量数据可能直接返回 `records` | 先检查返回，再按 `next_step` 继续取数 |
+| `async` | 立即返回 `run_id`，后台执行真实采集 | 多个目标可连续提交，再用 `get_run_status(wait_seconds=60)` 统一等待 |
+
+异步任务只得到 `run_id` 不等于采集成功。必须确认终态，再读取结果；同一目标不要因为等待而重复提交任务。
+
+## Data App 的使用原则
+
+Data App 是 DataHub 中具体的数据能力。它们会随市场更新，因此不维护静态目录；使用前直接用 `search_data_apps` 搜索，再用 `get_data_app_details` 确认当前的输入、输出、价格和边界即可。
+
+## 连接与使用建议
+
+- **尚未确定 App**：按<a href="/zh/datahub/quick-start/agent-connection/general" target="_blank" rel="noopener noreferrer">通用连接：在 Agent 中选择 App</a>先连接 DataHub MCP，再搜索、比较和确认。
+- **长期固定使用某个 App**：使用<a href="/zh/datahub/quick-start/agent-connection/codex" target="_blank" rel="noopener noreferrer">Codex：连接指定 App</a>或<a href="/zh/datahub/quick-start/agent-connection/workbuddy" target="_blank" rel="noopener noreferrer">WorkBuddy：连接指定 App</a>，缩小工具范围。
+- **涉及费用或大批量数据**：先调用详情工具核对 `pricing` 和 `examples`，使用小数据量试跑；如需大量结果，优先处理 `handoff`。
+
+<Note>
+  DataHub MCP 的通用服务以 `https://mcp-v2.bazhuayu.com` 为基础，支持 API Key 或 OAuth；连接配置和当前参数以 DataHub 开放平台生成的内容为准。它不同于顶栏“<a href="/zh/mcp/index" target="_blank" rel="noopener noreferrer">MCP 服务</a>”中的八爪鱼采集器 MCP，二者不要混用地址、认证和工具名。
+</Note>

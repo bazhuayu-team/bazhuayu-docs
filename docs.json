@@ -535,6 +535,12 @@
                     ]
                   }
                 ]
+              },
+              {
+                "group": "MCP 能力参考",
+                "pages": [
+                  "zh/datahub/mcp-capabilities"
+                ]
               }
             ]
           },
