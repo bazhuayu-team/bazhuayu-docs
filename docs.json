@@ -527,8 +527,9 @@
                 "pages": [
                   "zh/datahub/quick-start/client-use",
                   {
-                    "group": "Agent 连接",
+                    "group": "MCP连接使用",
                     "pages": [
+                      "zh/datahub/quick-start/agent-connection/general",
                       "zh/datahub/quick-start/agent-connection/codex",
                       "zh/datahub/quick-start/agent-connection/workbuddy"
                     ]
@@ -764,7 +765,7 @@
     },
     {
       "source": "/zh/datahub/quick-start/agent-connection",
-      "destination": "/zh/datahub/quick-start/agent-connection/codex"
+      "destination": "/zh/datahub/quick-start/agent-connection/general"
     },
     {
       "source": "/favicons/:path*",

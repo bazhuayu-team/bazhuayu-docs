@@ -6,11 +6,14 @@ description: 在 DataHub 网页端选择、试跑并核对 Data App 的数据结
 这篇教程适合希望直接在 DataHub 网页端使用数据能力的用户。你不需要配置 MCP 或编写代码，只需选择合适的 Data App、填写参数并在页面中检查结果。
 
 <CardGroup cols={2}>
-  <Card title="使用 Codex 连接" href="/zh/datahub/quick-start/agent-connection/codex">
-    从选择 Data App 开始，完整配置 Codex 并验证真实数据调用。
+  <Card title="通用连接" href="/zh/datahub/quick-start/agent-connection/general">
+    不预选 App，先连接 DataHub MCP，再让 Agent 搜索和运行合适的能力。
   </Card>
-  <Card title="使用 WorkBuddy 连接" href="/zh/datahub/quick-start/agent-connection/workbuddy">
-    从选择 Data App 开始，完整配置 WorkBuddy 连接器并验证结果。
+  <Card title="Codex：连接指定 App" href="/zh/datahub/quick-start/agent-connection/codex">
+    已经确定 App 时，将该能力作为固定工具接入 Codex。
+  </Card>
+  <Card title="WorkBuddy：连接指定 App" href="/zh/datahub/quick-start/agent-connection/workbuddy">
+    已经确定 App 时，将该能力作为固定连接器接入 WorkBuddy。
   </Card>
 </CardGroup>
 
@@ -76,13 +79,16 @@ description: 在 DataHub 网页端选择、试跑并核对 Data App 的数据结
 
 ## 下一步：连接 Agent
 
-请选择你实际使用的客户端。两篇教程都是独立的完整流程，不需要先阅读另一篇。
+还没有确定 App 时选择“通用连接”；已经确定固定 App 时，再按实际客户端选择 Codex 或 WorkBuddy 教程。
 
 <CardGroup cols={2}>
-  <Card title="Codex 完整教程" href="/zh/datahub/quick-start/agent-connection/codex">
-    配置 DataHub MCP、重新加载工具并完成第一次调用。
+  <Card title="通用连接" href="/zh/datahub/quick-start/agent-connection/general">
+    连接后由 Agent 搜索、比较并运行 Data App。
   </Card>
-  <Card title="WorkBuddy 完整教程" href="/zh/datahub/quick-start/agent-connection/workbuddy">
-    安装、信任连接器并完成第一次调用。
+  <Card title="Codex：指定 App" href="/zh/datahub/quick-start/agent-connection/codex">
+    先选 App，再配置 Codex 并完成第一次调用。
+  </Card>
+  <Card title="WorkBuddy：指定 App" href="/zh/datahub/quick-start/agent-connection/workbuddy">
+    先选 App，再安装并验证 WorkBuddy 连接器。
   </Card>
 </CardGroup>

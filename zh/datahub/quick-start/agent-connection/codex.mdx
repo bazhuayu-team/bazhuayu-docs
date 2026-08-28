@@ -1,9 +1,13 @@
 ---
-title: 使用 Codex 连接
-description: 从选择 Data App 到完成真实调用，零基础配置 DataHub MCP 与 Codex。
+title: Codex：连接指定 App
+description: 先选择固定 Data App，再将该能力接入 Codex 并完成真实调用。
 ---
 
-这篇教程会带你从零完成一次 DataHub 与 Codex 的连接。即使你没有使用过 MCP，也可以按照页面顺序操作：先选择并试跑 Data App，再复制安装提示词、创建 API Key、让 Codex 完成配置，最后用一个真实问题验证结果。
+这篇教程适合**已经知道要使用哪个 Data App** 的用户。你会先在市场中选择并试跑具体 App，再复制这个 App 的安装提示词，让 Codex 把它作为固定工具使用。
+
+<Note>
+  本文采用“先选 App，再连接”的指定 App 模式。如果你还不知道该选哪个 App，希望先连接 MCP、再让 Agent 搜索，请改用 <a href="/zh/datahub/quick-start/agent-connection/general" target="_blank" rel="noopener noreferrer">通用连接：在 Agent 中选择 App</a>。
+</Note>
 
 <Note>
   本文以 Zillow 房源搜索 Data App 为例。你选择其他 Data App 时，页面名称、输入参数和返回字段可能不同，但连接方法相同。
@@ -78,7 +82,7 @@ description: 从选择 Data App 到完成真实调用，零基础配置 DataHub 
   </Step>
 </Steps>
 
-DataHub MCP 使用 API Key 鉴权。配置中的 `Authorization: Bearer <API_KEY>` 只是把 API Key 放入请求头的格式，不是 OAuth 登录，也不需要去寻找 OAuth 授权页面。
+本篇从 Data App 详情页生成的指定 App 配置使用 API Key。配置中的 `Authorization: Bearer <API_KEY>` 只是把 API Key 放入请求头的格式。通用连接另支持 OAuth，请不要把两种教程中的配置片段混用。
 
 ## 第四步：让 Codex 完成连接
 
@@ -158,7 +162,7 @@ DataHub MCP 使用 API Key 鉴权。配置中的 `Authorization: Bearer <API_KEY
     重新加载 MCP 或重启 Codex。仍然看不到时，让 Codex检查用户级 `config.toml` 中的服务地址和请求头是否完整，并确认读取的是同一个用户配置。
   </Accordion>
   <Accordion title="提示未授权或 API Key 无效">
-    确认 Key 没有缺字符、空格或换行，并检查它是否仍然有效。不要把 API Key 当成 OAuth 凭证；应使用 Data App 页面生成的 `Authorization` 请求头格式。
+    确认 Key 没有缺字符、空格或换行，并检查它是否仍然有效。本篇使用指定 App 页面生成的 API Key 配置；如果需要 OAuth，请改用通用连接页面生成的配置。
   </Accordion>
   <Accordion title="Codex 没有调用工具，直接给了文字答案">
     在问题中明确写出“请使用刚连接的 DataHub 工具”，并给出该 App 支持的参数。还可以先让 Codex 列出当前可用工具，确认服务已加载。
@@ -179,6 +183,11 @@ DataHub MCP 使用 API Key 鉴权。配置中的 `Authorization: Bearer <API_KEY
 - Codex 已重新加载 MCP，并出现对应 DataHub 工具。
 - 已完成一次真实工具调用，并核对返回条数和关键字段。
 
-<Card title="使用 WorkBuddy 连接" href="/zh/datahub/quick-start/agent-connection/workbuddy">
-  如果你使用 WorkBuddy，请查看对应的完整连接流程。
-</Card>
+<CardGroup cols={2}>
+  <Card title="通用连接" href="/zh/datahub/quick-start/agent-connection/general">
+    不预选 App，连接后让 Agent 搜索并运行合适的数据能力。
+  </Card>
+  <Card title="WorkBuddy：连接指定 App" href="/zh/datahub/quick-start/agent-connection/workbuddy">
+    如果你使用 WorkBuddy，请查看对应的固定 App 完整流程。
+  </Card>
+</CardGroup>

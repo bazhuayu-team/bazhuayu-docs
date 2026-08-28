@@ -1,0 +1,228 @@
+---
+title: 通用连接：在 Agent 中选择 App
+description: 不预先选择 Data App，先连接 DataHub MCP，再让 Agent 搜索、了解并运行合适的数据能力。
+---
+
+如果你还不知道应该使用哪个 Data App，或者希望 Agent 根据每次任务自行寻找能力，请使用这篇教程。通用连接会把 DataHub 的发现与运行工具接入 Agent；连接完成后，你可以先描述数据需求，再让 Agent 搜索合适的 Data App、查看参数，最后确认并运行。
+
+<Note>
+  **通用连接不要求先选 App。** 本教程与“Codex：连接指定 App”“WorkBuddy：连接指定 App”是两种不同用法。指定 App 连接适合目标明确、长期只使用固定能力的场景；通用连接适合需求会变化或尚未确定 App 的场景。
+</Note>
+
+## 先理解两种连接方式
+
+| 方式 | 操作顺序 | 适合场景 |
+| --- | --- | --- |
+| **通用连接** | 先连接 DataHub MCP → 在 Agent 中搜索 App → 查看详情 → 选择并运行 | 不知道该选哪个 App；每次任务可能需要不同数据能力；希望 Agent 辅助发现。 |
+| **指定 App 连接** | 先在市场选择 App → 复制该 App 的安装提示词 → 连接 Agent → 直接运行 | 已经确定固定 App；希望减少工具范围；用于稳定、重复的业务流程。 |
+
+两种方式调用的都是 DataHub 中的 Data App，区别只是“在哪里选择 App”。你可以同时保留两类连接，但建议为它们使用容易识别的名称，避免 Agent 选错工具。
+
+## 完成后你能做什么
+
+完成本教程后，你可以在 Agent 中依次完成：
+
+1. 按关键词、平台或场景搜索 Data App。
+2. 查看某个 App 的用途、输入参数、输出字段和计费说明。
+3. 确认 App 和参数后发起运行。
+4. 查询异步任务状态并取得最终结果。
+
+## 开始前
+
+请准备好：
+
+- 一个能够正常登录的八爪鱼账号。
+- 一个支持 Streamable HTTP MCP 的 Agent 客户端，例如 WorkBuddy、Codex、Claude Code 或 Cursor。
+- 如果选择 API Key 方式：提前在用户中心创建 DataHub API Key。
+- 一个用于测试的简单数据目标，例如“寻找可以查询 Instagram 账号信息的 Data App”。
+
+<Warning>
+  API Key 相当于账号凭证。不要把真实 Key 提交到代码仓库、共享配置、公开截图或群聊。OAuth 模式不要把网页登录后的临时访问令牌复制到本地配置中。
+</Warning>
+
+## 第一步：打开通用 MCP 连接
+
+<Steps>
+  <Step title="进入 Data Hub 开放平台">
+    登录八爪鱼官网，在顶部 Data Hub 菜单中点击“Data Hub 开放平台”。
+
+    <img src="/assets/datahub/agent-connection/general/open-datahub-platform.png" alt="从 Data Hub 菜单进入开放平台" width="820" />
+  </Step>
+  <Step title="打开 MCP 连接">
+    在开放平台左侧导航中点击“MCP 连接”。页面显示的默认工具集可以检索并运行 DataHub 中的 Data App，不需要提前从市场选择某个 App。
+
+    <img src="/assets/datahub/agent-connection/general/open-mcp-connection.png" alt="在 Data Hub 开放平台打开 MCP 连接" width="820" />
+  </Step>
+</Steps>
+
+<Tip>
+  在某个 Data App 的“调用方式”页面，也可以通过底部的“MCP 连接”入口跳转到这里。跳转只是为了方便，不代表必须先选择该 App。
+</Tip>
+
+## 第二步：选择认证方式
+
+通用连接支持 API Key 和 OAuth。两种方式只影响身份认证，不会改变 Data App 的搜索和运行能力。
+
+### 方式一：API Key（推荐）
+
+适合长期稳定使用、命令行客户端和自动化流程。页面生成的配置会包含：
+
+```text
+Authorization: Bearer <YOUR_API_KEY>
+```
+
+这里的 `Bearer` 是 API Key 的请求头传递格式。请使用 DataHub API Key，不要拿网页登录状态中的临时 access token 代替。
+
+如果还没有 Key，请先按照 <a href="/zh/mcp/quick-start/api-key" target="_blank" rel="noopener noreferrer">获取 API Key</a> 创建。API Key 通常只在创建时完整显示，请保存在可信的密码管理工具中。
+
+### 方式二：OAuth 登录
+
+适合支持 MCP OAuth 的交互式客户端。选择 OAuth 后，配置中不写 API Key；客户端第一次连接时会打开浏览器，由你登录八爪鱼账号并确认授权。登录状态可能到期，之后需要重新授权。
+
+<img src="/assets/datahub/agent-connection/general/choose-auth-and-copy-config.png" alt="在 DataHub MCP 连接页面选择 API Key 或 OAuth" width="820" />
+
+## 第三步：复制通用安装提示词
+
+在“MCP 连接”页面选择你的 Agent 客户端和认证方式，然后点击“复制安装提示词”。请复制页面当前生成的完整内容，不要凭记忆手写服务地址、工具范围或请求头。
+
+<Tip>
+  页面显示的通用服务地址以 `https://mcp-v2.bazhuayu.com` 为基础。具体配置和工具参数可能调整，始终以开放平台当前生成的内容为准。
+</Tip>
+
+## 第四步：让 Agent 完成配置
+
+下面以 WorkBuddy 为例。Codex、Claude Code 和 Cursor 的按钮位置不同，但核心步骤相同：粘贴安装提示词、选择认证方式、允许修改当前用户的 MCP 配置，然后重新加载客户端。
+
+<Steps>
+  <Step title="把安装提示词发送给 Agent">
+    新建对话，粘贴刚才复制的完整提示词。Agent 应先询问认证方式，再写入配置；如果它准备把凭证写进项目文件，请立即停止并要求改为当前用户的本地 MCP 配置。
+
+    <img src="/assets/datahub/agent-connection/general/paste-general-install-prompt.png" alt="在 WorkBuddy 中粘贴 DataHub 通用 MCP 安装提示词" width="820" />
+  </Step>
+  <Step title="确认认证方式">
+    选择 API Key 时，按 Agent 提示安全提供 Key；选择 OAuth 时，不要提供任何 Key，让 Agent 写入无凭证配置。
+
+    <img src="/assets/datahub/agent-connection/general/choose-authentication-in-agent.png" alt="在 Agent 中选择 DataHub MCP 的 API Key 或 OAuth 认证" width="720" />
+  </Step>
+  <Step title="重新加载客户端">
+    配置完成后，重新加载 MCP 或重启客户端。使用 OAuth 时，首次连接可能先显示“需要认证”，这是正常状态。
+
+    <img src="/assets/datahub/agent-connection/general/oauth-config-complete.png" alt="Agent 完成 DataHub OAuth MCP 配置并提示重新加载" width="780" />
+  </Step>
+</Steps>
+
+## 第五步：完成 OAuth 授权（仅 OAuth）
+
+如果你选择的是 API Key，请直接跳到下一步。
+
+<Steps>
+  <Step title="在连接器中点击连接">
+    以 WorkBuddy 为例，打开 MCP 服务管理，找到刚添加的 `bazhuayu_datahub`。当它显示“需要认证”时，点击“连接”。
+
+    <img src="/assets/datahub/agent-connection/general/authorize-workbuddy-connector.jpeg" alt="在 WorkBuddy 中连接需要 OAuth 认证的 DataHub MCP" width="500" />
+  </Step>
+  <Step title="在浏览器中登录并授权">
+    浏览器会打开八爪鱼身份页面。核对域名和当前账号，阅读授权范围后确认。完成后按页面提示返回 WorkBuddy；其他客户端可能会自动返回。
+
+    <img src="/assets/datahub/agent-connection/general/oauth-authorize-account-redacted.png" alt="在浏览器中确认 DataHub MCP OAuth 授权，账号信息已打码" width="620" />
+  </Step>
+  <Step title="确认连接器已启用">
+    回到客户端，确认“需要认证”提示消失，并且连接器处于启用状态。如果仍显示未认证，重新加载客户端后再试一次。
+  </Step>
+</Steps>
+
+## 第六步：先搜索，不要立即运行
+
+通用连接的关键是让 Agent 先发现 Data App。第一次使用时，建议明确要求它只搜索和比较，不要直接创建收费任务。例如：
+
+```text
+请使用 DataHub 搜索与“Instagram 账号信息”有关的 Data App。
+先列出最相关的 3 个结果，分别说明用途、需要的输入、主要输出字段和计费方式。
+暂时不要运行，等我确认。
+```
+
+Agent 通常会先使用 `search_data_apps` 搜索市场，再使用 `get_data_app_details` 查看候选 App 的详细契约。
+
+<img src="/assets/datahub/agent-connection/general/search-data-apps-in-agent.png" alt="WorkBuddy 说明如何搜索、查看并运行 DataHub Data App" width="820" />
+
+<Note>
+  Agent 搜索到的 App 数量、名称和覆盖平台会随 DataHub 市场实时变化。文档不提供固定清单，请以实际 `search_data_apps` 返回为准。
+</Note>
+
+## 第七步：确认 App 后再运行
+
+从候选结果中选择一个 App，让 Agent 先复述参数和预计操作，再执行小范围测试：
+
+```text
+选择第 1 个 Data App。请先告诉我它的必填参数、默认值和计费方式。
+我确认后，只运行最小数据量，并返回任务状态、结果条数和前 5 条数据。
+```
+
+<Steps>
+  <Step title="核对输入和费用">
+    确认必填参数、数据范围、返回字段和计费单位。信息不清楚时，让 Agent 再调用详情工具，不要猜参数。
+  </Step>
+  <Step title="小范围运行">
+    确认后再让 Agent 使用 `run_data_app`。同步 App 会直接返回结果；异步 App 需要继续查询运行状态。
+  </Step>
+  <Step title="取得异步结果">
+    对异步任务，让 Agent 使用运行状态与结果工具等待完成，再返回最终数据。不要仅凭“任务已提交”判断采集成功。
+  </Step>
+  <Step title="核对结果">
+    检查任务状态、实际条数和关键字段。个别记录缺少字段可能是源数据差异；如果大多数记录都不符合预期，再考虑更换 App 或调整参数。
+  </Step>
+</Steps>
+
+## 常见问题
+
+<AccordionGroup>
+  <Accordion title="通用连接是不是必须先选择一个 Data App？">
+    不是。通用连接先提供搜索和运行工具，连接后再由 Agent 使用 `search_data_apps` 查找能力。只有“指定 App 连接”才需要先在市场选择 App。
+  </Accordion>
+  <Accordion title="API Key 和 OAuth 应该选哪个？">
+    长期使用、命令行或自动化流程优先选择 API Key；希望通过浏览器登录、且客户端明确支持 MCP OAuth 时可以选择 OAuth。OAuth 登录状态可能到期，需要重新授权。
+  </Accordion>
+  <Accordion title="配置成功，但没有 search_data_apps">
+    确认使用的是开放平台“MCP 连接”页面生成的通用配置，而不是某个指定 App 的受限连接。重新复制当前提示词并重新加载客户端。
+  </Accordion>
+  <Accordion title="OAuth 一直显示需要认证">
+    在客户端连接器中点击“连接”，完成浏览器登录和授权后返回客户端。检查浏览器是否拦截了跳转，并确认授权页面域名属于八爪鱼官方身份服务。
+  </Accordion>
+  <Accordion title="Agent 搜索到 App 后直接运行了">
+    在提示词中明确写“只搜索和比较，暂时不要运行”。涉及费用或大量数据时，要求 Agent 在调用 `run_data_app` 前等待确认。
+  </Accordion>
+  <Accordion title="运行后只得到任务 ID，没有数据">
+    该 App 可能采用异步运行。让 Agent继续查询任务状态，并在完成后取得结果；不要重复提交同一任务。
+  </Accordion>
+</AccordionGroup>
+
+## 完成检查
+
+- 已从 Data Hub 开放平台的“MCP 连接”页面复制通用安装提示词。
+- 已明确选择 API Key 或 OAuth，没有混用两种凭证。
+- Agent 已加载 DataHub 通用工具，并能使用 `search_data_apps`。
+- 已先搜索和查看 App 详情，再确认运行。
+- 已用最小数据量完成一次真实调用，并检查最终结果。
+
+## 已经知道要用哪个 App？
+
+如果你的业务长期使用固定 App，可以缩小连接范围：
+
+<CardGroup cols={2}>
+  <Card title="Codex：连接指定 App" href="/zh/datahub/quick-start/agent-connection/codex">
+    先选择具体 App，再将它作为固定工具接入 Codex。
+  </Card>
+  <Card title="WorkBuddy：连接指定 App" href="/zh/datahub/quick-start/agent-connection/workbuddy">
+    先选择具体 App，再将它作为固定连接器接入 WorkBuddy。
+  </Card>
+</CardGroup>
+
+## 实际搜索效果
+
+下图展示了通用 MCP 连接成功后，WorkBuddy 调用 `search_data_apps` 搜索 Instagram 相关能力，并按账号、帖子、互动和搜索场景整理候选 Data App 的实际结果。
+
+<img src="/assets/datahub/agent-connection/general/agent-search-data-app-results.jpg" alt="WorkBuddy 通过 DataHub 通用 MCP 搜索 Instagram 相关 Data App 的实际结果" width="820" />
+
+<Note>
+  截图用于证明 Agent 可以在连接后自行搜索 Data App。实际搜索数量、应用名称、发布者和价格会随 DataHub 市场变化，请以当次工具返回为准。
+</Note>
