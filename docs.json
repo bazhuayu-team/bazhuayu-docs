@@ -525,7 +525,14 @@
               {
                 "group": "快速入门",
                 "pages": [
-                  "zh/datahub/getting-started"
+                  "zh/datahub/quick-start/client-use",
+                  {
+                    "group": "Agent 连接",
+                    "pages": [
+                      "zh/datahub/quick-start/agent-connection/codex",
+                      "zh/datahub/quick-start/agent-connection/workbuddy"
+                    ]
+                  }
                 ]
               }
             ]
@@ -750,6 +757,14 @@
     {
       "source": "/zh/changelog",
       "destination": "/zh/changelog/august-2026"
+    },
+    {
+      "source": "/zh/datahub/getting-started",
+      "destination": "/zh/datahub/quick-start/client-use"
+    },
+    {
+      "source": "/zh/datahub/quick-start/agent-connection",
+      "destination": "/zh/datahub/quick-start/agent-connection/codex"
     },
     {
       "source": "/favicons/:path*",

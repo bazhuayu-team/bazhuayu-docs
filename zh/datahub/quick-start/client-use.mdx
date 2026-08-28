@@ -1,0 +1,88 @@
+---
+title: 客户端直接使用
+description: 在 DataHub 网页端选择、试跑并核对 Data App 的数据结果。
+---
+
+这篇教程适合希望直接在 DataHub 网页端使用数据能力的用户。你不需要配置 MCP 或编写代码，只需选择合适的 Data App、填写参数并在页面中检查结果。
+
+<CardGroup cols={2}>
+  <Card title="使用 Codex 连接" href="/zh/datahub/quick-start/agent-connection/codex">
+    从选择 Data App 开始，完整配置 Codex 并验证真实数据调用。
+  </Card>
+  <Card title="使用 WorkBuddy 连接" href="/zh/datahub/quick-start/agent-connection/workbuddy">
+    从选择 Data App 开始，完整配置 WorkBuddy 连接器并验证结果。
+  </Card>
+</CardGroup>
+
+## 开始前
+
+请准备好一个可正常登录的八爪鱼账号，以及希望查询的数据目标，例如关键词、内容链接、商品 ID 或平台筛选条件。首次试用建议从小范围参数开始，先确认数据字段、时效和计费方式是否符合预期。
+
+## 访问并登录 DataHub
+
+<Steps>
+  <Step title="打开 Data Hub 市场">
+    访问 <a href="https://www.bazhuayu.com/data-hub" target="_blank" rel="noopener noreferrer">Data Hub 市场</a>。你可以使用搜索和分类筛选寻找所需的数据能力；市场中的应用、分类和价格会持续更新，请以页面实时信息为准。
+
+    <img src="/assets/datahub/getting-started/open-datahub-market.png" alt="打开 Data Hub 市场并浏览 Data App" width="820" />
+  </Step>
+  <Step title="登录八爪鱼账号">
+    点击页面右上角的账号入口完成登录。登录后才能提交在线体验、查看运行结果以及导出页面支持的数据文件。
+
+    <img src="/assets/datahub/getting-started/sign-in-to-account.png" alt="登录八爪鱼账号" width="560" />
+  </Step>
+</Steps>
+
+## 选择并了解 Data App
+
+<Steps>
+  <Step title="选择适合的 Data App">
+    从市场中点击与目标场景相匹配的 Data App。应用名称只能帮助初步筛选，是否适用仍应以详情页的数据说明、输入参数和输出字段为准。
+
+    <img src="/assets/datahub/getting-started/select-data-app.png" alt="在 Data Hub 市场选择一个 Data App" width="820" />
+  </Step>
+  <Step title="核对能力范围与费用">
+    依次查看“概览”“输入参数”“输出数据”“调用方式”和“价格”。重点确认数据来源与时效、必填参数、返回字段、单次调用限制和计费单位，避免不符合预期时直接扩大数据量。
+
+    <img src="/assets/datahub/getting-started/review-data-app-details.png" alt="查看 Data App 的能力、输入输出和价格说明" width="780" />
+  </Step>
+</Steps>
+
+## 在线运行并检查结果
+
+<Steps>
+  <Step title="填写参数并提交运行">
+    点击“立即体验”，按表单提示填写参数。带星号的字段为必填项；列表、分页和数量参数需遵循页面显示的格式和上限。第一次运行时建议使用少量数据进行验证。
+
+    <img src="/assets/datahub/getting-started/run-data-app-online.png" alt="填写 Data App 参数并提交运行" width="760" />
+  </Step>
+  <Step title="核对返回的数据">
+    等待运行完成后，在页面查看表格或 JSON 结果。先检查状态、返回条数和核心字段；确认符合预期后，再使用页面支持的导出方式或接入下游流程。
+
+    <img src="/assets/datahub/getting-started/review-online-results.png" alt="查看 Data App 在线运行结果" width="760" />
+  </Step>
+</Steps>
+
+<Tip>
+  在线运行成功只说明当前参数可以得到结果。正式业务使用前，建议再用接近真实场景的参数验证边界情况、数据完整性和实际费用。
+</Tip>
+
+## 完成检查
+
+- 已成功登录 DataHub，并找到目标 Data App。
+- 已核对输入参数、输出字段和公开价格。
+- 已用小范围参数完成一次在线运行。
+- 已检查状态、返回条数和关键字段。
+
+## 下一步：连接 Agent
+
+请选择你实际使用的客户端。两篇教程都是独立的完整流程，不需要先阅读另一篇。
+
+<CardGroup cols={2}>
+  <Card title="Codex 完整教程" href="/zh/datahub/quick-start/agent-connection/codex">
+    配置 DataHub MCP、重新加载工具并完成第一次调用。
+  </Card>
+  <Card title="WorkBuddy 完整教程" href="/zh/datahub/quick-start/agent-connection/workbuddy">
+    安装、信任连接器并完成第一次调用。
+  </Card>
+</CardGroup>

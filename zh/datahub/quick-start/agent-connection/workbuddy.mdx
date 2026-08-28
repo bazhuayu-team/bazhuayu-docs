@@ -1,0 +1,184 @@
+---
+title: 使用 WorkBuddy 连接
+description: 从选择 Data App 到完成真实调用，零基础配置 DataHub MCP 与 WorkBuddy。
+---
+
+这篇教程会带你从零完成一次 DataHub 与 WorkBuddy 的连接。你不需要了解 MCP 配置文件，只需按顺序完成网页试跑、复制安装提示词、创建 API Key、启用连接器和验证结果。
+
+<Note>
+  WorkBuddy 与 Codex 使用的是同一套 DataHub MCP 能力。不同之处只是 WorkBuddy 会通过连接器界面展示启用和信任状态，Data App 的能力并没有变化。
+</Note>
+
+## 完成后你能做什么
+
+完成本教程后，你可以直接在 WorkBuddy 中描述数据需求，让它调用 DataHub 的 Data App 获取结构化数据。本文同时说明单个 Data App 和多个 Data App 的连接方法。
+
+## 开始前
+
+请准备好：
+
+- 一个能够正常登录的八爪鱼账号。
+- 已安装并登录的 WorkBuddy 客户端。
+- 一个明确的小范围测试目标，例如目标平台、关键词和返回数量。
+
+<Warning>
+  API Key 相当于账号凭证。不要把真实 Key 放进项目文件、代码仓库、公开截图或群聊，只在 WorkBuddy 的可信凭证输入或明确请求环节中使用。
+</Warning>
+
+## 第一步：选择并试跑 Data App
+
+先在网页端确认 Data App 的输入和输出，再连接 WorkBuddy。这样后续出现问题时，可以快速区分是参数不正确，还是连接器没有配置好。
+
+<Steps>
+  <Step title="打开 Data Hub 市场并登录">
+    访问 <a href="https://www.bazhuayu.com/data-hub" target="_blank" rel="noopener noreferrer">Data Hub 市场</a>，点击右上角账号入口完成登录。
+
+    <img src="/assets/datahub/getting-started/open-datahub-market.png" alt="打开 Data Hub 市场" width="820" />
+
+    <img src="/assets/datahub/getting-started/sign-in-to-account.png" alt="登录八爪鱼账号" width="560" />
+  </Step>
+  <Step title="选择目标 Data App">
+    使用搜索或分类找到目标应用。进入详情页后，认真查看能力说明、必填参数、返回字段和价格，确认它适合当前任务。
+
+    <img src="/assets/datahub/getting-started/select-data-app.png" alt="在市场中选择 Data App" width="820" />
+
+    <img src="/assets/datahub/getting-started/review-data-app-details.png" alt="查看 Data App 的输入输出和价格" width="780" />
+  </Step>
+  <Step title="在线运行一次">
+    点击“立即体验”，按页面提示填写参数。第一次只请求少量数据，运行完成后检查状态、条数和关键字段。
+
+    <img src="/assets/datahub/getting-started/run-data-app-online.png" alt="填写参数并在线运行 Data App" width="760" />
+
+    <img src="/assets/datahub/getting-started/review-online-results.png" alt="检查 Data App 在线运行结果" width="760" />
+  </Step>
+</Steps>
+
+如果网页端没有得到结果，请先调整参数或更换 Data App。网页端验证成功后，再继续连接 WorkBuddy。
+
+## 第二步：复制 WorkBuddy 安装提示词
+
+在 Data App 详情页打开“调用方式”，选择 MCP，然后复制“让 AI 自己完成配置”的完整提示词。也可以通过详情页侧边栏的 MCP 入口快速进入。
+
+<img src="/assets/datahub/getting-started/open-data-app-call-methods.png" alt="在 Data App 调用方式页面查看 MCP 配置" width="760" />
+
+<img src="/assets/datahub/getting-started/copy-agent-install-prompt.png" alt="复制 WorkBuddy 可使用的 DataHub MCP 安装提示词" width="760" />
+
+<Tip>
+  第一次连接建议只选择一个 Data App。工具越少，WorkBuddy 越容易识别正确能力，排查问题也更简单。
+</Tip>
+
+## 第三步：创建 DataHub API Key
+
+<Steps>
+  <Step title="进入 API Key 管理页面">
+    按照 <a href="/zh/mcp/quick-start/api-key" target="_blank" rel="noopener noreferrer">获取 API Key</a> 教程进入八爪鱼用户中心，创建新的 API Key。
+
+    <img src="/assets/datahub/getting-started/create-datahub-api-key.png" alt="在用户中心创建 DataHub API Key" width="760" />
+  </Step>
+  <Step title="安全保存 API Key">
+    Key 通常只在创建时完整显示。请暂时保存在可信密码管理工具中，不要保存到项目目录或普通共享文档。
+  </Step>
+</Steps>
+
+DataHub MCP 使用 API Key 鉴权。配置中的 `Authorization: Bearer <API_KEY>` 是 API Key 的请求头传递格式，并不表示 OAuth 登录。
+
+## 第四步：在 WorkBuddy 中安装连接
+
+<Steps>
+  <Step title="把安装提示词发送给 WorkBuddy">
+    新建一个 WorkBuddy 对话，粘贴刚才复制的完整安装提示词并发送。WorkBuddy 会读取服务地址和配置要求，并在需要时请求 API Key。
+
+    <img src="/assets/datahub/getting-started/paste-install-prompt-into-agent.png" alt="向 WorkBuddy 发送 DataHub MCP 安装提示词" width="760" />
+  </Step>
+  <Step title="按提示提供 API Key">
+    仅在可信的凭证输入环节或 WorkBuddy 明确请求时提供 API Key。确认连接地址来自 Data App 当前“调用方式”页面，不要使用来源不明的地址。
+  </Step>
+  <Step title="启用并信任连接器">
+    打开 WorkBuddy 的连接器管理界面，找到刚创建的 DataHub MCP 连接。核对名称和服务来源后，启用并信任该连接器。
+
+    <img src="/assets/datahub/getting-started/trust-workbuddy-connector.png" alt="在 WorkBuddy 中启用并信任 DataHub MCP 连接器" width="760" />
+  </Step>
+  <Step title="重新加载连接器">
+    如果连接器启用后没有立即出现工具，请重新加载 WorkBuddy；找不到重新加载入口时，关闭并重新打开客户端。
+  </Step>
+</Steps>
+
+## 第五步：执行第一次真实调用
+
+使用清楚、具体的自然语言提出需求，最好包含平台、筛选条件和数量。例如：
+
+```text
+请使用刚才连接的 DataHub 工具，查询与“AI Agent”相关的数据，先返回 5 条，并列出标题、来源、发布时间和链接。
+```
+
+<Steps>
+  <Step title="确认 WorkBuddy 调用了连接器">
+    观察对话中的工具调用或连接器记录。只有出现对应 DataHub 工具调用，才说明 WorkBuddy 真正访问了 Data App。
+  </Step>
+  <Step title="核对数据结果">
+    检查返回条数、核心字段和内容是否符合预期。如果只得到普通说明文字，可以明确要求“请调用刚连接的 DataHub 工具”。
+
+    <img src="/assets/datahub/getting-started/verify-agent-data-result.png" alt="WorkBuddy 调用 Data App 并返回结构化结果" width="760" />
+  </Step>
+</Steps>
+
+## 可选：让 WorkBuddy 使用多个 Data App
+
+当同一个工作流确实需要多项能力时，可以创建自定义工具集，将多个 Data App 放入同一个 MCP 连接。
+
+<Steps>
+  <Step title="进入开放平台的 MCP 连接">
+    从 Data Hub 进入开放平台，打开“MCP 连接”，然后进入“自定义工具集”。
+
+    <img src="/assets/datahub/getting-started/open-datahub-platform.png" alt="进入 Data Hub 开放平台" width="820" />
+
+    <img src="/assets/datahub/getting-started/open-mcp-connections.png" alt="打开开放平台中的 MCP 连接" width="820" />
+  </Step>
+  <Step title="添加需要的 Data App">
+    只选择当前流程真正需要的应用。工具过多会增加 WorkBuddy 选择错误工具的概率。
+
+    <img src="/assets/datahub/getting-started/add-data-app-to-toolset.png" alt="向 DataHub 自定义工具集添加 Data App" width="780" />
+  </Step>
+  <Step title="复制多 App 安装提示词">
+    保存工具集后，复制页面当前生成的完整安装提示词。
+
+    <img src="/assets/datahub/getting-started/copy-multi-app-install-prompt.png" alt="复制多 Data App 安装提示词" width="780" />
+  </Step>
+  <Step title="发送给 WorkBuddy 并重新加载">
+    将多 App 安装提示词发送给 WorkBuddy，按提示更新连接器并重新加载。然后先让 WorkBuddy 列出可用能力，再逐个测试所选 App。
+
+    <img src="/assets/datahub/getting-started/verify-multi-app-install-prompt.png" alt="在 WorkBuddy 中验证多 Data App 安装提示词" width="720" />
+  </Step>
+</Steps>
+
+## 常见问题
+
+<AccordionGroup>
+  <Accordion title="连接器已经添加，但看不到工具">
+    检查连接器是否已启用并信任，然后重新加载或重启 WorkBuddy。仍未出现时，重新核对安装提示词中的服务地址与请求头。
+  </Accordion>
+  <Accordion title="提示未授权或 API Key 无效">
+    确认 Key 没有缺字符、空格或换行，并检查它是否仍然有效。DataHub 使用 API Key，不需要 OAuth 授权；请使用页面生成的 `Authorization` 请求头格式。
+  </Accordion>
+  <Accordion title="WorkBuddy 没有调用工具，只给出普通回答">
+    在问题中明确写出“请使用刚连接的 DataHub 工具”，并给出 Data App 支持的参数。也可以先让 WorkBuddy 列出当前可用连接器和工具。
+  </Accordion>
+  <Accordion title="网页端成功，WorkBuddy 调用失败">
+    使用网页端成功的同一组参数再次测试，逐项检查 API Key、连接地址、连接器信任状态和 WorkBuddy 日志。第一次请求保持数据量较小。
+  </Accordion>
+  <Accordion title="工具集新增 App 后没有同步">
+    在开放平台保存工具集，重新复制当前提示词并更新 WorkBuddy 连接器，然后重新加载客户端。工具集变化不会自动同步。
+  </Accordion>
+</AccordionGroup>
+
+## 完成检查
+
+- 已在网页端用少量数据成功试跑 Data App。
+- 已从 Data App 当前“调用方式”页面复制安装提示词。
+- API Key 只保存在可信的本地配置或凭证工具中。
+- WorkBuddy 连接器已启用并信任，且能看到对应工具。
+- 已完成一次真实工具调用，并核对返回条数和关键字段。
+
+<Card title="使用 Codex 连接" href="/zh/datahub/quick-start/agent-connection/codex">
+  如果你使用 Codex，请查看对应的完整连接流程。
+</Card>

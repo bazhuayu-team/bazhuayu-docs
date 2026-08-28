@@ -1,0 +1,184 @@
+---
+title: 使用 Codex 连接
+description: 从选择 Data App 到完成真实调用，零基础配置 DataHub MCP 与 Codex。
+---
+
+这篇教程会带你从零完成一次 DataHub 与 Codex 的连接。即使你没有使用过 MCP，也可以按照页面顺序操作：先选择并试跑 Data App，再复制安装提示词、创建 API Key、让 Codex 完成配置，最后用一个真实问题验证结果。
+
+<Note>
+  本文以 Zillow 房源搜索 Data App 为例。你选择其他 Data App 时，页面名称、输入参数和返回字段可能不同，但连接方法相同。
+</Note>
+
+## 完成后你能做什么
+
+完成本教程后，你可以直接在 Codex 中描述数据需求，由 Codex 调用 DataHub 的 Data App，并返回结构化结果。整个过程不需要手写 MCP 配置。
+
+## 开始前
+
+请准备好：
+
+- 一个能够正常登录的八爪鱼账号。
+- 已安装并登录的 Codex 客户端。
+- 一个明确的小范围测试目标，例如“查询 Tampa 的 5 条出租房源”。
+
+<Warning>
+  API Key 相当于账号凭证。不要把真实 Key 放进项目文件、代码仓库、公开截图或群聊，只在 Codex 明确请求凭证时提供。
+</Warning>
+
+## 第一步：选择并试跑 Data App
+
+连接 Agent 前，先在网页端确认 Data App 能满足需求。这样如果后续调用失败，你可以快速判断问题出在数据参数还是 Codex 配置。
+
+<Steps>
+  <Step title="打开 Data Hub 市场并登录">
+    访问 <a href="https://www.bazhuayu.com/data-hub" target="_blank" rel="noopener noreferrer">Data Hub 市场</a>，点击右上角账号入口完成登录。
+
+    <img src="/assets/datahub/getting-started/open-datahub-market.png" alt="打开 Data Hub 市场" width="820" />
+
+    <img src="/assets/datahub/getting-started/sign-in-to-account.png" alt="登录八爪鱼账号" width="560" />
+  </Step>
+  <Step title="找到需要的 Data App">
+    使用搜索或分类筛选目标应用。进入详情页后，先阅读能力说明、输入参数、输出字段和价格。不要只根据应用名称判断是否适用。
+
+    <img src="/assets/datahub/getting-started/select-data-app.png" alt="在市场中选择 Data App" width="820" />
+
+    <img src="/assets/datahub/getting-started/review-data-app-details.png" alt="查看 Data App 的输入输出和价格" width="780" />
+  </Step>
+  <Step title="用少量数据在线试跑">
+    点击“立即体验”，填写页面要求的参数。第一次只请求少量数据，运行完成后检查状态、返回条数和关键字段。
+
+    <img src="/assets/datahub/getting-started/run-data-app-online.png" alt="填写参数并在线运行 Data App" width="760" />
+
+    <img src="/assets/datahub/getting-started/review-online-results.png" alt="检查 Data App 在线运行结果" width="760" />
+  </Step>
+</Steps>
+
+如果网页端没有得到结果，请先修改输入参数或更换 Data App，不要急着连接 Codex。
+
+## 第二步：复制 Codex 安装提示词
+
+在 Data App 详情页打开“调用方式”，选择 MCP，然后找到“让 AI 自己完成配置”或“复制安装提示词”。复制页面生成的完整内容，不要手动改写服务地址。
+
+<img src="/assets/datahub/agent-connection/codex/open-data-app-call-methods.jpeg" alt="在 Data App 调用方式页面复制 Codex 安装提示词" width="760" />
+
+<Tip>
+  只需要一项能力时，优先连接单个 Data App。这样 Codex 更容易选对工具，也更方便排查问题。
+</Tip>
+
+## 第三步：创建 DataHub API Key
+
+<Steps>
+  <Step title="进入 API Key 管理页面">
+    按照 <a href="/zh/mcp/quick-start/api-key" target="_blank" rel="noopener noreferrer">获取 API Key</a> 教程进入八爪鱼用户中心并创建 Key。
+
+    <img src="/assets/datahub/getting-started/create-datahub-api-key.png" alt="在用户中心创建 DataHub API Key" width="760" />
+  </Step>
+  <Step title="暂时保存新创建的 Key">
+    Key 通常只在创建时完整显示。请将它保存在可信的密码管理工具中，完成配置后不要继续保留在普通文本文件里。
+  </Step>
+</Steps>
+
+DataHub MCP 使用 API Key 鉴权。配置中的 `Authorization: Bearer <API_KEY>` 只是把 API Key 放入请求头的格式，不是 OAuth 登录，也不需要去寻找 OAuth 授权页面。
+
+## 第四步：让 Codex 完成连接
+
+<Steps>
+  <Step title="把安装提示词发送给 Codex">
+    新建一个 Codex 对话，粘贴刚才复制的完整安装提示词并发送。Codex 会读取服务地址和配置要求，然后说明下一步需要什么。
+
+    <img src="/assets/datahub/agent-connection/codex/paste-install-prompt.jpeg" alt="在 Codex 中发送 DataHub 安装提示词" width="820" />
+  </Step>
+  <Step title="按提示提供 API Key">
+    只有当 Codex 明确请求凭证时，再提供刚创建的 API Key。确认 Codex 修改的是当前用户的 MCP 配置，而不是项目中的共享文件。
+  </Step>
+  <Step title="确认配置结果">
+    Codex 完成后会说明写入了哪个配置文件，以及新服务的名称。正常情况下，它会修改用户级 `config.toml`，并提示重新加载 MCP 或重启 Codex。
+
+    <img src="/assets/datahub/agent-connection/codex/confirm-mcp-config.jpeg" alt="Codex 确认 DataHub MCP 配置已完成" width="760" />
+  </Step>
+  <Step title="重新加载 Codex">
+    按 Codex 的提示重新加载 MCP；如果界面中没有重新加载入口，关闭并重新打开 Codex。重新打开后，再继续下一步验证。
+  </Step>
+</Steps>
+
+## 第五步：执行第一次真实调用
+
+用自然语言告诉 Codex 你要查询什么，并给出明确范围。第一次调用建议限制数量，例如：
+
+```text
+请使用刚才连接的 Zillow Property Search 工具，查询 Tampa 的出租房源，先返回 5 条，并列出价格、卧室数、地址和详情链接。
+```
+
+<Steps>
+  <Step title="确认 Codex 调用了 Data App">
+    观察对话中的工具调用记录。只有出现对应 DataHub 工具调用，才说明 Codex 真正使用了 Data App，而不是根据已有知识直接回答。
+  </Step>
+  <Step title="核对返回结果">
+    检查返回条数、字段和内容是否与网页端试跑结果一致。字段为空不一定代表失败，应先确认该条数据源本身是否提供该字段。
+
+    <img src="/assets/datahub/agent-connection/codex/verify-data-result.jpeg" alt="Codex 调用 Zillow Data App 并返回结构化房源结果" width="820" />
+  </Step>
+</Steps>
+
+## 可选：让 Codex 使用多个 Data App
+
+只有当一个工作流确实需要多种数据能力时，再创建多 App 工具集。
+
+<Steps>
+  <Step title="进入开放平台的 MCP 连接">
+    从 Data Hub 进入开放平台，打开“MCP 连接”，然后进入“自定义工具集”。
+
+    <img src="/assets/datahub/getting-started/open-datahub-platform.png" alt="进入 Data Hub 开放平台" width="820" />
+
+    <img src="/assets/datahub/getting-started/open-mcp-connections.png" alt="打开开放平台中的 MCP 连接" width="820" />
+  </Step>
+  <Step title="选择需要的 Data App">
+    只加入当前工作流真正需要的 App。部分应用详情页也会提供“相关 Data Apps”组合入口。
+
+    <img src="/assets/datahub/agent-connection/related-data-apps-bundle.jpeg" alt="选择相关 Data Apps 组合" width="760" />
+
+    <img src="/assets/datahub/getting-started/add-data-app-to-toolset.png" alt="向自定义工具集添加 Data App" width="780" />
+  </Step>
+  <Step title="复制并发送多 App 安装提示词">
+    保存工具集后复制页面生成的安装提示词，把它发送给 Codex，并按提示重新加载 MCP。
+
+    <img src="/assets/datahub/getting-started/copy-multi-app-install-prompt.png" alt="复制多个 Data App 的安装提示词" width="780" />
+
+    <img src="/assets/datahub/agent-connection/codex/paste-multi-app-prompt.jpeg" alt="在 Codex 中发送多 Data App 安装提示词" width="820" />
+  </Step>
+  <Step title="逐个验证工具">
+    先让 Codex 列出当前可用的数据能力，再一次只测试一个 App。全部通过后，再让多个 App 协同完成复杂任务。
+  </Step>
+</Steps>
+
+## 常见问题
+
+<AccordionGroup>
+  <Accordion title="Codex 说配置成功，但看不到工具">
+    重新加载 MCP 或重启 Codex。仍然看不到时，让 Codex检查用户级 `config.toml` 中的服务地址和请求头是否完整，并确认读取的是同一个用户配置。
+  </Accordion>
+  <Accordion title="提示未授权或 API Key 无效">
+    确认 Key 没有缺字符、空格或换行，并检查它是否仍然有效。不要把 API Key 当成 OAuth 凭证；应使用 Data App 页面生成的 `Authorization` 请求头格式。
+  </Accordion>
+  <Accordion title="Codex 没有调用工具，直接给了文字答案">
+    在问题中明确写出“请使用刚连接的 DataHub 工具”，并给出该 App 支持的参数。还可以先让 Codex 列出当前可用工具，确认服务已加载。
+  </Accordion>
+  <Accordion title="网页端有结果，Codex 调用却失败">
+    对照网页端成功参数，逐项检查服务地址、API Key、参数格式和 Codex 日志。第一次验证时保持请求范围小，避免把超时误认为连接失败。
+  </Accordion>
+  <Accordion title="修改工具集后，Codex 仍显示旧工具">
+    保存新的工具集后，重新复制当前安装提示词并让 Codex 更新配置，然后重新加载 MCP。客户端不会自动同步工具集变化。
+  </Accordion>
+</AccordionGroup>
+
+## 完成检查
+
+- 已在网页端用少量数据成功试跑 Data App。
+- 已从 Data App 当前“调用方式”页面复制安装提示词。
+- API Key 只保存在可信的本地配置或凭证工具中。
+- Codex 已重新加载 MCP，并出现对应 DataHub 工具。
+- 已完成一次真实工具调用，并核对返回条数和关键字段。
+
+<Card title="使用 WorkBuddy 连接" href="/zh/datahub/quick-start/agent-connection/workbuddy">
+  如果你使用 WorkBuddy，请查看对应的完整连接流程。
+</Card>
