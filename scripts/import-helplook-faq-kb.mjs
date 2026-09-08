@@ -280,7 +280,7 @@ async function importFaq() {
     const sourceUrl = `${SOURCE_BASE}/${page.sourceSlug}`;
     const outputPath = path.join(root, ...page.route.slice(1).split("/")) + ".mdx";
     const description = excerpt(markdown, 160) || `${page.title}常见问题解答`;
-    const body = `---\ntitle: "${escapeYaml(page.title)}"\ndescription: "${escapeYaml(description)}"\nhidden: true\nkbStatus: "unverified"\nkbSource: "faq"\nsourceSlug: "${page.sourceSlug}"\nsource: "${sourceUrl}"\n---\n\n${markdown}\n`;
+    const body = `---\ntitle: "${escapeYaml(page.title)}"\ndescription: "${escapeYaml(description)}"\nhidden: true\nnoindex: true\nkbStatus: "unverified"\nkbSource: "faq"\nsourceSlug: "${page.sourceSlug}"\nsource: "${sourceUrl}"\n---\n\n${markdown}\n`;
     await fs.mkdir(path.dirname(outputPath), { recursive: true });
     await fs.writeFile(outputPath, body, "utf8");
     records.push({

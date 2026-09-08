@@ -65,6 +65,7 @@
               },
               {
                 "group": "快速入门",
+                "boost": 2,
                 "pages": [
                   {
                     "group": "注册安装",
@@ -91,6 +92,7 @@
               },
               {
                 "group": "操作指南",
+                "boost": 1.5,
                 "pages": [
                   {
                     "group": "基本采集",
@@ -847,6 +849,6 @@
       "twitter:card": "summary_large_image",
       "apple-mobile-web-app-title": "八爪鱼文档"
     },
-    "indexing": "navigable"
+    "indexing": "all"
   }
 }
