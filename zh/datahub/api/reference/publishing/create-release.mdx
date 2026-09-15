@@ -1,9 +1,15 @@
 ---
 title: "发布 Release"
 description: "把一个就绪的 Build 晋升为正式版本，版本号在此刻确定。"
+api: POST https://api-datahub.bazhuayu.com/v1/data-apps/{app_id}/releases
+authMethod: bearer
 ---
 
-**`POST`** `https://api-datahub.bazhuayu.com/v1/data-apps/{app_id}/releases`
+## 端点
+
+```
+POST https://api-datahub.bazhuayu.com/v1/data-apps/{app_id}/releases
+```
 
 认证：需要 API Key，且仅 App 作者（发布者本人）可调用；其他人得到 `404`。
 

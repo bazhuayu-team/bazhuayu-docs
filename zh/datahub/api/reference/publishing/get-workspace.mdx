@@ -1,9 +1,15 @@
 ---
 title: "读取草稿"
 description: "读回草稿的原文、文件、版本号与校验结果，供「继续编辑」回填。"
+api: GET https://api-datahub.bazhuayu.com/v1/data-apps/{app_id}/workspace
+authMethod: bearer
 ---
 
-**`GET`** `https://api-datahub.bazhuayu.com/v1/data-apps/{app_id}/workspace`
+## 端点
+
+```
+GET https://api-datahub.bazhuayu.com/v1/data-apps/{app_id}/workspace
+```
 
 认证：需要 API Key，且仅 App 作者（发布者本人）可调用；其他人得到 `404`。
 

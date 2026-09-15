@@ -1,9 +1,15 @@
 ---
 title: "发布者运行详情"
 description: "对我发布的 App 的某一次调用，白名单字段，附结构化告警。"
+api: GET https://api-datahub.bazhuayu.com/v1/publisher/runs/{run_id}
+authMethod: bearer
 ---
 
-**`GET`** `https://api-datahub.bazhuayu.com/v1/publisher/runs/{run_id}`
+## 端点
+
+```
+GET https://api-datahub.bazhuayu.com/v1/publisher/runs/{run_id}
+```
 
 认证：需要 API Key（`Authorization: Bearer <API Key>`）。
 

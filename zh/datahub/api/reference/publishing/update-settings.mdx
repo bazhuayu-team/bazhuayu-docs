@@ -1,9 +1,15 @@
 ---
 title: "调整可见性与维护状态"
 description: "切换 App 的可见范围、维护开关与源语言，随时可逆。"
+api: PATCH https://api-datahub.bazhuayu.com/v1/data-apps/{app_id}/settings
+authMethod: bearer
 ---
 
-**`PATCH`** `https://api-datahub.bazhuayu.com/v1/data-apps/{app_id}/settings`
+## 端点
+
+```
+PATCH https://api-datahub.bazhuayu.com/v1/data-apps/{app_id}/settings
+```
 
 认证：需要 API Key，且仅 App 作者（发布者本人）可调用；其他人得到 `404`。
 

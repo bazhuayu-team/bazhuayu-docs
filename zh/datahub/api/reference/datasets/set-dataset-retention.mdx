@@ -1,9 +1,15 @@
 ---
 title: "设置保留标记"
 description: "把数据集标记为长期保留，或取消标记。"
+api: PUT https://api-datahub.bazhuayu.com/v1/datasets/{dataset_id}/retention
+authMethod: bearer
 ---
 
-**`PUT`** `https://api-datahub.bazhuayu.com/v1/datasets/{dataset_id}/retention`
+## 端点
+
+```
+PUT https://api-datahub.bazhuayu.com/v1/datasets/{dataset_id}/retention
+```
 
 认证：需要 API Key（`Authorization: Bearer <API Key>`）。
 

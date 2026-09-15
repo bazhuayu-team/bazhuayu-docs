@@ -1,9 +1,14 @@
 ---
 title: "读取一种语言的译文"
 description: "读取一个 App 某种语言的完整译文 overlay，含 README。"
+api: GET https://api-datahub.bazhuayu.com/v1/data-apps/{app_id}/translations/{locale}
 ---
 
-**`GET`** `https://api-datahub.bazhuayu.com/v1/data-apps/{app_id}/translations/{locale}`
+## 端点
+
+```
+GET https://api-datahub.bazhuayu.com/v1/data-apps/{app_id}/translations/{locale}
+```
 
 认证：可匿名调用；携带 API Key 时可使用登录态才有的筛选或看到更多内容。
 

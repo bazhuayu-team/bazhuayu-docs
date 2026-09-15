@@ -1,9 +1,15 @@
 ---
 title: "读取运行结果"
 description: "分页读取一次运行产出的记录，支持 JSON、JSONL、CSV 与列裁剪。"
+api: GET https://api-datahub.bazhuayu.com/v1/runs/{run_id}/records
+authMethod: bearer
 ---
 
-**`GET`** `https://api-datahub.bazhuayu.com/v1/runs/{run_id}/records`
+## 端点
+
+```
+GET https://api-datahub.bazhuayu.com/v1/runs/{run_id}/records
+```
 
 认证：需要 API Key（`Authorization: Bearer <API Key>`）。
 

@@ -1,9 +1,15 @@
 ---
 title: "校验 manifest"
 description: "对一份 manifest 做完整校验，不落库，返回问题清单与预览卡片。"
+api: POST https://api-datahub.bazhuayu.com/v1/data-apps/validate
+authMethod: bearer
 ---
 
-**`POST`** `https://api-datahub.bazhuayu.com/v1/data-apps/validate`
+## 端点
+
+```
+POST https://api-datahub.bazhuayu.com/v1/data-apps/validate
+```
 
 认证：需要 API Key（`Authorization: Bearer <API Key>`）。
 

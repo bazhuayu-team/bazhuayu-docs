@@ -1,13 +1,19 @@
 ---
 title: "校验 .dataapp 包（已弃用）"
 description: "上传 zip 形式的 .dataapp 包做校验，不落库。已由契约通道取代。"
+api: POST https://api-datahub.bazhuayu.com/v1/data-apps/package
+authMethod: bearer
 ---
 
 <Warning>
   **已弃用。** 契约通道已取代 `.dataapp` 包流程：用装配契约文件夹端点自检，通过门户的契约导入向导提交。本端点为内置控制台与既有测试保留，移除另行安排。
 </Warning>
 
-**`POST`** `https://api-datahub.bazhuayu.com/v1/data-apps/package`
+## 端点
+
+```
+POST https://api-datahub.bazhuayu.com/v1/data-apps/package
+```
 
 认证：需要 API Key（`Authorization: Bearer <API Key>`）。
 

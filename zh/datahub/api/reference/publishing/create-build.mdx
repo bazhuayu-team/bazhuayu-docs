@@ -1,9 +1,15 @@
 ---
 title: "冻结 Build 快照"
 description: "把当前草稿内容冻结成不可变快照，作为调试运行和发布的对象。"
+api: POST https://api-datahub.bazhuayu.com/v1/data-apps/{app_id}/builds
+authMethod: bearer
 ---
 
-**`POST`** `https://api-datahub.bazhuayu.com/v1/data-apps/{app_id}/builds`
+## 端点
+
+```
+POST https://api-datahub.bazhuayu.com/v1/data-apps/{app_id}/builds
+```
 
 认证：需要 API Key，且仅 App 作者（发布者本人）可调用；其他人得到 `404`。
 

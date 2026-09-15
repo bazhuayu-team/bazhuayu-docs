@@ -1,9 +1,15 @@
 ---
 title: "Release 列表"
 description: "作者视角的版本历史，含 Build 标识与撤回标记。"
+api: GET https://api-datahub.bazhuayu.com/v1/data-apps/{app_id}/releases
+authMethod: bearer
 ---
 
-**`GET`** `https://api-datahub.bazhuayu.com/v1/data-apps/{app_id}/releases`
+## 端点
+
+```
+GET https://api-datahub.bazhuayu.com/v1/data-apps/{app_id}/releases
+```
 
 认证：需要 API Key，且仅 App 作者（发布者本人）可调用；其他人得到 `404`。
 

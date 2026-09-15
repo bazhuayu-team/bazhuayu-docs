@@ -1,9 +1,15 @@
 ---
 title: "上游调用留痕详情"
 description: "读取单条上游调用的完整请求与响应内容。"
+api: GET https://api-datahub.bazhuayu.com/v1/runs/{run_id}/upstream-calls/{call_id}
+authMethod: bearer
 ---
 
-**`GET`** `https://api-datahub.bazhuayu.com/v1/runs/{run_id}/upstream-calls/{call_id}`
+## 端点
+
+```
+GET https://api-datahub.bazhuayu.com/v1/runs/{run_id}/upstream-calls/{call_id}
+```
 
 认证：需要 API Key，且仅 App 作者（发布者本人）可调用；其他人得到 `404`。
 

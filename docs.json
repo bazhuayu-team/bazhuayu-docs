@@ -737,109 +737,107 @@
                 ]
               },
               {
-                "group": "API 概述",
+                "group": "DataHub API",
                 "pages": [
                   "zh/datahub/api/index",
-                  "zh/datahub/api/reference/introduction"
-                ]
-              },
-              {
-                "group": "客户端库",
-                "pages": [
-                  "zh/datahub/api/clients/python",
-                  "zh/datahub/api/clients/javascript"
-                ]
-              },
-              {
-                "group": "发现 Data App",
-                "pages": [
-                  "zh/datahub/api/reference/discovery/get-meta",
-                  "zh/datahub/api/reference/discovery/search-data-apps",
-                  "zh/datahub/api/reference/discovery/get-data-app",
-                  "zh/datahub/api/reference/discovery/list-data-app-versions",
-                  "zh/datahub/api/reference/discovery/get-data-app-readme",
-                  "zh/datahub/api/reference/discovery/get-manifest-schema",
-                  "zh/datahub/api/reference/discovery/get-template-variables",
-                  "zh/datahub/api/reference/discovery/list-data-app-translations",
-                  "zh/datahub/api/reference/discovery/get-data-app-translation",
-                  "zh/datahub/api/reference/discovery/lookup-translations"
-                ]
-              },
-              {
-                "group": "运行与结果",
-                "pages": [
-                  "zh/datahub/api/reference/runs/start-run",
-                  "zh/datahub/api/reference/runs/get-run",
-                  "zh/datahub/api/reference/runs/list-runs",
-                  "zh/datahub/api/reference/runs/cancel-run",
-                  "zh/datahub/api/reference/runs/get-run-records",
-                  "zh/datahub/api/reference/runs/list-upstream-calls",
-                  "zh/datahub/api/reference/runs/get-upstream-call"
-                ]
-              },
-              {
-                "group": "数据集",
-                "pages": [
-                  "zh/datahub/api/reference/datasets/list-datasets",
-                  "zh/datahub/api/reference/datasets/get-dataset",
-                  "zh/datahub/api/reference/datasets/set-dataset-retention",
-                  "zh/datahub/api/reference/datasets/get-dataset-records"
-                ]
-              },
-              {
-                "group": "账户与账单",
-                "pages": [
-                  "zh/datahub/api/reference/account/get-account",
-                  "zh/datahub/api/reference/account/get-billing"
-                ]
-              },
-              {
-                "group": "凭证密钥",
-                "pages": [
-                  "zh/datahub/api/reference/secrets/list-secrets",
-                  "zh/datahub/api/reference/secrets/put-secret",
-                  "zh/datahub/api/reference/secrets/delete-secret"
-                ]
-              },
-              {
-                "group": "发布与运营（App 作者）",
-                "pages": [
-                  "zh/datahub/api/reference/publishing/validate-manifest",
-                  "zh/datahub/api/reference/publishing/save-workspace",
-                  "zh/datahub/api/reference/publishing/get-workspace",
-                  "zh/datahub/api/reference/publishing/delete-workspace",
-                  "zh/datahub/api/reference/publishing/create-build",
-                  "zh/datahub/api/reference/publishing/list-builds",
-                  "zh/datahub/api/reference/publishing/get-build",
-                  "zh/datahub/api/reference/publishing/create-release",
-                  "zh/datahub/api/reference/publishing/list-releases",
-                  "zh/datahub/api/reference/publishing/yank-release",
-                  "zh/datahub/api/reference/publishing/unyank-release",
-                  "zh/datahub/api/reference/publishing/get-manifest",
-                  "zh/datahub/api/reference/publishing/download-contract",
-                  "zh/datahub/api/reference/publishing/update-settings",
-                  "zh/datahub/api/reference/publishing/list-grants",
-                  "zh/datahub/api/reference/publishing/grant-access",
-                  "zh/datahub/api/reference/publishing/revoke-access",
-                  "zh/datahub/api/reference/publishing/batch-grants",
-                  "zh/datahub/api/reference/publishing/batch-settings",
-                  "zh/datahub/api/reference/publishing/save-translation",
-                  "zh/datahub/api/reference/publishing/delete-translation",
-                  "zh/datahub/api/reference/publishing/deprecate-data-app",
-                  "zh/datahub/api/reference/publishing/undeprecate-data-app",
-                  "zh/datahub/api/reference/publishing/rename-data-app",
-                  "zh/datahub/api/reference/publishing/get-data-app-stats",
-                  "zh/datahub/api/reference/publishing/get-publisher-usage",
-                  "zh/datahub/api/reference/publishing/get-publisher-latency",
-                  "zh/datahub/api/reference/publishing/list-publisher-runs",
-                  "zh/datahub/api/reference/publishing/get-publisher-run",
-                  "zh/datahub/api/reference/publishing/list-publisher-probes",
-                  "zh/datahub/api/reference/publishing/get-publisher-probes-latest",
-                  "zh/datahub/api/reference/publishing/assemble-contract",
-                  "zh/datahub/api/reference/publishing/split-contract",
-                  "zh/datahub/api/reference/publishing/download-skill",
-                  "zh/datahub/api/reference/publishing/publish-data-app",
-                  "zh/datahub/api/reference/publishing/validate-package"
+                  "zh/datahub/api/reference/introduction",
+                  {
+                    "group": "客户端库",
+                    "pages": [
+                      "zh/datahub/api/clients/python",
+                      "zh/datahub/api/clients/javascript"
+                    ]
+                  },
+                  {
+                    "group": "发现 Data App",
+                    "pages": [
+                      "zh/datahub/api/reference/discovery/get-meta",
+                      "zh/datahub/api/reference/discovery/search-data-apps",
+                      "zh/datahub/api/reference/discovery/get-data-app",
+                      "zh/datahub/api/reference/discovery/list-data-app-versions",
+                      "zh/datahub/api/reference/discovery/get-data-app-readme",
+                      "zh/datahub/api/reference/discovery/get-manifest-schema",
+                      "zh/datahub/api/reference/discovery/get-template-variables",
+                      "zh/datahub/api/reference/discovery/list-data-app-translations",
+                      "zh/datahub/api/reference/discovery/get-data-app-translation",
+                      "zh/datahub/api/reference/discovery/lookup-translations"
+                    ]
+                  },
+                  {
+                    "group": "运行与结果",
+                    "pages": [
+                      "zh/datahub/api/reference/runs/start-run",
+                      "zh/datahub/api/reference/runs/get-run",
+                      "zh/datahub/api/reference/runs/list-runs",
+                      "zh/datahub/api/reference/runs/cancel-run",
+                      "zh/datahub/api/reference/runs/get-run-records",
+                      "zh/datahub/api/reference/runs/list-upstream-calls",
+                      "zh/datahub/api/reference/runs/get-upstream-call"
+                    ]
+                  },
+                  {
+                    "group": "数据集",
+                    "pages": [
+                      "zh/datahub/api/reference/datasets/list-datasets",
+                      "zh/datahub/api/reference/datasets/get-dataset",
+                      "zh/datahub/api/reference/datasets/set-dataset-retention",
+                      "zh/datahub/api/reference/datasets/get-dataset-records"
+                    ]
+                  },
+                  {
+                    "group": "账户与账单",
+                    "pages": [
+                      "zh/datahub/api/reference/account/get-account",
+                      "zh/datahub/api/reference/account/get-billing"
+                    ]
+                  },
+                  {
+                    "group": "凭证密钥",
+                    "pages": [
+                      "zh/datahub/api/reference/secrets/list-secrets",
+                      "zh/datahub/api/reference/secrets/put-secret",
+                      "zh/datahub/api/reference/secrets/delete-secret"
+                    ]
+                  },
+                  {
+                    "group": "发布与运营",
+                    "pages": [
+                      "zh/datahub/api/reference/publishing/validate-manifest",
+                      "zh/datahub/api/reference/publishing/save-workspace",
+                      "zh/datahub/api/reference/publishing/get-workspace",
+                      "zh/datahub/api/reference/publishing/delete-workspace",
+                      "zh/datahub/api/reference/publishing/create-build",
+                      "zh/datahub/api/reference/publishing/list-builds",
+                      "zh/datahub/api/reference/publishing/get-build",
+                      "zh/datahub/api/reference/publishing/create-release",
+                      "zh/datahub/api/reference/publishing/list-releases",
+                      "zh/datahub/api/reference/publishing/yank-release",
+                      "zh/datahub/api/reference/publishing/unyank-release",
+                      "zh/datahub/api/reference/publishing/get-manifest",
+                      "zh/datahub/api/reference/publishing/download-contract",
+                      "zh/datahub/api/reference/publishing/update-settings",
+                      "zh/datahub/api/reference/publishing/list-grants",
+                      "zh/datahub/api/reference/publishing/grant-access",
+                      "zh/datahub/api/reference/publishing/revoke-access",
+                      "zh/datahub/api/reference/publishing/batch-grants",
+                      "zh/datahub/api/reference/publishing/batch-settings",
+                      "zh/datahub/api/reference/publishing/save-translation",
+                      "zh/datahub/api/reference/publishing/delete-translation",
+                      "zh/datahub/api/reference/publishing/deprecate-data-app",
+                      "zh/datahub/api/reference/publishing/undeprecate-data-app",
+                      "zh/datahub/api/reference/publishing/rename-data-app",
+                      "zh/datahub/api/reference/publishing/get-data-app-stats",
+                      "zh/datahub/api/reference/publishing/get-publisher-usage",
+                      "zh/datahub/api/reference/publishing/get-publisher-latency",
+                      "zh/datahub/api/reference/publishing/list-publisher-runs",
+                      "zh/datahub/api/reference/publishing/get-publisher-run",
+                      "zh/datahub/api/reference/publishing/list-publisher-probes",
+                      "zh/datahub/api/reference/publishing/get-publisher-probes-latest",
+                      "zh/datahub/api/reference/publishing/assemble-contract",
+                      "zh/datahub/api/reference/publishing/split-contract",
+                      "zh/datahub/api/reference/publishing/download-skill"
+                    ]
+                  }
                 ]
               }
             ]

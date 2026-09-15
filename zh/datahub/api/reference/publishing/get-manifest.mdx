@@ -1,9 +1,15 @@
 ---
 title: "读回 manifest"
 description: "作者读回最新 Release 的完整 manifest（含 runtime 块），供编辑后重新发布。"
+api: GET https://api-datahub.bazhuayu.com/v1/data-apps/{app_id}/manifest
+authMethod: bearer
 ---
 
-**`GET`** `https://api-datahub.bazhuayu.com/v1/data-apps/{app_id}/manifest`
+## 端点
+
+```
+GET https://api-datahub.bazhuayu.com/v1/data-apps/{app_id}/manifest
+```
 
 认证：需要 API Key，且仅 App 作者（发布者本人）可调用；其他人得到 `404`。
 

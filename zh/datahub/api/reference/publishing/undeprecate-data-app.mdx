@@ -1,9 +1,15 @@
 ---
 title: "恢复维护"
 description: "撤销弃用标记，状态回到原有轨道。"
+api: POST https://api-datahub.bazhuayu.com/v1/data-apps/{app_id}/undeprecate
+authMethod: bearer
 ---
 
-**`POST`** `https://api-datahub.bazhuayu.com/v1/data-apps/{app_id}/undeprecate`
+## 端点
+
+```
+POST https://api-datahub.bazhuayu.com/v1/data-apps/{app_id}/undeprecate
+```
 
 认证：需要 API Key，且仅 App 作者（发布者本人）可调用；其他人得到 `404`。
 

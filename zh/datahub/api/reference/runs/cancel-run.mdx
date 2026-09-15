@@ -1,9 +1,15 @@
 ---
 title: "取消运行"
 description: "取消排队或执行中的运行，已产出的记录保留。"
+api: POST https://api-datahub.bazhuayu.com/v1/runs/{run_id}/cancel
+authMethod: bearer
 ---
 
-**`POST`** `https://api-datahub.bazhuayu.com/v1/runs/{run_id}/cancel`
+## 端点
+
+```
+POST https://api-datahub.bazhuayu.com/v1/runs/{run_id}/cancel
+```
 
 认证：需要 API Key（`Authorization: Bearer <API Key>`）。
 

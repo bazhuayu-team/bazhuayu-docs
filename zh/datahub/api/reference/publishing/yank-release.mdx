@@ -1,9 +1,15 @@
 ---
 title: "撤回版本"
 description: "撤回一个版本：拒绝新运行、不再解析为最新，可逆。"
+api: POST https://api-datahub.bazhuayu.com/v1/data-apps/{app_id}/releases/{version}/yank
+authMethod: bearer
 ---
 
-**`POST`** `https://api-datahub.bazhuayu.com/v1/data-apps/{app_id}/releases/{version}/yank`
+## 端点
+
+```
+POST https://api-datahub.bazhuayu.com/v1/data-apps/{app_id}/releases/{version}/yank
+```
 
 认证：需要 API Key，且仅 App 作者（发布者本人）可调用；其他人得到 `404`。
 

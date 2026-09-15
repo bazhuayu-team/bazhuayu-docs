@@ -1,9 +1,15 @@
 ---
 title: "保存一种语言的译文"
 description: "整份替换某种语言的译文 overlay；不产生新版本，对所有版本生效。"
+api: PUT https://api-datahub.bazhuayu.com/v1/data-apps/{app_id}/translations/{locale}
+authMethod: bearer
 ---
 
-**`PUT`** `https://api-datahub.bazhuayu.com/v1/data-apps/{app_id}/translations/{locale}`
+## 端点
+
+```
+PUT https://api-datahub.bazhuayu.com/v1/data-apps/{app_id}/translations/{locale}
+```
 
 认证：需要 API Key，且仅 App 作者（发布者本人）可调用；其他人得到 `404`。
 

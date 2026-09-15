@@ -1,9 +1,15 @@
 ---
 title: "发布者运行耗时分布"
 description: "我的 App 的运行耗时百分位（p50 / p90 / p95 / p99 / max），可按 App 或版本拆分。"
+api: GET https://api-datahub.bazhuayu.com/v1/publisher/usage/latency
+authMethod: bearer
 ---
 
-**`GET`** `https://api-datahub.bazhuayu.com/v1/publisher/usage/latency`
+## 端点
+
+```
+GET https://api-datahub.bazhuayu.com/v1/publisher/usage/latency
+```
 
 认证：需要 API Key（`Authorization: Bearer <API Key>`）。
 

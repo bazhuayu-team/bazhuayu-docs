@@ -1,13 +1,19 @@
 ---
 title: "一步发布（已弃用）"
 description: "api 型 App 的一步发布糖，提交即发布。已由契约导入向导与三步链取代。"
+api: POST https://api-datahub.bazhuayu.com/v1/data-apps
+authMethod: bearer
 ---
 
 <Warning>
   **已弃用。** 提交现在走门户的契约导入向导（背后是装配契约文件夹端点）或三步链（保存草稿 → 冻结 Build → 发布 Release）。本端点为内置控制台与既有测试保留，移除另行安排。
 </Warning>
 
-**`POST`** `https://api-datahub.bazhuayu.com/v1/data-apps`
+## 端点
+
+```
+POST https://api-datahub.bazhuayu.com/v1/data-apps
+```
 
 认证：需要 API Key（`Authorization: Bearer <API Key>`）。
 

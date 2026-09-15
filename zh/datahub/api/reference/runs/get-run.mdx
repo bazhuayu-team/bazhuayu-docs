@@ -1,9 +1,15 @@
 ---
 title: "查询运行"
 description: "读取一次运行的状态、进度、错误、用量与费用，支持长轮询。"
+api: GET https://api-datahub.bazhuayu.com/v1/runs/{run_id}
+authMethod: bearer
 ---
 
-**`GET`** `https://api-datahub.bazhuayu.com/v1/runs/{run_id}`
+## 端点
+
+```
+GET https://api-datahub.bazhuayu.com/v1/runs/{run_id}
+```
 
 认证：需要 API Key（`Authorization: Bearer <API Key>`）。
 

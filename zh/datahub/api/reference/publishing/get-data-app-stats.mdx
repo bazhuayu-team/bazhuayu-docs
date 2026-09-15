@@ -1,9 +1,15 @@
 ---
 title: "App 运行统计"
 description: "作者自检用的单 App 汇总指标：运行量、成功率、最近运行、近 30 天计费。"
+api: GET https://api-datahub.bazhuayu.com/v1/data-apps/{app_id}/stats
+authMethod: bearer
 ---
 
-**`GET`** `https://api-datahub.bazhuayu.com/v1/data-apps/{app_id}/stats`
+## 端点
+
+```
+GET https://api-datahub.bazhuayu.com/v1/data-apps/{app_id}/stats
+```
 
 认证：需要 API Key，且仅 App 作者（发布者本人）可调用；其他人得到 `404`。
 

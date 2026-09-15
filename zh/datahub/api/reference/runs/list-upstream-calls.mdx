@@ -1,9 +1,15 @@
 ---
 title: "调试运行的上游调用留痕"
 description: "查看作者调试运行中每一次上游 HTTP 交互的时间线，用于排障。"
+api: GET https://api-datahub.bazhuayu.com/v1/runs/{run_id}/upstream-calls
+authMethod: bearer
 ---
 
-**`GET`** `https://api-datahub.bazhuayu.com/v1/runs/{run_id}/upstream-calls`
+## 端点
+
+```
+GET https://api-datahub.bazhuayu.com/v1/runs/{run_id}/upstream-calls
+```
 
 认证：需要 API Key，且仅 App 作者（发布者本人）可调用；其他人得到 `404`。
 

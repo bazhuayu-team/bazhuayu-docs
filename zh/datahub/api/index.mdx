@@ -1,5 +1,5 @@
 ---
-title: "DataHub API"
+title: "API 概览"
 description: "通过 REST API、官方客户端库或 MCP 以编程方式发现、运行 Data App，读取结果并核对消耗。"
 ---
 
@@ -7,7 +7,29 @@ DataHub 的全部能力都通过一套公开 REST API 提供。网页端、MCP�
 
 ## REST API
 
-基础地址 `https://api-datahub.bazhuayu.com`，所有端点以 `/v1` 开头，请求与响应均为 JSON。需要身份的端点使用 `Authorization: Bearer <API Key>` 认证，API Key 在八爪鱼账户中心创建。
+我们提供的 DataHub 开放接口都基于如下 URL 访问：
+
+BaseURL: `https://api-datahub.bazhuayu.com`
+
+所有端点以 `/v1` 开头，请求与响应均为 JSON。例如发起运行的完整地址：
+
+```
+POST https://api-datahub.bazhuayu.com/v1/data-apps/{app_id}/runs
+```
+
+> 注意：文档中的 `{xxxx}` 表示占位符，需替换为真实值。
+
+### 认证
+
+需要身份的端点在请求头传入 API Key：
+
+```http
+Authorization: Bearer <API Key>
+```
+
+API Key 在八爪鱼账户中心创建，步骤见 <a href="/zh/mcp/quick-start/api-key" target="_blank" rel="noopener noreferrer">获取 API Key</a>。详细约定见 <a href="/zh/datahub/api/reference/introduction">通用约定</a>。
+
+### 调用示例
 
 发起一次运行并等待结果：
 
@@ -20,7 +42,7 @@ curl -X POST \
 ```
 
 <CardGroup cols={2}>
-  <Card title="接口参考" href="/zh/datahub/api/reference/introduction">
+  <Card title="通用约定" href="/zh/datahub/api/reference/introduction">
     认证、响应结构、分页、错误等通用约定，以及按资源分组的全部端点说明。
   </Card>
 

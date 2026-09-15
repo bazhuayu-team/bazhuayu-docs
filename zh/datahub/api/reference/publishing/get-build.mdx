@@ -1,9 +1,15 @@
 ---
 title: "Build 快照详情"
 description: "查看单个快照的状态与失败原因，code 型构建进度轮询用。"
+api: GET https://api-datahub.bazhuayu.com/v1/data-apps/{app_id}/builds/{build_id}
+authMethod: bearer
 ---
 
-**`GET`** `https://api-datahub.bazhuayu.com/v1/data-apps/{app_id}/builds/{build_id}`
+## 端点
+
+```
+GET https://api-datahub.bazhuayu.com/v1/data-apps/{app_id}/builds/{build_id}
+```
 
 认证：需要 API Key，且仅 App 作者（发布者本人）可调用；其他人得到 `404`。
 

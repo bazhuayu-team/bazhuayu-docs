@@ -1,9 +1,15 @@
 ---
 title: "发起运行"
 description: "用满足输入契约的参数发起一次 Data App 运行，可选择等待结果。"
+api: POST https://api-datahub.bazhuayu.com/v1/data-apps/{app_id}/runs
+authMethod: bearer
 ---
 
-**`POST`** `https://api-datahub.bazhuayu.com/v1/data-apps/{app_id}/runs`
+## 端点
+
+```
+POST https://api-datahub.bazhuayu.com/v1/data-apps/{app_id}/runs
+```
 
 认证：需要 API Key（`Authorization: Bearer <API Key>`）。
 
