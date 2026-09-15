@@ -1,0 +1,95 @@
+---
+title: "校验 manifest"
+description: "对一份 manifest 做完整校验，不落库，返回问题清单与预览卡片。"
+---
+
+**`POST`** `https://api-datahub.bazhuayu.com/v1/data-apps/validate`
+
+认证：需要 API Key（`Authorization: Bearer <API Key>`）。
+
+两阶段发布的第一阶段：结构、跨块规则、自发布护栏、code 包检查与文件名检查的完整校验，与发布时用的是同一个判定，返回问题清单和预览卡片。对错判定唯一以本端点为准，不要照文档里的字段表自行判断。
+
+## 请求
+
+### 请求体
+
+<ParamField body="manifest" type="string" required>
+  manifest 原文，YAML 或 JSON 字符串。
+</ParamField>
+
+<ParamField body="files" type="object">
+  随附文件，键为相对路径，值为文本内容（code 型或带 README 时使用）。
+</ParamField>
+
+<ParamField body="secrets" type="object">
+  随附的密钥名到明文的映射；校验端点不会存储它们。
+</ParamField>
+
+### 示例请求
+
+```bash
+curl -X POST \
+  -H "Authorization: Bearer $BAZHUAYU_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"manifest": "spec_version: \"0.2\"\nidentity:\n  app_name: reviews-query\n  name: 商品评论查询\n  …"}' \
+  "https://api-datahub.bazhuayu.com/v1/data-apps/validate"
+```
+
+## 响应
+
+### 200 成功
+
+```json
+{
+  "data": {
+    "valid": false,
+    "errors": [
+      {
+        "path": "$",
+        "message": "'identity' is a required property"
+      },
+      {
+        "path": "$",
+        "message": "'input' is a required property"
+      },
+      "…"
+    ],
+    "card": null
+  }
+}
+```
+
+响应包在 `data` 字段中，其内容如下。
+
+<ResponseField name="valid" type="boolean" required>
+  是否通过。
+</ResponseField>
+
+<ResponseField name="errors" type="object[]">
+  问题清单，每项含 `path`（JSON 路径）与 `message`。
+  <Expandable title="字段">
+    <ResponseField name="path" type="string" required>
+      —
+    </ResponseField>
+
+    <ResponseField name="message" type="string" required>
+      —
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="card" type="object">
+  通过时的预览卡片，未通过为 `null`。
+</ResponseField>
+
+### 错误
+
+| HTTP | `code` | `category` | 说明 |
+| --- | --- | --- | --- |
+| 401 | `unauthorized` | `forbidden` | 缺少或无效的 API Key。 |
+
+错误响应统一为 `{"error": {code, category, message, retryable}}`，见<a href="/zh/datahub/api/reference/introduction#错误">错误</a>。
+
+## 客户端库
+
+Python 与 JavaScript SDK 暂未封装此端点，请直接调用 REST。

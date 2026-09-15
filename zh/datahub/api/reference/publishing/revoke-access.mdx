@@ -1,0 +1,60 @@
+---
+title: "撤销授权"
+description: "把一个用户移出分享名单，立即生效。"
+---
+
+**`DELETE`** `https://api-datahub.bazhuayu.com/v1/data-apps/{app_id}/grants/{username}`
+
+认证：需要 API Key，且仅 App 作者（发布者本人）可调用；其他人得到 `404`。
+
+撤销立即生效：读取路径每次请求都查名单，没有缓存窗口。
+
+## 请求
+
+### 路径参数
+
+<ParamField path="app_id" type="string" required>
+  App 引用。
+</ParamField>
+
+<ParamField path="username" type="string" required>
+  被撤销用户的用户名。
+</ParamField>
+
+### 示例请求
+
+```bash
+curl -X DELETE \
+  -H "Authorization: Bearer $BAZHUAYU_API_KEY" \
+  "https://api-datahub.bazhuayu.com/v1/data-apps/carol/reviews-query/grants/dave"
+```
+
+## 响应
+
+### 200 成功
+
+```json
+{
+  "data": {
+    "ok": true
+  }
+}
+```
+
+响应包在 `data` 字段中，其内容如下。
+
+<ResponseField name="ok" type="boolean">
+  固定为 `true`。
+</ResponseField>
+
+### 错误
+
+| HTTP | `code` | `category` | 说明 |
+| --- | --- | --- | --- |
+| 401 | `unauthorized` | `forbidden` | 缺少或无效的 API Key。 |
+
+错误响应统一为 `{"error": {code, category, message, retryable}}`，见<a href="/zh/datahub/api/reference/introduction#错误">错误</a>。
+
+## 客户端库
+
+Python 与 JavaScript SDK 暂未封装此端点，请直接调用 REST。

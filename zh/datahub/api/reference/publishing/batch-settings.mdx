@@ -1,0 +1,89 @@
+---
+title: "批量调整运营设置"
+description: "把同一份设置补丁应用到多个 App，用于整簇暂停或恢复。"
+---
+
+**`POST`** `https://api-datahub.bazhuayu.com/v1/data-apps/batch/settings`
+
+认证：需要 API Key（`Authorization: Bearer <API Key>`）。
+
+整簇 App 的可逆运营开关：上游变更或限流时，用同一条 `pause_message` 一次暂停所有相关 App，修好后一次恢复；批量切换可见范围同理（与批量授权配合，按「先填名单，再切到 shared」的顺序）。字段语义与单个 App 的设置端点完全相同，本端点只是把一份补丁应用到多个 App。
+
+## 请求
+
+### 请求体
+
+<ParamField body="app_names" type="string[]" required>
+  —
+</ParamField>
+
+<ParamField body="settings" type="object" required>
+  —
+</ParamField>
+
+### 示例请求
+
+```bash
+curl -X POST \
+  -H "Authorization: Bearer $BAZHUAYU_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"apps": ["carol/reviews-query", "carol/product-detail"], "patch": {"accepting_runs": false, "pause_message": "上游限流，暂停服务"}}' \
+  "https://api-datahub.bazhuayu.com/v1/data-apps/batch/settings"
+```
+
+## 响应
+
+### 200 成功
+
+```json
+{
+  "data": {
+    "updated": 2,
+    "apps": [
+      {
+        "app": "carol/reviews-query",
+        "ok": true
+      },
+      {
+        "app": "carol/product-detail",
+        "ok": true
+      }
+    ]
+  }
+}
+```
+
+响应包在 `data` 字段中，其内容如下。
+
+<ResponseField name="updated" type="integer" required>
+  成功更新的 App 数。
+</ResponseField>
+
+<ResponseField name="apps" type="object[]" required>
+  逐个 App 的处理结果。
+  <Expandable title="字段">
+    <ResponseField name="app_name" type="string" required>
+      —
+    </ResponseField>
+
+    <ResponseField name="ok" type="boolean" required>
+      —
+    </ResponseField>
+
+    <ResponseField name="code" type="string">
+      —
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+### 错误
+
+| HTTP | `code` | `category` | 说明 |
+| --- | --- | --- | --- |
+| 401 | `unauthorized` | `forbidden` | 缺少或无效的 API Key。 |
+
+错误响应统一为 `{"error": {code, category, message, retryable}}`，见<a href="/zh/datahub/api/reference/introduction#错误">错误</a>。
+
+## 客户端库
+
+Python 与 JavaScript SDK 暂未封装此端点，请直接调用 REST。

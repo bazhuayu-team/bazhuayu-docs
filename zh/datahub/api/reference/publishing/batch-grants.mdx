@@ -1,0 +1,121 @@
+---
+title: "批量授权"
+description: "一次把多个 App 分享给多个用户，矩阵语义，幂等。"
+---
+
+**`POST`** `https://api-datahub.bazhuayu.com/v1/data-apps/batch/grants`
+
+认证：需要 API Key（`Authorization: Bearer <API Key>`）。
+
+一次向多个用户开放多个你拥有的 App（矩阵语义，幂等）。存储与生效规则与单用户授权相同。每个用户名只解析一次。`granted` 只计**新增**的配对，已在名单上的配对幂等跳过，便于区分「新增 3 个、已有 2 个」。
+
+## 请求
+
+### 请求体
+
+<ParamField body="app_names" type="string[]" required>
+  —
+</ParamField>
+
+<ParamField body="usernames" type="string[]" required>
+  用户名列表。
+</ParamField>
+
+### 示例请求
+
+```bash
+curl -X POST \
+  -H "Authorization: Bearer $BAZHUAYU_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"apps": ["carol/reviews-query", "carol/product-detail"], "usernames": ["dave", "erin"]}' \
+  "https://api-datahub.bazhuayu.com/v1/data-apps/batch/grants"
+```
+
+## 响应
+
+### 200 成功
+
+```json
+{
+  "data": {
+    "granted": 3,
+    "skipped": 1,
+    "apps": [
+      {
+        "app": "carol/reviews-query",
+        "ok": true
+      },
+      {
+        "app": "carol/product-detail",
+        "ok": true
+      }
+    ],
+    "users": [
+      {
+        "username": "dave",
+        "ok": true
+      },
+      {
+        "username": "erin",
+        "ok": true
+      }
+    ]
+  }
+}
+```
+
+响应包在 `data` 字段中，其内容如下。
+
+<ResponseField name="granted" type="integer" required>
+  新增的授权配对数。
+</ResponseField>
+
+<ResponseField name="requested" type="integer" required>
+  —
+</ResponseField>
+
+<ResponseField name="apps" type="object[]" required>
+  逐个 App 的处理结果。
+  <Expandable title="字段">
+    <ResponseField name="app_name" type="string" required>
+      —
+    </ResponseField>
+
+    <ResponseField name="ok" type="boolean" required>
+      —
+    </ResponseField>
+
+    <ResponseField name="code" type="string">
+      —
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="users" type="object[]" required>
+  逐个用户的解析结果。
+  <Expandable title="字段">
+    <ResponseField name="username" type="string" required>
+      —
+    </ResponseField>
+
+    <ResponseField name="ok" type="boolean" required>
+      —
+    </ResponseField>
+
+    <ResponseField name="code" type="string">
+      —
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+### 错误
+
+| HTTP | `code` | `category` | 说明 |
+| --- | --- | --- | --- |
+| 401 | `unauthorized` | `forbidden` | 缺少或无效的 API Key。 |
+
+错误响应统一为 `{"error": {code, category, message, retryable}}`，见<a href="/zh/datahub/api/reference/introduction#错误">错误</a>。
+
+## 客户端库
+
+Python 与 JavaScript SDK 暂未封装此端点，请直接调用 REST。

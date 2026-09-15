@@ -1,0 +1,64 @@
+---
+title: "批量读取卡片级译文"
+description: "一次为多个 App 取某种语言的卡片级译文，用于目录页渲染。"
+---
+
+**`POST`** `https://api-datahub.bazhuayu.com/v1/data-apps/translations/lookup`
+
+认证：可匿名调用；携带 API Key 时可使用登录态才有的筛选或看到更多内容。
+
+目录页渲染用：最多 100 个 `app_id` 加一种语言，返回其中**对调用方可见且带该语言译文**的 App 的卡片级条目（名称、简介、能力边界、关键词、计费事件说明）。其余 App 直接不出现在 `items` 里，不报错。
+
+README、schema 与使用知识不在这里，需要完整译文请读<a href="/zh/datahub/api/reference/discovery/get-data-app-translation">单个 App 的译文</a>。
+
+## 请求
+
+### 请求体
+
+<ParamField body="app_ids" type="string[]" required>
+  App 稳定标识列表，最多 100 个。
+</ParamField>
+
+<ParamField body="locale" type="string" required>
+  语言代码。
+</ParamField>
+
+### 示例请求
+
+```bash
+curl -X POST \
+  -H "Authorization: Bearer $BAZHUAYU_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"app_ids": ["app_6dfe4e839ccf"], "locale": "en"}' \
+  "https://api-datahub.bazhuayu.com/v1/data-apps/translations/lookup"
+```
+
+## 响应
+
+### 200 成功
+
+```json
+{
+  "data": {
+    "items": {}
+  }
+}
+```
+
+响应包在 `data` 字段中，其内容如下。
+
+<ResponseField name="items" type="object">
+  以 `app_id` 为键的译文条目字典，没有译文的 App 不出现。
+</ResponseField>
+
+### 错误
+
+| HTTP | `code` | `category` | 说明 |
+| --- | --- | --- | --- |
+| 401 | `unauthorized` | `forbidden` | 缺少或无效的 API Key。 |
+
+错误响应统一为 `{"error": {code, category, message, retryable}}`，见<a href="/zh/datahub/api/reference/introduction#错误">错误</a>。
+
+## 客户端库
+
+Python 与 JavaScript SDK 暂未封装此端点，请直接调用 REST。

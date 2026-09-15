@@ -1,0 +1,66 @@
+---
+title: "撤回版本"
+description: "撤回一个版本：拒绝新运行、不再解析为最新，可逆。"
+---
+
+**`POST`** `https://api-datahub.bazhuayu.com/v1/data-apps/{app_id}/releases/{version}/yank`
+
+认证：需要 API Key，且仅 App 作者（发布者本人）可调用；其他人得到 `404`。
+
+版本级撤回：该版本拒绝新运行（`422 version-yanked`），解析最新版本时被跳过；进行中的运行不受影响；钉到该版本的详情与契约仍可读（消费方排障需要）；不删除任何行，Build 与审计链不动。通过配对的撤销撤回恢复。
+
+## 请求
+
+### 路径参数
+
+<ParamField path="app_id" type="string" required>
+  App 引用。
+</ParamField>
+
+<ParamField path="version" type="string" required>
+  版本号。
+</ParamField>
+
+### 示例请求
+
+```bash
+curl -X POST \
+  -H "Authorization: Bearer $BAZHUAYU_API_KEY" \
+  "https://api-datahub.bazhuayu.com/v1/data-apps/carol/reviews-query/releases/1.2.0/yank"
+```
+
+## 响应
+
+### 200 成功
+
+```json
+{
+  "data": {
+    "version": "string",
+    "yanked": false
+  }
+}
+```
+
+响应包在 `data` 字段中，其内容如下。
+
+<ResponseField name="version" type="string" required>
+  版本号。
+</ResponseField>
+
+<ResponseField name="yanked" type="boolean" required>
+  当前撤回状态。
+</ResponseField>
+
+### 错误
+
+| HTTP | `code` | `category` | 说明 |
+| --- | --- | --- | --- |
+| 401 | `unauthorized` | `forbidden` | 缺少或无效的 API Key。 |
+| 404 | `version-not-found` | `not_found` | 该版本不存在。 |
+
+错误响应统一为 `{"error": {code, category, message, retryable}}`，见<a href="/zh/datahub/api/reference/introduction#错误">错误</a>。
+
+## 客户端库
+
+Python 与 JavaScript SDK 暂未封装此端点，请直接调用 REST。

@@ -1,0 +1,79 @@
+---
+title: "账户信息"
+description: "读取当前凭证对应的账号身份与自开户以来的累计数据费。"
+---
+
+**`GET`** `https://api-datahub.bazhuayu.com/v1/account`
+
+认证：需要 API Key（`Authorization: Bearer <API Key>`）。
+
+当前凭证对应账号的身份信息和累计数据费。这是身份端点，没有时间维度；按时段和维度查看消费用<a href="/zh/datahub/api/reference/account/get-billing">账单聚合</a>。
+
+`total_spent` 只含数据费，即按 App 价格表对运行产出计的费用。钱包余额、充值和发票不在 DataHub API 范围内，请在八爪鱼账户中心查看。同一账号的多把 API Key 查到的是同一个累计值。
+
+## 请求
+
+### 示例请求
+
+```bash
+curl \
+  -H "Authorization: Bearer $BAZHUAYU_API_KEY" \
+  "https://api-datahub.bazhuayu.com/v1/account"
+```
+
+## 响应
+
+### 200 成功
+
+```json
+{
+  "data": {
+    "user_id": "user-carol",
+    "username": "carol",
+    "total_spent": 0.06,
+    "currency": "CNY"
+  }
+}
+```
+
+响应包在 `data` 字段中，其内容如下。
+
+<ResponseField name="user_id" type="string" required>
+  账号的稳定标识。
+</ResponseField>
+
+<ResponseField name="username" type="string">
+  当前用户名，也是你发布的 App 引用 `<username>/<app_name>` 的前半段；未设置时为 `null`。
+</ResponseField>
+
+<ResponseField name="total_spent" type="number" required>
+  累计数据费。
+</ResponseField>
+
+<ResponseField name="currency" type="string">
+  币种。
+</ResponseField>
+
+### 错误
+
+| HTTP | `code` | `category` | 说明 |
+| --- | --- | --- | --- |
+| 401 | `unauthorized` | `forbidden` | 缺少或无效的 API Key。 |
+
+错误响应统一为 `{"error": {code, category, message, retryable}}`，见<a href="/zh/datahub/api/reference/introduction#错误">错误</a>。
+
+## 客户端库
+
+<CodeGroup>
+
+```python Python
+info = client.account()
+print(info["username"], info["total_spent"], info["currency"])
+```
+
+```js JavaScript
+const info = await client.account();
+console.log(info.username, info.total_spent, info.currency);
+```
+
+</CodeGroup>

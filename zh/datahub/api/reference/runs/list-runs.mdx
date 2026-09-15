@@ -1,0 +1,349 @@
+---
+title: "运行列表"
+description: "列出我发起的全部运行，支持按状态、App、凭证、渠道、种类与时间范围筛选。"
+---
+
+**`GET`** `https://api-datahub.bazhuayu.com/v1/runs`
+
+认证：需要 API Key（`Authorization: Bearer <API Key>`）。
+
+我发起的所有运行。归属按**账号**：用 API Key、SDK、MCP 和网页登录态发起的运行都在同一份列表里。始终按发起时间倒序，`pagination.total` 是筛选后的总数。
+
+筛选条件可以组合。`status` 支持逗号分隔多值（OR）；`credential` 是发起凭证的非敏感稳定标识，用来追踪是哪把 Key 在消耗额度；`created_from` / `created_to` 按发起时间，起点包含、终点不包含。这套词汇与<a href="/zh/datahub/api/reference/account/get-billing">账单聚合</a>相同，把账单分组的键原样传进来就能钻取到对应的运行。
+
+每一项都带 `billing` 与 `usage`，逐条对账不需要再单独查详情。输入回显打码规则与运行详情相同。
+
+## 请求
+
+### 查询参数
+
+<ParamField query="status" type="string">
+  运行状态，逗号分隔多值。词汇表之外的值返回 `400`。
+</ParamField>
+
+<ParamField query="credential" type="string">
+  发起凭证的稳定标识，取值来自账单聚合 `group_by=credential` 的 `credential`。
+</ParamField>
+
+<ParamField query="data_app" type="string">
+  App 引用，`<namespace>/<app_name>` 或 `app_<hex>`。
+</ParamField>
+
+<ParamField query="triggered_by" type="string">
+  发起渠道，如 `api` / `sdk` / `mcp` / `cli` / `web`。
+</ParamField>
+
+<ParamField query="created_from" type="string">
+  发起时间起点，包含，ISO-8601 绝对时间。
+</ParamField>
+
+<ParamField query="created_to" type="string">
+  发起时间终点，不包含。
+</ParamField>
+
+<ParamField query="run_kind" type="string">
+  `production` 生产运行，`test` 作者调试运行。
+
+取值：`test` / `production`。
+</ParamField>
+
+<ParamField query="offset" type="integer" default="0">
+  分页起点。
+
+范围 ≥ 0。
+</ParamField>
+
+<ParamField query="limit" type="integer" default="50">
+  每页条数，最大 200。
+
+范围 1 到 200。
+</ParamField>
+
+### 示例请求
+
+```bash
+curl \
+  -H "Authorization: Bearer $BAZHUAYU_API_KEY" \
+  "https://api-datahub.bazhuayu.com/v1/runs?data_app=carol/probe-b&status=SUCCEEDED,PARTIALLY_SUCCEEDED&limit=50"
+```
+
+## 响应
+
+### 200 成功
+
+```json
+{
+  "data": {
+    "items": [
+      {
+        "run_id": "run_3b750088f51c",
+        "namespace": "carol",
+        "app_name": "probe-b",
+        "app_version": "0.1.0",
+        "build_id": null,
+        "run_kind": "production",
+        "state": "RUNNING",
+        "input": {
+          "product": "p-doc"
+        },
+        "progress": {
+          "done": 0,
+          "total": null,
+          "status_text": null
+        },
+        "dataset_id": "ds_ec3ba97b8534",
+        "partial": false,
+        "cancel_requested": false,
+        "triggered_by": "api",
+        "upstream_ref": null,
+        "created_at": "2026-09-15T07:45:41.876601+00:00",
+        "started_at": "2026-09-15T07:45:41.883082+00:00",
+        "first_started_at": "2026-09-15T07:45:41.883082+00:00",
+        "finished_at": null,
+        "usage": {
+          "metrics": {
+            "records_collected": 0
+          },
+          "duration_ms": null
+        },
+        "billing": {
+          "events": [],
+          "total": 0.0,
+          "currency": "CNY",
+          "charged": false
+        },
+        "error": null
+      },
+      "…"
+    ],
+    "pagination": {
+      "offset": 0,
+      "limit": 2,
+      "count": 2,
+      "total": 2,
+      "has_more": false
+    }
+  }
+}
+```
+
+响应包在 `data` 字段中，其内容如下。
+
+<ResponseField name="items" type="object[]" required>
+  运行列表，每项字段与运行详情相同（不含 `sample_records`）。
+  <Expandable title="字段">
+    <ResponseField name="run_id" type="string" required>
+      —
+    </ResponseField>
+
+    <ResponseField name="namespace" type="string">
+      —
+    </ResponseField>
+
+    <ResponseField name="app_name" type="string">
+      —
+    </ResponseField>
+
+    <ResponseField name="app_version" type="string">
+      —
+    </ResponseField>
+
+    <ResponseField name="build_id" type="string">
+      —
+    </ResponseField>
+
+    <ResponseField name="run_kind" type="string">
+      —
+    </ResponseField>
+
+    <ResponseField name="state" type="enum" required>
+      取值：`PENDING` / `QUEUED` / `RUNNING` / `SUCCEEDED` / `PARTIALLY_SUCCEEDED` / `FAILED` / `CANCELLED` / `EXPIRED`。
+    </ResponseField>
+
+    <ResponseField name="input" type="object">
+      —
+    </ResponseField>
+
+    <ResponseField name="progress" type="object">
+      —
+      <Expandable title="字段">
+        <ResponseField name="done" type="integer">
+          —
+        </ResponseField>
+
+        <ResponseField name="total" type="integer">
+          —
+        </ResponseField>
+
+        <ResponseField name="status_text" type="string">
+          —
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
+
+    <ResponseField name="dataset_id" type="string">
+      —
+    </ResponseField>
+
+    <ResponseField name="partial" type="boolean">
+      —
+    </ResponseField>
+
+    <ResponseField name="cancel_requested" type="boolean">
+      true while cancellation has been requested and the run is still winding down (cooperative stop / partial-result recovery); always false in terminal states (normalized server-side), so consumers need not derive it from state
+    </ResponseField>
+
+    <ResponseField name="triggered_by" type="string">
+      —
+    </ResponseField>
+
+    <ResponseField name="upstream_ref" type="string">
+      —
+    </ResponseField>
+
+    <ResponseField name="created_at" type="string">
+      —
+    </ResponseField>
+
+    <ResponseField name="started_at" type="string">
+      —
+    </ResponseField>
+
+    <ResponseField name="first_started_at" type="string">
+      when the run was first claimed by a worker. Unlike started_at, which is re-stamped on every retry, this one is never rewritten, so it is the anchor for queue time: queued = first_started_at - created_at, and total wall time = finished_at - first_started_at. Deriving queue time from started_at counts the earlier attempts' execution as queueing. Null only for runs never claimed.
+    </ResponseField>
+
+    <ResponseField name="finished_at" type="string">
+      —
+    </ResponseField>
+
+    <ResponseField name="usage" type="object">
+      Objective usage metering: how much the run did (kept separate from
+    Billing; this is what evaluations compare against).
+      <Expandable title="字段">
+        <ResponseField name="metrics" type="object">
+          —
+        </ResponseField>
+
+        <ResponseField name="duration_ms" type="integer">
+          —
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
+
+    <ResponseField name="billing" type="object">
+      Billing ledger = Usage x pricing x billing_rules: how much is charged.
+      <Expandable title="字段">
+        <ResponseField name="events" type="object[]">
+          —
+        </ResponseField>
+
+        <ResponseField name="total" type="number">
+          —
+        </ResponseField>
+
+        <ResponseField name="currency" type="string">
+          —
+        </ResponseField>
+
+        <ResponseField name="charged" type="boolean">
+          —
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
+
+    <ResponseField name="error" type="object">
+      —
+      <Expandable title="字段">
+        <ResponseField name="code" type="string" required>
+          —
+        </ResponseField>
+
+        <ResponseField name="category" type="string">
+          —
+        </ResponseField>
+
+        <ResponseField name="message" type="string" required>
+          —
+        </ResponseField>
+
+        <ResponseField name="retryable" type="boolean">
+          —
+        </ResponseField>
+
+        <ResponseField name="retry_after" type="number">
+          —
+        </ResponseField>
+
+        <ResponseField name="item_index" type="integer">
+          —
+        </ResponseField>
+
+        <ResponseField name="details" type="object[]">
+          —
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="pagination" type="object">
+  分页信息。
+  <Expandable title="字段">
+    <ResponseField name="offset" type="integer">
+      —
+    </ResponseField>
+
+    <ResponseField name="limit" type="integer">
+      —
+    </ResponseField>
+
+    <ResponseField name="count" type="integer">
+      —
+    </ResponseField>
+
+    <ResponseField name="total" type="integer">
+      —
+    </ResponseField>
+
+    <ResponseField name="has_more" type="boolean">
+      —
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+### 错误
+
+| HTTP | `code` | `category` | 说明 |
+| --- | --- | --- | --- |
+| 401 | `unauthorized` | `forbidden` | 缺少或无效的 API Key。 |
+| 400 | `invalid-status` | `invalid_input` | `status` 含有词汇表之外的状态值。 |
+
+错误响应统一为 `{"error": {code, category, message, retryable}}`，见<a href="/zh/datahub/api/reference/introduction#错误">错误</a>。
+
+## 客户端库
+
+<CodeGroup>
+
+```python Python
+# 自动翻页遍历
+for r in client.iterate_runs(data_app="carol/probe-b", created_from="2026-09-01T00:00:00+08:00"):
+    print(r["run_id"], r["state"], r["billing"]["total"])
+
+# 需要总数时用分页版本
+page = client.list_runs_page(status="QUEUED,RUNNING", limit=50)
+print(page["pagination"]["total"])
+```
+
+```js JavaScript
+// 自动翻页遍历
+for await (const r of client.iterateRuns({ dataApp: "carol/probe-b", createdFrom: "2026-09-01T00:00:00+08:00" })) {
+  console.log(r.run_id, r.state, r.billing.total);
+}
+
+// 需要总数时用分页版本
+const page = await client.listRunsPage({ status: "QUEUED,RUNNING", limit: 50 });
+console.log(page.pagination.total);
+```
+
+</CodeGroup>

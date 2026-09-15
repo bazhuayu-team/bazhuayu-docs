@@ -1,0 +1,148 @@
+---
+title: "读取数据集记录"
+description: "分页读取一个数据集里的记录，支持 JSON、JSONL、CSV 与列裁剪。"
+---
+
+**`GET`** `https://api-datahub.bazhuayu.com/v1/datasets/{dataset_id}/records`
+
+认证：需要 API Key（`Authorization: Bearer <API Key>`）。
+
+分页读取数据集记录，参数与<a href="/zh/datahub/api/reference/runs/get-run-records">读取运行结果</a>相同；归属门与数据集详情相同，不可见即 `404`。
+
+## 请求
+
+### 路径参数
+
+<ParamField path="dataset_id" type="string" required>
+  数据集标识。
+</ParamField>
+
+### 查询参数
+
+<ParamField query="offset" type="integer" default="0">
+  分页起点。
+
+范围 ≥ 0。
+</ParamField>
+
+<ParamField query="limit" type="integer" default="100">
+  每页条数，最大 10000。
+
+范围 1 到 10000。
+</ParamField>
+
+<ParamField query="format" type="string" default="json">
+  输出格式。`json` 带信封与分页；`jsonl` 每行一条；`csv` 表格。
+
+取值：`json` / `jsonl` / `csv`。
+</ParamField>
+
+<ParamField query="fields" type="string">
+  逗号分隔的字段名，只返回这些列。
+</ParamField>
+
+### 示例请求
+
+```bash
+curl \
+  -H "Authorization: Bearer $BAZHUAYU_API_KEY" \
+  "https://api-datahub.bazhuayu.com/v1/datasets/ds_0bd5345d13d0/records?offset=0&limit=100"
+```
+
+## 响应
+
+### 200 成功
+
+```json
+{
+  "data": {
+    "run_id": null,
+    "dataset_id": "ds_0bd5345d13d0",
+    "records": [
+      {
+        "review_id": "103c9e-0000"
+      },
+      {
+        "review_id": "103c9e-0001"
+      }
+    ],
+    "partial": false,
+    "pagination": {
+      "offset": 0,
+      "limit": 2,
+      "count": 2,
+      "total": 20,
+      "has_more": true
+    }
+  }
+}
+```
+
+响应包在 `data` 字段中，其内容如下。
+
+<ResponseField name="run_id" type="string">
+  数据集来自运行时为该运行标识，否则为 `null`。
+</ResponseField>
+
+<ResponseField name="dataset_id" type="string" required>
+  数据集标识。
+</ResponseField>
+
+<ResponseField name="records" type="object[]" required>
+  记录数组。
+</ResponseField>
+
+<ResponseField name="partial" type="boolean">
+  来源运行是否部分成功或被取消。
+</ResponseField>
+
+<ResponseField name="pagination" type="object" required>
+  分页信息。
+  <Expandable title="字段">
+    <ResponseField name="offset" type="integer">
+      —
+    </ResponseField>
+
+    <ResponseField name="limit" type="integer">
+      —
+    </ResponseField>
+
+    <ResponseField name="count" type="integer">
+      —
+    </ResponseField>
+
+    <ResponseField name="total" type="integer">
+      —
+    </ResponseField>
+
+    <ResponseField name="has_more" type="boolean">
+      —
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+### 错误
+
+| HTTP | `code` | `category` | 说明 |
+| --- | --- | --- | --- |
+| 401 | `unauthorized` | `forbidden` | 缺少或无效的 API Key。 |
+| 404 | `dataset-not-found` | `not_found` | 数据集不存在、不属于当前账号，或是平台公共样例集（不可标记）。 |
+
+错误响应统一为 `{"error": {code, category, message, retryable}}`，见<a href="/zh/datahub/api/reference/introduction#错误">错误</a>。
+
+## 客户端库
+
+<CodeGroup>
+
+```python Python
+for record in client.iterate_dataset_records("ds_0bd5345d13d0"):
+    print(record)
+```
+
+```js JavaScript
+for await (const record of client.iterateDatasetRecords("ds_0bd5345d13d0")) {
+  console.log(record);
+}
+```
+
+</CodeGroup>

@@ -1,0 +1,119 @@
+---
+title: "最新巡检状态"
+description: "我每个 App 最近一轮巡检折叠成的单一结论，最差的在前。"
+---
+
+**`GET`** `https://api-datahub.bazhuayu.com/v1/publisher/probes/latest`
+
+认证：需要 API Key（`Authorization: Bearer <API Key>`）。
+
+我每个 App 最近一轮巡检批次折叠成一个 App 级结论（任一示例失败即 `FAIL`，其次 `TIMEOUT`、`NO_DATA`，批次进行中为 `PENDING`，全部通过为 `PASS`，什么都没跑为 `SKIPPED`），附第一个失败示例的错误。回答的是「现在有没有东西坏了」。从未被巡检的 App 不出现。最差的在前，再按应用名排。
+
+## 请求
+
+### 查询参数
+
+<ParamField query="data_app" type="string[]">
+  只看这些 App，可重复传。
+</ParamField>
+
+### 示例请求
+
+```bash
+curl \
+  -H "Authorization: Bearer $BAZHUAYU_API_KEY" \
+  "https://api-datahub.bazhuayu.com/v1/publisher/probes/latest"
+```
+
+## 响应
+
+### 200 成功
+
+```json
+{
+  "data": {
+    "items": []
+  }
+}
+```
+
+响应包在 `data` 字段中，其内容如下。
+
+<ResponseField name="items" type="object[]">
+  每个 App 一条。
+  <Expandable title="字段">
+    <ResponseField name="namespace" type="string">
+      发布者用户名。
+    </ResponseField>
+
+    <ResponseField name="app_name" type="string">
+      应用名。
+    </ResponseField>
+
+    <ResponseField name="app_version" type="string">
+      —
+    </ResponseField>
+
+    <ResponseField name="verdict" type="string" required>
+      App 级结论。
+    </ResponseField>
+
+    <ResponseField name="skip_reason" type="string">
+      —
+    </ResponseField>
+
+    <ResponseField name="examples" type="integer">
+      —
+    </ResponseField>
+
+    <ResponseField name="passed" type="integer">
+      —
+    </ResponseField>
+
+    <ResponseField name="error" type="object">
+      第一个失败示例的错误。
+      <Expandable title="字段">
+        <ResponseField name="code" type="string" required>
+          —
+        </ResponseField>
+
+        <ResponseField name="category" type="string">
+          —
+        </ResponseField>
+
+        <ResponseField name="message" type="string">
+          —
+        </ResponseField>
+
+        <ResponseField name="retryable" type="boolean">
+          —
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
+
+    <ResponseField name="kind" type="string">
+      —
+    </ResponseField>
+
+    <ResponseField name="checked_at" type="string" required>
+      —
+    </ResponseField>
+
+    <ResponseField name="finished_at" type="string">
+      —
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+### 错误
+
+| HTTP | `code` | `category` | 说明 |
+| --- | --- | --- | --- |
+| 401 | `unauthorized` | `forbidden` | 缺少或无效的 API Key。 |
+| 404 | `app-not-found` | `not_found` | App 不存在、已改名，或对当前凭证不可见（私有 / 分享范围之外）。 |
+
+错误响应统一为 `{"error": {code, category, message, retryable}}`，见<a href="/zh/datahub/api/reference/introduction#错误">错误</a>。
+
+## 客户端库
+
+Python 与 JavaScript SDK 暂未封装此端点，请直接调用 REST。

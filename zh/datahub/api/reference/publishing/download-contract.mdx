@@ -1,0 +1,47 @@
+---
+title: "下载契约文件夹"
+description: "把最新 Release 的作者侧契约打成 zip 下载。"
+---
+
+**`GET`** `https://api-datahub.bazhuayu.com/v1/data-apps/{app_id}/contract.zip`
+
+认证：需要 API Key，且仅 App 作者（发布者本人）可调用；其他人得到 `404`。
+
+最新 Release 的作者侧契约，按规范契约文件夹形式拆分并在服务端打包为 zip，数据源与读回 manifest 相同（文件引用已内联）。zip 内有一层 `<app_name>/` 目录，响应头 `Content-Disposition` 给出 `<app_name>.zip`。
+
+零 Release 返回 `404 release-not-found`：语义是「最新 Release」，不回落到草稿。编辑器伴生状态等非槽位文件不会包含，所以「下载 → 编辑 → 导入」对 api 型是无损往返。App 有译文时 zip 还带 `i18n.json`（当前译文，而非发布当时的）。
+
+## 请求
+
+### 路径参数
+
+<ParamField path="app_id" type="string" required>
+  App 引用。
+</ParamField>
+
+### 示例请求
+
+```bash
+curl \
+  -H "Authorization: Bearer $BAZHUAYU_API_KEY" \
+  "https://api-datahub.bazhuayu.com/v1/data-apps/carol/reviews-query/contract.zip"
+```
+
+## 响应
+
+### 200 成功
+
+响应体是 `application/zip` 二进制。
+
+### 错误
+
+| HTTP | `code` | `category` | 说明 |
+| --- | --- | --- | --- |
+| 401 | `unauthorized` | `forbidden` | 缺少或无效的 API Key。 |
+| 404 | `release-not-found` | `not_found` | 该版本不存在，或 App 尚无任何 Release。 |
+
+错误响应统一为 `{"error": {code, category, message, retryable}}`，见<a href="/zh/datahub/api/reference/introduction#错误">错误</a>。
+
+## 客户端库
+
+Python 与 JavaScript SDK 暂未封装此端点，请直接调用 REST。

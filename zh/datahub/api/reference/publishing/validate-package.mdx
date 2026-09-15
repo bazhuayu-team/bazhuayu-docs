@@ -1,0 +1,90 @@
+---
+title: "校验 .dataapp 包（已弃用）"
+description: "上传 zip 形式的 .dataapp 包做校验，不落库。已由契约通道取代。"
+---
+
+<Warning>
+  **已弃用。** 契约通道已取代 `.dataapp` 包流程：用装配契约文件夹端点自检，通过门户的契约导入向导提交。本端点为内置控制台与既有测试保留，移除另行安排。
+</Warning>
+
+**`POST`** `https://api-datahub.bazhuayu.com/v1/data-apps/package`
+
+认证：需要 API Key（`Authorization: Bearer <API Key>`）。
+
+以原始 zip 作为请求体上传 `.dataapp` 包 → 解包 → 同一套校验流水线；不落库。只做校验并回显解包出的文件：**通过后仍需调用一步发布端点**（两阶段发布不变，上传不是绕过校验的通道）。包内可以有一层包裹目录。
+
+## 请求
+
+### 示例请求
+
+```bash
+curl -X POST \
+  -H "Authorization: Bearer $BAZHUAYU_API_KEY" \
+  "https://api-datahub.bazhuayu.com/v1/data-apps/package"
+```
+
+## 响应
+
+### 200 成功
+
+```json
+{
+  "data": {
+    "valid": false,
+    "errors": [
+      {
+        "path": "string",
+        "message": "string"
+      }
+    ],
+    "card": {},
+    "manifest": "",
+    "files": {}
+  }
+}
+```
+
+响应包在 `data` 字段中，其内容如下。
+
+<ResponseField name="valid" type="boolean" required>
+  是否通过。
+</ResponseField>
+
+<ResponseField name="errors" type="object[]">
+  问题清单。
+  <Expandable title="字段">
+    <ResponseField name="path" type="string" required>
+      —
+    </ResponseField>
+
+    <ResponseField name="message" type="string" required>
+      —
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="card" type="object">
+  预览卡片。
+</ResponseField>
+
+<ResponseField name="manifest" type="string">
+  —
+</ResponseField>
+
+<ResponseField name="files" type="object">
+  解包出的文件名列表。
+</ResponseField>
+
+### 错误
+
+| HTTP | `code` | `category` | 说明 |
+| --- | --- | --- | --- |
+| 401 | `unauthorized` | `forbidden` | 缺少或无效的 API Key。 |
+| 422 | `invalid-manifest` | `invalid_input` | manifest 未通过校验，`issues[]` 列出问题。 |
+| 413 | `payload-too-large` | `invalid_input` | 请求体超过大小限制。 |
+
+错误响应统一为 `{"error": {code, category, message, retryable}}`，见<a href="/zh/datahub/api/reference/introduction#错误">错误</a>。
+
+## 客户端库
+
+Python 与 JavaScript SDK 暂未封装此端点，请直接调用 REST。

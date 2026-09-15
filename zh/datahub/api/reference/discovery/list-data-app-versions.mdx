@@ -1,0 +1,76 @@
+---
+title: "App 版本历史"
+description: "列出一个 App 已发布的全部版本，最新在前。"
+---
+
+**`GET`** `https://api-datahub.bazhuayu.com/v1/data-apps/{app_id}/versions`
+
+认证：可匿名调用；携带 API Key 时可使用登录态才有的筛选或看到更多内容。
+
+所有已发布的版本，最新在前。详情与运行默认使用最新版本，可用 `version` 参数钉住历史版本。
+
+被作者撤回（yank）的版本仍留在历史里并带标记，供排障时对照，但不参与「最新版本」的解析。
+
+## 请求
+
+### 路径参数
+
+<ParamField path="app_id" type="string" required>
+  App 引用，`app_<hex>` 或 `<namespace>/<app_name>`。
+</ParamField>
+
+### 示例请求
+
+```bash
+curl \
+  -H "Authorization: Bearer $BAZHUAYU_API_KEY" \
+  "https://api-datahub.bazhuayu.com/v1/data-apps/carol/probe-b/versions"
+```
+
+## 响应
+
+### 200 成功
+
+```json
+{
+  "data": [
+    {
+      "version": "0.1.0",
+      "published_at": "2026-09-15T07:45:38.633930+00:00",
+      "latest": true,
+      "yanked": false
+    }
+  ]
+}
+```
+
+响应包在 `data` 字段中，`data` 是数组，元素字段如下。
+
+<ResponseField name="version" type="string" required>
+  版本号，三段式。
+</ResponseField>
+
+<ResponseField name="published_at" type="string">
+  发布时间。
+</ResponseField>
+
+<ResponseField name="latest" type="boolean">
+  是否为当前最新版本。
+</ResponseField>
+
+<ResponseField name="yanked" type="boolean">
+  是否已被作者撤回。
+</ResponseField>
+
+### 错误
+
+| HTTP | `code` | `category` | 说明 |
+| --- | --- | --- | --- |
+| 401 | `unauthorized` | `forbidden` | 缺少或无效的 API Key。 |
+| 404 | `app-not-found` | `not_found` | App 不存在、已改名，或对当前凭证不可见（私有 / 分享范围之外）。 |
+
+错误响应统一为 `{"error": {code, category, message, retryable}}`，见<a href="/zh/datahub/api/reference/introduction#错误">错误</a>。
+
+## 客户端库
+
+Python 与 JavaScript SDK 暂未封装此端点，请直接调用 REST。

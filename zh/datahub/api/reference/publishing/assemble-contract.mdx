@@ -1,0 +1,141 @@
+---
+title: "装配契约文件夹"
+description: "把契约文件夹的多份 JSON 合并成一份 manifest 并完整校验，匿名可用。"
+---
+
+**`POST`** `https://api-datahub.bazhuayu.com/v1/data-apps/contract/assemble`
+
+认证：无需认证，可匿名调用。
+
+把契约文件夹（以相对路径为键的文件映射，保持顺序）合并成一份自包含的 manifest。装配规则以本端点为唯一真相，门户导入向导与契约 Skill 的自检都用它。
+
+槽位文件：`dataapp.json` / `input_schema.json` / `output_schema.json` / `runtime.json` / `pricing.json` / `examples.json` / `README.md`（文件名大小写不敏感，`input.schema.json` 的点号写法也接受并在 `picked` 中归一）。pricing 与 examples 也可以平铺在 dataapp.json 里。合并后的 manifest 走完整的作者态校验（与校验 manifest 端点同一判定），`issues` 为空才算可交付。可恢复的异常（缺文件、跨层重名、忽略的非契约文件、文件夹名不匹配等）作为结构化 `warnings`（code + params，由展示层本地化）返回，不算错误。
+
+硬失败（`400`）：槽位文件不是合法 JSON、形状不对（examples.json 必须是数组，其他槽位是对象）或超过 1MB；一个契约文件都没有；总大小超过 12MB。契约通道只覆盖 api 型，`runtime.kind=code` 会产生 issue。
+
+可选的第 8 个文件 `i18n.json`（`{source, locales}`，最多 4MB）**不并入 manifest**，而是解析后作为 `translations` 返回，由调用方再通过译文端点保存。`source` 必填；非法语言为 `400`；等于 `source` 的语言以 `i18n-locale-is-source` 跳过；路径级问题以 `i18n-*` 告警返回。
+
+匿名可用：装配是对请求体的纯函数，不读不写平台数据，没有需要保护的东西；文件与总大小限制是唯一的准入控制。
+
+## 请求
+
+### 请求体
+
+<ParamField body="files" type="object" required>
+  文件映射，键为相对路径，值为文件文本内容。
+</ParamField>
+
+### 示例请求
+
+```bash
+curl -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"files": {"dataapp.json": "{\"spec_version\": \"0.2\", \"identity\": {…}}", "input_schema.json": "{\"type\": \"object\", …}", "output_schema.json": "{\"id_field\": \"review_id\", …}", "runtime.json": "{\"kind\": \"api\", …}", "pricing.json": "{\"events\": [...]}", "examples.json": "[...]", "README.md": "# 商品评论查询"}}' \
+  "https://api-datahub.bazhuayu.com/v1/data-apps/contract/assemble"
+```
+
+## 响应
+
+### 200 成功
+
+```json
+{
+  "data": {
+    "manifest": {
+      "spec_version": "0.2",
+      "identity": {
+        "app_name": "reviews-query",
+        "name": "商品评论查询"
+      },
+      "…": "…"
+    },
+    "picked": {
+      "dataapp.json": "dataapp.json",
+      "input_schema.json": "input_schema.json"
+    },
+    "issues": [],
+    "warnings": [
+      {
+        "code": "contract-folder-name-mismatch",
+        "params": {
+          "expected": "reviews-query",
+          "actual": "reviews"
+        }
+      }
+    ],
+    "card": {
+      "app_name": "reviews-query",
+      "name": "商品评论查询"
+    },
+    "translations": null
+  }
+}
+```
+
+响应包在 `data` 字段中，其内容如下。
+
+<ResponseField name="manifest" type="object" required>
+  合并后的 manifest 对象。
+</ResponseField>
+
+<ResponseField name="picked" type="string[]">
+  实际识别到的槽位文件映射。
+</ResponseField>
+
+<ResponseField name="folder_name" type="string">
+  —
+</ResponseField>
+
+<ResponseField name="issues" type="object[]">
+  校验问题清单，为空才可交付。
+  <Expandable title="字段">
+    <ResponseField name="path" type="string" required>
+      —
+    </ResponseField>
+
+    <ResponseField name="message" type="string" required>
+      —
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="warnings" type="object[]">
+  结构化告警。
+  <Expandable title="字段">
+    <ResponseField name="code" type="string" required>
+      —
+    </ResponseField>
+
+    <ResponseField name="params" type="object">
+      —
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="translations" type="object">
+  解析后的 `i18n.json` 内容，没有则为 `null`。
+  <Expandable title="字段">
+    <ResponseField name="source" type="string" required>
+      —
+    </ResponseField>
+
+    <ResponseField name="locales" type="object">
+      —
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+### 错误
+
+| HTTP | `code` | `category` | 说明 |
+| --- | --- | --- | --- |
+| 400 | `contract-file-invalid` | `invalid_input` | 契约文件不是合法 JSON、形状不对或超过 1MB；或缺少 `i18n.json` 的 `source`。 |
+| 400 | `contract-empty` | `invalid_input` | 文件集合里没有任何契约槽位文件。 |
+| 400 | `locale-invalid` | `invalid_input` | 语言代码不合法。 |
+| 413 | `payload-too-large` | `invalid_input` | 请求体超过大小限制。 |
+
+错误响应统一为 `{"error": {code, category, message, retryable}}`，见<a href="/zh/datahub/api/reference/introduction#错误">错误</a>。
+
+## 客户端库
+
+Python 与 JavaScript SDK 暂未封装此端点，请直接调用 REST。

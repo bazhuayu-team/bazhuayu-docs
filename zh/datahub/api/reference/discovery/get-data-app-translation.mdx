@@ -1,0 +1,95 @@
+---
+title: "读取一种语言的译文"
+description: "读取一个 App 某种语言的完整译文 overlay，含 README。"
+---
+
+**`GET`** `https://api-datahub.bazhuayu.com/v1/data-apps/{app_id}/translations/{locale}`
+
+认证：可匿名调用；携带 API Key 时可使用登录态才有的筛选或看到更多内容。
+
+某种语言的完整译文条目（含 README），按存储原样返回：不回落到其他语言，不做协商。可见性与详情相同；`view=owner` 使用作者视角解析，未发布的草稿也能被作者读到。
+
+该语言没有译文时返回 `404 translation-not-found`。这在读取路径上是常见状态，按原文展示即可。
+
+## 请求
+
+### 路径参数
+
+<ParamField path="app_id" type="string" required>
+  App 引用，`app_<hex>` 或 `<namespace>/<app_name>`。
+</ParamField>
+
+<ParamField path="locale" type="string" required>
+  语言代码，形如 `en`、`en-US`、`zh-CN`。
+</ParamField>
+
+### 查询参数
+
+<ParamField query="view" type="string">
+  传 `owner` 切换到作者视角。
+</ParamField>
+
+### 示例请求
+
+```bash
+curl \
+  -H "Authorization: Bearer $BAZHUAYU_API_KEY" \
+  "https://api-datahub.bazhuayu.com/v1/data-apps/carol/probe-b/translations/en"
+```
+
+## 响应
+
+### 200 成功
+
+```json
+{
+  "data": {
+    "locale": "string",
+    "origin": "author",
+    "entries": {},
+    "based_on_version": "string",
+    "updated_at": "string",
+    "revision": 0
+  }
+}
+```
+
+响应包在 `data` 字段中，其内容如下。
+
+<ResponseField name="locale" type="string" required>
+  语言代码。
+</ResponseField>
+
+<ResponseField name="origin" type="enum" required>
+  译文来源。 取值：`author` / `platform`。
+</ResponseField>
+
+<ResponseField name="entries" type="object">
+  译文条目，键是 manifest 中的路径，值是译文字符串或字符串数组。
+</ResponseField>
+
+<ResponseField name="based_on_version" type="string">
+  译文基于的版本号。
+</ResponseField>
+
+<ResponseField name="updated_at" type="string" required>
+  —
+</ResponseField>
+
+<ResponseField name="revision" type="integer" required>
+  —
+</ResponseField>
+
+### 错误
+
+| HTTP | `code` | `category` | 说明 |
+| --- | --- | --- | --- |
+| 401 | `unauthorized` | `forbidden` | 缺少或无效的 API Key。 |
+| 404 | `app-not-found` | `not_found` | App 不存在、已改名，或对当前凭证不可见（私有 / 分享范围之外）。 |
+| 404 | `translation-not-found` | `not_found` | 该语言没有译文。读取路径上这是常见状态，按原文展示即可。 |
+
+错误响应统一为 `{"error": {code, category, message, retryable}}`，见<a href="/zh/datahub/api/reference/introduction#错误">错误</a>。
+
+## 客户端库
+
+Python 与 JavaScript SDK 暂未封装此端点，请直接调用 REST。

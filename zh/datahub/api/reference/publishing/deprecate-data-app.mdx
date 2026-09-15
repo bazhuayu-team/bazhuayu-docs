@@ -1,0 +1,80 @@
+---
+title: "弃用 App"
+description: "把 App 标记为不再维护：退出市场检索、拒绝新版本，可逆。"
+---
+
+**`POST`** `https://api-datahub.bazhuayu.com/v1/data-apps/{app_id}/deprecate`
+
+认证：需要 API Key，且仅 App 作者（发布者本人）可调用；其他人得到 `404`。
+
+身份级弃用（幂等、可逆）：不再维护、建议迁移、拒绝新的 Release。
+
+弃用的 App 退出市场检索，但详情按可见范围仍可读，运行仍被允许。切断供给是作者的明确决定（维护开关），不是弃用的隐含语义，这样进行中的集成不会突然中断。零 Release 的 App 也可以弃用。误操作或改变主意可通过恢复维护撤销。
+
+## 请求
+
+### 路径参数
+
+<ParamField path="app_id" type="string" required>
+  App 引用。
+</ParamField>
+
+### 示例请求
+
+```bash
+curl -X POST \
+  -H "Authorization: Bearer $BAZHUAYU_API_KEY" \
+  "https://api-datahub.bazhuayu.com/v1/data-apps/carol/reviews-query/deprecate"
+```
+
+## 响应
+
+### 200 成功
+
+```json
+{
+  "data": {
+    "app_name": "string",
+    "namespace": "string",
+    "version": "",
+    "status": "string",
+    "missing_secrets": [
+      "string"
+    ]
+  }
+}
+```
+
+响应包在 `data` 字段中，其内容如下。
+
+<ResponseField name="app_name" type="string" required>
+  —
+</ResponseField>
+
+<ResponseField name="namespace" type="string">
+  —
+</ResponseField>
+
+<ResponseField name="version" type="string">
+  —
+</ResponseField>
+
+<ResponseField name="status" type="string" required>
+  弃用后的派生状态。
+</ResponseField>
+
+<ResponseField name="missing_secrets" type="string[]">
+  —
+</ResponseField>
+
+### 错误
+
+| HTTP | `code` | `category` | 说明 |
+| --- | --- | --- | --- |
+| 401 | `unauthorized` | `forbidden` | 缺少或无效的 API Key。 |
+
+错误响应统一为 `{"error": {code, category, message, retryable}}`，见<a href="/zh/datahub/api/reference/introduction#错误">错误</a>。
+
+## 客户端库
+
+Python 与 JavaScript SDK 暂未封装此端点，请直接调用 REST。

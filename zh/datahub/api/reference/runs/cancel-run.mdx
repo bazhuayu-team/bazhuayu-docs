@@ -1,0 +1,329 @@
+---
+title: "取消运行"
+description: "取消排队或执行中的运行，已产出的记录保留。"
+---
+
+**`POST`** `https://api-datahub.bazhuayu.com/v1/runs/{run_id}/cancel`
+
+认证：需要 API Key（`Authorization: Bearer <API Key>`）。
+
+下达取消信号并短暂等待（最多 5 秒）执行方响应，返回当前运行对象。排队中的运行立即停止；执行中的通常在数秒内协作停止。已经写回的记录保留（`partial` 为 `true`），可以照常读取，只按已产出的记录计费。
+
+归属门与运行详情相同：只能取消自己发起的运行。取消后用查询运行确认终态。
+
+## 请求
+
+### 路径参数
+
+<ParamField path="run_id" type="string" required>
+  运行标识。
+</ParamField>
+
+### 示例请求
+
+```bash
+curl -X POST \
+  -H "Authorization: Bearer $BAZHUAYU_API_KEY" \
+  "https://api-datahub.bazhuayu.com/v1/runs/run_c62bc0fb8df2/cancel"
+```
+
+## 响应
+
+### 200 成功
+
+```json
+{
+  "data": {
+    "run_id": "run_c62bc0fb8df2",
+    "namespace": "carol",
+    "app_name": "probe-b",
+    "app_version": "0.1.0",
+    "build_id": null,
+    "run_kind": "production",
+    "state": "SUCCEEDED",
+    "input": {
+      "product": "p-now"
+    },
+    "progress": {
+      "done": 20,
+      "total": null,
+      "status_text": null
+    },
+    "dataset_id": "ds_0bd5345d13d0",
+    "partial": false,
+    "cancel_requested": false,
+    "triggered_by": "api",
+    "upstream_ref": null,
+    "created_at": "2026-09-15T07:45:40.411993+00:00",
+    "started_at": "2026-09-15T07:45:40.419610+00:00",
+    "first_started_at": "2026-09-15T07:45:40.419610+00:00",
+    "finished_at": "2026-09-15T07:45:40.822250+00:00",
+    "usage": {
+      "metrics": {
+        "records_collected": 20
+      },
+      "duration_ms": 402
+    },
+    "billing": {
+      "events": [
+        {
+          "event": "record",
+          "label": "获取一条",
+          "qty": 20.0,
+          "unit_price": 0.001,
+          "amount": 0.02,
+          "unit_size": null,
+          "raw_qty": null
+        }
+      ],
+      "total": 0.02,
+      "currency": "CNY",
+      "charged": true
+    },
+    "error": null,
+    "sample_records": null,
+    "warnings": []
+  }
+}
+```
+
+返回运行对象，字段与<a href="/zh/datahub/api/reference/runs/start-run">发起运行</a>相同。
+
+响应包在 `data` 字段中，其内容如下。
+
+<ResponseField name="run_id" type="string" required>
+  —
+</ResponseField>
+
+<ResponseField name="namespace" type="string">
+  —
+</ResponseField>
+
+<ResponseField name="app_name" type="string">
+  —
+</ResponseField>
+
+<ResponseField name="app_version" type="string">
+  —
+</ResponseField>
+
+<ResponseField name="build_id" type="string">
+  —
+</ResponseField>
+
+<ResponseField name="run_kind" type="string">
+  —
+</ResponseField>
+
+<ResponseField name="state" type="enum" required>
+  取值：`PENDING` / `QUEUED` / `RUNNING` / `SUCCEEDED` / `PARTIALLY_SUCCEEDED` / `FAILED` / `CANCELLED` / `EXPIRED`。
+</ResponseField>
+
+<ResponseField name="input" type="object">
+  —
+</ResponseField>
+
+<ResponseField name="progress" type="object">
+  —
+  <Expandable title="字段">
+    <ResponseField name="done" type="integer">
+      —
+    </ResponseField>
+
+    <ResponseField name="total" type="integer">
+      —
+    </ResponseField>
+
+    <ResponseField name="status_text" type="string">
+      —
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="dataset_id" type="string">
+  —
+</ResponseField>
+
+<ResponseField name="partial" type="boolean">
+  —
+</ResponseField>
+
+<ResponseField name="cancel_requested" type="boolean">
+  true while cancellation has been requested and the run is still winding down (cooperative stop / partial-result recovery); always false in terminal states (normalized server-side), so consumers need not derive it from state
+</ResponseField>
+
+<ResponseField name="triggered_by" type="string">
+  —
+</ResponseField>
+
+<ResponseField name="upstream_ref" type="string">
+  —
+</ResponseField>
+
+<ResponseField name="created_at" type="string">
+  —
+</ResponseField>
+
+<ResponseField name="started_at" type="string">
+  —
+</ResponseField>
+
+<ResponseField name="first_started_at" type="string">
+  when the run was first claimed by a worker. Unlike started_at, which is re-stamped on every retry, this one is never rewritten, so it is the anchor for queue time: queued = first_started_at - created_at, and total wall time = finished_at - first_started_at. Deriving queue time from started_at counts the earlier attempts' execution as queueing. Null only for runs never claimed.
+</ResponseField>
+
+<ResponseField name="finished_at" type="string">
+  —
+</ResponseField>
+
+<ResponseField name="usage" type="object">
+  Objective usage metering: how much the run did (kept separate from
+Billing; this is what evaluations compare against).
+  <Expandable title="字段">
+    <ResponseField name="metrics" type="object">
+      —
+    </ResponseField>
+
+    <ResponseField name="duration_ms" type="integer">
+      —
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="billing" type="object">
+  Billing ledger = Usage x pricing x billing_rules: how much is charged.
+  <Expandable title="字段">
+    <ResponseField name="events" type="object[]">
+      —
+      <Expandable title="字段">
+        <ResponseField name="event" type="string" required>
+          —
+        </ResponseField>
+
+        <ResponseField name="label" type="string">
+          —
+        </ResponseField>
+
+        <ResponseField name="qty" type="number" required>
+          —
+        </ResponseField>
+
+        <ResponseField name="unit_price" type="number" required>
+          —
+        </ResponseField>
+
+        <ResponseField name="amount" type="number" required>
+          —
+        </ResponseField>
+
+        <ResponseField name="unit_size" type="integer">
+          —
+        </ResponseField>
+
+        <ResponseField name="raw_qty" type="number">
+          —
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
+
+    <ResponseField name="total" type="number">
+      —
+    </ResponseField>
+
+    <ResponseField name="currency" type="string">
+      —
+    </ResponseField>
+
+    <ResponseField name="charged" type="boolean">
+      —
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="error" type="object">
+  —
+  <Expandable title="字段">
+    <ResponseField name="code" type="string" required>
+      —
+    </ResponseField>
+
+    <ResponseField name="category" type="string">
+      —
+    </ResponseField>
+
+    <ResponseField name="message" type="string" required>
+      —
+    </ResponseField>
+
+    <ResponseField name="retryable" type="boolean">
+      —
+    </ResponseField>
+
+    <ResponseField name="retry_after" type="number">
+      —
+    </ResponseField>
+
+    <ResponseField name="item_index" type="integer">
+      —
+    </ResponseField>
+
+    <ResponseField name="details" type="object[]">
+      —
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="sample_records" type="object[]">
+  —
+</ResponseField>
+
+<ResponseField name="warnings" type="object[]">
+  —
+  <Expandable title="字段">
+    <ResponseField name="code" type="string" required>
+      —
+    </ResponseField>
+
+    <ResponseField name="event" type="string">
+      —
+    </ResponseField>
+
+    <ResponseField name="detail" type="object">
+      —
+    </ResponseField>
+
+    <ResponseField name="count" type="integer">
+      —
+    </ResponseField>
+
+    <ResponseField name="updated_at" type="string">
+      —
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+### 错误
+
+| HTTP | `code` | `category` | 说明 |
+| --- | --- | --- | --- |
+| 401 | `unauthorized` | `forbidden` | 缺少或无效的 API Key。 |
+| 404 | `run-not-found` | `not_found` | 运行不存在，或不是当前账号发起的。 |
+| 409 | `run-terminal` | `invalid_input` | 运行已经结束，无法取消。 |
+
+错误响应统一为 `{"error": {code, category, message, retryable}}`，见<a href="/zh/datahub/api/reference/introduction#错误">错误</a>。
+
+## 客户端库
+
+<CodeGroup>
+
+```python Python
+run = client.cancel("run_c62bc0fb8df2")
+print(run["state"], run["partial"])
+```
+
+```js JavaScript
+const run = await client.cancel("run_c62bc0fb8df2");
+console.log(run.state, run.partial);
+```
+
+</CodeGroup>

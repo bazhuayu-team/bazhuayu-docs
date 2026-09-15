@@ -1,0 +1,6739 @@
+openapi: 3.1.0
+info:
+  title: DataHub API
+  version: 0.2.0
+  description: Public /v1 contract of Bazhuayu DataHub. Internal channels are excluded.
+servers:
+- url: https://api-datahub.bazhuayu.com
+security:
+- bearerAuth: []
+tags:
+- name: Discovery
+  description: 'Anonymous access: platform metadata (currency), data app search, detail
+    and input contract, machine-readable manifest spec.'
+- name: Publishing
+  description: 'Self-service publishing channel (API Key auth), two-phase: validate
+    first (validate / package, nothing persisted), then publish (POST /data-apps,
+    the submission goes live as a new Release). api kind (declarative integration)
+    becomes visible on publish; code kind (code package) returns 202 and enters an
+    async image build; once ready it is promoted to a Release, visible and runnable.
+    Poll progress via GET /data-apps/{ref}/builds.'
+- name: Runs & Results
+  description: Start / query / cancel runs and read result records with pagination.
+    Business inputs go in the request body; platform run options (wait, max_records)
+    go in query parameters.
+- name: Datasets
+  description: Metadata and record access for platform datasets (including seeded
+    stock data).
+- name: Account
+  description: Account info and cumulative usage for the current API Key.
+- name: Secrets
+  description: 'CRUD for upstream credentials (environment entries referenced by manifest
+    `runtime.env`). Plaintext is write-only: every read returns a mask.'
+paths:
+  /v1/meta:
+    get:
+      tags:
+      - Discovery
+      summary: Platform metadata
+      description: 'Deployment-level constants, anonymously readable: currently only
+
+        the billing currency (ISO 4217 code).
+
+
+        Amount fields (`unit_price` / `amount` / `total_spent`) never carry a
+
+        unit; the unit lives here. Authenticated endpoints return the same
+
+        value, but anonymous rendering of a search card''s `price_from` has no
+
+        access to those endpoints, hence this dedicated window.'
+      operationId: platform_meta_v1_meta_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope_PlatformMeta_'
+  /v1/data-apps:
+    get:
+      tags:
+      - Discovery
+      summary: Search data apps
+      description: 'Marketplace search (anonymous). `owner=me` (Bearer required)
+
+        switches to the ownership view: only apps you own, including
+
+        unreleased ones, with `status`/`scope` added to each card;
+
+        `shared_with=me` (Bearer required) lists shared apps granted to you.
+
+        Without a view, `scope` is a first-class attribute dimension deciding
+
+        the candidate set: default/`public` = marketplace; `private` (Bearer
+
+        required) = my private apps; `shared` (Bearer required) = all visible
+
+        shared apps (shared by me + shared with me, both directions);
+
+        `all` = the full visible set (for anonymous callers this degrades
+
+        naturally to the marketplace). In attribute mode `status` defaults to
+
+        published and cards carry a `scope` field; in view mode
+
+        `scope`/`status` filter within the view (owner=me shows everything by
+
+        default). Default ordering: by relevance when `q` is given, otherwise
+
+        by most recent publication.'
+      operationId: list_data_apps_v1_data_apps_get
+      parameters:
+      - name: q
+        in: query
+        required: false
+        schema:
+          type: string
+          default: ''
+          title: Q
+      - name: type
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            pattern: ^(data|transform)$
+          - type: 'null'
+          title: Type
+      - name: capability
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            pattern: ^(data-acquisition|data-processing)$
+          - type: 'null'
+          title: Capability
+      - name: owner
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            pattern: ^me$
+          - type: 'null'
+          title: Owner
+      - name: shared_with
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            pattern: ^me$
+          - type: 'null'
+          title: Shared With
+      - name: scope
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            pattern: ^(public|private|shared|all)$
+          - type: 'null'
+          title: Scope
+      - name: status
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            pattern: ^(draft|published|deprecated)$
+          - type: 'null'
+          title: Status
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+          title: Offset
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 100
+          minimum: 1
+          default: 5
+          title: Limit
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope_SearchResult_'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+      - Publishing
+      summary: Publish a data app (api kind one-step publish)
+      description: '**Deprecated**: submissions now go through the portal''s contract
+
+        import wizard (backed by POST /data-apps/contract/assemble) or the
+
+        three-step chain (workspace → builds → releases). Kept for the
+
+        built-in console and existing tests; removal will be scheduled
+
+        separately.
+
+
+        One-step publish sugar for api kind (declarative integration):
+
+        internally an atomic chain of create identity → save Workspace →
+
+        freeze Build → promote Release; submitting is publishing.
+
+
+        **The version number is fixed by the publish action**: default =
+
+        patch+1 over the current largest Release (0.1.0 for the first); the
+
+        submission need not and does not carry a version (identity.version
+
+        is ignored on this path). To specify a version explicitly
+
+        (expressing a major/minor bump), use the three-step chain''s
+
+        POST /data-apps/{ref}/releases.
+
+        code kind (code packages) does not use this sugar: image builds are
+
+        async, so "submit = published" does not hold — follow the
+
+        three-step chain (PUT workspace → POST builds → poll until ready →
+
+        POST releases).
+
+
+        The namespace is inferred from authentication: identity.app_name in
+
+        the manifest carries only the app name (no prefix of any kind), and
+
+        the app lands under the publisher''s own (user, app name) — the
+
+        package is author-uploaded text that could say anything; the only
+
+        proof of identity is which key you publish with. Same-named apps
+
+        across users coexist naturally, and there is no namespace
+
+        declaration slot to impersonate.
+
+        The app identity (app_id) is minted exactly once; renaming the user
+
+        or the app never changes it. External references are always the
+
+        two-part `<namespace>/<app_name>` form. Releases are immutable:
+
+        publishing again appends a new version, old versions are never
+
+        overwritten, and runs in flight or historical references pinned to
+
+        old versions are unaffected by a publish.
+
+        Two name gates precede publishing: the account must have a username
+
+        (without one the two-part reference is unreachable and nobody could
+
+        call the published app, 400); and the historical ownership of
+
+        (username, app name) must be yours — after a username changes
+
+        hands, app names used by the previous holder enter a freeze
+
+        (30 days from when the platform first observes the handover) and
+
+        cannot be reused within it (409), protecting stray external
+
+        references from takeover.'
+      operationId: publish_data_app_v1_data_apps_post
+      deprecated: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ManifestSubmission'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope_PublishResult_'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/data-apps/manifest-schema:
+    get:
+      tags:
+      - Discovery
+      summary: Get the manifest spec (JSON Schema)
+      description: 'Machine-readable form of the manifest spec (spec 0.2, JSON Schema
+
+        2020-12).
+
+
+        For coding assistants / editors / third-party validators: returns the
+
+        exact manifest.schema.json the platform validates against — the spec
+
+        is the implementation, so there is no second truth of field tables
+
+        copied into docs.'
+      operationId: get_manifest_schema_v1_data_apps_manifest_schema_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope_dict_str__Any__'
+  /v1/data-apps/template-variables:
+    get:
+      tags:
+      - Discovery
+      summary: List the request-template variables
+      description: 'The placeholders a request template (url / query / headers / body
+        of
+
+        any api stage) may reference, with a one-line description, an example
+
+        rendered value and the stages each one is valid in.
+
+
+        This is the same vocabulary the publish pipeline validates against, so
+
+        editors and coding assistants can offer exactly what the platform
+
+        accepts instead of copying a variable list that drifts. Anonymous, like
+
+        the manifest schema: a deployment-level constant with no caller data.'
+      operationId: get_template_variables_v1_data_apps_template_variables_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope_dict_str__Any__'
+  /v1/data-apps/{app_id}/versions:
+    get:
+      tags:
+      - Discovery
+      summary: Data app version history
+      description: 'All published Releases (newest first). Runs/detail default to
+        the
+
+        latest version; pin with `?version=`.
+
+
+        Yanked versions stay in the history with a marker (consumers need
+
+        them for troubleshooting) but do not participate in resolving latest.'
+      operationId: list_app_versions_v1_data_apps__app_id__versions_get
+      parameters:
+      - name: app_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: App Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope_list_AppVersion__'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/data-apps/{app_id}/readme:
+    get:
+      tags:
+      - Discovery
+      summary: Data app README (Markdown)
+      description: 'Human-readable rich content (Markdown); not part of the
+
+        machine-readable detail, fetched on demand from this separate
+
+        endpoint. Defaults to the latest version.'
+      operationId: get_data_app_readme_v1_data_apps__app_id__readme_get
+      parameters:
+      - name: app_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: App Id
+      - name: version
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Version
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/data-apps/{app_id}/workspace:
+    put:
+      tags:
+      - Publishing
+      summary: Save the draft (Workspace, owner only)
+      description: 'Save the app''s mutable draft: **a save is never rejected for
+
+        validation failures** — full validation still runs and the result
+
+        (valid/issues) comes back alongside; "save half now, keep editing
+
+        later" is a model promise.
+
+
+        The app identity is created implicitly on the first save (there is no
+
+        separate "create app" endpoint). Only three minimal hard checks
+
+        (400): the account has a username, the content is within the size
+
+        limit, and attached file names are legal (identity.app_name in the
+
+        manifest is no longer compared to the path — the routing name follows
+
+        the ref; the declared name in the file is consumed only at creation).
+
+        Optimistic concurrency via expected_revision (409 revision-conflict;
+
+        multiple tabs never overwrite silently). Bundled secrets are stored
+
+        only when this save is valid (no credentials scattered from
+
+        half-finished drafts); names not stored are reported via
+
+        secrets_deferred. Editing stays allowed while deprecated
+
+        (self-testing is harmless; what is rejected is a new Release).'
+      operationId: put_app_workspace_v1_data_apps__app_id__workspace_put
+      parameters:
+      - name: app_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: App Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkspaceSubmission'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope_WorkspaceSaveResult_'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    get:
+      tags:
+      - Publishing
+      summary: Read back the draft (owner only)
+      description: 'Raw manifest + files + revision + valid/issues (the backfill
+
+        source for "continue editing" in a frontend).
+
+
+        No draft yet → 404 workspace-not-found: this is a normal state on the
+
+        main path (a new app, or published with no draft in progress), not an
+
+        error state — clients should map it explicitly rather than treat it
+
+        as a server failure.'
+      operationId: get_app_workspace_v1_data_apps__app_id__workspace_get
+      parameters:
+      - name: app_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: App Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope_WorkspaceView_'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - Publishing
+      summary: Discard the draft (owner only)
+      description: 'Discard the draft; if the app has no Release at all, the identity
+
+        is cascade-deleted with it (an unpublished empty shell is not kept;
+
+        name-binding ownership is untouched — historical occupation is
+
+        anti-takeover semantics). Build snapshots are kept (immutable
+
+        objects, collected by GC).
+
+
+        Having no draft does not short-circuit into an early 404: a
+
+        draft-less, zero-Release identity (historical orphan) still goes
+
+        through the cascade cleanup — otherwise orphans could never be
+
+        deleted; no draft + existing Releases is the 404 case (a published
+
+        app normally has no draft in progress).'
+      operationId: delete_app_workspace_v1_data_apps__app_id__workspace_delete
+      parameters:
+      - name: app_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: App Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope_WorkspaceDeleteResult_'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/data-apps/{app_id}/builds:
+    post:
+      tags:
+      - Publishing
+      summary: Freeze a Build snapshot (owner only)
+      description: 'Freeze the current Workspace content into an immutable snapshot
+
+        (the reference object for debug runs and publishing).
+
+
+        Guards: the workspace exists and its current content is valid
+
+        (otherwise 422 with issues); the body may carry expected_revision
+
+        (409 if modified concurrently between save and freeze). An existing
+
+        ready snapshot with the same content_hash is reused directly
+
+        (idempotent optimization, no duplicate rows). api kind is ready
+
+        immediately; code kind returns 202 and submits an image build
+
+        (a second submission while one is in flight for the same app is
+
+        409 — the single build host is serial anyway). Builds stay allowed
+
+        while deprecated (self-testing is harmless; what is rejected is a
+
+        new Release).'
+      operationId: create_app_build_v1_data_apps__app_id__builds_post
+      parameters:
+      - name: app_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: App Id
+      requestBody:
+        content:
+          application/json:
+            schema:
+              anyOf:
+              - $ref: '#/components/schemas/BuildRequest'
+              - type: 'null'
+              title: Body
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope_BuildCreateResult_'
+        '202':
+          description: code kind snapshot accepted; async image build started (build_status=building;
+            poll progress via GET /data-apps/{ref}/builds/{build_id})
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope_BuildCreateResult_'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    get:
+      tags:
+      - Publishing
+      summary: Build snapshot list (owner only)
+      description: 'Status of all Build snapshots (building / ready / failed, newest
+
+        first) with failure reason summaries. Owner-side resolution:
+
+        available for zero-Release apps; anyone but the owner gets 404
+
+        (build status is owner-side information whose existence is not
+
+        acknowledged externally).'
+      operationId: list_app_builds_v1_data_apps__app_id__builds_get
+      parameters:
+      - name: app_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: App Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope_BuildList_'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/data-apps/{app_id}/builds/{build_id}:
+    get:
+      tags:
+      - Publishing
+      summary: Build snapshot detail (owner only)
+      description: 'Status and failure reason of a single snapshot (the polling
+
+        window for code kind build progress).'
+      operationId: get_app_build_v1_data_apps__app_id__builds__build_id__get
+      parameters:
+      - name: app_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: App Id
+      - name: build_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Build Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope_BuildDetail_'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/data-apps/{app_id}/releases:
+    post:
+      tags:
+      - Publishing
+      summary: Publish a Release (promote a Build, owner only)
+      description: 'Promote an explicit ready Build to an official version; **the
+
+        version number is fixed at this moment**: default = patch+1 over the
+
+        current largest Release (0.1.0 for the first); an explicit version
+
+        must be three numeric parts and strictly greater than the current
+
+        largest (use the override to express a major/minor bump).
+
+
+        Guards: the build exists and is ready; the snapshot re-runs the
+
+        validation pipeline (the spec may have evolved during the Build''s
+
+        lifetime); when expected_revision is given, the Workspace must not
+
+        have been modified concurrently. Concurrent publishes are arbitrated
+
+        by a uniqueness constraint on (owner, app name, version); when
+
+        auto-versioning collides, the engine recomputes and retries once.
+
+        The Workspace is kept after publishing (it may already be ahead of
+
+        the published snapshot; clearing it would lose unsubmitted edits).'
+      operationId: create_app_release_v1_data_apps__app_id__releases_post
+      parameters:
+      - name: app_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: App Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReleaseRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope_ReleaseResult_'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    get:
+      tags:
+      - Publishing
+      summary: Release list (owner only)
+      description: 'Owner-view Release history (includes build_id and yanked; the
+
+        public view is GET /{ref}/versions). Newest first; latest = the
+
+        largest non-yanked version.'
+      operationId: list_app_releases_v1_data_apps__app_id__releases_get
+      parameters:
+      - name: app_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: App Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope_ReleaseList_'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/data-apps/{app_id}/releases/{version}/yank:
+    post:
+      tags:
+      - Publishing
+      summary: Yank a Release (reversible, owner only)
+      description: 'Release-level withdrawal: the version rejects new runs (422
+
+        version-yanked) and is skipped when resolving latest; runs in flight
+
+        are unaffected; detail/contract pinned to the version stay readable
+
+        (consumers need them for troubleshooting); no rows are deleted and
+
+        Builds and the audit chain are untouched. Reversible via the paired
+
+        /unyank.'
+      operationId: yank_app_release_v1_data_apps__app_id__releases__version__yank_post
+      parameters:
+      - name: app_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: App Id
+      - name: version
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Version
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope_YankResult_'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/data-apps/{app_id}/releases/{version}/unyank:
+    post:
+      tags:
+      - Publishing
+      summary: Unyank a Release (owner only)
+      operationId: unyank_app_release_v1_data_apps__app_id__releases__version__unyank_post
+      parameters:
+      - name: app_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: App Id
+      - name: version
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Version
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope_YankResult_'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/data-apps/{app_id}/stats:
+    get:
+      tags:
+      - Publishing
+      summary: Data app run statistics (publisher self-check)
+      description: 'Aggregated metrics (run volume / success rate / most recent run,
+
+        etc.), open only to the app owner.
+
+
+        Zero-Release apps can be queried too (test traffic already exists
+
+        while debugging). Derived from pre-aggregated daily buckets
+
+        (accumulated at terminal states, no detail scans), fresh within
+
+        seconds. Debug traffic (run_kind=test) is excluded by default;
+
+        `include_test=true` merges debug runs into the self-check view.
+
+        Metrics with no terminal runs in the window are null rather than 0.'
+      operationId: get_data_app_stats_v1_data_apps__app_id__stats_get
+      parameters:
+      - name: app_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: App Id
+      - name: include_test
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+          title: Include Test
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope_AppStats_'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/publisher/usage:
+    get:
+      tags:
+      - Publishing
+      summary: Publisher usage analytics (all my apps, filterable)
+      description: 'How my apps are being called over a period: range totals plus
+        a
+
+        breakdown by day (or by hour for short ranges), by app or by calling
+
+        channel (or two of these crossed), or — for diagnosis — by final
+
+        state, by app version or by error code. The publisher-side
+
+        counterpart of GET /billing — same vocabulary (`created_from` /
+
+        `created_to` are ISO-8601 absolute timestamps, inclusive start /
+
+        exclusive end, attributed by run start time; `tz_offset` only moves
+
+        day boundaries; `data_app` / `triggered_by` narrow the set),
+
+        ownership flips from "runs I started" to "apps I own" (zero-Release
+
+        apps included).
+
+
+        Day / hour / app / channel breakdowns come from hourly pre-aggregated
+
+        buckets (accumulated at terminal states), so any range and any
+
+        whole-hour offset is exact and cheap. State / version / error
+
+        breakdowns are computed from run details on demand and therefore
+
+        require both bounds at most 92 days apart (400 range-too-wide);
+
+        error groups only cover runs that carry an error and each one brings
+
+        the most recent error message as `sample_message`. Debug traffic
+
+        (run_kind=test) is excluded by default; platform health probes never
+
+        count. Success counts partial successes; cancellations leave the
+
+        success-rate denominator; metrics with no finished run are null
+
+        rather than 0. `amount` is what callers paid for these runs (data
+
+        fees), not the publisher''s earnings.
+
+
+        Day / hour groups are ascending (`hour` keys are local wall-clock
+
+        `YYYY-MM-DDTHH:00` under `tz_offset`, no zone suffix), other groups by
+
+        run count descending. Unknown or other people''s apps in `data_app`
+
+        are 404 (no existence leak). `group_by` outside the vocabulary, or
+
+        combining `day` with `hour`, is 400 invalid-group-by.
+
+
+        Callers: `totals.callers` (and `previous_totals.callers`) is the
+
+        number of distinct users who called in the range — it comes from run
+
+        details, so it is null unless the range is bounded and at most 92
+
+        days. `group_by=caller` breaks a **single private or shared app**
+
+        down by caller: the publisher''s own runs (`caller_kind=owner`) and
+
+        users currently on the grant list (`grantee`) are named by their
+
+        current username; everyone else (former grantees, callers from a
+
+        public period) is merged into one `other` group. It is 400
+
+        caller-group-unavailable for a public app or for more than one app
+
+        — a public app''s callers are anonymous and only counted.'
+      operationId: publisher_usage_v1_publisher_usage_get
+      parameters:
+      - name: group_by
+        in: query
+        required: false
+        schema:
+          type: string
+          description: one or two comma-separated dimensions from day / hour / data_app
+            / triggered_by / state / version / error / caller (e.g. `day,data_app`);
+            `day` and `hour` are two granularities of the same time axis and cannot
+            be combined; state / version / error / caller are computed from run details
+            and need a bounded range of at most 92 days; `caller` additionally needs
+            exactly one private or shared `data_app`; default `day`
+          default: day
+          title: Group By
+        description: one or two comma-separated dimensions from day / hour / data_app
+          / triggered_by / state / version / error / caller (e.g. `day,data_app`);
+          `day` and `hour` are two granularities of the same time axis and cannot
+          be combined; state / version / error / caller are computed from run details
+          and need a bounded range of at most 92 days; `caller` additionally needs
+          exactly one private or shared `data_app`; default `day`
+      - name: data_app
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: restrict to these apps (`<username>/<app_name>`, repeatable);
+            default = all my apps
+          title: Data App
+        description: restrict to these apps (`<username>/<app_name>`, repeatable);
+          default = all my apps
+      - name: created_from
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Created From
+      - name: created_to
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Created To
+      - name: tz_offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 840
+          minimum: -720
+          description: timezone offset for day / hour buckets (minutes relative to
+            UTC, e.g. 480 for UTC+8); default 0 means UTC. Fixed offset, no DST; buckets
+            are hourly so half-hour offsets are approximated to the hour
+          default: 0
+          title: Tz Offset
+        description: timezone offset for day / hour buckets (minutes relative to UTC,
+          e.g. 480 for UTC+8); default 0 means UTC. Fixed offset, no DST; buckets
+          are hourly so half-hour offsets are approximated to the hour
+      - name: triggered_by
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: restrict to one calling channel (api / sdk / mcp / web …, the
+            same value as the runs list filter)
+          title: Triggered By
+        description: restrict to one calling channel (api / sdk / mcp / web …, the
+          same value as the runs list filter)
+      - name: include_test
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+          title: Include Test
+      - name: compare
+        in: query
+        required: false
+        schema:
+          type: boolean
+          description: also return `previous_totals` for the equal-length range immediately
+            before `created_from` (requires both bounds)
+          default: false
+          title: Compare
+        description: also return `previous_totals` for the equal-length range immediately
+          before `created_from` (requires both bounds)
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope_PublisherUsage_'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/publisher/usage/latency:
+    get:
+      tags:
+      - Publishing
+      summary: Publisher run duration distribution (percentiles)
+      description: 'How long my apps'' runs take: p50 / p90 / p95 / p99 / max of
+
+        `finished_at - started_at` in milliseconds over a bounded range,
+
+        optionally per app or per app version (slowest p95 first). Same
+
+        ownership, range and filter semantics as GET /publisher/usage; the
+
+        sample is every finished run that has a start time (failed and
+
+        cancelled runs included — the distribution describes the runs, not
+
+        only the successful ones), and every percentile is null when there
+
+        is none. Percentiles need run details, so both bounds are required
+
+        and may be at most 92 days apart (400 range-too-wide).'
+      operationId: publisher_latency_v1_publisher_usage_latency_get
+      parameters:
+      - name: group_by
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: 'optional single dimension: data_app (per app) or version (per
+            app version); default = range totals only'
+          title: Group By
+        description: 'optional single dimension: data_app (per app) or version (per
+          app version); default = range totals only'
+      - name: data_app
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: restrict to these apps (`<username>/<app_name>`, repeatable);
+            default = all my apps
+          title: Data App
+        description: restrict to these apps (`<username>/<app_name>`, repeatable);
+          default = all my apps
+      - name: created_from
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Created From
+      - name: created_to
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Created To
+      - name: triggered_by
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: restrict to one calling channel (same value as the runs list
+            filter)
+          title: Triggered By
+        description: restrict to one calling channel (same value as the runs list
+          filter)
+      - name: include_test
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+          title: Include Test
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope_PublisherLatency_'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/publisher/runs:
+    get:
+      tags:
+      - Publishing
+      summary: Publisher run list (calls to my apps)
+      description: 'Every call made to the apps I publish, most recent first — the
+
+        detail face behind GET /publisher/usage: the same ownership ("apps I
+
+        own", zero-Release apps included), the same range predicate
+
+        (`created_from` / `created_to` are ISO-8601 absolute timestamps,
+
+        inclusive start / exclusive end, by run start time) and the same
+
+        filter values, so any aggregate number drills down to exactly the
+
+        runs it counted.
+
+
+        This is a **whitelisted** view, not the caller''s run object: it tells
+
+        you what happened (state, timing, records written back, error code
+
+        and message, data fee the caller paid) and never who called, what
+
+        they sent (`input`) or what they got back (no `dataset_id`, no
+
+        records, no credential identifier). Callers keep reading their own
+
+        runs through GET /runs; a publisher cannot open one of these run_ids
+
+        there. Debug traffic (run_kind=test) is excluded unless asked for;
+
+        `status` accepts comma-separated states (OR). Unknown or other
+
+        people''s apps in `data_app` are 404 (no existence leak).'
+      operationId: publisher_runs_v1_publisher_runs_get
+      parameters:
+      - name: data_app
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: restrict to these apps (`<username>/<app_name>`, repeatable);
+            default = all my apps
+          title: Data App
+        description: restrict to these apps (`<username>/<app_name>`, repeatable);
+          default = all my apps
+      - name: status
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: run state, comma-separated multi-value OR (e.g. `FAILED` or
+            `PENDING,QUEUED`); values outside the vocabulary are 400
+          title: Status
+        description: run state, comma-separated multi-value OR (e.g. `FAILED` or `PENDING,QUEUED`);
+          values outside the vocabulary are 400
+      - name: triggered_by
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: restrict to one calling channel (api / sdk / mcp / web …, same
+            value as the runs list filter)
+          title: Triggered By
+        description: restrict to one calling channel (api / sdk / mcp / web …, same
+          value as the runs list filter)
+      - name: version
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: restrict to runs pinned to this Release version
+          title: Version
+        description: restrict to runs pinned to this Release version
+      - name: error_code
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: restrict to runs whose error code equals this (the `error_code`
+            key of GET /publisher/usage group_by=error)
+          title: Error Code
+        description: restrict to runs whose error code equals this (the `error_code`
+          key of GET /publisher/usage group_by=error)
+      - name: run_kind
+        in: query
+        required: false
+        schema:
+          type: string
+          description: '`production` (default) live traffic only, `test` my debug
+            runs only, `all` both; platform health probes never appear; other values
+            are 400 invalid-run-kind'
+          default: production
+          title: Run Kind
+        description: '`production` (default) live traffic only, `test` my debug runs
+          only, `all` both; platform health probes never appear; other values are
+          400 invalid-run-kind'
+      - name: created_from
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Created From
+      - name: created_to
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Created To
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+          title: Offset
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 200
+          minimum: 1
+          default: 50
+          title: Limit
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope_PublisherRunList_'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/publisher/runs/{run_id}:
+    get:
+      tags:
+      - Publishing
+      summary: Publisher run detail (a call to one of my apps)
+      description: 'One call to an app I publish, same whitelisted shape as the list
+
+        plus the run''s structured warnings (e.g. billing-qty-missing).
+
+        Ownership is by **app**: a run of someone else''s app and a
+
+        nonexistent run_id both return 404. There is no `input`, no result
+
+        data and no caller identity here — and this run_id does not open
+
+        under GET /runs/{run_id} unless you also started it.'
+      operationId: publisher_run_v1_publisher_runs__run_id__get
+      parameters:
+      - name: run_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Run Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope_PublisherRunDetail_'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/publisher/probes:
+    get:
+      tags:
+      - Publishing
+      summary: Health-probe history of my apps
+      description: 'What the platform''s daily health probe found on the apps I
+
+        publish, most recent first: for each probed example, whether it still
+
+        connected and produced records (PASS), produced nothing (NO_DATA),
+
+        failed (FAIL, with the error), ran out of the probe budget (TIMEOUT)
+
+        or was not run at all (SKIPPED: `skip_reason` = no-example / paused /
+
+        not-eligible). Only published public or shared apps are probed;
+
+        private apps never are. Probe runs never count in usage or billing
+
+        and do not appear under GET /publisher/runs. Unknown or other
+
+        people''s apps in `data_app` are 404 (no existence leak).'
+      operationId: publisher_probes_v1_publisher_probes_get
+      parameters:
+      - name: data_app
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: restrict to these apps (`<username>/<app_name>`, repeatable);
+            default = all my apps
+          title: Data App
+        description: restrict to these apps (`<username>/<app_name>`, repeatable);
+          default = all my apps
+      - name: days
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 365
+          minimum: 1
+          description: look-back window in days (default 30)
+          default: 30
+          title: Days
+        description: look-back window in days (default 30)
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 500
+          minimum: 1
+          default: 100
+          title: Limit
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope_PublisherProbeList_'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/publisher/probes/latest:
+    get:
+      tags:
+      - Publishing
+      summary: Latest health-probe status of each of my apps
+      description: 'The most recent probe batch of each of my apps, folded to one
+
+        app-level verdict (FAIL if any example failed, then TIMEOUT, NO_DATA,
+
+        PENDING while the batch is still running, PASS when every example
+
+        passed, SKIPPED when nothing was run) with the first failing
+
+        example''s error — the signal behind "is anything broken right now".
+
+        Apps that were never probed are absent. Sorted worst first, then by
+
+        app name.'
+      operationId: publisher_probes_latest_v1_publisher_probes_latest_get
+      parameters:
+      - name: data_app
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: restrict to these apps (`<username>/<app_name>`, repeatable);
+            default = all my apps
+          title: Data App
+        description: restrict to these apps (`<username>/<app_name>`, repeatable);
+          default = all my apps
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope_PublisherProbeStatusList_'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/data-apps/{app_id}/manifest:
+    get:
+      tags:
+      - Publishing
+      summary: Read back the manifest (owner only)
+      description: 'Owner read-back of the **latest Release''s** full manifest
+
+        (including the runtime block), the data source for
+
+        edit-then-republish; zero Release → 404 (draft self-inspection
+
+        always goes through the /workspace endpoint; the two are never
+
+        mixed — dual-source backfill relies on this boundary).
+
+
+        runtime is an internal construct (never in public payloads such as
+
+        cards/detail), so this endpoint is owner-only (anyone else gets
+
+        404) — auth.secret is only an alias reference into runtime.env;
+
+        credential plaintext lives in the secret store and is not leaked by
+
+        read-back. status is injected as the current derived value; scope
+
+        likewise from the current operational state (not the manifest''s
+
+        original value — a publish wizard backfilling current visibility
+
+        relies on it); the manifest no longer carries identity.version (the
+
+        version is a Release attribute), so take the version from the
+
+        detail injection / versions list.'
+      operationId: get_data_app_manifest_v1_data_apps__app_id__manifest_get
+      parameters:
+      - name: app_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: App Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope_dict_str__Any__'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/data-apps/{app_id}/contract.zip:
+    get:
+      tags:
+      - Publishing
+      summary: Download the contract folder of the latest release (owner only)
+      description: 'The author-side contract of the **latest Release** as a zip: same
+
+        source as GET /data-apps/{ref}/manifest (file references resolved
+
+        inline), split into the canonical contract-folder form (see POST
+
+        /data-apps/contract/split) and packed server-side. The zip carries one
+
+        `<app_name>/` shell directory; the response sets Content-Disposition
+
+        with `<app_name>.zip`.
+
+
+        Zero Release (a never-published draft) → 404 release-not-found: the
+
+        semantics are "latest Release", with no fallback to the workspace
+
+        draft. `_editor_state.json` and other non-slot files are never
+
+        included — the editor companion state travels only through the
+
+        workspace channel and is regenerated by the editing frontend on the
+
+        next save, so a download → edit → import round trip is lossless for
+
+        api kind.
+
+
+        When the app has translations, the zip also carries `i18n.json`
+
+        (`{source, locales}`) — the **current** translations, not the ones
+
+        at the time this Release was published (translations hang off the
+
+        app identity, not the Release).'
+      operationId: download_app_contract_v1_data_apps__app_id__contract_zip_get
+      parameters:
+      - name: app_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: App Id
+      responses:
+        '200':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/data-apps/{app_id}/settings:
+    patch:
+      tags:
+      - Publishing
+      summary: Adjust visibility and maintenance state
+      description: "App-level reversible operational state (orthogonal to lifecycle,\n\
+        adjustable at any time):\n\n- `scope`: public (marketplace visible) / private\
+        \ (owner only) /\n  shared (grant list, managed via PUT/DELETE .../grants/{username});\n\
+        - `accepting_runs`: maintenance switch. false = under maintenance;\n  new\
+        \ runs from others are rejected (403 app-not-accepting-runs,\n  message carrying\
+        \ `pause_message`); existing runs, purchased data\n  and marketplace visibility\
+        \ are unaffected; the owner's self-tests\n  are exempt. Flip back to true\
+        \ once the upstream is fixed — no\n  lifecycle change needed.\n\n- `source_locale`:\
+        \ the locale the manifest is written in\n  (`language[-Script][-REGION]`,\
+        \ e.g. zh-CN / en-US). Unset = the\n  deployment default. Translations for\
+        \ other locales overlay this\n  original (see .../translations). If a translation\
+        \ already exists\n  for the new source locale the response carries a\n  `translation-shadowed-by-source`\
+        \ warning — it is not deleted\n  automatically.\n\nZero-Release apps can be\
+        \ adjusted too (no external effect, but\nkeeping the settings is the unsurprising\
+        \ behavior)."
+      operationId: update_app_settings_v1_data_apps__app_id__settings_patch
+      parameters:
+      - name: app_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: App Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AppSettingsPatch'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope_AppSettings_'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/data-apps/{app_id}/grants:
+    get:
+      tags:
+      - Publishing
+      summary: List access grants (owner only)
+      description: 'The grant list for scope=shared. Owner only (available for
+
+        zero-Release apps) — the list never appears in detail or any
+
+        non-owner response. Usernames are resolved at render time: after a
+
+        grantee renames, the list shows the new name.'
+      operationId: list_app_grants_v1_data_apps__app_id__grants_get
+      parameters:
+      - name: app_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: App Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope_GrantList_'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/data-apps/{app_id}/grants/{username}:
+    put:
+      tags:
+      - Publishing
+      summary: Grant access to a user (point-to-point sharing)
+      description: 'Open the app to a specific user (idempotent). Takes effect only
+
+        with `scope=shared` (set via the settings endpoint); list members
+
+        can view and run the app and are billed per its pricing (whoever
+
+        runs pays). The API accepts a username while storage keeps the user
+
+        id — mutable names are not identifiers.'
+      operationId: grant_app_access_v1_data_apps__app_id__grants__username__put
+      parameters:
+      - name: app_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: App Id
+      - name: username
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Username
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope_OkResult_'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - Publishing
+      summary: Revoke a user's access grant
+      description: 'Revocation takes effect immediately (the read path checks the
+
+        list per request; no cache window).'
+      operationId: revoke_app_access_v1_data_apps__app_id__grants__username__delete
+      parameters:
+      - name: app_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: App Id
+      - name: username
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Username
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope_OkResult_'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/data-apps/batch/grants:
+    post:
+      tags:
+      - Publishing
+      summary: Batch grant access (multiple apps x multiple users)
+      description: 'Open multiple apps you own to multiple users at once (matrix
+
+        semantics, idempotent).
+
+
+        Same storage and effect rules as the single-user PUT: the user id is
+
+        stored, the list is stored orthogonally to scope, and grants take
+
+        effect when scope=shared. Each username is resolved once. `granted`
+
+        counts **newly added** pairs — pairs already on the list are skipped
+
+        idempotently, letting the caller distinguish "3 added, 2 already
+
+        granted".'
+      operationId: batch_grant_access_v1_data_apps_batch_grants_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchGrantsRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope_BatchGrantsResult_'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/data-apps/batch/settings:
+    post:
+      tags:
+      - Publishing
+      summary: Batch operational settings (apply one patch to multiple apps)
+      description: 'Reversible operational switches for a whole cluster of apps:
+
+        when an upstream changes or throttles, pause all related apps at
+
+        once with the same `pause_message`, then restore them at once after
+
+        the fix; batch scope switching works the same way (pairs with batch
+
+        grants in the "populate the list first, then switch to shared"
+
+        order). Field semantics are identical to the single-app PATCH
+
+        settings; this endpoint just applies one patch to multiple apps.'
+      operationId: batch_update_settings_v1_data_apps_batch_settings_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchSettingsRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope_BatchSettingsResult_'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/data-apps/translations/lookup:
+    post:
+      tags:
+      - Discovery
+      summary: Batch-fetch card-level translations for one locale
+      description: 'Catalog-page hydration: for up to 100 app_ids and one locale,
+
+        return the card-level entries (identity.name / identity.summary /
+
+        discovery.boundary / discovery.keywords / pricing.events.<event>.label)
+
+        of apps that are visible to the caller **and** carry that locale.
+
+        Everything else is simply absent from `items` (no error). Readme,
+
+        schemas and knowledge are never included here — read
+
+        GET /data-apps/{ref}/translations/{locale} for the full overlay.
+
+        The engine does no language negotiation: pick the locale on the
+
+        consuming side (each card already carries `source_locale`).'
+      operationId: lookup_translations_v1_data_apps_translations_lookup_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TranslationLookupRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope_TranslationLookupResult_'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/data-apps/{app_id}/translations:
+    get:
+      tags:
+      - Discovery
+      summary: List an app's translation locales
+      description: 'Which locales carry a translation overlay, with origin
+
+        (author / platform) and the Release version each was based on.
+
+        Same visibility as detail. `view=owner` switches to the owner
+
+        resolver (non-owners and unknown refs are 404, never a public
+
+        fallback) and adds `stale` / `stale_paths`: whether the translatable
+
+        source of the **latest Release** (the workspace for zero-Release
+
+        apps) has changed since the translation was saved, and which paths
+
+        — hints for the author, with no effect on how consumers overlay.'
+      operationId: list_app_translations_v1_data_apps__app_id__translations_get
+      parameters:
+      - name: app_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: App Id
+      - name: view
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            pattern: ^owner$
+          - type: 'null'
+          title: View
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope_TranslationList_'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/data-apps/{app_id}/translations/{locale}:
+    get:
+      tags:
+      - Discovery
+      summary: Read one locale's translation overlay
+      description: 'Full entries for one locale (readme included), returned as
+
+        stored — no fallback to other locales, no negotiation. Same
+
+        visibility as detail; `view=owner` uses the owner resolver instead
+
+        (zero-Release drafts are readable by their author this way). 404
+
+        translation-not-found when the app has no overlay for that locale
+
+        (a normal, frequent state on the read path: show the original).'
+      operationId: get_app_translation_v1_data_apps__app_id__translations__locale__get
+      parameters:
+      - name: app_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: App Id
+      - name: locale
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Locale
+      - name: view
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            pattern: ^owner$
+          - type: 'null'
+          title: View
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope_TranslationView_'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    put:
+      tags:
+      - Publishing
+      summary: Save one locale's translation (owner only)
+      description: 'Replace the whole overlay for one locale; origin becomes `author`.
+
+        Saving a translation never creates a Release — translations hang off
+
+        the app identity and apply to every version.
+
+
+        Hard checks (400): locale must be valid and must not equal the app''s
+
+        `source_locale` (locale-is-source); entries must map paths to strings
+
+        / string arrays (translation-invalid); at most 20 locales per app
+
+        (translation-locale-limit); 413 above 4MB. Path-level problems
+
+        (unknown path, wrong type, `enum_titles` length not matching `enum`,
+
+        duplicate event/example ids) are `warnings`, not rejections —
+
+        consumers skip those entries. The hash basis is the **workspace**
+
+        (what the author sees while translating), falling back to the
+
+        latest Release when there is no draft; `stale` in the response is
+
+        computed against the latest Release, so a translation saved for a
+
+        not-yet-published draft change reports stale=true until that change
+
+        ships. `expected_revision` mismatch → 409 revision-conflict.'
+      operationId: put_app_translation_v1_data_apps__app_id__translations__locale__put
+      parameters:
+      - name: app_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: App Id
+      - name: locale
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Locale
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TranslationPut'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope_TranslationSaveResult_'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - Publishing
+      summary: Delete one locale's translation (owner only)
+      description: 'Idempotent: deleting a locale that has no overlay is still 200
+
+        with deleted=false. Takes effect immediately for search on this
+
+        replica; other replicas follow the watermark.'
+      operationId: delete_app_translation_v1_data_apps__app_id__translations__locale__delete
+      parameters:
+      - name: app_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: App Id
+      - name: locale
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Locale
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope_TranslationDeleteResult_'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/data-apps/{app_id}:
+    get:
+      tags:
+      - Discovery
+      summary: Data app detail
+      description: 'Self-contained machine-readable detail: input/output contracts
+
+        (JSON Schema), execution mode, pricing and call examples. Defaults
+
+        to the latest version; use `version` to read a historical version''s
+
+        contract.'
+      operationId: get_data_app_v1_data_apps__app_id__get
+      parameters:
+      - name: app_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: App Id
+      - name: version
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Version
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope_dict_str__Any__'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/data-apps/contract/assemble:
+    post:
+      tags:
+      - Publishing
+      summary: Assemble a contract folder into a manifest
+      description: 'Merge a contract folder (files map keyed by relative path, order
+
+        preserved) into one self-contained manifest — the single source of
+
+        truth for the assembly rules shared by the portal import wizard and
+
+        the contract-json skill''s self-check.
+
+
+        Slot files: dataapp.json / input_schema.json / output_schema.json /
+
+        runtime.json / pricing.json / examples.json / README.md (name match
+
+        is case-insensitive; the dotted `input.schema.json` spelling is also
+
+        accepted and normalized in `picked`). pricing/examples may instead
+
+        live flattened inside dataapp.json. The merged manifest then goes
+
+        through the full authoring check (same verdict as POST
+
+        /data-apps/validate); `issues` must be empty before the folder counts
+
+        as deliverable. Recoverable oddities (missing files, duplicate names
+
+        across levels, ignored non-contract files, folder-name mismatch, ...)
+
+        come back as structured `warnings` (code + params, localized by
+
+        consuming display layers), not errors.
+
+
+        Hard failures (400): a slot file is not valid JSON /
+
+        has the wrong shape (examples.json must be an array, other slots
+
+        objects) / exceeds 1MB, no contract file is found at all, or the
+
+        total size exceeds the 12MB channel limit. The contract channel
+
+        covers api kind only: runtime.kind=code yields an issue.
+
+
+        Optional 8th file `i18n.json` (`{source, locales}`, up to 4MB): it
+
+        is **not merged into the manifest** — it comes back parsed as
+
+        `translations` for the caller to save via the translations
+
+        endpoints. `source` is required (400 contract-file-invalid when
+
+        missing); invalid locales are 400 locale-invalid; a locale equal to
+
+        `source` is skipped with `i18n-locale-is-source`; path-level
+
+        problems surface as `i18n-*` warnings.
+
+
+        Encoding: the files map is JSON text, so byte-level encoding is the
+
+        client''s concern (browsers decode as UTF-8 before upload); the
+
+        server only strips a leading UTF-8 BOM. The fixed `contract` path
+
+        segment reserves that username (like `batch`): a user named
+
+        `contract` cannot address apps named assemble/split here.
+
+
+        Anonymous access (like GET /data-apps/manifest-schema and the skill
+
+        zip): assembly is a pure function over the request body — nothing is
+
+        read from or written to the platform, so there is no data to
+
+        protect, and requiring a key only forced contract authors to obtain
+
+        a token before they could self-check. The per-file / total size
+
+        guards remain the only admission control.'
+      operationId: assemble_contract_v1_data_apps_contract_assemble_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContractAssembleRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope_ContractAssembleResult_'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/data-apps/contract/split:
+    post:
+      tags:
+      - Publishing
+      summary: Split a manifest into contract-folder files
+      description: 'The inverse of assemble: one self-contained manifest → the
+
+        canonical contract-folder files map (JSON text per file; zipping is
+
+        the client''s mechanical concern).
+
+
+        Split semantics (the single source of truth): platform-injected
+
+        read-back keys (scope / status / namespace) are stripped; input /
+
+        output each shed one `schema` layer, with output.id_field moved back
+
+        to the top of output_schema.json; runtime / pricing / examples become
+
+        standalone files whenever present (the export is always the
+
+        split-file form); an empty readme writes no README.md; the remaining
+
+        keys are dataapp.json in their original order. A split folder
+
+        re-assembled through POST contract/assemble reproduces the manifest
+
+        with zero warnings. Optional `translations` (`{source, locales}`)
+
+        additionally produces `i18n.json`.'
+      operationId: split_contract_v1_data_apps_contract_split_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContractSplitRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope_ContractSplitResult_'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/data-apps/validate:
+    post:
+      tags:
+      - Publishing
+      summary: Validate a manifest (nothing persisted)
+      description: 'Phase one of two-phase publishing: full validation of structure,
+
+        cross-block rules, self-publish guardrails, code-package checks and
+
+        file-name checks (the same single verdict used by publish),
+
+        returning the issue list and a preview card.'
+      operationId: validate_manifest_v1_data_apps_validate_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ManifestSubmission'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope_ManifestCheckResult_'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/data-apps/package:
+    post:
+      tags:
+      - Publishing
+      summary: Validate a .dataapp package (zip upload, nothing persisted)
+      description: '**Deprecated**: the contract channel replaces the `.dataapp`
+
+        package flow — assemble/self-check via POST
+
+        /data-apps/contract/assemble and submit through the portal''s
+
+        contract import wizard. Kept for the built-in console and existing
+
+        tests; removal will be scheduled separately.
+
+
+        Upload a `.dataapp` package (raw zip as the request body) →
+
+        unpack → the same validation pipeline; nothing persisted.
+
+
+        Validation only, echoing the unpacked files: **after it passes you
+
+        still call POST /data-apps to publish** (two-phase publishing
+
+        stands; upload is not a bypass around validation). The package may
+
+        contain one wrapper directory around the content.'
+      operationId: check_manifest_package_v1_data_apps_package_post
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope_ManifestPackageResult_'
+      deprecated: true
+  /v1/data-apps/{app_id}/deprecate:
+    post:
+      tags:
+      - Publishing
+      summary: Deprecate a data app (reversible via undeprecate)
+      description: 'Identity-level deprecation (idempotent, reversible): no longer
+
+        maintained, migration encouraged, new Releases rejected.
+
+
+        A deprecated app leaves marketplace search, but its detail stays
+
+        visible per scope and runs are still allowed — cutting supply is the
+
+        author''s explicit decision (the accepting_runs switch), not an
+
+        implied semantic of deprecated, so integrations in flight do not
+
+        break suddenly. Zero-Release apps can be deprecated too —
+
+        deprecation is an identity-level switch, independent of Releases.
+
+        Recover from a mis-click or a change of heart via
+
+        POST /undeprecate.'
+      operationId: deprecate_app_lifecycle_v1_data_apps__app_id__deprecate_post
+      parameters:
+      - name: app_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: App Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope_LifecycleResult_'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/data-apps/{app_id}/rename:
+    post:
+      tags:
+      - Publishing
+      summary: Rename an app (routing alias, owner only)
+      description: 'Renaming is fully open (not limited to zero-Release apps): the
+
+        app name is a routing alias, so a rename publishes no version,
+
+        invalidates no old version, and does not affect runs in flight (all
+
+        persistent references pin app_id).
+
+
+        Broken caller references are the developer''s own responsibility:
+
+        old `owner/old-name` references (MCP ?tools= / SDK / REST / detail
+
+        page URLs) return a clean 404 after the rename, with no redirect;
+
+        historical runs and billing echo the new name. The old name cannot
+
+        be taken by others under your namespace, but you yourself may later
+
+        create a new app with it — at which point stray external references
+
+        would point at that new app (you are reminded again at creation).
+
+        Consumers are advised to integrate against app_id instead, which is
+
+        immune to future renames.
+
+        The validation chain mirrors identity creation: pattern → reserved
+
+        words → new name != current name; colliding with someone else''s
+
+        historical binding is 409 app-name-reserved, with another app of
+
+        your own 409 app-name-taken.'
+      operationId: rename_data_app_v1_data_apps__app_id__rename_post
+      parameters:
+      - name: app_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: App Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RenameRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope_RenameResult_'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/data-apps/{app_id}/undeprecate:
+    post:
+      tags:
+      - Publishing
+      summary: Undeprecate a data app (inverse of deprecate)
+      description: 'Resume maintenance (idempotent): clears the deprecated flag and
+
+        the derived status falls back onto its existing track — published
+
+        again when Releases exist (marketplace search restored per scope),
+
+        draft when there are none.
+
+
+        Isomorphic to version-level yank/unyank: deprecation is an
+
+        identity-level marker, not a physical state. Restoring does not
+
+        touch scope / accepting_runs: if the author flipped operational
+
+        switches while deprecated, undeprecating does not silently flip
+
+        them back.'
+      operationId: undeprecate_app_lifecycle_v1_data_apps__app_id__undeprecate_post
+      parameters:
+      - name: app_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: App Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope_LifecycleResult_'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/skills/{name}.zip:
+    get:
+      tags:
+      - Publishing
+      summary: Download a skill package
+      description: 'Unified skill package distribution (anonymous): currently
+
+        dataapp-contract-json (the contract authoring skill shared by the
+
+        portal''s "AI-assisted generation" flow and API-side authors). The
+
+        zip''s top level is the skill directory itself (agent-neutral
+
+        layout); unzip to each coding assistant''s convention:
+
+        `.claude/skills/` for Claude Code, `.codex/skills/` for Codex,
+
+        the project root for others.
+
+
+        The content is pure docs + references (all example upstreams are
+
+        fictional domains), with no credentials and no internal platform
+
+        constructs, hence anonymous access.'
+      operationId: download_skill_v1_skills__name__zip_get
+      parameters:
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Name
+      responses:
+        '200':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/data-apps/{app_id}/runs:
+    post:
+      tags:
+      - Runs & Results
+      summary: Start a run
+      description: 'The request body is an instance of the app''s input contract
+
+        (strictly validated). `wait` decides whether the call holds for the
+
+        result. Omitted: the app''s `execution.mode` default applies — sync
+
+        apps hold until terminal (up to the app''s `execution.timeout_seconds`),
+
+        async apps return a run_id immediately. Given explicitly (0–60 s):
+
+        the same for both modes — hold at most `wait` seconds for the
+
+        terminal state; `wait=0` returns right after enqueue, so a sync app
+
+        can be started without waiting and polled via
+
+        GET /runs/{run_id}?wait=. Whenever the run is terminal on return,
+
+        `sample_records` carries the first records.
+
+        `version` pins the run to a historical version (contract and price
+
+        both follow that version); defaults to the latest. `build` is a
+
+        debug run (owner only): pins an immutable Build snapshot
+
+        (run_kind=test, excluded from public statistics; billing applies as
+
+        usual — the owner pays for their own debugging, no special-casing);
+
+        mutually exclusive with `version`.
+
+
+        The run gate matches the detail gate: draft/private owner only,
+
+        shared per grant list — not visible means 404 (prevents existence
+
+        leaks). Visible but under maintenance (accepting_runs=false) is
+
+        403, with the owner''s self-tests exempt. New runs pinned to a
+
+        yanked version are rejected (422 version-yanked; runs in flight are
+
+        unaffected).'
+      operationId: run_data_app_v1_data_apps__app_id__runs_post
+      parameters:
+      - name: app_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: App Id
+      - name: wait
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: number
+            maximum: 60.0
+            minimum: 0
+          - type: 'null'
+          title: Wait
+      - name: max_records
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+            minimum: 1
+          - type: 'null'
+          title: Max Records
+      - name: triggered_by
+        in: query
+        required: false
+        schema:
+          type: string
+          pattern: ^[a-z][a-z0-9_-]{0,31}$
+          default: api
+          title: Triggered By
+      - name: version
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Version
+      - name: build
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Build
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+              title: Body
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope_RunWithSamples_'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/runs:
+    get:
+      tags:
+      - Runs & Results
+      summary: Run list
+      description: 'All runs I started — ownership is by **user**, so runs started
+
+        via SDK (key) and portal (JWT) share this one list. Always ordered
+
+        by start time descending; `pagination.total` reflects the filtered
+
+        result set.
+
+
+        Filters (combinable): `status` run state — supports comma-separated
+
+        multi-value OR matching (e.g. `status=PENDING,QUEUED`; pagination
+
+        and total hold on the merged result set; values outside the
+
+        vocabulary are rejected with 400); `credential` the originating
+
+        credential (a non-secret stable identifier, not the credential
+
+        itself — for tracing which credential is consuming quota);
+
+        `data_app` an app reference (`<username>/<app_name>`);
+
+        `triggered_by` the originating channel (mcp / api / cli / sdk);
+
+        `run_kind` (test debug / production — query-side filtering so one
+
+        kind''s traffic does not dilute the other kind''s pagination);
+
+        `created_from` / `created_to` start-time range (ISO-8601 absolute
+
+        timestamps, inclusive start, exclusive end).
+
+        Fields marked `sensitive` are masked in the input echo, same rules
+
+        as run detail.'
+      operationId: list_runs_v1_runs_get
+      parameters:
+      - name: status
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Status
+      - name: credential
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Credential
+      - name: data_app
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Data App
+      - name: triggered_by
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Triggered By
+      - name: created_from
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Created From
+      - name: created_to
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Created To
+      - name: run_kind
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            pattern: ^(test|production)$
+          - type: 'null'
+          title: Run Kind
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+          title: Offset
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 200
+          minimum: 1
+          default: 50
+          title: Limit
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope_RunList_'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/runs/{run_id}:
+    get:
+      tags:
+      - Runs & Results
+      summary: Run detail
+      description: 'State, progress, error object and upstream task reference; with
+
+        `wait` > 0, long-polls until terminal or timeout.
+
+
+        You can only read runs you started: someone else''s run_id and a
+
+        nonexistent run_id both return 404. Fields marked `sensitive` in
+
+        the app''s input contract are masked in the input echo — plaintext
+
+        is write-only, and even the initiator reads back masks.'
+      operationId: get_run_v1_runs__run_id__get
+      parameters:
+      - name: run_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Run Id
+      - name: wait
+        in: query
+        required: false
+        schema:
+          type: number
+          maximum: 60.0
+          minimum: 0
+          default: 0
+          title: Wait
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope_RunWithSamples_'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/runs/{run_id}/cancel:
+    post:
+      tags:
+      - Runs & Results
+      summary: Cancel a run
+      description: 'Sets the cancel signal and briefly waits (up to 5 seconds) for
+
+        the worker to respond, returning the current run state; cancelling
+
+        a run that has already produced records keeps the partial results.
+
+
+        Same ownership gate as run detail: you can only cancel runs you
+
+        started.'
+      operationId: cancel_run_v1_runs__run_id__cancel_post
+      parameters:
+      - name: run_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Run Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope_RunWithSamples_'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/runs/{run_id}/records:
+    get:
+      tags:
+      - Runs & Results
+      summary: Read run result records
+      description: 'Paginated read of the records produced by the run; `format`
+
+        supports json / jsonl / csv, `fields` selects columns
+
+        (comma-separated).
+
+
+        You can only read runs you started: someone else''s run_id and a
+
+        nonexistent run_id both return 404.'
+      operationId: run_records_v1_runs__run_id__records_get
+      parameters:
+      - name: run_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Run Id
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+          title: Offset
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 10000
+          minimum: 1
+          default: 100
+          title: Limit
+      - name: format
+        in: query
+        required: false
+        schema:
+          type: string
+          pattern: ^(json|jsonl|csv)$
+          default: json
+          title: Format
+      - name: fields
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Fields
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope_RecordsPage_'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/runs/{run_id}/upstream-calls:
+    get:
+      tags:
+      - Runs & Results
+      summary: Upstream call audit (debug runs only, owner only)
+      description: 'Upstream call timeline of a debug run (run_kind=test): one entry
+
+        per upstream HTTP interaction of an api kind run (submit / status /
+
+        fetch). `summary` aggregates the full audit trail by (attempt,
+
+        stage) (independent of pagination — see at a glance which stage is
+
+        stuck); `items` carries metadata only — request/response bodies are
+
+        fetched on demand via the single-entry detail endpoint.
+
+
+        You can only read your own debug runs: someone else''s, nonexistent
+
+        and production runs all return 404. Credentials and environment
+
+        values are masked on the write side; values marked `sensitive` in
+
+        the input contract are masked again on the read side. code kind
+
+        runs have no HTTP audit trail and return an empty list.'
+      operationId: run_upstream_calls_page_v1_runs__run_id__upstream_calls_get
+      parameters:
+      - name: run_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Run Id
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+          title: Offset
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 500
+          minimum: 1
+          default: 50
+          title: Limit
+      - name: stage
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            pattern: ^(submit|status|fetch)$
+          - type: 'null'
+          title: Stage
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope_UpstreamCallsPage_'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/runs/{run_id}/upstream-calls/{call_id}:
+    get:
+      tags:
+      - Runs & Results
+      summary: Upstream call audit detail (debug runs only, owner only)
+      description: 'The full scene of a single audit entry: request (query/body) and
+
+        response body (truncated on the write side when oversized, see
+
+        `response_truncated`). Same auth rules as the list endpoint.'
+      operationId: run_upstream_call_detail_v1_runs__run_id__upstream_calls__call_id__get
+      parameters:
+      - name: run_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Run Id
+      - name: call_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Call Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope_UpstreamCallDetail_'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/datasets:
+    get:
+      tags:
+      - Datasets
+      summary: Dataset list
+      description: 'Lists only the caller''s own datasets, plus seed/sample sets the
+
+        platform explicitly makes public.'
+      operationId: list_datasets_v1_datasets_get
+      parameters:
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+          title: Offset
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 200
+          minimum: 1
+          default: 50
+          title: Limit
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope_DatasetList_'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/datasets/{dataset_id}:
+    get:
+      tags:
+      - Datasets
+      summary: Dataset detail
+      description: 'Someone else''s dataset and a nonexistent dataset return the same
+
+        404.'
+      operationId: get_dataset_v1_datasets__dataset_id__get
+      parameters:
+      - name: dataset_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Dataset Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope_Dataset_'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/datasets/{dataset_id}/retention:
+    put:
+      tags:
+      - Datasets
+      summary: Set the retention mark
+      description: 'Run result data is retained for 90 days (from creation time);
+
+        datasets carrying the retention mark are excluded from expiry
+
+        cleanup. The mark is a **user''s explicit declaration** — reading
+
+        does not renew it; setting and clearing are both idempotent.
+
+
+        You can only mark datasets you own: someone else''s, platform
+
+        public seed sets and nonexistent ones all return 404 — the marking
+
+        gate is narrower than the visibility gate (you can see a seed set,
+
+        but it is not your output and does not participate in cleanup, so
+
+        marking it would be meaningless).'
+      operationId: set_dataset_retention_v1_datasets__dataset_id__retention_put
+      parameters:
+      - name: dataset_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Dataset Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RetentionMark'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope_RetentionState_'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/datasets/{dataset_id}/records:
+    get:
+      tags:
+      - Datasets
+      summary: Read dataset records
+      description: 'Paginated read of dataset records; same ownership gate as
+
+        dataset detail — not visible means 404.'
+      operationId: dataset_records_v1_datasets__dataset_id__records_get
+      parameters:
+      - name: dataset_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Dataset Id
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+          title: Offset
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 10000
+          minimum: 1
+          default: 100
+          title: Limit
+      - name: format
+        in: query
+        required: false
+        schema:
+          type: string
+          pattern: ^(json|jsonl|csv)$
+          default: json
+          title: Format
+      - name: fields
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Fields
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope_RecordsPage_'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/account:
+    get:
+      tags:
+      - Account
+      summary: Account and cumulative usage
+      operationId: account_v1_account_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope_Account_'
+  /v1/billing:
+    get:
+      tags:
+      - Account
+      summary: Billing aggregation
+      description: 'How much I spent over a period and where it went: an interval
+
+        total plus a grouped breakdown by day, by data app or by
+
+        credential. Independent of /account — account is an identity
+
+        endpoint and carries no time series.
+
+
+        The time range shares vocabulary with the run list: `created_from`
+
+        / `created_to` (ISO-8601 absolute timestamps, inclusive start,
+
+        exclusive end, attributed by run start time) — carry the same
+
+        parameters into GET /runs and you get exactly the runs behind any
+
+        group''s numbers. `tz_offset` only affects which day a run falls
+
+        into for day buckets (so callers can reconcile by their local day)
+
+        and changes no amounts or range predicates. Only data fees are
+
+        aggregated. Day groups are ascending (read reconciliation front to
+
+        back); data app / credential groups are by amount descending
+
+        (where the money mainly goes / which key spends it).
+
+
+        The `credential` grouping answers "how much did each of my
+
+        credentials spend" (tracing which key a runaway script holds): the
+
+        key is the originating credential''s non-secret stable identifier,
+
+        the same value as the `credential` filter on GET /runs — ownership
+
+        is always user-scoped; credentials are only a partition within it,
+
+        never a cross-user view.'
+      operationId: billing_report_v1_billing_get
+      parameters:
+      - name: group_by
+        in: query
+        required: false
+        schema:
+          type: string
+          pattern: ^(day|data_app|credential)$
+          default: day
+          title: Group By
+      - name: created_from
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Created From
+      - name: created_to
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Created To
+      - name: tz_offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 840
+          minimum: -720
+          description: timezone offset for day buckets (minutes relative to UTC, e.g.
+            480 for UTC+8); default 0 means UTC days. Fixed offset, no DST; drill-down
+            boundaries must be converted with the same offset into UTC absolute timestamps
+            and passed as created_from/to
+          default: 0
+          title: Tz Offset
+        description: timezone offset for day buckets (minutes relative to UTC, e.g.
+          480 for UTC+8); default 0 means UTC days. Fixed offset, no DST; drill-down
+          boundaries must be converted with the same offset into UTC absolute timestamps
+          and passed as created_from/to
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope_BillingReport_'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/secrets:
+    get:
+      tags:
+      - Secrets
+      summary: List my secrets
+      description: 'Returns names and masks only — once plaintext is written, no
+
+        endpoint ever echoes it back; if forgotten, just set it again.'
+      operationId: list_secrets_v1_secrets_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope_SecretList_'
+  /v1/secrets/{name}:
+    put:
+      tags:
+      - Secrets
+      summary: Create or update a secret
+      description: 'Writes a secret value (overwrites if it exists, i.e. rotation).
+
+        The name is the one referenced in the manifest''s `runtime.env`;
+
+        multiple apps of the same publisher may share one name.'
+      operationId: put_secret_v1_secrets__name__put
+      parameters:
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Name
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecretValue'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope_SecretInfo_'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - Secrets
+      summary: Delete a secret
+      description: 'After deletion, runs of apps referencing this name will fail
+
+        with upstream-env-missing when environment entries are issued.'
+      operationId: delete_secret_v1_secrets__name__delete
+      parameters:
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Name
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope_dict_str__str__'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    Account:
+      properties:
+        user_id:
+          type: string
+          title: User Id
+        username:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Username
+        total_spent:
+          type: number
+          title: Total Spent
+        currency:
+          type: string
+          title: Currency
+      type: object
+      required:
+      - user_id
+      - total_spent
+      title: Account
+    ApiError:
+      properties:
+        code:
+          type: string
+          title: Code
+        category:
+          type: string
+          title: Category
+          default: internal
+        message:
+          type: string
+          title: Message
+        retryable:
+          type: boolean
+          title: Retryable
+          default: false
+        retry_after:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Retry After
+        item_index:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Item Index
+        details:
+          anyOf:
+          - items:
+              additionalProperties:
+                type: string
+              type: object
+            type: array
+          - type: 'null'
+          title: Details
+      type: object
+      required:
+      - code
+      - message
+      title: ApiError
+    AppSettings:
+      properties:
+        scope:
+          type: string
+          title: Scope
+        accepting_runs:
+          type: boolean
+          title: Accepting Runs
+        pause_message:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Pause Message
+        source_locale:
+          type: string
+          title: Source Locale
+        warnings:
+          items:
+            $ref: '#/components/schemas/ContractWarning'
+          type: array
+          title: Warnings
+      type: object
+      required:
+      - scope
+      - accepting_runs
+      - source_locale
+      title: AppSettings
+    AppSettingsPatch:
+      properties:
+        scope:
+          anyOf:
+          - type: string
+            enum:
+            - public
+            - private
+            - shared
+          - type: 'null'
+          title: Scope
+        accepting_runs:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Accepting Runs
+        pause_message:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Pause Message
+        source_locale:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Source Locale
+      type: object
+      title: AppSettingsPatch
+      description: 'PATCH settings request body: all fields optional; only provided
+        keys change.'
+    AppStats:
+      properties:
+        namespace:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Namespace
+        app_name:
+          type: string
+          title: App Name
+        total_runs:
+          type: integer
+          title: Total Runs
+        last_run_at:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Last Run At
+        runs_30d:
+          type: integer
+          title: Runs 30D
+        success_rate_30d:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Success Rate 30D
+        runs_7d:
+          type: integer
+          title: Runs 7D
+          default: 0
+        success_rate_7d:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Success Rate 7D
+        calls_7d:
+          items:
+            type: integer
+          type: array
+          title: Calls 7D
+        avg_duration_ms_30d:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Avg Duration Ms 30D
+        credits_30d:
+          type: number
+          title: Credits 30D
+          default: 0.0
+      type: object
+      required:
+      - app_name
+      - total_runs
+      - runs_30d
+      - calls_7d
+      title: AppStats
+      description: 'Run statistics of an app (publisher self-service), derived from
+        daily
+
+        bucket aggregates; rolling windows use UTC days and include today.
+
+
+        "No finished runs in the window" is always expressed as null (not 0):
+
+        success rates and averages have no neutral default value.'
+    AppVersion:
+      properties:
+        version:
+          type: string
+          title: Version
+        published_at:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Published At
+        latest:
+          type: boolean
+          title: Latest
+          default: false
+        yanked:
+          type: boolean
+          title: Yanked
+          default: false
+      type: object
+      required:
+      - version
+      title: AppVersion
+    BatchAppResult:
+      properties:
+        app_name:
+          type: string
+          title: App Name
+        ok:
+          type: boolean
+          title: Ok
+        code:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Code
+      type: object
+      required:
+      - app_name
+      - ok
+      title: BatchAppResult
+    BatchGrantsRequest:
+      properties:
+        app_names:
+          items:
+            type: string
+          type: array
+          title: App Names
+        usernames:
+          items:
+            type: string
+          type: array
+          title: Usernames
+      type: object
+      required:
+      - app_names
+      - usernames
+      title: BatchGrantsRequest
+      description: 'Batch grants (app x user matrix): open several of the caller''s
+        apps to
+
+        several users at once.'
+    BatchGrantsResult:
+      properties:
+        granted:
+          type: integer
+          title: Granted
+        requested:
+          type: integer
+          title: Requested
+        apps:
+          items:
+            $ref: '#/components/schemas/BatchAppResult'
+          type: array
+          title: Apps
+        users:
+          items:
+            $ref: '#/components/schemas/BatchUserResult'
+          type: array
+          title: Users
+      type: object
+      required:
+      - granted
+      - requested
+      - apps
+      - users
+      title: BatchGrantsResult
+    BatchSettingsRequest:
+      properties:
+        app_names:
+          items:
+            type: string
+          type: array
+          title: App Names
+        settings:
+          $ref: '#/components/schemas/AppSettingsPatch'
+      type: object
+      required:
+      - app_names
+      - settings
+      title: BatchSettingsRequest
+      description: 'Batch operational settings: apply one patch to multiple apps (pause
+        or
+
+        resume a whole cluster during upstream instability).'
+    BatchSettingsResult:
+      properties:
+        updated:
+          type: integer
+          title: Updated
+        apps:
+          items:
+            $ref: '#/components/schemas/BatchAppResult'
+          type: array
+          title: Apps
+      type: object
+      required:
+      - updated
+      - apps
+      title: BatchSettingsResult
+    BatchUserResult:
+      properties:
+        username:
+          type: string
+          title: Username
+        ok:
+          type: boolean
+          title: Ok
+        code:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Code
+      type: object
+      required:
+      - username
+      - ok
+      title: BatchUserResult
+    Billing:
+      properties:
+        events:
+          items:
+            $ref: '#/components/schemas/BillingEvent'
+          type: array
+          title: Events
+        total:
+          type: number
+          title: Total
+          default: 0.0
+        currency:
+          type: string
+          title: Currency
+        charged:
+          type: boolean
+          title: Charged
+          default: true
+      type: object
+      title: Billing
+      description: 'Billing ledger = Usage x pricing x billing_rules: how much is
+        charged.'
+    BillingEvent:
+      properties:
+        event:
+          type: string
+          title: Event
+        label:
+          type: string
+          title: Label
+          default: ''
+        qty:
+          type: number
+          title: Qty
+        unit_price:
+          type: number
+          title: Unit Price
+        amount:
+          type: number
+          title: Amount
+        unit_size:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Unit Size
+        raw_qty:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Raw Qty
+      type: object
+      required:
+      - event
+      - qty
+      - unit_price
+      - amount
+      title: BillingEvent
+    BillingGroup:
+      properties:
+        day:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Day
+        namespace:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Namespace
+        app_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: App Name
+        credential:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Credential
+        credential_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Credential Name
+        runs:
+          type: integer
+          title: Runs
+          default: 0
+        amount:
+          type: number
+          title: Amount
+          default: 0.0
+      type: object
+      title: BillingGroup
+      description: 'One group of the billing aggregate: group_by=day carries `day`,
+
+        group_by=data_app carries the two-part app reference, group_by=credential
+
+        carries `credential` (a non-secret stable identifier, same value as the
+
+        GET /runs filter).'
+    BillingReport:
+      properties:
+        total:
+          type: number
+          title: Total
+          default: 0.0
+        currency:
+          type: string
+          title: Currency
+        group_by:
+          type: string
+          title: Group By
+          default: day
+        groups:
+          items:
+            $ref: '#/components/schemas/BillingGroup'
+          type: array
+          title: Groups
+      type: object
+      title: BillingReport
+      description: 'Spending aggregate from the caller''s perspective (billing report):
+
+        range total plus per-group breakdown. Data fees only.'
+    BuildCreateResult:
+      properties:
+        build_id:
+          type: string
+          title: Build Id
+        build_status:
+          type: string
+          title: Build Status
+        content_hash:
+          type: string
+          title: Content Hash
+        source_revision:
+          type: integer
+          title: Source Revision
+        reused:
+          type: boolean
+          title: Reused
+          default: false
+        created_at:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Created At
+      type: object
+      required:
+      - build_id
+      - build_status
+      - content_hash
+      - source_revision
+      title: BuildCreateResult
+      description: 'POST builds: api-type builds become ready synchronously (200);
+        code-type
+
+        builds return 202 building (poll GET builds/{id} until ready/failed).'
+    BuildDetail:
+      properties:
+        build_id:
+          type: string
+          title: Build Id
+        build_status:
+          type: string
+          title: Build Status
+        error:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Error
+        content_hash:
+          type: string
+          title: Content Hash
+          default: ''
+        source_revision:
+          type: integer
+          title: Source Revision
+          default: 0
+        created_at:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Created At
+      type: object
+      required:
+      - build_id
+      - build_status
+      title: BuildDetail
+    BuildInfo:
+      properties:
+        build_id:
+          type: string
+          title: Build Id
+        build_status:
+          type: string
+          title: Build Status
+        error:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Error
+        content_hash:
+          type: string
+          title: Content Hash
+          default: ''
+        source_revision:
+          type: integer
+          title: Source Revision
+          default: 0
+        created_at:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Created At
+      type: object
+      required:
+      - build_id
+      - build_status
+      title: BuildInfo
+      description: State of one build snapshot (GET /data-apps/{ref}/builds, owner
+        only).
+    BuildList:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/BuildInfo'
+          type: array
+          title: Items
+      type: object
+      title: BuildList
+    BuildRequest:
+      properties:
+        expected_revision:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Expected Revision
+      type: object
+      title: BuildRequest
+      description: 'POST builds request body (optional): optimistic concurrency guard.'
+    ContractAssembleRequest:
+      properties:
+        files:
+          additionalProperties:
+            type: string
+          type: object
+          title: Files
+      type: object
+      required:
+      - files
+      title: ContractAssembleRequest
+      description: 'POST contract/assemble request body: a contract folder as a files
+        map.
+
+
+        Keys are the relative paths as picked/dragged (kept in order): the
+
+        "duplicate name across levels" preference (shallower wins, later wins at
+
+        equal depth) and folder-name derivation depend on them.'
+    ContractAssembleResult:
+      properties:
+        manifest:
+          additionalProperties: true
+          type: object
+          title: Manifest
+        picked:
+          items:
+            type: string
+          type: array
+          title: Picked
+        folder_name:
+          type: string
+          title: Folder Name
+          default: ''
+        issues:
+          items:
+            $ref: '#/components/schemas/ManifestIssue'
+          type: array
+          title: Issues
+        warnings:
+          items:
+            $ref: '#/components/schemas/ContractWarning'
+          type: array
+          title: Warnings
+        translations:
+          anyOf:
+          - $ref: '#/components/schemas/ContractTranslations'
+          - type: 'null'
+      type: object
+      required:
+      - manifest
+      title: ContractAssembleResult
+      description: 'Assembly result: the merged manifest plus the full authoring check
+
+        (same verdict as POST /data-apps/validate) and structured soft warnings.'
+    ContractSplitRequest:
+      properties:
+        manifest:
+          additionalProperties: true
+          type: object
+          title: Manifest
+        translations:
+          anyOf:
+          - $ref: '#/components/schemas/ContractTranslations'
+          - type: 'null'
+      type: object
+      required:
+      - manifest
+      title: ContractSplitRequest
+      description: 'POST contract/split request body: any self-contained manifest
+        object
+
+        (e.g. the read-back of GET /data-apps/{ref}/manifest, injected keys
+
+        included — they are stripped during the split). Optional `translations`
+
+        additionally produces `i18n.json`.'
+    ContractSplitResult:
+      properties:
+        files:
+          additionalProperties:
+            type: string
+          type: object
+          title: Files
+        folder_name:
+          type: string
+          title: Folder Name
+          default: ''
+      type: object
+      title: ContractSplitResult
+      description: 'Split result: canonical contract-folder form, dataapp.json first.
+
+        README.md is omitted when the readme is empty (a folder may have 6 files).
+
+        Non-slot content (`_editor_state.json`, code packages) never appears —
+
+        the input is an inline manifest, which carries no files map.'
+    ContractTranslations:
+      properties:
+        source:
+          type: string
+          title: Source
+        locales:
+          additionalProperties:
+            additionalProperties: true
+            type: object
+          type: object
+          title: Locales
+      type: object
+      required:
+      - source
+      title: ContractTranslations
+      description: 'The companion `i18n.json` of a contract folder: `source` is the
+        locale
+
+        the manifest is written in (required); `locales` maps each target locale
+
+        to a flat entries object (path → string or string array; see
+
+        GET/PUT /data-apps/{ref}/translations/{locale}). Never merged into the
+
+        manifest — translations are stored per app, not per release.'
+    ContractWarning:
+      properties:
+        code:
+          type: string
+          title: Code
+        params:
+          additionalProperties: true
+          type: object
+          title: Params
+      type: object
+      required:
+      - code
+      title: ContractWarning
+      description: 'One structured soft warning from contract assembly. `code` is
+        a stable
+
+        kebab-case identifier; `params` carries the variables (file names, the
+
+        ignored-file list, ...). Localization happens in consuming display layers
+
+        keyed by `code`; unknown codes should be shown as the code itself.
+
+
+        Codes: `contract-file-missing` (a non-optional slot file is absent;
+
+        params.file), `readme-missing`, `duplicate-contract-file` (same name at
+
+        several levels; params.file/kept/ignored), `id-field-missing`
+
+        (output_schema.json has no id_field and runtime has no dedup_by to infer
+
+        it from), `pricing-missing` (no pricing.json and no pricing section in
+
+        dataapp.json), `non-contract-files-ignored` (params.files is the full
+
+        list), `folder-name-mismatch` (params.folder_name/declared_name).
+
+        i18n.json codes (params.locale/path): `i18n-locale-is-source` (a locale
+
+        equal to `source`, skipped), `i18n-path-unresolved` (path not in the
+
+        translatable allowlist or absent from the manifest), `i18n-type-mismatch`
+
+        (params.expected string/list), `i18n-length-mismatch` (`enum_titles`
+
+        length differs from `enum`; params.expected/actual), `i18n-path-ambiguous`
+
+        (duplicate pricing event / example id makes the path ambiguous).'
+    DataEnvelope_Account_:
+      properties:
+        data:
+          $ref: '#/components/schemas/Account'
+      type: object
+      required:
+      - data
+      title: DataEnvelope[Account]
+    DataEnvelope_AppSettings_:
+      properties:
+        data:
+          $ref: '#/components/schemas/AppSettings'
+      type: object
+      required:
+      - data
+      title: DataEnvelope[AppSettings]
+    DataEnvelope_AppStats_:
+      properties:
+        data:
+          $ref: '#/components/schemas/AppStats'
+      type: object
+      required:
+      - data
+      title: DataEnvelope[AppStats]
+    DataEnvelope_BatchGrantsResult_:
+      properties:
+        data:
+          $ref: '#/components/schemas/BatchGrantsResult'
+      type: object
+      required:
+      - data
+      title: DataEnvelope[BatchGrantsResult]
+    DataEnvelope_BatchSettingsResult_:
+      properties:
+        data:
+          $ref: '#/components/schemas/BatchSettingsResult'
+      type: object
+      required:
+      - data
+      title: DataEnvelope[BatchSettingsResult]
+    DataEnvelope_BillingReport_:
+      properties:
+        data:
+          $ref: '#/components/schemas/BillingReport'
+      type: object
+      required:
+      - data
+      title: DataEnvelope[BillingReport]
+    DataEnvelope_BuildCreateResult_:
+      properties:
+        data:
+          $ref: '#/components/schemas/BuildCreateResult'
+      type: object
+      required:
+      - data
+      title: DataEnvelope[BuildCreateResult]
+    DataEnvelope_BuildDetail_:
+      properties:
+        data:
+          $ref: '#/components/schemas/BuildDetail'
+      type: object
+      required:
+      - data
+      title: DataEnvelope[BuildDetail]
+    DataEnvelope_BuildList_:
+      properties:
+        data:
+          $ref: '#/components/schemas/BuildList'
+      type: object
+      required:
+      - data
+      title: DataEnvelope[BuildList]
+    DataEnvelope_ContractAssembleResult_:
+      properties:
+        data:
+          $ref: '#/components/schemas/ContractAssembleResult'
+      type: object
+      required:
+      - data
+      title: DataEnvelope[ContractAssembleResult]
+    DataEnvelope_ContractSplitResult_:
+      properties:
+        data:
+          $ref: '#/components/schemas/ContractSplitResult'
+      type: object
+      required:
+      - data
+      title: DataEnvelope[ContractSplitResult]
+    DataEnvelope_DatasetList_:
+      properties:
+        data:
+          $ref: '#/components/schemas/DatasetList'
+      type: object
+      required:
+      - data
+      title: DataEnvelope[DatasetList]
+    DataEnvelope_Dataset_:
+      properties:
+        data:
+          $ref: '#/components/schemas/Dataset'
+      type: object
+      required:
+      - data
+      title: DataEnvelope[Dataset]
+    DataEnvelope_GrantList_:
+      properties:
+        data:
+          $ref: '#/components/schemas/GrantList'
+      type: object
+      required:
+      - data
+      title: DataEnvelope[GrantList]
+    DataEnvelope_LifecycleResult_:
+      properties:
+        data:
+          $ref: '#/components/schemas/LifecycleResult'
+      type: object
+      required:
+      - data
+      title: DataEnvelope[LifecycleResult]
+    DataEnvelope_ManifestCheckResult_:
+      properties:
+        data:
+          $ref: '#/components/schemas/ManifestCheckResult'
+      type: object
+      required:
+      - data
+      title: DataEnvelope[ManifestCheckResult]
+    DataEnvelope_ManifestPackageResult_:
+      properties:
+        data:
+          $ref: '#/components/schemas/ManifestPackageResult'
+      type: object
+      required:
+      - data
+      title: DataEnvelope[ManifestPackageResult]
+    DataEnvelope_OkResult_:
+      properties:
+        data:
+          $ref: '#/components/schemas/OkResult'
+      type: object
+      required:
+      - data
+      title: DataEnvelope[OkResult]
+    DataEnvelope_PlatformMeta_:
+      properties:
+        data:
+          $ref: '#/components/schemas/PlatformMeta'
+      type: object
+      required:
+      - data
+      title: DataEnvelope[PlatformMeta]
+    DataEnvelope_PublishResult_:
+      properties:
+        data:
+          $ref: '#/components/schemas/PublishResult'
+      type: object
+      required:
+      - data
+      title: DataEnvelope[PublishResult]
+    DataEnvelope_PublisherLatency_:
+      properties:
+        data:
+          $ref: '#/components/schemas/PublisherLatency'
+      type: object
+      required:
+      - data
+      title: DataEnvelope[PublisherLatency]
+    DataEnvelope_PublisherProbeList_:
+      properties:
+        data:
+          $ref: '#/components/schemas/PublisherProbeList'
+      type: object
+      required:
+      - data
+      title: DataEnvelope[PublisherProbeList]
+    DataEnvelope_PublisherProbeStatusList_:
+      properties:
+        data:
+          $ref: '#/components/schemas/PublisherProbeStatusList'
+      type: object
+      required:
+      - data
+      title: DataEnvelope[PublisherProbeStatusList]
+    DataEnvelope_PublisherRunDetail_:
+      properties:
+        data:
+          $ref: '#/components/schemas/PublisherRunDetail'
+      type: object
+      required:
+      - data
+      title: DataEnvelope[PublisherRunDetail]
+    DataEnvelope_PublisherRunList_:
+      properties:
+        data:
+          $ref: '#/components/schemas/PublisherRunList'
+      type: object
+      required:
+      - data
+      title: DataEnvelope[PublisherRunList]
+    DataEnvelope_PublisherUsage_:
+      properties:
+        data:
+          $ref: '#/components/schemas/PublisherUsage'
+      type: object
+      required:
+      - data
+      title: DataEnvelope[PublisherUsage]
+    DataEnvelope_RecordsPage_:
+      properties:
+        data:
+          $ref: '#/components/schemas/RecordsPage'
+      type: object
+      required:
+      - data
+      title: DataEnvelope[RecordsPage]
+    DataEnvelope_ReleaseList_:
+      properties:
+        data:
+          $ref: '#/components/schemas/ReleaseList'
+      type: object
+      required:
+      - data
+      title: DataEnvelope[ReleaseList]
+    DataEnvelope_ReleaseResult_:
+      properties:
+        data:
+          $ref: '#/components/schemas/ReleaseResult'
+      type: object
+      required:
+      - data
+      title: DataEnvelope[ReleaseResult]
+    DataEnvelope_RenameResult_:
+      properties:
+        data:
+          $ref: '#/components/schemas/RenameResult'
+      type: object
+      required:
+      - data
+      title: DataEnvelope[RenameResult]
+    DataEnvelope_RetentionState_:
+      properties:
+        data:
+          $ref: '#/components/schemas/RetentionState'
+      type: object
+      required:
+      - data
+      title: DataEnvelope[RetentionState]
+    DataEnvelope_RunList_:
+      properties:
+        data:
+          $ref: '#/components/schemas/RunList'
+      type: object
+      required:
+      - data
+      title: DataEnvelope[RunList]
+    DataEnvelope_RunWithSamples_:
+      properties:
+        data:
+          $ref: '#/components/schemas/RunWithSamples'
+      type: object
+      required:
+      - data
+      title: DataEnvelope[RunWithSamples]
+    DataEnvelope_SearchResult_:
+      properties:
+        data:
+          $ref: '#/components/schemas/SearchResult'
+      type: object
+      required:
+      - data
+      title: DataEnvelope[SearchResult]
+    DataEnvelope_SecretInfo_:
+      properties:
+        data:
+          $ref: '#/components/schemas/SecretInfo'
+      type: object
+      required:
+      - data
+      title: DataEnvelope[SecretInfo]
+    DataEnvelope_SecretList_:
+      properties:
+        data:
+          $ref: '#/components/schemas/SecretList'
+      type: object
+      required:
+      - data
+      title: DataEnvelope[SecretList]
+    DataEnvelope_TranslationDeleteResult_:
+      properties:
+        data:
+          $ref: '#/components/schemas/TranslationDeleteResult'
+      type: object
+      required:
+      - data
+      title: DataEnvelope[TranslationDeleteResult]
+    DataEnvelope_TranslationList_:
+      properties:
+        data:
+          $ref: '#/components/schemas/TranslationList'
+      type: object
+      required:
+      - data
+      title: DataEnvelope[TranslationList]
+    DataEnvelope_TranslationLookupResult_:
+      properties:
+        data:
+          $ref: '#/components/schemas/TranslationLookupResult'
+      type: object
+      required:
+      - data
+      title: DataEnvelope[TranslationLookupResult]
+    DataEnvelope_TranslationSaveResult_:
+      properties:
+        data:
+          $ref: '#/components/schemas/TranslationSaveResult'
+      type: object
+      required:
+      - data
+      title: DataEnvelope[TranslationSaveResult]
+    DataEnvelope_TranslationView_:
+      properties:
+        data:
+          $ref: '#/components/schemas/TranslationView'
+      type: object
+      required:
+      - data
+      title: DataEnvelope[TranslationView]
+    DataEnvelope_UpstreamCallDetail_:
+      properties:
+        data:
+          $ref: '#/components/schemas/UpstreamCallDetail'
+      type: object
+      required:
+      - data
+      title: DataEnvelope[UpstreamCallDetail]
+    DataEnvelope_UpstreamCallsPage_:
+      properties:
+        data:
+          $ref: '#/components/schemas/UpstreamCallsPage'
+      type: object
+      required:
+      - data
+      title: DataEnvelope[UpstreamCallsPage]
+    DataEnvelope_WorkspaceDeleteResult_:
+      properties:
+        data:
+          $ref: '#/components/schemas/WorkspaceDeleteResult'
+      type: object
+      required:
+      - data
+      title: DataEnvelope[WorkspaceDeleteResult]
+    DataEnvelope_WorkspaceSaveResult_:
+      properties:
+        data:
+          $ref: '#/components/schemas/WorkspaceSaveResult'
+      type: object
+      required:
+      - data
+      title: DataEnvelope[WorkspaceSaveResult]
+    DataEnvelope_WorkspaceView_:
+      properties:
+        data:
+          $ref: '#/components/schemas/WorkspaceView'
+      type: object
+      required:
+      - data
+      title: DataEnvelope[WorkspaceView]
+    DataEnvelope_YankResult_:
+      properties:
+        data:
+          $ref: '#/components/schemas/YankResult'
+      type: object
+      required:
+      - data
+      title: DataEnvelope[YankResult]
+    DataEnvelope_dict_str__Any__:
+      properties:
+        data:
+          additionalProperties: true
+          type: object
+          title: Data
+      type: object
+      required:
+      - data
+      title: DataEnvelope[dict[str, Any]]
+    DataEnvelope_dict_str__str__:
+      properties:
+        data:
+          additionalProperties:
+            type: string
+          type: object
+          title: Data
+      type: object
+      required:
+      - data
+      title: DataEnvelope[dict[str, str]]
+    DataEnvelope_list_AppVersion__:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/AppVersion'
+          type: array
+          title: Data
+      type: object
+      required:
+      - data
+      title: DataEnvelope[list[AppVersion]]
+    Dataset:
+      properties:
+        dataset_id:
+          type: string
+          title: Dataset Id
+        name:
+          type: string
+          title: Name
+        scope:
+          type: string
+          title: Scope
+          default: private
+        source:
+          type: string
+          title: Source
+          default: run
+        row_count:
+          type: integer
+          title: Row Count
+          default: 0
+        retained:
+          type: boolean
+          title: Retained
+          default: false
+        created_at:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Created At
+        updated_at:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Updated At
+      type: object
+      required:
+      - dataset_id
+      - name
+      title: Dataset
+      description: Public shape of a dataset.
+    DatasetList:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/Dataset'
+          type: array
+          title: Items
+      type: object
+      required:
+      - items
+      title: DatasetList
+    GrantEntry:
+      properties:
+        username:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Username
+        granted_at:
+          type: string
+          title: Granted At
+      type: object
+      required:
+      - granted_at
+      title: GrantEntry
+    GrantList:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/GrantEntry'
+          type: array
+          title: Items
+      type: object
+      required:
+      - items
+      title: GrantList
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    LatencyGroup:
+      properties:
+        samples:
+          type: integer
+          title: Samples
+          default: 0
+        p50:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: P50
+        p90:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: P90
+        p95:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: P95
+        p99:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: P99
+        max:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Max
+        namespace:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Namespace
+        app_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: App Name
+        version:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Version
+      type: object
+      title: LatencyGroup
+      description: 'One group of the latency report: `namespace` + `app_name` for
+
+        data_app, plus `version` for version (null for debug runs).'
+    LatencyMetrics:
+      properties:
+        samples:
+          type: integer
+          title: Samples
+          default: 0
+        p50:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: P50
+        p90:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: P90
+        p95:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: P95
+        p99:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: P99
+        max:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Max
+      type: object
+      title: LatencyMetrics
+      description: 'Run duration distribution in milliseconds (finished_at - started_at,
+
+        continuous-interpolated percentiles). `samples` counts finished runs that
+
+        have a start time; every percentile is null when there are none.'
+    LifecycleResult:
+      properties:
+        app_name:
+          type: string
+          title: App Name
+        namespace:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Namespace
+        version:
+          type: string
+          title: Version
+          default: ''
+        status:
+          type: string
+          title: Status
+        missing_secrets:
+          items:
+            type: string
+          type: array
+          title: Missing Secrets
+      type: object
+      required:
+      - app_name
+      - status
+      title: LifecycleResult
+      description: Response of the lifecycle endpoint (deprecate).
+    ManifestCheckResult:
+      properties:
+        valid:
+          type: boolean
+          title: Valid
+        errors:
+          items:
+            $ref: '#/components/schemas/ManifestIssue'
+          type: array
+          title: Errors
+        card:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Card
+      type: object
+      required:
+      - valid
+      title: ManifestCheckResult
+    ManifestIssue:
+      properties:
+        path:
+          type: string
+          title: Path
+        message:
+          type: string
+          title: Message
+      type: object
+      required:
+      - path
+      - message
+      title: ManifestIssue
+    ManifestPackageResult:
+      properties:
+        valid:
+          type: boolean
+          title: Valid
+        errors:
+          items:
+            $ref: '#/components/schemas/ManifestIssue'
+          type: array
+          title: Errors
+        card:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Card
+        manifest:
+          type: string
+          title: Manifest
+          default: ''
+        files:
+          additionalProperties:
+            type: string
+          type: object
+          title: Files
+      type: object
+      required:
+      - valid
+      title: ManifestPackageResult
+      description: 'Validation result of an uploaded package: the verdict plus the
+        extracted
+
+        source files (used to refill the editor; publish after confirmation).'
+    ManifestSubmission:
+      properties:
+        manifest:
+          type: string
+          title: Manifest
+        files:
+          additionalProperties:
+            type: string
+          type: object
+          title: Files
+        secrets:
+          additionalProperties:
+            type: string
+          type: object
+          title: Secrets
+      type: object
+      required:
+      - manifest
+      title: ManifestSubmission
+    OkResult:
+      properties:
+        ok:
+          type: boolean
+          title: Ok
+          default: true
+      type: object
+      title: OkResult
+    Pagination:
+      properties:
+        offset:
+          type: integer
+          title: Offset
+          default: 0
+        limit:
+          type: integer
+          title: Limit
+          default: 0
+        count:
+          type: integer
+          title: Count
+          default: 0
+        total:
+          type: integer
+          title: Total
+          default: 0
+        has_more:
+          type: boolean
+          title: Has More
+          default: false
+      type: object
+      title: Pagination
+    PlatformMeta:
+      properties:
+        currency:
+          type: string
+          title: Currency
+      type: object
+      title: PlatformMeta
+      description: 'Platform metadata: deployment-level constants needed to render
+        amounts
+
+        that do not belong to any single business object. Readable anonymously.'
+    Progress:
+      properties:
+        done:
+          type: integer
+          title: Done
+          default: 0
+        total:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Total
+        status_text:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Status Text
+      type: object
+      title: Progress
+    PublicRun:
+      properties:
+        run_id:
+          type: string
+          title: Run Id
+        namespace:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Namespace
+        app_name:
+          type: string
+          title: App Name
+          default: ''
+        app_version:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: App Version
+        build_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Build Id
+        run_kind:
+          type: string
+          title: Run Kind
+          default: production
+        state:
+          $ref: '#/components/schemas/RunState'
+        input:
+          additionalProperties: true
+          type: object
+          title: Input
+        progress:
+          $ref: '#/components/schemas/Progress'
+        dataset_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Dataset Id
+        partial:
+          type: boolean
+          title: Partial
+          default: false
+        cancel_requested:
+          type: boolean
+          title: Cancel Requested
+          description: true while cancellation has been requested and the run is still
+            winding down (cooperative stop / partial-result recovery); always false
+            in terminal states (normalized server-side), so consumers need not derive
+            it from state
+          default: false
+        triggered_by:
+          type: string
+          title: Triggered By
+          default: api
+        upstream_ref:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Upstream Ref
+        created_at:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Created At
+        started_at:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Started At
+        first_started_at:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: First Started At
+          description: 'when the run was first claimed by a worker. Unlike started_at,
+            which is re-stamped on every retry, this one is never rewritten, so it
+            is the anchor for queue time: queued = first_started_at - created_at,
+            and total wall time = finished_at - first_started_at. Deriving queue time
+            from started_at counts the earlier attempts'' execution as queueing. Null
+            only for runs never claimed.'
+        finished_at:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Finished At
+        usage:
+          $ref: '#/components/schemas/Usage'
+        billing:
+          $ref: '#/components/schemas/Billing'
+        error:
+          anyOf:
+          - $ref: '#/components/schemas/ApiError'
+          - type: 'null'
+      type: object
+      required:
+      - run_id
+      - state
+      title: PublicRun
+      description: 'Public shape of a run: the app is referenced as `<namespace>/<app_name>`
+
+        plus the pinned version.'
+    PublishResult:
+      properties:
+        app_name:
+          type: string
+          title: App Name
+        namespace:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Namespace
+        version:
+          type: string
+          title: Version
+          default: ''
+        status:
+          type: string
+          title: Status
+          default: published
+        card:
+          additionalProperties: true
+          type: object
+          title: Card
+        missing_secrets:
+          items:
+            type: string
+          type: array
+          title: Missing Secrets
+        name_reused_from:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Name Reused From
+      type: object
+      required:
+      - app_name
+      - card
+      title: PublishResult
+    PublisherLatency:
+      properties:
+        range:
+          $ref: '#/components/schemas/UsageRange'
+        totals:
+          $ref: '#/components/schemas/LatencyMetrics'
+        group_by:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Group By
+        groups:
+          items:
+            $ref: '#/components/schemas/LatencyGroup'
+          type: array
+          title: Groups
+      type: object
+      required:
+      - range
+      - totals
+      title: PublisherLatency
+      description: 'Publisher-side duration distribution over a bounded range, optionally
+
+        broken down by app or by app version (slowest p95 first).'
+    PublisherProbe:
+      properties:
+        namespace:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Namespace
+        app_name:
+          type: string
+          title: App Name
+          default: ''
+        app_version:
+          type: string
+          title: App Version
+          default: ''
+        example_id:
+          type: string
+          title: Example Id
+          default: '-'
+        verdict:
+          type: string
+          title: Verdict
+        skip_reason:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Skip Reason
+        records:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Records
+        duration_ms:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Duration Ms
+        error:
+          anyOf:
+          - $ref: '#/components/schemas/PublisherRunError'
+          - type: 'null'
+        kind:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Kind
+          description: '`scheduled` (daily batch) or `manual` (ops re-test)'
+        created_at:
+          type: string
+          title: Created At
+        finished_at:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Finished At
+      type: object
+      required:
+      - verdict
+      - created_at
+      title: PublisherProbe
+      description: 'One health-probe result of an app I publish (one example, one
+        run of
+
+        the platform''s daily connectivity check): whether the example still
+
+        produces records, how long it took and why it failed. Probe runs never
+
+        count in usage or billing.'
+    PublisherProbeList:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/PublisherProbe'
+          type: array
+          title: Items
+      type: object
+      title: PublisherProbeList
+      description: Probe history of my apps, most recent first.
+    PublisherProbeStatus:
+      properties:
+        namespace:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Namespace
+        app_name:
+          type: string
+          title: App Name
+          default: ''
+        app_version:
+          type: string
+          title: App Version
+          default: ''
+        verdict:
+          type: string
+          title: Verdict
+        skip_reason:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Skip Reason
+        examples:
+          type: integer
+          title: Examples
+          default: 0
+        passed:
+          type: integer
+          title: Passed
+          default: 0
+        error:
+          anyOf:
+          - $ref: '#/components/schemas/PublisherRunError'
+          - type: 'null'
+        kind:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Kind
+        checked_at:
+          type: string
+          title: Checked At
+        finished_at:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Finished At
+      type: object
+      required:
+      - verdict
+      - checked_at
+      title: PublisherProbeStatus
+      description: 'The latest probe batch of one app, folded to an app-level verdict:
+
+        FAIL if any example failed, then TIMEOUT, NO_DATA, PENDING (batch still
+
+        running), PASS when every example passed, SKIPPED when no run was made
+
+        (`skip_reason` says why). `error` is the first failing example''s error.'
+    PublisherProbeStatusList:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/PublisherProbeStatus'
+          type: array
+          title: Items
+      type: object
+      title: PublisherProbeStatusList
+      description: 'Latest probe status of each of my apps that has ever been probed
+
+        (apps never probed are absent).'
+    PublisherRun:
+      properties:
+        run_id:
+          type: string
+          title: Run Id
+        namespace:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Namespace
+        app_name:
+          type: string
+          title: App Name
+          default: ''
+        app_version:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: App Version
+        build_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Build Id
+          description: Build snapshot a debug run (run_kind=test) was pinned to; null
+            for production runs
+        run_kind:
+          type: string
+          title: Run Kind
+          default: production
+        state:
+          $ref: '#/components/schemas/RunState'
+        partial:
+          type: boolean
+          title: Partial
+          default: false
+        triggered_by:
+          type: string
+          title: Triggered By
+          default: api
+        created_at:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Created At
+        started_at:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Started At
+        finished_at:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Finished At
+        duration_ms:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Duration Ms
+        records:
+          type: integer
+          title: Records
+          default: 0
+        amount:
+          type: number
+          title: Amount
+          default: 0.0
+        error:
+          anyOf:
+          - $ref: '#/components/schemas/PublisherRunError'
+          - type: 'null'
+      type: object
+      required:
+      - run_id
+      - state
+      title: PublisherRun
+      description: 'One call to an app I publish, publisher perspective: what happened
+        and
+
+        what it cost the caller — never who called, what they sent or what they
+
+        got back. `records` is the number of records written back; `amount` is
+
+        the data fee the caller paid for this run (resource fees excluded), not
+
+        the publisher''s earnings.'
+    PublisherRunDetail:
+      properties:
+        run_id:
+          type: string
+          title: Run Id
+        namespace:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Namespace
+        app_name:
+          type: string
+          title: App Name
+          default: ''
+        app_version:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: App Version
+        build_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Build Id
+          description: Build snapshot a debug run (run_kind=test) was pinned to; null
+            for production runs
+        run_kind:
+          type: string
+          title: Run Kind
+          default: production
+        state:
+          $ref: '#/components/schemas/RunState'
+        partial:
+          type: boolean
+          title: Partial
+          default: false
+        triggered_by:
+          type: string
+          title: Triggered By
+          default: api
+        created_at:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Created At
+        started_at:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Started At
+        finished_at:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Finished At
+        duration_ms:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Duration Ms
+        records:
+          type: integer
+          title: Records
+          default: 0
+        amount:
+          type: number
+          title: Amount
+          default: 0.0
+        error:
+          anyOf:
+          - $ref: '#/components/schemas/PublisherRunError'
+          - type: 'null'
+        warnings:
+          items:
+            $ref: '#/components/schemas/RunWarning'
+          type: array
+          title: Warnings
+      type: object
+      required:
+      - run_id
+      - state
+      title: PublisherRunDetail
+    PublisherRunError:
+      properties:
+        code:
+          type: string
+          title: Code
+        category:
+          type: string
+          title: Category
+          default: internal
+        message:
+          type: string
+          title: Message
+          default: ''
+        retryable:
+          type: boolean
+          title: Retryable
+          default: false
+      type: object
+      required:
+      - code
+      title: PublisherRunError
+      description: 'Why a run failed, as the publisher may see it: code, category,
+        the
+
+        message and whether the caller could retry. Field-level `details` of
+
+        input validation and retry hints stay with the caller.'
+    PublisherRunList:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/PublisherRun'
+          type: array
+          title: Items
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        currency:
+          type: string
+          title: Currency
+      type: object
+      required:
+      - items
+      title: PublisherRunList
+      description: Page of calls to my apps, most recent first.
+    PublisherUsage:
+      properties:
+        range:
+          $ref: '#/components/schemas/UsageRange'
+        currency:
+          type: string
+          title: Currency
+        totals:
+          $ref: '#/components/schemas/UsageTotals'
+        previous_totals:
+          anyOf:
+          - $ref: '#/components/schemas/UsageTotals'
+          - type: 'null'
+        group_by:
+          type: string
+          title: Group By
+          default: day
+        groups:
+          items:
+            $ref: '#/components/schemas/UsageGroup'
+          type: array
+          title: Groups
+      type: object
+      required:
+      - range
+      - totals
+      title: PublisherUsage
+      description: 'Publisher-side usage analytics: totals over the range (optionally
+        the
+
+        preceding equal-length range for period-over-period comparison) and a
+
+        breakdown by up to two dimensions.'
+    RecordsPage:
+      properties:
+        run_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Run Id
+        dataset_id:
+          type: string
+          title: Dataset Id
+        records:
+          items:
+            additionalProperties: true
+            type: object
+          type: array
+          title: Records
+        partial:
+          type: boolean
+          title: Partial
+          default: false
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+      type: object
+      required:
+      - dataset_id
+      - records
+      - pagination
+      title: RecordsPage
+    ReleaseEntry:
+      properties:
+        version:
+          type: string
+          title: Version
+        build_id:
+          type: string
+          title: Build Id
+        yanked:
+          type: boolean
+          title: Yanked
+          default: false
+        latest:
+          type: boolean
+          title: Latest
+          default: false
+        published_at:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Published At
+      type: object
+      required:
+      - version
+      - build_id
+      title: ReleaseEntry
+    ReleaseList:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/ReleaseEntry'
+          type: array
+          title: Items
+      type: object
+      title: ReleaseList
+    ReleaseRequest:
+      properties:
+        build_id:
+          type: string
+          title: Build Id
+        version:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Version
+        expected_revision:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Expected Revision
+      type: object
+      required:
+      - build_id
+      title: ReleaseRequest
+      description: 'POST releases: promote a ready build to a release; the version
+        number
+
+        is fixed at this point.'
+    ReleaseResult:
+      properties:
+        app_name:
+          type: string
+          title: App Name
+        namespace:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Namespace
+        version:
+          type: string
+          title: Version
+        build_id:
+          type: string
+          title: Build Id
+        published_at:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Published At
+        missing_secrets:
+          items:
+            type: string
+          type: array
+          title: Missing Secrets
+      type: object
+      required:
+      - app_name
+      - version
+      - build_id
+      title: ReleaseResult
+    RenameRequest:
+      properties:
+        new_app_name:
+          type: string
+          title: New App Name
+      type: object
+      required:
+      - new_app_name
+      title: RenameRequest
+      description: POST /data-apps/{ref}/rename (author-side, owner only).
+    RenameResult:
+      properties:
+        app_id:
+          type: string
+          title: App Id
+        app_name:
+          type: string
+          title: App Name
+        namespace:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Namespace
+      type: object
+      required:
+      - app_id
+      - app_name
+      title: RenameResult
+    RetentionMark:
+      properties:
+        retained:
+          type: boolean
+          title: Retained
+      type: object
+      required:
+      - retained
+      title: RetentionMark
+      description: 'Retention mark request body: true sets the mark, false revokes
+        it (idempotent).'
+    RetentionState:
+      properties:
+        dataset_id:
+          type: string
+          title: Dataset Id
+        retained:
+          type: boolean
+          title: Retained
+      type: object
+      required:
+      - dataset_id
+      - retained
+      title: RetentionState
+    RunList:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/PublicRun'
+          type: array
+          title: Items
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+      type: object
+      required:
+      - items
+      title: RunList
+    RunState:
+      type: string
+      enum:
+      - PENDING
+      - QUEUED
+      - RUNNING
+      - SUCCEEDED
+      - PARTIALLY_SUCCEEDED
+      - FAILED
+      - CANCELLED
+      - EXPIRED
+      title: RunState
+    RunWarning:
+      properties:
+        code:
+          type: string
+          title: Code
+        event:
+          type: string
+          title: Event
+          default: ''
+        detail:
+          additionalProperties: true
+          type: object
+          title: Detail
+        count:
+          type: integer
+          title: Count
+          default: 0
+        updated_at:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Updated At
+      type: object
+      required:
+      - code
+      title: RunWarning
+      description: 'Structured run-level warning (e.g. billing-qty-missing: the quantity
+
+        field is missing, non-numeric, or negative, so it is charged as 0).
+
+        Surfaced only in the single-run detail, never in lists.'
+    RunWithSamples:
+      properties:
+        run_id:
+          type: string
+          title: Run Id
+        namespace:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Namespace
+        app_name:
+          type: string
+          title: App Name
+          default: ''
+        app_version:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: App Version
+        build_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Build Id
+        run_kind:
+          type: string
+          title: Run Kind
+          default: production
+        state:
+          $ref: '#/components/schemas/RunState'
+        input:
+          additionalProperties: true
+          type: object
+          title: Input
+        progress:
+          $ref: '#/components/schemas/Progress'
+        dataset_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Dataset Id
+        partial:
+          type: boolean
+          title: Partial
+          default: false
+        cancel_requested:
+          type: boolean
+          title: Cancel Requested
+          description: true while cancellation has been requested and the run is still
+            winding down (cooperative stop / partial-result recovery); always false
+            in terminal states (normalized server-side), so consumers need not derive
+            it from state
+          default: false
+        triggered_by:
+          type: string
+          title: Triggered By
+          default: api
+        upstream_ref:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Upstream Ref
+        created_at:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Created At
+        started_at:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Started At
+        first_started_at:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: First Started At
+          description: 'when the run was first claimed by a worker. Unlike started_at,
+            which is re-stamped on every retry, this one is never rewritten, so it
+            is the anchor for queue time: queued = first_started_at - created_at,
+            and total wall time = finished_at - first_started_at. Deriving queue time
+            from started_at counts the earlier attempts'' execution as queueing. Null
+            only for runs never claimed.'
+        finished_at:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Finished At
+        usage:
+          $ref: '#/components/schemas/Usage'
+        billing:
+          $ref: '#/components/schemas/Billing'
+        error:
+          anyOf:
+          - $ref: '#/components/schemas/ApiError'
+          - type: 'null'
+        sample_records:
+          anyOf:
+          - items:
+              additionalProperties: true
+              type: object
+            type: array
+          - type: 'null'
+          title: Sample Records
+        warnings:
+          items:
+            $ref: '#/components/schemas/RunWarning'
+          type: array
+          title: Warnings
+      type: object
+      required:
+      - run_id
+      - state
+      title: RunWithSamples
+    SearchResult:
+      properties:
+        items:
+          items:
+            additionalProperties: true
+            type: object
+          type: array
+          title: Items
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        low_confidence:
+          type: boolean
+          title: Low Confidence
+          default: false
+      type: object
+      required:
+      - items
+      - pagination
+      title: SearchResult
+    SecretInfo:
+      properties:
+        name:
+          type: string
+          title: Name
+        masked:
+          type: string
+          title: Masked
+        scope:
+          type: string
+          title: Scope
+          default: publisher
+        created_at:
+          type: string
+          title: Created At
+        updated_at:
+          type: string
+          title: Updated At
+      type: object
+      required:
+      - name
+      - masked
+      - created_at
+      - updated_at
+      title: SecretInfo
+      description: Secret metadata. The plaintext never leaves the API; only a mask
+        is returned.
+    SecretList:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/SecretInfo'
+          type: array
+          title: Items
+      type: object
+      required:
+      - items
+      title: SecretList
+    SecretValue:
+      properties:
+        value:
+          type: string
+          title: Value
+      type: object
+      required:
+      - value
+      title: SecretValue
+    TranslationDeleteResult:
+      properties:
+        deleted:
+          type: boolean
+          title: Deleted
+      type: object
+      required:
+      - deleted
+      title: TranslationDeleteResult
+    TranslationList:
+      properties:
+        source_locale:
+          type: string
+          title: Source Locale
+        items:
+          items:
+            $ref: '#/components/schemas/TranslationMeta'
+          type: array
+          title: Items
+      type: object
+      required:
+      - source_locale
+      title: TranslationList
+    TranslationLookupItem:
+      properties:
+        origin:
+          type: string
+          enum:
+          - author
+          - platform
+          title: Origin
+        entries:
+          additionalProperties: true
+          type: object
+          title: Entries
+      type: object
+      required:
+      - origin
+      title: TranslationLookupItem
+    TranslationLookupRequest:
+      properties:
+        app_ids:
+          items:
+            type: string
+          type: array
+          maxItems: 100
+          minItems: 1
+          title: App Ids
+        locale:
+          type: string
+          title: Locale
+      type: object
+      required:
+      - app_ids
+      - locale
+      title: TranslationLookupRequest
+      description: 'POST translations/lookup request body: up to 100 app_ids and one
+
+        locale; the response only carries card-level paths (identity.name /
+
+        identity.summary / discovery.boundary / discovery.keywords /
+
+        pricing.events.<event>.label) so a catalog page can hydrate cards in one
+
+        call without pulling readmes or schemas.'
+    TranslationLookupResult:
+      properties:
+        items:
+          additionalProperties:
+            $ref: '#/components/schemas/TranslationLookupItem'
+          type: object
+          title: Items
+      type: object
+      title: TranslationLookupResult
+    TranslationMeta:
+      properties:
+        locale:
+          type: string
+          title: Locale
+        origin:
+          type: string
+          enum:
+          - author
+          - platform
+          title: Origin
+        based_on_version:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Based On Version
+        updated_at:
+          type: string
+          title: Updated At
+        stale:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Stale
+        stale_paths:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Stale Paths
+      type: object
+      required:
+      - locale
+      - origin
+      - updated_at
+      title: TranslationMeta
+      description: 'One locale of an app''s translations (no entries). `stale` /
+
+        `stale_paths` appear only in the owner view (`?view=owner`) and the
+
+        platform channel: they compare the translation''s recorded source hashes
+
+        against the **latest Release** (against the workspace for zero-Release
+
+        apps) and are hints only — stale translations still overlay normally.'
+    TranslationPut:
+      properties:
+        entries:
+          additionalProperties: true
+          type: object
+          title: Entries
+        expected_revision:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Expected Revision
+      type: object
+      required:
+      - entries
+      title: TranslationPut
+      description: 'PUT translations/{locale} request body: the whole entries object
+
+        (replace semantics). Values must be strings or string arrays.'
+    TranslationSaveResult:
+      properties:
+        locale:
+          type: string
+          title: Locale
+        origin:
+          type: string
+          enum:
+          - author
+          - platform
+          title: Origin
+        revision:
+          type: integer
+          title: Revision
+        based_on_version:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Based On Version
+        based_on_hash:
+          type: string
+          title: Based On Hash
+        stale:
+          type: boolean
+          title: Stale
+        stale_paths:
+          items:
+            type: string
+          type: array
+          title: Stale Paths
+        warnings:
+          items:
+            $ref: '#/components/schemas/ContractWarning'
+          type: array
+          title: Warnings
+      type: object
+      required:
+      - locale
+      - origin
+      - revision
+      - based_on_hash
+      - stale
+      title: TranslationSaveResult
+    TranslationView:
+      properties:
+        locale:
+          type: string
+          title: Locale
+        origin:
+          type: string
+          enum:
+          - author
+          - platform
+          title: Origin
+        entries:
+          additionalProperties: true
+          type: object
+          title: Entries
+        based_on_version:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Based On Version
+        updated_at:
+          type: string
+          title: Updated At
+        revision:
+          type: integer
+          title: Revision
+      type: object
+      required:
+      - locale
+      - origin
+      - updated_at
+      - revision
+      title: TranslationView
+      description: 'Full entries of one locale: flat path → string | string[] overlay
+
+        over the manifest (identity.name / identity.summary / discovery.boundary
+
+        / discovery.keywords / readme / knowledge.* / (input|output).schema...
+
+        title|description|enum_titles / pricing.events.<event>.label /
+
+        examples.<id>.goal). Consumers overlay by path and fall back to the
+
+        manifest for anything missing or unresolvable.'
+    UpstreamCallDetail:
+      properties:
+        call_id:
+          type: integer
+          title: Call Id
+        attempt:
+          type: integer
+          title: Attempt
+        seq:
+          type: integer
+          title: Seq
+        stage:
+          type: string
+          title: Stage
+        method:
+          type: string
+          title: Method
+        url:
+          type: string
+          title: Url
+        status_code:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Status Code
+        error:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Error
+        duration_ms:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Duration Ms
+        response_truncated:
+          type: boolean
+          title: Response Truncated
+          default: false
+        created_at:
+          type: string
+          title: Created At
+        request:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Request
+        response_body:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Response Body
+      type: object
+      required:
+      - call_id
+      - attempt
+      - seq
+      - stage
+      - method
+      - url
+      - created_at
+      title: UpstreamCallDetail
+    UpstreamCallMeta:
+      properties:
+        call_id:
+          type: integer
+          title: Call Id
+        attempt:
+          type: integer
+          title: Attempt
+        seq:
+          type: integer
+          title: Seq
+        stage:
+          type: string
+          title: Stage
+        method:
+          type: string
+          title: Method
+        url:
+          type: string
+          title: Url
+        status_code:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Status Code
+        error:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Error
+        duration_ms:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Duration Ms
+        response_truncated:
+          type: boolean
+          title: Response Truncated
+          default: false
+        created_at:
+          type: string
+          title: Created At
+      type: object
+      required:
+      - call_id
+      - attempt
+      - seq
+      - stage
+      - method
+      - url
+      - created_at
+      title: UpstreamCallMeta
+      description: 'Metadata of one recorded upstream call (owner-only debug readback).
+
+        The list shape omits request/response bodies; fetch them from the
+
+        single-call detail endpoint. Status polling easily produces hundreds of
+
+        calls, so the list stays light.'
+    UpstreamCallsPage:
+      properties:
+        run_id:
+          type: string
+          title: Run Id
+        summary:
+          items:
+            $ref: '#/components/schemas/UpstreamStageSummary'
+          type: array
+          title: Summary
+        items:
+          items:
+            $ref: '#/components/schemas/UpstreamCallMeta'
+          type: array
+          title: Items
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+      type: object
+      required:
+      - run_id
+      - summary
+      - items
+      - pagination
+      title: UpstreamCallsPage
+    UpstreamStageSummary:
+      properties:
+        attempt:
+          type: integer
+          title: Attempt
+        stage:
+          type: string
+          title: Stage
+        calls:
+          type: integer
+          title: Calls
+        last_status_code:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Last Status Code
+        last_error:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Last Error
+        duration_ms_sum:
+          type: integer
+          title: Duration Ms Sum
+          default: 0
+        first_at:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: First At
+        last_at:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Last At
+      type: object
+      required:
+      - attempt
+      - stage
+      - calls
+      title: UpstreamStageSummary
+      description: 'Per-(attempt, stage) aggregate: answers "which stage is stuck"
+        at a glance.'
+    Usage:
+      properties:
+        metrics:
+          additionalProperties:
+            type: integer
+          type: object
+          title: Metrics
+        duration_ms:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Duration Ms
+      type: object
+      title: Usage
+      description: 'Objective usage metering: how much the run did (kept separate
+        from
+
+        Billing; this is what evaluations compare against).'
+    UsageGroup:
+      properties:
+        runs:
+          type: integer
+          title: Runs
+          default: 0
+        succeeded:
+          type: integer
+          title: Succeeded
+          default: 0
+        partial:
+          type: integer
+          title: Partial
+          default: 0
+        failed:
+          type: integer
+          title: Failed
+          default: 0
+        cancelled:
+          type: integer
+          title: Cancelled
+          default: 0
+        success_rate:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Success Rate
+        records:
+          type: integer
+          title: Records
+          default: 0
+        avg_duration_ms:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Avg Duration Ms
+        amount:
+          type: number
+          title: Amount
+          default: 0.0
+        day:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Day
+        hour:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Hour
+        namespace:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Namespace
+        app_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: App Name
+        channel:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Channel
+        state:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: State
+        version:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Version
+          description: 'version dimension: the Release version the run was pinned
+            to; null for debug runs (they pin a Build snapshot)'
+        error_code:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Error Code
+        error_category:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Error Category
+        sample_message:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Sample Message
+          description: 'error dimension: message of the most recent run in this group'
+        last_seen_at:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Last Seen At
+        username:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Username
+          description: 'caller dimension: the caller''s current username; null for
+            the merged `other` group or when the user has no username'
+        caller_kind:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Caller Kind
+          description: 'caller dimension: `owner` (the publisher''s own runs), `grantee`
+            (a user currently on the app''s grant list) or `other` (all remaining
+            callers merged into one group)'
+      type: object
+      title: UsageGroup
+      description: 'One group of the usage aggregate: only the keys of the requested
+
+        dimensions are set — `day` for day, `hour` for hour, `namespace` +
+
+        `app_name` for data_app, `channel` for triggered_by, `state` for state,
+
+        `namespace` + `app_name` + `version` for version, `error_code` +
+
+        `error_category` (plus `sample_message` / `last_seen_at`) for error,
+
+        `username` + `caller_kind` for caller.
+
+        Error groups only cover runs that carry an error object, so they do not
+
+        add up to the totals.'
+    UsageRange:
+      properties:
+        created_from:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Created From
+        created_to:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Created To
+        tz_offset:
+          type: integer
+          title: Tz Offset
+          default: 0
+      type: object
+      title: UsageRange
+      description: Echo of the effective range (normalised UTC instants) and offset.
+    UsageTotals:
+      properties:
+        runs:
+          type: integer
+          title: Runs
+          default: 0
+        succeeded:
+          type: integer
+          title: Succeeded
+          default: 0
+        partial:
+          type: integer
+          title: Partial
+          default: 0
+        failed:
+          type: integer
+          title: Failed
+          default: 0
+        cancelled:
+          type: integer
+          title: Cancelled
+          default: 0
+        success_rate:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Success Rate
+        records:
+          type: integer
+          title: Records
+          default: 0
+        avg_duration_ms:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Avg Duration Ms
+        amount:
+          type: number
+          title: Amount
+          default: 0.0
+        apps_active:
+          type: integer
+          title: Apps Active
+          default: 0
+        callers:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Callers
+          description: distinct callers (users) in the range; computed from run details,
+            so null unless both bounds are given at most 92 days apart
+      type: object
+      title: UsageTotals
+      description: 'Range totals plus the number of distinct apps that had runs and,
+        for a
+
+        bounded range of at most 92 days, the number of distinct callers.'
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    WorkspaceDeleteResult:
+      properties:
+        deleted:
+          type: boolean
+          title: Deleted
+        app_deleted:
+          type: boolean
+          title: App Deleted
+          default: false
+      type: object
+      required:
+      - deleted
+      title: WorkspaceDeleteResult
+    WorkspaceSaveResult:
+      properties:
+        app_name:
+          type: string
+          title: App Name
+        app_id:
+          type: string
+          title: App Id
+        namespace:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Namespace
+        revision:
+          type: integer
+          title: Revision
+        valid:
+          type: boolean
+          title: Valid
+        issues:
+          items:
+            $ref: '#/components/schemas/ManifestIssue'
+          type: array
+          title: Issues
+        missing_secrets:
+          items:
+            type: string
+          type: array
+          title: Missing Secrets
+        secrets_deferred:
+          items:
+            type: string
+          type: array
+          title: Secrets Deferred
+        name_reused_from:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Name Reused From
+      type: object
+      required:
+      - app_name
+      - app_id
+      - revision
+      - valid
+      title: WorkspaceSaveResult
+    WorkspaceSubmission:
+      properties:
+        manifest:
+          type: string
+          title: Manifest
+        files:
+          additionalProperties:
+            type: string
+          type: object
+          title: Files
+        secrets:
+          additionalProperties:
+            type: string
+          type: object
+          title: Secrets
+        expected_revision:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Expected Revision
+      type: object
+      required:
+      - manifest
+      title: WorkspaceSubmission
+      description: 'PUT workspace request body: may be incomplete (validation issues
+        are
+
+        returned alongside the save; the write is not rejected).'
+    WorkspaceView:
+      properties:
+        app_name:
+          type: string
+          title: App Name
+        app_id:
+          type: string
+          title: App Id
+        namespace:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Namespace
+        manifest:
+          type: string
+          title: Manifest
+        files:
+          additionalProperties:
+            type: string
+          type: object
+          title: Files
+        revision:
+          type: integer
+          title: Revision
+        valid:
+          type: boolean
+          title: Valid
+        issues:
+          items:
+            $ref: '#/components/schemas/ManifestIssue'
+          type: array
+          title: Issues
+        content_hash:
+          type: string
+          title: Content Hash
+          default: ''
+        created_at:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Created At
+        updated_at:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Updated At
+      type: object
+      required:
+      - app_name
+      - app_id
+      - manifest
+      - revision
+      - valid
+      title: WorkspaceView
+      description: GET workspace readback (refill source for "continue editing", owner
+        only).
+    YankResult:
+      properties:
+        version:
+          type: string
+          title: Version
+        yanked:
+          type: boolean
+          title: Yanked
+      type: object
+      required:
+      - version
+      - yanked
+      title: YankResult
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: DataHub API Key

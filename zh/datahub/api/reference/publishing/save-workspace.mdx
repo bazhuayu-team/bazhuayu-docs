@@ -1,0 +1,143 @@
+---
+title: "保存草稿"
+description: "保存 App 的可变草稿（工作区）；校验不通过也能保存，结果随响应返回。"
+---
+
+**`PUT`** `https://api-datahub.bazhuayu.com/v1/data-apps/{app_id}/workspace`
+
+认证：需要 API Key，且仅 App 作者（发布者本人）可调用；其他人得到 `404`。
+
+保存 App 的可变草稿。**保存永远不会因校验失败而被拒绝**：完整校验照常运行，结果（`valid` / `issues`）随响应一起返回。「先存一半，回头再改」是模型承诺。
+
+App 身份在第一次保存时隐式创建，没有单独的「创建 App」端点。只有三条最小硬检查（`400`）：账号已有用户名、内容在大小限制内、随附文件名合法。manifest 里的 `identity.app_name` 不再与路径比对：路由名跟随引用，文件里声明的名字只在创建时消费一次。
+
+`expected_revision` 提供乐观并发控制（`409 revision-conflict`），多个标签页不会静默互相覆盖。随附的密钥只在本次保存有效时才存储，未存储的名称通过 `secrets_deferred` 报告。已弃用的 App 仍可编辑；被拒绝的只是新的 Release。
+
+## 请求
+
+### 路径参数
+
+<ParamField path="app_id" type="string" required>
+  App 引用，`app_<hex>` 或 `<namespace>/<app_name>`。首次保存时用后者。
+</ParamField>
+
+### 请求体
+
+<ParamField body="manifest" type="string" required>
+  manifest 原文。
+</ParamField>
+
+<ParamField body="files" type="object">
+  随附文件，键为相对路径，值为文本内容。
+</ParamField>
+
+<ParamField body="secrets" type="object">
+  随附的密钥名到明文的映射，本次保存有效时才存储。
+</ParamField>
+
+<ParamField body="expected_revision" type="integer">
+  期望的当前草稿版本号，不一致则 `409`。
+</ParamField>
+
+### 示例请求
+
+```bash
+curl -X PUT \
+  -H "Authorization: Bearer $BAZHUAYU_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"manifest": "spec_version: \"0.2\"\n…", "files": {}, "expected_revision": 3}' \
+  "https://api-datahub.bazhuayu.com/v1/data-apps/carol/reviews-query/workspace"
+```
+
+## 响应
+
+### 200 成功
+
+```json
+{
+  "data": {
+    "app_name": "string",
+    "app_id": "string",
+    "namespace": "string",
+    "revision": 0,
+    "valid": false,
+    "issues": [
+      {
+        "path": "string",
+        "message": "string"
+      }
+    ],
+    "missing_secrets": [
+      "string"
+    ],
+    "secrets_deferred": [
+      "string"
+    ],
+    "name_reused_from": "string"
+  }
+}
+```
+
+响应包在 `data` 字段中，其内容如下。
+
+<ResponseField name="app_name" type="string" required>
+  —
+</ResponseField>
+
+<ResponseField name="app_id" type="string" required>
+  App 的稳定标识。
+</ResponseField>
+
+<ResponseField name="namespace" type="string">
+  —
+</ResponseField>
+
+<ResponseField name="revision" type="integer" required>
+  保存后的草稿版本号。
+</ResponseField>
+
+<ResponseField name="valid" type="boolean" required>
+  当前内容是否通过校验。
+</ResponseField>
+
+<ResponseField name="issues" type="object[]">
+  问题清单。
+  <Expandable title="字段">
+    <ResponseField name="path" type="string" required>
+      —
+    </ResponseField>
+
+    <ResponseField name="message" type="string" required>
+      —
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="missing_secrets" type="string[]">
+  —
+</ResponseField>
+
+<ResponseField name="secrets_deferred" type="string[]">
+  因本次保存无效而未存储的密钥名。
+</ResponseField>
+
+<ResponseField name="name_reused_from" type="string">
+  —
+</ResponseField>
+
+### 错误
+
+| HTTP | `code` | `category` | 说明 |
+| --- | --- | --- | --- |
+| 401 | `unauthorized` | `forbidden` | 缺少或无效的 API Key。 |
+| 400 | `username-required` | `invalid_input` | 账号尚未设置用户名，无法形成 `<username>/<app_name>` 引用。 |
+| 409 | `revision-conflict` | `invalid_input` | `expected_revision` 与当前草稿版本号不一致，说明有并发修改。 |
+| 400 | `invalid-app-name` | `invalid_input` | 名称不符合命名规则或是保留字。 |
+| 409 | `app-name-reserved` | `forbidden` | 该名称被他人的历史绑定占用（用户名易主后的 30 天冻结期）。 |
+| 413 | `payload-too-large` | `invalid_input` | 请求体超过大小限制。 |
+
+错误响应统一为 `{"error": {code, category, message, retryable}}`，见<a href="/zh/datahub/api/reference/introduction#错误">错误</a>。
+
+## 客户端库
+
+Python 与 JavaScript SDK 暂未封装此端点，请直接调用 REST。

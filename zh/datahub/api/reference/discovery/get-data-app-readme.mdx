@@ -1,0 +1,51 @@
+---
+title: "App README"
+description: "读取 App 的 Markdown 说明文档。"
+---
+
+**`GET`** `https://api-datahub.bazhuayu.com/v1/data-apps/{app_id}/readme`
+
+认证：可匿名调用；携带 API Key 时可使用登录态才有的筛选或看到更多内容。
+
+面向人阅读的富文本说明（Markdown 原文），不属于机读详情，按需单独读取。默认最新版本。
+
+## 请求
+
+### 路径参数
+
+<ParamField path="app_id" type="string" required>
+  App 引用，`app_<hex>` 或 `<namespace>/<app_name>`。
+</ParamField>
+
+### 查询参数
+
+<ParamField query="version" type="string">
+  指定版本号，默认最新版本。
+</ParamField>
+
+### 示例请求
+
+```bash
+curl \
+  -H "Authorization: Bearer $BAZHUAYU_API_KEY" \
+  "https://api-datahub.bazhuayu.com/v1/data-apps/carol/probe-b/readme"
+```
+
+## 响应
+
+### 200 成功
+
+响应体是 `text/markdown` 原文，不包信封。没有 README 的 App 返回空内容。
+
+### 错误
+
+| HTTP | `code` | `category` | 说明 |
+| --- | --- | --- | --- |
+| 401 | `unauthorized` | `forbidden` | 缺少或无效的 API Key。 |
+| 404 | `app-not-found` | `not_found` | App 不存在、已改名，或对当前凭证不可见（私有 / 分享范围之外）。 |
+
+错误响应统一为 `{"error": {code, category, message, retryable}}`，见<a href="/zh/datahub/api/reference/introduction#错误">错误</a>。
+
+## 客户端库
+
+Python 与 JavaScript SDK 暂未封装此端点，请直接调用 REST。

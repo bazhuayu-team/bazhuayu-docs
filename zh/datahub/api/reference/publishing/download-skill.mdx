@@ -1,0 +1,45 @@
+---
+title: "下载 Skill 包"
+description: "下载给编码助手用的 Skill 包，目前只有契约编写 Skill。"
+---
+
+**`GET`** `https://api-datahub.bazhuayu.com/v1/skills/{name}.zip`
+
+认证：无需认证，可匿名调用。
+
+统一的 Skill 包分发（匿名）：目前只有 `dataapp-contract-json`，即门户「AI 辅助生成」与 API 侧作者共用的契约编写 Skill。zip 顶层就是 Skill 目录本身（与 Agent 无关的布局），解压到各编码助手的约定位置：Claude Code 为 `.claude/skills/`，Codex 为 `.codex/skills/`，其他放项目根目录。
+
+内容是纯文档与参考（示例上游全部是虚构域名），不含凭证与平台内部构件，因此匿名可下载。
+
+## 请求
+
+### 路径参数
+
+<ParamField path="name" type="string" required>
+  Skill 名称，目前只有 `dataapp-contract-json`。
+</ParamField>
+
+### 示例请求
+
+```bash
+curl \
+  "https://api-datahub.bazhuayu.com/v1/skills/dataapp-contract-json.zip"
+```
+
+## 响应
+
+### 200 成功
+
+响应体是 `application/zip` 二进制。
+
+### 错误
+
+| HTTP | `code` | `category` | 说明 |
+| --- | --- | --- | --- |
+| 404 | `skill-not-found` | `not_found` | 不存在该 Skill 包。 |
+
+错误响应统一为 `{"error": {code, category, message, retryable}}`，见<a href="/zh/datahub/api/reference/introduction#错误">错误</a>。
+
+## 客户端库
+
+Python 与 JavaScript SDK 暂未封装此端点，请直接调用 REST。

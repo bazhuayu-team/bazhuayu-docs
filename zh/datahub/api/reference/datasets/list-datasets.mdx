@@ -1,0 +1,122 @@
+---
+title: "数据集列表"
+description: "列出我的数据集，以及平台公开的种子样例集。"
+---
+
+**`GET`** `https://api-datahub.bazhuayu.com/v1/datasets`
+
+认证：需要 API Key（`Authorization: Bearer <API Key>`）。
+
+只列出调用方自己的数据集，外加平台明确公开的种子 / 样例集。每次运行的结果都落在一个数据集里，`dataset_id` 出现在运行对象上。
+
+## 请求
+
+### 查询参数
+
+<ParamField query="offset" type="integer" default="0">
+  分页起点。
+
+范围 ≥ 0。
+</ParamField>
+
+<ParamField query="limit" type="integer" default="50">
+  每页条数。
+
+范围 1 到 200。
+</ParamField>
+
+### 示例请求
+
+```bash
+curl \
+  -H "Authorization: Bearer $BAZHUAYU_API_KEY" \
+  "https://api-datahub.bazhuayu.com/v1/datasets?limit=50"
+```
+
+## 响应
+
+### 200 成功
+
+```json
+{
+  "data": {
+    "items": [
+      {
+        "dataset_id": "ds_ec3ba97b8534",
+        "name": "app_6dfe4e839ccf run output",
+        "scope": "private",
+        "source": "run",
+        "row_count": 0,
+        "retained": false,
+        "created_at": "2026-09-15T07:45:41.872962+00:00",
+        "updated_at": "2026-09-15T07:45:41.872962+00:00"
+      },
+      "…"
+    ]
+  }
+}
+```
+
+响应包在 `data` 字段中，其内容如下。
+
+<ResponseField name="items" type="object[]" required>
+  数据集列表。
+  <Expandable title="字段">
+    <ResponseField name="dataset_id" type="string" required>
+      数据集标识。
+    </ResponseField>
+
+    <ResponseField name="name" type="string" required>
+      名称。
+    </ResponseField>
+
+    <ResponseField name="scope" type="string">
+      `private` 我的，`public` 平台公开。
+    </ResponseField>
+
+    <ResponseField name="source" type="string">
+      来源，运行产出为 `run`。
+    </ResponseField>
+
+    <ResponseField name="row_count" type="integer">
+      记录条数。
+    </ResponseField>
+
+    <ResponseField name="retained" type="boolean">
+      是否已标记长期保留。
+    </ResponseField>
+
+    <ResponseField name="created_at" type="string">
+      创建时间。
+    </ResponseField>
+
+    <ResponseField name="updated_at" type="string">
+      最近写入时间。
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+### 错误
+
+| HTTP | `code` | `category` | 说明 |
+| --- | --- | --- | --- |
+| 401 | `unauthorized` | `forbidden` | 缺少或无效的 API Key。 |
+
+错误响应统一为 `{"error": {code, category, message, retryable}}`，见<a href="/zh/datahub/api/reference/introduction#错误">错误</a>。
+
+## 客户端库
+
+<CodeGroup>
+
+```python Python
+for ds in client.list_datasets(limit=50):
+    print(ds["dataset_id"], ds["row_count"], ds["retained"])
+```
+
+```js JavaScript
+for (const ds of await client.listDatasets({ limit: 50 })) {
+  console.log(ds.dataset_id, ds.row_count, ds.retained);
+}
+```
+
+</CodeGroup>

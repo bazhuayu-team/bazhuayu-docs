@@ -1,0 +1,90 @@
+---
+title: "Build 快照列表"
+description: "列出全部 Build 快照及其状态，最新在前。"
+---
+
+**`GET`** `https://api-datahub.bazhuayu.com/v1/data-apps/{app_id}/builds`
+
+认证：需要 API Key，且仅 App 作者（发布者本人）可调用；其他人得到 `404`。
+
+所有 Build 快照的状态（构建中 / 就绪 / 失败，最新在前）与失败原因摘要。作者视角解析：零 Release 的 App 也能查；非作者一律 `404`，构建状态是作者侧信息，对外不承认存在。
+
+## 请求
+
+### 路径参数
+
+<ParamField path="app_id" type="string" required>
+  App 引用。
+</ParamField>
+
+### 示例请求
+
+```bash
+curl \
+  -H "Authorization: Bearer $BAZHUAYU_API_KEY" \
+  "https://api-datahub.bazhuayu.com/v1/data-apps/carol/reviews-query/builds"
+```
+
+## 响应
+
+### 200 成功
+
+```json
+{
+  "data": {
+    "items": [
+      {
+        "build_id": "bld_a583f440a0ab",
+        "build_status": "ready",
+        "error": null,
+        "content_hash": "267d174fa14b05d66608cbd8315242f4b0f5b0b62a5fd94ffa852ee6cf62f978",
+        "source_revision": 1,
+        "created_at": "2026-09-15T07:45:38.595886+00:00"
+      }
+    ]
+  }
+}
+```
+
+响应包在 `data` 字段中，其内容如下。
+
+<ResponseField name="items" type="object[]">
+  快照列表。
+  <Expandable title="字段">
+    <ResponseField name="build_id" type="string" required>
+      Build 标识。
+    </ResponseField>
+
+    <ResponseField name="build_status" type="string" required>
+      状态。
+    </ResponseField>
+
+    <ResponseField name="error" type="string">
+      失败原因摘要。
+    </ResponseField>
+
+    <ResponseField name="content_hash" type="string">
+      内容哈希。
+    </ResponseField>
+
+    <ResponseField name="source_revision" type="integer">
+      冻结时的草稿版本号。
+    </ResponseField>
+
+    <ResponseField name="created_at" type="string">
+      创建时间。
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+### 错误
+
+| HTTP | `code` | `category` | 说明 |
+| --- | --- | --- | --- |
+| 401 | `unauthorized` | `forbidden` | 缺少或无效的 API Key。 |
+
+错误响应统一为 `{"error": {code, category, message, retryable}}`，见<a href="/zh/datahub/api/reference/introduction#错误">错误</a>。
+
+## 客户端库
+
+Python 与 JavaScript SDK 暂未封装此端点，请直接调用 REST。

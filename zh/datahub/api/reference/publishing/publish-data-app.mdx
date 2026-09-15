@@ -1,0 +1,107 @@
+---
+title: "一步发布（已弃用）"
+description: "api 型 App 的一步发布糖，提交即发布。已由契约导入向导与三步链取代。"
+---
+
+<Warning>
+  **已弃用。** 提交现在走门户的契约导入向导（背后是装配契约文件夹端点）或三步链（保存草稿 → 冻结 Build → 发布 Release）。本端点为内置控制台与既有测试保留，移除另行安排。
+</Warning>
+
+**`POST`** `https://api-datahub.bazhuayu.com/v1/data-apps`
+
+认证：需要 API Key（`Authorization: Bearer <API Key>`）。
+
+api 型（声明式接入）的一步发布糖：内部是「创建身份 → 保存草稿 → 冻结 Build → 发布 Release」的原子链，提交即发布。
+
+**版本号由发布动作确定**：默认在当前最大版本上补丁号加一（首个为 `0.1.0`），提交不需要也不会携带版本号（这条路径忽略 `identity.version`）。要显式指定版本，用三步链的发布 Release 端点。code 型不走这条糖：镜像构建是异步的，「提交即发布」不成立。
+
+命名空间由认证推断：manifest 的 `identity.app_name` 只写应用名，App 落在发布者自己的（用户，应用名）下。`app_id` 只铸造一次，改用户名或改应用名都不变；外部引用一律是两段式。Release 不可变：再次发布追加新版本，旧版本不被覆盖。发布前有两道名称门：账号必须有用户名（`400`）；（用户名，应用名）的历史归属必须是你的，用户名易主后前任用过的应用名进入 30 天冻结期（`409`）。
+
+## 请求
+
+### 请求体
+
+<ParamField body="manifest" type="string" required>
+  manifest 原文。
+</ParamField>
+
+<ParamField body="files" type="object">
+  随附文件。
+</ParamField>
+
+<ParamField body="secrets" type="object">
+  密钥名到明文的映射。
+</ParamField>
+
+### 示例请求
+
+```bash
+curl -X POST \
+  -H "Authorization: Bearer $BAZHUAYU_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"manifest": "spec_version: \"0.2\"\n…", "secrets": {"EXAMPLE_API_KEY": "sk-example"}}' \
+  "https://api-datahub.bazhuayu.com/v1/data-apps"
+```
+
+## 响应
+
+### 200 成功
+
+```json
+{
+  "data": {
+    "app_id": "app_6dfe4e839ccf",
+    "namespace": "carol",
+    "app_name": "reviews-query",
+    "version": "0.1.0",
+    "build_id": "bld_a583f440a0ab",
+    "published_at": "2026-09-15T08:00:00+00:00"
+  }
+}
+```
+
+响应包在 `data` 字段中，其内容如下。
+
+<ResponseField name="app_name" type="string" required>
+  应用名。
+</ResponseField>
+
+<ResponseField name="namespace" type="string">
+  发布者用户名。
+</ResponseField>
+
+<ResponseField name="version" type="string">
+  发布的版本号。
+</ResponseField>
+
+<ResponseField name="status" type="string">
+  —
+</ResponseField>
+
+<ResponseField name="card" type="object" required>
+  —
+</ResponseField>
+
+<ResponseField name="missing_secrets" type="string[]">
+  —
+</ResponseField>
+
+<ResponseField name="name_reused_from" type="string">
+  —
+</ResponseField>
+
+### 错误
+
+| HTTP | `code` | `category` | 说明 |
+| --- | --- | --- | --- |
+| 401 | `unauthorized` | `forbidden` | 缺少或无效的 API Key。 |
+| 422 | `invalid-manifest` | `invalid_input` | manifest 未通过校验，`issues[]` 列出问题。 |
+| 400 | `username-required` | `invalid_input` | 账号尚未设置用户名，无法形成 `<username>/<app_name>` 引用。 |
+| 409 | `app-name-reserved` | `forbidden` | 该名称被他人的历史绑定占用（用户名易主后的 30 天冻结期）。 |
+| 400 | `invalid-app-name` | `invalid_input` | 名称不符合命名规则或是保留字。 |
+
+错误响应统一为 `{"error": {code, category, message, retryable}}`，见<a href="/zh/datahub/api/reference/introduction#错误">错误</a>。
+
+## 客户端库
+
+Python 与 JavaScript SDK 暂未封装此端点，请直接调用 REST。

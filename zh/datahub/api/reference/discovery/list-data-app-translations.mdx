@@ -1,0 +1,97 @@
+---
+title: "App 译文语言列表"
+description: "列出一个 App 有哪些语言的译文 overlay。"
+---
+
+**`GET`** `https://api-datahub.bazhuayu.com/v1/data-apps/{app_id}/translations`
+
+认证：可匿名调用；携带 API Key 时可使用登录态才有的筛选或看到更多内容。
+
+哪些语言带有译文 overlay，以及每份译文的来源（`author` 作者 / `platform` 平台）和它基于的版本。可见性与详情相同。
+
+`view=owner` 切换到作者视角：非作者与未知引用一律 `404`；并附加 `stale` / `stale_paths`，提示最新版本的可译原文自译文保存后是否已变化、变在哪些路径。这只是给作者的提示，不影响消费侧如何叠加译文。
+
+引擎不做语言协商，也不做回落：由消费侧根据卡片上的 `source_locale` 自行选择语言。
+
+## 请求
+
+### 路径参数
+
+<ParamField path="app_id" type="string" required>
+  App 引用，`app_<hex>` 或 `<namespace>/<app_name>`。
+</ParamField>
+
+### 查询参数
+
+<ParamField query="view" type="string">
+  传 `owner` 切换到作者视角。
+</ParamField>
+
+### 示例请求
+
+```bash
+curl \
+  -H "Authorization: Bearer $BAZHUAYU_API_KEY" \
+  "https://api-datahub.bazhuayu.com/v1/data-apps/carol/probe-b/translations"
+```
+
+## 响应
+
+### 200 成功
+
+```json
+{
+  "data": {
+    "source_locale": "zh-CN",
+    "items": []
+  }
+}
+```
+
+响应包在 `data` 字段中，其内容如下。
+
+<ResponseField name="source_locale" type="string" required>
+  App 内容的源语言。
+</ResponseField>
+
+<ResponseField name="items" type="object[]">
+  各语言译文的摘要。
+  <Expandable title="字段">
+    <ResponseField name="locale" type="string" required>
+      语言代码。
+    </ResponseField>
+
+    <ResponseField name="origin" type="enum" required>
+      `author` 作者提供，`platform` 平台提供。 取值：`author` / `platform`。
+    </ResponseField>
+
+    <ResponseField name="based_on_version" type="string">
+      译文基于的版本号。
+    </ResponseField>
+
+    <ResponseField name="updated_at" type="string" required>
+      —
+    </ResponseField>
+
+    <ResponseField name="stale" type="boolean">
+      仅 `view=owner`：原文是否已在译文之后变化。
+    </ResponseField>
+
+    <ResponseField name="stale_paths" type="string[]">
+      仅 `view=owner`：发生变化的路径。
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+### 错误
+
+| HTTP | `code` | `category` | 说明 |
+| --- | --- | --- | --- |
+| 401 | `unauthorized` | `forbidden` | 缺少或无效的 API Key。 |
+| 404 | `app-not-found` | `not_found` | App 不存在、已改名，或对当前凭证不可见（私有 / 分享范围之外）。 |
+
+错误响应统一为 `{"error": {code, category, message, retryable}}`，见<a href="/zh/datahub/api/reference/introduction#错误">错误</a>。
+
+## 客户端库
+
+Python 与 JavaScript SDK 暂未封装此端点，请直接调用 REST。

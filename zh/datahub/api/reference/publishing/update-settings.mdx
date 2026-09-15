@@ -1,0 +1,113 @@
+---
+title: "调整可见性与维护状态"
+description: "切换 App 的可见范围、维护开关与源语言，随时可逆。"
+---
+
+**`PATCH`** `https://api-datahub.bazhuayu.com/v1/data-apps/{app_id}/settings`
+
+认证：需要 API Key，且仅 App 作者（发布者本人）可调用；其他人得到 `404`。
+
+App 级、可逆、与生命周期正交的运营状态，随时可调：
+
+* `scope`：`public` 市场可见 / `private` 仅作者 / `shared` 按授权名单（名单用分享端点维护）。
+* `accepting_runs`：维护开关。`false` 表示维护中，他人的新运行被拒（`403 app-not-accepting-runs`，`message` 带 `pause_message`）；已有运行、已购数据和市场可见性不受影响；作者自测不受限。上游修好后切回 `true` 即可，不需要动生命周期。
+* `source_locale`：manifest 所用的语言（如 `zh-CN` / `en-US`），未设置为部署缺省。其他语言的译文叠加在这份原文之上。若新源语言已有译文，响应带 `translation-shadowed-by-source` 告警，不会自动删除。
+
+零 Release 的 App 也可以调整。
+
+## 请求
+
+### 路径参数
+
+<ParamField path="app_id" type="string" required>
+  App 引用。
+</ParamField>
+
+### 请求体
+
+<ParamField body="scope" type="enum">
+  可见范围。`public` / `private` / `shared`。
+
+取值：`public` / `private` / `shared`。
+</ParamField>
+
+<ParamField body="accepting_runs" type="boolean">
+  是否接受他人的新运行。
+</ParamField>
+
+<ParamField body="pause_message" type="string">
+  维护中给调用方看的留言。
+</ParamField>
+
+<ParamField body="source_locale" type="string">
+  manifest 的源语言代码。
+</ParamField>
+
+### 示例请求
+
+```bash
+curl -X PATCH \
+  -H "Authorization: Bearer $BAZHUAYU_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"accepting_runs": false, "pause_message": "上游接口维护中，预计 18:00 恢复"}' \
+  "https://api-datahub.bazhuayu.com/v1/data-apps/carol/reviews-query/settings"
+```
+
+## 响应
+
+### 200 成功
+
+```json
+{
+  "data": {
+    "scope": "private",
+    "accepting_runs": true,
+    "pause_message": null,
+    "source_locale": "zh-CN",
+    "warnings": []
+  }
+}
+```
+
+响应包在 `data` 字段中，其内容如下。
+
+<ResponseField name="scope" type="string" required>
+  当前可见范围。
+</ResponseField>
+
+<ResponseField name="accepting_runs" type="boolean" required>
+  当前维护开关。
+</ResponseField>
+
+<ResponseField name="pause_message" type="string">
+  当前维护留言。
+</ResponseField>
+
+<ResponseField name="source_locale" type="string" required>
+  当前源语言。
+</ResponseField>
+
+<ResponseField name="warnings" type="object[]">
+  结构化告警。
+  <Expandable title="字段">
+    <ResponseField name="code" type="string" required>
+      —
+    </ResponseField>
+
+    <ResponseField name="params" type="object">
+      —
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+### 错误
+
+| HTTP | `code` | `category` | 说明 |
+| --- | --- | --- | --- |
+| 401 | `unauthorized` | `forbidden` | 缺少或无效的 API Key。 |
+
+错误响应统一为 `{"error": {code, category, message, retryable}}`，见<a href="/zh/datahub/api/reference/introduction#错误">错误</a>。
+
+## 客户端库
+
+Python 与 JavaScript SDK 暂未封装此端点，请直接调用 REST。

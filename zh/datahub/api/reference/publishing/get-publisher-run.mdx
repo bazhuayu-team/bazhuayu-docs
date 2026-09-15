@@ -1,0 +1,177 @@
+---
+title: "发布者运行详情"
+description: "对我发布的 App 的某一次调用，白名单字段，附结构化告警。"
+---
+
+**`GET`** `https://api-datahub.bazhuayu.com/v1/publisher/runs/{run_id}`
+
+认证：需要 API Key（`Authorization: Bearer <API Key>`）。
+
+对我发布的 App 的一次调用，与列表相同的白名单字段，外加该运行的结构化告警（如 `billing-qty-missing`）。归属按 **App**：他人 App 的运行与不存在的 `run_id` 都返回 `404`。这里没有 `input`、没有结果数据、没有调用方身份；除非你自己也是发起人，否则这个 `run_id` 无法在自己的运行列表里打开。
+
+## 请求
+
+### 路径参数
+
+<ParamField path="run_id" type="string" required>
+  运行标识。
+</ParamField>
+
+### 示例请求
+
+```bash
+curl \
+  -H "Authorization: Bearer $BAZHUAYU_API_KEY" \
+  "https://api-datahub.bazhuayu.com/v1/publisher/runs/run_c62bc0fb8df2"
+```
+
+## 响应
+
+### 200 成功
+
+```json
+{
+  "data": {
+    "run_id": "run_c62bc0fb8df2",
+    "namespace": "carol",
+    "app_name": "probe-b",
+    "app_version": "0.1.0",
+    "build_id": null,
+    "run_kind": "production",
+    "state": "SUCCEEDED",
+    "partial": false,
+    "triggered_by": "api",
+    "created_at": "2026-09-15T07:45:40.411993+00:00",
+    "started_at": "2026-09-15T07:45:40.419610+00:00",
+    "finished_at": "2026-09-15T07:45:40.822250+00:00",
+    "duration_ms": 402,
+    "records": 20,
+    "amount": 0.02,
+    "error": null,
+    "warnings": []
+  }
+}
+```
+
+字段与<a href="/zh/datahub/api/reference/publishing/list-publisher-runs">发布者运行列表</a>的条目相同，外加 `warnings[]`。
+
+响应包在 `data` 字段中，其内容如下。
+
+<ResponseField name="run_id" type="string" required>
+  —
+</ResponseField>
+
+<ResponseField name="namespace" type="string">
+  —
+</ResponseField>
+
+<ResponseField name="app_name" type="string">
+  —
+</ResponseField>
+
+<ResponseField name="app_version" type="string">
+  —
+</ResponseField>
+
+<ResponseField name="build_id" type="string">
+  Build snapshot a debug run (run_kind=test) was pinned to; null for production runs
+</ResponseField>
+
+<ResponseField name="run_kind" type="string">
+  —
+</ResponseField>
+
+<ResponseField name="state" type="enum" required>
+  取值：`PENDING` / `QUEUED` / `RUNNING` / `SUCCEEDED` / `PARTIALLY_SUCCEEDED` / `FAILED` / `CANCELLED` / `EXPIRED`。
+</ResponseField>
+
+<ResponseField name="partial" type="boolean">
+  —
+</ResponseField>
+
+<ResponseField name="triggered_by" type="string">
+  —
+</ResponseField>
+
+<ResponseField name="created_at" type="string">
+  —
+</ResponseField>
+
+<ResponseField name="started_at" type="string">
+  —
+</ResponseField>
+
+<ResponseField name="finished_at" type="string">
+  —
+</ResponseField>
+
+<ResponseField name="duration_ms" type="integer">
+  —
+</ResponseField>
+
+<ResponseField name="records" type="integer">
+  —
+</ResponseField>
+
+<ResponseField name="amount" type="number">
+  —
+</ResponseField>
+
+<ResponseField name="error" type="object">
+  —
+  <Expandable title="字段">
+    <ResponseField name="code" type="string" required>
+      —
+    </ResponseField>
+
+    <ResponseField name="category" type="string">
+      —
+    </ResponseField>
+
+    <ResponseField name="message" type="string">
+      —
+    </ResponseField>
+
+    <ResponseField name="retryable" type="boolean">
+      —
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="warnings" type="object[]">
+  —
+  <Expandable title="字段">
+    <ResponseField name="code" type="string" required>
+      —
+    </ResponseField>
+
+    <ResponseField name="event" type="string">
+      —
+    </ResponseField>
+
+    <ResponseField name="detail" type="object">
+      —
+    </ResponseField>
+
+    <ResponseField name="count" type="integer">
+      —
+    </ResponseField>
+
+    <ResponseField name="updated_at" type="string">
+      —
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+### 错误
+
+| HTTP | `code` | `category` | 说明 |
+| --- | --- | --- | --- |
+| 401 | `unauthorized` | `forbidden` | 缺少或无效的 API Key。 |
+| 404 | `run-not-found` | `not_found` | 运行不存在，或不是当前账号发起的。 |
+
+错误响应统一为 `{"error": {code, category, message, retryable}}`，见<a href="/zh/datahub/api/reference/introduction#错误">错误</a>。
+
+## 客户端库
+
+Python 与 JavaScript SDK 暂未封装此端点，请直接调用 REST。

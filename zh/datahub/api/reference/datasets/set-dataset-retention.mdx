@@ -1,0 +1,82 @@
+---
+title: "设置保留标记"
+description: "把数据集标记为长期保留，或取消标记。"
+---
+
+**`PUT`** `https://api-datahub.bazhuayu.com/v1/datasets/{dataset_id}/retention`
+
+认证：需要 API Key（`Authorization: Bearer <API Key>`）。
+
+运行结果默认自创建起保留 90 天；带保留标记的数据集不参与过期清理。标记是**用户的明确声明**：读取不会续期，设置与清除都是幂等的。
+
+只能标记自己的数据集：别人的、平台公开的种子集和不存在的都返回 `404`。标记门比可见门窄，因为种子集不是你的产出，也不参与清理，标记它没有意义。
+
+## 请求
+
+### 路径参数
+
+<ParamField path="dataset_id" type="string" required>
+  数据集标识。
+</ParamField>
+
+### 请求体
+
+<ParamField body="retained" type="boolean" required>
+  `true` 标记保留，`false` 取消标记。
+</ParamField>
+
+### 示例请求
+
+```bash
+curl -X PUT \
+  -H "Authorization: Bearer $BAZHUAYU_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"retained": true}' \
+  "https://api-datahub.bazhuayu.com/v1/datasets/ds_0bd5345d13d0/retention"
+```
+
+## 响应
+
+### 200 成功
+
+```json
+{
+  "data": {
+    "dataset_id": "ds_0bd5345d13d0",
+    "retained": true
+  }
+}
+```
+
+响应包在 `data` 字段中，其内容如下。
+
+<ResponseField name="dataset_id" type="string" required>
+  数据集标识。
+</ResponseField>
+
+<ResponseField name="retained" type="boolean" required>
+  当前标记状态。
+</ResponseField>
+
+### 错误
+
+| HTTP | `code` | `category` | 说明 |
+| --- | --- | --- | --- |
+| 401 | `unauthorized` | `forbidden` | 缺少或无效的 API Key。 |
+| 404 | `dataset-not-found` | `not_found` | 数据集不存在、不属于当前账号，或是平台公共样例集（不可标记）。 |
+
+错误响应统一为 `{"error": {code, category, message, retryable}}`，见<a href="/zh/datahub/api/reference/introduction#错误">错误</a>。
+
+## 客户端库
+
+<CodeGroup>
+
+```python Python
+client.set_dataset_retention("ds_0bd5345d13d0", retained=True)
+```
+
+```js JavaScript
+await client.setDatasetRetention("ds_0bd5345d13d0", true);
+```
+
+</CodeGroup>

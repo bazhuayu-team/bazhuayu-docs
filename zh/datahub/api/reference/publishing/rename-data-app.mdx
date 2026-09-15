@@ -1,0 +1,82 @@
+---
+title: "重命名 App"
+description: "修改应用名（路由别名），不发版、不影响进行中的运行。"
+---
+
+**`POST`** `https://api-datahub.bazhuayu.com/v1/data-apps/{app_id}/rename`
+
+认证：需要 API Key，且仅 App 作者（发布者本人）可调用；其他人得到 `404`。
+
+重命名完全开放，不限于零 Release 的 App：应用名是路由别名，重命名不发布版本、不作废旧版本、不影响进行中的运行（所有持久引用都钉 `app_id`）。
+
+调用方引用失效是开发者自己的责任：旧的 `owner/old-name` 引用（MCP 钉选、SDK、REST、详情页地址）在重命名后返回干净的 `404`，不做重定向；历史运行与账单显示新名字。旧名不会被他人在你的命名空间下占用，但你自己以后可以再用它建新 App，届时外部残留引用会指向新 App。建议消费方按 `app_id` 集成。
+
+校验链与创建身份相同：命名规则 → 保留字 → 新名不等于当前名；与他人的历史绑定冲突为 `409 app-name-reserved`，与你自己的另一个 App 冲突为 `409 app-name-taken`。
+
+## 请求
+
+### 路径参数
+
+<ParamField path="app_id" type="string" required>
+  App 引用。
+</ParamField>
+
+### 请求体
+
+<ParamField body="new_app_name" type="string" required>
+  —
+</ParamField>
+
+### 示例请求
+
+```bash
+curl -X POST \
+  -H "Authorization: Bearer $BAZHUAYU_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"app_name": "review-lookup"}' \
+  "https://api-datahub.bazhuayu.com/v1/data-apps/carol/reviews-query/rename"
+```
+
+## 响应
+
+### 200 成功
+
+```json
+{
+  "data": {
+    "app_id": "app_6dfe4e839ccf",
+    "namespace": "carol",
+    "app_name": "review-lookup",
+    "previous_app_name": "reviews-query"
+  }
+}
+```
+
+响应包在 `data` 字段中，其内容如下。
+
+<ResponseField name="app_id" type="string" required>
+  App 的稳定标识，不变。
+</ResponseField>
+
+<ResponseField name="app_name" type="string" required>
+  新名称。
+</ResponseField>
+
+<ResponseField name="namespace" type="string">
+  发布者用户名。
+</ResponseField>
+
+### 错误
+
+| HTTP | `code` | `category` | 说明 |
+| --- | --- | --- | --- |
+| 401 | `unauthorized` | `forbidden` | 缺少或无效的 API Key。 |
+| 400 | `invalid-app-name` | `invalid_input` | 名称不符合命名规则或是保留字。 |
+| 409 | `app-name-reserved` | `forbidden` | 该名称被他人的历史绑定占用（用户名易主后的 30 天冻结期）。 |
+| 409 | `app-name-taken` | `invalid_input` | 你名下已有同名 App。 |
+
+错误响应统一为 `{"error": {code, category, message, retryable}}`，见<a href="/zh/datahub/api/reference/introduction#错误">错误</a>。
+
+## 客户端库
+
+Python 与 JavaScript SDK 暂未封装此端点，请直接调用 REST。

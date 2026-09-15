@@ -1,0 +1,67 @@
+---
+title: "拆分 manifest 为契约文件夹"
+description: "装配的逆操作：把一份 manifest 拆成规范的契约文件夹文件集。"
+---
+
+**`POST`** `https://api-datahub.bazhuayu.com/v1/data-apps/contract/split`
+
+认证：无需认证，可匿名调用。
+
+装配的逆操作：一份自包含的 manifest → 规范契约文件夹的文件映射（每个文件是 JSON 文本；打包 zip 是客户端的事）。
+
+拆分语义（唯一真相）：平台注入的读回键（`scope` / `status` / `namespace`）被剥掉；input / output 各去掉一层 `schema`，`output.id_field` 移回 `output_schema.json` 顶层；runtime / pricing / examples 只要存在就独立成文件；空 README 不写文件；其余键按原顺序进 `dataapp.json`。拆出的文件夹再经装配可以零告警复现 manifest。可选的 `translations`（`{source, locales}`）额外产出 `i18n.json`。
+
+## 请求
+
+### 请求体
+
+<ParamField body="manifest" type="object" required>
+  manifest 对象。
+</ParamField>
+
+<ParamField body="translations" type="object">
+  可选的译文集合 `&#123;source, locales&#125;`。
+</ParamField>
+
+### 示例请求
+
+```bash
+curl -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"manifest": {"spec_version": "0.2", "identity": {"app_name": "reviews-query"}, "…": "…"}}' \
+  "https://api-datahub.bazhuayu.com/v1/data-apps/contract/split"
+```
+
+## 响应
+
+### 200 成功
+
+```json
+{
+  "data": {
+    "files": {
+      "dataapp.json": "{\n  \"spec_version\": \"0.2\",\n  …",
+      "input_schema.json": "{…}",
+      "output_schema.json": "{…}",
+      "runtime.json": "{…}",
+      "pricing.json": "{…}",
+      "examples.json": "[…]"
+    },
+    "warnings": []
+  }
+}
+```
+
+响应包在 `data` 字段中，其内容如下。
+
+<ResponseField name="files" type="object">
+  文件映射，键为文件名，值为 JSON 文本。
+</ResponseField>
+
+<ResponseField name="folder_name" type="string">
+  —
+</ResponseField>
+
+## 客户端库
+
+Python 与 JavaScript SDK 暂未封装此端点，请直接调用 REST。

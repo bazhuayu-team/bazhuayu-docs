@@ -1,0 +1,133 @@
+---
+title: "保存一种语言的译文"
+description: "整份替换某种语言的译文 overlay；不产生新版本，对所有版本生效。"
+---
+
+**`PUT`** `https://api-datahub.bazhuayu.com/v1/data-apps/{app_id}/translations/{locale}`
+
+认证：需要 API Key，且仅 App 作者（发布者本人）可调用；其他人得到 `404`。
+
+整份替换某种语言的 overlay，来源记为 `author`。保存译文不会产生 Release：译文挂在 App 身份上，对所有版本生效。
+
+硬检查（`400`）：语言代码合法且不等于 App 的 `source_locale`；条目必须把路径映射到字符串或字符串数组；单个 App 最多 20 种语言；超过 4MB 为 `413`。路径级问题（未知路径、类型不符、`enum_titles` 长度与 `enum` 不匹配、事件或示例 id 重复）作为 `warnings` 返回而不拒绝，消费侧跳过这些条目。
+
+哈希基准是**工作区**（作者翻译时看到的内容），没有草稿时回落到最新 Release；响应里的 `stale` 按最新 Release 计算，所以为尚未发布的草稿改动保存的译文会报 `stale=true`，直到那次改动发布。`expected_revision` 不一致为 `409`。
+
+## 请求
+
+### 路径参数
+
+<ParamField path="app_id" type="string" required>
+  App 引用。
+</ParamField>
+
+<ParamField path="locale" type="string" required>
+  语言代码。
+</ParamField>
+
+### 请求体
+
+<ParamField body="entries" type="object" required>
+  译文条目，键为 manifest 路径，值为字符串或字符串数组。
+</ParamField>
+
+<ParamField body="expected_revision" type="integer">
+  期望的当前草稿版本号。
+</ParamField>
+
+### 示例请求
+
+```bash
+curl -X PUT \
+  -H "Authorization: Bearer $BAZHUAYU_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"entries": {"identity.name": "Product Review Lookup", "identity.summary": "Fetch public reviews by product id"}, "readme": "# Product Review Lookup\n…"}' \
+  "https://api-datahub.bazhuayu.com/v1/data-apps/carol/reviews-query/translations/en"
+```
+
+## 响应
+
+### 200 成功
+
+```json
+{
+  "data": {
+    "locale": "string",
+    "origin": "author",
+    "revision": 0,
+    "based_on_version": "string",
+    "based_on_hash": "string",
+    "stale": false,
+    "stale_paths": [
+      "string"
+    ],
+    "warnings": [
+      {
+        "code": "string",
+        "params": {}
+      }
+    ]
+  }
+}
+```
+
+响应包在 `data` 字段中，其内容如下。
+
+<ResponseField name="locale" type="string" required>
+  语言代码。
+</ResponseField>
+
+<ResponseField name="origin" type="enum" required>
+  译文来源。 取值：`author` / `platform`。
+</ResponseField>
+
+<ResponseField name="revision" type="integer" required>
+  —
+</ResponseField>
+
+<ResponseField name="based_on_version" type="string">
+  —
+</ResponseField>
+
+<ResponseField name="based_on_hash" type="string" required>
+  —
+</ResponseField>
+
+<ResponseField name="stale" type="boolean" required>
+  原文是否已在译文之后变化。
+</ResponseField>
+
+<ResponseField name="stale_paths" type="string[]">
+  发生变化的路径。
+</ResponseField>
+
+<ResponseField name="warnings" type="object[]">
+  路径级告警。
+  <Expandable title="字段">
+    <ResponseField name="code" type="string" required>
+      —
+    </ResponseField>
+
+    <ResponseField name="params" type="object">
+      —
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+### 错误
+
+| HTTP | `code` | `category` | 说明 |
+| --- | --- | --- | --- |
+| 401 | `unauthorized` | `forbidden` | 缺少或无效的 API Key。 |
+| 400 | `locale-invalid` | `invalid_input` | 语言代码不合法。 |
+| 400 | `locale-is-source` | `invalid_input` | 目标语言与 App 的源语言相同。 |
+| 400 | `translation-invalid` | `invalid_input` | 译文条目形状不合法（路径必须映射到字符串或字符串数组）。 |
+| 400 | `translation-locale-limit` | `invalid_input` | 单个 App 最多 20 个语言。 |
+| 413 | `payload-too-large` | `invalid_input` | 请求体超过大小限制。 |
+| 409 | `revision-conflict` | `invalid_input` | `expected_revision` 与当前草稿版本号不一致，说明有并发修改。 |
+
+错误响应统一为 `{"error": {code, category, message, retryable}}`，见<a href="/zh/datahub/api/reference/introduction#错误">错误</a>。
+
+## 客户端库
+
+Python 与 JavaScript SDK 暂未封装此端点，请直接调用 REST。

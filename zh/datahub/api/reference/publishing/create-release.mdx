@@ -1,0 +1,101 @@
+---
+title: "发布 Release"
+description: "把一个就绪的 Build 晋升为正式版本，版本号在此刻确定。"
+---
+
+**`POST`** `https://api-datahub.bazhuayu.com/v1/data-apps/{app_id}/releases`
+
+认证：需要 API Key，且仅 App 作者（发布者本人）可调用；其他人得到 `404`。
+
+把指定的就绪 Build 晋升为正式版本。**版本号在此刻确定**：默认在当前最大版本上补丁号加一（首个为 `0.1.0`）；显式给出的版本必须是三段数字且严格大于当前最大版本，用它来表达主版本或次版本升级。
+
+前置条件：Build 存在且就绪；快照会重新过一遍校验流水线（Build 存续期间规范可能已演进）；给了 `expected_revision` 时工作区不得被并发修改。并发发布由（发布者，应用名，版本）唯一约束仲裁，自动版本号冲突时引擎重算并重试一次。发布后工作区保留，它可能已经领先于发布的快照。
+
+## 请求
+
+### 路径参数
+
+<ParamField path="app_id" type="string" required>
+  App 引用。
+</ParamField>
+
+### 请求体
+
+<ParamField body="build_id" type="string" required>
+  要发布的 Build 标识，必须处于就绪状态。
+</ParamField>
+
+<ParamField body="version" type="string">
+  显式版本号，三段数字；省略则补丁号加一。
+</ParamField>
+
+<ParamField body="expected_revision" type="integer">
+  期望的当前草稿版本号，不一致则 `409`。
+</ParamField>
+
+### 示例请求
+
+```bash
+curl -X POST \
+  -H "Authorization: Bearer $BAZHUAYU_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"build_id": "bld_a583f440a0ab", "version": "1.2.0"}' \
+  "https://api-datahub.bazhuayu.com/v1/data-apps/carol/reviews-query/releases"
+```
+
+## 响应
+
+### 200 成功
+
+```json
+{
+  "data": {
+    "version": "1.2.0",
+    "build_id": "bld_a583f440a0ab",
+    "published_at": "2026-09-15T08:00:00+00:00",
+    "latest": true
+  }
+}
+```
+
+响应包在 `data` 字段中，其内容如下。
+
+<ResponseField name="app_name" type="string" required>
+  —
+</ResponseField>
+
+<ResponseField name="namespace" type="string">
+  —
+</ResponseField>
+
+<ResponseField name="version" type="string" required>
+  发布的版本号。
+</ResponseField>
+
+<ResponseField name="build_id" type="string" required>
+  对应的 Build。
+</ResponseField>
+
+<ResponseField name="published_at" type="string">
+  发布时间。
+</ResponseField>
+
+<ResponseField name="missing_secrets" type="string[]">
+  —
+</ResponseField>
+
+### 错误
+
+| HTTP | `code` | `category` | 说明 |
+| --- | --- | --- | --- |
+| 401 | `unauthorized` | `forbidden` | 缺少或无效的 API Key。 |
+| 404 | `build-not-found` | `not_found` | Build 快照不存在。 |
+| 409 | `build-not-ready` | `invalid_input` | Build 尚未就绪（构建中或失败），不能发布。 |
+| 422 | `invalid-manifest` | `invalid_input` | manifest 未通过校验，`issues[]` 列出问题。 |
+| 409 | `revision-conflict` | `invalid_input` | `expected_revision` 与当前草稿版本号不一致，说明有并发修改。 |
+
+错误响应统一为 `{"error": {code, category, message, retryable}}`，见<a href="/zh/datahub/api/reference/introduction#错误">错误</a>。
+
+## 客户端库
+
+Python 与 JavaScript SDK 暂未封装此端点，请直接调用 REST。

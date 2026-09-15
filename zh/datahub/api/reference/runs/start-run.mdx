@@ -1,0 +1,387 @@
+---
+title: "发起运行"
+description: "用满足输入契约的参数发起一次 Data App 运行，可选择等待结果。"
+---
+
+**`POST`** `https://api-datahub.bazhuayu.com/v1/data-apps/{app_id}/runs`
+
+认证：需要 API Key（`Authorization: Bearer <API Key>`）。
+
+请求体是 App 输入契约（详情里的 `input_schema`）的一个实例，严格校验。
+
+`wait` 决定这次调用是否等待结果：
+
+* **省略**：按 App 的 `execution.mode` 默认行为。`sync` 型一直等到终态（上限为 App 的 `execution.timeout_seconds`）；`async` 型立即返回 `run_id`。
+* **显式给出 0-60**：两种模式行为一致，最多等 `wait` 秒；`wait=0` 入队即返回，`sync` 型也可以先拿到 `run_id` 再用 <a href="/zh/datahub/api/reference/runs/get-run">查询运行</a> 的 `wait` 长轮询。
+
+返回时运行已到终态的话，`sample_records` 带首批记录。完整结果通过<a href="/zh/datahub/api/reference/runs/get-run-records">读取运行结果</a>分页取。
+
+`version` 把运行钉到历史版本（契约与价格都随该版本）；`build` 是作者调试用，钉住一个不可变的 Build 快照（`run_kind=test`，不进公开统计，但照常计费），与 `version` 互斥。
+
+运行门与详情门一致：不可见即 `404`；可见但作者暂停接收运行为 `403`（作者自测不受限）；钉到已撤回版本的新运行被拒（`422`）。
+
+## 请求
+
+### 路径参数
+
+<ParamField path="app_id" type="string" required>
+  App 引用，`app_<hex>` 或 `<namespace>/<app_name>`。
+</ParamField>
+
+### 查询参数
+
+<ParamField query="wait" type="number">
+  最多等待多少秒到终态。省略按 App 模式默认；`0` 发起即返回。
+
+范围 0 到 60。
+</ParamField>
+
+<ParamField query="max_records" type="integer">
+  最多产出多少条记录，达到后运行正常结束。用于控制费用与耗时。
+
+范围 ≥ 1。
+</ParamField>
+
+<ParamField query="triggered_by" type="string" default="api">
+  发起渠道标记，默认 `api`；SDK 与 MCP 会自动填自己的值。可作为运行列表与账单的筛选维度。
+</ParamField>
+
+<ParamField query="version" type="string">
+  钉到指定版本运行，默认最新版本。
+</ParamField>
+
+<ParamField query="build" type="string">
+  作者调试用，钉到某个 Build 快照；与 `version` 互斥。
+</ParamField>
+
+### 请求体
+
+JSON 对象，结构由 App 的 `input_schema` 决定，从详情里的 `examples` 复制一份再修改最稳妥。
+
+### 示例请求
+
+```bash
+curl -X POST \
+  -H "Authorization: Bearer $BAZHUAYU_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"product": "p-9001"}' \
+  "https://api-datahub.bazhuayu.com/v1/data-apps/carol/probe-b/runs?wait=60"
+```
+
+## 响应
+
+### 200 成功
+
+```json
+{
+  "data": {
+    "run_id": "run_c62bc0fb8df2",
+    "namespace": "carol",
+    "app_name": "probe-b",
+    "app_version": "0.1.0",
+    "build_id": null,
+    "run_kind": "production",
+    "state": "SUCCEEDED",
+    "input": {
+      "product": "p-now"
+    },
+    "progress": {
+      "done": 20,
+      "total": null,
+      "status_text": null
+    },
+    "dataset_id": "ds_0bd5345d13d0",
+    "partial": false,
+    "cancel_requested": false,
+    "triggered_by": "api",
+    "upstream_ref": null,
+    "created_at": "2026-09-15T07:45:40.411993+00:00",
+    "started_at": "2026-09-15T07:45:40.419610+00:00",
+    "first_started_at": "2026-09-15T07:45:40.419610+00:00",
+    "finished_at": "2026-09-15T07:45:40.822250+00:00",
+    "usage": {
+      "metrics": {
+        "records_collected": 20
+      },
+      "duration_ms": 402
+    },
+    "billing": {
+      "events": [
+        {
+          "event": "record",
+          "label": "获取一条",
+          "qty": 20.0,
+          "unit_price": 0.001,
+          "amount": 0.02,
+          "unit_size": null,
+          "raw_qty": null
+        }
+      ],
+      "total": 0.02,
+      "currency": "CNY",
+      "charged": true
+    },
+    "error": null,
+    "sample_records": null,
+    "warnings": []
+  }
+}
+```
+
+响应包在 `data` 字段中，其内容如下。
+
+<ResponseField name="run_id" type="string" required>
+  运行标识，后续查询、读取、取消都用它。
+</ResponseField>
+
+<ResponseField name="namespace" type="string">
+  App 发布者用户名。
+</ResponseField>
+
+<ResponseField name="app_name" type="string">
+  应用名。
+</ResponseField>
+
+<ResponseField name="app_version" type="string">
+  钉住的版本号；调试运行为 `null`。
+</ResponseField>
+
+<ResponseField name="build_id" type="string">
+  调试运行钉住的 Build 快照；生产运行为 `null`。
+</ResponseField>
+
+<ResponseField name="run_kind" type="string">
+  `production` 生产运行，`test` 作者调试运行。
+</ResponseField>
+
+<ResponseField name="state" type="enum" required>
+  运行状态。 取值：`PENDING` / `QUEUED` / `RUNNING` / `SUCCEEDED` / `PARTIALLY_SUCCEEDED` / `FAILED` / `CANCELLED` / `EXPIRED`。
+</ResponseField>
+
+<ResponseField name="input" type="object">
+  输入回显；输入契约中标记 `sensitive` 的字段会被打码。
+</ResponseField>
+
+<ResponseField name="progress" type="object">
+  进度。`done` / `total` 由 App 上报，`status_text` 是 App 写的人读状态。
+  <Expandable title="字段">
+    <ResponseField name="done" type="integer">
+      —
+    </ResponseField>
+
+    <ResponseField name="total" type="integer">
+      —
+    </ResponseField>
+
+    <ResponseField name="status_text" type="string">
+      —
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="dataset_id" type="string">
+  结果数据集标识。
+</ResponseField>
+
+<ResponseField name="partial" type="boolean">
+  `true` 表示部分成功或被取消，已产出的记录可用。
+</ResponseField>
+
+<ResponseField name="cancel_requested" type="boolean">
+  是否已收到取消请求。
+</ResponseField>
+
+<ResponseField name="triggered_by" type="string">
+  发起渠道。
+</ResponseField>
+
+<ResponseField name="upstream_ref" type="string">
+  上游原始任务号（如有）。
+</ResponseField>
+
+<ResponseField name="created_at" type="string">
+  发起时间，也是时间范围筛选与账单归属的依据。
+</ResponseField>
+
+<ResponseField name="started_at" type="string">
+  最近一次开始执行的时间。
+</ResponseField>
+
+<ResponseField name="first_started_at" type="string">
+  首次开始执行的时间，重试不会改写。
+</ResponseField>
+
+<ResponseField name="finished_at" type="string">
+  结束时间。
+</ResponseField>
+
+<ResponseField name="usage" type="object">
+  客观用量：`metrics` 记录数等计数，`duration_ms` 执行耗时。
+  <Expandable title="字段">
+    <ResponseField name="metrics" type="object">
+      —
+    </ResponseField>
+
+    <ResponseField name="duration_ms" type="integer">
+      —
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="billing" type="object">
+  费用明细：`events[]` 逐个计费事件的数量、单价与金额，`total` 合计，`charged` 是否实际收费。终态后才完整。
+  <Expandable title="字段">
+    <ResponseField name="events" type="object[]">
+      —
+      <Expandable title="字段">
+        <ResponseField name="event" type="string" required>
+          —
+        </ResponseField>
+
+        <ResponseField name="label" type="string">
+          —
+        </ResponseField>
+
+        <ResponseField name="qty" type="number" required>
+          —
+        </ResponseField>
+
+        <ResponseField name="unit_price" type="number" required>
+          —
+        </ResponseField>
+
+        <ResponseField name="amount" type="number" required>
+          —
+        </ResponseField>
+
+        <ResponseField name="unit_size" type="integer">
+          —
+        </ResponseField>
+
+        <ResponseField name="raw_qty" type="number">
+          —
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
+
+    <ResponseField name="total" type="number">
+      —
+    </ResponseField>
+
+    <ResponseField name="currency" type="string">
+      —
+    </ResponseField>
+
+    <ResponseField name="charged" type="boolean">
+      —
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="error" type="object">
+  失败时的错误对象（`code` / `category` / `message` / `retryable`）。
+  <Expandable title="字段">
+    <ResponseField name="code" type="string" required>
+      —
+    </ResponseField>
+
+    <ResponseField name="category" type="string">
+      —
+    </ResponseField>
+
+    <ResponseField name="message" type="string" required>
+      —
+    </ResponseField>
+
+    <ResponseField name="retryable" type="boolean">
+      —
+    </ResponseField>
+
+    <ResponseField name="retry_after" type="number">
+      —
+    </ResponseField>
+
+    <ResponseField name="item_index" type="integer">
+      —
+    </ResponseField>
+
+    <ResponseField name="details" type="object[]">
+      —
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="sample_records" type="object[]">
+  返回时已到终态则带首批记录，否则为 `null`。
+</ResponseField>
+
+<ResponseField name="warnings" type="object[]">
+  结构化告警，例如 `billing-qty-missing`。
+  <Expandable title="字段">
+    <ResponseField name="code" type="string" required>
+      —
+    </ResponseField>
+
+    <ResponseField name="event" type="string">
+      —
+    </ResponseField>
+
+    <ResponseField name="detail" type="object">
+      —
+    </ResponseField>
+
+    <ResponseField name="count" type="integer">
+      —
+    </ResponseField>
+
+    <ResponseField name="updated_at" type="string">
+      —
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+### 错误
+
+| HTTP | `code` | `category` | 说明 |
+| --- | --- | --- | --- |
+| 401 | `unauthorized` | `forbidden` | 缺少或无效的 API Key。 |
+| 400 | `invalid-input` | `invalid_input` | 请求体不满足 App 的输入契约，`details[]` 逐项指出字段路径与原因。 |
+| 404 | `app-not-found` | `not_found` | App 不存在、已改名，或对当前凭证不可见（私有 / 分享范围之外）。 |
+| 403 | `app-not-accepting-runs` | `forbidden` | App 处于维护中，作者暂停接收新运行；`message` 带作者留言。 |
+| 402 | `balance-negative` | `forbidden` | 钱包余额为负，暂停发起新运行；充值后原样重试。 |
+| 503 | `billing-unavailable` | `temporary` | 账号有欠费记录且计费服务暂时无法核验余额；`retryable` 为 `true`，稍后重试。 |
+| 422 | `version-yanked` | `invalid_input` | 指定的版本已被作者撤回，不再接受新运行。 |
+
+错误响应统一为 `{"error": {code, category, message, retryable}}`，见<a href="/zh/datahub/api/reference/introduction#错误">错误</a>。
+
+## 客户端库
+
+<CodeGroup>
+
+```python Python
+# 发起并等待终态（SDK 内部轮询）
+run = client.call("carol/probe-b", {"product": "p-9001"}, max_records=100)
+print(run["state"], run["billing"]["total"])
+
+# 只发起，不等待
+run = client.run("carol/probe-b", {"product": "p-9001"}, wait=0)
+run_id = run["run_id"]
+```
+
+```js JavaScript
+// 发起并等待终态（SDK 内部轮询，超时参数单位毫秒）
+const run = await client.call("carol/probe-b", { product: "p-9001" }, { maxRecords: 100, timeout: 120_000 });
+console.log(run.state, run.billing.total);
+
+// 只发起，不等待
+const started = await client.run("carol/probe-b", { product: "p-9001" }, { wait: 0 });
+const runId = started.run_id;
+```
+
+</CodeGroup>
+
+## 注意事项
+
+* 状态词汇：`PENDING`、`QUEUED`、`RUNNING`、`SUCCEEDED`、`PARTIALLY_SUCCEEDED`、`FAILED`、`CANCELLED`、`EXPIRED`。后五个是终态。
+* 同一目标不要因为等待超时而重复发起；先用 `run_id` 查询状态。
+* 失败不计费；部分成功与取消只按已产出记录计费。

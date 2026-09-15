@@ -1,0 +1,55 @@
+---
+title: "平台元信息"
+description: "读取部署级常量，目前只有计费币种。"
+---
+
+**`GET`** `https://api-datahub.bazhuayu.com/v1/meta`
+
+认证：无需认证，可匿名调用。
+
+返回部署级常量，目前只有计费币种（ISO 4217 代码）。所有金额字段（`unit_price`、`amount`、`total_spent`）本身不带单位，单位以这里为准。国内站为 `CNY`。
+
+匿名可读：市场卡片上的起始价格在未登录时也要能正确显示币种，所以单独开了这个窗口。
+
+## 请求
+
+### 示例请求
+
+```bash
+curl \
+  "https://api-datahub.bazhuayu.com/v1/meta"
+```
+
+## 响应
+
+### 200 成功
+
+```json
+{
+  "data": {
+    "currency": "CNY"
+  }
+}
+```
+
+响应包在 `data` 字段中，其内容如下。
+
+<ResponseField name="currency" type="string">
+  计费币种，ISO 4217 代码。
+</ResponseField>
+
+## 客户端库
+
+<CodeGroup>
+
+```python Python
+meta = client.meta()
+print(meta["currency"])
+```
+
+```js JavaScript
+const meta = await client.meta();
+console.log(meta.currency);
+```
+
+</CodeGroup>

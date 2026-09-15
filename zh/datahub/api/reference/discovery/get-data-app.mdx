@@ -1,0 +1,220 @@
+---
+title: "App 详情"
+description: "读取一个 Data App 的完整机读说明：输入输出契约、执行剖面、价格、示例与调用示例。"
+---
+
+**`GET`** `https://api-datahub.bazhuayu.com/v1/data-apps/{app_id}`
+
+认证：可匿名调用；携带 API Key 时可使用登录态才有的筛选或看到更多内容。
+
+自包含的机读详情：输入契约与输出结构（JSON Schema）、执行模式、价格、使用知识、输入示例，以及 MCP / REST / CLI / SDK 四种调用示例。默认返回最新版本，传 `version` 可读取历史版本的契约。
+
+可见性与运行门相同：公开 App 匿名可读；私有 App 仅作者可读；分享 App 仅授权名单内可读。不可见与不存在都返回 `404`，不暴露存在性。
+
+## 请求
+
+### 路径参数
+
+<ParamField path="app_id" type="string" required>
+  App 引用，`app_<hex>` 或 `<namespace>/<app_name>`。
+</ParamField>
+
+### 查询参数
+
+<ParamField query="version" type="string">
+  指定版本号读取历史契约，默认最新版本。
+</ParamField>
+
+### 示例请求
+
+```bash
+curl \
+  -H "Authorization: Bearer $BAZHUAYU_API_KEY" \
+  "https://api-datahub.bazhuayu.com/v1/data-apps/carol/probe-b"
+```
+
+## 响应
+
+### 200 成功
+
+```json
+{
+  "data": {
+    "app_id": "app_6dfe4e839ccf",
+    "namespace": "carol",
+    "app_name": "probe-b",
+    "name": "商品评论查询",
+    "type": "data",
+    "summary": "按商品编号获取评论列表",
+    "capability": "data-acquisition",
+    "keywords": [
+      "reviews",
+      "ecommerce"
+    ],
+    "boundary": "只覆盖公开评论，不含买家秀图片",
+    "version": "0.1.0",
+    "published_at": "2026-09-15T07:45:38.633930+00:00",
+    "status": "published",
+    "scope": "public",
+    "accepting_runs": true,
+    "source_locale": "zh-CN",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "product": {
+          "type": "string",
+          "description": "商品编号"
+        }
+      },
+      "required": [
+        "product"
+      ],
+      "additionalProperties": false
+    },
+    "output_schema": {
+      "id_field": "review_id",
+      "record": {
+        "type": "object",
+        "properties": {
+          "review_id": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          },
+          "rating": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "execution": {
+      "mode": "sync",
+      "timeout_seconds": 60,
+      "cancel_notify": false,
+      "recovers_partial_on_cancel": false
+    },
+    "knowledge": {
+      "when_to_use": [
+        "需要某个商品的全部公开评论时"
+      ],
+      "when_not_to_use": [
+        "需要买家图片或视频时"
+      ],
+      "failure_handling": [
+        "商品下架时返回空结果而非错误"
+      ]
+    },
+    "pricing": {
+      "events": [
+        {
+          "event": "record",
+          "label": "获取一条",
+          "unit_price": 0.001,
+          "qty_from": "",
+          "unit_size": null
+        }
+      ]
+    },
+    "examples": [
+      {
+        "name": "基础查询",
+        "input": {
+          "product": "p-9001"
+        }
+      }
+    ],
+    "call_examples": {
+      "mcp": "…",
+      "api": "curl -X POST 'https://api-datahub.bazhuayu.com/v1/data-apps/carol/probe-b/runs' …",
+      "cli": "op run carol/probe-b --input '{\"product\": \"p-9001\"}'",
+      "sdk": "from bazhuayu_client import Client …"
+    }
+  }
+}
+```
+
+响应是一个自由结构的对象（随 manifest 规范演进只增不改），上面列出的是稳定字段。
+
+响应包在 `data` 字段中，其内容如下。
+
+<ResponseField name="app_id" type="string">
+  App 的稳定标识。
+</ResponseField>
+
+<ResponseField name="namespace" type="string">
+  发布者用户名。
+</ResponseField>
+
+<ResponseField name="app_name" type="string">
+  应用名。
+</ResponseField>
+
+<ResponseField name="version" type="string">
+  本次返回的契约对应的版本号。
+</ResponseField>
+
+<ResponseField name="status" type="string">
+  生命周期状态。
+</ResponseField>
+
+<ResponseField name="scope" type="string">
+  可见范围。
+</ResponseField>
+
+<ResponseField name="accepting_runs" type="boolean">
+  是否接受新运行。
+</ResponseField>
+
+<ResponseField name="input_schema" type="object">
+  输入契约，标准 JSON Schema；发起运行的请求体必须满足它。
+</ResponseField>
+
+<ResponseField name="output_schema" type="object">
+  输出结构。`id_field` 是记录的主键字段，`record` 是单条记录的 JSON Schema。
+</ResponseField>
+
+<ResponseField name="execution" type="object">
+  执行剖面。`mode` 为 `sync` / `async`，`timeout_seconds` 为单次运行上限。
+</ResponseField>
+
+<ResponseField name="knowledge" type="object">
+  使用知识：适用场景、不适用场景、失败处理方式。
+</ResponseField>
+
+<ResponseField name="pricing" type="object">
+  价格表。
+</ResponseField>
+
+<ResponseField name="examples" type="object[]">
+  输入示例，建议以此为起点构造请求体。
+</ResponseField>
+
+<ResponseField name="call_examples" type="object">
+  渲染好的四种调用示例（`mcp` / `api` / `cli` / `sdk`）。
+</ResponseField>
+
+### 错误
+
+| HTTP | `code` | `category` | 说明 |
+| --- | --- | --- | --- |
+| 401 | `unauthorized` | `forbidden` | 缺少或无效的 API Key。 |
+| 404 | `app-not-found` | `not_found` | App 不存在、已改名，或对当前凭证不可见（私有 / 分享范围之外）。 |
+
+错误响应统一为 `{"error": {code, category, message, retryable}}`，见<a href="/zh/datahub/api/reference/introduction#错误">错误</a>。
+
+## 客户端库
+
+<CodeGroup>
+
+```python Python
+detail = client.get_app("carol/probe-b")      # 或 app_id
+print(detail["input_schema"], detail["pricing"])
+```
+
+```js JavaScript
+const detail = await client.getApp("carol/probe-b");   // 或 app_id
+console.log(detail.input_schema, detail.pricing);
+```
+
+</CodeGroup>

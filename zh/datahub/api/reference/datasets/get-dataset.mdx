@@ -1,0 +1,94 @@
+---
+title: "数据集详情"
+description: "读取一个数据集的元信息。"
+---
+
+**`GET`** `https://api-datahub.bazhuayu.com/v1/datasets/{dataset_id}`
+
+认证：需要 API Key（`Authorization: Bearer <API Key>`）。
+
+数据集元信息。别人的数据集与不存在的数据集返回同样的 `404`。
+
+## 请求
+
+### 路径参数
+
+<ParamField path="dataset_id" type="string" required>
+  数据集标识。
+</ParamField>
+
+### 示例请求
+
+```bash
+curl \
+  -H "Authorization: Bearer $BAZHUAYU_API_KEY" \
+  "https://api-datahub.bazhuayu.com/v1/datasets/ds_0bd5345d13d0"
+```
+
+## 响应
+
+### 200 成功
+
+```json
+{
+  "data": {
+    "dataset_id": "ds_0bd5345d13d0",
+    "name": "app_6dfe4e839ccf run output",
+    "scope": "private",
+    "source": "run",
+    "row_count": 20,
+    "retained": false,
+    "created_at": "2026-09-15T07:45:40.407451+00:00",
+    "updated_at": "2026-09-15T07:45:40.772143+00:00"
+  }
+}
+```
+
+字段与<a href="/zh/datahub/api/reference/datasets/list-datasets">数据集列表</a>的条目相同。
+
+响应包在 `data` 字段中，其内容如下。
+
+<ResponseField name="dataset_id" type="string" required>
+  —
+</ResponseField>
+
+<ResponseField name="name" type="string" required>
+  —
+</ResponseField>
+
+<ResponseField name="scope" type="string">
+  —
+</ResponseField>
+
+<ResponseField name="source" type="string">
+  —
+</ResponseField>
+
+<ResponseField name="row_count" type="integer">
+  —
+</ResponseField>
+
+<ResponseField name="retained" type="boolean">
+  —
+</ResponseField>
+
+<ResponseField name="created_at" type="string">
+  —
+</ResponseField>
+
+<ResponseField name="updated_at" type="string">
+  —
+</ResponseField>
+
+### 错误
+
+| HTTP | `code` | `category` | 说明 |
+| --- | --- | --- | --- |
+| 401 | `unauthorized` | `forbidden` | 缺少或无效的 API Key。 |
+| 404 | `dataset-not-found` | `not_found` | 数据集不存在、不属于当前账号，或是平台公共样例集（不可标记）。 |
+
+错误响应统一为 `{"error": {code, category, message, retryable}}`，见<a href="/zh/datahub/api/reference/introduction#错误">错误</a>。
+
+## 客户端库
+
+Python 与 JavaScript SDK 暂未封装此端点，请直接调用 REST。

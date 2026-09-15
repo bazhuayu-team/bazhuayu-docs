@@ -1,0 +1,354 @@
+---
+title: "发布者用量分析"
+description: "我发布的 App 在一段时间内被怎样调用：合计与按日、小时、App、渠道、状态、版本、错误码或调用方拆分。"
+---
+
+**`GET`** `https://api-datahub.bazhuayu.com/v1/publisher/usage`
+
+认证：需要 API Key（`Authorization: Bearer <API Key>`）。
+
+我的 App 在一段时间内被怎样调用：区间合计，加按日（或短区间按小时）、按 App、按调用渠道拆分（可两两交叉），或为诊断而按终态、按版本、按错误码拆分。它是账单聚合在发布者侧的对应物：词汇相同（`created_from` / `created_to` 按运行发起时间，起点包含、终点不包含；`tz_offset` 只移动日边界；`data_app` / `triggered_by` 缩小范围），归属从「我发起的运行」翻转为「我拥有的 App」（含零 Release 的 App）。
+
+日 / 小时 / App / 渠道拆分来自终态时累加的小时桶，任意区间与整小时偏移都精确且廉价。状态 / 版本 / 错误码拆分按需从运行明细计算，因此必须给出两端且跨度不超过 92 天（`400 range-too-wide`）；错误分组只覆盖带错误的运行，每组附最近一条错误消息 `sample_message`。作者调试运行默认排除，平台巡检永不计入。成功计入部分成功，取消不进成功率分母，没有终态运行的指标为 `null`。`amount` 是调用方为这些运行支付的数据费，不是发布者的结算收益。
+
+日 / 小时分组升序（`hour` 键是 `tz_offset` 下的本地时钟 `YYYY-MM-DDTHH:00`，不带时区后缀），其他分组按运行数降序。`data_app` 里未知或他人的 App 为 `404`。
+
+`totals.callers` 是区间内的不同调用用户数，来自运行明细，只在区间有界且不超过 92 天时有值。`group_by=caller` 把**单个私有或分享 App** 按调用方拆分：作者自己（`caller_kind=owner`）和当前名单内的用户（`grantee`）按当前用户名显示，其他人（曾被授权者、公开时期的调用者）合并为一个 `other` 组。公开 App 或多个 App 为 `400 caller-group-unavailable`：公开 App 的调用方匿名，只计数。
+
+## 请求
+
+### 查询参数
+
+<ParamField query="group_by" type="string" default="day">
+  一到两个维度，逗号分隔，取值 `day` / `hour` / `data_app` / `triggered_by` / `state` / `version` / `error` / `caller`（如 `day,data_app`）。`day` 与 `hour` 不能组合；`state` / `version` / `error` / `caller` 需要不超过 92 天的有界区间；`caller` 还需要恰好一个私有或分享 App。默认 `day`。
+</ParamField>
+
+<ParamField query="data_app" type="string[]">
+  只看这些 App（`<username>/<app_name>`，可重复传），默认全部我的 App。
+</ParamField>
+
+<ParamField query="created_from" type="string">
+  起点，包含。
+</ParamField>
+
+<ParamField query="created_to" type="string">
+  终点，不包含。
+</ParamField>
+
+<ParamField query="tz_offset" type="integer" default="0">
+  日 / 小时分桶的时区偏移，分钟，北京时间传 `480`。桶是小时级，半小时偏移会近似到整点。
+
+范围 -720 到 840。
+</ParamField>
+
+<ParamField query="triggered_by" type="string">
+  只看一个调用渠道（`api` / `sdk` / `mcp` / `web` 等）。
+</ParamField>
+
+<ParamField query="include_test" type="boolean" default="False">
+  是否并入作者调试运行。
+</ParamField>
+
+<ParamField query="compare" type="boolean" default="False">
+  同时返回紧邻 `created_from` 之前等长区间的 `previous_totals`，需要两端都给。
+</ParamField>
+
+### 示例请求
+
+```bash
+curl \
+  -H "Authorization: Bearer $BAZHUAYU_API_KEY" \
+  "https://api-datahub.bazhuayu.com/v1/publisher/usage?group_by=day,data_app&created_from=2026-09-01T00:00:00%2B08:00&created_to=2026-10-01T00:00:00%2B08:00&tz_offset=480"
+```
+
+## 响应
+
+### 200 成功
+
+```json
+{
+  "data": {
+    "range": {
+      "created_from": null,
+      "created_to": null,
+      "tz_offset": 480
+    },
+    "currency": "CNY",
+    "totals": {
+      "runs": 2,
+      "succeeded": 2,
+      "partial": 0,
+      "failed": 0,
+      "cancelled": 0,
+      "success_rate": 1.0,
+      "records": 40,
+      "avg_duration_ms": 422,
+      "amount": 0.04,
+      "apps_active": 1,
+      "callers": null
+    },
+    "previous_totals": null,
+    "group_by": "day",
+    "groups": [
+      {
+        "runs": 2,
+        "succeeded": 2,
+        "partial": 0,
+        "failed": 0,
+        "cancelled": 0,
+        "success_rate": 1.0,
+        "records": 40,
+        "avg_duration_ms": 422,
+        "amount": 0.04,
+        "day": "2026-09-15",
+        "hour": null,
+        "namespace": null,
+        "app_name": null,
+        "channel": null,
+        "state": null,
+        "version": null,
+        "error_code": null,
+        "error_category": null,
+        "sample_message": null,
+        "last_seen_at": null,
+        "username": null,
+        "caller_kind": null
+      }
+    ]
+  }
+}
+```
+
+响应包在 `data` 字段中，其内容如下。
+
+<ResponseField name="range" type="object" required>
+  本次实际使用的区间与偏移。
+  <Expandable title="字段">
+    <ResponseField name="created_from" type="string">
+      —
+    </ResponseField>
+
+    <ResponseField name="created_to" type="string">
+      —
+    </ResponseField>
+
+    <ResponseField name="tz_offset" type="integer">
+      —
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="currency" type="string">
+  币种。
+</ResponseField>
+
+<ResponseField name="totals" type="object" required>
+  区间合计。
+  <Expandable title="字段">
+    <ResponseField name="runs" type="integer">
+      运行数。
+    </ResponseField>
+
+    <ResponseField name="succeeded" type="integer">
+      成功数（含部分成功）。
+    </ResponseField>
+
+    <ResponseField name="partial" type="integer">
+      部分成功数。
+    </ResponseField>
+
+    <ResponseField name="failed" type="integer">
+      失败数。
+    </ResponseField>
+
+    <ResponseField name="cancelled" type="integer">
+      取消数。
+    </ResponseField>
+
+    <ResponseField name="success_rate" type="number">
+      成功率，取消不进分母；无终态运行为 `null`。
+    </ResponseField>
+
+    <ResponseField name="records" type="integer">
+      写回记录总数。
+    </ResponseField>
+
+    <ResponseField name="avg_duration_ms" type="integer">
+      平均执行毫秒数。
+    </ResponseField>
+
+    <ResponseField name="amount" type="number">
+      调用方支付的数据费合计。
+    </ResponseField>
+
+    <ResponseField name="apps_active" type="integer">
+      有运行的 App 数。
+    </ResponseField>
+
+    <ResponseField name="callers" type="integer">
+      不同调用用户数，区间无界或超过 92 天为 `null`。
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="previous_totals" type="object">
+  `compare=true` 时的上一等长区间合计。
+  <Expandable title="字段">
+    <ResponseField name="runs" type="integer">
+      —
+    </ResponseField>
+
+    <ResponseField name="succeeded" type="integer">
+      —
+    </ResponseField>
+
+    <ResponseField name="partial" type="integer">
+      —
+    </ResponseField>
+
+    <ResponseField name="failed" type="integer">
+      —
+    </ResponseField>
+
+    <ResponseField name="cancelled" type="integer">
+      —
+    </ResponseField>
+
+    <ResponseField name="success_rate" type="number">
+      —
+    </ResponseField>
+
+    <ResponseField name="records" type="integer">
+      —
+    </ResponseField>
+
+    <ResponseField name="avg_duration_ms" type="integer">
+      —
+    </ResponseField>
+
+    <ResponseField name="amount" type="number">
+      —
+    </ResponseField>
+
+    <ResponseField name="apps_active" type="integer">
+      —
+    </ResponseField>
+
+    <ResponseField name="callers" type="integer">
+      distinct callers (users) in the range; computed from run details, so null unless both bounds are given at most 92 days apart
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="group_by" type="string">
+  本次实际使用的维度。
+</ResponseField>
+
+<ResponseField name="groups" type="object[]">
+  分组列表，每组带与 `totals` 相同的指标，外加本维度的键（`day` / `hour` / `namespace` + `app_name` / `channel` / `state` / `version` / `error_code` + `error_category` + `sample_message` + `last_seen_at` / `username` + `caller_kind`），未用到的键为 `null`。
+  <Expandable title="字段">
+    <ResponseField name="runs" type="integer">
+      —
+    </ResponseField>
+
+    <ResponseField name="succeeded" type="integer">
+      —
+    </ResponseField>
+
+    <ResponseField name="partial" type="integer">
+      —
+    </ResponseField>
+
+    <ResponseField name="failed" type="integer">
+      —
+    </ResponseField>
+
+    <ResponseField name="cancelled" type="integer">
+      —
+    </ResponseField>
+
+    <ResponseField name="success_rate" type="number">
+      —
+    </ResponseField>
+
+    <ResponseField name="records" type="integer">
+      —
+    </ResponseField>
+
+    <ResponseField name="avg_duration_ms" type="integer">
+      —
+    </ResponseField>
+
+    <ResponseField name="amount" type="number">
+      —
+    </ResponseField>
+
+    <ResponseField name="day" type="string">
+      —
+    </ResponseField>
+
+    <ResponseField name="hour" type="string">
+      —
+    </ResponseField>
+
+    <ResponseField name="namespace" type="string">
+      —
+    </ResponseField>
+
+    <ResponseField name="app_name" type="string">
+      —
+    </ResponseField>
+
+    <ResponseField name="channel" type="string">
+      —
+    </ResponseField>
+
+    <ResponseField name="state" type="string">
+      —
+    </ResponseField>
+
+    <ResponseField name="version" type="string">
+      version dimension: the Release version the run was pinned to; null for debug runs (they pin a Build snapshot)
+    </ResponseField>
+
+    <ResponseField name="error_code" type="string">
+      —
+    </ResponseField>
+
+    <ResponseField name="error_category" type="string">
+      —
+    </ResponseField>
+
+    <ResponseField name="sample_message" type="string">
+      error dimension: message of the most recent run in this group
+    </ResponseField>
+
+    <ResponseField name="last_seen_at" type="string">
+      —
+    </ResponseField>
+
+    <ResponseField name="username" type="string">
+      caller dimension: the caller's current username; null for the merged `other` group or when the user has no username
+    </ResponseField>
+
+    <ResponseField name="caller_kind" type="string">
+      caller dimension: `owner` (the publisher's own runs), `grantee` (a user currently on the app's grant list) or `other` (all remaining callers merged into one group)
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+### 错误
+
+| HTTP | `code` | `category` | 说明 |
+| --- | --- | --- | --- |
+| 401 | `unauthorized` | `forbidden` | 缺少或无效的 API Key。 |
+| 400 | `invalid-group-by` | `invalid_input` | `group_by` 不在允许的取值内，或组合不合法。 |
+| 400 | `range-too-wide` | `invalid_input` | 该维度需要同时给出 `created_from` 与 `created_to`，且跨度不超过 92 天。 |
+| 400 | `caller-group-unavailable` | `invalid_input` | `group_by=caller` 只支持恰好一个私有或分享 App。 |
+| 404 | `app-not-found` | `not_found` | App 不存在、已改名，或对当前凭证不可见（私有 / 分享范围之外）。 |
+
+错误响应统一为 `{"error": {code, category, message, retryable}}`，见<a href="/zh/datahub/api/reference/introduction#错误">错误</a>。
+
+## 客户端库
+
+Python 与 JavaScript SDK 暂未封装此端点，请直接调用 REST。

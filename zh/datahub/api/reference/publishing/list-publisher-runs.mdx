@@ -1,0 +1,240 @@
+---
+title: "发布者运行列表"
+description: "别人对我发布的 App 的每一次调用，白名单字段，不含输入、结果与调用方身份。"
+---
+
+**`GET`** `https://api-datahub.bazhuayu.com/v1/publisher/runs`
+
+认证：需要 API Key（`Authorization: Bearer <API Key>`）。
+
+对我发布的 App 的每一次调用，最新在前，是发布者用量分析背后的明细面：同样的归属（我拥有的 App，含零 Release）、同样的区间谓词与筛选值，所以任何汇总数字都能钻取到它计入的运行。
+
+这是**白名单视图**，不是调用方的运行对象：它告诉你发生了什么（状态、时间、写回记录数、错误码与消息、调用方支付的数据费），但永远不告诉你是谁调用、传了什么（没有 `input`）、拿到了什么（没有 `dataset_id`、没有记录、没有凭证标识）。调用方继续通过自己的运行列表读取；发布者无法用这里的 `run_id` 打开对方的运行。作者调试运行默认排除；`status` 支持逗号分隔多值。
+
+## 请求
+
+### 查询参数
+
+<ParamField query="data_app" type="string[]">
+  只看这些 App，可重复传。
+</ParamField>
+
+<ParamField query="status" type="string">
+  运行状态，逗号分隔多值。
+</ParamField>
+
+<ParamField query="triggered_by" type="string">
+  只看一个调用渠道。
+</ParamField>
+
+<ParamField query="version" type="string">
+  只看钉到该版本的运行。
+</ParamField>
+
+<ParamField query="error_code" type="string">
+  只看错误码等于该值的运行（发布者用量分析 `group_by=error` 的 `error_code`）。
+</ParamField>
+
+<ParamField query="run_kind" type="string" default="production">
+  `production`（默认）只看生产流量，`test` 只看我的调试运行，`all` 两者都看。
+</ParamField>
+
+<ParamField query="created_from" type="string">
+  起点，包含。
+</ParamField>
+
+<ParamField query="created_to" type="string">
+  终点，不包含。
+</ParamField>
+
+<ParamField query="offset" type="integer" default="0">
+  分页起点。
+
+范围 ≥ 0。
+</ParamField>
+
+<ParamField query="limit" type="integer" default="50">
+  每页条数。
+
+范围 1 到 200。
+</ParamField>
+
+### 示例请求
+
+```bash
+curl \
+  -H "Authorization: Bearer $BAZHUAYU_API_KEY" \
+  "https://api-datahub.bazhuayu.com/v1/publisher/runs?data_app=carol/reviews-query&status=FAILED&limit=50"
+```
+
+## 响应
+
+### 200 成功
+
+```json
+{
+  "data": {
+    "items": [
+      {
+        "run_id": "run_3b750088f51c",
+        "namespace": "carol",
+        "app_name": "probe-b",
+        "app_version": "0.1.0",
+        "build_id": null,
+        "run_kind": "production",
+        "state": "SUCCEEDED",
+        "partial": false,
+        "triggered_by": "api",
+        "created_at": "2026-09-15T07:45:41.876601+00:00",
+        "started_at": "2026-09-15T07:45:41.883082+00:00",
+        "finished_at": "2026-09-15T07:45:42.326823+00:00",
+        "duration_ms": 443,
+        "records": 20,
+        "amount": 0.02,
+        "error": null
+      },
+      "…"
+    ],
+    "pagination": {
+      "offset": 0,
+      "limit": 2,
+      "count": 2,
+      "total": 2,
+      "has_more": false
+    },
+    "currency": "CNY"
+  }
+}
+```
+
+响应包在 `data` 字段中，其内容如下。
+
+<ResponseField name="items" type="object[]" required>
+  运行列表。
+  <Expandable title="字段">
+    <ResponseField name="run_id" type="string" required>
+      运行标识。
+    </ResponseField>
+
+    <ResponseField name="namespace" type="string">
+      发布者用户名。
+    </ResponseField>
+
+    <ResponseField name="app_name" type="string">
+      应用名。
+    </ResponseField>
+
+    <ResponseField name="app_version" type="string">
+      钉住的版本。
+    </ResponseField>
+
+    <ResponseField name="build_id" type="string">
+      调试运行钉住的 Build。
+    </ResponseField>
+
+    <ResponseField name="run_kind" type="string">
+      运行种类。
+    </ResponseField>
+
+    <ResponseField name="state" type="enum" required>
+      运行状态。 取值：`PENDING` / `QUEUED` / `RUNNING` / `SUCCEEDED` / `PARTIALLY_SUCCEEDED` / `FAILED` / `CANCELLED` / `EXPIRED`。
+    </ResponseField>
+
+    <ResponseField name="partial" type="boolean">
+      是否部分成功或被取消。
+    </ResponseField>
+
+    <ResponseField name="triggered_by" type="string">
+      调用渠道。
+    </ResponseField>
+
+    <ResponseField name="created_at" type="string">
+      发起时间。
+    </ResponseField>
+
+    <ResponseField name="started_at" type="string">
+      开始时间。
+    </ResponseField>
+
+    <ResponseField name="finished_at" type="string">
+      结束时间。
+    </ResponseField>
+
+    <ResponseField name="duration_ms" type="integer">
+      执行耗时。
+    </ResponseField>
+
+    <ResponseField name="records" type="integer">
+      写回记录数。
+    </ResponseField>
+
+    <ResponseField name="amount" type="number">
+      调用方支付的数据费。
+    </ResponseField>
+
+    <ResponseField name="error" type="object">
+      失败时的错误对象。
+      <Expandable title="字段">
+        <ResponseField name="code" type="string" required>
+          —
+        </ResponseField>
+
+        <ResponseField name="category" type="string">
+          —
+        </ResponseField>
+
+        <ResponseField name="message" type="string">
+          —
+        </ResponseField>
+
+        <ResponseField name="retryable" type="boolean">
+          —
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="pagination" type="object">
+  分页信息。
+  <Expandable title="字段">
+    <ResponseField name="offset" type="integer">
+      —
+    </ResponseField>
+
+    <ResponseField name="limit" type="integer">
+      —
+    </ResponseField>
+
+    <ResponseField name="count" type="integer">
+      —
+    </ResponseField>
+
+    <ResponseField name="total" type="integer">
+      —
+    </ResponseField>
+
+    <ResponseField name="has_more" type="boolean">
+      —
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="currency" type="string">
+  币种。
+</ResponseField>
+
+### 错误
+
+| HTTP | `code` | `category` | 说明 |
+| --- | --- | --- | --- |
+| 401 | `unauthorized` | `forbidden` | 缺少或无效的 API Key。 |
+| 400 | `invalid-status` | `invalid_input` | `status` 含有词汇表之外的状态值。 |
+| 400 | `invalid-run-kind` | `invalid_input` | `run_kind` 不在允许的取值内。 |
+| 404 | `app-not-found` | `not_found` | App 不存在、已改名，或对当前凭证不可见（私有 / 分享范围之外）。 |
+
+错误响应统一为 `{"error": {code, category, message, retryable}}`，见<a href="/zh/datahub/api/reference/introduction#错误">错误</a>。
+
+## 客户端库
+
+Python 与 JavaScript SDK 暂未封装此端点，请直接调用 REST。

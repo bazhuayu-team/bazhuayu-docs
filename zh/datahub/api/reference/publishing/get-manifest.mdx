@@ -1,0 +1,144 @@
+---
+title: "读回 manifest"
+description: "作者读回最新 Release 的完整 manifest（含 runtime 块），供编辑后重新发布。"
+---
+
+**`GET`** `https://api-datahub.bazhuayu.com/v1/data-apps/{app_id}/manifest`
+
+认证：需要 API Key，且仅 App 作者（发布者本人）可调用；其他人得到 `404`。
+
+作者读回**最新 Release** 的完整 manifest（含 `runtime` 块），是「编辑后重新发布」的数据源。零 Release 返回 `404`；草稿的自检一律走工作区端点，两者不混用。
+
+`runtime` 是后端构件，从不出现在卡片、详情等公开载荷里，所以本端点仅作者可用。`auth.secret` 只是对 `runtime.env` 的别名引用，凭证明文只在密钥库，不随读回外泄。`status` 与 `scope` 按当前运营状态注入而不是 manifest 原值；manifest 不再携带 `identity.version`，版本号请从版本列表取。
+
+## 请求
+
+### 路径参数
+
+<ParamField path="app_id" type="string" required>
+  App 引用。
+</ParamField>
+
+### 示例请求
+
+```bash
+curl \
+  -H "Authorization: Bearer $BAZHUAYU_API_KEY" \
+  "https://api-datahub.bazhuayu.com/v1/data-apps/carol/reviews-query/manifest"
+```
+
+## 响应
+
+### 200 成功
+
+```json
+{
+  "data": {
+    "spec_version": "0.2",
+    "identity": {
+      "app_name": "probe-b",
+      "name": "运行列表测试源",
+      "summary": "运行列表分页与筛选用例的测试 App",
+      "type": "data"
+    },
+    "discovery": {
+      "keywords": [
+        "runs-list-probe"
+      ]
+    },
+    "input": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "product": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "product"
+        ]
+      }
+    },
+    "output": {
+      "id_field": "review_id",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "review_id": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "execution": {
+      "mode": "sync",
+      "timeout_seconds": 60
+    },
+    "pricing": {
+      "events": [
+        {
+          "event": "record",
+          "label": "获取一条",
+          "unit_price": 0.001
+        }
+      ]
+    },
+    "runtime": {
+      "kind": "api",
+      "env": {
+        "base": "PARTNER_API_BASE",
+        "api_key": "PARTNER_API_KEY"
+      },
+      "api": {
+        "auth": {
+          "type": "api_key",
+          "in": "header",
+          "name": "X-API-Key",
+          "secret": "api_key"
+        },
+        "response_code": {
+          "path": "code",
+          "ok_codes": [
+            20000
+          ],
+          "message_path": "message"
+        },
+        "fetch": {
+          "request": {
+            "method": "GET",
+            "url": "{env.base}/api/envelope/reviews",
+            "query": {
+              "product": "{input.product}"
+            }
+          },
+          "response": {
+            "records_path": "data.records",
+            "field_map": {
+              "review_id": "id"
+            }
+          }
+        }
+      }
+    },
+    "status": "published",
+    "scope": "private",
+    "namespace": "carol",
+    "source_locale": "zh-CN"
+  }
+}
+```
+
+`data` 就是 manifest 对象本身（上面只展示了开头部分）。
+
+### 错误
+
+| HTTP | `code` | `category` | 说明 |
+| --- | --- | --- | --- |
+| 401 | `unauthorized` | `forbidden` | 缺少或无效的 API Key。 |
+| 404 | `release-not-found` | `not_found` | 该版本不存在，或 App 尚无任何 Release。 |
+
+错误响应统一为 `{"error": {code, category, message, retryable}}`，见<a href="/zh/datahub/api/reference/introduction#错误">错误</a>。
+
+## 客户端库
+
+Python 与 JavaScript SDK 暂未封装此端点，请直接调用 REST。

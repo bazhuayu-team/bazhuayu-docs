@@ -1,0 +1,190 @@
+---
+title: "发布者运行耗时分布"
+description: "我的 App 的运行耗时百分位（p50 / p90 / p95 / p99 / max），可按 App 或版本拆分。"
+---
+
+**`GET`** `https://api-datahub.bazhuayu.com/v1/publisher/usage/latency`
+
+认证：需要 API Key（`Authorization: Bearer <API Key>`）。
+
+我的 App 的运行耗时：有界区间内 `finished_at - started_at` 的 p50 / p90 / p95 / p99 / max（毫秒），可按 App 或按版本拆分（p95 最慢的在前）。归属、区间与筛选语义与发布者用量分析相同；样本是每个有开始时间的已结束运行（含失败与取消，分布描述的是运行本身而不只是成功的运行），没有样本时百分位为 `null`。百分位需要运行明细，所以两端必填且跨度不超过 92 天。
+
+## 请求
+
+### 查询参数
+
+<ParamField query="group_by" type="string">
+  可选的单一维度：`data_app` 按 App，`version` 按版本。默认只返回区间合计。
+</ParamField>
+
+<ParamField query="data_app" type="string[]">
+  只看这些 App，可重复传。
+</ParamField>
+
+<ParamField query="created_from" type="string">
+  起点，包含，必填。
+</ParamField>
+
+<ParamField query="created_to" type="string">
+  终点，不包含，必填。
+</ParamField>
+
+<ParamField query="triggered_by" type="string">
+  只看一个调用渠道。
+</ParamField>
+
+<ParamField query="include_test" type="boolean" default="False">
+  是否并入作者调试运行。
+</ParamField>
+
+### 示例请求
+
+```bash
+curl \
+  -H "Authorization: Bearer $BAZHUAYU_API_KEY" \
+  "https://api-datahub.bazhuayu.com/v1/publisher/usage/latency?created_from=2026-09-01T00:00:00Z&created_to=2026-09-15T00:00:00Z&group_by=data_app"
+```
+
+## 响应
+
+### 200 成功
+
+```json
+{
+  "data": {
+    "range": {
+      "created_from": "2026-09-01T00:00:00Z",
+      "created_to": "2026-09-15T00:00:00Z"
+    },
+    "totals": {
+      "samples": 128,
+      "p50_ms": 410,
+      "p90_ms": 980,
+      "p95_ms": 1420,
+      "p99_ms": 3100,
+      "max_ms": 5200
+    },
+    "group_by": "data_app",
+    "groups": [
+      {
+        "namespace": "carol",
+        "app_name": "reviews-query",
+        "version": null,
+        "samples": 128,
+        "p50_ms": 410,
+        "p90_ms": 980,
+        "p95_ms": 1420,
+        "p99_ms": 3100,
+        "max_ms": 5200
+      }
+    ]
+  }
+}
+```
+
+响应包在 `data` 字段中，其内容如下。
+
+<ResponseField name="range" type="object" required>
+  本次实际使用的区间。
+  <Expandable title="字段">
+    <ResponseField name="created_from" type="string">
+      —
+    </ResponseField>
+
+    <ResponseField name="created_to" type="string">
+      —
+    </ResponseField>
+
+    <ResponseField name="tz_offset" type="integer">
+      —
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="totals" type="object" required>
+  区间合计：`samples` 样本数与各百分位毫秒数。
+  <Expandable title="字段">
+    <ResponseField name="samples" type="integer">
+      —
+    </ResponseField>
+
+    <ResponseField name="p50" type="integer">
+      —
+    </ResponseField>
+
+    <ResponseField name="p90" type="integer">
+      —
+    </ResponseField>
+
+    <ResponseField name="p95" type="integer">
+      —
+    </ResponseField>
+
+    <ResponseField name="p99" type="integer">
+      —
+    </ResponseField>
+
+    <ResponseField name="max" type="integer">
+      —
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="group_by" type="string">
+  本次实际使用的维度。
+</ResponseField>
+
+<ResponseField name="groups" type="object[]">
+  分组列表，每组带同样的指标与本维度的键。
+  <Expandable title="字段">
+    <ResponseField name="samples" type="integer">
+      —
+    </ResponseField>
+
+    <ResponseField name="p50" type="integer">
+      —
+    </ResponseField>
+
+    <ResponseField name="p90" type="integer">
+      —
+    </ResponseField>
+
+    <ResponseField name="p95" type="integer">
+      —
+    </ResponseField>
+
+    <ResponseField name="p99" type="integer">
+      —
+    </ResponseField>
+
+    <ResponseField name="max" type="integer">
+      —
+    </ResponseField>
+
+    <ResponseField name="namespace" type="string">
+      —
+    </ResponseField>
+
+    <ResponseField name="app_name" type="string">
+      —
+    </ResponseField>
+
+    <ResponseField name="version" type="string">
+      —
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+### 错误
+
+| HTTP | `code` | `category` | 说明 |
+| --- | --- | --- | --- |
+| 401 | `unauthorized` | `forbidden` | 缺少或无效的 API Key。 |
+| 400 | `range-too-wide` | `invalid_input` | 该维度需要同时给出 `created_from` 与 `created_to`，且跨度不超过 92 天。 |
+| 404 | `app-not-found` | `not_found` | App 不存在、已改名，或对当前凭证不可见（私有 / 分享范围之外）。 |
+
+错误响应统一为 `{"error": {code, category, message, retryable}}`，见<a href="/zh/datahub/api/reference/introduction#错误">错误</a>。
+
+## 客户端库
+
+Python 与 JavaScript SDK 暂未封装此端点，请直接调用 REST。

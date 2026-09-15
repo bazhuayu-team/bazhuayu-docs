@@ -1,0 +1,121 @@
+---
+title: "上游调用留痕详情"
+description: "读取单条上游调用的完整请求与响应内容。"
+---
+
+**`GET`** `https://api-datahub.bazhuayu.com/v1/runs/{run_id}/upstream-calls/{call_id}`
+
+认证：需要 API Key，且仅 App 作者（发布者本人）可调用；其他人得到 `404`。
+
+单条留痕的完整现场：请求（query / body）与响应体。响应体过大时在写入侧已截断，见 `response_truncated`。鉴权规则与列表端点相同。
+
+## 请求
+
+### 路径参数
+
+<ParamField path="run_id" type="string" required>
+  调试运行的标识。
+</ParamField>
+
+<ParamField path="call_id" type="integer" required>
+  留痕条目标识，来自列表的 `items[].call_id`。
+</ParamField>
+
+### 示例请求
+
+```bash
+curl \
+  -H "Authorization: Bearer $BAZHUAYU_API_KEY" \
+  "https://api-datahub.bazhuayu.com/v1/runs/run_c62bc0fb8df2/upstream-calls/1"
+```
+
+## 响应
+
+### 200 成功
+
+```json
+{
+  "data": {
+    "call_id": 0,
+    "attempt": 0,
+    "seq": 0,
+    "stage": "string",
+    "method": "string",
+    "url": "string",
+    "status_code": 0,
+    "error": "string",
+    "duration_ms": 0,
+    "response_truncated": false,
+    "created_at": "string",
+    "request": {},
+    "response_body": "string"
+  }
+}
+```
+
+响应包在 `data` 字段中，其内容如下。
+
+<ResponseField name="call_id" type="integer" required>
+  —
+</ResponseField>
+
+<ResponseField name="attempt" type="integer" required>
+  —
+</ResponseField>
+
+<ResponseField name="seq" type="integer" required>
+  —
+</ResponseField>
+
+<ResponseField name="stage" type="string" required>
+  —
+</ResponseField>
+
+<ResponseField name="method" type="string" required>
+  —
+</ResponseField>
+
+<ResponseField name="url" type="string" required>
+  —
+</ResponseField>
+
+<ResponseField name="status_code" type="integer">
+  —
+</ResponseField>
+
+<ResponseField name="error" type="string">
+  —
+</ResponseField>
+
+<ResponseField name="duration_ms" type="integer">
+  —
+</ResponseField>
+
+<ResponseField name="response_truncated" type="boolean">
+  响应体是否在写入时被截断。
+</ResponseField>
+
+<ResponseField name="created_at" type="string" required>
+  —
+</ResponseField>
+
+<ResponseField name="request" type="object">
+  请求内容（query / headers / body，敏感值已打码）。
+</ResponseField>
+
+<ResponseField name="response_body" type="string">
+  上游响应体。
+</ResponseField>
+
+### 错误
+
+| HTTP | `code` | `category` | 说明 |
+| --- | --- | --- | --- |
+| 401 | `unauthorized` | `forbidden` | 缺少或无效的 API Key。 |
+| 404 | `upstream-calls-not-found` | `not_found` | 只有调试运行（`run_kind=test`）保留上游调用留痕；生产运行、他人的运行与不存在的运行都返回此错误。 |
+
+错误响应统一为 `{"error": {code, category, message, retryable}}`，见<a href="/zh/datahub/api/reference/introduction#错误">错误</a>。
+
+## 客户端库
+
+Python 与 JavaScript SDK 暂未封装此端点，请直接调用 REST。

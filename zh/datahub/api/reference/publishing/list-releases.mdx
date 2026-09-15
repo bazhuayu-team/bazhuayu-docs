@@ -1,0 +1,85 @@
+---
+title: "Release 列表"
+description: "作者视角的版本历史，含 Build 标识与撤回标记。"
+---
+
+**`GET`** `https://api-datahub.bazhuayu.com/v1/data-apps/{app_id}/releases`
+
+认证：需要 API Key，且仅 App 作者（发布者本人）可调用；其他人得到 `404`。
+
+作者视角的 Release 历史（含 `build_id` 与 `yanked`；公开视角是<a href="/zh/datahub/api/reference/discovery/list-data-app-versions">App 版本历史</a>）。最新在前；`latest` 是最大的未撤回版本。
+
+## 请求
+
+### 路径参数
+
+<ParamField path="app_id" type="string" required>
+  App 引用。
+</ParamField>
+
+### 示例请求
+
+```bash
+curl \
+  -H "Authorization: Bearer $BAZHUAYU_API_KEY" \
+  "https://api-datahub.bazhuayu.com/v1/data-apps/carol/reviews-query/releases"
+```
+
+## 响应
+
+### 200 成功
+
+```json
+{
+  "data": {
+    "items": [
+      {
+        "version": "0.1.0",
+        "build_id": "bld_a583f440a0ab",
+        "yanked": false,
+        "latest": true,
+        "published_at": "2026-09-15T07:45:38.633930+00:00"
+      }
+    ]
+  }
+}
+```
+
+响应包在 `data` 字段中，其内容如下。
+
+<ResponseField name="items" type="object[]">
+  版本列表。
+  <Expandable title="字段">
+    <ResponseField name="version" type="string" required>
+      版本号。
+    </ResponseField>
+
+    <ResponseField name="build_id" type="string" required>
+      对应的 Build。
+    </ResponseField>
+
+    <ResponseField name="yanked" type="boolean">
+      是否已撤回。
+    </ResponseField>
+
+    <ResponseField name="latest" type="boolean">
+      是否为最新版本。
+    </ResponseField>
+
+    <ResponseField name="published_at" type="string">
+      发布时间。
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+### 错误
+
+| HTTP | `code` | `category` | 说明 |
+| --- | --- | --- | --- |
+| 401 | `unauthorized` | `forbidden` | 缺少或无效的 API Key。 |
+
+错误响应统一为 `{"error": {code, category, message, retryable}}`，见<a href="/zh/datahub/api/reference/introduction#错误">错误</a>。
+
+## 客户端库
+
+Python 与 JavaScript SDK 暂未封装此端点，请直接调用 REST。

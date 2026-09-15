@@ -1,0 +1,88 @@
+---
+title: "Build 快照详情"
+description: "查看单个快照的状态与失败原因，code 型构建进度轮询用。"
+---
+
+**`GET`** `https://api-datahub.bazhuayu.com/v1/data-apps/{app_id}/builds/{build_id}`
+
+认证：需要 API Key，且仅 App 作者（发布者本人）可调用；其他人得到 `404`。
+
+单个快照的状态与失败原因，是 code 型构建进度的轮询窗口。
+
+## 请求
+
+### 路径参数
+
+<ParamField path="app_id" type="string" required>
+  App 引用。
+</ParamField>
+
+<ParamField path="build_id" type="string" required>
+  Build 标识。
+</ParamField>
+
+### 示例请求
+
+```bash
+curl \
+  -H "Authorization: Bearer $BAZHUAYU_API_KEY" \
+  "https://api-datahub.bazhuayu.com/v1/data-apps/carol/reviews-query/builds/bld_a583f440a0ab"
+```
+
+## 响应
+
+### 200 成功
+
+```json
+{
+  "data": {
+    "build_id": "string",
+    "build_status": "string",
+    "error": "string",
+    "content_hash": "",
+    "source_revision": 0,
+    "created_at": "string"
+  }
+}
+```
+
+字段与<a href="/zh/datahub/api/reference/publishing/list-builds">Build 快照列表</a>的条目相同。
+
+响应包在 `data` 字段中，其内容如下。
+
+<ResponseField name="build_id" type="string" required>
+  —
+</ResponseField>
+
+<ResponseField name="build_status" type="string" required>
+  —
+</ResponseField>
+
+<ResponseField name="error" type="string">
+  —
+</ResponseField>
+
+<ResponseField name="content_hash" type="string">
+  —
+</ResponseField>
+
+<ResponseField name="source_revision" type="integer">
+  —
+</ResponseField>
+
+<ResponseField name="created_at" type="string">
+  —
+</ResponseField>
+
+### 错误
+
+| HTTP | `code` | `category` | 说明 |
+| --- | --- | --- | --- |
+| 401 | `unauthorized` | `forbidden` | 缺少或无效的 API Key。 |
+| 404 | `build-not-found` | `not_found` | Build 快照不存在。 |
+
+错误响应统一为 `{"error": {code, category, message, retryable}}`，见<a href="/zh/datahub/api/reference/introduction#错误">错误</a>。
+
+## 客户端库
+
+Python 与 JavaScript SDK 暂未封装此端点，请直接调用 REST。

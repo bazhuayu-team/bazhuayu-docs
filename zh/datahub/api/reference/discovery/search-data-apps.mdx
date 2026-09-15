@@ -1,0 +1,205 @@
+---
+title: "搜索 Data App"
+description: "按关键词检索市场里的 Data App，返回精简卡片；登录后可切换到我的 App 或分享给我的 App 视图。"
+---
+
+**`GET`** `https://api-datahub.bazhuayu.com/v1/data-apps`
+
+认证：可匿名调用；携带 API Key 时可使用登录态才有的筛选或看到更多内容。
+
+市场检索，匿名可用。`q` 为空时按最近发布时间列出目录，有 `q` 时按相关度排序。
+
+携带 API Key 后有两类扩展：
+
+* **视图切换**：`owner=me` 只列我发布的 App（含未发布的草稿，卡片附带 `status` 与 `scope`）；`shared_with=me` 列出通过点对点分享授权给我的 App。
+* **可见范围**：不用视图时 `scope` 决定候选集。默认或 `public` 为市场；`private` 为我的私有 App；`shared` 为所有可见的分享 App（我分享出去的和分享给我的）；`all` 为当前凭证可见的全集，匿名调用时自然退化为市场。属性模式下 `status` 默认只出已发布的 App。
+
+卡片只含选型需要的信息：名称、简介、能力边界、输入输出提示、运行模式、起始价格和价格表。完整的输入输出契约、执行剖面与调用示例要通过<a href="/zh/datahub/api/reference/discovery/get-data-app">App 详情</a>读取。
+
+## 请求
+
+### 查询参数
+
+<ParamField query="q" type="string">
+  业务关键词，中英文均可，可加平台名缩小范围（如 `temu 评论`）。为空时列出目录。
+</ParamField>
+
+<ParamField query="type" type="string">
+  按 App 类型筛选。`data` 取外部数据，`transform` 加工已有数据。
+
+取值：`data` / `transform`。
+</ParamField>
+
+<ParamField query="capability" type="string">
+  按能力类型筛选。`data-acquisition` 数据获取，`data-processing` 数据处理。
+
+取值：`data-acquisition` / `data-processing`。
+</ParamField>
+
+<ParamField query="owner" type="string">
+  传 `me` 切换到「我发布的 App」视图，需要 API Key。
+</ParamField>
+
+<ParamField query="shared_with" type="string">
+  传 `me` 切换到「分享给我的 App」视图，需要 API Key。
+</ParamField>
+
+<ParamField query="scope" type="string">
+  可见范围。`public` 市场（默认）、`private` 我的私有 App、`shared` 分享关系内的 App、`all` 可见全集。后三者需要 API Key。
+
+取值：`public` / `private` / `shared` / `all`。
+</ParamField>
+
+<ParamField query="status" type="string">
+  按生命周期状态筛选。`draft` 草稿、`published` 已发布、`deprecated` 已弃用。属性模式默认 `published`。
+
+取值：`draft` / `published` / `deprecated`。
+</ParamField>
+
+<ParamField query="offset" type="integer" default="0">
+  分页起点。
+
+范围 ≥ 0。
+</ParamField>
+
+<ParamField query="limit" type="integer" default="5">
+  每页条数。
+
+范围 1 到 100。
+</ParamField>
+
+### 示例请求
+
+```bash
+curl \
+  -H "Authorization: Bearer $BAZHUAYU_API_KEY" \
+  "https://api-datahub.bazhuayu.com/v1/data-apps?q=reviews&limit=5"
+```
+
+## 响应
+
+### 200 成功
+
+```json
+{
+  "data": {
+    "items": [
+      {
+        "app_id": "app_6dfe4e839ccf",
+        "namespace": "carol",
+        "app_name": "probe-b",
+        "name": "商品评论查询",
+        "type": "data",
+        "summary": "按商品编号获取评论列表",
+        "capability": "data-acquisition",
+        "keywords": [
+          "reviews",
+          "ecommerce"
+        ],
+        "boundary": "只覆盖公开评论，不含买家秀图片",
+        "required_input_hint": [
+          "product"
+        ],
+        "main_output_hint": [
+          "review_id",
+          "content",
+          "rating"
+        ],
+        "execution_mode": "sync",
+        "price_from": 0.001,
+        "pricing": {
+          "events": [
+            {
+              "event": "record",
+              "label": "获取一条",
+              "unit_price": 0.001,
+              "qty_from": "",
+              "unit_size": null
+            }
+          ]
+        },
+        "match_score": 1.0,
+        "published_at": "2026-09-15T07:45:38.633930+00:00",
+        "updated_at": "2026-09-15T07:45:38.633930+00:00",
+        "source_locale": "zh-CN"
+      }
+    ],
+    "pagination": {
+      "offset": 0,
+      "limit": 5,
+      "count": 1,
+      "total": 1,
+      "has_more": false
+    },
+    "low_confidence": false
+  }
+}
+```
+
+响应包在 `data` 字段中，其内容如下。
+
+<ResponseField name="items" type="object[]" required>
+  卡片列表。
+</ResponseField>
+
+<ResponseField name="pagination" type="object" required>
+  分页信息。
+  <Expandable title="字段">
+    <ResponseField name="offset" type="integer">
+      —
+    </ResponseField>
+
+    <ResponseField name="limit" type="integer">
+      —
+    </ResponseField>
+
+    <ResponseField name="count" type="integer">
+      —
+    </ResponseField>
+
+    <ResponseField name="total" type="integer">
+      —
+    </ResponseField>
+
+    <ResponseField name="has_more" type="boolean">
+      —
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="low_confidence" type="boolean">
+  `true` 表示没有足够相关的结果，返回的是弱匹配。
+</ResponseField>
+
+### 错误
+
+| HTTP | `code` | `category` | 说明 |
+| --- | --- | --- | --- |
+| 401 | `unauthorized` | `forbidden` | 缺少或无效的 API Key。 |
+
+错误响应统一为 `{"error": {code, category, message, retryable}}`，见<a href="/zh/datahub/api/reference/introduction#错误">错误</a>。
+
+## 客户端库
+
+<CodeGroup>
+
+```python Python
+result = client.search("reviews", limit=5)
+for card in result["items"]:
+    print(card["app_id"], card["namespace"], card["app_name"], card["price_from"])
+
+# 分享给我的 App
+shared = client.search("", shared_with="me")
+```
+
+```js JavaScript
+const result = await client.search("reviews", { limit: 5 });
+for (const card of result.items) {
+  console.log(card.app_id, card.namespace, card.app_name, card.price_from);
+}
+
+// 分享给我的 App
+const shared = await client.search("", { sharedWith: "me" });
+```
+
+</CodeGroup>

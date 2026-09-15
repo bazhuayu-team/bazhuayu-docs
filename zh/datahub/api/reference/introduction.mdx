@@ -1,0 +1,164 @@
+---
+title: "接口参考"
+description: "DataHub REST API 的地址、认证、响应结构、分页、错误、时间参数与 App 引用约定，以及按资源分组的端点索引。"
+---
+
+本节按资源分组列出 DataHub 公开 REST API 的每一个端点。每个端点页给出方法与路径、认证要求、参数、真实响应样例与字段说明、可能的错误，以及客户端库中的对应方法。本页只放所有端点共用的约定。
+
+## 基础地址
+
+| 项目   | 值                                  |
+| ---- | ---------------------------------- |
+| 基础地址 | `https://api-datahub.bazhuayu.com` |
+| 路径前缀 | 所有端点以 `/v1` 开头                     |
+| 协议   | HTTPS，请求体与响应体均为 JSON              |
+
+<Note>
+  `/v1` 契约只增不改：新增字段和新增端点会随版本演进出现，已发布的字段不会改名或改语义。集成时忽略未知字段即可，不要依赖字段顺序。
+</Note>
+
+## 认证
+
+需要身份的端点使用标准 Bearer 认证，把 DataHub API Key 放在 `Authorization` 请求头中：
+
+```http
+Authorization: Bearer <你的 API Key>
+```
+
+API Key 在八爪鱼账户中心创建，步骤见<a href="/zh/mcp/quick-start/api-key" target="_blank" rel="noopener noreferrer">获取 API Key</a>。通过网页登录或 OAuth 授权取得的访问令牌同样可以放在这个位置。
+
+每个端点页的「认证」一行标明它属于哪一类：
+
+| 类别      | 含义                                        |
+| ------- | ----------------------------------------- |
+| 匿名      | 不需要凭证                                     |
+| 可匿名     | 不带凭证可调用；带凭证后可用登录态才有的筛选或看到更多内容              |
+| 需要 API Key | 必须带凭证                                    |
+| 仅 App 作者 | 必须带凭证，且只有该 App 的发布者能调用；其他人得到 `404`         |
+
+<Warning>
+  DataHub API 只认 `Authorization: Bearer`，不支持把凭证放在 URL 查询参数里。它与「八爪鱼采集器 → MCP 服务」中采集器 MCP 使用的 `x-api-key` 请求头不是同一套约定，不要混用。API Key 相当于账号凭证，不要提交到代码仓库、共享配置或公开截图。
+</Warning>
+
+## 响应结构
+
+成功响应统一包在 `data` 字段里；错误响应统一包在 `error` 字段里，两者不会同时出现。
+
+```json
+{ "data": { "...": "..." } }
+```
+
+```json
+{
+  "error": {
+    "code": "unauthorized",
+    "category": "forbidden",
+    "message": "valid API key or access token required (Authorization: Bearer <credential>)",
+    "retryable": false
+  }
+}
+```
+
+少数端点返回非 JSON 内容（Markdown 原文、CSV / JSONL 文本、zip 二进制），端点页会单独说明。
+
+## 错误
+
+| 字段          | 说明                                                                     |
+| ----------- | ---------------------------------------------------------------------- |
+| `code`      | 稳定的错误标识，程序分支请以此为准，例如 `unauthorized`、`app-not-found`、`balance-negative` |
+| `category`  | 错误大类：`invalid_input`（输入不合法）、`not_found`（对象不存在或不可见）、`forbidden`（无权或被拒）、`temporary`（平台暂时不可用） |
+| `message`   | 面向开发者的英文说明，仅供阅读，不要用它做判断                                                |
+| `retryable` | 是否可以原样重试。为 `true` 时建议退避后重试，为 `false` 时需要先修正请求或等待用户处理                  |
+| `details`   | 输入校验失败时才有，数组，逐项给出出错字段的 `path` 与 `message`                              |
+
+各端点页的「错误」一节列出该端点特有的错误码。以下几条在多数端点都可能出现：
+
+| HTTP | `code`          | 含义                          |
+| ---- | --------------- | --------------------------- |
+| 401  | `unauthorized`  | 缺少或无效的 API Key              |
+| 404  | `*-not-found`   | 对象不存在或对当前凭证不可见，两者刻意不区分，避免暴露存在性 |
+| 400  | `invalid-input` | 请求体或参数不合法                   |
+
+「不存在」与「不可见」返回相同的 `404`，是平台的一贯做法：私有 App、他人的运行、他人的数据集都不会通过错误码泄露存在性。
+
+## 分页
+
+列表类端点统一使用 `offset` / `limit` 查询参数，响应中带 `pagination` 对象：
+
+```json
+{
+  "data": {
+    "items": [ "..." ],
+    "pagination": {
+      "offset": 0,
+      "limit": 50,
+      "count": 50,
+      "total": 132,
+      "has_more": true
+    }
+  }
+}
+```
+
+`total` 是筛选条件下的总条数，`has_more` 为 `true` 时把 `offset` 加上 `count` 继续读取。各端点的 `limit` 上限见各自说明。
+
+## 时间参数
+
+涉及时间范围的端点（运行列表、账单聚合、发布者分析等）共用同一套词汇：
+
+* `created_from`：起点，**包含**。
+* `created_to`：终点，**不包含**。
+* 两者都是 ISO-8601 绝对时间，例如 `2026-09-01T00:00:00Z` 或 `2026-09-01T08:00:00+08:00`。放进 URL 时 `+` 要编码为 `%2B`。
+* 一次运行归属到它的**发起时间**，与结束时间无关。
+
+按本地日期分桶的端点另有 `tz_offset` 参数（分钟，相对 UTC，北京时间为 `480`），它只影响一次运行落到哪一天，不改变金额和范围本身。
+
+## App 的引用方式
+
+凡是需要指定 App 的地方（路径中的 `{app_id}`、筛选参数 `data_app`）都接受两种形式：
+
+* `<namespace>/<app_name>`：发布者用户名加应用名，人类可读，发布者或应用改名后失效。
+* `app_id`：形如 `app_<hex>` 的稳定标识，改名不受影响。
+
+长期集成（配置文件、定时任务）建议记录 `app_id`。
+
+## 运行状态
+
+| 状态                    | 含义                      | 终态 |
+| --------------------- | ----------------------- | -- |
+| `PENDING`             | 已受理，尚未排队                | 否  |
+| `QUEUED`              | 排队等待执行                  | 否  |
+| `RUNNING`             | 执行中                     | 否  |
+| `SUCCEEDED`           | 成功                      | 是  |
+| `PARTIALLY_SUCCEEDED` | 部分成功，已产出的记录可用            | 是  |
+| `FAILED`              | 失败，不计数据费                | 是  |
+| `CANCELLED`           | 已取消，已产出的记录保留并计费          | 是  |
+| `EXPIRED`             | 超时过期                    | 是  |
+
+## 端点分组
+
+<CardGroup cols={2}>
+  <Card title="发现 Data App" href="/zh/datahub/api/reference/discovery/search-data-apps">
+    搜索、详情、版本、README、规范与译文读取。
+  </Card>
+
+  <Card title="运行与结果" href="/zh/datahub/api/reference/runs/start-run">
+    发起、查询、列表、取消、读取记录、调试留痕。
+  </Card>
+
+  <Card title="数据集" href="/zh/datahub/api/reference/datasets/list-datasets">
+    运行结果的持久化容器与保留标记。
+  </Card>
+
+  <Card title="账户与账单" href="/zh/datahub/api/reference/account/get-account">
+    累计消费与按时段、维度聚合的账单。
+  </Card>
+
+  <Card title="凭证密钥" href="/zh/datahub/api/reference/secrets/list-secrets">
+    App 作者为自己的 App 存放上游凭证。
+  </Card>
+
+  <Card title="发布与运营" href="/zh/datahub/api/reference/publishing/validate-manifest">
+    草稿、Build、Release 三步链，运营开关、分享、译文、契约工具与发布者分析。
+  </Card>
+</CardGroup>

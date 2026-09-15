@@ -1,0 +1,123 @@
+---
+title: "JavaScript 客户端库"
+description: "官方 JavaScript SDK bazhuayu-client 的安装、初始化、方法与端点对照、错误处理。"
+---
+
+`bazhuayu-client` 是 DataHub 的官方 JavaScript 客户端库：只封装公开 `/v1` REST API，零第三方运行时依赖，基于内置 `fetch`。方法与端点一一对应，参数名按语言习惯改为驼峰（例如 `created_from` 对应 `createdFrom`），返回的就是响应里 `data` 部分的原样内容。当前版本 0.2.9，Node.js 20.17 及以上，附带 TypeScript 类型。
+
+## 安装
+
+```bash
+npm install bazhuayu-client
+```
+
+## 初始化
+
+```js
+import { Client } from "bazhuayu-client";
+
+const client = new Client({ apiKey: "<你的 API Key>" });
+```
+
+| 选项        | 说明                                                                                  |
+| --------- | ----------------------------------------------------------------------------------- |
+| `apiKey`  | DataHub API Key。省略时读取环境变量 `BAZHUAYU_API_KEY`；再没有则匿名，只能调用可匿名的端点。                        |
+| `baseUrl` | 服务地址。省略时读取 `BAZHUAYU_BASE_URL`，缺省为 `https://api-datahub.bazhuayu.com`。本地或预发环境显式传入。 |
+| `timeout` | 单次 HTTP 请求超时，毫秒。                                                                    |
+
+所有方法都返回 Promise。
+
+## 方法与端点对照
+
+| 方法                                                          | 端点                                    | 说明                            |
+| ----------------------------------------------------------- | ------------------------------------- | ----------------------------- |
+| `meta()`                                                    | `GET /v1/meta`                        | 平台元信息（币种）                     |
+| `search(query, { type, capability, scope, owner, sharedWith, status, offset, limit })` | `GET /v1/data-apps` | 搜索 Data App               |
+| `getApp(appId)`                                             | `GET /v1/data-apps/{app_id}`          | App 详情                        |
+| `run(appId, input, { wait, maxRecords, version, triggeredBy })` | `POST /v1/data-apps/{app_id}/runs` | 发起运行，返回运行对象                |
+| `call(appId, input, { maxRecords, version, timeout, pollInterval, raiseOnFailure })` | 发起 + 轮询 | 发起并等到终态；失败可抛 `RunFailed` |
+| `getRun(runId, { wait })`                                   | `GET /v1/runs/{run_id}`               | 查询运行，`wait` 长轮询               |
+| `listRunsPage(filters)`                                     | `GET /v1/runs`                        | 一页运行，含 `pagination`           |
+| `listRuns(filters)`                                         | `GET /v1/runs`                        | 一页运行，只返回条目                   |
+| `iterateRuns(filters)`                                      | `GET /v1/runs`                        | 异步迭代器，自动翻页                   |
+| `cancel(runId)`                                             | `POST /v1/runs/{run_id}/cancel`       | 取消运行                          |
+| `getRecords(runId, { offset, limit, fields })`              | `GET /v1/runs/{run_id}/records`       | 一页结果记录                        |
+| `iterateRecords(runId, { batch, fields })`                  | `GET /v1/runs/{run_id}/records`       | 异步迭代器，自动翻页                   |
+| `exportRecords(runId, format)`                              | `GET /v1/runs/{run_id}/records`       | 整份导出为 `jsonl` / `csv` 文本     |
+| `listDatasets({ offset, limit })`                           | `GET /v1/datasets`                    | 数据集列表                         |
+| `setDatasetRetention(datasetId, retained)`                  | `PUT /v1/datasets/{dataset_id}/retention` | 设置保留标记                   |
+| `getDatasetRecords(datasetId, { offset, limit, fields })`   | `GET /v1/datasets/{dataset_id}/records` | 一页数据集记录                  |
+| `iterateDatasetRecords(datasetId, { batch, fields })`       | `GET /v1/datasets/{dataset_id}/records` | 异步迭代器，自动翻页              |
+| `account()`                                                 | `GET /v1/account`                     | 账户信息与累计消费                     |
+| `billing({ groupBy, createdFrom, createdTo, tzOffset })`    | `GET /v1/billing`                     | 账单聚合                          |
+
+运行列表的筛选对象 `filters` 支持 `status`、`dataApp`、`triggeredBy`、`runKind`、`credential`、`createdFrom`、`createdTo`，另加分页的 `offset` / `limit`。发布与运营类端点和凭证密钥端点未封装，请直接调用 REST。
+
+## 典型用法
+
+```js
+import { Client, ApiError, RunFailed } from "bazhuayu-client";
+
+const client = new Client({ apiKey: "<你的 API Key>" });
+
+// 发现
+const { items } = await client.search("reviews", { limit: 5 });
+for (const card of items) console.log(card.app_id, card.namespace, card.app_name);
+const detail = await client.getApp("carol/reviews-query");
+
+// 运行并消费。时间参数一律毫秒；超时抛 TimeoutError 但不取消服务端运行
+const run = await client.call("carol/reviews-query", { product: "p-9001" }, {
+  maxRecords: 100, timeout: 120_000, raiseOnFailure: true,
+});
+for await (const record of client.iterateRecords(run.run_id)) {
+  console.log(record);
+}
+
+// 非阻塞：先发起，再自己轮询
+const started = await client.run("carol/reviews-query", { product: "p-9002" }, { wait: 0 });
+const polled = await client.getRun(started.run_id, { wait: 60 });
+
+// 对账
+console.log(await client.billing({ groupBy: "data_app", tzOffset: 480 }));
+for await (const r of client.iterateRuns({ createdFrom: "2026-09-01T00:00:00+08:00" })) {
+  console.log(r.run_id, r.state, r.billing.total);
+}
+
+// 结果默认保留 90 天，需要长期保留的数据集打标记
+await client.setDatasetRetention(run.dataset_id, true);
+```
+
+## 错误处理
+
+API 的错误响应统一抛成 `ApiError`（继承 `Error`），字段与 REST 的 `error` 结构一一对应：
+
+| 属性           | 说明                                    |
+| ------------ | ------------------------------------- |
+| `statusCode` | HTTP 状态码                              |
+| `code`       | 稳定错误标识，程序分支以此为准                       |
+| `category`   | 错误大类                                  |
+| `message`    | 英文说明                                  |
+| `retryable`  | 是否可原样重试                               |
+| `details`    | 输入校验失败时的字段级问题数组，否则为 `undefined`       |
+
+```js
+import { ApiError } from "bazhuayu-client";
+
+try {
+  await client.run("carol/reviews-query", {});
+} catch (e) {
+  if (e instanceof ApiError && e.code === "invalid-input") {
+    for (const d of e.details ?? []) console.log(d.path, d.message);
+  } else if (e instanceof ApiError && e.retryable) {
+    // 退避后重试
+  } else {
+    throw e;
+  }
+}
+```
+
+`RunFailed` 在 `call()` 传 `raiseOnFailure: true` 且运行以 `FAILED` / `CANCELLED` / `EXPIRED` 结束时抛出，其 `run` 属性带完整运行对象。
+
+## App 引用
+
+`getApp()`、`run()`、`call()` 和运行列表的 `dataApp` 筛选都接受两种引用：两段式 `<namespace>/<app_name>`（人类可读，发布者改名后失效）和稳定标识 `app_id`（`app_<hex>`，改名不受影响）。长期集成请记录 `app_id`。点对点分享给你的 App 不出现在市场检索里，用 `search("", { sharedWith: "me" })` 查询。

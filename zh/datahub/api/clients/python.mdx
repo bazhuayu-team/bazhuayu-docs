@@ -1,0 +1,119 @@
+---
+title: "Python 客户端库"
+description: "官方 Python SDK bazhuayu-client 的安装、初始化、方法与端点对照、错误处理。"
+---
+
+`bazhuayu-client` 是 DataHub 的官方 Python 客户端库：只封装公开 `/v1` REST API，唯一运行时依赖是 `httpx`。方法与端点一一对应，参数名与 REST 相同，返回的就是响应里 `data` 部分的原样内容（`dict` / `list`）。当前版本 0.2.9，Python 3.10 及以上。
+
+## 安装
+
+```bash
+pip install bazhuayu-client
+```
+
+## 初始化
+
+```python
+from bazhuayu_client import Client
+
+client = Client(api_key="<你的 API Key>")
+```
+
+| 参数         | 说明                                                                                  |
+| ---------- | ----------------------------------------------------------------------------------- |
+| `api_key`  | DataHub API Key。省略时读取环境变量 `BAZHUAYU_API_KEY`；再没有则匿名，只能调用可匿名的端点。                        |
+| `base_url` | 服务地址。省略时读取 `BAZHUAYU_BASE_URL`，缺省为 `https://api-datahub.bazhuayu.com`。本地或预发环境显式传入。 |
+| `timeout`  | 单次 HTTP 请求超时，秒，默认 90。                                                                     |
+
+`Client` 支持 `with` 语句，退出时自动释放连接；也可以手动调用 `client.close()`。SDK 不读取 `.env` 文件，需要的话由调用方自行加载。
+
+## 方法与端点对照
+
+| 方法                                                  | 端点                                    | 说明                                   |
+| --------------------------------------------------- | ------------------------------------- | ------------------------------------ |
+| `meta()`                                            | `GET /v1/meta`                        | 平台元信息（币种）                            |
+| `search(query, *, type, capability, scope, owner, shared_with, status, offset, limit)` | `GET /v1/data-apps` | 搜索 Data App                          |
+| `get_app(app_id)`                                   | `GET /v1/data-apps/{app_id}`          | App 详情                               |
+| `run(app_id, input, *, wait, max_records, version, triggered_by)` | `POST /v1/data-apps/{app_id}/runs` | 发起运行，返回运行对象                    |
+| `call(app_id, input, *, max_records, version, timeout, poll_interval, raise_on_failure)` | 发起 + 轮询 | 发起并等到终态；失败可抛 `RunFailed` |
+| `get_run(run_id, *, wait)`                          | `GET /v1/runs/{run_id}`               | 查询运行，`wait` 长轮询                      |
+| `list_runs_page(**filters)`                         | `GET /v1/runs`                        | 一页运行，含 `pagination`                  |
+| `list_runs(**filters)`                              | `GET /v1/runs`                        | 一页运行，只返回条目                          |
+| `iterate_runs(**filters)`                           | `GET /v1/runs`                        | 自动翻页遍历                               |
+| `cancel(run_id)`                                    | `POST /v1/runs/{run_id}/cancel`       | 取消运行                                 |
+| `get_records(run_id, *, offset, limit, fields)`     | `GET /v1/runs/{run_id}/records`       | 一页结果记录                               |
+| `iterate_records(run_id, *, batch, fields)`         | `GET /v1/runs/{run_id}/records`       | 自动翻页遍历记录                             |
+| `export_records(run_id, format)`                    | `GET /v1/runs/{run_id}/records`       | 整份导出为 `jsonl` / `csv` 文本            |
+| `list_datasets(*, offset, limit)`                   | `GET /v1/datasets`                    | 数据集列表                                |
+| `set_dataset_retention(dataset_id, retained)`       | `PUT /v1/datasets/{dataset_id}/retention` | 设置保留标记                          |
+| `get_dataset_records(dataset_id, *, offset, limit, fields)` | `GET /v1/datasets/{dataset_id}/records` | 一页数据集记录                     |
+| `iterate_dataset_records(dataset_id, *, batch, fields)` | `GET /v1/datasets/{dataset_id}/records` | 自动翻页遍历数据集记录                 |
+| `account()`                                         | `GET /v1/account`                     | 账户信息与累计消费                            |
+| `billing(*, group_by, created_from, created_to, tz_offset)` | `GET /v1/billing`             | 账单聚合                                 |
+
+发布与运营类端点（草稿、Build、Release、设置、分享、译文、发布者分析）和凭证密钥端点未封装，请直接调用 REST。各方法的参数含义与对应端点页一致。
+
+## 典型用法
+
+```python
+from bazhuayu_client import Client, ApiError, RunFailed
+
+with Client(api_key="<你的 API Key>") as client:
+    # 发现
+    for card in client.search("reviews", limit=5)["items"]:
+        print(card["app_id"], card["namespace"], card["app_name"])
+    detail = client.get_app("carol/reviews-query")
+
+    # 运行并消费
+    run = client.call("carol/reviews-query", {"product": "p-9001"}, max_records=100)
+    for record in client.iterate_records(run["run_id"]):
+        print(record)
+
+    # 非阻塞：先发起，再自己轮询
+    started = client.run("carol/reviews-query", {"product": "p-9002"}, wait=0)
+    run = client.get_run(started["run_id"], wait=60)
+
+    # 对账
+    print(client.billing(group_by="data_app", tz_offset=480))
+    for r in client.iterate_runs(created_from="2026-09-01T00:00:00+08:00"):
+        print(r["run_id"], r["state"], r["billing"]["total"])
+
+    # 结果默认保留 90 天，需要长期保留的数据集打标记
+    client.set_dataset_retention(run["dataset_id"], retained=True)
+```
+
+`call()` 发起后在客户端轮询直到终态；`timeout` 与 `poll_interval` 单位为秒。超时抛 `TimeoutError`，但不会取消服务端的运行。`raise_on_failure=True` 时运行以 `FAILED` / `CANCELLED` / `EXPIRED` 结束会抛 `RunFailed`，其 `run` 属性带完整运行对象。
+
+## 错误处理
+
+API 的错误响应统一抛成 `ApiError`，字段与 REST 的 `error` 结构一一对应：
+
+| 属性            | 说明                                  |
+| ------------- | ----------------------------------- |
+| `status_code` | HTTP 状态码                            |
+| `code`        | 稳定错误标识，程序分支以此为准                     |
+| `category`    | 错误大类                                |
+| `message`     | 英文说明                                |
+| `retryable`   | 是否可原样重试                             |
+| `details`     | 输入校验失败时的字段级问题列表，否则为 `None`          |
+
+```python
+from bazhuayu_client import ApiError
+
+try:
+    client.run("carol/reviews-query", {})
+except ApiError as e:
+    if e.code == "invalid-input":
+        for d in e.details or []:
+            print(d["path"], d["message"])
+    elif e.retryable:
+        ...  # 退避后重试
+    else:
+        raise
+```
+
+非平台信封的响应（网关 502、格式错误的 2xx）被归一为 `http-error` / `invalid-response` 两个 `code`。
+
+## App 引用
+
+`get_app()`、`run()`、`call()` 和运行列表的 `data_app` 筛选都接受两种引用：两段式 `<namespace>/<app_name>`（人类可读，发布者改名后失效）和稳定标识 `app_id`（`app_<hex>`，改名不受影响）。配置文件、定时任务等长期集成请记录 `app_id`。点对点分享给你的 App 不出现在市场检索里，用 `search(shared_with="me")` 查询。

@@ -1,0 +1,224 @@
+---
+title: "调试运行的上游调用留痕"
+description: "查看作者调试运行中每一次上游 HTTP 交互的时间线，用于排障。"
+---
+
+**`GET`** `https://api-datahub.bazhuayu.com/v1/runs/{run_id}/upstream-calls`
+
+认证：需要 API Key，且仅 App 作者（发布者本人）可调用；其他人得到 `404`。
+
+调试运行（`run_kind=test`）的上游调用时间线：api 型运行的每次上游 HTTP 交互（`submit` / `status` / `fetch`）各一条。`summary` 按（尝试次数，阶段）聚合整条留痕，与分页无关，一眼看出卡在哪个阶段；`items` 只含元信息，请求与响应体通过单条详情按需读取。
+
+只能读自己的调试运行：别人的、不存在的、以及**生产运行**一律 `404`。凭证与环境项的值在写入时已打码；输入契约里标记 `sensitive` 的值读取时再打码一次。code 型运行没有 HTTP 留痕，返回空列表。
+
+## 请求
+
+### 路径参数
+
+<ParamField path="run_id" type="string" required>
+  调试运行的标识。
+</ParamField>
+
+### 查询参数
+
+<ParamField query="offset" type="integer" default="0">
+  分页起点。
+
+范围 ≥ 0。
+</ParamField>
+
+<ParamField query="limit" type="integer" default="50">
+  每页条数。
+
+范围 1 到 500。
+</ParamField>
+
+<ParamField query="stage" type="string">
+  只看某个阶段。`submit` 提交、`status` 轮询状态、`fetch` 取数。
+
+取值：`submit` / `status` / `fetch`。
+</ParamField>
+
+### 示例请求
+
+```bash
+curl \
+  -H "Authorization: Bearer $BAZHUAYU_API_KEY" \
+  "https://api-datahub.bazhuayu.com/v1/runs/run_c62bc0fb8df2/upstream-calls"
+```
+
+## 响应
+
+### 200 成功
+
+```json
+{
+  "data": {
+    "run_id": "string",
+    "summary": [
+      {
+        "attempt": 0,
+        "stage": "string",
+        "calls": 0,
+        "last_status_code": 0,
+        "last_error": "string",
+        "duration_ms_sum": 0,
+        "first_at": "string",
+        "last_at": "string"
+      }
+    ],
+    "items": [
+      {
+        "call_id": 0,
+        "attempt": 0,
+        "seq": 0,
+        "stage": "string",
+        "method": "string",
+        "url": "string",
+        "status_code": 0,
+        "error": "string",
+        "duration_ms": 0,
+        "response_truncated": false,
+        "created_at": "string"
+      }
+    ],
+    "pagination": {
+      "offset": 0,
+      "limit": 0,
+      "count": 0,
+      "total": 0,
+      "has_more": false
+    }
+  }
+}
+```
+
+响应包在 `data` 字段中，其内容如下。
+
+<ResponseField name="run_id" type="string" required>
+  —
+</ResponseField>
+
+<ResponseField name="summary" type="object[]" required>
+  按（尝试次数，阶段）聚合的统计。
+  <Expandable title="字段">
+    <ResponseField name="attempt" type="integer" required>
+      —
+    </ResponseField>
+
+    <ResponseField name="stage" type="string" required>
+      —
+    </ResponseField>
+
+    <ResponseField name="calls" type="integer" required>
+      —
+    </ResponseField>
+
+    <ResponseField name="last_status_code" type="integer">
+      —
+    </ResponseField>
+
+    <ResponseField name="last_error" type="string">
+      —
+    </ResponseField>
+
+    <ResponseField name="duration_ms_sum" type="integer">
+      —
+    </ResponseField>
+
+    <ResponseField name="first_at" type="string">
+      —
+    </ResponseField>
+
+    <ResponseField name="last_at" type="string">
+      —
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="items" type="object[]" required>
+  留痕条目元信息。
+  <Expandable title="字段">
+    <ResponseField name="call_id" type="integer" required>
+      条目标识，用于读取详情。
+    </ResponseField>
+
+    <ResponseField name="attempt" type="integer" required>
+      第几次尝试。
+    </ResponseField>
+
+    <ResponseField name="seq" type="integer" required>
+      —
+    </ResponseField>
+
+    <ResponseField name="stage" type="string" required>
+      阶段。
+    </ResponseField>
+
+    <ResponseField name="method" type="string" required>
+      HTTP 方法。
+    </ResponseField>
+
+    <ResponseField name="url" type="string" required>
+      请求地址（凭证已打码）。
+    </ResponseField>
+
+    <ResponseField name="status_code" type="integer">
+      上游响应状态码。
+    </ResponseField>
+
+    <ResponseField name="error" type="string">
+      —
+    </ResponseField>
+
+    <ResponseField name="duration_ms" type="integer">
+      耗时。
+    </ResponseField>
+
+    <ResponseField name="response_truncated" type="boolean">
+      —
+    </ResponseField>
+
+    <ResponseField name="created_at" type="string" required>
+      —
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="pagination" type="object" required>
+  分页信息。
+  <Expandable title="字段">
+    <ResponseField name="offset" type="integer">
+      —
+    </ResponseField>
+
+    <ResponseField name="limit" type="integer">
+      —
+    </ResponseField>
+
+    <ResponseField name="count" type="integer">
+      —
+    </ResponseField>
+
+    <ResponseField name="total" type="integer">
+      —
+    </ResponseField>
+
+    <ResponseField name="has_more" type="boolean">
+      —
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+### 错误
+
+| HTTP | `code` | `category` | 说明 |
+| --- | --- | --- | --- |
+| 401 | `unauthorized` | `forbidden` | 缺少或无效的 API Key。 |
+| 404 | `upstream-calls-not-found` | `not_found` | 只有调试运行（`run_kind=test`）保留上游调用留痕；生产运行、他人的运行与不存在的运行都返回此错误。 |
+
+错误响应统一为 `{"error": {code, category, message, retryable}}`，见<a href="/zh/datahub/api/reference/introduction#错误">错误</a>。
+
+## 客户端库
+
+Python 与 JavaScript SDK 暂未封装此端点，请直接调用 REST。

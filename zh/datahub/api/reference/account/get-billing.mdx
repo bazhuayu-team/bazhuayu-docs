@@ -1,0 +1,175 @@
+---
+title: "账单聚合"
+description: "查看一段时间的消费合计，并按日、按 App 或按凭证拆分。"
+---
+
+**`GET`** `https://api-datahub.bazhuayu.com/v1/billing`
+
+认证：需要 API Key（`Authorization: Bearer <API Key>`）。
+
+一段时间花了多少、钱花在哪：区间合计加按维度拆分。与账户信息互相独立。
+
+时间范围与运行列表共用词汇：`created_from` / `created_to` 为 ISO-8601 绝对时间，起点包含、终点不包含，按运行**发起时间**归属。把同样的参数带进 <a href="/zh/datahub/api/reference/runs/list-runs">运行列表</a>，得到的就是任一分组数字背后的运行。`tz_offset` 只影响按日分桶时一次运行落到哪一天，不改变金额，也不改变时间范围本身。
+
+只聚合数据费。按日分组升序，便于从前往后对账；按 App 与按凭证分组按金额降序，先看钱主要花在哪、哪把 Key 在花。
+
+`credential` 分组回答「我的每把凭证各花了多少」：键是发起凭证的非敏感稳定标识，与运行列表的 `credential` 筛选值相同。归属始终以账号为范围，凭证只是账号内部的拆分，永远看不到别人的凭证。
+
+## 请求
+
+### 查询参数
+
+<ParamField query="group_by" type="string" default="day">
+  拆分维度。`day` 按日（默认）、`data_app` 按 App、`credential` 按发起凭证。
+
+取值：`day` / `data_app` / `credential`。
+</ParamField>
+
+<ParamField query="created_from" type="string">
+  起点，包含。不传则从最早的运行算起。
+</ParamField>
+
+<ParamField query="created_to" type="string">
+  终点，不包含。不传则算到现在。
+</ParamField>
+
+<ParamField query="tz_offset" type="integer" default="0">
+  按日分桶的时区偏移，单位分钟，相对 UTC。北京时间传 `480`；默认 `0` 按 UTC 日切分。固定偏移，不处理夏令时；钻取时的 `created_from` / `created_to` 必须用同一偏移换算成绝对时间。
+
+范围 -720 到 840。
+</ParamField>
+
+### 示例请求
+
+```bash
+curl \
+  -H "Authorization: Bearer $BAZHUAYU_API_KEY" \
+  "https://api-datahub.bazhuayu.com/v1/billing?group_by=day&created_from=2026-09-01T00:00:00%2B08:00&created_to=2026-10-01T00:00:00%2B08:00&tz_offset=480"
+```
+
+## 响应
+
+### 200 成功
+
+```json
+{
+  "data": {
+    "total": 0.08,
+    "currency": "CNY",
+    "group_by": "day",
+    "groups": [
+      {
+        "day": "2026-07-01",
+        "namespace": null,
+        "app_name": null,
+        "credential": null,
+        "credential_name": null,
+        "runs": 2,
+        "amount": 0.04
+      },
+      {
+        "day": "2026-09-15",
+        "namespace": null,
+        "app_name": null,
+        "credential": null,
+        "credential_name": null,
+        "runs": 2,
+        "amount": 0.04
+      }
+    ]
+  }
+}
+```
+
+响应包在 `data` 字段中，其内容如下。
+
+<ResponseField name="total" type="number">
+  时间范围内的合计，等于各组 `amount` 之和。
+</ResponseField>
+
+<ResponseField name="currency" type="string">
+  币种。
+</ResponseField>
+
+<ResponseField name="group_by" type="string">
+  本次实际使用的维度。
+</ResponseField>
+
+<ResponseField name="groups" type="object[]">
+  分组列表。每个分组对象都带全部维度字段，未用到的维度为 `null`。
+  <Expandable title="字段">
+    <ResponseField name="day" type="string">
+      `group_by=day` 的键，`YYYY-MM-DD`。
+    </ResponseField>
+
+    <ResponseField name="namespace" type="string">
+      `group_by=data_app` 的键之一，发布者用户名。
+    </ResponseField>
+
+    <ResponseField name="app_name" type="string">
+      `group_by=data_app` 的键之一，应用名。
+    </ResponseField>
+
+    <ResponseField name="credential" type="string">
+      `group_by=credential` 的键，发起凭证的非敏感稳定标识，不是密钥本身。
+    </ResponseField>
+
+    <ResponseField name="credential_name" type="string">
+      凭证显示名（API Key 名称，或 OAuth 登录的客户端名如 Claude、Cursor），取不到为 `null`。
+    </ResponseField>
+
+    <ResponseField name="runs" type="integer">
+      组内产生了消费的运行数。失败运行数据费为 0，不计入。
+    </ResponseField>
+
+    <ResponseField name="amount" type="number">
+      组内合计。
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+### 错误
+
+| HTTP | `code` | `category` | 说明 |
+| --- | --- | --- | --- |
+| 401 | `unauthorized` | `forbidden` | 缺少或无效的 API Key。 |
+| 400 | `invalid-group-by` | `invalid_input` | `group_by` 不在允许的取值内，或组合不合法。 |
+
+错误响应统一为 `{"error": {code, category, message, retryable}}`，见<a href="/zh/datahub/api/reference/introduction#错误">错误</a>。
+
+## 客户端库
+
+<CodeGroup>
+
+```python Python
+report = client.billing(group_by="day",
+                        created_from="2026-09-01T00:00:00+08:00",
+                        created_to="2026-10-01T00:00:00+08:00",
+                        tz_offset=480)
+print(report["total"], report["currency"])
+for g in report["groups"]:
+    print(g["day"], g["runs"], g["amount"])
+
+by_key = client.billing(group_by="credential")
+```
+
+```js JavaScript
+const report = await client.billing({
+  groupBy: "day",
+  createdFrom: "2026-09-01T00:00:00+08:00",
+  createdTo: "2026-10-01T00:00:00+08:00",
+  tzOffset: 480,
+});
+console.log(report.total, report.currency);
+for (const g of report.groups) console.log(g.day, g.runs, g.amount);
+
+const byKey = await client.billing({ groupBy: "credential" });
+```
+
+</CodeGroup>
+
+## 注意事项
+
+* 计费口径对所有接入方式一致：失败不计费；部分成功和取消只按已产出记录计费；取量由平台从入库数据派生；作者调试运行照常计费；平台健康巡检不计费。
+* 单次运行的费用构成在运行对象的 `billing` 块里，见<a href="/zh/datahub/api/reference/runs/get-run">查询运行</a>。
+* 按本地日对账时，`tz_offset` 与钻取用的时间范围必须使用同一个偏移，否则分桶边界和筛选边界对不上。

@@ -1,0 +1,83 @@
+---
+title: "DataHub API"
+description: "通过 REST API、官方客户端库或 MCP 以编程方式发现、运行 Data App，读取结果并核对消耗。"
+---
+
+DataHub 的全部能力都通过一套公开 REST API 提供。网页端、MCP、Python 与 JavaScript 客户端库都只是这套 API 的不同接入方式，调用的是同一份数据、同一套计费口径。
+
+## REST API
+
+基础地址 `https://api-datahub.bazhuayu.com`，所有端点以 `/v1` 开头，请求与响应均为 JSON。需要身份的端点使用 `Authorization: Bearer <API Key>` 认证，API Key 在八爪鱼账户中心创建。
+
+发起一次运行并等待结果：
+
+```bash
+curl -X POST \
+  -H "Authorization: Bearer $BAZHUAYU_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"product": "p-9001"}' \
+  "https://api-datahub.bazhuayu.com/v1/data-apps/carol/reviews-query/runs?wait=60"
+```
+
+<CardGroup cols={2}>
+  <Card title="接口参考" href="/zh/datahub/api/reference/introduction">
+    认证、响应结构、分页、错误等通用约定，以及按资源分组的全部端点说明。
+  </Card>
+
+  <Card title="OpenAPI 规范" href="/assets/datahub/api/openapi.yaml.txt">
+    机读契约文件，可导入 Postman、代码生成器或 AI 编码助手。
+  </Card>
+</CardGroup>
+
+## 客户端库
+
+官方客户端库封装了 REST API 中面向调用方的全部端点，方法与端点一一对应，返回的就是响应里 `data` 部分的原样内容。
+
+<Tabs>
+  <Tab title="Python">
+    ```bash
+    pip install bazhuayu-client
+    ```
+
+    ```python
+    from bazhuayu_client import Client
+
+    with Client(api_key="<你的 API Key>") as client:
+        result = client.search("reviews", limit=5)
+        run = client.call("carol/reviews-query", {"product": "p-9001"})
+        for record in client.iterate_records(run["run_id"]):
+            print(record)
+    ```
+
+    <a href="/zh/datahub/api/clients/python">Python 客户端库文档</a>
+  </Tab>
+
+  <Tab title="JavaScript">
+    ```bash
+    npm install bazhuayu-client
+    ```
+
+    ```js
+    import { Client } from "bazhuayu-client";
+
+    const client = new Client({ apiKey: "<你的 API Key>" });
+    const result = await client.search("reviews", { limit: 5 });
+    const run = await client.call("carol/reviews-query", { product: "p-9001" });
+    for await (const record of client.iterateRecords(run.run_id)) {
+      console.log(record);
+    }
+    ```
+
+    <a href="/zh/datahub/api/clients/javascript">JavaScript 客户端库文档</a>
+  </Tab>
+</Tabs>
+
+## MCP
+
+让 Agent 直接使用 Data App 时，接入 DataHub 通用 MCP 即可，不需要写代码。它提供搜索、详情、运行、状态、结果、取消、列表七个工具，并可把指定 App 钉选为专用工具。见<a href="/zh/datahub/mcp-capabilities">DataHub MCP 能力说明</a>与<a href="/zh/datahub/quick-start/agent-connection/general">通用连接教程</a>。
+
+## 面向 AI
+
+* 全站索引：`https://www.bazhuayu.com/docs/llms.txt`
+* 任何文档页地址加 `.md` 后缀可直接取到 Markdown 源文。
+* 契约编写 Skill：`GET /v1/skills/dataapp-contract-json.zip`，供 Claude Code、Codex 等编码助手生成 Data App 契约。

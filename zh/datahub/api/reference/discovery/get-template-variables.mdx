@@ -1,0 +1,62 @@
+---
+title: "请求模板变量表"
+description: "列出 api 型 App 的请求模板可引用的占位符。"
+---
+
+**`GET`** `https://api-datahub.bazhuayu.com/v1/data-apps/template-variables`
+
+认证：无需认证，可匿名调用。
+
+api 型 App 的请求模板（各阶段的 url / query / headers / body）可以引用哪些占位符：每个变量附一句说明、一个渲染示例，以及它在哪些阶段可用。
+
+这与发布流水线校验用的是同一份词汇表，编辑器和编码助手可以据此精确提示，不必抄一份会漂移的变量清单。
+
+## 请求
+
+### 示例请求
+
+```bash
+curl \
+  "https://api-datahub.bazhuayu.com/v1/data-apps/template-variables"
+```
+
+## 响应
+
+### 200 成功
+
+```json
+{
+  "data": {
+    "syntax": "Single curly braces; a placeholder should be the whole string value (\"{input.keyword}\"), except inside url where it may …",
+    "variables": [
+      {
+        "name": "input.<field>",
+        "description": "A caller-supplied input value; <field> must be a top-level property of input.schema. When the placeholder is the whole s…",
+        "example": "wireless charger",
+        "stages": [
+          "submit",
+          "status",
+          "…"
+        ]
+      },
+      {
+        "name": "env.<alias>",
+        "description": "The value of a platform-side environment entry declared in runtime.env under <alias>; delivered per run and always treat…",
+        "example": "https://api.example-upstream.com",
+        "stages": [
+          "submit",
+          "status",
+          "…"
+        ]
+      },
+      "…"
+    ]
+  }
+}
+```
+
+`syntax` 说明占位符语法，`variables[]` 逐个列出变量名、说明、示例值与可用阶段。
+
+## 客户端库
+
+Python 与 JavaScript SDK 暂未封装此端点，请直接调用 REST。

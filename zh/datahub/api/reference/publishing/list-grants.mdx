@@ -1,0 +1,65 @@
+---
+title: "分享名单"
+description: "查看 App 的点对点分享授权名单。"
+---
+
+**`GET`** `https://api-datahub.bazhuayu.com/v1/data-apps/{app_id}/grants`
+
+认证：需要 API Key，且仅 App 作者（发布者本人）可调用；其他人得到 `404`。
+
+`scope=shared` 时生效的授权名单。仅作者可见，零 Release 的 App 也能查；名单从不出现在详情或任何非作者响应里。用户名在渲染时解析，被授权者改名后显示新名字。
+
+## 请求
+
+### 路径参数
+
+<ParamField path="app_id" type="string" required>
+  App 引用。
+</ParamField>
+
+### 示例请求
+
+```bash
+curl \
+  -H "Authorization: Bearer $BAZHUAYU_API_KEY" \
+  "https://api-datahub.bazhuayu.com/v1/data-apps/carol/reviews-query/grants"
+```
+
+## 响应
+
+### 200 成功
+
+```json
+{
+  "data": {
+    "items": []
+  }
+}
+```
+
+响应包在 `data` 字段中，其内容如下。
+
+<ResponseField name="items" type="object[]" required>
+  名单。
+  <Expandable title="字段">
+    <ResponseField name="username" type="string">
+      被授权用户的当前用户名。
+    </ResponseField>
+
+    <ResponseField name="granted_at" type="string" required>
+      授权时间。
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+### 错误
+
+| HTTP | `code` | `category` | 说明 |
+| --- | --- | --- | --- |
+| 401 | `unauthorized` | `forbidden` | 缺少或无效的 API Key。 |
+
+错误响应统一为 `{"error": {code, category, message, retryable}}`，见<a href="/zh/datahub/api/reference/introduction#错误">错误</a>。
+
+## 客户端库
+
+Python 与 JavaScript SDK 暂未封装此端点，请直接调用 REST。

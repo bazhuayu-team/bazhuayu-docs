@@ -1,0 +1,168 @@
+---
+title: "读取运行结果"
+description: "分页读取一次运行产出的记录，支持 JSON、JSONL、CSV 与列裁剪。"
+---
+
+**`GET`** `https://api-datahub.bazhuayu.com/v1/runs/{run_id}/records`
+
+认证：需要 API Key（`Authorization: Bearer <API Key>`）。
+
+分页读取运行产出的记录。`format` 支持 `json`（默认，带信封与分页）、`jsonl`、`csv`；`fields` 用逗号分隔选择列。
+
+运行进行中也可以读，读到的是截至当前已产出的部分，`pagination.total` 会持续增长；完整结果要等终态。`partial` 为 `true` 表示运行部分成功或被取消，这些记录有效且已计费。
+
+只能读自己发起的运行：别人的与不存在的 `run_id` 都返回 `404`。
+
+## 请求
+
+### 路径参数
+
+<ParamField path="run_id" type="string" required>
+  运行标识。
+</ParamField>
+
+### 查询参数
+
+<ParamField query="offset" type="integer" default="0">
+  分页起点。
+
+范围 ≥ 0。
+</ParamField>
+
+<ParamField query="limit" type="integer" default="100">
+  每页条数，最大 10000。
+
+范围 1 到 10000。
+</ParamField>
+
+<ParamField query="format" type="string" default="json">
+  输出格式。`json` 带信封与分页；`jsonl` 每行一条；`csv` 表格。
+
+取值：`json` / `jsonl` / `csv`。
+</ParamField>
+
+<ParamField query="fields" type="string">
+  逗号分隔的字段名，只返回这些列，例如 `title,price,url`。
+</ParamField>
+
+### 示例请求
+
+```bash
+curl \
+  -H "Authorization: Bearer $BAZHUAYU_API_KEY" \
+  "https://api-datahub.bazhuayu.com/v1/runs/run_c62bc0fb8df2/records?offset=0&limit=100"
+```
+
+## 响应
+
+### 200 成功
+
+```json
+{
+  "data": {
+    "run_id": "run_c62bc0fb8df2",
+    "dataset_id": "ds_0bd5345d13d0",
+    "records": [
+      {
+        "review_id": "103c9e-0000"
+      },
+      {
+        "review_id": "103c9e-0001"
+      }
+    ],
+    "partial": false,
+    "pagination": {
+      "offset": 0,
+      "limit": 2,
+      "count": 2,
+      "total": 20,
+      "has_more": true
+    }
+  }
+}
+```
+
+`format=jsonl` 与 `format=csv` 时响应体是原始文本，不包信封；分页参数仍然有效。
+
+响应包在 `data` 字段中，其内容如下。
+
+<ResponseField name="run_id" type="string">
+  运行标识。
+</ResponseField>
+
+<ResponseField name="dataset_id" type="string" required>
+  结果所在的数据集。
+</ResponseField>
+
+<ResponseField name="records" type="object[]" required>
+  记录数组，每条结构由 App 的 `output_schema.record` 决定。
+</ResponseField>
+
+<ResponseField name="partial" type="boolean">
+  运行是否部分成功或被取消。
+</ResponseField>
+
+<ResponseField name="pagination" type="object" required>
+  分页信息。
+  <Expandable title="字段">
+    <ResponseField name="offset" type="integer">
+      —
+    </ResponseField>
+
+    <ResponseField name="limit" type="integer">
+      —
+    </ResponseField>
+
+    <ResponseField name="count" type="integer">
+      —
+    </ResponseField>
+
+    <ResponseField name="total" type="integer">
+      —
+    </ResponseField>
+
+    <ResponseField name="has_more" type="boolean">
+      —
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+### 错误
+
+| HTTP | `code` | `category` | 说明 |
+| --- | --- | --- | --- |
+| 401 | `unauthorized` | `forbidden` | 缺少或无效的 API Key。 |
+| 404 | `run-not-found` | `not_found` | 运行不存在，或不是当前账号发起的。 |
+
+错误响应统一为 `{"error": {code, category, message, retryable}}`，见<a href="/zh/datahub/api/reference/introduction#错误">错误</a>。
+
+## 客户端库
+
+<CodeGroup>
+
+```python Python
+# 自动翻页遍历全部记录
+for record in client.iterate_records("run_c62bc0fb8df2", batch=500):
+    print(record)
+
+# 单页
+page = client.get_records("run_c62bc0fb8df2", offset=0, limit=100, fields="title,price")
+
+# 整份导出为文本（jsonl / csv）
+text = client.export_records("run_c62bc0fb8df2", format="csv")
+```
+
+```js JavaScript
+// 自动翻页遍历全部记录
+for await (const record of client.iterateRecords("run_c62bc0fb8df2", { batch: 500 })) {
+  console.log(record);
+}
+
+// 单页
+const page = await client.getRecords("run_c62bc0fb8df2", { offset: 0, limit: 100, fields: "title,price" });
+
+// 整份导出为文本（jsonl / csv）
+const text = await client.exportRecords("run_c62bc0fb8df2", "csv");
+```
+
+</CodeGroup>

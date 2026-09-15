@@ -1,0 +1,135 @@
+---
+title: "健康巡检历史"
+description: "平台每日健康巡检在我的 App 上的逐次结果。"
+---
+
+**`GET`** `https://api-datahub.bazhuayu.com/v1/publisher/probes`
+
+认证：需要 API Key（`Authorization: Bearer <API Key>`）。
+
+平台每日健康巡检在我发布的 App 上发现了什么，最新在前：对每个被巡检的示例，是仍能连通并产出记录（`PASS`）、没有产出（`NO_DATA`）、失败（`FAIL`，附错误）、超出巡检预算（`TIMEOUT`），还是根本没跑（`SKIPPED`，`skip_reason` 为 `no-example` / `paused` / `not-eligible`）。只巡检已发布的公开或分享 App，私有 App 从不巡检。巡检运行不计入用量与账单，也不出现在发布者运行列表。
+
+## 请求
+
+### 查询参数
+
+<ParamField query="data_app" type="string[]">
+  只看这些 App，可重复传。
+</ParamField>
+
+<ParamField query="days" type="integer" default="30">
+  回看天数，默认 30。
+
+范围 1 到 365。
+</ParamField>
+
+<ParamField query="limit" type="integer" default="100">
+  最多返回条数。
+
+范围 1 到 500。
+</ParamField>
+
+### 示例请求
+
+```bash
+curl \
+  -H "Authorization: Bearer $BAZHUAYU_API_KEY" \
+  "https://api-datahub.bazhuayu.com/v1/publisher/probes?days=30&limit=100"
+```
+
+## 响应
+
+### 200 成功
+
+```json
+{
+  "data": {
+    "items": []
+  }
+}
+```
+
+响应包在 `data` 字段中，其内容如下。
+
+<ResponseField name="items" type="object[]">
+  巡检结果列表。
+  <Expandable title="字段">
+    <ResponseField name="namespace" type="string">
+      发布者用户名。
+    </ResponseField>
+
+    <ResponseField name="app_name" type="string">
+      应用名。
+    </ResponseField>
+
+    <ResponseField name="app_version" type="string">
+      —
+    </ResponseField>
+
+    <ResponseField name="example_id" type="string">
+      —
+    </ResponseField>
+
+    <ResponseField name="verdict" type="string" required>
+      结果。
+    </ResponseField>
+
+    <ResponseField name="skip_reason" type="string">
+      跳过原因。
+    </ResponseField>
+
+    <ResponseField name="records" type="integer">
+      —
+    </ResponseField>
+
+    <ResponseField name="duration_ms" type="integer">
+      —
+    </ResponseField>
+
+    <ResponseField name="error" type="object">
+      失败时的错误对象。
+      <Expandable title="字段">
+        <ResponseField name="code" type="string" required>
+          —
+        </ResponseField>
+
+        <ResponseField name="category" type="string">
+          —
+        </ResponseField>
+
+        <ResponseField name="message" type="string">
+          —
+        </ResponseField>
+
+        <ResponseField name="retryable" type="boolean">
+          —
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
+
+    <ResponseField name="kind" type="string">
+      `scheduled` (daily batch) or `manual` (ops re-test)
+    </ResponseField>
+
+    <ResponseField name="created_at" type="string" required>
+      —
+    </ResponseField>
+
+    <ResponseField name="finished_at" type="string">
+      —
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+### 错误
+
+| HTTP | `code` | `category` | 说明 |
+| --- | --- | --- | --- |
+| 401 | `unauthorized` | `forbidden` | 缺少或无效的 API Key。 |
+| 404 | `app-not-found` | `not_found` | App 不存在、已改名，或对当前凭证不可见（私有 / 分享范围之外）。 |
+
+错误响应统一为 `{"error": {code, category, message, retryable}}`，见<a href="/zh/datahub/api/reference/introduction#错误">错误</a>。
+
+## 客户端库
+
+Python 与 JavaScript SDK 暂未封装此端点，请直接调用 REST。
