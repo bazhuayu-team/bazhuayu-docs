@@ -1,5 +1,6 @@
 ---
 title: "【雪球】热帖评论采集"
+description: "学习如何使用八爪鱼完成“【雪球】热帖评论采集”数据采集。"
 source: "https://www.bazhuayu.com/helpcenter/docs/15dMlG"
 ---
 2022-06-10 
@@ -8,19 +9,19 @@ source: "https://www.bazhuayu.com/helpcenter/docs/15dMlG"
 
 打开雪球网 <a href="https://xueqiu.com/" target="_blank" rel="noopener noreferrer">https://xueqiu.com/</a>，页面显示雪球热帖列表，点击每一个帖子的标题可进入详情页，查看并采集详情页里面的数据内容。
 
- 
+
 
 **采集字段**
 
 帖子作者、标题、文章内容、发布时间、评论数、评论者、评论内容、评论时间等。
 
- 
+
 
 ![【雪球】热帖评论采集](/assets/academy/case-studies/xueqiu-hot-post-comments/01-653f5cea003cc.png)
 
 *点击查看高清大图，**下文其他图片同理*  
 
- 
+
 
 **采集结果**
 
@@ -28,9 +29,9 @@ source: "https://www.bazhuayu.com/helpcenter/docs/15dMlG"
 
 ![【雪球】热帖评论采集](/assets/academy/case-studies/xueqiu-hot-post-comments/02-653f5cfa5c44c.png)
 
- 
 
- 
+
+
 
 **教程说明**
 
@@ -38,7 +39,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/15dMlG"
 
 如果因网页改版造成网址或步骤无效，无法收集到目标数据，请联系官方客服，我们将及时修正。
 
- 
+
 
 **采集步骤**
 
@@ -58,17 +59,17 @@ source: "https://www.bazhuayu.com/helpcenter/docs/15dMlG"
 
 步骤八、启动采集
 
- 
 
- 
+
+
 
 **以下为具体步骤：**
 
- 
+
 
 ## 步骤一、打开网页
 
- 
+
 
 在首页【输入框】中输入目标网址<a href="https://xueqiu.com/" target="_blank" rel="noopener noreferrer">https://xueqiu.com/</a>，点击【开始采集】，八爪鱼自动打开网页。
 
@@ -81,18 +82,18 @@ source: "https://www.bazhuayu.com/helpcenter/docs/15dMlG"
   您的浏览器不支持视频播放，请更新浏览器后重试。
 </video>
 
- 
+
 
 特别说明：
 
 - a. 打开网页后，如果开始开始【自动识别】，请点击【不再自动识别】或【取消识别】将其关掉。因为本文不适合使用【自动识别】。
 - b. 【自动识别】适用于自动识别网页上的列表、滚动和翻页，识别成功后直接启动采集即可获取数据。详情点击查看 [【自动识别】教程](../tutorial8/81zdypz)
 
- 
+
 
 ## 步骤二、设置页面滚动和【点击加载更多】
 
- 
+
 
 打开雪球网网页后，我们观察发现，页面默认只显示部分帖子，向下滚动页面到底部才能加载出更多帖子列表。
 
@@ -100,7 +101,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/15dMlG"
 
 在八爪鱼中也需要进行相同的设置。
 
- 
+
 
 1、设置页面滚动
 
@@ -108,13 +109,13 @@ source: "https://www.bazhuayu.com/helpcenter/docs/15dMlG"
 
 ![【雪球】热帖评论采集](/assets/academy/case-studies/xueqiu-hot-post-comments/04-653f5d219ef4e.gif)
 
- 
+
 
 特别说明：
 
 - a. 设置中的滚动次数和时间间隔，请根据采集需求和网页加载情况进行设置，并非是一成不变的，具体请点击查看 [处理滚动加载数据的网页教程](../tutorial8/81ymgd)
 
- 
+
 
 2、设置点击【加载更多】
 
@@ -128,18 +129,18 @@ source: "https://www.bazhuayu.com/helpcenter/docs/15dMlG"
 
 ![【雪球】热帖评论采集](/assets/academy/case-studies/xueqiu-hot-post-comments/05-653f5d32ce34c.gif)
 
- 
+
 
 特别说明：
 
 - a. 为什么通过【加载更多】进行翻页的网页，需设置一个合适的翻页次数？通过一定次数的【加载更多】翻页后，页面上展示出非常多的标题列表。这些列表同在一个页面，采集的时候都会被定位到。如果同时定位的列表过多，采集速度会变慢，影响数据的正常采集。设置一个合理的翻页次数，可以控制同时定位到的列表，保障数据采集正常进行。
 - b. 设置中的滚动次数和时间间隔，请根据采集需求和网页加载情况进行设置，并非是一成不变的，具体请点击查看 [处理滚动加载数据的网页教程](../tutorial8/81ymgd)
 
- 
+
 
 ## 步骤三、创建【循环列表】
 
- 
+
 
 1、创建【循环-点击元素】，点击进入每个帖子详情页
 
@@ -153,7 +154,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/15dMlG"
 
 ![【雪球】热帖评论采集](/assets/academy/case-studies/xueqiu-hot-post-comments/06-653f5d48b04d0.gif)
 
- 
+
 
 2、调整流程
 
@@ -163,13 +164,13 @@ source: "https://www.bazhuayu.com/helpcenter/docs/15dMlG"
 
 ![【雪球】热帖评论采集](/assets/academy/case-studies/xueqiu-hot-post-comments/07-653f5d582ad06.gif)
 
- 
 
- 
+
+
 
 ## 步骤四、采集详情页的文章标题、正文等字段
 
- 
+
 
 选中页面中的文本，然后在操作提示框中，点击【采集该元素文本】。
 
@@ -184,15 +185,15 @@ source: "https://www.bazhuayu.com/helpcenter/docs/15dMlG"
   您的浏览器不支持视频播放，请更新浏览器后重试。
 </video>
 
- 
+
 
 ## 步骤五、创建评论部分的【循环列表】，采集全部评论内容、评论者等字段
 
- 
+
 
 一篇帖子内可能有多条评论，通过以下几步，采集文章内的所有评论者和评论内容：
 
- 
+
 
 ① 选中一个评论者名称
 
@@ -211,21 +212,21 @@ source: "https://www.bazhuayu.com/helpcenter/docs/15dMlG"
 
 注意：如果还需要采集其他字段，则在当前列表中继续提取即可（在页面中以红框框起来），无需再新建循环。
 
- 
+
 
 特别说明：
 
 - a. 评论列表有可能不止一页，如需采集多页评论内容，可添加翻页步骤，具体操作参考教程实现翻页。
 
- 
+
 
 ## 步骤六、编辑字段
 
- 
+
 
 执行完前面的步骤，采集框架已经完成啦！我们需要在这个基础上进一步优化。
 
- 
+
 
 1、修改字段名称
 
@@ -233,7 +234,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/15dMlG"
 
 ![【雪球】热帖评论采集](/assets/academy/case-studies/xueqiu-hot-post-comments/10-653f5d8b4663a.gif)
 
- 
+
 
 2、修改字段XPath
 
@@ -247,7 +248,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/15dMlG"
 
 ![【雪球】热帖评论采集](/assets/academy/case-studies/xueqiu-hot-post-comments/11-653f5d9a8c4b8.gif)
 
- 
+
 
 特别说明：
 
@@ -258,11 +259,11 @@ source: "https://www.bazhuayu.com/helpcenter/docs/15dMlG"
 
 【评论内容】：//div[@class="comment\_\_item\_\_main"]/\*[not(@class="comment\_\_item\_\_main\_\_hd")]
 
- 
+
 
 ## 步骤七、设置执行前等待
 
- 
+
 
 为防止网页跳转太快采集不到数据，我们需要设置执行前等待：
 
@@ -270,11 +271,11 @@ source: "https://www.bazhuayu.com/helpcenter/docs/15dMlG"
 
 ![【雪球】热帖评论采集](/assets/academy/case-studies/xueqiu-hot-post-comments/12-653f5db56a1f5.gif)
 
- 
+
 
 ## 步骤八、启动采集
 
- 
+
 
 1、单击【采集】并【启动本地采集】。启动后八爪鱼开始自动采集数据。
 
@@ -287,21 +288,21 @@ source: "https://www.bazhuayu.com/helpcenter/docs/15dMlG"
   您的浏览器不支持视频播放，请更新浏览器后重试。
 </video>
 
- 
+
 
 特别说明：
 
 - a. 【本地采集】是使用自己的电脑进行采集，【云采集】是使用八爪鱼提供的云服务器采集，点击查看 [本地采集与云采集详解](../tutorial8/81xsrm8)。
 
- 
+
 
 2、采集完成后，选择合适的导出方式来导出数据。支持导出为Excel，CSV，HTML，数据库等。这里导出为Excel。数据示例：
 
 ![【雪球】热帖评论采集](/assets/academy/case-studies/xueqiu-hot-post-comments/14-653f5dee3d18e.png)
 
- 
 
- 
+
+
 
  作者：Tom
 

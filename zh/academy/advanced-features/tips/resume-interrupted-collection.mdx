@@ -4,16 +4,16 @@ description: "介绍八爪鱼采集器进阶功能：断点采集（采集中断
 source: "https://www.bazhuayu.com/helpcenter/docs/duan-dian-cai-ji-cai-ji-zhong-duan-xu-yao-cai-ji-hou-xu-shu-ju"
 ---
 
-\
+
 在八爪鱼采集器中，当采集任务因网络中断、软件关闭或其他原因意外停止时，您可以使用一些小技巧，从停止的位置继续采集，无需重新开始。以基本配置采集可以参考该东方财富网教程进行配置 :<a href="/zh/academy/case-studies/finance/eastmoney-private-placement?search=1" target="_blank" rel="noopener noreferrer">【东方财富】定向增发股数据采集</a>
 
 ## **方法一：启动暂停，手动跳转后继续采集**
 
- 
+
 
 启动采集后中断，需要到指定页面继续采集
 
-<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/edc0e0455145403715931389255/wu7czXQMFa4A.mp4" width="100%"></video>
+<video controls src="https://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/edc0e0455145403715931389255/wu7czXQMFa4A.mp4" width="100%"></video>
 
 以下步骤，进行详情说明：启动 → 暂停 → 跳转至目标页 → 继续采集
 
@@ -33,13 +33,13 @@ source: "https://www.bazhuayu.com/helpcenter/docs/duan-dian-cai-ji-cai-ji-zhong-
 
 在八爪鱼采集器中，当您需要从特定页码开始采集数据时，可以使用"精准分页跳转+循环列表采集"组合方案。该方案的核心思路是：先定位到目标页码，再启动数据采集，避免从第一页开始逐页翻页的时间消耗
 
-<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/24bf93dd5145403715864354025/bLkAQRLPFhwA.mp4" width="100%"></video>
+<video controls src="https://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/24bf93dd5145403715864354025/bLkAQRLPFhwA.mp4" width="100%"></video>
 
 以下步骤，进行详情说明：
 
 1、先配置循环点击跳转指定页数，选择"循环执行次数"模式，比如这里是填写：循环执行次数等于5 次
 
- 
+
 
 ![断点采集（采集中断，需要采集后续数据）](/assets/academy/advanced-features/resume-interrupted-collection/04-69841aca0e659.png)
 
@@ -55,7 +55,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/duan-dian-cai-ji-cai-ji-zhong-
 
 当目标网站本身具有**页码输入框**功能时，能够进行输入指定页码搜索，您可以使用更高效、更精准的页码跳转方案。这种方案通过**直接输入目标页码**，实现快速定位，避免逐页翻页的时间消耗
 
-<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/2dcbede05145403715864714622/ytjTzoAE56EA.mp4" width="100%"></video>
+<video controls src="https://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/2dcbede05145403715864714622/ytjTzoAE56EA.mp4" width="100%"></video>
 
 以下步骤，进行详情说明：
 
@@ -65,8 +65,8 @@ source: "https://www.bazhuayu.com/helpcenter/docs/duan-dian-cai-ji-cai-ji-zhong-
 
 2、选中网页中的文本输入框，在提示框中选择【输入文本】，输入页码【5】，按【确定】保存
 
-![断点采集（采集中断，需要采集后续数据）](/assets/academy/advanced-features/resume-interrupted-collection/08-69841ac9d9d4c.png)\
-\
+![断点采集（采集中断，需要采集后续数据）](/assets/academy/advanced-features/resume-interrupted-collection/08-69841ac9d9d4c.png)
+
 3、点击“确定”“按钮，鼠标点击该按钮，进行跳转指定填写页码
 
 ![断点采集（采集中断，需要采集后续数据）](/assets/academy/advanced-features/resume-interrupted-collection/09-69841ac99d41e.png)

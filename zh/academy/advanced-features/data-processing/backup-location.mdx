@@ -8,13 +8,13 @@ source: "https://www.bazhuayu.com/helpcenter/docs/diZtWC"
 
 但是存在这样一种情况，同一字段在不同页面的位置略有不同。此时，我们可以尝试通过备用位置解决。例如，一个字段，在A页面和B页面的位置不同，那么可以用A页面字段的位置做规则提取字段，然后将B页面字段的位置设为备用位置。这样，AB两个页面的字段就都能被提取到。
 
- 
+
 
 ### 一、什么是备用元素
 
 备用元素，也就是在当前xpath元素找不到的时候，启动备用的xpath，可以通过备用元素解决网页结构不一致导致采集漏字段的问题。
 
- 
+
 
 ### 二、怎么设置备用元素
 
@@ -22,23 +22,23 @@ source: "https://www.bazhuayu.com/helpcenter/docs/diZtWC"
 
 示例网站：
 
-https\://fgw\.sh.gov.cn/fgw\_zcjd/20220822/ab80c123e81840c688ade0caa2f21a11.html
+https://fgw\.sh.gov.cn/fgw\_zcjd/20220822/ab80c123e81840c688ade0caa2f21a11.html
 
-https\://fgw\.sh.gov.cn/fgw\_zcjd/20220728/8802ea2324a643cbbfee5fc3b87dfad3.html
+https://fgw\.sh.gov.cn/fgw\_zcjd/20220728/8802ea2324a643cbbfee5fc3b87dfad3.html
 
- 
+
 
 **Step1：**&#x6309;照需求，采集数据。这里我们采集这2个详情页文章的标题、时间、正文链接
 
 <video controls src="https://resource-wangsu.helplook.net/docker_production/3mkuae/article/diZtWC/video/654c817470c77.mp4" width="100%"></video>
 
- 
+
 
 **Step2：**&#x542F;动采集看一下，第2个详情页的【时间】字段并未采集到。这是因为第2个详情页的网页结构和第1个不同，第1个详情页的【时间】定位XPath，不适用第2个详情页了。
 
 ![设置备用位置](/assets/academy/advanced-features/backup-location/01-654c8363c3969.png)
 
-###  
+
 
 #### 2.设置备用位置
 
@@ -50,7 +50,7 @@ https\://fgw\.sh.gov.cn/fgw\_zcjd/20220728/8802ea2324a643cbbfee5fc3b87dfad3.html
 
 <video controls src="https://resource-wangsu.helplook.net/docker_production/3mkuae/article/diZtWC/video/654c85ce3af26.mp4" width="100%"></video>
 
- 
+
 
 **Step2：**&#x542F;动采集看一下，2个详情页的【时间】字段都被正常采集下来了，备用位置设置成功。
 
@@ -60,7 +60,7 @@ https\://fgw\.sh.gov.cn/fgw\_zcjd/20220728/8802ea2324a643cbbfee5fc3b87dfad3.html
 >
 > 以上示例也可以通过修改XPath解决。查看 <a href="/zh/academy/xpath/modify-element/locate-element" target="_blank" rel="noopener noreferrer">字段提取不到，字段提取错位如何处理？</a>
 
- 
+
 
 ### 三、多元素并列设置
 
@@ -68,17 +68,17 @@ https\://fgw\.sh.gov.cn/fgw\_zcjd/20220728/8802ea2324a643cbbfee5fc3b87dfad3.html
 
 场景示例网站：<a href="https://www.shaanxi.gov.cn/sxsearch/search.html?tenantId=16711&code=1920ae4af69&searchWord=%E9%99%95%E8%A5%BF" target="_blank" rel="noopener noreferrer">https://www.shaanxi.gov.cn/sxsearch/search.html?tenantId=16711&code=1920ae4af69&searchWord=%E9%99%95%E8%A5%BF</a>
 
- 
 
-<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/9e5b5a205145403715909921712/6bZZVH4bo4YA.mp4" width="100%"></video>
 
- 
+<video controls src="https://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/9e5b5a205145403715909921712/6bZZVH4bo4YA.mp4" width="100%"></video>
+
+
 
 > 特别说明：
 >
 > a. 我们发现这个政府网站下会集合其他网站公告，而且不止一个网站，备用元素设置一个是不够的。
 
- 
+
 
 接下来我们跟随案例进行解析。
 
@@ -86,11 +86,11 @@ https\://fgw\.sh.gov.cn/fgw\_zcjd/20220728/8802ea2324a643cbbfee5fc3b87dfad3.html
 
 我们先初步手动配置好任务，目标字段是详情页标题，详情链接，发布时间，来源，正文。
 
- 
 
-<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/06e2788c5145403715884798170/ge0fvAdxWgkA.mp4" width="100%"></video>
 
- 
+<video controls src="https://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/06e2788c5145403715884798170/ge0fvAdxWgkA.mp4" width="100%"></video>
+
+
 
 > 特别说明：
 >
@@ -98,21 +98,21 @@ https\://fgw\.sh.gov.cn/fgw\_zcjd/20220728/8802ea2324a643cbbfee5fc3b87dfad3.html
 >
 > b. 基础配置请参考：<a href="/zh/academy/basic-collection/beginner/custom-collection" target="_blank" rel="noopener noreferrer">初级采集</a>
 
- 
+
 
 初步执行。
 
- 
 
-<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/0b522e0d5145403715884960558/WaQZCajKrNIA.mp4" width="100%"></video>
 
- 
+<video controls src="https://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/0b522e0d5145403715884960558/WaQZCajKrNIA.mp4" width="100%"></video>
+
+
 
 > 特别说明：
 >
 > a. 通过执行任务发现，只有我们设置的详情页站点可以采集到，其他都无法采集。
 
- 
+
 
 #### 2.记录xpath，巧用“|”符号
 
@@ -126,11 +126,11 @@ https\://fgw\.sh.gov.cn/fgw\_zcjd/20220728/8802ea2324a643cbbfee5fc3b87dfad3.html
 
 ③将xpath复制后用“|”拼接到原字段。
 
- 
 
-<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/ccaf69185145403715951602243/FlktDT8tpvMA.mp4" width="100%"></video>
 
- 
+<video controls src="https://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/ccaf69185145403715951602243/FlktDT8tpvMA.mp4" width="100%"></video>
+
+
 
 > 特别说明：
 >
@@ -138,36 +138,36 @@ https\://fgw\.sh.gov.cn/fgw\_zcjd/20220728/8802ea2324a643cbbfee5fc3b87dfad3.html
 >
 > b.xpath是什么？请关注：<a href="/zh/academy/xpath/getting-started/why-use-xpath" target="_blank" rel="noopener noreferrer">Xpath入门</a>
 
- 
 
- 
+
+
 
 #### 3.执行展示效果
 
- 
 
-<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/0be229825145403715952034739/KaGqOE8cVcsA.mp4" width="100%"></video>
 
- 
+<video controls src="https://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/0be229825145403715952034739/KaGqOE8cVcsA.mp4" width="100%"></video>
+
+
 
 > 特别说明：
 >
 > a. 此案例只以正文为例，后续扩展若是详情页多字段需要采集，可以类比操作。
 
- 
 
- 
 
- 
 
- 
 
- 
 
- 
 
- 
 
- 
+
+
+
+
+
+
+
+
 
 作者：FAN、YfY

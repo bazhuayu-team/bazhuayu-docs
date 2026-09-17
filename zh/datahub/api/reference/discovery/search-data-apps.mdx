@@ -19,7 +19,7 @@ GET https://api-datahub.bazhuayu.com/v1/data-apps
 * **视图切换**：`owner=me` 只列我发布的 App（含未发布的草稿，卡片附带 `status` 与 `scope`）；`shared_with=me` 列出通过点对点分享授权给我的 App。
 * **可见范围**：不用视图时 `scope` 决定候选集。默认或 `public` 为市场；`private` 为我的私有 App；`shared` 为所有可见的分享 App（我分享出去的和分享给我的）；`all` 为当前凭证可见的全集，匿名调用时自然退化为市场。属性模式下 `status` 默认只出已发布的 App。
 
-卡片只含选型需要的信息：名称、简介、能力边界、输入输出提示、运行模式、起始价格和价格表。完整的输入输出契约、执行剖面与调用示例要通过<a href="/zh/datahub/api/reference/discovery/get-data-app">App 详情</a>读取。
+卡片只含选型需要的信息：名称、简介、能力边界、输入输出提示、运行模式、起始价格和价格表。完整的输入输出契约、执行剖面与调用示例要通过<a href="/zh/datahub/api/reference/discovery/get-data-app" target="_blank" rel="noopener noreferrer">App 详情</a>读取。
 
 ## 请求
 
@@ -182,7 +182,7 @@ curl \
 | --- | --- | --- | --- |
 | 401 | `unauthorized` | `forbidden` | 缺少或无效的 API Key。 |
 
-错误响应统一为 `{"error": {code, category, message, retryable}}`，见<a href="/zh/datahub/api/reference/introduction#错误">错误</a>。
+错误响应统一为 `{"error": {code, category, message, retryable}}`，见<a href="/zh/datahub/api/reference/introduction#错误" target="_blank" rel="noopener noreferrer">错误</a>。
 
 ## 客户端库
 

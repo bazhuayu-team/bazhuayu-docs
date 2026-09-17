@@ -1,12 +1,13 @@
 ---
 title: "【淘宝】商品列表页采集"
+description: "学习如何使用八爪鱼完成“【淘宝】商品列表页采集”数据采集。"
 source: "https://www.bazhuayu.com/helpcenter/docs/jEn5z9"
 ---
 **采集场景**
 
 在淘宝首页（<a href="https://s.taobao.com/search" target="_blank" rel="noopener noreferrer">https://s.taobao.com/search</a>）输入关键词搜索，采集搜索后得到的商品列表页数据。示例中关键词为【耐克】，可根据需求进行更换，同时支持自动批量输入多个关键词。
 
- 
+
 
 **采集字段**
 
@@ -14,13 +15,13 @@ source: "https://www.bazhuayu.com/helpcenter/docs/jEn5z9"
 
 ![【淘宝】商品列表页采集](/assets/academy/case-studies/taobao-product-list/01-68b012503bfed.png)
 
- 
+
 
 *鼠标放到图片上，右键，选择【在新标签页中打开图片】可查看高清大图*
 
 *下文其他图片同理*
 
- 
+
 
 **采集结果**
 
@@ -34,7 +35,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/jEn5z9"
 
 如果因网页改版造成网址或步骤无效，无法采集到目标数据，请联系官方客服，我们将及时修正。
 
- 
+
 
 **采集步骤**
 
@@ -52,26 +53,26 @@ source: "https://www.bazhuayu.com/helpcenter/docs/jEn5z9"
 
 步骤七、启动采集
 
- 
+
 
 **以下为具体步骤：**
 
- 
+
 
 ## 步骤一、打开网页
 
- 
+
 
 在首页【输入框】中输入目标网址 <a href="https://s.taobao.com/search" target="_blank" rel="noopener noreferrer">https://s.taobao.com/search</a> ，点击【开始采集】，八爪鱼自动打开网页
 
-<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/fd068b065145403696860980070/mTQq49CNNmoA.mp4" width="100%"></video>
+<video controls src="https://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/fd068b065145403696860980070/mTQq49CNNmoA.mp4" width="100%"></video>
 
 特别说明：
 
 - a. 打开网页后，如果开始开始【自动识别】，请点击【不再自动识别】或【取消识别】将其关掉。因为本文不适合使用【自动识别】。
 - b. 【自动识别】适用于自动识别网页上的列表、滚动和翻页，识别成功后直接启动采集即可获取数据。详情点击查看 <a href="/zh/academy/quick-start/three-minute-quick-start/auto-recognize-collection" target="_blank" rel="noopener noreferrer">【自动识别】教程</a>
 
- 
+
 
 ## 步骤二、登录淘宝
 
@@ -85,9 +86,9 @@ source: "https://www.bazhuayu.com/helpcenter/docs/jEn5z9"
 
 这样就获取到了登录后的Cookie，启动时直接以登录状态打开网页。
 
- 
 
- <video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/1c04678a5145403696864092940/WzE23gMDRZgA.mp4" width="100%"></video>
+
+ <video controls src="https://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/1c04678a5145403696864092940/WzE23gMDRZgA.mp4" width="100%"></video>
 
 > 特别说明：
 >
@@ -105,17 +106,17 @@ source: "https://www.bazhuayu.com/helpcenter/docs/jEn5z9"
 > 
 > - c. 怎么判断是否获取到Cookie？获取Cookie后 ![](/assets/academy/case-studies/taobao-product-list/06-68b01b792a9c1.png) 会变成  ![](/assets/academy/case-studies/taobao-product-list/07-68b01b79292bd.png) ，点击 <img src="/assets/academy/case-studies/taobao-product-list/08-68b01b79297fe.png" alt="" className="academy-inline-icon" /> ，可查看具体的Cookie内容。
 
- 
+
 
 ## 步骤三、输入多个关键词并搜索
 
- 
+
 
 1、在【打开网页】步骤后，点击页面输入文本的位置，一般定位到INPUT标签层上，点击操作提示内的【输入文本】
 
 ![【淘宝】商品列表页采集](/assets/academy/case-studies/taobao-product-list/09-68b01c7766cc0.png)
 
- 
+
 
 2、点击操作提示内的【批量输入文本】
 
@@ -137,19 +138,19 @@ source: "https://www.bazhuayu.com/helpcenter/docs/jEn5z9"
 > 
 > - b. 一次最多输入2W个关键字。可先准备一个包含多个关键字的文档，然后将其复制粘贴进八爪鱼中。
 
- 
+
 
 4、点击搜索
 
 选中【搜索】按钮，在操作提示框中点击【点击该按钮】，出现关键词的搜索结果列表页。
 
- <video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/d13d46c65145403696863176610/oIwPA5JSgrYA.mp4" width="100%"></video>
+ <video controls src="https://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/d13d46c65145403696863176610/oIwPA5JSgrYA.mp4" width="100%"></video>
 
- 
+
 
 ## 步骤四、创建【循环列表】，采集所有商品列表中的数据
 
- 
+
 
 1、通过以下连续3步，采集所有商品列表中的数据：
 
@@ -159,9 +160,9 @@ source: "https://www.bazhuayu.com/helpcenter/docs/jEn5z9"
 
 ③点击【文本内容】，生成循环配置
 
- <video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/dee1af0b5145403696863726218/oAqP5SpbDsYA.mp4" width="100%"></video>
+ <video controls src="https://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/dee1af0b5145403696863726218/oAqP5SpbDsYA.mp4" width="100%"></video>
 
- 
+
 
 > 特别说明：
 >
@@ -177,7 +178,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/jEn5z9"
 > 
 > - b. 为何通过以上3步，可建立【循环-提取数据】？详情点击查看 <a href="/zh/academy/basic-collection/beginner/list-collection" target="_blank" rel="noopener noreferrer">列表数据采集教程 </a>。
 
- 
+
 
 2、修改循环列表XPath
 
@@ -187,9 +188,9 @@ source: "https://www.bazhuayu.com/helpcenter/docs/jEn5z9"
 
 ③元素XPath填写：//div[@id="content\_wrapper"]/div/div/a
 
-<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/e7ae51645145403696860031882/3Z27tSRj5NUA.mp4" width="100%"></video>
+<video controls src="https://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/e7ae51645145403696860031882/3Z27tSRj5NUA.mp4" width="100%"></video>
 
- 
+
 
 3、提取所需字段
 
@@ -197,38 +198,38 @@ source: "https://www.bazhuayu.com/helpcenter/docs/jEn5z9"
 
 如提取链接字段，操作提示内点击【链接地址】
 
-<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/780a60b55145403696858908915/xcdXLPpAZK8A.mp4" width="100%"></video>
+<video controls src="https://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/780a60b55145403696858908915/xcdXLPpAZK8A.mp4" width="100%"></video>
 
- 
+
 
 ## 步骤五、创建【循环翻页】，以采集多页数据
 
- 
+
 
 如果只是采集一页数据，可跳过此步骤。
 
 如果需要翻页以采集多页数据：选择页面中的【下一页】按钮，在操作提示上单击【循环点击下一页】，创建【循环翻页】。
 
- 
 
- <video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/fcf6240d5145403696860973345/swFCbevb2zwA.mp4" width="100%"></video>
+
+ <video controls src="https://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/fcf6240d5145403696860973345/swFCbevb2zwA.mp4" width="100%"></video>
 
 特别说明：
 
 - a. 创建【循环翻页】后，八爪鱼会自动点击【下一页】按钮进行翻页，从第1页，第2页......直到最后1页。如果只需采集特定页的数据，可在八爪鱼中设置循环翻页的次数，详情点击查看  <a href="/zh/academy/basic-collection/pagination/next-page-button" target="_blank" rel="noopener noreferrer">翻页以采集多页数据教程</a>。
 - b. 在选中【下一页】范围时，选中的范围不同，弹出的提示也不同。如果选中的是最里层的文字【下一页】，黄色操作提示框中弹出的提示是【循环点击下一页】。如果选中的是最整个【下一页】按钮，黄色操作提示框中弹出的提示是【循环点击单个链接】。两者的作用相同，都是为了实现翻页。
 
- 
 
- 
+
+
 
 步骤六，编辑字段
 
- 
+
 
 1、进入【提取数据】设置页面，可删除多余字段，修改字段名，移动字段顺序等。
 
- <video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/2213a48d5145403696857554047/Ui710loaGl0A.mp4" width="100%"></video>
+ <video controls src="https://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/2213a48d5145403696857554047/Ui710loaGl0A.mp4" width="100%"></video>
 
  2、修改字段XPath定位
 
@@ -254,11 +255,11 @@ source: "https://www.bazhuayu.com/helpcenter/docs/jEn5z9"
 
 店铺名称xpath：//span[@class="shopNameText--DmtlsDKm"]
 
- 
 
-<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/891a9e7b5145403696879088982/AZWKz4apUcAA.mp4" width="100%"></video>
 
- 
+<video controls src="https://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/891a9e7b5145403696879088982/AZWKz4apUcAA.mp4" width="100%"></video>
+
+
 
 > 注意：
 >
@@ -266,19 +267,19 @@ source: "https://www.bazhuayu.com/helpcenter/docs/jEn5z9"
 >
 > 此处用到相关XPath，具体参考对应教程：<a href="/zh/academy/xpath/relative-absolute-xpath" target="_blank" rel="noopener noreferrer">绝对xpath、相对XPath学习与实例</a>
 
- 
+
 
 ## 步骤七、启动采集
 
- 
+
 
 1、单击【保存】并【采集】。启动后八爪鱼开始自动采集数据。
 
- 
 
-<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/df26cb685145403696863760343/zkX53qyUR58A.mp4" width="100%"></video>
 
- 
+<video controls src="https://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/df26cb685145403696863760343/zkX53qyUR58A.mp4" width="100%"></video>
+
+
 
 > 特别说明：
 >
@@ -292,22 +293,22 @@ source: "https://www.bazhuayu.com/helpcenter/docs/jEn5z9"
 > 
 > - a. 【本地采集】是使用自己的电脑进行采集，【云采集】是使用八爪鱼提供的云服务器采集
 
- 
 
- 
+
+
 
 2、采集完成后，选择合适的导出方式来导出数据。支持导出为Excel，CSV，HTML，数据库等。这里导出为Excel。
 
- 
+
 
  ![【淘宝】商品列表页采集](/assets/academy/case-studies/taobao-product-list/12-68b0feb3df5aa.png)
 
- 
+
 
 数据示例：
 
 ![【淘宝】商品列表页采集](/assets/academy/case-studies/taobao-product-list/13-68b0fea2398fc.png)
 
- 
+
 
 作者：Leon

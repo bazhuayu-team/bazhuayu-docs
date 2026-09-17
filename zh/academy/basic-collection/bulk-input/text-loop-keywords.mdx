@@ -6,25 +6,25 @@ source: "https://www.bazhuayu.com/helpcenter/docs/2DUt4F"
 
 有很多网站，需要输入关键词查询，然后采集查询后得到的结果数据。
 
- 
+
 
 例如：在京东首页搜索框中输入商品名称搜索，采集搜索后得到的商品信息；在新闻网站的搜索框中，输入热门关键词，采集搜索后得到的最新资讯。
 
- 
+
 
 在八爪鱼中该如何操作呢？来看一下具体的操作步骤。
 
- 
+
 
 ### **一、输入1个关键词查询**
 
- 
+
 
 示例网址：<a href="https://www.jd.com" target="_blank" rel="noopener noreferrer">https://www.jd.com</a>
 
 采集需求：在京东首页，输入关键词【手机】，采集出现的手机商品数据。
 
- 
+
 
 Step1. 输入网址打开网页。需先登录，请先点击切换到浏览器模式，然后像在正常浏览器里面操作一样，点击滑块手动拖动过去。拖动完成后再继续往下操作。
 
@@ -39,25 +39,25 @@ Step1. 输入网址打开网页。需先登录，请先点击切换到浏览器�
   您的浏览器不支持视频播放，请更新浏览器后重试。
 </video>
 
- 
 
- 
+
+
 
 Step2. 接下来按需提取数据即可。具体请看 <a href="/zh/academy/basic-collection/beginner/custom-collection" target="_blank" rel="noopener noreferrer">新手入门课程</a>  。
 
- 
 
- 
+
+
 
 ### **二、批量输入多个关键词（单文本输入）**
 
- 
+
 
 示例网址：<a href="https://www.jd.com" target="_blank" rel="noopener noreferrer">https://www.jd.com</a>
 
 采集需求：在京东首页，依次输入 **关键词1、关键词2、关键词3、关键词4** （用户可将其更换成自己想要的关键词，单次最多支持输入2W个）并搜索，然后采集每个关键词的搜索结果数据。
 
- 
+
 
 #### Step1.  设置【文本循环】
 
@@ -80,7 +80,7 @@ Step2. 接下来按需提取数据即可。具体请看 <a href="/zh/academy/b
 >
 > a. 可先准备一个含有多个关键词的excel文档，支持复制粘贴。一次最多输入2W个关键词。
 
- 
+
 
 #### Step2. 设置【输入文字】
 
@@ -99,7 +99,7 @@ Step2. 接下来按需提取数据即可。具体请看 <a href="/zh/academy/b
   您的浏览器不支持视频播放，请更新浏览器后重试。
 </video>
 
- 
+
 
 Step3.点击搜索
 
@@ -114,7 +114,7 @@ Step3.点击搜索
   您的浏览器不支持视频播放，请更新浏览器后重试。
 </video>
 
- 
+
 
 Step4. 按需提取数据。
 
@@ -129,7 +129,7 @@ Step4. 按需提取数据。
   您的浏览器不支持视频播放，请更新浏览器后重试。
 </video>
 
- 
+
 
 Step5.开始采集数据
 
@@ -137,9 +137,9 @@ Step5.开始采集数据
 
 ![](/assets/academy/basic-collection/text-loop-keywords/10-650d2e8b87c9a.png)
 
- 
 
- 
+
+
 
 注意：有的网页，在输入第1个关键词并点击搜索以后，文本输入框的位置（本质上）是网页源码会有变化，第1个关键词的数据采集完成以后，没办法输入第2个关键词。此时，需将【打开网页】步骤，拖至【循环】内，如下图所示：
 
@@ -147,23 +147,23 @@ Step5.开始采集数据
 
 ### **三、批量输入多个关键词（双文本输入）**
 
- 
+
 
 示例网址：<a href="https://kns.cnki.net/kns8/AdvSearch?dbcode=CFLS" target="_blank" rel="noopener noreferrer">https://kns.cnki.net/kns8/AdvSearch?dbcode=CFLS</a>
 
 采集需求：&#x5728;**【作者发文检索】**&#x7684;条件下，有俩个文本框需要一一对应输入，依次输入 **组合关键词1;组合关键词1****、组合关键词2;组合关键词2、组合关键词3;组合关键词3**（一组关键词间用英文符号间隔开，用户可将其更换成自己想要的关键词，单次最多支持输入2W个）并搜索，然后采集每个关键词的搜索结果数据。
 
- 
+
 
 #### Step1.  输入网址，设置【点击元素】
 
 输入网址后，自动打开网页。我们需要选&#x62E9;**【作者发文检索】。**&#x5C06;鼠标移动&#x5230;**【作者发文检索】，**&#x70B9;击之后选择【点击该元素】，并设置Ajax超时时间为3s。
 
- 
 
-<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/1a041cf53270835015512120883/PNaCHkyBP0AA.mp4" width="100%"></video>
 
- 
+<video controls src="https://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/1a041cf53270835015512120883/PNaCHkyBP0AA.mp4" width="100%"></video>
+
+
 
 #### Step2.  选中文本输入框
 
@@ -171,11 +171,11 @@ Step5.开始采集数据
 
 将鼠标移动到第一个输入框，点击后选&#x62E9;**【输入文本】**，再点击第二个循环框，由于咱们会在后面输入多组关键词，因此操作框内不输入关键词，直接点&#x51FB;**【确定】**&#x5373;可。
 
- 
 
-<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/699fa55b3270835015513267354/7IhjdoWAC8gA.mp4" width="100%"></video>
 
- 
+<video controls src="https://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/699fa55b3270835015513267354/7IhjdoWAC8gA.mp4" width="100%"></video>
+
+
 
 #### Step3. 创建文本循环
 
@@ -185,17 +185,17 @@ Step5.开始采集数据
 
 检查一下，现在，循环中就有了我们输入的多组关键词。
 
-<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/46c728c13270835015509097075/9xuWtWRcA0QA.mp4" width="100%"></video>
+<video controls src="https://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/46c728c13270835015509097075/9xuWtWRcA0QA.mp4" width="100%"></video>
 
 关键词：
 
-范嘉昊;北京科技大学冶金与生态工程学院\
-吴克辉;中国科学院物理研究所\
+范嘉昊;北京科技大学冶金与生态工程学院
+吴克辉;中国科学院物理研究所
 程妍昕;西安电子科技大学
 
- 
 
- 
+
+
 
 #### Step4. **设置【输入循环文本】**
 
@@ -203,17 +203,17 @@ Step5.开始采集数据
 
 来验证一下，选中【循环】，在流程中选择关键词，点击【输入循环文本】，可以看到，可以成功的依次填充我们设置的关键词到网页上的文本框中。
 
-<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/6700f8d23270835015513125109/PUYrBMNp6sIA.mp4" width="100%"></video>
+<video controls src="https://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/6700f8d23270835015513125109/PUYrBMNp6sIA.mp4" width="100%"></video>
 
 #### Step5.设置点击元素
 
 点击页面的【检索】，选择【点击该按钮】，然后选择我们要的字段进行提取，【点击元素】设置Ajax超时时间位3s。
 
- 
 
-<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/7545a6ba3270835015513760661/NtGhUj0T888A.mp4" width="100%"></video>
 
-####  
+<video controls src="https://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/7545a6ba3270835015513760661/NtGhUj0T888A.mp4" width="100%"></video>
+
+
 
 #### Step6.优化流程
 
@@ -221,13 +221,13 @@ Step5.开始采集数据
 
 修改下字段名称，删除不必要的字段以及调整字段顺序后点击保存。
 
- 
 
-<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/09e6f05c3270835015508760245/j3PPUinIcN0A.mp4" width="100%"></video>
 
- 
+<video controls src="https://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/09e6f05c3270835015508760245/j3PPUinIcN0A.mp4" width="100%"></video>
 
- 
+
+
+
 
 #### Step7：开始采集
 
@@ -235,6 +235,6 @@ Step5.开始采集数据
 
 可以看到采集页面一一对应的输入咱们设置的三组关键词，并采集到对应的字段。
 
-<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/d2137dc33270835015511379198/6AimAeLgNUIA.mp4" width="100%"></video>
+<video controls src="https://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/d2137dc33270835015511379198/6AimAeLgNUIA.mp4" width="100%"></video>
 
 ![文本循环：批量输入关键词](/assets/academy/basic-collection/text-loop-keywords/16-65b2314782875.png)

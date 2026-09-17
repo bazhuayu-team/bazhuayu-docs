@@ -1,5 +1,6 @@
 ---
 title: "【央视新闻】关键词搜索列表采集"
+description: "学习如何使用八爪鱼完成“【央视新闻】关键词搜索列表采集”数据采集。"
 source: "https://www.bazhuayu.com/helpcenter/docs/yang-shi-xin-wen-guan-jian-ci-sou-suo-lie-biao-cai-ji"
 ---
 **一、采集场景**
@@ -10,9 +11,9 @@ source: "https://www.bazhuayu.com/helpcenter/docs/yang-shi-xin-wen-guan-jian-ci-
 
 ，通过批量输入多个关键词检索相关新闻，然后采集新闻的列表页数据，再翻页采集全部页的数据
 
- 
 
- 
+
+
 
 **<a href="/zh/academy/case-studies/news/jiemian-keyword-list-detail#e5796071b2891dfd7209a3343ac8f7b8" target="_blank" rel="noopener noreferrer">二、采集字段</a>**
 
@@ -20,25 +21,25 @@ source: "https://www.bazhuayu.com/helpcenter/docs/yang-shi-xin-wen-guan-jian-ci-
 
 ![【央视新闻】关键词搜索列表采集](/assets/academy/case-studies/cctv-keyword-list/01-69c3939ead508.png)
 
- 
 
- 
+
+
 
 **三、采集结果**
 
 采集结果可导出为Excel，CSV，HTML，数据库等多种格式。导出为Excel示例：
 
- 
+
 
 ![【央视新闻】关键词搜索列表采集](/assets/academy/case-studies/cctv-keyword-list/02-69c39713b3f36.png)
 
- 
 
- 
 
- 
 
- 
+
+
+
+
 
 **<a href="/zh/academy/case-studies/news/jiemian-keyword-list-detail#6d9c1aa5fdd97aae3187c08c1f05f903" target="_blank" rel="noopener noreferrer">四、采集步骤</a>**
 
@@ -54,30 +55,30 @@ source: "https://www.bazhuayu.com/helpcenter/docs/yang-shi-xin-wen-guan-jian-ci-
 
 步骤六、启动采集
 
- 
 
- 
+
+
 
 **以下为具体步骤：**
 
- 
+
 
 **<a href="/zh/academy/case-studies/news/jiemian-keyword-list-detail#eacbc190842df1942f165db4a2045a4a" target="_blank" rel="noopener noreferrer">步骤一、打开网页</a>**
 
-在首页【输入框】中输入目标网址：<a href="https://search.cctv.com/search.php?qtext=医疗\&page=1\&type=web\&sort=date\&datepid=1\&channel=\&vtime=-1\&is_search=1" target="_blank" rel="noopener noreferrer">https://search.cctv.com/search.php?qtext=%E5%8C%BB%E7%96%97\&page=1\&type=web\&sort=date\&datepid=1\&channel=\&vtime=-1\&is\_search=1</a>\
+在首页【输入框】中输入目标网址：<a href="https://search.cctv.com/search.php?qtext=医疗\&page=1\&type=web\&sort=date\&datepid=1\&channel=\&vtime=-1\&is_search=1" target="_blank" rel="noopener noreferrer">https://search.cctv.com/search.php?qtext=%E5%8C%BB%E7%96%97\&page=1\&type=web\&sort=date\&datepid=1\&channel=\&vtime=-1\&is\_search=1</a>
 点击【开始采集】，八爪鱼自动打开网页。
 
- 
 
- 
+
+
 
 ![【央视新闻】关键词搜索列表采集](/assets/academy/case-studies/cctv-keyword-list/03-69c395625b203.png)
 
- 
 
- 
 
- 
+
+
+
 
 **<a href="/zh/academy/case-studies/news/jiemian-keyword-list-detail#16d41ff166b2d54549adb63bfda58dc0" target="_blank" rel="noopener noreferrer">步骤二、批量输入关键词</a>**
 
@@ -91,17 +92,17 @@ source: "https://www.bazhuayu.com/helpcenter/docs/yang-shi-xin-wen-guan-jian-ci-
 
 汽车
 
- 
+
 
 并且勾选上【输入回车键Enter】
 
-<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/087b35085145403721237699186/KxiFZiL1PeEA.mp4" width="100%"></video>
+<video controls src="https://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/087b35085145403721237699186/KxiFZiL1PeEA.mp4" width="100%"></video>
 
- 
 
- 
 
- 
+
+
+
 
 #### 步骤三、采集列表数据
 
@@ -113,31 +114,31 @@ source: "https://www.bazhuayu.com/helpcenter/docs/yang-shi-xin-wen-guan-jian-ci-
 
 3、点击【选择全部相似组】
 
-4、点击【元素中数据内容】\
-\
+4、点击【元素中数据内容】
+
 5、创建一个循环列表进行提取列表数据，并且添加输入的关键词作为采集的字段
 
- 
 
-<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/5734f7365145403721238710525/baAaSZcYoj4A.mp4" width="100%"></video>
 
- 
+<video controls src="https://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/5734f7365145403721238710525/baAaSZcYoj4A.mp4" width="100%"></video>
 
- 
+
+
+
 
 #### 步骤四、修改编辑字段
 
 依次修改编辑字段名，或调整字段顺序，如下：
 
-<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/0f65f1665145403721237984736/OsBGg4zxn2sA.mp4" width="100%"></video>
+<video controls src="https://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/0f65f1665145403721237984736/OsBGg4zxn2sA.mp4" width="100%"></video>
 
- 
 
- 
 
- 
 
- 
+
+
+
+
 
 #### 步骤五、设置循环翻页
 
@@ -145,38 +146,38 @@ source: "https://www.bazhuayu.com/helpcenter/docs/yang-shi-xin-wen-guan-jian-ci-
 
 ![【央视新闻】关键词搜索列表采集](/assets/academy/case-studies/cctv-keyword-list/04-69c398617715c.png)
 
- 
 
- 
 
- 
+
+
+
 
 #### 步骤六、保存任务启动采集
 
 1.配置好任务后，点击【保存】-【启动采集】
 
-<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/5738399b5145403721238716371/qQcpcqnkqYEA.mp4" width="100%"></video>
+<video controls src="https://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/5738399b5145403721238716371/qQcpcqnkqYEA.mp4" width="100%"></video>
 
- 
 
- 
 
- 
 
- 
+
+
+
+
 
 采集到数据后，数据支持导出为Excel、CSV、HTML、数据库等。这里导出为Excel。数据示例：
 
 ![【央视新闻】关键词搜索列表采集](/assets/academy/case-studies/cctv-keyword-list/05-69c3970ed9e10.png)
 
- 
 
- 
 
- 
+
+
+
 
 模板推荐：客户端搜索模板【央视新闻-关键词搜索列表采集】，一键获取更全的数据
 
- 
+
 
 ![【央视新闻】关键词搜索列表采集](/assets/academy/case-studies/cctv-keyword-list/06-69c3a6f80f672.png)

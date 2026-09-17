@@ -12,33 +12,33 @@ source: "https://www.bazhuayu.com/helpcenter/docs/WoDMcd"
 
 ### **1、抓取文本：抓取显示在页面中的文本**
 
- 
+
 
 操作：鼠标选中页面中的文本，在弹出的操作提示框中选择【文本内容】，目标文本就被采集下来了。
 
 同时，将鼠标移动到字段名【文本】上，点击 <img src="/assets/academy/advanced-features/custom-extraction-method/01-65361850603f0.png" alt="" className="academy-inline-icon" /> 按钮，选择【元素抓取方式】，可以看到八爪鱼自动为我们选择了【元素文本】。
 
- 
+
 
 <video controls src="https://resource-wangsu.helplook.net/docker_production/3mkuae/article/WoDMcd/video/654e0861dca72.mp4" width="100%"></video>
 
- 
 
- 
+
+
 
 ### **2、抓取图片网址：抓取图片的网址**
 
- 
+
 
 操作：鼠标选中页面中的图片，在弹出的操作提示框中选择【图片链接】，图片网址就被提取下来了。
 
 同时，将鼠标移动到字段名【图片地址】上，点击 <img src="/assets/academy/advanced-features/custom-extraction-method/02-6536184fe4d71.png" alt="" className="academy-inline-icon" /> 按钮，选择【元素抓取方式】，可以看到八爪鱼自动为我们选择了【抓取图片网址（IMG标签的src属性）】。
 
- 
+
 
 <video controls src="https://resource-wangsu.helplook.net/docker_production/3mkuae/article/WoDMcd/video/654e093d6abb4.mp4" width="100%"></video>
 
- 
+
 
 为什么是【IMG标签的src属性】？在 <a href="/zh/academy/xpath/getting-started/what-is-html-xpath" target="_blank" rel="noopener noreferrer">XPath与Html</a> 中，我们讲过网页Html相关知识，网页上的图片一般都是用IMG标签表示，其图片地址会放在IMG标签的src属性中。
 
@@ -46,7 +46,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/WoDMcd"
 
 这里演示的只是抓取图片时使用的抓取方式，具体的图片采集，请看教程<a href="/zh/academy/data-export/file-download" target="_blank" rel="noopener noreferrer">文件边采集边下载</a>
 
- 
+
 
 ### **3、抓取链接网址，抓取网页上超链接的网址**
 
@@ -54,21 +54,21 @@ source: "https://www.bazhuayu.com/helpcenter/docs/WoDMcd"
 
 同时，将鼠标移动到字段名【链接地址】上，点击 <img src="/assets/academy/advanced-features/custom-extraction-method/03-6536185266f3e.png" alt="" className="academy-inline-icon" /> 按钮，选择【元素抓取方式】，可以看到八爪鱼自动为我们选择了【元素链接网址】。
 
- 
+
 
 <video controls src="https://resource-wangsu.helplook.net/docker_production/3mkuae/article/WoDMcd/video/654e0ab0efb65.mp4" width="100%"></video>
 
- 
+
 
 在 <a href="/zh/academy/xpath/getting-started/what-is-html-xpath" target="_blank" rel="noopener noreferrer">XPath与Html</a>  中，我们讲过网页Html相关知识，网页上的超链接一般都是用A标签表示，超链接会放在IMG标签的href属性中。
 
 所以，当我们要提取超链接网址时，本质上是用XPath定位到A标签，再从A标签中提取href属性，href属性的值，就是超链接网址。如果选择采集链接之后，字段显示为空，一般是xpath定位的元素没有链接，需要在源码里确认一下。
 
- 
+
 
 ### 4.抓取网页源码：抓取网页元素对应的源码
 
- 
+
 
 抓取网页源码Outer Html 
 
@@ -76,13 +76,13 @@ source: "https://www.bazhuayu.com/helpcenter/docs/WoDMcd"
 
 同时，将鼠标移动到字段名【OuterHtml】上，点击 <img src="/assets/academy/advanced-features/custom-extraction-method/04-653618528a508.png" alt="" className="academy-inline-icon" /> 按钮，选择【元素抓取方式】，可以看到八爪鱼自动为我们选择了【元素网页源码（Outer Html】。
 
- 
+
 
 <video controls src="https://resource-wangsu.helplook.net/docker_production/3mkuae/article/WoDMcd/video/654e0ba46130d.mp4" width="100%"></video>
 
- 
 
- 
+
+
 
 ### 5.抓取网页源码Inner Html
 
@@ -90,11 +90,11 @@ source: "https://www.bazhuayu.com/helpcenter/docs/WoDMcd"
 
 同时，将鼠标移动到字段名【Inner Html】上，点击 <img src="/assets/academy/advanced-features/custom-extraction-method/05-653618530fc27.png" alt="" className="academy-inline-icon" /> 按钮，选择【元素抓取方式】，可以看到八爪鱼自动为我们选择了【元素内部网页源码（Inner Html】。
 
- 
+
 
 <video controls src="https://resource-wangsu.helplook.net/docker_production/3mkuae/article/WoDMcd/video/654e0c0d431ec.mp4" width="100%"></video>
 
- 
+
 
 Outer Html 和 Inner Html有何区别？
 
@@ -102,21 +102,21 @@ Outer Html：包含当前元素（如图红色框）
 
 Inner Html：不包含当前元素，从当前元素的下一级开始（如图橙色框）
 
- 
+
 
 ![](/assets/academy/advanced-features/custom-extraction-method/06-654e0ecb8773e.png)
 
- 
+
 
 ### 6、抓取元素属性值
 
- 
+
 
 先用XPath找到当前元素的源码，观察当前源码中存在什么属性值、需要提取哪个属性值，然后提取存在且需要的属性值即可。
 
 示例网址：<a href="https://search.jd.com/Search?keyword=%E6%89%8B%E6%9C%BA&enc=utf-8&qrst=1&rt=1&stop=1&vt=2&wq=%E6%89%8B%E6%9C%BA&page=7&s=177&click=0" target="_blank" rel="noopener noreferrer">https://search.jd.com/Search?keyword=%E6%89%8B%E6%9C%BA&enc=utf-8&qrst=1&rt=1&stop=1&vt=2&wq=%E6%89%8B%E6%9C%BA&page=7&s=177&click=0</a>
 
- 
+
 
 操作步骤：
 
@@ -124,11 +124,11 @@ Inner Html：不包含当前元素，从当前元素的下一级开始（如图�
 
 第1个商品列表的定位XPath为.//\*[@id='J\_goodsList']/ul/li[1]，对应的网页源码中，有class、data-sku、data-spu、data-pid四个属性。我们需要抓取data-sku这个属性的属性值。
 
- 
+
 
 ![](/assets/academy/advanced-features/custom-extraction-method/07-654e11794244d.png)
 
- 
+
 
 我们先选中第一个商品列表，在弹出的操作提示框中，选择【文本内容】，这个步骤只是为了获得定位到列表的XPath。
 

@@ -8,7 +8,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/lweEtU"
 
 正则表达式是对字符串（包括普通字符（例如，a 到 z 之间的字母）和特殊字符（称为“元字符”））操作的一种逻辑公式，就是用事先定义好的一些特定字符、及这些特定字符的组合，组成一个【规则字符串】，这个【规则字符串】用来表达对字符串的一种过滤逻辑。正则表达式是一种文本模式，该模式描述在搜索文本时要匹配的一个或多个字符串。
 
- 
+
 
 ### **2、正则的****用途**
 
@@ -18,7 +18,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/lweEtU"
 
 字符串替换
 
- 
+
 
 ### **3、常用元字符及描述**
 
@@ -58,7 +58,7 @@ X\{n,m\} 最少n次，最多m次
 
 “” 正则 “a?” 零宽度匹配，出现零次
 
- 
+
 
 #### **边界匹配**
 
@@ -70,7 +70,7 @@ X\{n,m\} 最少n次，最多m次
 
 ^[\s&&[^\n]]\*\n$  空白行，开头是空白字符但不是换行符，出现0次或多次，且紧跟着是结束的换行符
 
- 
+
 
 ### **4、常用正则表达式**
 
@@ -86,7 +86,7 @@ X\{n,m\} 最少n次，最多m次
 
 同时，也可以用 “([\d\D]\*)”、“([\w\W]\*)” 来表示
 
- 
+
 
 ([\s\S]\*?)  加上问号 表示最短匹配
 
@@ -114,7 +114,7 @@ X\{n,m\} 最少n次，最多m次
 
 去除尾部空格：(\s\*$)
 
- 
+
 
 #### **匹配图片：**
 
@@ -130,7 +130,7 @@ X\{n,m\} 最少n次，最多m次
 
 (http:|https:|//)(.+?)(\\.png|\\.jpg|\\.gif|\\.bmp|\\.jpeg)
 
- 
+
 
 ### **5、常用实例**
 
@@ -138,7 +138,7 @@ X\{n,m\} 最少n次，最多m次
 
 示例用八爪鱼正则工具演示： \\\  \\|
 
- 
+
 
 2\) 表达式的开始结束表示
 
@@ -148,7 +148,7 @@ X\{n,m\} 最少n次，最多m次
 
 表示任意字符(.+?)
 
- 
+
 
 3\) 正则表达式如何调整文本前后位置
 
@@ -158,13 +158,13 @@ X\{n,m\} 最少n次，最多m次
 
 ![正则表达式](/assets/academy/advanced-features/regular-expression/01-65573cf99e16b.png)
 
- 
+
 
 **第一步：做列表循环，提取列表的数据。其中提取数据步骤，设置提取红框内的时间。**
 
 <video controls src="https://resource-wangsu.helplook.net/docker_production/3mkuae/article/lweEtU/video/65573fb99989b.mp4" width="100%"></video>
 
- 
+
 
 **第二步，数据预览界面，在对应的字段那里点击三个点<img src="/assets/academy/advanced-features/regular-expression/02-6557427ee375d.png" alt="正则表达式" className="academy-inline-icon" />（更多字段操作），选择格式化数据，选择用正则表达式替换，将文本里面的换行符去掉，把时间格式化为 172023-11**
 
@@ -174,7 +174,7 @@ X\{n,m\} 最少n次，最多m次
 
 ![正则表达式](/assets/academy/advanced-features/regular-expression/04-6557420421737.png)
 
- 
+
 
 **第三步，再次选择正则表达式替换，调整时间文本内容的顺序。**
 
@@ -206,6 +206,6 @@ $的顺序是可以调整的：
 
 ![正则表达式](/assets/academy/advanced-features/regular-expression/05-655743ce915e8.png)
 
- 
+
 
 作者：Tina

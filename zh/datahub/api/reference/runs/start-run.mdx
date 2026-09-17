@@ -18,9 +18,9 @@ POST https://api-datahub.bazhuayu.com/v1/data-apps/{app_id}/runs
 `wait` 决定这次调用是否等待结果：
 
 * **省略**：按 App 的 `execution.mode` 默认行为。`sync` 型一直等到终态（上限为 App 的 `execution.timeout_seconds`）；`async` 型立即返回 `run_id`。
-* **显式给出 0-60**：两种模式行为一致，最多等 `wait` 秒；`wait=0` 入队即返回，`sync` 型也可以先拿到 `run_id` 再用 <a href="/zh/datahub/api/reference/runs/get-run">查询运行</a> 的 `wait` 长轮询。
+* **显式给出 0-60**：两种模式行为一致，最多等 `wait` 秒；`wait=0` 入队即返回，`sync` 型也可以先拿到 `run_id` 再用 <a href="/zh/datahub/api/reference/runs/get-run" target="_blank" rel="noopener noreferrer">查询运行</a> 的 `wait` 长轮询。
 
-返回时运行已到终态的话，`sample_records` 带首批记录。完整结果通过<a href="/zh/datahub/api/reference/runs/get-run-records">读取运行结果</a>分页取。
+返回时运行已到终态的话，`sample_records` 带首批记录。完整结果通过<a href="/zh/datahub/api/reference/runs/get-run-records" target="_blank" rel="noopener noreferrer">读取运行结果</a>分页取。
 
 `version` 把运行钉到历史版本（契约与价格都随该版本）；`build` 是作者调试用，钉住一个不可变的 Build 快照（`run_kind=test`，不进公开统计，但照常计费），与 `version` 互斥。
 
@@ -358,7 +358,7 @@ curl -X POST \
 | 503 | `billing-unavailable` | `temporary` | 账号有欠费记录且计费服务暂时无法核验余额；`retryable` 为 `true`，稍后重试。 |
 | 422 | `version-yanked` | `invalid_input` | 指定的版本已被作者撤回，不再接受新运行。 |
 
-错误响应统一为 `{"error": {code, category, message, retryable}}`，见<a href="/zh/datahub/api/reference/introduction#错误">错误</a>。
+错误响应统一为 `{"error": {code, category, message, retryable}}`，见<a href="/zh/datahub/api/reference/introduction#错误" target="_blank" rel="noopener noreferrer">错误</a>。
 
 ## 客户端库
 

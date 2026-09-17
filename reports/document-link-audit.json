@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-08-26T07:53:07.043Z",
+  "generatedAt": "2026-09-17T06:46:11.676Z",
   "mode": "write",
-  "filesScanned": 858,
-  "changedFiles": 2,
+  "filesScanned": 932,
+  "changedFiles": 60,
   "converted": {
     "currentDocs": 0,
     "oldHelpCenter": 0,
-    "external": 547,
-    "internalRelative": 1054
+    "external": 550,
+    "internalRelative": 1147
   },
   "oldHelpCenter": {
     "uniqueUrls": 24,

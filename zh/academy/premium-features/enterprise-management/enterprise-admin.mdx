@@ -12,7 +12,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/FM40jz"
 
 而团队版（旧套餐旗舰\旗舰+版本），则处于公共集群，其节点数较少，所有团队版（就套餐旗舰/旗舰+）用户一起争夺节点的使用权。
 
- 
+
 
 ### 二、企业版**可手动调整每个任务的云节点数**
 
@@ -22,7 +22,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/FM40jz"
 
 调整后的节点数长期有效，再次启动或复制/导入导出任务，也无需重新设置节点数。
 
- 
+
 
 ### **1、云节点分配入口**
 
@@ -30,13 +30,13 @@ source: "https://www.bazhuayu.com/helpcenter/docs/FM40jz"
 
 ![企业版管理](/assets/academy/premium-features/enterprise-admin/01-6555dc6945c0a.png)
 
- 
+
 
 最后在弹窗中设置该任务的最大可用节点。
 
 ![企业版管理](/assets/academy/premium-features/enterprise-admin/02-6555dca776d01.png)
 
- 
+
 
 ### 2、云节点分配原则
 
@@ -48,7 +48,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/FM40jz"
 
 ![企业版管理](/assets/academy/premium-features/enterprise-admin/03-6555edc6d0398.png)
 
- 
+
 
 如何得知账号正在运行的云节点数？
 
@@ -56,7 +56,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/FM40jz"
 
 在【我的任务】界面，【云采集状态】中筛选出全部的【运行中】任务，依次查看每个任务的 云采集实况，然后将每个任务的【运行中】子任务数相加，即可得到当前时间账号有多少个云节点正在采集数据。
 
- 
+
 
 **方法二：通过云监控预警平台查看（推荐）**
 
@@ -64,7 +64,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/FM40jz"
 
 ![企业版管理](/assets/academy/premium-features/enterprise-admin/04-6555ed58813d7.png)
 
- 
+
 
 **云节点分配原则：**
 
@@ -76,7 +76,7 @@ c.  一般而言，在账号内空闲节点充足的情况，建议给某个任
 
 d. 已经分配出去的云节点，完成该子任务的采集之后，才会被回收到账号中供其他任务使用。如：任务A的最大可用节点数是30，启动云采集后，这30个节点都在进行采集（即该任务运行中的子任务数是30）。随后又想降低任务A的云节点，分配一些节点给任务B使用。此时将任务A的最大可用节点数调成10个，那20个节点并不会马上转给任务B使用。而是继续运行任务A的子任务，该子任务完成后，才会转给任务B使用。
 
- 
+
 
 **特殊情况说明：**
 
@@ -86,7 +86,7 @@ d. 已经分配出去的云节点，完成该子任务的采集之后，才会�
 
 举个例子，任务A的每个子任务只需要10秒就可以完成采集，但每个子任务分配上云节点并启动需要花费20秒。故在查询的瞬间就会出在采集的节点少，分配并启动的多。而我们的【运行中子任务数】，只是查询并显示正在采集过程中的，那类分配并启动中的不会查询到。故看起来像是节点用不满。
 
- 
+
 
 **（2）启动云采集后，【运行中】没有看到这个任务。**
 

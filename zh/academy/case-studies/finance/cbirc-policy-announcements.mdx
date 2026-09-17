@@ -1,5 +1,6 @@
 ---
 title: "【银保监】官网政策公告采集"
+description: "学习如何使用八爪鱼完成“【银保监】官网政策公告采集”数据采集。"
 source: "https://www.bazhuayu.com/helpcenter/docs/eyxkrQ"
 ---
 2022-06-30 
@@ -8,19 +9,19 @@ source: "https://www.bazhuayu.com/helpcenter/docs/eyxkrQ"
 
 进入中国银行保险监督管理委员会【新闻资讯】版块下的【监管动态】栏目 <a href="http://www.cbirc.gov.cn/cn/view/pages/ItemList.html?itemPId=914&itemId=915&itemUrl=ItemListRightList.html&itemName=%E7%9B%91%E7%AE%A1%E5%8A%A8%E6%80%81" target="_blank" rel="noopener noreferrer">http://www.cbirc.gov.cn/cn/view/pages/ItemList.html?itemPId=914&itemId=915&itemUrl=ItemListRightList.html&itemName=%E7%9B%91%E7%AE%A1%E5%8A%A8%E6%80%81</a>  ，进入每条监管动态详情，采集其详情页信息。
 
- 
+
 
 **采集字段**
 
 当前位置、标题、标题链接、发布时间、来源、正文、当前采集时间。
 
- 
+
 
 ![【银保监】官网政策公告采集](/assets/academy/case-studies/cbirc-policy-announcements/01-653f5b95a3bd2.png)
 
 *点击查看高清大图，**下文其他图片同理*  
 
- 
+
 
 **采集结果**
 
@@ -28,9 +29,9 @@ source: "https://www.bazhuayu.com/helpcenter/docs/eyxkrQ"
 
 ![【银保监】官网政策公告采集](/assets/academy/case-studies/cbirc-policy-announcements/02-653f5ba7354ca.png)
 
- 
 
- 
+
+
 
 **教程说明**
 
@@ -38,7 +39,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/eyxkrQ"
 
 如果因网页改版造成网址或步骤无效，无法收集到目标数据，请联系官方客服，我们将及时修正。
 
- 
+
 
 **采集步骤**
 
@@ -54,38 +55,38 @@ source: "https://www.bazhuayu.com/helpcenter/docs/eyxkrQ"
 
 步骤六、启动采集
 
- 
 
- 
+
+
 
 **以下为具体步骤：**
 
- 
+
 
 ## 步骤一、打开网页
 
- 
+
 
 在首页【输入框】中输入目标网址  <a href="http://www.cbirc.gov.cn/cn/view/pages/ItemList.html?itemPId=914&itemId=915&itemUrl=ItemListRightList.html&itemName=%E7%9B%91%E7%AE%A1%E5%8A%A8%E6%80%81" target="_blank" rel="noopener noreferrer">http://www.cbirc.gov.cn/cn/view/pages/ItemList.html?itemPId=914&itemId=915&itemUrl=ItemListRightList.html&itemName=%E7%9B%91%E7%AE%A1%E5%8A%A8%E6%80%81</a>，点击【开始采集】，八爪鱼自动打开网页。
 
 ![【银保监】官网政策公告采集](/assets/academy/case-studies/cbirc-policy-announcements/03-653f5bbd3294b.gif)
 
- 
+
 
 特别说明：
 
 - a. 打开网页后，如果开始开始【自动识别】，请点击【不再自动识别】或【取消识别】将其关掉。因为本文不适合使用【自动识别】。
 - b. 【自动识别】适用于自动识别网页上的列表、滚动和翻页，识别成功后直接启动采集即可获取数据。详情点击查看 [【自动识别】教程](../tutorial8/81zdypz)
 
- 
+
 
 ## 步骤二、建立【循环-点击元素】，进入每条监管动态的详情页
 
- 
+
 
 1、建立【循环-点击元素】，进入每条监管动态的详情页
 
- 
+
 
 通过以下3步，实现循环点击每个链接，进入详情页：
 
@@ -95,35 +96,35 @@ source: "https://www.bazhuayu.com/helpcenter/docs/eyxkrQ"
 
 ![【银保监】官网政策公告采集](/assets/academy/case-studies/cbirc-policy-announcements/04-653f5bd27ede9.gif)
 
- 
+
 
 特别说明：
 
 - a. 经过以上连续3步，【循环-点击元素】创建完成。【循环】中的项，对应着页面上所有监管动态链接。启动采集以后，八爪鱼就会按照循环中的顺序依次点击每个链接，进入详情页，以采集每条监管动态的详情页数据。
 - b. 为何通过以上3步，可建立【循环-点击元素】？详情点击查看 [采集点击多个链接后的详情页数据教程](../tutorial8/81xsrm6) 。
 
- 
+
 
 2、修改【循环-点击元素】Xpath
 
-为了精准定位到所有的监管动态链接，需修改一下【循环翻页】的XPath。\
+为了精准定位到所有的监管动态链接，需修改一下【循环翻页】的XPath。
 进入【循环翻页】设置页面，选择【循环方式】为【不固定元素列表】，修改XPath为：//span[@class="title"]/a，然后点击【应用】保存。
 
 改完后，再次点击【点击元素】步骤，进入问题详情页。
 
 ![【银保监】官网政策公告采集](/assets/academy/case-studies/cbirc-policy-announcements/05-653f5be934714.gif)
 
- 
+
 
 特别说明：
 
 - a. 默认生成的循环方式为【固定元素列表循环】，无法精准定位到所有的问题链接，所以我们需要手动修改XPath，使之定位到所有的问题链接。这里需要一定的XPath知识。点击查看 [XPath学习与实例教程](../tutorial8/81xpath) 。
 
- 
+
 
 ## 步骤三、提取详情页中的文本字段
 
- 
+
 
 进入详情页后，选中页面中的文本，然后在操作提示框中，点击【采集该元素文本】。
 
@@ -138,11 +139,11 @@ source: "https://www.bazhuayu.com/helpcenter/docs/eyxkrQ"
   您的浏览器不支持视频播放，请更新浏览器后重试。
 </video>
 
- 
+
 
 ## 步骤四、编辑字段
 
- 
+
 
 1、编辑字段
 
@@ -157,7 +158,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/eyxkrQ"
   您的浏览器不支持视频播放，请更新浏览器后重试。
 </video>
 
- 
+
 
 2、修改字段XPath
 
@@ -167,7 +168,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/eyxkrQ"
 
 ![【银保监】官网政策公告采集](/assets/academy/case-studies/cbirc-policy-announcements/08-653f5c1f8a44a.gif)
 
- 
+
 
 3、格式化字段
 
@@ -184,17 +185,17 @@ source: "https://www.bazhuayu.com/helpcenter/docs/eyxkrQ"
   您的浏览器不支持视频播放，请更新浏览器后重试。
 </video>
 
- 
+
 
 ## 步骤五、创建循环翻页
 
- 
+
 
 1、创建循环翻页
 
 如果只是采集一页数据，可跳过此步骤。
 
- 
+
 
 如果需要翻页以采集多页数据：
 
@@ -211,7 +212,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/eyxkrQ"
   您的浏览器不支持视频播放，请更新浏览器后重试。
 </video>
 
- 
+
 
 2、设置执行前等待时间****
 
@@ -228,11 +229,11 @@ source: "https://www.bazhuayu.com/helpcenter/docs/eyxkrQ"
   您的浏览器不支持视频播放，请更新浏览器后重试。
 </video>
 
- 
+
 
 ## 步骤六、启动采集
 
- 
+
 
 1、单击【采集】并【启动本地采集】。启动后八爪鱼开始自动采集数据。
 
@@ -245,21 +246,21 @@ source: "https://www.bazhuayu.com/helpcenter/docs/eyxkrQ"
   您的浏览器不支持视频播放，请更新浏览器后重试。
 </video>
 
- 
+
 
 特别说明：
 
 - a. 【本地采集】是使用自己的电脑进行采集，【云采集】是使用八爪鱼提供的云服务器采集，点击查看 [本地采集与云采集详解](../tutorial8/81xsrm8)。
 
- 
+
 
 2、采集完成后，选择合适的导出方式来导出数据。支持导出为Excel，CSV，HTML，数据库等。这里导出为Excel。数据示例：
 
 ![【银保监】官网政策公告采集](/assets/academy/case-studies/cbirc-policy-announcements/13-653f5c6ff3ac8.png)
 
- 
 
- 
+
+
 
  作者：Fan
 

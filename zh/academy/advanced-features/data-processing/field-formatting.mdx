@@ -8,13 +8,13 @@ source: "https://www.bazhuayu.com/helpcenter/docs/dR29V2"
 
 本教程将结合实例，具体讲解。
 
- 
+
 
 ### **一、【格式化数据】设置的位置**
 
- 
 
-示例网址：https\://book.douban.com/subject/4913064/
+
+示例网址：https://book.douban.com/subject/4913064/
 
 【格式化数据】是对提取到的字段进行格式化操作，我们先按照采集需求，提取字段。本示例中，我们提取此网页中的图书标题、图书简介和图片网址、页面网址等。
 
@@ -27,15 +27,15 @@ source: "https://www.bazhuayu.com/helpcenter/docs/dR29V2"
   您的浏览器不支持视频播放，请更新浏览器后重试。
 </video>
 
- 
 
- 
+
+
 
 字段提取完成以后，鼠标移动到目标字段上，然后点击 <img src="/assets/academy/advanced-features/field-formatting/02-65361b44cddae.png" alt="" className="academy-inline-icon" /> 按钮，选择【格式化数据】，就会进入【格式化数据】配置页面，也可以是纵向布局时直接点🖊小图标，或是是纵向布局时直接点后面的<img src="/assets/academy/advanced-features/field-formatting/03-65361b44cd34f.png" alt="" className="academy-inline-icon" />图标。
 
  ![](/assets/academy/advanced-features/field-formatting/04-65361b456d9a5.gif)
 
- 
+
 
 原始值：原始字段
 
@@ -47,7 +47,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/dR29V2"
 
 ![字段格式化](/assets/academy/advanced-features/field-formatting/05-656fdbd0cfe06.png)
 
- 
+
 
 ### **二、【格式化数据】10个选项详解**
 
@@ -73,7 +73,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/dR29V2"
 
 ![](/assets/academy/advanced-features/field-formatting/06-656fdc53751c3.gif)
 
- 
+
 
 #### **2、正则表达式替换**
 
@@ -85,7 +85,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/dR29V2"
 
  ![](/assets/academy/advanced-features/field-formatting/07-65361b45d0972.png)
 
- 
+
 
 具体步骤为：
 
@@ -105,7 +105,7 @@ Step1：【书籍信息】提取下来后，有很多空格，先将所有空格
 
 ![](/assets/academy/advanced-features/field-formatting/08-65361b465df28.gif)
 
- 
+
 
 Step2：用正则表达式找到【书籍信息】（去除全部空格）中除ISBN编码之外的信息，将其替换为空。
 
@@ -121,7 +121,7 @@ Step2：用正则表达式找到【书籍信息】（去除全部空格）中除
 
 ![字段格式化](/assets/academy/advanced-features/field-formatting/09-656fdd7b6eba4.png)
 
- 
+
 
 这里有个问题，像 作者:(.+?)ISBN: 这样的正则表达式怎么写出来的？怎么根据需求，生成正确的正则表达式呢？
 
@@ -137,7 +137,7 @@ Step2：用正则表达式找到【书籍信息】（去除全部空格）中除
 
 ![](/assets/academy/advanced-features/field-formatting/11-656fddcf65441.gif)
 
- 
+
 
 【源文本】： 作者:余华出版社:作家出版社出版年:2012-8-1页数:191定价:20.00元装帧:平装丛书:余华作品（2012版）ISBN:9787506365437
 
@@ -149,7 +149,7 @@ Step2：用正则表达式找到【书籍信息】（去除全部空格）中除
 
 【包含结束】：到某元素结束，且包含此元素
 
- 
+
 
 本示例设置
 
@@ -171,7 +171,7 @@ Step2：用正则表达式找到【书籍信息】（去除全部空格）中除
 
 ![](/assets/academy/advanced-features/field-formatting/12-656fde3f6defa.gif)
 
- 
+
 
 除【开始】【包含开始】【结束】【包含结束】外，还有【包含一个】【匹配所有】可选择。
 
@@ -181,23 +181,23 @@ Step2：用正则表达式找到【书籍信息】（去除全部空格）中除
 
  ![](/assets/academy/advanced-features/field-formatting/13-65361b46deaed.png)
 
- 
+
 
 #### **3、正则表达式匹配**
 
 用正则表达式将字段中的部分或全部内容提取出来。
 
- 
+
 
 实例：在采集数据的时候我们发现，红框中的【书籍信息】只能作为一个字段提取下来。如果想要将【出版年】独立为一个字段，就需要先将整个红框中的【书籍信息】作为一个字段提取下来，然后用【正则表达式匹配】将【出版年】单独提取出来。
 
 ![字段格式化](/assets/academy/advanced-features/field-formatting/14-656fdf1abee1c.png)
 
- 
+
 
 具体步骤为：
 
- 
+
 
 Step1：【书籍信息】提取下来后，有很多空格，先将所有空格去掉。（如果提取的字段中无空格，可跳过这一步）
 
@@ -213,7 +213,7 @@ Step1：【书籍信息】提取下来后，有很多空格，先将所有空格
 
 ![](/assets/academy/advanced-features/field-formatting/15-65361b47a49be.gif)
 
- 
+
 
 Step2：用正则表达式找到【书籍信息】（去除全部空格）中的【出版年】信息。
 
@@ -246,7 +246,7 @@ Step2：用正则表达式找到【书籍信息】（去除全部空格）中的
   您的浏览器不支持视频播放，请更新浏览器后重试。
 </video>
 
- 
+
 
 #### **4、去除空格**
 
@@ -258,13 +258,13 @@ Step2：用正则表达式找到【书籍信息】（去除全部空格）中的
 
 ![](/assets/academy/advanced-features/field-formatting/17-65361b4843a66.gif)
 
- 
+
 
 #### **5、添加前缀**
 
 为字段添加前缀，很好理解。
 
- 
+
 
 【原始文本】：9.4
 
@@ -274,7 +274,7 @@ Step2：用正则表达式找到【书籍信息】（去除全部空格）中的
 
 ![](/assets/academy/advanced-features/field-formatting/18-65361b47d0e7b.png)
 
- 
+
 
 #### **6、添加后缀**
 
@@ -286,11 +286,11 @@ Step2：用正则表达式找到【书籍信息】（去除全部空格）中的
 
 【替换结果】：9.4分
 
- 
+
 
 ![](/assets/academy/advanced-features/field-formatting/19-65361b4829536.png)
 
- 
+
 
 #### **7、日期时间格式化**
 
@@ -302,7 +302,7 @@ Step2：用正则表达式找到【书籍信息】（去除全部空格）中的
 
 ![](/assets/academy/advanced-features/field-formatting/20-656fe28c6c603.gif)
 
- 
+
 
 #### 8、时间戳转换
 
@@ -310,13 +310,13 @@ Step2：用正则表达式找到【书籍信息】（去除全部空格）中的
 
 ![](/assets/academy/advanced-features/field-formatting/21-656fe36bb7a8b.gif)
 
- 
+
 
 #### 9.时区时间转换
 
 不同时区时间转换，比如可以蒋北京时间转换为巴黎时间，也可以将巴黎时间转换为北京时间等。
 
- 
+
 
 #### **10、Html转码**
 

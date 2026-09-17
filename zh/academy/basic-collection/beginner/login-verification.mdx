@@ -8,51 +8,51 @@ source: "https://www.bazhuayu.com/helpcenter/docs/amPLH3"
 
 针对这类网站，八爪鱼提供多种解决方法。本课将详细讲解。
 
- 
+
 
 ## **方法一、浏览器模式+记住Cookie**
 
- 
+
 
 针对需要登录的网站，我们可以先将八爪鱼切换成浏览器模式，在浏览器模式下完成登录。然后通过获取Cookie记住登录状态。这样，八爪鱼就能在执行采集任务时，直接以登录状态打开网页，然后再采集数据。
 
- 
+
 
 ### **场景：手动登录**
 
- 
+
 
 以豆瓣网为例，
 
-登录网址为：https\://www\.douban.com
+登录网址为：https://www\.douban.com
 
-实际要采集数据的网址为：https\://book.douban.com/tag/%E5%B0%8F%E8%AF%B4
+实际要采集数据的网址为：https://book.douban.com/tag/%E5%B0%8F%E8%AF%B4
 
- 
+
 
 **步骤1、使用浏览器模式，输入账号密码或扫码，完成登录**
 
 在客户端首页，输入登录网址，打开网页后，点击 ![](/assets/academy/basic-collection/login-verification/01-6513f0375cd57.png) 按钮，进入浏览器模式。下图状态即为浏览器模式。在浏览器模式下，和用普通浏览器访问网页完全一样：只可浏览网页数据，不可配置规则。如需编辑规则，再次点击 ![](/assets/academy/basic-collection/login-verification/02-6513f03847cfb.png)按钮，关闭浏览器模式。
 
- 
+
 
 ![](/assets/academy/basic-collection/login-verification/03-6513f037770c8.png)
 
- 
 
- 
+
+
 
 在浏览器模式中，扫码登录。可以看到，现在我们已经以登录状态访问网页。
 
- 
+
 
 ![登录验证](/assets/academy/basic-collection/login-verification/04-65bc9a897834f.gif)
 
- 
+
 
 **步骤2、记住Cookie**
 
- 
+
 
 现在，我们已经处于登录状态，八爪鱼可以获取登录后的Cookie，记住登录状态。
 
@@ -60,15 +60,15 @@ source: "https://www.bazhuayu.com/helpcenter/docs/amPLH3"
 
 八爪鱼会记住这个Cookie状态，启动采集后，直接以登录状态打开网页。
 
- 
+
 
 ![登录验证](/assets/academy/basic-collection/login-verification/08-65bc9ac098900.gif)
 
-然后将鼠标移动到【打开网页】步骤后的 <img src="/assets/academy/basic-collection/login-verification/09-6513f03778c7e.png" alt="" className="academy-inline-icon" />位置，会出现 <img src="/assets/academy/basic-collection/login-verification/10-6513f037950a0.png" alt="" className="academy-inline-icon" /> 按钮。点击 <img src="/assets/academy/basic-collection/login-verification/11-6513f03783c7a.png" alt="" className="academy-inline-icon" />按钮，再添加一个【打开网页】步骤。双击新建的【打开网页】步骤，输入要采集数据的目标网址：https\://book.douban.com/tag/%E5%B0%8F%E8%AF%B4。
+然后将鼠标移动到【打开网页】步骤后的 <img src="/assets/academy/basic-collection/login-verification/09-6513f03778c7e.png" alt="" className="academy-inline-icon" />位置，会出现 <img src="/assets/academy/basic-collection/login-verification/10-6513f037950a0.png" alt="" className="academy-inline-icon" /> 按钮。点击 <img src="/assets/academy/basic-collection/login-verification/11-6513f03783c7a.png" alt="" className="academy-inline-icon" />按钮，再添加一个【打开网页】步骤。双击新建的【打开网页】步骤，输入要采集数据的目标网址：https://book.douban.com/tag/%E5%B0%8F%E8%AF%B4。
 
 ![登录验证](/assets/academy/basic-collection/login-verification/12-65bc9afd48002.gif)
 
- 
+
 
 **特别说明**：
 
@@ -78,11 +78,11 @@ b. Cookie是有生命周期的，这个周期多长时间取决于采集的网�
 
 c. 如果需要切换账号，可以打开【高级选项】，勾选【打开网页前先清理缓存】。这样，每次打开网页时都会清理掉缓存信息，以未登录状态打开网页，此时再登录新账号即可。
 
- 
+
 
 ![登录验证](/assets/academy/basic-collection/login-verification/13-65a8fdec8a5fa.png)
 
- 
+
 
 **步骤3、按照需求，配置采集任务**
 
@@ -101,41 +101,41 @@ c. 如果需要切换账号，可以打开【高级选项】，勾选【打开�
   您的浏览器不支持视频播放，请更新浏览器后重试。
 </video>
 
- 
 
- 
+
+
 
 **特别说明**：
 
 a. 用浏览器模式登录时，支持多种类型的验证码，包括输入型、滑块、手势等，因为是我们自己手动操作，跟在浏览器中相同。
 
- 
+
 
 记住cookie十分方便，每次直接以登录状态打开网页采集数据。但是，这个方法有一定局限性，部分网站是不支持Cookie登录的。此时，我们就可以用下面的方法。
 
- 
 
- 
+
+
 
 ## **方法二、配置流程、模拟人工登录**
 
- 
+
 
 针对需要登录的网站，我们也可以在采集流程中配置【输入账号-输入密码-点击登录】步骤，模拟登录。这样，八爪鱼在执行采集任务时，就会走一遍输入账号密码的流程。
 
- 
+
 
 ### **场景：输入账号、密码登录**
 
- 
+
 
 以163邮箱网站为例，
 
-登录网址为 https\://mail.163.com
+登录网址为 https://mail.163.com
 
 ![登录验证](/assets/academy/basic-collection/login-verification/16-65acca0a883d2.png)
 
- 
+
 
 **配置输入账号、输入密码的流程**
 
@@ -150,11 +150,11 @@ a. 用浏览器模式登录时，支持多种类型的验证码，包括输入�
   您的浏览器不支持视频播放，请更新浏览器后重试。
 </video>
 
- 
+
 
 **步骤2、按照需求，配置采集任务**
 
- 
+
 
 登录完成以后，按照需求配置采集规则即可。在这里仅提取1个简单的字段。
 
@@ -167,13 +167,13 @@ a. 用浏览器模式登录时，支持多种类型的验证码，包括输入�
   您的浏览器不支持视频播放，请更新浏览器后重试。
 </video>
 
- 
+
 
 **步骤3、启动采集，采集数据**
 
 启动本地采集后，可以看到，八爪鱼按照我们配置好的流程，自动地输入账号、密码、识别验证码，完成登录并采集数据。
 
- 
+
 
 
 
@@ -184,7 +184,7 @@ a. 用浏览器模式登录时，支持多种类型的验证码，包括输入�
   您的浏览器不支持视频播放，请更新浏览器后重试。
 </video>
 
- 
+
 
 **注意：**
 
@@ -192,6 +192,6 @@ a. 用浏览器模式登录时，支持多种类型的验证码，包括输入�
 
 **![登录验证](/assets/academy/basic-collection/login-verification/20-65356200785fc.png)**
 
- 
+
 
 作者：Y

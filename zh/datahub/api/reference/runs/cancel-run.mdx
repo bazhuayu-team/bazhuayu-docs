@@ -93,7 +93,7 @@ curl -X POST \
 }
 ```
 
-返回运行对象，字段与<a href="/zh/datahub/api/reference/runs/start-run">发起运行</a>相同。
+返回运行对象，字段与<a href="/zh/datahub/api/reference/runs/start-run" target="_blank" rel="noopener noreferrer">发起运行</a>相同。
 
 响应包在 `data` 字段中，其内容如下。
 
@@ -316,7 +316,7 @@ Billing; this is what evaluations compare against).
 | 404 | `run-not-found` | `not_found` | 运行不存在，或不是当前账号发起的。 |
 | 409 | `run-terminal` | `invalid_input` | 运行已经结束，无法取消。 |
 
-错误响应统一为 `{"error": {code, category, message, retryable}}`，见<a href="/zh/datahub/api/reference/introduction#错误">错误</a>。
+错误响应统一为 `{"error": {code, category, message, retryable}}`，见<a href="/zh/datahub/api/reference/introduction#错误" target="_blank" rel="noopener noreferrer">错误</a>。
 
 ## 客户端库
 

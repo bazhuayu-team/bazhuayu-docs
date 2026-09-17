@@ -15,7 +15,7 @@ GET https://api-datahub.bazhuayu.com/v1/billing
 
 一段时间花了多少、钱花在哪：区间合计加按维度拆分。与账户信息互相独立。
 
-时间范围与运行列表共用词汇：`created_from` / `created_to` 为 ISO-8601 绝对时间，起点包含、终点不包含，按运行**发起时间**归属。把同样的参数带进 <a href="/zh/datahub/api/reference/runs/list-runs">运行列表</a>，得到的就是任一分组数字背后的运行。`tz_offset` 只影响按日分桶时一次运行落到哪一天，不改变金额，也不改变时间范围本身。
+时间范围与运行列表共用词汇：`created_from` / `created_to` 为 ISO-8601 绝对时间，起点包含、终点不包含，按运行**发起时间**归属。把同样的参数带进 <a href="/zh/datahub/api/reference/runs/list-runs" target="_blank" rel="noopener noreferrer">运行列表</a>，得到的就是任一分组数字背后的运行。`tz_offset` 只影响按日分桶时一次运行落到哪一天，不改变金额，也不改变时间范围本身。
 
 只聚合数据费。按日分组升序，便于从前往后对账；按 App 与按凭证分组按金额降序，先看钱主要花在哪、哪把 Key 在花。
 
@@ -141,7 +141,7 @@ curl \
 | 401 | `unauthorized` | `forbidden` | 缺少或无效的 API Key。 |
 | 400 | `invalid-group-by` | `invalid_input` | `group_by` 不在允许的取值内，或组合不合法。 |
 
-错误响应统一为 `{"error": {code, category, message, retryable}}`，见<a href="/zh/datahub/api/reference/introduction#错误">错误</a>。
+错误响应统一为 `{"error": {code, category, message, retryable}}`，见<a href="/zh/datahub/api/reference/introduction#错误" target="_blank" rel="noopener noreferrer">错误</a>。
 
 ## 客户端库
 
@@ -177,5 +177,5 @@ const byKey = await client.billing({ groupBy: "credential" });
 ## 注意事项
 
 * 计费口径对所有接入方式一致：失败不计费；部分成功和取消只按已产出记录计费；取量由平台从入库数据派生；作者调试运行照常计费；平台健康巡检不计费。
-* 单次运行的费用构成在运行对象的 `billing` 块里，见<a href="/zh/datahub/api/reference/runs/get-run">查询运行</a>。
+* 单次运行的费用构成在运行对象的 `billing` 块里，见<a href="/zh/datahub/api/reference/runs/get-run" target="_blank" rel="noopener noreferrer">查询运行</a>。
 * 按本地日对账时，`tz_offset` 与钻取用的时间范围必须使用同一个偏移，否则分桶边界和筛选边界对不上。

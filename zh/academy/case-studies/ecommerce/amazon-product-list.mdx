@@ -1,34 +1,35 @@
 ---
 title: "【Amazon】商品列表页采集"
+description: "学习如何使用八爪鱼完成“【Amazon】商品列表页采集”数据采集。"
 source: "https://www.bazhuayu.com/helpcenter/docs/77G16M"
 ---
 **采集场景**
 
 在Amazon首页（<a href="https://www.amazon.com）输入关键词搜索" target="_blank" rel="noopener noreferrer">https://www.amazon.com）输入关键词搜索</a>，采集搜索后得到的商品列表数据。实例网址   <a href="https://www.amazon.com/s?k=Apple&ref=nb_sb_noss_2" target="_blank" rel="noopener noreferrer">https://www.amazon.com/s?k=Apple&ref=nb_sb_noss_2</a>，是搜索关键词 Apple后得到的商品列表页。
 
- 
+
 
 **采集字段**
 
 商品标题、图片URL、商品链接、商品价格、商品评分、评论数等字段。
 
- 
+
 
 ![](/assets/academy/case-studies/amazon-product-list/01-65323d7511a30.png)
 
- 
 
- 
+
+
 
 **采集结果**
 
 采集结果可导出为Excel，CSV，HTML，数据库等多种格式。导出为Excel示例：
 
- 
+
 
 ![](/assets/academy/case-studies/amazon-product-list/02-65323d750aa3d.png)
 
- 
+
 
 **教程说明**
 
@@ -36,7 +37,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/77G16M"
 
 如果因网页改版造成网址或步骤无效，无法采集到目标数据，请联系官方客服，我们将及时修正。
 
- 
+
 
 **采集步骤**
 
@@ -50,17 +51,17 @@ source: "https://www.bazhuayu.com/helpcenter/docs/77G16M"
 
 步骤五、启动采集
 
- 
+
 
 **以下为具体步骤：**
 
- 
+
 
 ## 步骤一、打开网页
 
- 
 
-1、在首页点击左上角 <img src="/assets/academy/case-studies/amazon-product-list/03-65323d739b7af.png" alt="" className="academy-inline-icon" /> 按钮，选择【自定义任务】，输入示例网址 https\://www\.amazon.com，然后点【开始采集】，八爪鱼自动打开网页。
+
+1、在首页点击左上角 <img src="/assets/academy/case-studies/amazon-product-list/03-65323d739b7af.png" alt="" className="academy-inline-icon" /> 按钮，选择【自定义任务】，输入示例网址 https://www\.amazon.com，然后点【开始采集】，八爪鱼自动打开网页。
 
 
 
@@ -71,13 +72,13 @@ source: "https://www.bazhuayu.com/helpcenter/docs/77G16M"
   您的浏览器不支持视频播放，请更新浏览器后重试。
 </video>
 
- 
 
- 
+
+
 
 ## 步骤二、选择配送地区
 
- 
+
 
 在Amazon中，选择不同的配送地址，输入关键词搜索后得到的商品列表是不一样的。
 
@@ -87,7 +88,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/77G16M"
 
 本文以【输入美国邮政编码】为例，输入 California (CA)的邮政编码：95136。具体操作如下：
 
- 
+
 
 1、在页面中选中【中国大陆】，在操作提示框中点击【点击该元素】，页面弹出位置输入框
 
@@ -101,7 +102,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/77G16M"
 
 <video controls src="https://resource-wangsu.helplook.net/docker_production/3mkuae/article/77G16M/video/656487c0227e7.mp4" width="100%"></video>
 
- 
+
 
 > 特别说明：
 >
@@ -117,17 +118,17 @@ source: "https://www.bazhuayu.com/helpcenter/docs/77G16M"
 > 
 > - b. 示例中输入的是California (CA)的邮政编码：95136，可按需求更换成美国其他州的邮政编码。
 
- 
 
- 
 
- 
+
+
+
 
 ## 步骤三、输入关键词并搜索采集列表
 
-## 
 
- 
+
+
 
 1、选中页面中的搜索框，在黄色操作提示框中，选择【输入文本】-批量输入，输入关键词【Apple】、【xiaomi】等多个关键词，然后点击确定。
 
@@ -139,7 +140,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/77G16M"
 
 <video controls src="https://resource-wangsu.helplook.net/docker_production/3mkuae/article/77G16M/video/65648a1b8ac3f.mp4" width="100%"></video>
 
- 
+
 
 > 特别说明：
 >
@@ -153,17 +154,17 @@ source: "https://www.bazhuayu.com/helpcenter/docs/77G16M"
 > 
 > - a. 本文使用【自动识别】，自动识别网页上的列表、滚动和翻页。识别成功后会生成采集规则，再对采集规则调整，以采集目标数据。如果【自动识别】的结果与以上图片不同，可点击【取消识别】自行配置采集流程或联系客服反馈。详情点击查看 <a href="/zh/academy/quick-start/three-minute-quick-start/auto-recognize-collection" target="_blank" rel="noopener noreferrer">【自动识别】教程</a>
 
- 
 
- 
+
+
 
 ## 步骤四、优化采集规则
 
- 
+
 
 以上步骤可以完成基本的数据采集。但Amazon有防采集，如需稳定采集大量数据，需对采集规则进行优化。常见的优化方法如下：
 
- 
+
 
 1、设置执行前等待 + 调整Ajax超时时间
 
@@ -171,7 +172,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/77G16M"
 
 <video controls src="https://resource-wangsu.helplook.net/docker_production/3mkuae/article/77G16M/video/65648b620a581.mp4" width="100%"></video>
 
- 
+
 
 > 特别说明：
 >
@@ -187,11 +188,11 @@ source: "https://www.bazhuayu.com/helpcenter/docs/77G16M"
 > 
 > - b. 执行前等待，即在执行此步骤前等待一段时间，可有效避免因网页未加载完全导致的漏数据，详情点击查看 <a href="/zh/academy/index" target="_blank" rel="noopener noreferrer">执行前等待使用场景与设置方法</a>
 
- 
+
 
 2、修改【循环列表】XPath
 
- 
+
 
 为了精准定位到所有关键词搜索结果列表，需修改一下【循环列表】的XPath。
 
@@ -199,7 +200,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/77G16M"
 
 <video controls src="https://resource-wangsu.helplook.net/docker_production/3mkuae/article/77G16M/video/656492384708c.mp4" width="100%"></video>
 
- 
+
 
 > 特别说明：
 >
@@ -213,9 +214,9 @@ source: "https://www.bazhuayu.com/helpcenter/docs/77G16M"
 > 
 > - a. 在搜索关键词后，出现的搜索结果排列方式会不同，属于amazon 防采集形式的一种。默认生成的【循环列表】XPath，无法精准定位到所有关键词搜索结果列表链接，所以我们需要手动修改XPath，使之定位到所有的搜索结果列表。这里需要一定的XPath知识。点击查看 <a href="/zh/academy/xpath/getting-started/why-use-xpath" target="_blank" rel="noopener noreferrer">XPath学习与实例教程</a> 。
 
- 
 
- 
+
+
 
 3、提取ASIN编码
 
@@ -223,7 +224,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/77G16M"
 
 ASIN编码在当前商品链接中，先采集商品链接，然后对商品链接进行格式化处理，得到ASIN编码。
 
- 
+
 
 复制商品链接命名为ASIN编码。
 
@@ -231,9 +232,9 @@ ASIN编码在当前商品链接中，先采集商品链接，然后对商品链�
 
 <video controls src="https://resource-wangsu.helplook.net/docker_production/3mkuae/article/77G16M/video/656492152c5a8.mp4" width="100%"></video>
 
- 
 
- 
+
+
 
 > 特别说明：
 >
@@ -249,21 +250,21 @@ ASIN编码在当前商品链接中，先采集商品链接，然后对商品链�
 > 
 > - b. 正则表达式是什么？怎么写？正则表达式是对字符串（包括普通字符（例如，a 到 z 之间的字母）和特殊字符（称为“元字符”））操作的一种逻辑公式，用来从文本中匹配/过滤信息。正则表达式有其特定写法，需要系统学习才能掌握，点击查看 <a href="/zh/academy/advanced-features/data-processing/regular-expression" target="_blank" rel="noopener noreferrer">正则表达式教程</a> 。
 
- 
 
- 
+
+
 
 ### 步骤五：启动采集
 
- 
+
 
 1、单击【采集】并【启动本地采集】。启动后八爪鱼开始自动采集数据。 
 
- 
+
 
 ![【Amazon】商品列表页采集](/assets/academy/case-studies/amazon-product-list/05-6615f5046b331.png)
 
- 
+
 
 > 特别说明：
 >
@@ -277,22 +278,22 @@ ASIN编码在当前商品链接中，先采集商品链接，然后对商品链�
 > 
 > - a. 【本地采集】是使用自己的电脑进行采集，【云采集】是使用八爪鱼提供的云服务器采集
 
- 
+
 
 2、采集完成后，选择合适的导出方式来导出数据。支持导出为Excel，CSV，HTML，数据库等。这里导出为Excel。
 
- 
+
 
 ![【Amazon】商品列表页采集](/assets/academy/case-studies/amazon-product-list/06-6615f582e3770.png)
 
- 
+
 
 示例数据：
 
- 
+
 
 ![【Amazon】商品列表页采集](/assets/academy/case-studies/amazon-product-list/07-6615fa13585dd.png)
 
- 
+
 
 作者:妙卡

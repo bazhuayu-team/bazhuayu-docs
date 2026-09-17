@@ -6,7 +6,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/I0LCzr"
 
 八爪鱼是基于网址进行数据采集的，可以支持输入多个网址生成网址循环采集每个网址上的数据，批量的网址输入支持从本地文件导入网址、根据规律批量生成网址、从已有任务导入网址。
 
- 
+
 
 ## **一、从本地文件导入网址**
 
@@ -22,7 +22,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/I0LCzr"
 >
 > ② 支持100w以内网址 ，超过的自动删除
 
- 
+
 
 ## **二、批量生成网址**
 
@@ -40,7 +40,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/I0LCzr"
 
 我们发现，第1页【start=】后面的值为0， 每递增一页，【start=】后面的值递增20，根据这个规律，可批量生成网址。
 
- 
+
 
 如下图所示：选中【start=】后面的值，点击【添加参数】，选择参数类型为【数字变更】，【开始值】为0，【每次动作递增】20，共10项，共批量生成10条网址。
 
@@ -60,29 +60,29 @@ source: "https://www.bazhuayu.com/helpcenter/docs/I0LCzr"
 
 ![](/assets/academy/advanced-features/bulk-url-input-extra/02-653667141b506.gif)
 
- 
+
 
 2、网址参数中出现字母变化，这个比较少见
 
 ![](/assets/academy/advanced-features/bulk-url-input-extra/03-6536671382d4d.png)
 
- 
+
 
 3、网址参数中出现时间变化，这个也比较少见
 
 ![](/assets/academy/advanced-features/bulk-url-input-extra/04-6536671370efd.png)
 
- 
+
 
 4、网址参数中出现关键词变化，常见于需要输入关键词搜索的网站
 
 示例网址：<a href="https://www.jd.com/" target="_blank" rel="noopener noreferrer">https://www.jd.com/</a>
 
-在首页输入关键词【手机】：https\://search.jd.com/Search?keyword=手机\&enc=utf-8\&wq=%E6%89%8B%E6%9C%BA\&pvid=070d13546be04c9cb9d78ba6d3c67438
+在首页输入关键词【手机】：https://search.jd.com/Search?keyword=手机\&enc=utf-8\&wq=%E6%89%8B%E6%9C%BA\&pvid=070d13546be04c9cb9d78ba6d3c67438
 
-在首页输入关键词【电脑】：https\://search.jd.com/Search?keyword=电脑\&enc=utf-8\&wq=%E6%89%8B%E6%9C%BA\&pvid=070d13546be04c9cb9d78ba6d3c6743
+在首页输入关键词【电脑】：https://search.jd.com/Search?keyword=电脑\&enc=utf-8\&wq=%E6%89%8B%E6%9C%BA\&pvid=070d13546be04c9cb9d78ba6d3c6743
 
- 
+
 
 我们发现，【keyword=】后面的值决定了搜索的是什么关键词，根据这个规律，可批量生成网址。
 
@@ -123,7 +123,7 @@ A任务采集到网址：
   您的浏览器不支持视频播放，请更新浏览器后重试。
 </video>
 
- 
+
 
 B任务直接调用A任务中采集到的网址：
 
@@ -131,7 +131,7 @@ B任务直接调用A任务中采集到的网址：
 
 ![](/assets/academy/advanced-features/bulk-url-input-extra/07-65366714597b1.gif)
 
- 
+
 
 调用完成后，点击【保存设置】，即可开始任务配置。本示例提取一下结果详情页的项目名称、面积。
 
@@ -151,14 +151,14 @@ B任务直接调用A任务中采集到的网址：
 
 > 请注意：跟随任务是调用源任务的云采集采集到的网址进行采集的。只有源任务的云采集有一定数据后，跟随任务才能启动并采集到数据。
 
- 
+
 
 也可以在【我的任务】列表里，设置跟随启动。
 
 ![网址批量输入（补充用法）](/assets/academy/advanced-features/bulk-url-input-extra/08-654458cf6c856.png)
 
- 
 
- 
+
+
 
 编辑：FAN

@@ -1,18 +1,19 @@
 ---
 title: "【Amazon】商品评论采集"
+description: "学习如何使用八爪鱼完成“【Amazon】商品评论采集”数据采集。"
 source: "https://www.bazhuayu.com/helpcenter/docs/jtJjlo"
 ---
 **采集场景**
 
 采集Amazon商品评价数据，实例网址：<a href="https://www.amazon.com/product-reviews/B07211W6X2/" target="_blank" rel="noopener noreferrer">https://www.amazon.com/product-reviews/B07211W6X2/</a> 。
 
- 
+
 
 **采集字段**
 
 评论标题、评论星级、评论时间、评论内容、有用数、ASIN等字段。
 
- 
+
 
 ![](/assets/academy/case-studies/amazon-product-reviews/01-65323d9c4fd9d.png)
 
@@ -20,7 +21,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/jtJjlo"
 
 *下文其他图片同理*
 
- 
+
 
 **采集结果**
 
@@ -34,7 +35,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/jtJjlo"
 
 如果因网页改版造成网址或步骤无效，无法收集到目标数据，请联系官方客服，我们将及时修正。
 
- 
+
 
 **采集步骤**
 
@@ -46,7 +47,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/jtJjlo"
 
 步骤四、启动采集
 
- 
+
 
 示例网址：
 
@@ -54,11 +55,11 @@ source: "https://www.bazhuayu.com/helpcenter/docs/jtJjlo"
 
 <a href="https://www.amazon.com/dp/B07S1YPSGT/" target="_blank" rel="noopener noreferrer">https://www.amazon.com/product-reviews/B07S1YPSGT/</a>
 
- 
+
 
 ## 步骤一、使用【智能识别】建立循环列表和翻页循环
 
- 
+
 
 1、在首页点击左上角 <img src="/assets/academy/case-studies/amazon-product-reviews/03-65323d9c2051d.png" alt="" className="academy-inline-icon" /> 按钮，选择【自定义任务】，输入示例网址，然后点【保存设置】，八爪鱼自动打开网页。
 
@@ -68,7 +69,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/jtJjlo"
 
 <video controls src="https://resource-wangsu.helplook.net/docker_production/3mkuae/article/jtJjlo/video/65604f650fbce.mp4" width="100%"></video>
 
-  
+
 
 > 特别说明：
 >
@@ -96,17 +97,17 @@ source: "https://www.bazhuayu.com/helpcenter/docs/jtJjlo"
 > 
 > ![【Amazon】商品评论采集](/assets/academy/case-studies/amazon-product-reviews/04-65604be9e9266.png)
 
- 
 
- 
+
+
 
 ## 步骤二、调整通过【智能识别】生成的规则
 
- 
+
 
 【智能识别】很好的辅助我们建立了采集规则，我们可以对规则进行调整和优化。
 
- 
+
 
 1、删除不需要字段
 
@@ -114,7 +115,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/jtJjlo"
 
 <video controls src="https://resource-wangsu.helplook.net/docker_production/3mkuae/article/jtJjlo/video/656051b6897d4.mp4" width="100%"></video>
 
- 
+
 
 2、对字段进行重命名
 
@@ -122,7 +123,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/jtJjlo"
 
 <video controls src="https://resource-wangsu.helplook.net/docker_production/3mkuae/article/jtJjlo/video/656053222c209.mp4" width="100%"></video>
 
- 
+
 
 3、添加特殊字段：采集时间、当前页面网址
 
@@ -132,7 +133,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/jtJjlo"
 
 ![](/assets/academy/case-studies/amazon-product-reviews/05-65323d9e2b896.gif)
 
- 
+
 
 4、提取ASIN编码
 
@@ -153,7 +154,7 @@ ASIN编码在当前商品评论网址中，对采集到的当前商品评论网�
   您的浏览器不支持视频播放，请更新浏览器后重试。
 </video>
 
- 
+
 
 > 特别说明：
 >
@@ -169,9 +170,9 @@ ASIN编码在当前商品评论网址中，对采集到的当前商品评论网�
 > 
 > - b. 正则表达式是什么？怎么写？正则表达式是对字符串（包括普通字符（例如，a 到 z 之间的字母）和特殊字符（称为“元字符”））操作的一种逻辑公式，用来从文本中匹配/过滤信息。正则表达式有其特定写法，需要系统学习才能掌握，点击查看 <a href="/zh/academy/advanced-features/data-processing/regular-expression" target="_blank" rel="noopener noreferrer">正则表达式 教程 。</a>
 
- 
 
- 
+
+
 
 ## 步骤三、优化规则
 
@@ -208,13 +209,13 @@ ASIN编码在当前商品评论网址中，对采集到的当前商品评论网�
 > 
 > - b. 评论中的翻页使用了Ajax技术，需设置Ajax加载。一般情况下，八爪鱼会自动判断并设置一定的【Ajax加载】。如果系统判断失误或者自动设置的【Ajax加载】过短，可根据采集需求和网页加载情况进行调整，详情点击查看 <a href="/zh/academy/video/operation-guidance/ajax-and-new-tabs/VNUXDW" target="_blank" rel="noopener noreferrer">Ajax教程</a> 。
 
- 
+
 
 步骤四、启动采集
 
 1、点击【采集】，这里选择【启动本地采集】。启动后八爪鱼开始自动采集数据。 
 
- 
+
 
 
 
@@ -239,21 +240,21 @@ ASIN编码在当前商品评论网址中，对采集到的当前商品评论网�
 > 
 > 2、采集完成后，选择合适的导出方式来导出数据。支持导出为Excel，CSV，HTML，数据库等。这里导出为Excel。
 
- 
+
 
 ![](/assets/academy/case-studies/amazon-product-reviews/09-65323d9f89c5d.png)
 
- 
+
 
 **示例数据：**
 
- 
+
 
 ![](/assets/academy/case-studies/amazon-product-reviews/10-65323d9fc7ac8.png)
 
- 
 
- 
+
+
 
 特别说明：
 
@@ -265,9 +266,9 @@ ASIN编码在当前商品评论网址中，对采集到的当前商品评论网�
 
 <video controls src="https://resource-wangsu.helplook.net/docker_production/3mkuae/article/jtJjlo/video/656055ed7c056.mp4" width="100%"></video>
 
- 
 
- 
+
+
 
 作者：Tina
 

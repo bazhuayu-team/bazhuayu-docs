@@ -1,12 +1,13 @@
 ---
 title: "【豆瓣】图书评论采集"
+description: "学习如何使用八爪鱼完成“【豆瓣】图书评论采集”数据采集。"
 source: "https://www.bazhuayu.com/helpcenter/docs/KfW4lO"
 ---
 **采集场景**
 
 在豆瓣读书短评页面 <a href="https://book.douban.com/subject/4011670/comments/" target="_blank" rel="noopener noreferrer">https://book.douban.com/subject/4011670/comments/</a> ， 采集图书评论信息。
 
- 
+
 
 **采集字段**
 
@@ -14,9 +15,9 @@ source: "https://www.bazhuayu.com/helpcenter/docs/KfW4lO"
 
 ![【豆瓣】图书评论采集](/assets/academy/case-studies/douban-book-reviews/01-653b5cc8a2259.png)
 
- 
 
- 
+
+
 
 **采集结果**
 
@@ -24,9 +25,9 @@ source: "https://www.bazhuayu.com/helpcenter/docs/KfW4lO"
 
 ![【豆瓣】图书评论采集](/assets/academy/case-studies/douban-book-reviews/02-6682144c3fbf1.png)
 
- 
 
-  
+
+
 
 **教程说明**
 
@@ -34,7 +35,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/KfW4lO"
 
 如果因网页改版造成网址或步骤无效，无法收集到目标数据，请联系官方客服，我们将及时修正。
 
- 
+
 
 **采集步骤**
 
@@ -50,28 +51,28 @@ source: "https://www.bazhuayu.com/helpcenter/docs/KfW4lO"
 
 步骤六、启动采集
 
- 
+
 
 **以下为具体步骤：**
 
-### 
+
 
 ### 步骤一、打开网页
 
- 
+
 
 在首页【输入框】中输入目标网址<a href="https://book.douban.com/subject/4011670/comments/" target="_blank" rel="noopener noreferrer"> https://book.douban.com/subject/4011670/comments/</a> ，点击【开始采集】，八爪鱼自动打开网页。
 
-<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/74abdee01253642699965112040/b6dVi9qGNJ8A.mp4" width="100%"></video>
+<video controls src="https://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/74abdee01253642699965112040/b6dVi9qGNJ8A.mp4" width="100%"></video>
 
- 
+
 
 特别说明：
 
 - a. 打开网页后，如果开始开始【自动识别】，请等待自动识别完成。八爪鱼支持自动识别网页上的列表，滚动和翻页，识别成功后直接启动采集并获取数据。如果【自动识别】的结果不是我们需要的，可点击【取消】关闭智能识别，自行配置采集流程。详情点击查看<a href="/zh/academy/basic-collection/beginner/custom-collection" target="_blank" rel="noopener noreferrer">【自动识别】</a>
 - b. 示例中输入的的是单个网址 <a href="https://book.douban.com/subject/4011670/comments/" target="_blank" rel="noopener noreferrer">https://book.douban.com/subject/4011670/comments/</a> ，大家可根据需求进行更换，结构与示例网址相同即可。如果需要批量采集网址，点击查看 <a href="/zh/academy/basic-collection/bulk-input/url-loop-similar-pages" target="_blank" rel="noopener noreferrer">批量采集同类网页（URL）教程</a>
 
- 
+
 
 ### 步骤二、创建【循环列表】
 
@@ -85,24 +86,24 @@ source: "https://www.bazhuayu.com/helpcenter/docs/KfW4lO"
 
 ④、点击【元素中数据内容】
 
-<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/905d87141253642699962257593/aLJx3bT38aEA.mp4" width="100%"></video>
+<video controls src="https://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/905d87141253642699962257593/aLJx3bT38aEA.mp4" width="100%"></video>
 
 特别说明：
 
 - a. 经过以上连续4步，【循环-提取数据】创建完成。【循环】中的项，对应着页面上所有图书评论列表，【提取数据】中的字段，对应着每个图书评论列表中的字段。启动采集以后，八爪鱼就会按照循环中的顺序依次提取每个列表中的字段。
 - b. 为何通过以上4步，可建立【循环-提取数据】？详情点击查看 <a href="/zh/academy/basic-collection/beginner/list-collection" target="_blank" rel="noopener noreferrer">列表数据采集教程 </a>。
 
- 
+
 
 ### 步骤三、编辑字段
 
- 
+
 
 1、在【当前页面数据预览】面板中，删除不需要的字段，同时修改字段名称。
 
-<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/f5f711b71253642699953488482/AfCvkOQ8JOAA.mp4" width="100%"></video>
+<video controls src="https://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/f5f711b71253642699953488482/AfCvkOQ8JOAA.mp4" width="100%"></video>
 
- 
+
 
 2、添加更多字段
 
@@ -118,9 +119,9 @@ source: "https://www.bazhuayu.com/helpcenter/docs/KfW4lO"
 
 【页面网址】：在【当前页面数据预览】面板中，点击【+】→ 【添加当前网页信息】 →【网址】。
 
-<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/cfffab771253642699966762807/51WYNF6QIGgA.mp4" width="100%"></video>
+<video controls src="https://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/cfffab771253642699966762807/51WYNF6QIGgA.mp4" width="100%"></video>
 
- 
+
 
 ### 步骤四、格式化数据
 
@@ -130,9 +131,9 @@ source: "https://www.bazhuayu.com/helpcenter/docs/KfW4lO"
 
 点击【作品名】字段后的  ... 按钮 → 【格式化数据】→【添加步骤】→【替换】，将【短评】替换为【空】，然后保存设置。
 
-<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/413142321253642699961175773/Du3W1pbQTxYA.mp4" width="100%"></video>
+<video controls src="https://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/413142321253642699961175773/Du3W1pbQTxYA.mp4" width="100%"></video>
 
- 
+
 
 2、 【星级】字段格式化
 
@@ -140,9 +141,9 @@ source: "https://www.bazhuayu.com/helpcenter/docs/KfW4lO"
 
 点击【星级】字段后的  ... 按钮 → 【格式化数据】→【添加步骤】→【正则表达式匹配】→ 匹配user-stars 和rating之间的数据→【确定】，得到【allstar50】，即评分为50。
 
-<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/6cf45f4f1253642699958007860/DLGpQtLXGlQA.mp4" width="100%"></video>
+<video controls src="https://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/6cf45f4f1253642699958007860/DLGpQtLXGlQA.mp4" width="100%"></video>
 
- 
+
 
 > 特别说明：
 >
@@ -158,7 +159,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/KfW4lO"
 > 
 > - b. 正则表达式是什么？怎么写？正则表达式是对字符串（包括普通字符（例如，a 到 z 之间的字母）和特殊字符（称为“元字符”））操作的一种逻辑公式，用来从文本中匹配/过滤信息。正则表达式有其特定写法，需要系统学习才能掌握，点击查看 <a href="/zh/academy/video/operation-guidance/data-formatting/43CIS3" target="_blank" rel="noopener noreferrer">正则表达式 教程</a> 。
 
- 
+
 
 ### 步骤五、创建【循环翻页】
 
@@ -168,17 +169,17 @@ source: "https://www.bazhuayu.com/helpcenter/docs/KfW4lO"
 
 如果需要翻页以采集多页数据：选择页面中的【后页】按钮，在操作提示上单击【循环点击单个链接】，创建【循环翻页】。
 
-<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/c626e8d71253642699959583471/wT5CAdYfCqIA.mp4" width="100%"></video>
+<video controls src="https://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/c626e8d71253642699959583471/wT5CAdYfCqIA.mp4" width="100%"></video>
 
- 
 
- 
+
+
 
 特别说明：
 
 - a. 创建【循环翻页】后，八爪鱼会自动点击【下一页】按钮进行翻页，从第1页，第2页......直到最后1页。如果只需采集特定页的数据，可在八爪鱼中设置循环翻页的次数，详情点击查看  <a href="/zh/academy/basic-collection/pagination/next-page-button" target="_blank" rel="noopener noreferrer">翻页以采集多页数据教程</a>。
 
- 
+
 
 2、修改【循环翻页】的XPath
 
@@ -186,40 +187,40 @@ source: "https://www.bazhuayu.com/helpcenter/docs/KfW4lO"
 
 进入【循环翻页】设置页面，修改XPath为：//a[@data-page="next"][contains(text(),'后页')]。
 
-<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/1a8189cc1253642699967644121/rL1nhWnybnMA.mp4" width="100%"></video>
+<video controls src="https://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/1a8189cc1253642699967644121/rL1nhWnybnMA.mp4" width="100%"></video>
 
- 
 
- 
+
+
 
 特别说明：
 
 - a. 为什么重复翻页？这是因为【循环翻页】默认生成的XPath，不仅可以定位到【下一页】的按钮，还能同时定位到【上一页】或者【首页】等，导致不断重复提取某页或某几页内容，因此我们需要修改翻页按钮的XPATH。这里需要一定的XPath知识。点击查看 <a href="/zh/academy/xpath/getting-started/why-use-xpath" target="_blank" rel="noopener noreferrer">XPath学习与实例教程</a> 。
 
- 
+
 
 ### 步骤六、启动采集
 
- 
+
 
 1、单击【采集】并【启动本地采集】。启动后八爪鱼开始自动采集数据。
 
- <video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/cb471cde1253642699966559927/agsHB3rZ32QA.mp4" width="100%"></video>
+ <video controls src="https://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/cb471cde1253642699966559927/agsHB3rZ32QA.mp4" width="100%"></video>
 
- 
+
 
 特别说明：
 
 - a. 【本地采集】是使用自己的电脑进行采集，【云采集】是使用八爪鱼提供的云服务器采集，点击查看 <a href="/zh/academy/data-export/start-and-export" target="_blank" rel="noopener noreferrer">本地采集与云采集详解</a>。
 
- 
+
 
 2、采集完成后，选择合适的导出方式导出数据。支持导出为Excel、CSV、HTML、数据库等。这里导出为Excel。
 
 ![【豆瓣】图书评论采集](/assets/academy/case-studies/douban-book-reviews/03-66821434a5778.png)
 
- 
 
- 
+
+
 
 作者：妙卡

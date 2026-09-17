@@ -8,7 +8,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/AMkU9y"
 
 八爪鱼采集器提供两种数据去重方式，满足不同程度的去重需求。
 
- 
+
 
 ### **一、按整条数据去重（默认）**
 
@@ -18,7 +18,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/AMkU9y"
 
 ![](/assets/academy/advanced-features/deduplicate-data/01-6513f4b6704d6.png)
 
- 
+
 
 ### **二、按字段去重（需手动设置）**
 
@@ -28,13 +28,13 @@ source: "https://www.bazhuayu.com/helpcenter/docs/AMkU9y"
 
 ![](/assets/academy/advanced-features/deduplicate-data/02-6513f4b657ada.png)
 
- 
+
 
 例2：选择【字段2】和【字段3】为对比字段，第1、4条数据的【字段2】和【字段3】内容相同，则第1、4条数据为重复数据，去重后仅保留第1条数据。
 
 ![](/assets/academy/advanced-features/deduplicate-data/03-6513f4b65e2ad.png)
 
- 
+
 
 ### **三、按字段去重实例**
 
@@ -44,19 +44,19 @@ source: "https://www.bazhuayu.com/helpcenter/docs/AMkU9y"
 
 ![](/assets/academy/advanced-features/deduplicate-data/04-6513f4b6a0dfb.png)
 
- 
+
 
 采集难点：
 
 八爪鱼采集器每次启动本地采集，均是从头开始采集，不可避免的会采到之前已经采集过的博文。同时，博文的评论数，分享数，点赞数都是动态变化的，每次采集时数值不一样。该情景下，八爪鱼默认的去重机制，无法剔除掉已经采集过的数据。
 
- 
+
 
 解决方法：
 
 使用按字段去重功能，以【博文内容】为对比字段。因为每条博文的内容一般是固定不变的，且同一个博主很少会发布两条内容一样的博文。（若考虑存在发布两条博文内容一样的情况，可以选择多个字段做去重条件。比如使用【博文内容】，【博文详情链接】，【发布时间】三个字段作为去重条件。本示例中仅以单个字段为例。）
 
- 
+
 
 操作演示：
 
@@ -86,6 +86,6 @@ Step3：选择要设为去重条件的字段。选好后，再点击【应用】
 >
 > 再将去重条件改为A（选择【字段1】作为对比去重条件），得到第3批云采集数据。则第3批云采集数据将和第1批云采集数据进行对比去重，自动删除重复数据，但不会和第2批云采集数据进行对比去重。
 
- 
+
 
 作者：Tina

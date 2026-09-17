@@ -14,7 +14,7 @@ POST https://api-datahub.bazhuayu.com/v1/data-apps/translations/lookup
 
 目录页渲染用：最多 100 个 `app_id` 加一种语言，返回其中**对调用方可见且带该语言译文**的 App 的卡片级条目（名称、简介、能力边界、关键词、计费事件说明）。其余 App 直接不出现在 `items` 里，不报错。
 
-README、schema 与使用知识不在这里，需要完整译文请读<a href="/zh/datahub/api/reference/discovery/get-data-app-translation">单个 App 的译文</a>。
+README、schema 与使用知识不在这里，需要完整译文请读<a href="/zh/datahub/api/reference/discovery/get-data-app-translation" target="_blank" rel="noopener noreferrer">单个 App 的译文</a>。
 
 ## 请求
 
@@ -62,7 +62,7 @@ curl -X POST \
 | --- | --- | --- | --- |
 | 401 | `unauthorized` | `forbidden` | 缺少或无效的 API Key。 |
 
-错误响应统一为 `{"error": {code, category, message, retryable}}`，见<a href="/zh/datahub/api/reference/introduction#错误">错误</a>。
+错误响应统一为 `{"error": {code, category, message, retryable}}`，见<a href="/zh/datahub/api/reference/introduction#错误" target="_blank" rel="noopener noreferrer">错误</a>。
 
 ## 客户端库
 

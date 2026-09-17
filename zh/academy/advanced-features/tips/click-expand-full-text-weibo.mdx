@@ -10,7 +10,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/dian-ji-zhan-kai-huo-qu-quan-w
 
 以微博为例![点击展开获取全文-微博为例](/assets/academy/advanced-features/click-expand-full-text-weibo/01-6982fbe9b6bf8.png)
 
-###  
+
 
 ### 二、处理方法
 
@@ -18,30 +18,30 @@ source: "https://www.bazhuayu.com/helpcenter/docs/dian-ji-zhan-kai-huo-qu-quan-w
 
 首先我们可以发现并不是每个博文都有【展开】按钮，因此我们可以设置一个判断条件，只有存在【展开】的时候我们才进行点击展开，否则就不进行点击操作，判断条件设置为以下条件![点击展开获取全文-微博为例](/assets/academy/advanced-features/click-expand-full-text-weibo/02-6983157ac3eb9.png)
 
- 
+
 
 点击元素和判断条件的xpath都设置为：//span[contains(text(),'展开')]
 
- 
+
 
 以下是完整的设置判断点击展开流程演示：
 
 首先，我们在提取数据之间进行判断是否点击展开的操作，我们需要进行添加判断步骤，然后判断条件设为【当前循环项包含元素】，对应的元素xpath设置为：//span[contains(text(),'展开')]
 
-<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/1514375e5145403715952417514/XCY4Q0DTlxIA.mp4" width="100%"></video>
+<video controls src="https://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/1514375e5145403715952417514/XCY4Q0DTlxIA.mp4" width="100%"></video>
 
 然后，再此判断分支条件内添加点击元素步骤，进行点击【展开】的操作，点击元素的xpath设置为相对xpath并且设置为：//span[contains(text(),'展开')]
 
-<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/45da83625145403715885192423/6GxY9gdUOAcA.mp4" width="100%"></video>
+<video controls src="https://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/45da83625145403715885192423/6GxY9gdUOAcA.mp4" width="100%"></video>
 
- 
 
-添加完成后，我们选择一条带有【展开】的博文进行测试，如果判断这条博文有【展开】按钮就进入第一个分支条件执行点击展开，否则就是没有【展开】按钮，进入执行第二个分支条件，不进行任务点击操作\
+
+添加完成后，我们选择一条带有【展开】的博文进行测试，如果判断这条博文有【展开】按钮就进入第一个分支条件执行点击展开，否则就是没有【展开】按钮，进入执行第二个分支条件，不进行任务点击操作
 如下视频所示，我们选择其中一条包含【展开】的博文进行反击规则步骤验证的时候，判断为存在，那么就会进入该分支下的点击操作
 
-<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/1514375e5145403715952417514/XCY4Q0DTlxIA.mp4" width="100%"></video>
+<video controls src="https://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/1514375e5145403715952417514/XCY4Q0DTlxIA.mp4" width="100%"></video>
 
- 
+
 
 > 特别说明：
 >

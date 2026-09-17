@@ -1,5 +1,6 @@
 ---
 title: "中国天气网数据采集"
+description: "学习如何使用八爪鱼完成“中国天气网数据采集”数据采集。"
 source: "https://www.bazhuayu.com/helpcenter/docs/4nxt2f"
 ---
 **采集场景**
@@ -8,17 +9,17 @@ source: "https://www.bazhuayu.com/helpcenter/docs/4nxt2f"
 
 ![中国天气网数据采集](/assets/academy/case-studies/weather-china-data/01-653b3cb8863b2.png)
 
- 
 
- 
 
- 
+
+
+
 
 **采集字段**
 
 地区、发布时间、风力、日间天气、夜间天气、温度、详情网址等字段。
 
- 
+
 
 **采集结果**
 
@@ -26,13 +27,13 @@ source: "https://www.bazhuayu.com/helpcenter/docs/4nxt2f"
 
 ![中国天气网数据采集](/assets/academy/case-studies/weather-china-data/02-653b3ccf6a9ef.png)
 
- 
 
- 
 
- 
 
- 
+
+
+
+
 
 **采集步骤**
 
@@ -44,27 +45,27 @@ source: "https://www.bazhuayu.com/helpcenter/docs/4nxt2f"
 
 步骤四、启动采集 导出数据
 
- 
+
 
 **以下为具体步骤：**
 
- 
+
 
 ## 步骤一、打开网页
 
- 
+
 
 在首页【输入框】中输入目标网址 <a href="http://www.weather.com.cn/forecast/" target="_blank" rel="noopener noreferrer">*http://www.weather.com.cn/forecast/*</a> ，点击【开始采集】，八爪鱼自动打开网页。
 
 ![中国天气网数据采集](/assets/academy/case-studies/weather-china-data/03-653b3ceaa5adb.png)
 
- 
 
- 
+
+
 
 ## 步骤二、创建【循环点击-提取】，采集所有城市以展示天气数据
 
- 
+
 
 打开网页后，通过以下几步，实现批量采集多个地区的天气数据。
 
@@ -72,7 +73,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/4nxt2f"
 
 2、采集该地区的数据
 
- 
+
 
 1、循环点击所有地区
 
@@ -80,7 +81,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/4nxt2f"
 
 ![中国天气网数据采集](/assets/academy/case-studies/weather-china-data/04-653b3cfbe64ab.png)
 
- 
+
 
 再点击【循环点击每个元素】，页面展示该地区的天气数据。
 
@@ -90,37 +91,37 @@ source: "https://www.bazhuayu.com/helpcenter/docs/4nxt2f"
 
 ![中国天气网数据采集](/assets/academy/case-studies/weather-china-data/06-653b3d1d8717b.png)
 
- 
+
 
 2、采集该地区的数据
 
- 
+
 
 注：对于该页面，一部分数据以文本形式展示，可直接提取；一部分以图片形式展示，需提取源码并格式化处理方可获取真正的数据。
 
- 
+
 
 ① 选中地区字段，采集该元素的文本。同理，依次提取【发布时间】，【风力】，【温度】字段。
 
 ![中国天气网数据采集](/assets/academy/case-studies/weather-china-data/07-653b3d339095d.png)
 
- 
+
 
 ② 选中日间天气图标，采集该元素的Outer HTML。同理，提取【夜间天气】，等字段。
 
 ![中国天气网数据采集](/assets/academy/case-studies/weather-china-data/08-653b3d3e6c639.png)
 
- 
+
 
 **③**点击【添加字段】，选择【当前网页信息>网址】
 
  ![中国天气网数据采集](/assets/academy/case-studies/weather-china-data/09-653b3d4c8fb40.png)
 
- 
+
 
 ## 步骤三、编辑字段 清洗数据
 
- 
+
 
 在【当前页面数据预览】页面，可删除多余字段，修改字段名，移动字段顺序，格式化字段等。 
 
@@ -128,19 +129,19 @@ source: "https://www.bazhuayu.com/helpcenter/docs/4nxt2f"
 
 ![中国天气网数据采集](/assets/academy/case-studies/weather-china-data/10-653b3d5c49368.png)
 
- 
+
 
 **②**在【当前页面数据预览】页面，选中字段后鼠标右键-元素抓取方式-元素属性-title。同理，依次对【夜间天气】等字段进行清洗操作。
 
- 
+
 
  ![中国天气网数据采集](/assets/academy/case-studies/weather-china-data/11-653b3d6797a4d.png)
 
- 
+
 
 ## 步骤四、启动采集 导出数据
 
- 
+
 
 1、单击【采集】并【启动本地采集】。启动后八爪鱼开始自动采集数据。
 
