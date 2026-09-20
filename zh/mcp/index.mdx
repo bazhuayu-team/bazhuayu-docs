@@ -3,7 +3,7 @@ title: 八爪鱼 MCP 服务
 description: 通过 MCP 协议搜索模板、运行云采集、查询任务状态、导出数据并检索数据中心内容。
 ---
 
-将八爪鱼采集能力接入 Coze（扣子）、Dify、QClaw（小龙虾）、ChatGPT、Claude、Cursor、Gemini 等兼容 MCP 的 AI 智能体。
+将八爪鱼采集能力接入千问办公、WorkBuddy、Coze（扣子）、Dify、QClaw（小龙虾）、ChatGPT、Claude、Cursor、Gemini 等 AI 智能体。
 
 八爪鱼 MCP 是面向 AI 智能体的**标准化数据连接器**。在对话中可以直接查询数据中心已经积累的存量内容，也可以搜索预置模板、触发云端采集、导出多种格式的数据，或按需采集 Temu、TikTok Shop 电商数据，无需手写爬虫代码。
 
@@ -12,11 +12,28 @@ description: 通过 MCP 协议搜索模板、运行云采集、查询任务状�
 ## 前置条件
 
 - **八爪鱼账户** — 免费版也可连接；免费 / 基础版用户每周可通过 MCP 获得 **2,000 条**免费采集额度
-- **兼容 MCP 的客户端** — 见下方 [平台对接](#平台对接)，或 <a href="/zh/mcp/guides/clients" target="_blank" rel="noopener noreferrer">客户端配置指南</a>
+- **支持连接器或 MCP 的客户端** — 见下方 [平台对接](#平台对接)，或 <a href="/zh/mcp/guides/clients" target="_blank" rel="noopener noreferrer">客户端配置指南</a>
 
-## 让 Agent 自动添加（推荐）
+## 使用内置连接器（推荐）
 
-WorkBuddy、QClaw、豆包专业版等具备工具配置能力的 Agent，通常可以根据一段对话自行添加 MCP 服务。先在账户中心<a href="/zh/mcp/quick-start/api-key" target="_blank" rel="noopener noreferrer">创建 API Key</a>，再将下面的内容发给 Agent，并把占位符替换为你的真实 Key：
+八爪鱼连接器已在部分国内 Agent 平台上线。千问办公和 WorkBuddy 用户可以直接在连接器市场搜索「八爪鱼」，点击连接后在浏览器中完成 OAuth 授权，再回到 Agent 中启用连接器。此方式不需要复制 MCP 地址或手动填写 API Key。
+
+<CardGroup cols={2}>
+  <Card title="千问办公" href="/zh/mcp/integrations/qwen-office">
+    在连接器市场搜索八爪鱼，完成 OAuth 授权后使用。
+  </Card>
+  <Card title="WorkBuddy" href="/zh/mcp/integrations/workbuddy">
+    连接并授权八爪鱼，然后在具体对话中打开连接器。
+  </Card>
+</CardGroup>
+
+<Note>
+  内置连接器使用 OAuth；手动添加通用 HTTP MCP 使用 `x-api-key`。两种方式都连接八爪鱼 MCP，但认证流程不同，请根据所选入口使用对应教程，不要混用凭证。
+</Note>
+
+## 让 Agent 自动添加通用 MCP
+
+QClaw、豆包专业版等具备工具配置能力的 Agent，通常可以根据一段对话自行添加 MCP 服务。先在账户中心<a href="/zh/mcp/quick-start/api-key" target="_blank" rel="noopener noreferrer">创建 API Key</a>，再将下面的内容发给 Agent，并把占位符替换为你的真实 Key。千问办公和 WorkBuddy 已有内置连接器时，优先使用上方 OAuth 流程，无需发送这段提示词：
 
 ```text
 请帮我添加名为“八爪鱼”的 HTTP MCP 服务，并自行完成配置和连通性测试。
@@ -35,7 +52,7 @@ API Key：<粘贴你的 API Key>
   仅在可信的本地 Agent 或私密对话中提供 API Key。不要把真实 Key 发送到群聊、公开对话或截图中；安装完成后也不要让 Agent 回显密钥。
 </Warning>
 
-八爪鱼采集器 MCP 使用 API Key 认证：将 Key 放入 `x-api-key` 请求头。若 Agent 无权修改配置，请按<a href="/zh/mcp/guides/clients" target="_blank" rel="noopener noreferrer">客户端配置指南</a>手动添加。
+手动添加八爪鱼采集器 MCP 时使用 API Key 认证：将 Key 放入 `x-api-key` 请求头。若 Agent 无权修改配置，请按<a href="/zh/mcp/guides/clients" target="_blank" rel="noopener noreferrer">客户端配置指南</a>手动添加。
 
 ## 能力范围
 
@@ -61,7 +78,8 @@ API Key：<粘贴你的 API Key>
 
 ## 认证方式
 
-使用请求头 `x-api-key` 认证。API Key 在<a href="/zh/mcp/quick-start/api-key" target="_blank" rel="noopener noreferrer">八爪鱼账户中心创建</a>；不要改写为 OAuth 或 `Authorization: Bearer <API Key>`。
+- **平台内置连接器**：千问办公、WorkBuddy 等已上架连接器的入口使用 OAuth。点击连接后，在八爪鱼授权页核对账号和权限并确认，无需在 Agent 对话中提供 API Key。
+- **手动添加通用 HTTP MCP**：使用请求头 `x-api-key` 认证。API Key 在<a href="/zh/mcp/quick-start/api-key" target="_blank" rel="noopener noreferrer">八爪鱼账户中心创建</a>；不要写成 OAuth 凭据或 `Authorization: Bearer <API Key>`。
 
 <Warning>
   请勿将 API Key 写入公开仓库、截图或群聊。泄露后请立即在账户中心作废并重新创建。
@@ -111,13 +129,13 @@ API Key：<粘贴你的 API Key>
 
 <Steps>
   <Step title="确认客户端支持 MCP">
-    在 AI 产品中找到「MCP / 连接器 / 工具」配置入口。
+    在 AI 产品中找到「连接器 / MCP / 工具」入口。千问办公和 WorkBuddy 可直接使用已经上架的八爪鱼连接器。
   </Step>
-  <Step title="让 Agent 添加或手动填写">
-    优先将上方对话发送给支持自主配置的 Agent；也可以手动填写 `https://mcp.bazhuayu.com`（国际环境使用 `https://mcp.octoparse.com`）。
+  <Step title="选择连接方式">
+    有内置连接器时，搜索「八爪鱼」并点击连接；没有内置连接器时，可让 Agent 添加或手动填写 `https://mcp.bazhuayu.com`（国际环境使用 `https://mcp.octoparse.com`）。
   </Step>
   <Step title="完成认证">
-    在 Headers 中配置 <a href="/zh/mcp/quick-start/api-key" target="_blank" rel="noopener noreferrer">API Key</a> 的 `x-api-key`。
+    内置连接器按页面提示完成 OAuth 授权；手动添加时，在 Headers 中配置 <a href="/zh/mcp/quick-start/api-key" target="_blank" rel="noopener noreferrer">API Key</a> 的 `x-api-key`。
   </Step>
   <Step title="在对话中试用">
     先用只读请求验证连接，例如：「列出数据中心当前支持的平台」，或「帮我找一个采集电商商品列表的八爪鱼模板」。
@@ -141,6 +159,12 @@ API Key：<粘贴你的 API Key>
 ## 平台对接 {#平台对接}
 
 <div className="mcp-platform-grid">
+  <a href="/docs/zh/mcp/integrations/qwen-office" className="mcp-platform-card">
+    <span>千问办公</span>
+  </a>
+  <a href="/docs/zh/mcp/integrations/workbuddy" className="mcp-platform-card">
+    <span>WorkBuddy</span>
+  </a>
   <a href="/docs/zh/mcp/integrations/coze" className="mcp-platform-card">
     <img src="/assets/mcp/platforms/coze.svg" alt="" width="24" height="24" />
     <span>Coze（扣子）</span>

@@ -544,6 +544,8 @@
                   {
                     "group": "平台对接",
                     "pages": [
+                      "zh/mcp/integrations/qwen-office",
+                      "zh/mcp/integrations/workbuddy",
                       "zh/mcp/integrations/coze",
                       "zh/mcp/integrations/dify",
                       "zh/mcp/integrations/qclaw",

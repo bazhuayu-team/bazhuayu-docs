@@ -11,8 +11,8 @@ description: 排查八爪鱼采集器 MCP 的连接、认证、模板任务和�
 
 **处理：**
 
-- 确认 URL 为 `https://mcp.bazhuayu.com`；国际环境使用 `https://mcp.octoparse.com`。
-- 确认 API Key 位于请求头 **`x-api-key`**，不要使用 OAuth 或 `Authorization: Bearer`。
+- 使用平台内置连接器时，确认 OAuth 授权已完成且连接器已在当前对话中启用；必要时断开后重新授权。
+- 手动添加通用 HTTP MCP 时，确认 URL 为 `https://mcp.bazhuayu.com`（国际环境使用 `https://mcp.octoparse.com`），并确认 API Key 位于请求头 **`x-api-key`**，不要写成 `Authorization: Bearer`。
 - 断开后重新连接，刷新工具列表或重启客户端。
 - 当前采集器 MCP 主入口实测有 12 个工具；不同客户端的展示名称可能不同，以工具标识和实时发现结果为准。
 

@@ -5,7 +5,9 @@ description: 在八爪鱼账户中心创建 API Key，供 MCP 以 x-api-key 方�
 
 ## 认证方式
 
-八爪鱼采集器 MCP 仅使用 API Key。无论使用 Coze、Dify、QClaw、Cursor、Claude Code 还是脚本环境，都将密钥放入请求头 `x-api-key`；不要使用 OAuth、Bearer Token 或 `Authorization` 请求头替代。
+本页用于**手动添加通用 HTTP MCP** 的 API Key 认证。使用这种方式时，将密钥放入请求头 `x-api-key`；不要写成 Bearer Token 或放入 `Authorization` 请求头。
+
+千问办公、WorkBuddy 等平台已经上架的八爪鱼连接器使用 OAuth，不需要创建或粘贴 API Key。请直接按照对应的<a href="/zh/mcp/index#平台对接" target="_blank" rel="noopener noreferrer">平台对接教程</a>完成授权。
 
 ## 创建 API Key
 
@@ -38,7 +40,7 @@ description: 在八爪鱼账户中心创建 API Key，供 MCP 以 x-api-key 方�
 
 ## 方式一：交给 Agent 自动配置（推荐）
 
-WorkBuddy、QClaw、豆包专业版等能够管理工具配置的 Agent，可以自行选择当前客户端支持的配置方式、写入 MCP 设置并测试连接。将下面的内容发给 Agent，并把占位符替换为刚刚创建的 Key：
+QClaw、豆包专业版等能够管理工具配置的 Agent，可以自行写入通用 MCP 设置并测试连接。将下面的内容发给 Agent，并把占位符替换为刚刚创建的 Key。WorkBuddy 已有内置连接器时，请使用 OAuth 对接教程，不需要发送这段提示词：
 
 ```text
 请帮我添加名为“八爪鱼”的 HTTP MCP 服务，并自行完成配置和连通性测试。
@@ -120,6 +122,7 @@ API Key：<粘贴你的 API Key>
 
 ## 与各平台教程的关系
 
+- **千问办公 / WorkBuddy 内置连接器** — 使用 OAuth，见<a href="/zh/mcp/index#平台对接" target="_blank" rel="noopener noreferrer">平台对接</a>
 - **Coze / Dify / QClaw** — <a href="/zh/mcp/index#平台对接" target="_blank" rel="noopener noreferrer">平台对接</a> 分组中的分平台教程
 - **ChatGPT / Claude / Cursor / Gemini / OpenClaw / VS Code** — <a href="/zh/mcp/guides/clients" target="_blank" rel="noopener noreferrer">客户端配置指南</a>
 

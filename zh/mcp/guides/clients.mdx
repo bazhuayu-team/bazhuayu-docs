@@ -1,19 +1,34 @@
 ---
 title: 客户端配置指南
-description: 在 ChatGPT、Claude、Cursor、Gemini、OpenClaw、VS Code 等客户端中连接八爪鱼 MCP。
+description: 在千问办公、WorkBuddy、ChatGPT、Claude、Cursor、Gemini、OpenClaw、VS Code 等客户端中连接八爪鱼 MCP。
 ---
 
-## 服务地址
+## 先选择连接方式
+
+千问办公和 WorkBuddy 已经上架八爪鱼连接器，推荐直接在连接器市场搜索「八爪鱼」，通过 OAuth 完成授权：
+
+<CardGroup cols={2}>
+  <Card title="千问办公" href="/zh/mcp/integrations/qwen-office">
+    查看连接器搜索、授权和验证步骤。
+  </Card>
+  <Card title="WorkBuddy" href="/zh/mcp/integrations/workbuddy">
+    查看连接、OAuth 授权及在对话中启用的方法。
+  </Card>
+</CardGroup>
+
+如果客户端没有上架八爪鱼连接器，再按下方方式手动添加通用 HTTP MCP。
+
+## 通用 MCP 服务地址
 
 ```text
 https://mcp.bazhuayu.com
 ```
 
-认证方式：**API Key**（Header：`x-api-key`）。API Key 创建见 <a href="/zh/mcp/quick-start/api-key" target="_blank" rel="noopener noreferrer">获取 API Key</a>；不要使用 OAuth 或 `Authorization: Bearer`。
+手动添加时的认证方式：**API Key**（Header：`x-api-key`）。API Key 创建见 <a href="/zh/mcp/quick-start/api-key" target="_blank" rel="noopener noreferrer">获取 API Key</a>；不要把 API Key 写成 OAuth 凭据或 `Authorization: Bearer`。
 
 ## Agent 对话安装
 
-WorkBuddy、QClaw、豆包专业版等能够自行管理工具配置的 Agent，可直接通过对话添加八爪鱼 MCP。推荐使用<a href="/zh/mcp/quick-start/api-key" target="_blank" rel="noopener noreferrer">获取 API Key</a>页面提供的完整提示词，让 Agent 写入 `x-api-key` 请求头、刷新工具列表并完成连接测试。
+QClaw、豆包专业版等能够自行管理工具配置的 Agent，可直接通过对话添加八爪鱼 MCP。推荐使用<a href="/zh/mcp/quick-start/api-key" target="_blank" rel="noopener noreferrer">获取 API Key</a>页面提供的完整提示词，让 Agent 写入 `x-api-key` 请求头、刷新工具列表并完成连接测试。WorkBuddy 已有内置连接器时，优先使用上方 OAuth 接入。
 
 <Note>
   对这类 Agent，应明确要求本次接入仅使用 API Key，不要把 Key 配置成 OAuth 凭据或 `Authorization: Bearer`。不支持自主配置的客户端，请继续按下方平台步骤手动操作。

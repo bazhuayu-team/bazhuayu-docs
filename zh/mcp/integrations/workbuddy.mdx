@@ -1,0 +1,72 @@
+---
+title: MCP 对接 WorkBuddy
+description: 在 WorkBuddy 中搜索八爪鱼连接器，完成 OAuth 授权并在对话中启用采集能力。
+---
+
+> WorkBuddy 已经上架八爪鱼连接器。通过连接器市场和 OAuth 授权即可接入八爪鱼 MCP，无需手动填写 MCP 地址或 API Key。
+
+## 前置准备
+
+- 已安装并登录 WorkBuddy
+- 一个可以正常登录的八爪鱼账户
+- 浏览器允许打开授权页面并返回 WorkBuddy
+
+<Note>
+  本文介绍的是 WorkBuddy 内置连接器，使用 OAuth 授权。若你选择「自定义连接器」手动添加通用 HTTP MCP，则应改用 `https://mcp.bazhuayu.com` 和 `x-api-key`。两种方式选择其一，不要把 OAuth 与 API Key 配置混用。
+</Note>
+
+## 连接八爪鱼
+
+<Steps>
+  <Step title="在连接器市场搜索八爪鱼">
+    打开 WorkBuddy 的「连接器」页面，在搜索框输入「八爪鱼」，找到八爪鱼连接器后点击卡片右侧的「+」或「连接」。
+
+    <img src="/assets/mcp/workbuddy/step-1-find-connector.png" alt="在 WorkBuddy 连接器市场搜索八爪鱼" className="mcp-step-image" />
+  </Step>
+  <Step title="完成 OAuth 授权">
+    浏览器会打开八爪鱼授权页。核对应用名称、当前账户和授权范围，确认后点击「允许访问」。授权页面会读取必要的用户标识、资料和邮箱，并保留授权以便连接器持续使用；如不接受，请点击「拒绝」。
+
+    <img src="/assets/mcp/workbuddy/step-2-oauth-authorization.png" alt="在浏览器中确认 WorkBuddy 八爪鱼连接器的 OAuth 授权，账号信息已移除" className="mcp-step-image" />
+  </Step>
+  <Step title="确认连接成功">
+    返回 WorkBuddy。页面出现「连接器 八爪鱼 已连接」提示，且连接器名称旁显示绿色状态点，即表示授权已经生效。
+
+    <img src="/assets/mcp/workbuddy/step-3-connected.png" alt="WorkBuddy 提示八爪鱼连接器已连接" className="mcp-step-image" />
+  </Step>
+  <Step title="在对话中启用连接器">
+    新建或打开对话，点击输入框左侧的工具入口，选择「连接器」，找到「八爪鱼」并打开开关。开启后即可在当前对话中调用八爪鱼 MCP。
+
+    <img src="/assets/mcp/workbuddy/step-4-enable-in-chat.png" alt="在 WorkBuddy 对话中启用八爪鱼连接器" className="mcp-step-image" />
+  </Step>
+</Steps>
+
+## 验证连接
+
+建议先发送只读请求，避免在连通性测试阶段创建或启动任务：
+
+```text
+请使用八爪鱼连接器，列出数据中心当前支持的平台。
+```
+
+如果 WorkBuddy 成功调用连接器并返回平台列表，说明连接正常。之后可以继续搜索模板、运行云采集、查询状态或导出结果；涉及创建、启动、停止任务等操作时，建议先让 Agent 说明即将执行的动作并等待确认。
+
+## 常见问题
+
+| 现象 | 处理建议 |
+| --- | --- |
+| 连接器市场没有八爪鱼 | 刷新列表并确认 WorkBuddy 已更新到支持该连接器的版本；入口名称和上架范围可能随版本变化 |
+| OAuth 页面没有打开 | 检查默认浏览器、弹窗拦截和网络设置，然后重新点击连接 |
+| 已授权但仍显示未连接 | 返回连接器页刷新；仍无效时断开连接并重新授权 |
+| 新对话里无法调用 | 连接成功不等于每个对话都自动启用，请在输入框左侧的「连接器」菜单中打开八爪鱼开关 |
+| 想切换八爪鱼账户 | 在授权页或连接器管理中先断开当前账户，再重新连接并选择目标账户 |
+
+<Warning>
+  只在八爪鱼官方身份页面完成登录和授权。不要把账号密码、Cookie 或 API Key 粘贴到 WorkBuddy 对话中，也不要在公开截图中保留个人账号信息。
+</Warning>
+
+## 相关链接
+
+- <a href="/zh/mcp/index" target="_blank" rel="noopener noreferrer">八爪鱼 MCP 概述</a>
+- <a href="/zh/mcp/workflow" target="_blank" rel="noopener noreferrer">工作流程示例</a>
+- <a href="/zh/mcp/troubleshooting" target="_blank" rel="noopener noreferrer">故障排查</a>
+
