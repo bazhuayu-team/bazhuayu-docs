@@ -4,13 +4,13 @@ description: "边滚动边采集数据教程，来自八爪鱼帮助中心「操
 source: "https://www.bazhuayu.com/helpcenter/docs/fHVc3P"
 ---
 
-## **一、什么是【边滚动边采集数据】**
+## 一、什么是【边滚动边采集数据】
 
 
 
 有很多网站，需要向下滚动页面，才能加载出新数据，像 <a href="https://www.toutiao.com/" target="_blank" rel="noopener noreferrer">今日头条首页</a>、<a href="https://image.baidu.com/search/index?tn=baiduimage\&ipn=r\&ct=201326592\&cl=2\&lm=-1\&st=-1\&fm=result\&fr=\&sf=1\&fmq=1572935261090_R\&pv=\&ic=\&nc=1\&z=\&hd=\&latest=\&copyright=\&se=1\&showtab=0\&fb=0\&width=\&height=\&face=0\&istype=2\&ie=utf-8\&sid=\&word=%E5%A4%8F%E7%9B%AE%E5%8F%8B%E4%BA%BA%E5%B8%90" target="_blank" rel="noopener noreferrer">百度图片搜索</a>、<a href="https://weibo.com/" target="_blank" rel="noopener noreferrer">新浪微博首页</a> 等页面都是这种情况。
 
-在采集这类网页数据时，相对应的在八爪鱼 https://etax.shandong.chinatax.gov.cn/dzswj/zdsswfsxajgbl.jsp https://etax.shandong.chinatax.gov.cn/dzswj/zdsswfsxajgbl.jsp中也需设置【页面滚动】。
+在采集这类网页数据时，需要在八爪鱼中设置【页面滚动】。
 
 
 
@@ -22,7 +22,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/fHVc3P"
 
 
 
-## **二、【边滚动边采集数据】的优点**
+## 二、【边滚动边采集数据】的优点
 
 
 
@@ -30,7 +30,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/fHVc3P"
 
 
 
-## **三、****【边滚动边采集数据】****如何设置？**
+## 三、【边滚动边采集数据】如何设置？
 
 
 
@@ -66,7 +66,7 @@ Step3：点击右上角【采集】，选择【普通采集】，打开采集页
 
 因为我们只设置了滚动3次，所以采集第3次滚动后加载的数据，退出采集流程。
 
-最后导出数据即可.
+最后导出数据即可。
 
 
 
@@ -85,7 +85,7 @@ Step3：点击右上角【采集】，选择【普通采集】，打开采集页
 
 
 
-如果不使用智能识别，如何自行配置采集任务，实现【边滚动边采集】呢？以下详细详解。
+如果不使用智能识别，如何自行配置采集任务，实现【边滚动边采集】呢？下面详细说明。
 
 示例网址：<a href="https://news.qq.com/" target="_blank" rel="noopener noreferrer">新闻中心-腾讯网 (qq.com)</a>
 
@@ -126,31 +126,3 @@ Step4：点击左上角的【采集】，选择本地采集【普通模式】，
 注意观察页面：八爪鱼滚动1次后，采集第1次滚动后加载的数据，继续滚动第2次，采集第2次滚动后加载的数据。
 
 因为我们只设置了滚动5次，所以采集第5次滚动后加载的数据，退出采集流程。
-
-
-
-
-
-### **3.局部滚动设置**
-
-**3.1、局部滚动xpath快速查找方法**
-
-1、首先需要安装Microsoft Edge浏览器
-![边滚动边采集数据](/assets/academy/basic-collection/scroll-and-collect/06-69b91d78f1cb3.png)
-
-2、演示网址<a href="https://www.douyin.com/video/7063388051535416614" target="_blank" rel="noopener noreferrer">douyin.com/video/7063388051535416614</a>
-
-3、在浏览器中打开演示的网址，然后键盘F12键，选择【控制台】![边滚动边采集数据](/assets/academy/basic-collection/scroll-and-collect/07-69b91d794d462.png)
-
-4、然后再下发复制粘贴输入以下代码，粘贴后按回车键
-function findScroller(element) \{     element.onscroll = function() \{ console.log(element)\}     Array.from(element.children).forEach(findScroller); \} findScroller(document.body);
-
-![边滚动边采集数据](/assets/academy/basic-collection/scroll-and-collect/08-69b91d7aa18bb.png)
-
-5、滚动评论页面数据，这个时候出来的就是局部滚动区域的xpath，进行复制对应的xpath即可，整个流程视频如下：
-
-### <video controls src="https://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/bc380d2d5145403694832398851/QIl3ZxQXfSUA.mp4" width="100%"></video>
-
-
-
-作者：Y

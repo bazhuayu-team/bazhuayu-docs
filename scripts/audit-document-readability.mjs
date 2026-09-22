@@ -78,6 +78,31 @@ function normalizeBody(source, issues) {
         }
       }
 
+      const heading = line.match(/^(#{1,6}[\t ]+)(.+)$/);
+      if (heading && /\*/.test(heading[2])) {
+        issues.headingEmphasis += 1;
+        line = `${heading[1]}${heading[2].replace(/\*+/g, "").trim()}`;
+      }
+
+      const repeatedStrongMarkers = (line.match(/\*{4,}/g) ?? []).length;
+      if (repeatedStrongMarkers > 0) {
+        issues.repeatedStrongMarkers += repeatedStrongMarkers;
+        line = line.replace(/\*{4,}/g, "");
+      }
+
+      if (line.includes("下文其他图片同理") && /\*/.test(line) && line !== "*点击查看高清大图，下文其他图片同理*") {
+        issues.malformedImageNotes += 1;
+        line = "*点击查看高清大图，下文其他图片同理*";
+      }
+
+      if (/^\*\*<video\b/i.test(line)) {
+        issues.htmlMediaEmphasis += 1;
+        line = line.slice(2);
+      } else if (/^\s*\*\*\s*$/.test(line)) {
+        issues.htmlMediaEmphasis += 1;
+        line = "";
+      }
+
       line = line.replace(/(\]\(\/assets\/[^)\s]+)\s+(\))/g, (_match, start, end) => {
         issues.assetPathWhitespace += 1;
         return `${start}${end}`;
@@ -127,6 +152,10 @@ const summary = {
     escapedUrlSchemes: 0,
     insecureTencentMedia: 0,
     generatedDescriptions: 0,
+    headingEmphasis: 0,
+    repeatedStrongMarkers: 0,
+    malformedImageNotes: 0,
+    htmlMediaEmphasis: 0,
   },
   warnings: {
     escapedUrls: 0,
@@ -156,6 +185,10 @@ for (const file of files) {
     escapedUrlSchemes: 0,
     insecureTencentMedia: 0,
     generatedDescriptions: 0,
+    headingEmphasis: 0,
+    repeatedStrongMarkers: 0,
+    malformedImageNotes: 0,
+    htmlMediaEmphasis: 0,
   };
   const next = normalizeBody(addMissingDescription(source, file, issues), issues);
 

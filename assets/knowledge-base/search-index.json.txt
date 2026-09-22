@@ -1,9 +1,9 @@
 {
   "version": 1,
-  "generatedAt": "2026-08-26T07:51:13.136Z",
+  "generatedAt": "2026-09-22T06:35:14.232Z",
   "counts": {
     "faqIntents": 413,
-    "publicAnswers": 729
+    "publicAnswers": 734
   },
   "aliases": [],
   "intents": [
@@ -4305,7 +4305,16 @@
     "doc:/zh/academy/basic-collection/beginner/click-to-jump": {
       "title": "点击元素跳转",
       "summary": "点击元素跳转教程，来自八爪鱼帮助中心「操作指南 / 基本采集」。",
-      "steps": [],
+      "steps": [
+        "在首页输入框中输入目标网址： http://www.ccgp-zhejiang.gov.cn/site/home ，点击【开始采集】，八爪鱼会自动打开网页。",
+        "以采集“资讯动态”栏目为例，先点击【资讯动态】板块，再在右上角操作提示中选择【点击一次】，创建点击元素步骤。",
+        "选中页面中的一个资讯列表项。列表项被绿色框选后，在黄色操作提示框中点击【选中全部相似元素】。",
+        "系统会自动识别所有同类列表并生成循环步骤。选择提取【文本内容】，依次提取每个列表项中的标题、发布时间等字段。",
+        "完成设置后，流程中会自动生成一个循环步骤，对应页面中的所有资讯动态列表。",
+        "找到并点击页面中的翻页按钮，在自动弹出的黄色操作提示框中点击【循环点击】，创建循环翻页步骤。",
+        "流程图中出现【循环翻页】步骤后，八爪鱼即可自动完成翻页。",
+        "点击【保存】，再点击【采集】，选择【启动本地采集】。启动后，八爪鱼会开始自动采集数据。本地采集使用当前电脑执行，云采集使用八爪鱼提供的云服务器执行，具体区别可 查看采集与导出说明 。"
+      ],
       "route": "/zh/academy/basic-collection/beginner/click-to-jump",
       "sourceType": "采集学院"
     },
@@ -4425,14 +4434,14 @@
     },
     "doc:/zh/academy/case-studies/ecommerce/aliexpress-keyword-products": {
       "title": "【速卖通】 AliExpress(速卖通)关键词搜索采集商品信息",
-      "summary": "采集场景 在AliExpress(速卖通) 首页中 http://www.aliexpress.com 中输入关键词，采集关键词搜索后得到的商品列表信息。 采集字段 关键词、标题、图片链接、商品详情链接、现价、原价、优惠、店铺名、店铺链接 【速卖通】 AliExpress(速卖通)关键词搜索采集商品信息 采集结果 采集结果可导出为Excel、CSV、HTML…",
+      "summary": "学习如何使用八爪鱼完成“【速卖通】 AliExpress(速卖通)关键词搜索采集商品信息”数据采集。",
       "steps": [],
       "route": "/zh/academy/case-studies/ecommerce/aliexpress-keyword-products",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/case-studies/ecommerce/aliexpress-product-reviews": {
       "title": "【速卖通】AliExpress(速卖通)商品评价",
-      "summary": "采集场景 在AliExpress(速卖通) 网站上进入商品详情页，采集商品的评论信息。 示例网址： http://www.aliexpress.com/item/4000093476853.html https://es.aliexpress.com/item/1005003334666560.…",
+      "summary": "学习如何使用八爪鱼完成“【速卖通】AliExpress(速卖通)商品评价”数据采集。",
       "steps": [
         "a. 打开网页后，如果开始开始【自动识别】，请点击【不再自动识别】或【取消识别】将其关掉。因为本文不适合使用【自动识别】。",
         "b. 【自动识别】适用于自动识别网页上的列表、滚动和翻页，识别成功后直接启动采集即可获取数据。详情点击查看 【自动识别】教程",
@@ -4448,28 +4457,28 @@
     },
     "doc:/zh/academy/case-studies/ecommerce/amazon-product-detail": {
       "title": "【Amazon】商品详情页采集",
-      "summary": "采集场景 采集Amazon商品详情页数据。Amazon商品详情页实例网址： https://www.amazon.com/dp/B07R7DY911 。 采集字段 title、brand、stars、ratings、questions、price、details、productdimensions、itemweight、shippingweight、asin…",
+      "summary": "学习如何使用八爪鱼完成“【Amazon】商品详情页采集”数据采集。",
       "steps": [],
       "route": "/zh/academy/case-studies/ecommerce/amazon-product-detail",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/case-studies/ecommerce/amazon-product-list": {
       "title": "【Amazon】商品列表页采集",
-      "summary": "采集场景 在Amazon首页（ https://www.amazon.com）输入关键词搜索 ，采集搜索后得到的商品列表数据。实例网址 https://www.amazon.com/s?k=Apple&ref=nbsbnoss2 ，是搜索关键词 Apple后得到的商品列表页。 采集字段 商品标题、图片URL、商品链接、商品价格、商品评分、评论数等字段。…",
+      "summary": "学习如何使用八爪鱼完成“【Amazon】商品列表页采集”数据采集。",
       "steps": [],
       "route": "/zh/academy/case-studies/ecommerce/amazon-product-list",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/case-studies/ecommerce/amazon-product-reviews": {
       "title": "【Amazon】商品评论采集",
-      "summary": "采集场景 采集Amazon商品评价数据，实例网址： https://www.amazon.com/product-reviews/B07211W6X2/ 。 采集字段 评论标题、评论星级、评论时间、评论内容、有用数、ASIN等字段。 鼠标放到图片上，右键，选择【在新标签页中打开图片】可查看高清大图 下文其他图片同理 采集结果 采集结果可导出为Excel、CS…",
+      "summary": "学习如何使用八爪鱼完成“【Amazon】商品评论采集”数据采集。",
       "steps": [],
       "route": "/zh/academy/case-studies/ecommerce/amazon-product-reviews",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/case-studies/ecommerce/baidu-aigou-products": {
       "title": "百度爱采购关键词搜索商品",
-      "summary": "采集场景 在爱采购搜索页面 https://b2b.baidu.com/ 输入关键词搜索，然后采集搜索后得到的多个商品列表数据。 采集字段 商品名称、余量、产品标签、价格、产地、厂家名称、商品图片链接等字段。 百度爱采购关键词搜索商品 采集结果 采集结果可导出为Excel、CSV、HTML、数据库等多种格式。…",
+      "summary": "学习如何使用八爪鱼完成“百度爱采购关键词搜索商品”数据采集。",
       "steps": [
         "a. 打开网页后，如果开始开始【自动识别】，请点击【不再自动识别】或【取消识别】将其关掉。因为当前步骤不需要用到智能识别。",
         "b. 【自动识别】适用于自动识别网页上的列表、滚动和翻页，识别成功后直接启动采集即可获取数据。详情点击查看 【自动识别】教程",
@@ -4485,7 +4494,7 @@
     },
     "doc:/zh/academy/case-studies/ecommerce/baidu-aigou-suppliers": {
       "title": "【百度爱采购】关键词搜索厂家",
-      "summary": "采集场景 在爱采购搜索页面 https://b2b.baidu.com/c?q 输入关键词搜索，然后采集搜索后得到的多个厂家列表数据。 采集字段 厂家名称、主要产品、注册地址、营业期限、注册资本、实例商品价格等字段。 点击查看高清大图，下文其他图片同理 采集结果 采集结果可导出为Excel、CSV、HTML、数据库等多种格式。…",
+      "summary": "学习如何使用八爪鱼完成“【百度爱采购】关键词搜索厂家”数据采集。",
       "steps": [
         "a. 打开网页后，如果开始开始【自动识别】，请点击【不再自动识别】或【取消识别】将其关掉。因为当前步骤不需要用到智能识别。",
         "b. 【自动识别】适用于自动识别网页上的列表、滚动和翻页，识别成功后直接启动采集即可获取数据。详情点击查看 【自动识别】教程",
@@ -4501,21 +4510,21 @@
     },
     "doc:/zh/academy/case-studies/ecommerce/jd-carousel-download": {
       "title": "【京东】商品轮播图采集下载",
-      "summary": "一、采集场景 打开京东商品详情页（实例网址： https://item.jd.com/100257240940.html ），采集点击不同的规格后得到的图片。 【京东】商品轮播图采集下载 二、采集字段 商品标题、规格、轮播图链接（下载轮播图）。 ①选取规格。②轮播图片。③下载大图。…",
+      "summary": "学习如何使用八爪鱼完成“【京东】商品轮播图采集下载”数据采集。",
       "steps": [],
       "route": "/zh/academy/case-studies/ecommerce/jd-carousel-download",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/case-studies/ecommerce/jd-product-detail": {
       "title": "【京东】商品详情页采集",
-      "summary": "采集场景 打开京东商品详情页（实例网址： https://item.jd.com/100068388547.html ），采集点击不同的参数（颜色、版本等）后得到的数据（商品编号、价格、主图链接等字段会随着参数变化而变化）。 【京东】商品详情页采集 采集字段 商品标题、外观、版本、价格、商品编号等。…",
+      "summary": "学习如何使用八爪鱼完成“【京东】商品详情页采集”数据采集。",
       "steps": [],
       "route": "/zh/academy/case-studies/ecommerce/jd-product-detail",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/case-studies/ecommerce/jd-product-list-alt": {
       "title": "【京东】商品list列表采集",
-      "summary": "采集场景 京东首页（ https://www.jd.com/）有很多商品分类 ，商品分类共三级。鼠标点击三级分类中的某个具体类别后，跳转到此类别的商品列表，跳转网址以list开头。采集list开头的商品列表数据。 实例：点击【家用电器】-【电视】-【平板电视】这个分类，跳转到【平板电视】分类的商品列表，跳转网址为 https://list.jd.…",
+      "summary": "学习如何使用八爪鱼完成“【京东】商品list列表采集”数据采集。",
       "steps": [
         "a. 打开网页后，如果开始开始【自动识别】，请点击【不再自动识别】或【取消识别】将其关掉。因为本文不适合使用【自动识别】。",
         "b. 【自动识别】适用于自动识别网页上的列表、滚动和翻页，识别成功后直接启动采集即可获取数据。详情点击查看 【自动识别】教程",
@@ -4531,14 +4540,14 @@
     },
     "doc:/zh/academy/case-studies/ecommerce/jd-product-list": {
       "title": "【京东】商品列表采集",
-      "summary": "采集场景 在京东搜索页 https://search.jd.com/Search 输入搜索，搜出后得到的多个商品列表数据。 【京东】商品列表采集 采集字段 商品标题、价格、到手价、标签、已售数量、店铺名称、评价等字段。 采集结果 采集结果可导出为Excel，CSV，HTML，数据库等格式。…",
+      "summary": "学习如何使用八爪鱼完成“【京东】商品列表采集”数据采集。",
       "steps": [],
       "route": "/zh/academy/case-studies/ecommerce/jd-product-list",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/case-studies/ecommerce/jd-product-reviews": {
       "title": "【京东】商品评价采集",
-      "summary": "一、采集场景 京东商品详情页中的评价，有多个分类：【全部评价】、【晒图】、【追评】、【回头客】、【好评】、【中评】、【差评】。其中【全部评价】默认展现，其他需点击后展现。本文以按【全部评价】采集为例讲解。实例网址： https://item.jd.com/100005185609.html ； https://item.jd.…",
+      "summary": "学习如何使用八爪鱼完成“【京东】商品评价采集”数据采集。",
       "steps": [
         "a. 打开网页后，如果开始开始【自动识别】，请等待自动识别完成。八爪鱼支持自动识别网页上的列表，滚动和翻页，识别成功后直接启动采集并获取数据。如果【自动识别】的结果不是我们需要的，可点击【取消】关闭智能识别，自行配置采集流程。详情点击查看 【自动识别】",
         "b. 以上操作会自动生成一个【循环网址】，启动采集后，八爪鱼会自动打开每个网址，采集每个网址中的数据。",
@@ -4554,7 +4563,7 @@
     },
     "doc:/zh/academy/case-studies/ecommerce/jd-scenarios-overview": {
       "title": "【京东】采集场景汇总",
-      "summary": "作为国内最大的电商平台之一，京东数据采集具有多个维度。 有人需要采集商品信息，包括品类、品牌、产品名、价格、销量等字段，以了解商品销售状况、热门商品属性，进行市场扩大和重要决策； 有人需要采集产品评论，以明确产品优缺点、市场意向，进行新商品调研优化； 除了以上之外，还有很多的应用场景等待挖掘。下面为大家详细介绍京东数据采集的方法。…",
+      "summary": "学习如何使用八爪鱼完成“【京东】采集场景汇总”数据采集。",
       "steps": [
         "a. 输入网站名称后无模板出现？请确保输入的网站名称正确。",
         "a. 输入网站名称后无模板出现？请确保输入的网站名称正确。"
@@ -4564,7 +4573,7 @@
     },
     "doc:/zh/academy/case-studies/ecommerce/taobao-product-list": {
       "title": "【淘宝】商品列表页采集",
-      "summary": "采集场景 在淘宝首页（ https://s.taobao.com/search ）输入关键词搜索，采集搜索后得到的商品列表页数据。示例中关键词为【耐克】，可根据需求进行更换，同时支持自动批量输入多个关键词。 采集字段 采集字段包括关键词文本值，产品标题，产品价格，销量，店铺名称，店铺链接等。…",
+      "summary": "学习如何使用八爪鱼完成“【淘宝】商品列表页采集”数据采集。",
       "steps": [
         "a. 打开网页后，如果开始开始【自动识别】，请点击【不再自动识别】或【取消识别】将其关掉。因为本文不适合使用【自动识别】。",
         "b. 【自动识别】适用于自动识别网页上的列表、滚动和翻页，识别成功后直接启动采集即可获取数据。详情点击查看 【自动识别】教程",
@@ -4576,7 +4585,7 @@
     },
     "doc:/zh/academy/case-studies/finance/10jqka-fund-nav": {
       "title": "【同花顺】基金净值数据采集",
-      "summary": "采集场景 进入同花顺基金净值查询页面： http://fund.10jqka.com.cn/datacenter/jz/ ，输入查询时间后搜索，采集搜索后得到的多个基金净值数据。 采集字段 序号、基金代码、基金代码链接、基金名称、基金链接、相关内容、相关内容链接、单位净值、累计净值、增长值、增长率、申购状态、赎回状态、当前采集时间等字段。…",
+      "summary": "学习如何使用八爪鱼完成“【同花顺】基金净值数据采集”数据采集。",
       "steps": [
         "a. 打开网页后，如果开始【自动识别】，请点击【不再自动识别】或【取消识别】将其关掉。因为本文不适合使用【自动识别】。",
         "b. 【自动识别】适用于自动识别网页上的列表、滚动和翻页，识别成功后直接启动采集即可获取数据。详情点击查看 【自动识别】 教程。",
@@ -4590,7 +4599,7 @@
     },
     "doc:/zh/academy/case-studies/finance/cbirc-policy-announcements": {
       "title": "【银保监】官网政策公告采集",
-      "summary": "2022-06-30 采集场景 进入中国银行保险监督管理委员会【新闻资讯】版块下的【监管动态】栏目 http://www.cbirc.gov.cn/cn/view/pages/ItemList.html?itemPId=914&itemId=915&itemUrl=ItemListRightList.…",
+      "summary": "学习如何使用八爪鱼完成“【银保监】官网政策公告采集”数据采集。",
       "steps": [
         "a. 打开网页后，如果开始开始【自动识别】，请点击【不再自动识别】或【取消识别】将其关掉。因为本文不适合使用【自动识别】。",
         "b. 【自动识别】适用于自动识别网页上的列表、滚动和翻页，识别成功后直接启动采集即可获取数据。详情点击查看 【自动识别】教程",
@@ -4604,14 +4613,14 @@
     },
     "doc:/zh/academy/case-studies/finance/cls-finance-briefs": {
       "title": "【财联社】财经信息短报采集",
-      "summary": "场景介绍 采集财经资讯，实时监控全网实时热点动向，财联社电报支持实时更新滚动，采集器配置定时运行可实现实时监控最新财经热点动向需求。固定短周期采集。 采集场景 打开财联社官网文献搜索界面（实例网址： https://www.cls.cn/telegraph ），设置每半小时监控采集新增数据。…",
+      "summary": "学习如何使用八爪鱼完成“【财联社】财经信息短报采集”数据采集。",
       "steps": [],
       "route": "/zh/academy/case-studies/finance/cls-finance-briefs",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/case-studies/finance/eastmoney-private-placement": {
       "title": "【东方财富】定向增发股数据采集",
-      "summary": "2022-06-21 采集场景 打开东方财富网【定向增发股】类目的网页： http://data.eastmoney.com/other/dxzf.html ，采集页面上显示的股票信息。 采集字段 股票简称、基金代码、发行方式、发行总数、发行价格、最新价、发行日期、增发上市日期、锁定期、股票代码详情链接、当前采集时间等字段。…",
+      "summary": "学习如何使用八爪鱼完成“【东方财富】定向增发股数据采集”数据采集。",
       "steps": [
         "a. 打开网页后，如果开始开始【自动识别】，请点击【不再自动识别】或【取消识别】将其关掉。因为本文不适合使用【自动识别】。",
         "b. 【自动识别】适用于自动识别网页上的列表、滚动和翻页，识别成功后直接启动采集即可获取数据。详情点击查看 【自动识别】教程",
@@ -4627,7 +4636,7 @@
     },
     "doc:/zh/academy/case-studies/finance/guba-stock-comments": {
       "title": "【股吧】股票评论采集",
-      "summary": "2022-06-17 采集场景 在股吧中输入某一批股票的网址，打开其对应的股吧，会展示很多讨论帖。点击每个讨论帖进入详情页，采集详情页的帖子信息和评论信息。 示例网址： http://guba.eastmoney.com/list,300869.html http://guba.eastmoney.com/list,002108.…",
+      "summary": "学习如何使用八爪鱼完成“【股吧】股票评论采集”数据采集。",
       "steps": [
         "a. 如果手上不是股吧网址，而是股票代码，可以依据股票代码批量生成网址，参考 网址批量生成教程 。",
         "b. 打开网页后，如果开始开始【自动识别】，请点击【不再自动识别】或【取消识别】将其关掉。因为本文不适合使用【自动识别】。",
@@ -4640,7 +4649,7 @@
     },
     "doc:/zh/academy/case-studies/finance/stats-monthly-indicators": {
       "title": "【国家统计局】筛选指定年份下月度指标数据",
-      "summary": "采集场景 在国家统计局月度数据（ https://data.stats.gov.cn/easyquery.htm?cn=A01） ， 筛选输入指定年份，循环采集各级指标及年度下各月份数据。 采集字段 各级指标名称、11月数据、10月数据、9月数据等。…",
+      "summary": "学习如何使用八爪鱼完成“【国家统计局】筛选指定年份下月度指标数据”数据采集。",
       "steps": [
         "a. 打开网页后，如果开始开始【自动识别】，请点击【不再自动识别】或【取消识别】将其关掉。因为本文不适合使用【自动识别】。",
         "b. 【自动识别】适用于自动识别网页上的列表、滚动和翻页，识别成功后直接启动采集即可获取数据。详情点击查看 【自动识别】教程",
@@ -4656,7 +4665,7 @@
     },
     "doc:/zh/academy/case-studies/finance/xueqiu-hot-post-comments": {
       "title": "【雪球】热帖评论采集",
-      "summary": "2022-06-10 采集场景 打开雪球网 https://xueqiu.com/ ，页面显示雪球热帖列表，点击每一个帖子的标题可进入详情页，查看并采集详情页里面的数据内容。 采集字段 帖子作者、标题、文章内容、发布时间、评论数、评论者、评论内容、评论时间等。…",
+      "summary": "学习如何使用八爪鱼完成“【雪球】热帖评论采集”数据采集。",
       "steps": [
         "a. 打开网页后，如果开始开始【自动识别】，请点击【不再自动识别】或【取消识别】将其关掉。因为本文不适合使用【自动识别】。",
         "b. 【自动识别】适用于自动识别网页上的列表、滚动和翻页，识别成功后直接启动采集即可获取数据。详情点击查看 【自动识别】教程",
@@ -4672,7 +4681,7 @@
     },
     "doc:/zh/academy/case-studies/life-services/58-job-listings": {
       "title": "【58同城】职位信息采集",
-      "summary": "采集场景 在58同城地区首页（ https://sz.58.com/ ，示例中默认为深圳） ，进入招聘频道，输入职位名称搜索，得到搜索结果列表。点击职位标题链接进入详情页，采集该职位具体信息。 采集字段 职位、薪酬、更新时间、浏览人数、申请人数等字段。 【58同城】职位信息采集 采集结果 采集结果可导出为Excel、CSV、HTML、数据库等多种格式。…",
+      "summary": "学习如何使用八爪鱼完成“【58同城】职位信息采集”数据采集。",
       "steps": [
         "a. 打开网页后，如果开始开始【自动识别】，请点击【不再自动识别】或【取消识别】将其关掉。因为本文不适合使用【自动识别】。",
         "b. 【自动识别】适用于自动识别网页上的列表、滚动和翻页，识别成功后直接启动采集即可获取数据。详情点击查看 【自动识别】教程",
@@ -4685,7 +4694,7 @@
     },
     "doc:/zh/academy/case-studies/life-services/baidu-images-export": {
       "title": "【百度图片】采集与导出",
-      "summary": "一、采集场景 在百度图片首页（ http://image.baidu.com/）输入关键词搜索 ，采集得到的图片地址。示例是搜索关键词【三清山】得到的图片。 二、采集字段 搜索关键词、图片地址、图片保存文件路径。 【百度图片】采集与导出 三、采集结果 采集结果可导出为Excel，CSV，HTML，数据库等多种格式。…",
+      "summary": "学习如何使用八爪鱼完成“【百度图片】采集与导出”数据采集。",
       "steps": [
         "a. 打开网页后，如果开始开始【自动识别】，请点击【不再自动识别】或【取消识别】将其关掉。因为本文不适合使用【自动识别】。",
         "b. 【自动识别】适用于自动识别网页上的列表、滚动和翻页，识别成功后直接启动采集即可获取数据。详情点击查看 【自动识别】教程",
@@ -4701,7 +4710,7 @@
     },
     "doc:/zh/academy/case-studies/life-services/baidu-map-list": {
       "title": "【百度地图】列表采集",
-      "summary": "采集场景 在百度地图首页（ https://map.baidu.com）输入【城市+关键词】搜索 ，采集搜索结果列表页。示例中关键词为【深圳 火锅】，可根据需求进行更换，同时支持自动批量输入多个关键词。 采集字段 搜索关键词、商家名称、人均、地址等。…",
+      "summary": "学习如何使用八爪鱼完成“【百度地图】列表采集”数据采集。",
       "steps": [
         "a. 打开网页后，如果开始开始【自动识别】，请等待自动识别完成。八爪鱼支持自动识别网页上的列表，滚动和翻页，识别成功后直接启动采集并获取数据。如果【自动识别】的结果不是我们需要的，可点击【取消】关闭智能识别，自行配置采集流程。详情点击查看 【自动识别】",
         "a. 经过以上连续4步，【循环-提取数据】创建完成。【循环】中的项，对应着页面上所有商家列表，【提取数据】中的字段，对应着每个商家列表中的字段。启动采集以后，八爪鱼就会按照循环中的顺序依次提取每个列表中的字段。",
@@ -4716,7 +4725,7 @@
     },
     "doc:/zh/academy/case-studies/life-services/baidu-search-results": {
       "title": "【百度】搜索结果采集",
-      "summary": "一、采集场景 在百度首页 https://www.baidu.com/ 输入关键词搜索，采集搜索后得到的搜索结果。 【百度】搜索结果采集 二、采集字段 标题、网页链接、简介 三、采集结果 采集结果可导出为Excel，CSV，HTML，数据库等多种格式。导出为Excel示例： 【百度】搜索结果采集 教程说明 八爪鱼版本：V8.5.…",
+      "summary": "学习如何使用八爪鱼完成“【百度】搜索结果采集”数据采集。",
       "steps": [
         "a. 打开网页后，如果开始开始【自动识别】，请点击【不再自动识别】或【取消识别】将其关掉。因为本文不适合使用【自动识别】。",
         "b. 【自动识别】适用于自动识别网页上的列表、滚动和翻页，识别成功后直接启动采集即可获取数据。详情点击查看 【自动识别】教程",
@@ -4732,14 +4741,14 @@
     },
     "doc:/zh/academy/case-studies/life-services/ctrip-attraction-reviews": {
       "title": "【携程】景点评价采集",
-      "summary": "采集场景 在携程网点击【攻略】-【目的地攻略】- 【选择目的地】-【选择景点】，采集目的地景点下的评论。 示例网址： https://you.ctrip.com/sight/bole922/5500.html https://you.ctrip.com/sight/lijiang32/3049.…",
+      "summary": "学习如何使用八爪鱼完成“【携程】景点评价采集”数据采集。",
       "steps": [],
       "route": "/zh/academy/case-studies/life-services/ctrip-attraction-reviews",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/case-studies/life-services/ctrip-travel-guides": {
       "title": "【携程】游记攻略采集",
-      "summary": "采集场景 在携程网点击【攻略】-【游记】，采集【游记】类目下的游记内容。 示例网址： https://you.ctrip.com/travels/chengdu104/3966766.html https://you.ctrip.com/travels/henan100058/3968107.…",
+      "summary": "学习如何使用八爪鱼完成“【携程】游记攻略采集”数据采集。",
       "steps": [
         "a. 手动输入的url数量不得大于1万个，如有超过1万url，请选择【从文件导入】，具体请查看教程 网址输入升级",
         "b. 打开网页后，如果开始开始【自动识别】，请点击【不再自动识别】或【取消识别】将其关掉。因为本文不适合使用【自动识别】。",
@@ -4755,7 +4764,7 @@
     },
     "doc:/zh/academy/case-studies/life-services/iguopin-job-listings": {
       "title": "【国聘】招聘职位数据采集",
-      "summary": "采集场景 在国聘网招聘搜索页（ https://www.iguopin.com/job） ， 输入关键词搜索（示例中的搜索关键词为【运营】），搜索后得到招聘信息列表页。点击职位链接，进入职位详情页，采集详情页数据，并在列表页自动翻页采集。 采集字段 岗位名称、位置、薪资范围、性质、经验要求、学历要求、招聘企业、报名截止时间、专业要求、行业要求、职位介绍等。…",
+      "summary": "学习如何使用八爪鱼完成“【国聘】招聘职位数据采集”数据采集。",
       "steps": [
         "a. 打开网页后，如果开始开始【自动识别】，请点击【不再自动识别】或【取消识别】将其关掉。因为本文不适合使用【自动识别】。",
         "b. 【自动识别】适用于自动识别网页上的列表、滚动和翻页，识别成功后直接启动采集即可获取数据。详情点击查看 【自动识别】教程",
@@ -4771,7 +4780,7 @@
     },
     "doc:/zh/academy/case-studies/life-services/tianyancha-company-info": {
       "title": "【天眼查】企业信息采集",
-      "summary": "采集场景 在天眼查搜索页面（ https://www.tianyancha.com/search） ，选择条件查询，得到条件查询后的结果列表页。实例网址： https://www.tianyancha.com/search?base=bj&companyType=normalcompany ，是选择了2个查询条件（省份地区：北京市；…",
+      "summary": "学习如何使用八爪鱼完成“【天眼查】企业信息采集”数据采集。",
       "steps": [
         "a. 打开网页后，如果开始开始【自动识别】，请等待自动识别完成。八爪鱼支持自动识别网页上的列表、滚动和翻页，此网页正是列表型网页。识别成功后直接启动采集即可获取数据。如果【自动识别】的结果不是我们需要的，可点击【取消识别】自行配置采集流程。详情点击查看 【自动识别】教程",
         "b. 示例网址： https://www.tianyancha.com/search?base=bj&companyType=normalcompany ，是 https://www.tianyancha.com/search 打开后，选择了2个查询条件（省份地区：北京市；机构类型：企业）后得到的网址，请根据需求更换筛选条件，然后输入筛选条件后得到的网址进行",
@@ -4787,14 +4796,14 @@
     },
     "doc:/zh/academy/case-studies/life-services/weather-china-data": {
       "title": "中国天气网数据采集",
-      "summary": "采集场景 在中国天气网页面 http://www.weather.com.cn/forecast/ 循环点击，采集点击后展示的多个地区的天气列表数据。 中国天气网数据采集 采集字段 地区、发布时间、风力、日间天气、夜间天气、温度、详情网址等字段。 采集结果 采集结果可导出为Excel，CSV，HTML，数据库等多种格式。…",
+      "summary": "学习如何使用八爪鱼完成“中国天气网数据采集”数据采集。",
       "steps": [],
       "route": "/zh/academy/case-studies/life-services/weather-china-data",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/case-studies/life-services/zhaopin-job-listings": {
       "title": "【智联招聘】智联招聘职位数据采集",
-      "summary": "采集场景 在智联招聘地区招聘搜索页（ https://sou.zhaopin.com/?jl=765） ， 输入关键词搜索（示例中的搜索关键词为【爬虫工程师】），搜索后得到招聘信息列表页。点击职位链接，进入职位详情页，采集详情页数据。 采集字段 职位名称、职位薪资、职位描述、职位链接等。…",
+      "summary": "学习如何使用八爪鱼完成“【智联招聘】智联招聘职位数据采集”数据采集。",
       "steps": [
         "a. 打开网页后，如果开始开始【自动识别】，请点击【不再自动识别】或【取消识别】将其关掉。因为本文不适合使用【自动识别】。",
         "b. 【自动识别】适用于自动识别网页上的列表、滚动和翻页，识别成功后直接启动采集即可获取数据。详情点击查看 【自动识别】教程",
@@ -4810,42 +4819,42 @@
     },
     "doc:/zh/academy/case-studies/news/cctv-keyword-list": {
       "title": "【央视新闻】关键词搜索列表采集",
-      "summary": "一、采集场景 央视新闻网 https://search.cctv.com/search.php?qtext=%E5%8C%BB%E7%96%97\\&page=1\\&type=web\\&sort=date\\&datepid=1\\&channel=\\&vtime=-1\\&is\\search=1 ，通过批量输入多个关键词检索相关新闻，然后采集新闻的列表页数据，再翻…",
+      "summary": "学习如何使用八爪鱼完成“【央视新闻】关键词搜索列表采集”数据采集。",
       "steps": [],
       "route": "/zh/academy/case-studies/news/cctv-keyword-list",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/case-studies/news/cqvip-keyword-papers": {
       "title": "【维普网】关键词搜索文献采集",
-      "summary": "场景介绍 应科研及科技前沿报告等相关需求，对于文献期刊的数据供应日渐密集，相应也用于AI数据投喂。企业为支撑数据库需要，定期采集相关词条数据，为第三方项目数据供应。 采集场景 打开维普官网文献搜索界面（实例网址： https://www.cqvip.com/search?…",
+      "summary": "学习如何使用八爪鱼完成“【维普网】关键词搜索文献采集”数据采集。",
       "steps": [],
       "route": "/zh/academy/case-studies/news/cqvip-keyword-papers",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/case-studies/news/gov-article-and-attachments": {
       "title": "【政府网站】采集正文及下载文中附件",
-      "summary": "一、采集场景 打开宝学教育广东考试网其中一篇公告（实例网址： http://www.gdgwyw.com/html/gdzk/sz/202204/7662407.html ），采集正文以及相关附件链接（并且下载）。 【政府网站】采集正文及下载文中附件 【政府网站】采集正文及下载文中附件 二、采集字段 ①标题，②文本，③附件链接，附件链接\\保存位置。…",
+      "summary": "学习如何使用八爪鱼完成“【政府网站】采集正文及下载文中附件”数据采集。",
       "steps": [],
       "route": "/zh/academy/case-studies/news/gov-article-and-attachments",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/case-studies/news/jiemian-keyword-list-detail": {
       "title": "【界面新闻】批量搜索关键词采集列表+详情",
-      "summary": "一、采集场景 界面新闻网站，通过批量输入多个关键词检索相关新闻，然后采集新闻的列表页数据，再点击列表标题进入详情页获取新闻正文等字段，最后再翻页采集全部页的数据 https://a.jiemian.com/index.php?m=search\\&a=index\\&opt=old\\&msg=%E8%A5%BF%E8%97%8F 二、采集字段 关键词、封面图图、…",
+      "summary": "学习如何使用八爪鱼完成“【界面新闻】批量搜索关键词采集列表+详情”数据采集。",
       "steps": [],
       "route": "/zh/academy/case-studies/news/jiemian-keyword-list-detail",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/case-studies/news/people-home-news": {
       "title": "【人民网】首页新闻采集",
-      "summary": "一、采集场景 本教程旨在指导用户如何从人民网（ http://www.people.com.cn/ ）采集“要闻热点”栏目的新闻数据。采集流程分为两步：首先获取列表页的新闻标题和链接，然后进入详情页提取正文、发布时间等字段 二、采集字段 新闻标题 板块标签 发布时间 来源 文章正文 作者 页面网址 当前时间 【人民网】首页新闻采集 三、采集结果 采集结果可导…",
+      "summary": "学习如何使用八爪鱼完成“【人民网】首页新闻采集”数据采集。",
       "steps": [],
       "route": "/zh/academy/case-studies/news/people-home-news",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/case-studies/news/public-resources-trigger-bids": {
       "title": "【全国公共资源交易平台】用触发器采集当天最新招标数据",
-      "summary": "采集场景 进入全国公共资源交易平台首页，（ https://deal.ggzy.gov.cn/ds/deal/dealList.jsp ），按照关键词进行采集列表数据。同时，用触发器采集当天最新招标数据 采集步骤 步骤一：打开网页关键词进行搜索采集 步骤二：配置【循环列表】提取数据 步骤三：修改字段 步骤四：用触发器采集当天最新招标数据 步骤五：启动采集 以…",
+      "summary": "学习如何使用八爪鱼完成“【全国公共资源交易平台】用触发器采集当天最新招标数据”数据采集。",
       "steps": [
         "a. 手动输入的url数量不得大于1万个，如有超过1万url，请选择【从文件导入】，具体请查看教程 网址输入升级",
         "b. 打开网页后，如果开始开始【自动识别】，请点击【不再自动识别】或【取消识别】将其关掉。因为本文不适合使用【自动识别】。",
@@ -4861,7 +4870,7 @@
     },
     "doc:/zh/academy/case-studies/news/sohu-politics-news": {
       "title": "【搜狐】时政新闻采集",
-      "summary": "采集场景 搜狐网站上有时政新闻的板块，实例网址： https://www.sohu.com/xchannel/tag?key=%E6%96%B0%E9%97%BB-%E6%97%B6%E6%94%BF\\&scm=10001.45714-201000.0.10005.0\\&spm=smpc.channel258.block2225ZJhqAx1nav.2.…",
+      "summary": "学习如何使用八爪鱼完成“【搜狐】时政新闻采集”数据采集。",
       "steps": [
         "a. 打开网页后，如果开始开始【自动识别】，请点击【不再自动识别】或【取消识别】将其关掉。因为本文不适合使用【自动识别】。",
         "b. 【自动识别】适用于自动识别网页上的列表、滚动和翻页，识别成功后直接启动采集即可获取数据。详情点击查看 【自动识别】教程 。",
@@ -4876,21 +4885,21 @@
     },
     "doc:/zh/academy/case-studies/news/tencent-news-video-export": {
       "title": "【腾讯新闻】视频采集与导出",
-      "summary": "为了让更多的用户实现采集需求，满足对网页图片、文档等文件下载等场景的期待，在八爪鱼最新版本上线了【文件下载】功能。大家不仅可以使用八爪鱼采集所需数据，还可以在采集的过程中下载网页上的文件，包括图片、音频、视频、文档等多种格式。 采集过程中，当用户需要采集网页中的图片、文档等各类文件时，八爪鱼可智能识别文件类型并提供下载选项，帮助用户一次性获取所需数据及文件。…",
+      "summary": "学习如何使用八爪鱼完成“【腾讯新闻】视频采集与导出”数据采集。",
       "steps": [],
       "route": "/zh/academy/case-studies/news/tencent-news-video-export",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/case-studies/news/thepaper-ordered-article-content": {
       "title": "【澎湃新闻】图文按顺序采集新闻正文",
-      "summary": "一、采集场景 澎湃新闻网站，采集新闻某个栏目下的列表页数据，再点击列表标题进入详情页获取新闻正文等字段，最后再循环滚动采集更多数据 https://www.thepaper.cn/channel25950 二、采集字段 标题、标题链接、图片链接、栏目链接、栏目名称、时间、正文等\\ 【澎湃新闻】图文按顺序采集新闻正文 三、采集结果 采集结果可导出为Excel，…",
+      "summary": "学习如何使用八爪鱼完成“【澎湃新闻】图文按顺序采集新闻正文”数据采集。",
       "steps": [],
       "route": "/zh/academy/case-studies/news/thepaper-ordered-article-content",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/case-studies/news/toutiao-author-articles": {
       "title": "【今日头条】头条号文章采集",
-      "summary": "采集场景 今日头条上有很多头条号，实例网址: https://www.toutiao.com/c/user/token/MS4wLjABAAAAjtBwvR3OD0QmhA9wLoIHcbufaw2GM6-i2fNvseUEL0/?tab=article ，是头条号【红星新闻】的主页。主页上展示其发布的文章列表。…",
+      "summary": "学习如何使用八爪鱼完成“【今日头条】头条号文章采集”数据采集。",
       "steps": [
         "a. 打开网页后，如果开始开始【自动识别】，请点击【不再自动识别】或【取消识别】将其关掉。因为本文不适合使用【自动识别】。",
         "b. 【自动识别】适用于自动识别网页上的列表、滚动和翻页，识别成功后直接启动采集即可获取数据。详情点击查看 【自动识别】教程 。",
@@ -4906,7 +4915,7 @@
     },
     "doc:/zh/academy/case-studies/news/toutiao-home-news": {
       "title": "【今日头条】首页新闻采集",
-      "summary": "采集场景 今日头条是重要的新闻资讯网站，首页（ https://www.toutiao.com/）默认展示最新的新闻列表 ，点击新闻标题，可进入新闻详情页，查看每条新闻的详情页数据。 采集字段 标题、来源、时间、正文、图片url等字段。 【今日头条】首页新闻采集 鼠标放到图片上，右键，选择【在新标签页中打开图片】可查看高清大图 下文其他图片同理 采集结果 采…",
+      "summary": "学习如何使用八爪鱼完成“【今日头条】首页新闻采集”数据采集。",
       "steps": [
         "a. 打开网页后，如果开始开始【自动识别】，请等待自动识别完成。八爪鱼支持自动识别网页上的列表，滚动和翻页，识别成功后直接启动采集并获取数据。如果【自动识别】的结果不是我们需要的，可点击【取消】关闭智能识别，自行配置采集流程。详情点击查看 【自动识别】",
         "a. 设置中的滚动次数和时间间隔，请根据采集需求和网页加载情况进行设置，并非是一成不变的，具体请点击查看 处理滚动加载数据的网页教程",
@@ -4920,14 +4929,14 @@
     },
     "doc:/zh/academy/case-studies/news/xinhuanet-keyword-search": {
       "title": "【新华网】关键词搜索采集",
-      "summary": "一、采集场景 新华网网站： http://so.news.cn/#search/0/%E6%96%B0%E9%97%BB/1/ ，通过批量输入多个关键词检索相关新闻，然后采集新闻的列表页数据，再点击列表标题进入详情页获取新闻正文等字段，最后再翻页采集全部页的数据 二、采集字段 标题、标题链接、标签、时间、关键词、发布时间、来源、正文内容 【新华网】关键词搜索…",
+      "summary": "学习如何使用八爪鱼完成“【新华网】关键词搜索采集”数据采集。",
       "steps": [],
       "route": "/zh/academy/case-studies/news/xinhuanet-keyword-search",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/case-studies/real-estate/58-short-rental-listings": {
       "title": "【58同城】民宿短租数据采集",
-      "summary": "采集场景 58同城的民宿短租版块，发布民宿短租的房源信息。本篇教程将详细讲解如何采集这些房源信息，并支持切换城市采集。 采集字段 城市、标题、出租人、位置、价格、标题链接、坐标等。 【58同城】民宿短租数据采集 采集结果 采集结果可导出为Excel，CSV，HTML，数据库等多种格式。…",
+      "summary": "学习如何使用八爪鱼完成“【58同城】民宿短租数据采集”数据采集。",
       "steps": [
         "a. 打开网页后，如果开始开始【自动识别】，请等待自动识别完成。八爪鱼支持自动识别网页上的列表，滚动和翻页，识别成功后直接启动采集并获取数据。如果【自动识别】的结果不是我们需要的，可点击【取消】关闭智能识别，自行配置采集流程。详情点击查看 【自动识别】",
         "b. 手动输入的url数量不得大于1万个，如有超过1万url，请选择【从文件导入】，具体请查看教程 网址输入升级",
@@ -4943,14 +4952,14 @@
     },
     "doc:/zh/academy/case-studies/real-estate/baixing-short-rental-listings": {
       "title": "【百姓网】短租房源数据采集",
-      "summary": "采集场景 采集某城市的百姓网日租短租房屋信息，示例网址（百姓网武汉日租房）： https://wuhan.baixing.com/duanzu/ 采集字段 出租人名称、标题、价格、发布时间、详情介绍、房屋地址、页面网址等字段 【百姓网】短租房源数据采集 采集结果 采集结果可导出为Excel，CSV，HTML，数据库等多种格式。…",
+      "summary": "学习如何使用八爪鱼完成“【百姓网】短租房源数据采集”数据采集。",
       "steps": [],
       "route": "/zh/academy/case-studies/real-estate/baixing-short-rental-listings",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/case-studies/real-estate/fang-home-listings": {
       "title": "【房天下】房源数据采集",
-      "summary": "采集场景 采集采集游天下不同城市的租房信息。 采集字段 城市、标题、出租人、地址、价格、标题链接等。 【房天下】房源数据采集 采集结果 采集结果可导出为Excel，CSV，HTML，数据库等多种格式。导出为Excel示例： 【房天下】房源数据采集 教程说明 本篇制作时间：2024/03/11 八爪鱼版本：V8.6.…",
+      "summary": "学习如何使用八爪鱼完成“【房天下】房源数据采集”数据采集。",
       "steps": [
         "a. 打开网页后，如果开始开始【自动识别】，请等待自动识别完成。八爪鱼支持自动识别网页上的列表，滚动和翻页，识别成功后直接启动采集并获取数据。如果【自动识别】的结果不是我们需要的，可点击【取消】关闭智能识别，自行配置采集流程。详情点击查看 【自动识别】",
         "b. 手动输入的url数量不得大于1万个，如有超过1万url，请选择【从文件导入】，具体请查看教程 网址输入升级",
@@ -4965,7 +4974,7 @@
     },
     "doc:/zh/academy/case-studies/real-estate/fang-second-hand-housing": {
       "title": "【房天下】二手房数据采集",
-      "summary": "采集场景 点击房天下网站的【二手房】分类，采集【二手房】分类下的房屋数据。 采集时可选择目标城市，本示例以深圳二手房为例： https://sz.esf.fang.com 。 采集字段 房源名称、房屋介绍、联系人、售价、所在小区、具体地址、单位价格等。…",
+      "summary": "学习如何使用八爪鱼完成“【房天下】二手房数据采集”数据采集。",
       "steps": [
         "a. 打开网页后，如果开始开始【自动识别】，请等待其自动识别完成，我们下一个步骤就是使用智能识别。",
         "c. 【自动识别】适用于自动识别网页上的列表、滚动和翻页，识别成功后直接启动采集即可获取数据。详情点击查看 【自动识别】教程",
@@ -4978,7 +4987,7 @@
     },
     "doc:/zh/academy/case-studies/real-estate/huanghekou-home-listings": {
       "title": "【黄河口信息港】房源数据采集",
-      "summary": "采集场景 采集黄河口信息港的短租房信息。 采集字段 区域、标题、标题链接、出租人、价格、位置等。 【黄河口信息港】房源数据采集 点击图片可查看高清大图，下文其他图片同理&#xA0; 采集结果 采集结果可导出为Excel，CSV，HTML，数据库等多种格式。…",
+      "summary": "学习如何使用八爪鱼完成“【黄河口信息港】房源数据采集”数据采集。",
       "steps": [
         "a. 本文使用【自动识别】，自动识别网页上的列表、滚动和翻页。识别成功后会生成采集规则，再对采集规则调整，以采集目标数据。如果【自动识别】的结果与以上图片不同，可点击【取消识别】自行配置采集流程或联系客服反馈。详情点击查看 【自动识别】教程",
         "a. 【本地采集】是使用自己的电脑进行采集，【云采集】是使用八爪鱼提供的云服务器采集，点击查看 本地采集与云采集详解 。",
@@ -4989,7 +4998,7 @@
     },
     "doc:/zh/academy/case-studies/social-media/bilibili-category-videos": {
       "title": "【B站】按类目标签采集视频",
-      "summary": "采集场景 B站有非常多的分类（动画、音乐、舞蹈等），每个分类下都会很多热门标签。本教程采集热门分类下的视频列表数据。 标签示例网址： https://www.bilibili.com/v/douga/mad/?spmidfrom=333.5.b7375626e6176.2#/4672 https://www.bilibili.…",
+      "summary": "学习如何使用八爪鱼完成“【B站】按类目标签采集视频”数据采集。",
       "steps": [
         "a. 手动输入的url数量不得大于1万个，如有超过1万url，请选择【从文件导入】，具体请查看教程 网址输入升级",
         "b. 打开网页后，如果开始开始【自动识别】，请点击【不再自动识别】或【取消识别】将其关掉。因为本文不适合使用【自动识别】。",
@@ -5005,7 +5014,7 @@
     },
     "doc:/zh/academy/case-studies/social-media/bilibili-up-videos": {
       "title": "【B站】UP主主页视频采集",
-      "summary": "采集场景 采集B站UP主主页的视频列表数据。 示例网址： https://space.bilibili.com/33775467?spmidfrom=333.337.0.0\\ https://space.bilibili.com/946974?spmidfrom=333.337.0.0\\ https://space.bilibili.…",
+      "summary": "学习如何使用八爪鱼完成“【B站】UP主主页视频采集”数据采集。",
       "steps": [
         "a. 手动输入的url数量不得大于1万个，如有超过1万url，请选择【从文件导入】，具体请查看教程 网址输入升级",
         "b. 打开网页后，如果开始开始【自动识别】，请点击【不再自动识别】或【取消识别】将其关掉。因为本文不适合使用【自动识别】。",
@@ -5021,7 +5030,7 @@
     },
     "doc:/zh/academy/case-studies/social-media/bilibili-video-collection": {
       "title": "【哔哩哔哩】视频采集",
-      "summary": "采集场景 在B站首页（ https://www.bilibili.com/ ），输入关键词搜索，得到相关视频列表页，然后点击视频链接进入其详情页，采集视频详情页中的详细信息。 示例在首页输入关键词【vlog】搜索，得到搜索结果列表页网址： https://search.bilibili.com/all?keyword=vlog 。…",
+      "summary": "学习如何使用八爪鱼完成“【哔哩哔哩】视频采集”数据采集。",
       "steps": [
         "a. 打开网页后，如果开始开始【自动识别】，请等待自动识别完成。八爪鱼支持自动识别网页上的列表，滚动和翻页，识别成功后直接启动采集并获取数据。如果【自动识别】的结果不是我们需要的，可点击【取消】关闭智能识别，自行配置采集流程。详情点击查看 【自动识别】",
         "b. 示例网址是在B站首页输入关键词【vlog】搜索后得到的网址。可根据需要，输入其他关键词搜索，得到对应网址，然后将网址输入八爪鱼中进行采集。",
@@ -5035,7 +5044,7 @@
     },
     "doc:/zh/academy/case-studies/social-media/bilibili-video-detail": {
       "title": "【B站】视频详情页数据采集",
-      "summary": "一、采集场景 打开B站详情页，采集视频详情页数据。 示例网址： https://www.bilibili.com/video/BV1ai4y1x7bB https://www.bilibili.com/video/BV1Wv411172X https://www.bilibili.…",
+      "summary": "学习如何使用八爪鱼完成“【B站】视频详情页数据采集”数据采集。",
       "steps": [
         "a. 手动输入的url数量不得大于1万个，如有超过1万url，请选择【从文件导入】，具体请查看教程 网址输入升级",
         "b. 打开网页后，如果开始开始【自动识别】，请点击【不再自动识别】或【取消识别】将其关掉。因为本文不适合使用【自动识别】。",
@@ -5048,7 +5057,7 @@
     },
     "doc:/zh/academy/case-studies/social-media/douban-book-reviews": {
       "title": "【豆瓣】图书评论采集",
-      "summary": "采集场景 在豆瓣读书短评页面 https://book.douban.com/subject/4011670/comments/ ， 采集图书评论信息。 采集字段 作品名、有用数、评论时间、评论内容、星级、当前时间、页面网址 【豆瓣】图书评论采集 采集结果 采集结果可导出为Excel、CSV、HTML、数据库等多种格式。…",
+      "summary": "学习如何使用八爪鱼完成“【豆瓣】图书评论采集”数据采集。",
       "steps": [
         "a. 打开网页后，如果开始开始【自动识别】，请等待自动识别完成。八爪鱼支持自动识别网页上的列表，滚动和翻页，识别成功后直接启动采集并获取数据。如果【自动识别】的结果不是我们需要的，可点击【取消】关闭智能识别，自行配置采集流程。详情点击查看 【自动识别】",
         "b. 示例中输入的的是单个网址 https://book.douban.com/subject/4011670/comments/ ，大家可根据需求进行更换，结构与示例网址相同即可。如果需要批量采集网址，点击查看 批量采集同类网页（URL）教程",
@@ -5064,7 +5073,7 @@
     },
     "doc:/zh/academy/case-studies/social-media/douban-hot-movies": {
       "title": "【豆瓣】热门电影采集",
-      "summary": "采集场景 在豆瓣电影首页（ https://movie.douban.com/ ）输入关键词搜索，得到相关电影列表页。实例网址： https://search.douban.com/movie/subjectsearch?searchtext=%E6%88%98%E7%8B%BC ，是输入关键词【战狼】后得到的电影列表页。…",
+      "summary": "学习如何使用八爪鱼完成“【豆瓣】热门电影采集”数据采集。",
       "steps": [
         "a. 创建【循环翻页】后，八爪鱼会自动点击【下一页】按钮进行翻页，从第1页，第2页......直到最后1页。如果只需采集特定页的数据，可在八爪鱼中设置循环翻页的次数，详情点击查看 翻页以采集多页数据教程 。",
         "a. 一定要在当前电影列表中选中电影标题做【点击该链接】，否则【点击元素】步骤无法与【循环】中的电影列表产生联动，会一直重复点击某一条电影链接，进入其详情页。",
@@ -5080,7 +5089,7 @@
     },
     "doc:/zh/academy/case-studies/social-media/douban-movie-short-reviews": {
       "title": "【豆瓣】电影短评采集",
-      "summary": "采集场景 在豆瓣【电影】短评页面 https://movie.douban.com/subject/36809864/comments https://movie.douban.com/subject/36448279/comments 采集电影短评评论信息 采集字段 电影名、看过人数、评论人、评论时间、评论内容、星级、页面网址 【豆瓣】电影短评采集 采集结…",
+      "summary": "学习如何使用八爪鱼完成“【豆瓣】电影短评采集”数据采集。",
       "steps": [
         "【星级】字段格式化"
       ],
@@ -5089,21 +5098,21 @@
     },
     "doc:/zh/academy/case-studies/social-media/kuaishou-account-videos": {
       "title": "【快手】个人账号视频采集",
-      "summary": "一、采集场景 快手： https://www.kuaishou.com/profile/3xj2q6nw8fckwc6 通过快手个人主页链接采集主页下的视频 二、采集字段 采集关键词、标题、来源、点赞数、图片链接 【快手】个人账号视频采集 三、采集结果 采集结果可导出为Excel，CSV，HTML，数据库等多种格式。…",
+      "summary": "学习如何使用八爪鱼完成“【快手】个人账号视频采集”数据采集。",
       "steps": [],
       "route": "/zh/academy/case-studies/social-media/kuaishou-account-videos",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/case-studies/social-media/kuaishou-keyword-videos": {
       "title": "【快手】关键词视频采集",
-      "summary": "一、采集场景 快手： https://www.kuaishou.com/?isHome=1 通过批量输入多个关键词检索相关的视频数据 二、采集字段 采集关键词、标题、来源、点赞数、图片链接 【快手】关键词视频采集 三、采集结果 采集结果可导出为Excel，CSV，HTML，数据库等多种格式。…",
+      "summary": "学习如何使用八爪鱼完成“【快手】关键词视频采集”数据采集。",
       "steps": [],
       "route": "/zh/academy/case-studies/social-media/kuaishou-keyword-videos",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/case-studies/social-media/sogou-wechat-keyword-search": {
       "title": "【搜狗微信】搜索关键词采集",
-      "summary": "采集场景 进入搜狗微信首页，（ https://weixin.sogou.com/） ，按照关键词进行采集文章列表数据。同时，点击每一篇文章的链接，进入文章详情页，采集文章正文和图片。 采集字段 关键词、标题链接、图片链接、标题、简介、公众号名称、发布时间、IP地址、页面源码、页面网址 【搜狗微信】搜索关键词采集 鼠标放到图片上，右键，选择【在新标签页中打开…",
+      "summary": "学习如何使用八爪鱼完成“【搜狗微信】搜索关键词采集”数据采集。",
       "steps": [
         "a. 本文使用【自动识别】，自动识别网页上的列表、滚动和翻页。识别成功后会生成采集规则，再对采集规则调整，以采集目标数据。如果【自动识别】的结果与以上图片不同，可点击【取消识别】自行配置采集流程或联系客服反馈。详情点击查看 【自动识别】教程",
         "a. 一定要在当前文章列表中选中文章链接做【点击该链接】，否则【点击元素】步骤无法与【循环】中的文章列表产生联动，会一直重复点击某一条文章链接，进入其文章详情页，无法实现依次点击每个文章链接。",
@@ -5116,7 +5125,7 @@
     },
     "doc:/zh/academy/case-studies/social-media/sogou-wechat-list-and-detail": {
       "title": "【搜狗微信】文章列表和详情页正文采集",
-      "summary": "采集场景 进入搜狗微信首页，（ https://weixin.sogou.com/） ，采集【热门】分类下的文章列表数据。同时，点击每一篇文章的链接，进入文章详情页，采集文章正文和图片。 采集字段 标题、文章链接、封面图、简介、来源、发布时间、正文、图片链接。…",
+      "summary": "学习如何使用八爪鱼完成“【搜狗微信】文章列表和详情页正文采集”数据采集。",
       "steps": [
         "a. 本文使用【自动识别】，自动识别网页上的列表、滚动和翻页。识别成功后会生成采集规则，再对采集规则调整，以采集目标数据。如果【自动识别】的结果与以上图片不同，可点击【取消识别】自行配置采集流程或联系客服反馈。详情点击查看 【自动识别】教程",
         "a. 一定要在当前文章列表中选中文章链接做【点击该链接】，否则【点击元素】步骤无法与【循环】中的文章列表产生联动，会一直重复点击某一条文章链接，进入其文章详情页，无法实现依次点击每个文章链接。",
@@ -5132,21 +5141,21 @@
     },
     "doc:/zh/academy/case-studies/social-media/wechat-articles-anti-crawl": {
       "title": "【微信公众号】文章采集（反爬较严重）",
-      "summary": "采集需求 如果需要采集确定公众号的文章，在网页上是无法直接获取。同时移动端的数据采集器又无法直接获取，本教程展示如何配置流程采集所需公众号的文章信息。 【微信公众号】文章采集（反爬较严重） 采集场景 搜索所需公众号的文章信息。通过登录微信公众平台（ https://mp.weixin.qq.com/cgi-bin/appmsg?…",
+      "summary": "学习如何使用八爪鱼完成“【微信公众号】文章采集（反爬较严重）”数据采集。",
       "steps": [],
       "route": "/zh/academy/case-studies/social-media/wechat-articles-anti-crawl",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/case-studies/social-media/weibo-author-posts": {
       "title": "【微博】博主主页的博文",
-      "summary": "采集场景 采集某个微博博主主页的博文数据，实例地址 https://weibo.com/u/3261134763 \\ https://weibo.com/2656274875?refer\\flag=1001030103\\ [](https://weibo.…",
+      "summary": "学习如何使用八爪鱼完成“【微博】博主主页的博文”数据采集。",
       "steps": [],
       "route": "/zh/academy/case-studies/social-media/weibo-author-posts",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/case-studies/social-media/weibo-first-level-comments": {
       "title": "【微博】评论采集（只采一级评论）",
-      "summary": "采集场景 在微博主页（ https://weibo.com/）登录后 ，循环打开微博博文链接，采集博文链接的一级评论数据。实例地址： https://weibo.com/1977661791/I7PgktlCh 。 【微博】评论采集（只采一级评论） 采集字段 博主用户名、发布时间、博文内容、转发数、评论数、点赞数、评论人、评论内容、评论时间。…",
+      "summary": "学习如何使用八爪鱼完成“【微博】评论采集（只采一级评论）”数据采集。",
       "steps": [
         "a. 设置中的滚动次数和时间间隔，请根据采集需求和网页加载情况进行设置，并非是一成不变的，具体请点击查看 处理滚动加载数据的网页教程",
         "a. 经过以上连续4步，【循环-提取数据】创建完成。【循环】中的项，对应着页面上的评论列表，【提取数据】中的字段，对应着每个评论列表中的字段。启动采集以后，八爪鱼就会按照循环中的顺序依次提取每个列表中的字段。",
@@ -5158,7 +5167,7 @@
     },
     "doc:/zh/academy/case-studies/social-media/weibo-keyword-search": {
       "title": "【微博】搜索关键词采集",
-      "summary": "采集场景 在微博主页（ https://weibo.com/）登录后 ，输入关键词搜索，采集得到的搜索结果列表数据。支持按【高级搜索】中设置的条件进搜索。 采集字段 博主用户名、发布时间、博文内容、分享数、评论数、点赞数、评论、评论用户名、评论时间。 采集结果 采集结果可导出为Excel、CSV、HTML、数据库等多种格式。…",
+      "summary": "学习如何使用八爪鱼完成“【微博】搜索关键词采集”数据采集。",
       "steps": [
         "a. 在【高级搜索】中选择什么条件，在得到的网址中就有一个对应参数，请注意观察筛选条件跟网址参数的对应关系，选择自己需要的。"
       ],
@@ -5167,7 +5176,7 @@
     },
     "doc:/zh/academy/case-studies/social-media/zhihu-hot-ranking": {
       "title": "【知乎】近期热榜采集",
-      "summary": "采集场景 采集知乎近期小时榜、日榜、周榜的列表信息 【知乎】近期热榜采集 采集字段 分类、问题、 问题链接 、标签、 热力值 、关注增量 、浏览增量、 回答增量 、赞同增量 采集结果 采集结果可导出为Excel，CSV，HTML，数据库等多种格式。导出为Excel示例： 【知乎】近期热榜采集 教程说明 八爪鱼版本：V8.7.…",
+      "summary": "学习如何使用八爪鱼完成“【知乎】近期热榜采集”数据采集。",
       "steps": [
         "a. 打开网页后，如果开始开始【自动识别】，请点击【不再自动识别】或【取消识别】将其关掉。因为本文不适合使用【自动识别】。",
         "b. 【自动识别】适用于自动识别网页上的列表、滚动和翻页，识别成功后直接启动采集即可获取数据。详情点击查看 【自动识别】教程",
@@ -5178,7 +5187,7 @@
     },
     "doc:/zh/academy/case-studies/social-media/zhihu-keyword-search": {
       "title": "【知乎】关键词搜索采集",
-      "summary": "采集场景 在知乎首页 https://www.zhihu.com/ ， 输入关键词搜索，得到相关问题列表。然后，点击问题链接进入详情页，采集该问题下的多个回答数据。 采集字段 问题名称、问题描述、评论数、问题网址、回答ID、回答ID描述、回答ID头像、回答正文等字段。…",
+      "summary": "学习如何使用八爪鱼完成“【知乎】关键词搜索采集”数据采集。",
       "steps": [
         "a. 打开网页后，如果开始开始【自动识别】，请点击【不再自动识别】或【取消识别】将其关掉。因为本文不适合使用【自动识别】。",
         "b. 【自动识别】适用于自动识别网页上的列表、滚动和翻页，识别成功后直接启动采集即可获取数据。详情点击查看 【自动识别】教程",
@@ -5291,7 +5300,10 @@
     "doc:/zh/academy/premium-features/cloud-extraction/cloud-extraction-logs": {
       "title": "云采集日志",
       "summary": "介绍八爪鱼采集器高版本功能：云采集日志。",
-      "steps": [],
+      "steps": [
+        "查看任务在云端的运行情况，判断云采集是否正常执行。",
+        "结合运行日志和页面截图，定位云采集遇到的问题。"
+      ],
       "route": "/zh/academy/premium-features/cloud-extraction/cloud-extraction-logs",
       "sourceType": "采集学院"
     },
@@ -5425,7 +5437,11 @@
     "doc:/zh/academy/quick-start/three-minute-quick-start/beginner-faq-official": {
       "title": "【八爪鱼新手入门】常见问题清单-官方版",
       "summary": "快速入门教程：【八爪鱼新手入门】常见问题清单-官方版",
-      "steps": [],
+      "steps": [
+        "发票类型可选电子发票（普通发票）和电子发票（增值税专用发票）。",
+        "可开票额度为最近 1 年的订单总额；线下支付订单如需开票，请咨询客服。",
+        "发票通常于每周五开具。"
+      ],
       "route": "/zh/academy/quick-start/three-minute-quick-start/beginner-faq-official",
       "sourceType": "采集学院"
     },
@@ -5478,56 +5494,63 @@
     },
     "doc:/zh/academy/troubleshooting/ajax-web-scraping": {
       "title": "Ajax 网页采集方法",
-      "summary": "很多网页使用了Ajax 技术，针对这种网页，我们需在八爪鱼中进行Ajax设置。 一、什么是Ajax？ Ajax (Asynchronous JavaScript and XML) ：异步JavaScript 和XML。 Ajax是一种在无需重新加载整个网页的情况下，更新部分网页的技术。 通过在后台与服务器进行少量数据交换，Ajax 可以使网页实现异步更新。…",
+      "summary": "了解“Ajax 网页采集方法”的排查方法与解决方案。",
       "steps": [],
       "route": "/zh/academy/troubleshooting/ajax-web-scraping",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/troubleshooting/anti-scraping": {
       "title": "常见防采集套路及解决方法",
-      "summary": "什么是防采集？ 用大白话来说，就是我们想利用工具采集某个网站的数据（前提当然是公开合法数据），但网站不想给你采集而设置的技术阻挡措施。 网站常见的防采集套路有哪些？ 防采套路1：输入验证码框验证 anti-scraping 采集难度：★☆☆☆☆ 常见网站：搜狗微信 在采集某些网站过程中，爪子们是不是经常会遇到这样的情况，要求你输入验证码，否则就卡住进行不下去…",
+      "summary": "了解“常见防采集套路及解决方法”的排查方法与解决方案。",
       "steps": [],
       "route": "/zh/academy/troubleshooting/anti-scraping",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/troubleshooting/auto-retry": {
       "title": "自动重试",
-      "summary": "一、功能简介 在采集数据时，可能存在网页没有正常打开(所需数据未能加载出来，多刷新下能正常加载），页面出现验证码、登录等等防采集的情况。 以上情况，大多可通过「重试」解决。 二、「重试」设置说明 在八爪鱼采集流程中，【打开网页】、【点击元素】和【点击翻页】步骤后均会打开新页面。…",
+      "summary": "了解“自动重试”的排查方法与解决方案。",
       "steps": [],
       "route": "/zh/academy/troubleshooting/auto-retry",
       "sourceType": "采集学院"
     },
+    "doc:/zh/academy/troubleshooting/blank-page-troubleshooting": {
+      "title": "网页空白的排错方法",
+      "summary": "解决采集流程中详情页变成 about:blank 空白页的问题。",
+      "steps": [],
+      "route": "/zh/academy/troubleshooting/blank-page-troubleshooting",
+      "sourceType": "采集学院"
+    },
     "doc:/zh/academy/troubleshooting/cloud-debug": {
       "title": "云排错（团队版及以上参考）",
-      "summary": "云采集排错教程 本教程针对本地采集有数据，云采集没有数据的排错教程，如果本地采集没有数据，请先参考 本地采集排错教程 本地采集有数据，云采集没有数据主要原因为以下几点： 防采集 网站或网速原因 网络环境不同，源码有变，原xpath定位不准 网站只允许单浏览器或单IP登录 一、防采集 防采集主要是以下三类：IP被封禁止访问、出现验证码、云上需要登录 针对以上三…",
+      "summary": "了解“云排错（团队版及以上参考）”的排查方法与解决方案。",
       "steps": [],
       "route": "/zh/academy/troubleshooting/cloud-debug",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/troubleshooting/index": {
       "title": "规则排错与优化",
-      "summary": "用八爪鱼配置规则采集数据出现异常时，如何快速定位并解决问题？本栏目覆盖本地排错、流程优化（执行前等待、Ajax 超时、页面滚动、自动重试）、常见防采集套路应对，以及云采集排错方法。 栏目导航 手动执行规则排查，本地采集常见问题（无数据、速度慢、数据重复/错位/漏采）的解决方法。 执行前等待、Ajax 超时设置、页面滚动配置。…",
+      "summary": "了解“规则排错与优化”的排查方法与解决方案。",
       "steps": [],
       "route": "/zh/academy/troubleshooting/index",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/troubleshooting/local-debug": {
       "title": "本地排错",
-      "summary": "如果用八爪鱼配置规则，采集数据出现异常，我们如何快速找出并解决问题？如何更好与客服沟通？ 完善的排查视频教程参考 问题排查-八爪鱼帮助中心 本教程将讲解本地采集的规则排错的基本思路与方法。 一、手动执行规则 做好采集规则以后，我们最好手动执行一下规则，检查规则是否满足采集需求。 手动执行规则是什么意思？…",
+      "summary": "了解“本地排错”的排查方法与解决方案。",
       "steps": [],
       "route": "/zh/academy/troubleshooting/local-debug",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/troubleshooting/new-tab": {
       "title": "新标签页处理",
-      "summary": "当我们进行数据采集，常常需要从当前页面点击到下级页面，当我们执行点击元素时，需要判断网页是否用了新标签，并进行相关设置。 一、什么是新标签？ 新标签页通常指当我们执行点击操作时，在浏览器中打开一个新的网页来显示特定的内容，并在新标签页中加载新的网页地址。 不同于只ajax只需要更新部分网页，此类网站如果需要更新内容，必须重新加载整个网页页面。…",
+      "summary": "了解“新标签页处理”的排查方法与解决方案。",
       "steps": [],
       "route": "/zh/academy/troubleshooting/new-tab",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/troubleshooting/rule-optimization": {
       "title": "规则优化",
-      "summary": "本篇主要讲解如何优化规则以采集更完整的数据 配置好了八爪鱼采集规则后，我们可以对规则进行一些优化，以更稳定地采集更完整的数据。 优化方向主要有以下三种： 一、设置执行前等待 二、设置/调整Ajax超时 三、设置页面滚动 一.设置执行前等待 执行前等待的意思是：在当前步骤等待一段时间，再执行下一个步骤 为什么要设置执行前等待?…",
+      "summary": "了解“规则优化”的排查方法与解决方案。",
       "steps": [
         "一、设置执行前等待",
         "二、设置/调整Ajax超时",
@@ -5545,7 +5568,7 @@
     },
     "doc:/zh/academy/video/interface-introduction/custom-task-editor-interface": {
       "title": "自定义任务编辑界面介绍",
-      "summary": "您的浏览器不支持视频播放，请更新浏览器后重试。 返回界面介绍",
+      "summary": "观看“自定义任务编辑界面介绍”视频教程。",
       "steps": [],
       "route": "/zh/academy/video/interface-introduction/custom-task-editor-interface",
       "sourceType": "采集学院"
@@ -5559,28 +5582,28 @@
     },
     "doc:/zh/academy/video/interface-introduction/local-collection-interface": {
       "title": "本地采集界面介绍",
-      "summary": "您的浏览器不支持视频播放，请更新浏览器后重试。 返回界面介绍",
+      "summary": "观看“本地采集界面介绍”视频教程。",
       "steps": [],
       "route": "/zh/academy/video/interface-introduction/local-collection-interface",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/video/interface-introduction/software-interface": {
       "title": "软件界面介绍",
-      "summary": "您的浏览器不支持视频播放，请更新浏览器后重试。 返回界面介绍",
+      "summary": "观看“软件界面介绍”视频教程。",
       "steps": [],
       "route": "/zh/academy/video/interface-introduction/software-interface",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/video/live-replays/1ksPHS": {
       "title": "新闻数据采集-政府公告",
-      "summary": "您的浏览器不支持视频播放，请更新浏览器后重试。 返回直播回放",
+      "summary": "观看“新闻数据采集-政府公告”视频教程。",
       "steps": [],
       "route": "/zh/academy/video/live-replays/1ksPHS",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/video/live-replays/bm4y2y": {
       "title": "金融数据采集-天天基金网",
-      "summary": "您的浏览器不支持视频播放，请更新浏览器后重试。 返回直播回放",
+      "summary": "观看“金融数据采集-天天基金网”视频教程。",
       "steps": [],
       "route": "/zh/academy/video/live-replays/bm4y2y",
       "sourceType": "采集学院"
@@ -5594,49 +5617,49 @@
     },
     "doc:/zh/academy/video/live-replays/j8rCdl": {
       "title": "新闻数据采集-人民网",
-      "summary": "您的浏览器不支持视频播放，请更新浏览器后重试。 返回直播回放",
+      "summary": "观看“新闻数据采集-人民网”视频教程。",
       "steps": [],
       "route": "/zh/academy/video/live-replays/j8rCdl",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/video/live-replays/lXmVmK": {
       "title": "八爪鱼数据抓取大神之路1",
-      "summary": "您的浏览器不支持视频播放，请更新浏览器后重试。 返回直播回放",
+      "summary": "观看“八爪鱼数据抓取大神之路1”视频教程。",
       "steps": [],
       "route": "/zh/academy/video/live-replays/lXmVmK",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/video/live-replays/m0Lz39": {
       "title": "八爪鱼数据抓取大神之路2",
-      "summary": "您的浏览器不支持视频播放，请更新浏览器后重试。 返回直播回放",
+      "summary": "观看“八爪鱼数据抓取大神之路2”视频教程。",
       "steps": [],
       "route": "/zh/academy/video/live-replays/m0Lz39",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/video/live-replays/OyiCS4": {
       "title": "社媒数据采集-豆瓣影评",
-      "summary": "您的浏览器不支持视频播放，请更新浏览器后重试。 返回直播回放",
+      "summary": "观看“社媒数据采集-豆瓣影评”视频教程。",
       "steps": [],
       "route": "/zh/academy/video/live-replays/OyiCS4",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/video/live-replays/RwYmL6": {
       "title": "电商数据采集-当当网",
-      "summary": "您的浏览器不支持视频播放，请更新浏览器后重试。 返回直播回放",
+      "summary": "观看“电商数据采集-当当网”视频教程。",
       "steps": [],
       "route": "/zh/academy/video/live-replays/RwYmL6",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/video/live-replays/x5L27t": {
       "title": "社媒数据采集-微博热搜",
-      "summary": "您的浏览器不支持视频播放，请更新浏览器后重试。 返回直播回放",
+      "summary": "观看“社媒数据采集-微博热搜”视频教程。",
       "steps": [],
       "route": "/zh/academy/video/live-replays/x5L27t",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/video/operation-guidance/ajax-and-new-tabs/gBYHKT": {
       "title": "边滚动边采集",
-      "summary": "您的浏览器不支持视频播放，请更新浏览器后重试。 返回操作指导 / Ajax与新标签",
+      "summary": "观看“边滚动边采集”视频教程。",
       "steps": [],
       "route": "/zh/academy/video/operation-guidance/ajax-and-new-tabs/gBYHKT",
       "sourceType": "采集学院"
@@ -5650,42 +5673,42 @@
     },
     "doc:/zh/academy/video/operation-guidance/ajax-and-new-tabs/McMBHy": {
       "title": "滚动加载数据采集",
-      "summary": "您的浏览器不支持视频播放，请更新浏览器后重试。 返回操作指导 / Ajax与新标签",
+      "summary": "观看“滚动加载数据采集”视频教程。",
       "steps": [],
       "route": "/zh/academy/video/operation-guidance/ajax-and-new-tabs/McMBHy",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/video/operation-guidance/ajax-and-new-tabs/VNUXDW": {
       "title": "Ajax网页设置方法",
-      "summary": "您的浏览器不支持视频播放，请更新浏览器后重试。 返回操作指导 / Ajax与新标签",
+      "summary": "观看“Ajax网页设置方法”视频教程。",
       "steps": [],
       "route": "/zh/academy/video/operation-guidance/ajax-and-new-tabs/VNUXDW",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/video/operation-guidance/basic-collection/AxAPjR": {
       "title": "第4课：表格数据采集",
-      "summary": "您的浏览器不支持视频播放，请更新浏览器后重试。 返回操作指导 / 基本采集",
+      "summary": "观看“第4课：表格数据采集”视频教程。",
       "steps": [],
       "route": "/zh/academy/video/operation-guidance/basic-collection/AxAPjR",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/video/operation-guidance/basic-collection/DgCT5c": {
       "title": "第8课：采集原理与执行逻辑",
-      "summary": "您的浏览器不支持视频播放，请更新浏览器后重试。 返回操作指导 / 基本采集",
+      "summary": "观看“第8课：采集原理与执行逻辑”视频教程。",
       "steps": [],
       "route": "/zh/academy/video/operation-guidance/basic-collection/DgCT5c",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/video/operation-guidance/basic-collection/eeI3gE": {
       "title": "第1课：自动识别",
-      "summary": "您的浏览器不支持视频播放，请更新浏览器后重试。 返回操作指导 / 基本采集",
+      "summary": "观看“第1课：自动识别”视频教程。",
       "steps": [],
       "route": "/zh/academy/video/operation-guidance/basic-collection/eeI3gE",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/video/operation-guidance/basic-collection/FQjd1k": {
       "title": "第7课：启动采集并导出数据",
-      "summary": "您的浏览器不支持视频播放，请更新浏览器后重试。 返回操作指导 / 基本采集",
+      "summary": "观看“第7课：启动采集并导出数据”视频教程。",
       "steps": [],
       "route": "/zh/academy/video/operation-guidance/basic-collection/FQjd1k",
       "sourceType": "采集学院"
@@ -5699,49 +5722,49 @@
     },
     "doc:/zh/academy/video/operation-guidance/basic-collection/kyr90q": {
       "title": "第6课：翻页以采集多页数据",
-      "summary": "您的浏览器不支持视频播放，请更新浏览器后重试。 返回操作指导 / 基本采集",
+      "summary": "观看“第6课：翻页以采集多页数据”视频教程。",
       "steps": [],
       "route": "/zh/academy/video/operation-guidance/basic-collection/kyr90q",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/video/operation-guidance/basic-collection/mtooro": {
       "title": "第2课：单个数据采集",
-      "summary": "您的浏览器不支持视频播放，请更新浏览器后重试。 返回操作指导 / 基本采集",
+      "summary": "观看“第2课：单个数据采集”视频教程。",
       "steps": [],
       "route": "/zh/academy/video/operation-guidance/basic-collection/mtooro",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/video/operation-guidance/basic-collection/nnKmj4": {
       "title": "0基础获取数据：使用模板采集数据",
-      "summary": "您的浏览器不支持视频播放，请更新浏览器后重试。 返回操作指导 / 基本采集",
+      "summary": "观看“0基础获取数据：使用模板采集数据”视频教程。",
       "steps": [],
       "route": "/zh/academy/video/operation-guidance/basic-collection/nnKmj4",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/video/operation-guidance/basic-collection/PPvZaN": {
       "title": "第5课：从列表进入详情采集",
-      "summary": "您的浏览器不支持视频播放，请更新浏览器后重试。 返回操作指导 / 基本采集",
+      "summary": "观看“第5课：从列表进入详情采集”视频教程。",
       "steps": [],
       "route": "/zh/academy/video/operation-guidance/basic-collection/PPvZaN",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/video/operation-guidance/basic-collection/RXxvh9": {
       "title": "第3课：列表数据采集",
-      "summary": "您的浏览器不支持视频播放，请更新浏览器后重试。 返回操作指导 / 基本采集",
+      "summary": "观看“第3课：列表数据采集”视频教程。",
       "steps": [],
       "route": "/zh/academy/video/operation-guidance/basic-collection/RXxvh9",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/video/operation-guidance/cloud-collection/94TVRX": {
       "title": "云采集使用方法",
-      "summary": "您的浏览器不支持视频播放，请更新浏览器后重试。 返回操作指导 / 云采集",
+      "summary": "观看“云采集使用方法”视频教程。",
       "steps": [],
       "route": "/zh/academy/video/operation-guidance/cloud-collection/94TVRX",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/video/operation-guidance/cloud-collection/96b1C4": {
       "title": "云采集原理与加速规则",
-      "summary": "您的浏览器不支持视频播放，请更新浏览器后重试。 返回操作指导 / 云采集",
+      "summary": "观看“云采集原理与加速规则”视频教程。",
       "steps": [],
       "route": "/zh/academy/video/operation-guidance/cloud-collection/96b1C4",
       "sourceType": "采集学院"
@@ -5755,28 +5778,28 @@
     },
     "doc:/zh/academy/video/operation-guidance/cloud-collection/UQwI5M": {
       "title": "云采集实况与历史运行记录",
-      "summary": "您的浏览器不支持视频播放，请更新浏览器后重试。 返回操作指导 / 云采集",
+      "summary": "观看“云采集实况与历史运行记录”视频教程。",
       "steps": [],
       "route": "/zh/academy/video/operation-guidance/cloud-collection/UQwI5M",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/video/operation-guidance/data-formatting/43CIS3": {
       "title": "正则表达式",
-      "summary": "您的浏览器不支持视频播放，请更新浏览器后重试。 返回操作指导 / 数据格式",
+      "summary": "观看“正则表达式”视频教程。",
       "steps": [],
       "route": "/zh/academy/video/operation-guidance/data-formatting/43CIS3",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/video/operation-guidance/data-formatting/8IsO0d": {
       "title": "设置备用元素",
-      "summary": "您的浏览器不支持视频播放，请更新浏览器后重试。 返回操作指导 / 数据格式",
+      "summary": "观看“设置备用元素”视频教程。",
       "steps": [],
       "route": "/zh/academy/video/operation-guidance/data-formatting/8IsO0d",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/video/operation-guidance/data-formatting/Ba0t8y": {
       "title": "采集新增数据的方法",
-      "summary": "您的浏览器不支持视频播放，请更新浏览器后重试。 返回操作指导 / 数据格式",
+      "summary": "观看“采集新增数据的方法”视频教程。",
       "steps": [],
       "route": "/zh/academy/video/operation-guidance/data-formatting/Ba0t8y",
       "sourceType": "采集学院"
@@ -5790,21 +5813,21 @@
     },
     "doc:/zh/academy/video/operation-guidance/data-formatting/ohUzyg": {
       "title": "格式化数据",
-      "summary": "您的浏览器不支持视频播放，请更新浏览器后重试。 返回操作指导 / 数据格式",
+      "summary": "观看“格式化数据”视频教程。",
       "steps": [],
       "route": "/zh/academy/video/operation-guidance/data-formatting/ohUzyg",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/video/operation-guidance/data-formatting/RclzGh": {
       "title": "添加特殊字段/字段设置导入导出",
-      "summary": "您的浏览器不支持视频播放，请更新浏览器后重试。 返回操作指导 / 数据格式",
+      "summary": "观看“添加特殊字段/字段设置导入导出”视频教程。",
       "steps": [],
       "route": "/zh/academy/video/operation-guidance/data-formatting/RclzGh",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/video/operation-guidance/data-formatting/SxJGxi": {
       "title": "同一字段的多行合并",
-      "summary": "您的浏览器不支持视频播放，请更新浏览器后重试。 返回操作指导 / 数据格式",
+      "summary": "观看“同一字段的多行合并”视频教程。",
       "steps": [],
       "route": "/zh/academy/video/operation-guidance/data-formatting/SxJGxi",
       "sourceType": "采集学院"
@@ -5818,7 +5841,7 @@
     },
     "doc:/zh/academy/video/operation-guidance/loop/FnOh8l": {
       "title": "批量输入关键词查询并采集",
-      "summary": "您的浏览器不支持视频播放，请更新浏览器后重试。 返回操作指导 / 循环",
+      "summary": "观看“批量输入关键词查询并采集”视频教程。",
       "steps": [],
       "route": "/zh/academy/video/operation-guidance/loop/FnOh8l",
       "sourceType": "采集学院"
@@ -5832,21 +5855,21 @@
     },
     "doc:/zh/academy/video/operation-guidance/loop/LGfMnL": {
       "title": "URL循环：批量采集同类网页",
-      "summary": "您的浏览器不支持视频播放，请更新浏览器后重试。 返回操作指导 / 循环",
+      "summary": "观看“URL循环：批量采集同类网页”视频教程。",
       "steps": [],
       "route": "/zh/academy/video/operation-guidance/loop/LGfMnL",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/video/operation-guidance/other-features/ACG7OJ": {
       "title": "网址输入",
-      "summary": "您的浏览器不支持视频播放，请更新浏览器后重试。 返回操作指导 / 其他功能点",
+      "summary": "观看“网址输入”视频教程。",
       "steps": [],
       "route": "/zh/academy/video/operation-guidance/other-features/ACG7OJ",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/video/operation-guidance/other-features/AIEmWP": {
       "title": "企业版管理",
-      "summary": "您的浏览器不支持视频播放，请更新浏览器后重试。 返回操作指导 / 其他功能点",
+      "summary": "观看“企业版管理”视频教程。",
       "steps": [],
       "route": "/zh/academy/video/operation-guidance/other-features/AIEmWP",
       "sourceType": "采集学院"
@@ -5860,28 +5883,28 @@
     },
     "doc:/zh/academy/video/operation-guidance/other-features/uODMGl": {
       "title": "触发器",
-      "summary": "您的浏览器不支持视频播放，请更新浏览器后重试。 返回操作指导 / 其他功能点",
+      "summary": "观看“触发器”视频教程。",
       "steps": [],
       "route": "/zh/academy/video/operation-guidance/other-features/uODMGl",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/video/operation-guidance/other-features/ypeaRe": {
       "title": "在下拉框中选择条件查询",
-      "summary": "您的浏览器不支持视频播放，请更新浏览器后重试。 返回操作指导 / 其他功能点",
+      "summary": "观看“在下拉框中选择条件查询”视频教程。",
       "steps": [],
       "route": "/zh/academy/video/operation-guidance/other-features/ypeaRe",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/video/operation-guidance/other-features/zcHG9D": {
       "title": "判断条件",
-      "summary": "您的浏览器不支持视频播放，请更新浏览器后重试。 返回操作指导 / 其他功能点",
+      "summary": "观看“判断条件”视频教程。",
       "steps": [],
       "route": "/zh/academy/video/operation-guidance/other-features/zcHG9D",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/video/operation-guidance/special-collection/5lvvAl": {
       "title": "登录验证的方法",
-      "summary": "您的浏览器不支持视频播放，请更新浏览器后重试。 返回操作指导 / 特殊采集",
+      "summary": "观看“登录验证的方法”视频教程。",
       "steps": [],
       "route": "/zh/academy/video/operation-guidance/special-collection/5lvvAl",
       "sourceType": "采集学院"
@@ -5895,28 +5918,28 @@
     },
     "doc:/zh/academy/video/operation-guidance/special-collection/s3wimX": {
       "title": "JSON采集",
-      "summary": "您的浏览器不支持视频播放，请更新浏览器后重试。 返回操作指导 / 特殊采集",
+      "summary": "观看“JSON采集”视频教程。",
       "steps": [],
       "route": "/zh/academy/video/operation-guidance/special-collection/s3wimX",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/video/operation-guidance/special-collection/zVfInA": {
       "title": "自定义抓取方式",
-      "summary": "您的浏览器不支持视频播放，请更新浏览器后重试。 返回操作指导 / 特殊采集",
+      "summary": "观看“自定义抓取方式”视频教程。",
       "steps": [],
       "route": "/zh/academy/video/operation-guidance/special-collection/zVfInA",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/video/operation-guidance/special-pagination/632Kyf": {
       "title": "边点击边采集",
-      "summary": "您的浏览器不支持视频播放，请更新浏览器后重试。 返回操作指导 / 特殊翻页",
+      "summary": "观看“边点击边采集”视频教程。",
       "steps": [],
       "route": "/zh/academy/video/operation-guidance/special-pagination/632Kyf",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/video/operation-guidance/special-pagination/EuhHoA": {
       "title": "无“下一页“按钮，点击数字进行翻页",
-      "summary": "您的浏览器不支持视频播放，请更新浏览器后重试。 返回操作指导 / 特殊翻页",
+      "summary": "观看“无“下一页“按钮，点击数字进行翻页”视频教程。",
       "steps": [],
       "route": "/zh/academy/video/operation-guidance/special-pagination/EuhHoA",
       "sourceType": "采集学院"
@@ -5930,14 +5953,14 @@
     },
     "doc:/zh/academy/video/operation-guidance/special-pagination/Qkras0": {
       "title": "点击加载更多采集数据",
-      "summary": "您的浏览器不支持视频播放，请更新浏览器后重试。 返回操作指导 / 特殊翻页",
+      "summary": "观看“点击加载更多采集数据”视频教程。",
       "steps": [],
       "route": "/zh/academy/video/operation-guidance/special-pagination/Qkras0",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/video/practice/3xzMDM": {
       "title": "巧用数据分析工具，优化选品策略",
-      "summary": "您的浏览器不支持视频播放，请更新浏览器后重试。 返回操作实践",
+      "summary": "观看“巧用数据分析工具，优化选品策略”视频教程。",
       "steps": [],
       "route": "/zh/academy/video/practice/3xzMDM",
       "sourceType": "采集学院"
@@ -5951,14 +5974,14 @@
     },
     "doc:/zh/academy/video/practice/jing-dong-mu-ban-cookie-huo-qu-fang-fa": {
       "title": "cookie获取方法",
-      "summary": "您的浏览器不支持视频播放，请更新浏览器后重试。 返回操作实践",
+      "summary": "观看“cookie获取方法”视频教程。",
       "steps": [],
       "route": "/zh/academy/video/practice/jing-dong-mu-ban-cookie-huo-qu-fang-fa",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/video/practice/Unq8tx": {
       "title": "采集亚马逊排行榜数据，辅助选品决策",
-      "summary": "您的浏览器不支持视频播放，请更新浏览器后重试。 返回操作实践",
+      "summary": "观看“采集亚马逊排行榜数据，辅助选品决策”视频教程。",
       "steps": [],
       "route": "/zh/academy/video/practice/Unq8tx",
       "sourceType": "采集学院"
@@ -5972,35 +5995,35 @@
     },
     "doc:/zh/academy/video/troubleshooting/PfjkIv": {
       "title": "执行前等待",
-      "summary": "您的浏览器不支持视频播放，请更新浏览器后重试。 返回问题排查",
+      "summary": "观看“执行前等待”视频教程。",
       "steps": [],
       "route": "/zh/academy/video/troubleshooting/PfjkIv",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/video/troubleshooting/vrSVmL": {
       "title": "云采集日志",
-      "summary": "您的浏览器不支持视频播放，请更新浏览器后重试。 返回问题排查",
+      "summary": "观看“云采集日志”视频教程。",
       "steps": [],
       "route": "/zh/academy/video/troubleshooting/vrSVmL",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/video/troubleshooting/YqLshX": {
       "title": "本地采集排错",
-      "summary": "您的浏览器不支持视频播放，请更新浏览器后重试。 返回问题排查",
+      "summary": "观看“本地采集排错”视频教程。",
       "steps": [],
       "route": "/zh/academy/video/troubleshooting/YqLshX",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/video/troubleshooting/Yz1QAb": {
       "title": "云采集排错",
-      "summary": "您的浏览器不支持视频播放，请更新浏览器后重试。 返回问题排查",
+      "summary": "观看“云采集排错”视频教程。",
       "steps": [],
       "route": "/zh/academy/video/troubleshooting/Yz1QAb",
       "sourceType": "采集学院"
     },
     "doc:/zh/academy/video/troubleshooting/ZGoL4g": {
       "title": "优化规则采集",
-      "summary": "您的浏览器不支持视频播放，请更新浏览器后重试。 返回问题排查",
+      "summary": "观看“优化规则采集”视频教程。",
       "steps": [],
       "route": "/zh/academy/video/troubleshooting/ZGoL4g",
       "sourceType": "采集学院"
@@ -6186,49 +6209,76 @@
       "route": "/zh/mcp/cases/index",
       "sourceType": "MCP 服务"
     },
+    "doc:/zh/mcp/describe-ecommerce-dataset": {
+      "title": "describe_ecommerce_dataset",
+      "summary": "查看 Temu 和 TikTok Shop 电商结果集的字段、类型与稳定 ID 映射。",
+      "steps": [
+        "用 ecommercedatatask 提交关键词、商品详情或评论采集。",
+        "从返回的 nextStep 和 resultAvailability.nextAvailableAt 获取建议的数据集、itemIds 和可查询时间。",
+        "调用 describeecommercedataset 核对字段与稳定 ID。",
+        "使用 querycollectedreviews 查询对应结果集；需要筛选时，仅使用本工具返回的字段名。"
+      ],
+      "route": "/zh/mcp/describe-ecommerce-dataset",
+      "sourceType": "MCP 服务"
+    },
     "doc:/zh/mcp/ecommerce-data-task": {
       "title": "ecommerce_data_task",
-      "summary": "提交 Temu 或 TikTok Shop 商品与评论采集任务。",
+      "summary": "为 Temu 或 TikTok Shop 提交关键词、商品详情或评论采集任务。",
       "steps": [
-        "reviewPolling.dataset：temuComment 或 tiktokShopComment",
-        "intervalSeconds、maxAttempts、attempts：轮询配置与实际次数",
-        "stoppedReason：recordsfound 或 maxattemptsreached",
-        "attemptsDetail：每次轮询的等待时间、返回数量和是否还有更多数据",
-        "collectedReviews：轮询期间已经取得的评论"
+        "keywords：关键词搜索输入。",
+        "productIds：详情或评论采集的商品 ID。",
+        "site：Temu 必填；TikTok Shop 当前默认美国站。",
+        "commentPages：评论页数，范围 1-50，默认 10。",
+        "commentSort：default 或 time，默认按时间。",
+        "keywordSort：default、sales、newest、priceAsc 或 priceDesc。",
+        "limit 与 limitFlag：控制结果数量或页数。",
+        "用 describeecommercedataset 查看字段与稳定 ID 映射。"
       ],
       "route": "/zh/mcp/ecommerce-data-task",
       "sourceType": "MCP 服务"
     },
     "doc:/zh/mcp/execute-task": {
       "title": "execute_task",
-      "summary": "校验模板参数，或创建并启动八爪鱼云采集任务。",
+      "summary": "使用模板实时参数创建并启动八爪鱼云采集任务。",
       "steps": [
-        "使用 inputSchema[].field 作为 key，未知 key 会以 unmappedparameters 失败。",
-        "MultiInput 字段始终传 string[]，即使只有一个值。",
-        "对 source-backed 字段，先精确查询模板取得根级 sourceOptions，再把所选 option 的 key 作为字段值。",
-        "依赖其他字段的数据源选项可通过 validateOnly: true 逐级取得。"
+        "Input / Dropdown 传字符串；MultiInput / CheckboxList 始终传字符串数组。",
+        "数据源下拉字段必须传 sourceTree 中选项的 key。",
+        "返回 inputrequired 时，读取下一层 sourceOptions，补齐依赖选项后重新调用。",
+        "调用最长约等待 45 秒，常见结果为 running、completed、stopped、failed 或 inputrequired。",
+        "正常结果可能包含 taskId、lotNo、collectedRows 和任务里程碑。"
       ],
       "route": "/zh/mcp/execute-task",
       "sourceType": "MCP 服务"
     },
     "doc:/zh/mcp/export-data": {
       "title": "export_data",
-      "summary": "查询采集与导出进度，预览并下载八爪鱼任务数据。",
-      "steps": [],
+      "summary": "按任务和采集批次分页读取结果，或获取大结果集的签名下载链接。",
+      "steps": [
+        "短时有效的签名下载 URL；",
+        "可直接执行的 curlTemplate；",
+        "建议的输出文件路径。"
+      ],
       "route": "/zh/mcp/export-data",
+      "sourceType": "MCP 服务"
+    },
+    "doc:/zh/mcp/get-task-status": {
+      "title": "get_task_status",
+      "summary": "查询模板云采集任务的实时状态、采集批次和已采集行数。",
+      "steps": [],
+      "route": "/zh/mcp/get-task-status",
       "sourceType": "MCP 服务"
     },
     "doc:/zh/mcp/guides/clients": {
       "title": "客户端配置指南",
-      "summary": "在 ChatGPT、Claude、Cursor、Gemini、OpenClaw、VS Code 等客户端中连接八爪鱼 MCP。",
+      "summary": "在千问办公、WorkBuddy、ChatGPT、Claude、Cursor、Gemini、OpenClaw、VS Code 等客户端中连接八爪鱼 MCP。",
       "steps": [
         "打开 ChatGPT → Settings → Connectors（或「连接器」）。",
         "添加 MCP 连接器，URL 填写 https://mcp.bazhuayu.com 或 https://mcp.octoparse.com。",
-        "选择 OAuth 完成八爪鱼登录，或使用 API Key（若界面支持自定义 Header）。",
+        "在自定义 Headers 中填写 x-api-key 和你的 API Key；若该入口不支持自定义 Header，请使用该产品支持 HTTP MCP Headers 的配置方式。",
         "在新对话中启用该连接器后测试搜索模板。",
         "Settings → Connectors → Add connector。",
         "输入 MCP URL：https://mcp.bazhuayu.com 或 https://mcp.octoparse.com。",
-        "通过 OAuth 授权八爪鱼账户。",
+        "在连接器的 Headers / API Key 配置中填写 x-api-key；若当前入口不能配置 Header，请改用该客户端的本地 MCP 配置方式。",
         "在对话中确认已勾选八爪鱼 MCP 工具。"
       ],
       "route": "/zh/mcp/guides/clients",
@@ -6236,16 +6286,16 @@
     },
     "doc:/zh/mcp/index": {
       "title": "八爪鱼 MCP 服务",
-      "summary": "通过 MCP 协议查询数据中心存量内容、搜索采集模板、运行云采集任务并导出数据。",
+      "summary": "通过 MCP 协议搜索模板、运行云采集、查询任务状态、导出数据并检索数据中心内容。",
       "steps": [
         "八爪鱼账户 — 免费版也可连接；免费 / 基础版用户每周可通过 MCP 获得 2,000 条免费采集额度",
-        "兼容 MCP 的客户端 — 见下方 平台对接，或 客户端配置指南",
+        "支持连接器或 MCP 的客户端 — 见下方 平台对接，或 客户端配置指南",
         "本次接入只使用 API Key 认证，请将密钥放在请求头 x-api-key 中。",
         "不要改用 OAuth，也不要写成 Authorization: Bearer 。",
         "请根据当前客户端支持的 MCP 配置方式自行安装；完成后按需刷新工具列表或重启客户端。",
         "请验证服务已连接并能读取工具列表，再调用只读工具 listplatforms 完成连通性测试；只向我报告配置位置、测试结果和后续用法，不要在回复中回显完整 API Key。",
         "搜索预置采集模板",
-        "触发并监控云采集任务"
+        "触发云采集、查询实时状态和采集批次"
       ],
       "route": "/zh/mcp/index",
       "sourceType": "MCP 服务"
@@ -6369,6 +6419,20 @@
       "route": "/zh/mcp/integrations/qclaw",
       "sourceType": "MCP 服务"
     },
+    "doc:/zh/mcp/integrations/qwen-office": {
+      "title": "MCP 对接千问办公",
+      "summary": "在千问办公中通过内置八爪鱼连接器完成 OAuth 授权并使用采集能力。",
+      "steps": [
+        "已登录千问办公",
+        "一个可以正常登录的八爪鱼账户",
+        "浏览器允许打开授权页面",
+        "八爪鱼 MCP 概述",
+        "工作流程示例",
+        "故障排查"
+      ],
+      "route": "/zh/mcp/integrations/qwen-office",
+      "sourceType": "MCP 服务"
+    },
     "doc:/zh/mcp/integrations/vscode": {
       "title": "MCP 对接 VS Code",
       "summary": "在 VS Code 中通过 MCP 连接八爪鱼采集器，配合 GitHub Copilot 用自然语言搜索模板、创建任务、运行云采集并导出数据。",
@@ -6385,17 +6449,34 @@
       "route": "/zh/mcp/integrations/vscode",
       "sourceType": "MCP 服务"
     },
+    "doc:/zh/mcp/integrations/workbuddy": {
+      "title": "MCP 对接 WorkBuddy",
+      "summary": "在 WorkBuddy 中搜索八爪鱼连接器，完成 OAuth 授权并在对话中启用采集能力。",
+      "steps": [
+        "已安装并登录 WorkBuddy",
+        "一个可以正常登录的八爪鱼账户",
+        "浏览器允许打开授权页面并返回 WorkBuddy",
+        "八爪鱼 MCP 概述",
+        "工作流程示例",
+        "故障排查"
+      ],
+      "route": "/zh/mcp/integrations/workbuddy",
+      "sourceType": "MCP 服务"
+    },
     "doc:/zh/mcp/list-platforms": {
       "title": "list_platforms",
-      "summary": "查看八爪鱼数据中心内容搜索当前支持的平台和域名。",
+      "summary": "查看八爪鱼数据中心内容搜索当前支持的平台代码。",
       "steps": [],
       "route": "/zh/mcp/list-platforms",
       "sourceType": "MCP 服务"
     },
     "doc:/zh/mcp/query-collected-reviews": {
       "title": "query_collected_reviews",
-      "summary": "查询 Temu 或 TikTok Shop 已采集的商品评论。",
-      "steps": [],
+      "summary": "查询 Temu 和 TikTok Shop 已采集的评论、商品详情或关键词搜索结果。",
+      "steps": [
+        "Temu：temuComment、temuProductDetail、temuKeywordSearch",
+        "TikTok Shop：tiktokShopComment、tiktokShopProductDetail、tiktokShopKeywordSearch"
+      ],
       "route": "/zh/mcp/query-collected-reviews",
       "sourceType": "MCP 服务"
     },
@@ -6409,8 +6490,8 @@
         "请验证服务已连接并能读取工具列表，再调用只读工具 listplatforms 完成连通性测试；只向我报告配置位置、测试结果和后续用法，不要在回复中回显完整 API Key。",
         "「用八爪鱼搜索一个采集新闻标题的模板」",
         "「列出我账户下的八爪鱼任务」",
-        "Coze / Dify / QClaw — 平台对接 分组中的分平台教程",
-        "ChatGPT / Claude / Cursor / Gemini / OpenClaw / VS Code — 客户端配置指南"
+        "千问办公 / WorkBuddy 内置连接器 — 使用 OAuth，见 平台对接",
+        "Coze / Dify / QClaw — 平台对接 分组中的分平台教程"
       ],
       "route": "/zh/mcp/quick-start/api-key",
       "sourceType": "MCP 服务"
@@ -6421,7 +6502,7 @@
       "steps": [
         "尽量批量操作 — 将多个操作合并为更少的请求",
         "缓存模板结果 — searchtemplates 的结果很少变化，可以缓存",
-        "长任务使用 MCP Tasks — 客户端支持时通过 tasks/get / tasks/result 跟踪；兼容模式按 10-30 秒间隔调用 exportdata",
+        "长任务查询状态 — 通过 gettaskstatus 获取状态和 lotNo；完成或停止后再调用 exportdata",
         "监控用量 — 追踪每周提取的记录数，保持在限制范围内"
       ],
       "route": "/zh/mcp/rate-limits",
@@ -6458,12 +6539,13 @@
     },
     "doc:/zh/mcp/search-templates": {
       "title": "search_templates",
-      "summary": "搜索并查看八爪鱼预置采集模板、输入字段和数据源选项。",
+      "summary": "搜索采集模板，并读取实时输入、输出与数据源选项契约。",
       "steps": [
-        "recommendedTemplateName：建议传给 executetask 的模板名称",
-        "templates：标准化模板列表，包含 templateName、executionMode 和输入/输出摘要",
-        "page、pageSize、totalMatchingTemplates、totalPages：分页信息",
-        "localCollectionGuidance：最佳匹配仅支持本地采集时的处理建议"
+        "templateName：后续传给 executetask 的精确名称。",
+        "inputSchema：参数的真实 field、控件类型、必填状态和示例。",
+        "sourceTree：下拉或多选字段的候选值；应传其中 option 的 key，不能传展示文字。",
+        "executionMode：优先选择包含 Cloud 的模板。",
+        "outputSchema：如有提供，可先确认可采集的输出字段。"
       ],
       "route": "/zh/mcp/search-templates",
       "sourceType": "MCP 服务"
@@ -6482,29 +6564,28 @@
     },
     "doc:/zh/mcp/troubleshooting": {
       "title": "MCP 故障排查",
-      "summary": "针对常见连接、授权及任务相关问题的修复方案。",
+      "summary": "排查八爪鱼采集器 MCP 的连接、认证、模板任务和电商结果问题。",
       "steps": [
-        "八爪鱼环境确认地址为 https://mcp.bazhuayu.com；国际 八爪鱼 环境为 https://mcp.octoparse.com",
-        "检查公司代理 / 防火墙是否拦截 HTTPS 出站",
-        "URL 末尾不要多余斜杠；协议必须为 https",
-        "断开 MCP 后重新连接并完成授权",
-        "API Key 模式确认 Header 为 x-api-key",
-        "重启客户端（Cursor、Claude Code 等需重启后加载 mcp.json）；Coze / Dify / QClaw 请按平台要求重新保存或重启",
-        "连接成功后可用只读工具 listplatforms 验证；当前服务端应公开 10 个工具",
-        "支持 MCP Tasks 的客户端使用 tasks/get 和 tasks/result 跟踪运行状态"
+        "使用平台内置连接器时，确认 OAuth 授权已完成且连接器已在当前对话中启用；必要时断开后重新授权。",
+        "手动添加通用 HTTP MCP 时，确认 URL 为 https://mcp.bazhuayu.com（国际环境使用 https://mcp.octoparse.com），并确认 API Key 位于请求头 x-api-key，不要写成 Authorization: Bearer。",
+        "断开后重新连接，刷新工具列表或重启客户端。",
+        "当前采集器 MCP 主入口实测有 12 个工具；不同客户端的展示名称可能不同，以工具标识和实时发现结果为准。",
+        "按 获取 API Key 页面重新检查 Key 和 Header 名。",
+        "在八爪鱼账户中心重新生成 Key 后，仅更新私密客户端配置。",
+        "不要把真实 Key 写入仓库、截图或排障日志。",
+        "先用 searchtemplates(query) 发现模板，再用 id 或 slug 精确读取本次的 inputSchema 和 sourceTree。"
       ],
       "route": "/zh/mcp/troubleshooting",
       "sourceType": "MCP 服务"
     },
     "doc:/zh/mcp/workflow": {
       "title": "MCP 工作流程示例",
-      "summary": "从搜索模板、校验参数和运行云采集，到预览及导出结果的完整流程。",
+      "summary": "从模板搜索和实时参数读取，到任务状态确认与分页导出的完整云采集流程。",
       "steps": [
-        "客户端支持 MCP Tasks：优先使用 Task 模式，并通过 tasks/get 跟踪状态、通过 tasks/result 获取最终执行结果。",
-        "客户端不支持 MCP Tasks：调用会在创建并启动成功后返回 accepted 和八爪鱼 taskId；等待约 10-30 秒后使用 exportdata 轮询。",
-        "已有任务：searchtasks → startorstoptask → exportdata",
-        "数据中心存量检索：listplatforms → 从实时清单选择 domain → searchplatformcontent。需要限定来源时，把域名传给 include 或 exclude，不要填写平台展示名称；该流程直接查询提前采集的数据，不会创建新的采集任务",
-        "电商评论：ecommercedatatask → querycollectedreviews"
+        "已有任务：searchtasks → gettaskstatus → exportdata；需要改变状态时才用 startorstoptask。",
+        "数据中心内容检索：listplatforms → searchplatformcontent；这是查询提前采集的存量内容，不会创建网页采集任务。",
+        "Temu / TikTok Shop：ecommercedatatask → describeecommercedataset → querycollectedreviews。",
+        "Amazon：使用模板云采集链路。先用关键词搜索模板获取商品与 ASIN，再用详情、评论模板补充数据；不要将 Amazon 当作电商专项接口的支持平台。"
       ],
       "route": "/zh/mcp/workflow",
       "sourceType": "MCP 服务"
@@ -6636,14 +6717,14 @@
     },
     "doc:/zh/api-reference/access-token/obtain-a-new-token": {
       "title": "获取全新 Token",
-      "summary": "所需套餐： 全部 端点 描述 你需要提供一次八爪鱼平台的登录账号和密码来获取全新【Access Token】。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | Content-Type | String | 是 | application/json | 请求头示例 请求体 | 参数 | 类型…",
+      "summary": "介绍“获取全新 Token”接口的功能、参数与调用方法。",
       "steps": [],
       "route": "/zh/api-reference/access-token/obtain-a-new-token",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/access-token/refresh-token": {
       "title": "刷新 Token",
-      "summary": "所需套餐： 全部 端点 描述 token 过期后，允许根据上一次获取 token 时的 refreshToken 刷新获取新的 token。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | Content-Type | String | 是 | application/json | 请求头示…",
+      "summary": "介绍“刷新 Token”接口的功能、参数与调用方法。",
       "steps": [],
       "route": "/zh/api-reference/access-token/refresh-token",
       "sourceType": "OpenAPI"
@@ -6661,105 +6742,105 @@
     },
     "doc:/zh/api-reference/cloud-extraction/get-statuses-v2": {
       "title": "批量获取任务状态 V2",
-      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 此接口接收用户传入的一批任务ID，返回相应的任务状态列表。调用频率：1秒5次请求。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
+      "summary": "介绍“批量获取任务状态 V2”接口的功能、参数与调用方法。",
       "steps": [],
       "route": "/zh/api-reference/cloud-extraction/get-statuses-v2",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/cloud-extraction/get-statuses": {
       "title": "批量获取任务状态",
-      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 根据任务 ID 批量获取任务状态信息。调用频率：5 秒 1 次请求。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
+      "summary": "介绍“批量获取任务状态”接口的功能、参数与调用方法。",
       "steps": [],
       "route": "/zh/api-reference/cloud-extraction/get-statuses",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/cloud-extraction/get-subtask-status": {
       "title": "获取子任务状态",
-      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 获取任务最新批次的子任务状态 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
+      "summary": "介绍“获取子任务状态”接口的功能、参数与调用方法。",
       "steps": [],
       "route": "/zh/api-reference/cloud-extraction/get-subtask-status",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/cloud-extraction/get-task-stats": {
       "title": "任务运行情况",
-      "summary": "所需套餐： 企业版 端点 描述 此接口用于获取云采集监控平台中任务和子任务运行数量情况。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
+      "summary": "介绍“任务运行情况”接口的功能、参数与调用方法。",
       "steps": [],
       "route": "/zh/api-reference/cloud-extraction/get-task-stats",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/cloud-extraction/get-task-status": {
       "title": "获取任务状态",
-      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 此接口接收用户传入的一批任务ID，返回相应的任务状态列表。调用频率：5秒1次请求。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
+      "summary": "介绍“获取任务状态”接口的功能、参数与调用方法。",
       "steps": [],
       "route": "/zh/api-reference/cloud-extraction/get-task-status",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/cloud-extraction/start-subtasks": {
       "title": "批量启动子任务",
-      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 启动云节点子任务 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
+      "summary": "介绍“批量启动子任务”接口的功能、参数与调用方法。",
       "steps": [],
       "route": "/zh/api-reference/cloud-extraction/start-subtasks",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/cloud-extraction/start-task": {
       "title": "启动任务",
-      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 启动云节点任务 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
+      "summary": "介绍“启动任务”接口的功能、参数与调用方法。",
       "steps": [],
       "route": "/zh/api-reference/cloud-extraction/start-task",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/cloud-extraction/stop-subtasks": {
       "title": "批量停止子任务",
-      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 停止云节点子任务 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
+      "summary": "介绍“批量停止子任务”接口的功能、参数与调用方法。",
       "steps": [],
       "route": "/zh/api-reference/cloud-extraction/stop-subtasks",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/cloud-extraction/stop-task": {
       "title": "停止任务",
-      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 停止任务采集 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
+      "summary": "介绍“停止任务”接口的功能、参数与调用方法。",
       "steps": [],
       "route": "/zh/api-reference/cloud-extraction/stop-task",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/data/get-batch-data": {
       "title": "根据指定位置获取任务批次数据",
-      "summary": "所需套餐： 旗舰版、旗舰+、企业版、团队版 端点 描述 将位置（offset）设置为 0，将从第一条数据的位置开始获取数据，并返回获取后续数据的实际起始位置（offset），您应该通过该返回的位置（offset）来获取下一批数据，以此类推。 例如： 第一次：offset = 0，size = 100， 返回：offset = 1024 第二次：offset…",
+      "summary": "介绍“根据指定位置获取任务批次数据”接口的功能、参数与调用方法。",
       "steps": [],
       "route": "/zh/api-reference/data/get-batch-data",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/data/get-data-by-offset": {
       "title": "根据指定位置获取任务数据",
-      "summary": "所需套餐： 旗舰版、旗舰+、企业版、团队版 端点 描述 将位置（offset）设置为 0，将从第一条数据的位置开始获取数据，并返回获取后续数据的实际起始位置（offset），您应该通过该返回的位置（offset）来获取下一批数据，以此类推。 例如： 第一次：offset = 0，size = 100， 返回：offset = 1024 第二次：offset…",
+      "summary": "介绍“根据指定位置获取任务数据”接口的功能、参数与调用方法。",
       "steps": [],
       "route": "/zh/api-reference/data/get-data-by-offset",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/data/get-non-exported-data": {
       "title": "获取未导出的数据",
-      "summary": "所需套餐： 旗舰版、旗舰+、企业版、团队版 端点 描述 获取任务中尚未标记为已导出的数据。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
+      "summary": "介绍“获取未导出的数据”接口的功能、参数与调用方法。",
       "steps": [],
       "route": "/zh/api-reference/data/get-non-exported-data",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/data/mark-data-as-exported": {
       "title": "标记数据为已导出状态",
-      "summary": "所需套餐： 旗舰版、旗舰+、企业版、团队版 端点 描述 确认数据已导出，否则数据仍属于未导出。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
+      "summary": "介绍“标记数据为已导出状态”接口的功能、参数与调用方法。",
       "steps": [],
       "route": "/zh/api-reference/data/mark-data-as-exported",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/data/remove-data": {
       "title": "清空任务数据",
-      "summary": "所需套餐： 旗舰版、旗舰+、企业版、团队版 端点 描述 清空任务数据 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
+      "summary": "介绍“清空任务数据”接口的功能、参数与调用方法。",
       "steps": [],
       "route": "/zh/api-reference/data/remove-data",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/intro": {
-      "title": "八爪鱼 开放接口文档",
-      "summary": "八爪鱼开放API文档 — 涵盖认证、任务管理、云端采集及数据获取。",
+      "title": "八爪鱼 OpenAPI 文档",
+      "summary": "八爪鱼 OpenAPI 文档 — 涵盖认证、任务管理、云端采集及数据获取。",
       "steps": [
         "联系人：八爪鱼技术支持",
         "邮箱：help@skieer.com"
@@ -6776,91 +6857,91 @@
     },
     "doc:/zh/api-reference/task/copy-tasks": {
       "title": "批量复制任务到多个任务组",
-      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 此接口用于批量复制多个任务到多个不同的任务组。用户可以选择多个任务，并将它们复制到多个任务组中。每个任务可以被复制到不同的任务组，从而实现灵活的任务分配和管理。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | Strin…",
+      "summary": "介绍“批量复制任务到多个任务组”接口的功能、参数与调用方法。",
       "steps": [],
       "route": "/zh/api-reference/task/copy-tasks",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/task/delete-tasks": {
       "title": "批量删除任务",
-      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 删除任务接口说明：支持根据任务id批量删除任务 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
+      "summary": "介绍“批量删除任务”接口的功能、参数与调用方法。",
       "steps": [],
       "route": "/zh/api-reference/task/delete-tasks",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/task/duplicate-task": {
       "title": "复制任务",
-      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 复制任务到指定组 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
+      "summary": "介绍“复制任务”接口的功能、参数与调用方法。",
       "steps": [],
       "route": "/zh/api-reference/task/duplicate-task",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/task/get-actions": {
       "title": "批量获取任务步骤信息",
-      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 此接口根据步骤类型，获取一批任务的步骤信息。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
+      "summary": "介绍“批量获取任务步骤信息”接口的功能、参数与调用方法。",
       "steps": [],
       "route": "/zh/api-reference/task/get-actions",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/task/move-task": {
       "title": "移动任务",
-      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 移动任务到指定组 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
+      "summary": "介绍“移动任务”接口的功能、参数与调用方法。",
       "steps": [],
       "route": "/zh/api-reference/task/move-task",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/task/search-task": {
       "title": "搜索任务",
-      "summary": "所需套餐： 旗舰版、旗舰+、企业版、团队版 端点 描述 根据条件搜索任务，目前支持按任务组搜索。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
+      "summary": "介绍“搜索任务”接口的功能、参数与调用方法。",
       "steps": [],
       "route": "/zh/api-reference/task/search-task",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/task/update-action-properties": {
       "title": "更新步骤配置",
-      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 此接口用于更新任务中指定步骤配置。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
+      "summary": "介绍“更新步骤配置”接口的功能、参数与调用方法。",
       "steps": [],
       "route": "/zh/api-reference/task/update-action-properties",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/task/update-loop-items": {
       "title": "更新循环步骤的内容",
-      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 此接口更新循环步骤的循环列表，目前支持【文本列表】、【网址列表】。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
+      "summary": "介绍“更新循环步骤的内容”接口的功能、参数与调用方法。",
       "steps": [],
       "route": "/zh/api-reference/task/update-loop-items",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/task/update-task-parameters": {
       "title": "更新任务参数",
-      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 通过该接口，用户可以一次性更新多行输入框中的可循环参数（如多行文本、多行URLs），以及单个文本、数字等非循环参数。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 o…",
+      "summary": "介绍“更新任务参数”接口的功能、参数与调用方法。",
       "steps": [],
       "route": "/zh/api-reference/task/update-task-parameters",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/task/update-task-urls": {
       "title": "更新采集 URLs",
-      "summary": "所需套餐： 旗舰+、企业版、团队版 端点 描述 将采集的网址替换 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
+      "summary": "介绍“更新采集 URLs”接口的功能、参数与调用方法。",
       "steps": [],
       "route": "/zh/api-reference/task/update-task-urls",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/task-analytics/query-task-analytics": {
       "title": "查询任务采集与执行分析",
-      "summary": "所需套餐： 旗舰版、旗舰+、企业版 端点 描述 按日/周/月粒度查询任务采集量、执行次数、成功率及资源消耗等指标。时间范围为 UTC 自然日，仅支持查询最近 3 个月内数据。 未传 memberNames 或传空数组时，仅查询当前登录用户；传入成员名称时须为当前用户团队成员。…",
+      "summary": "介绍“查询任务采集与执行分析”接口的功能、参数与调用方法。",
       "steps": [],
       "route": "/zh/api-reference/task-analytics/query-task-analytics",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/task-group/delete-groups": {
       "title": "批量删除任务组",
-      "summary": "所需套餐： 企业版、团队版 端点 描述 支持通过查询任务组名称（精确匹配）批量删除任务组。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
+      "summary": "介绍“批量删除任务组”接口的功能、参数与调用方法。",
       "steps": [],
       "route": "/zh/api-reference/task-group/delete-groups",
       "sourceType": "OpenAPI"
     },
     "doc:/zh/api-reference/task-group/get-task-group-information": {
       "title": "获取用户的任务组信息",
-      "summary": "所需套餐： 旗舰版、旗舰+、企业版、团队版 端点 描述 此接口用于获取用户所有任务组信息。 请求头 | 参数 | 类型 | 必填 | 说明 | |------|------|------|------| | x-api-key | String | 二选一 | API Key，例如 opskxxxxxx；…",
+      "summary": "介绍“获取用户的任务组信息”接口的功能、参数与调用方法。",
       "steps": [],
       "route": "/zh/api-reference/task-group/get-task-group-information",
       "sourceType": "OpenAPI"
