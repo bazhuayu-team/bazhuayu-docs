@@ -1,6 +1,6 @@
 ---
 title: 产品首页
-description: 八爪鱼采集器产品首页，了解产品能力、工作原理、使用须知、套餐计费、采集学院与开放集成入口。
+description: 八爪鱼产品文档首页，了解采集器、DataHub、MCP 与开放集成能力，并找到适合自己的使用入口。
 ---
 
 ## 什么是八爪鱼采集器
@@ -24,6 +24,32 @@ description: 八爪鱼采集器产品首页，了解产品能力、工作原理�
 
   <Card title="使用须知" href="/zh/product/intro/usage-notice">
     查看 Windows、Mac 安装要求、Mac 旧版本缓存清理步骤，以及隐私声明。
+  </Card>
+</CardGroup>
+
+## 什么是 DataHub
+
+**八爪鱼 DataHub** 是面向 AI 与业务场景的数据能力平台。它把网页采集任务、已有数据集、第三方接口和数据处理程序封装为标准化的 **Data App**，统一描述用途、输入参数、输出字段和计费方式，让用户、AI Agent 和业务系统能够按需发现并调用数据能力。
+
+采集器解决“如何从网页获得结构化数据”，DataHub 进一步解决“如何把数据能力作为标准服务交付和复用”。你可以先在 Data Hub 市场中查看和试跑 Data App，也可以通过 API、MCP 或 SDK 接入自己的工作流。千问办公和 WorkBuddy 已提供 DataHub 内置连接器，使用八爪鱼账号完成 OAuth 授权后即可在对话中搜索和运行 Data App。
+
+<img src="/assets/datahub/standardized-data-app-flow.png" alt="采集任务、数据集、第三方接口和数据处理程序经标准化封装为 Data App，再服务于用户、Agent 和业务系统" />
+
+<CardGroup cols={2}>
+  <Card title="了解 DataHub" href="/zh/datahub/index">
+    了解 Data App、典型场景、接入方式、按量计费和完整使用流程。
+  </Card>
+
+  <Card title="浏览 Data App 市场" href="https://www.bazhuayu.com/data-hub">
+    按能力、行业、平台和内容类型寻找 Data App，并在线查看说明和试跑数据。
+  </Card>
+
+  <Card title="在千问办公中使用" href="/zh/datahub/quick-start/agent-connection/qwen-office-connector">
+    从千问办公连接器市场安装八爪鱼 DataHub，通过 OAuth 授权后直接使用。
+  </Card>
+
+  <Card title="在 WorkBuddy 中使用" href="/zh/datahub/quick-start/agent-connection/workbuddy-connector">
+    从 WorkBuddy 连接器市场连接 DataHub，通过 OAuth 授权后直接使用。
   </Card>
 </CardGroup>
 
@@ -51,11 +77,11 @@ description: 八爪鱼采集器产品首页，了解产品能力、工作原理�
   </Card>
 
   <Card title="开放集成">
-    支持 OpenAPI、MCP、CLI 等方式接入业务系统、AI 智能体和自动化流程。
+    采集器支持 OpenAPI、MCP、CLI 等方式接入业务系统和自动化流程；DataHub 还可通过标准化 Data App 为 AI Agent 提供数据能力。
   </Card>
 </CardGroup>
 
-## 工作原理
+## 采集器如何工作
 
 <Steps>
   <Step title="打开目标网站">
@@ -82,7 +108,7 @@ description: 八爪鱼采集器产品首页，了解产品能力、工作原理�
   请遵守目标网站规则和相关法律法规。电话、手机号、邮箱、微信号、QQ 号等个人隐私信息属于敏感数据，不建议采集，官方客服也不能提供此类采集指导。
 </Note>
 
-## 套餐与计费
+## 采集器套餐与计费
 
 八爪鱼采集器提供免费版、个人版、团队版、企业版和私有化部署方案。不同版本包含的任务量、云节点、并发能力、定时任务、自动导出、企业服务和安全部署能力不同。
 
@@ -122,7 +148,7 @@ description: 八爪鱼采集器产品首页，了解产品能力、工作原理�
   </Card>
 
   <Card title="DataHub" href="/zh/datahub/index">
-    发现并调用可直接用于 AI 与业务场景的标准化 Data App。
+    发现、试跑并调用可直接用于 AI 与业务场景的标准化 Data App。
   </Card>
 
   <Card title="八爪鱼采集器" href="/zh/mcp/index">

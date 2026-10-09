@@ -1,0 +1,145 @@
+---
+title: 千问办公：使用 DataHub 内置连接器
+description: 在千问办公中安装八爪鱼 DataHub 连接器，通过 OAuth 授权后搜索、运行并读取 Data App 结果。
+---
+
+千问办公已内置八爪鱼 DataHub 连接器。安装并授权后，你可以直接在对话中搜索 Data App、查看输入输出与计费说明、发起运行、查询状态并读取结构化结果，不需要手动填写 MCP 服务地址或 API Key。
+
+<Note>
+  本文介绍的是千问办公连接器市场中的**内置连接器**。如果你使用的 Agent 没有内置 DataHub 连接器，请参阅 <a href="/zh/datahub/quick-start/agent-connection/general" target="_blank" rel="noopener noreferrer">通用连接：在 Agent 中选择 App</a>。
+</Note>
+
+## 开始前
+
+请准备好：
+
+- 已安装并登录千问办公，且左侧“扩展”中可以打开“连接器”。
+- 一个能够正常登录的八爪鱼账号，用于完成 OAuth 授权。
+- 一个小范围测试目标，例如“寻找可以采集电商商品信息的 Data App”。
+
+<Warning>
+  Data App 可能按调用次数或返回条数计费。第一次使用时，先搜索和查看详情；运行前核对必填参数、数据范围和计费方式，并从小数据量开始验证。
+</Warning>
+
+## 第一步：打开连接器市场
+
+在千问办公左侧导航中点击“扩展”，再点击“连接器”。
+
+<img src="/assets/datahub/agent-connection/qwen-office/open-connectors.png" alt="在千问办公中打开扩展下的连接器" width="820" />
+
+## 第二步：安装八爪鱼 DataHub
+
+<Steps>
+  <Step title="搜索连接器">
+    在右上角搜索框中输入“八爪鱼Data Hub”，确认结果名称和八爪鱼图标。
+
+    <img src="/assets/datahub/agent-connection/qwen-office/search-datahub-connector.png" alt="在千问办公连接器市场搜索八爪鱼 DataHub" width="820" />
+  </Step>
+  <Step title="确认安装">
+    打开连接器详情，阅读能力说明后点击“安装 八爪鱼Data Hub”。
+
+    <img src="/assets/datahub/agent-connection/qwen-office/install-datahub-connector.png" alt="在千问办公中安装八爪鱼 DataHub 连接器" width="720" />
+  </Step>
+</Steps>
+
+## 第三步：启用并完成 OAuth 授权
+
+<Steps>
+  <Step title="启用连接器">
+    安装完成后点击“启用 八爪鱼Data Hub”。千问办公会打开浏览器，进入八爪鱼账号授权流程。
+
+    <img src="/assets/datahub/agent-connection/qwen-office/enable-datahub-connector.png" alt="在千问办公中启用八爪鱼 DataHub 连接器" width="720" />
+  </Step>
+  <Step title="核对并授权">
+    确认授权页面属于八爪鱼官方身份服务，并核对当前登录账号。按页面提示同意授权后，等待“授权成功”提示。
+
+    <img src="/assets/datahub/agent-connection/qwen-office/oauth-authorized.png" alt="八爪鱼 DataHub OAuth 授权成功" width="720" />
+  </Step>
+  <Step title="确认安装状态">
+    返回千问办公，确认连接器卡片右侧显示绿色勾选。如果仍显示未启用，重新打开连接器详情并再次完成授权。
+
+    <img src="/assets/datahub/agent-connection/qwen-office/connector-installed.png" alt="千问办公中的八爪鱼 DataHub 连接器已安装并启用" width="820" />
+  </Step>
+</Steps>
+
+## 第四步：在任务中启用连接器
+
+<Steps>
+  <Step title="创建新任务">
+    点击左侧“新任务”，进入对话界面。
+
+    <img src="/assets/datahub/agent-connection/qwen-office/new-task.png" alt="在千问办公中创建新任务" width="820" />
+  </Step>
+  <Step title="检查连接器开关">
+    打开输入框附近的连接器菜单，确认“八爪鱼Data Hub”处于开启状态。连接器只安装在客户端中但未在当前任务启用时，Agent 不会调用 DataHub 工具。
+
+    <img src="/assets/datahub/agent-connection/qwen-office/enable-connector-in-task.png" alt="在千问办公当前任务中开启八爪鱼 DataHub 连接器" width="820" />
+  </Step>
+</Steps>
+
+## 第五步：提出数据需求
+
+开启连接器后，可以直接用自然语言描述目标。第一次使用建议先搜索和查看详情，再确认是否运行：
+
+```text
+帮我找一个能采集电商商品信息的 Data App。
+先列出最相关的 3 个结果，说明输入参数、输出字段和计费方式，暂时不要运行。
+```
+
+<img src="/assets/datahub/agent-connection/qwen-office/enter-data-request.png" alt="在千问办公中向 DataHub 连接器提出数据需求" width="820" />
+
+确认 App 后，还可以继续使用下面的提示词：
+
+```text
+查看这个 Data App 的输入参数、输出字段和计费方式。
+```
+
+```text
+用这些参数运行 Data App，最多返回 100 条数据。运行前先让我确认。
+```
+
+```text
+查看刚才那次运行的状态和费用。
+```
+
+```text
+读取最近一次成功运行的前 50 条结果。
+```
+
+<Tip>
+  如果 Agent 只返回普通说明文字，可以明确补充“请调用八爪鱼 DataHub 连接器”。涉及收费或较大数据量时，要求 Agent 在运行前等待确认。
+</Tip>
+
+## 常见问题
+
+<AccordionGroup>
+  <Accordion title="搜索不到八爪鱼 DataHub">
+    先确认已经进入“扩展 → 连接器”，再搜索完整名称“八爪鱼Data Hub”。如果仍无结果，刷新连接器市场，并确认当前千问办公版本和账号已开放连接器功能。
+  </Accordion>
+  <Accordion title="安装后仍显示未启用">
+    再次点击“启用”，完成浏览器中的八爪鱼账号授权，然后返回千问办公。必要时关闭并重新打开千问办公。
+  </Accordion>
+  <Accordion title="新任务中没有调用 DataHub">
+    打开当前任务的连接器菜单，确认“八爪鱼Data Hub”开关已开启，并在提示词中明确要求调用该连接器。
+  </Accordion>
+  <Accordion title="运行后只返回任务 ID">
+    该 Data App 可能采用异步运行。继续要求 Agent 查询刚才任务的状态，并在完成后读取结果，不要重复提交相同任务。
+  </Accordion>
+</AccordionGroup>
+
+## 完成检查
+
+- 已在千问办公连接器市场安装“八爪鱼Data Hub”。
+- 已通过八爪鱼账号完成 OAuth 授权。
+- 当前任务中的 DataHub 连接器处于开启状态。
+- 已先搜索并查看 Data App 详情，再确认是否运行。
+- 已用小数据量完成一次真实调用，并核对状态、费用和结果。
+
+<CardGroup cols={2}>
+  <Card title="WorkBuddy：内置连接器" href="/zh/datahub/quick-start/agent-connection/workbuddy-connector">
+    在 WorkBuddy 连接器市场中直接连接 DataHub，并通过 OAuth 授权。
+  </Card>
+  <Card title="DataHub MCP 能力说明" href="/zh/datahub/mcp-capabilities">
+    查看 Data App 搜索、运行、状态查询、结果读取和大结果处理规则。
+  </Card>
+</CardGroup>

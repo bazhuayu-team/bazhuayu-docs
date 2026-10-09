@@ -1,0 +1,153 @@
+---
+title: WorkBuddy：使用 DataHub 内置连接器
+description: 在 WorkBuddy 连接器市场中连接 DataHub，通过 OAuth 授权后搜索、运行并读取 Data App 结果。
+---
+
+WorkBuddy 已内置 DataHub 连接器。连接并授权后，你可以直接在任务中搜索 Data App、查看输入输出与计费说明、发起运行、跟踪状态和费用，并读取结构化结果，不需要手动创建自定义连接器或填写 API Key。
+
+<Note>
+  本文介绍的是 WorkBuddy 连接器市场中的**内置连接器**。如果你已经选定固定 Data App，需要通过安装提示词限制工具范围，请参阅 <a href="/zh/datahub/quick-start/agent-connection/workbuddy" target="_blank" rel="noopener noreferrer">WorkBuddy：连接指定 App</a>。两种方式不要混用配置。
+</Note>
+
+## 开始前
+
+请准备好：
+
+- 已安装并登录 WorkBuddy，且能够打开“专家·技能·连接器”。
+- 一个能够正常登录的八爪鱼账号，用于完成 OAuth 授权。
+- 一个小范围测试目标，例如“寻找可以采集电商商品信息的 Data App”。
+
+<Warning>
+  Data App 可能按调用次数或返回条数计费。第一次使用时，先搜索和查看详情；运行前核对必填参数、数据范围和计费方式，并从小数据量开始验证。
+</Warning>
+
+## 第一步：打开连接器市场
+
+<Steps>
+  <Step title="进入专家技能连接器">
+    在 WorkBuddy 左侧导航中点击“专家·技能·连接器”。
+
+    <img src="/assets/datahub/agent-connection/workbuddy-connector/open-expert-skill-connector.png" alt="在 WorkBuddy 中打开专家技能连接器" width="820" />
+  </Step>
+  <Step title="切换到连接器">
+    在页面顶部选择“连接器”，进入连接器市场。
+
+    <img src="/assets/datahub/agent-connection/workbuddy-connector/open-connectors-tab.png" alt="在 WorkBuddy 专家技能连接器页面切换到连接器" width="820" />
+  </Step>
+</Steps>
+
+## 第二步：连接 DataHub
+
+<Steps>
+  <Step title="搜索 DataHub">
+    在右上角搜索框中输入“DataHub”，确认结果名称和八爪鱼图标。连接器说明应包含发现和运行 Data App、跟踪状态与费用、读取结果等能力。
+
+    <img src="/assets/datahub/agent-connection/workbuddy-connector/search-datahub-connector.png" alt="在 WorkBuddy 连接器市场搜索 DataHub" width="820" />
+  </Step>
+  <Step title="发起连接">
+    打开 DataHub 连接器详情，阅读能力说明和示例提示词后点击“连接”。
+
+    <img src="/assets/datahub/agent-connection/workbuddy-connector/connect-datahub.png" alt="在 WorkBuddy 中连接 DataHub" width="720" />
+  </Step>
+</Steps>
+
+## 第三步：完成 OAuth 授权
+
+WorkBuddy 会打开八爪鱼账号授权页面。确认页面属于八爪鱼官方身份服务，核对当前账号和授权范围后点击“允许访问”。授权完成后，浏览器会显示“授权成功”。
+
+<img src="/assets/datahub/agent-connection/workbuddy-connector/oauth-authorized.png" alt="八爪鱼 DataHub OAuth 授权成功" width="720" />
+
+返回 WorkBuddy，确认页面顶部提示“连接器 DataHub 已连接”，并且 DataHub 卡片显示绿色状态点。
+
+<img src="/assets/datahub/agent-connection/workbuddy-connector/connector-connected.png" alt="WorkBuddy 中的 DataHub 连接器已连接" width="820" />
+
+<Warning>
+  授权页面会显示当前八爪鱼账号和连接器申请的权限。请核对后再允许访问，不要在来源不明的页面输入账号或授权。
+</Warning>
+
+## 第四步：在任务中启用连接器
+
+<Steps>
+  <Step title="创建新任务">
+    点击左侧“新建任务”，进入对话界面。
+
+    <img src="/assets/datahub/agent-connection/workbuddy-connector/new-task.png" alt="在 WorkBuddy 中创建新任务" width="820" />
+  </Step>
+  <Step title="打开任务工具菜单">
+    点击输入框左下角的加号，打开文件、专家、技能和连接器菜单。
+
+    <img src="/assets/datahub/agent-connection/workbuddy-connector/open-task-tools.png" alt="在 WorkBuddy 任务输入框中打开连接器菜单" width="820" />
+  </Step>
+  <Step title="确认 DataHub 已开启">
+    进入“连接器”，确认 DataHub 开关处于开启状态。连接器只完成账号连接但未在当前任务启用时，WorkBuddy 不会调用 DataHub 工具。
+
+    <img src="/assets/datahub/agent-connection/workbuddy-connector/enable-connector-in-task.png" alt="在 WorkBuddy 当前任务中开启 DataHub 连接器" width="820" />
+  </Step>
+</Steps>
+
+## 第五步：提出数据需求
+
+第一次使用建议先搜索和比较，再决定是否运行：
+
+```text
+帮我找一个能采集电商商品信息的 Data App。
+先列出最相关的 3 个结果，说明输入参数、输出字段和计费方式，暂时不要运行。
+```
+
+<img src="/assets/datahub/agent-connection/workbuddy-connector/enter-data-request.png" alt="在 WorkBuddy 中向 DataHub 连接器提出数据需求" width="820" />
+
+确认 App 后，还可以继续使用下面的提示词：
+
+```text
+查看这个 Data App 的输入参数、输出字段和计费方式。
+```
+
+```text
+用这些参数运行 Data App，最多返回 100 条数据。运行前先让我确认。
+```
+
+```text
+查看刚才那次运行的状态和费用。
+```
+
+```text
+读取最近一次成功运行的前 50 条结果。
+```
+
+<Tip>
+  如果 WorkBuddy 只返回普通说明文字，可以明确补充“请调用 DataHub 连接器”。涉及收费或较大数据量时，要求它在运行前等待确认。
+</Tip>
+
+## 常见问题
+
+<AccordionGroup>
+  <Accordion title="搜索不到 DataHub">
+    确认已经进入“专家·技能·连接器”页面顶部的“连接器”分类，再搜索“DataHub”。如果仍无结果，刷新连接器市场，并确认当前 WorkBuddy 版本和账号已开放连接器功能。
+  </Accordion>
+  <Accordion title="授权完成后仍显示未连接">
+    返回 WorkBuddy 后刷新连接器页面。仍未连接时，重新点击“连接”并完成授权；同时检查浏览器是否拦截了返回 WorkBuddy 的跳转。
+  </Accordion>
+  <Accordion title="新任务中没有调用 DataHub">
+    点击输入框左下角加号，进入“连接器”，确认 DataHub 开关已开启，并在提示词中明确要求调用该连接器。
+  </Accordion>
+  <Accordion title="运行后只返回任务 ID">
+    该 Data App 可能采用异步运行。继续要求 WorkBuddy 查询刚才任务的状态，并在完成后读取结果，不要重复提交相同任务。
+  </Accordion>
+</AccordionGroup>
+
+## 完成检查
+
+- 已在 WorkBuddy 连接器市场找到并连接 DataHub。
+- 已通过八爪鱼账号完成 OAuth 授权。
+- 当前任务中的 DataHub 连接器处于开启状态。
+- 已先搜索并查看 Data App 详情，再确认是否运行。
+- 已用小数据量完成一次真实调用，并核对状态、费用和结果。
+
+<CardGroup cols={2}>
+  <Card title="千问办公：内置连接器" href="/zh/datahub/quick-start/agent-connection/qwen-office-connector">
+    在千问办公连接器市场中安装八爪鱼 DataHub，并通过 OAuth 授权。
+  </Card>
+  <Card title="WorkBuddy：连接指定 App" href="/zh/datahub/quick-start/agent-connection/workbuddy">
+    已经确定固定 App 时，用安装提示词限制连接器中的工具范围。
+  </Card>
+</CardGroup>

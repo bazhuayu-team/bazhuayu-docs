@@ -727,7 +727,14 @@
                     "pages": [
                       "zh/datahub/quick-start/agent-connection/general",
                       "zh/datahub/quick-start/agent-connection/codex",
-                      "zh/datahub/quick-start/agent-connection/workbuddy"
+                      "zh/datahub/quick-start/agent-connection/workbuddy",
+                      {
+                        "group": "国内 Agent 内置连接器",
+                        "pages": [
+                          "zh/datahub/quick-start/agent-connection/qwen-office-connector",
+                          "zh/datahub/quick-start/agent-connection/workbuddy-connector"
+                        ]
+                      }
                     ]
                   }
                 ]

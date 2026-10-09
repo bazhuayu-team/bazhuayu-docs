@@ -10,6 +10,10 @@ description: 先选择固定 Data App，再将该能力接入 WorkBuddy 并完�
 </Note>
 
 <Note>
+  WorkBuddy 已提供 DataHub 内置连接器。如果你希望直接通过连接器市场和 OAuth 接入完整的 DataHub 能力，不需要限制为固定 App，请改用 <a href="/zh/datahub/quick-start/agent-connection/workbuddy-connector" target="_blank" rel="noopener noreferrer">WorkBuddy：使用 DataHub 内置连接器</a>。本文继续保留给固定 App 和自定义工具集场景。
+</Note>
+
+<Note>
   WorkBuddy 与 Codex 使用的是同一套 DataHub MCP 能力。不同之处只是 WorkBuddy 会通过连接器界面展示启用和信任状态，Data App 的能力并没有变化。
 </Note>
 
@@ -184,6 +188,9 @@ description: 先选择固定 Data App，再将该能力接入 WorkBuddy 并完�
 - 已完成一次真实工具调用，并核对返回条数和关键字段。
 
 <CardGroup cols={2}>
+  <Card title="WorkBuddy：内置连接器" href="/zh/datahub/quick-start/agent-connection/workbuddy-connector">
+    通过连接器市场和 OAuth 直接接入完整的 DataHub 发现与运行能力。
+  </Card>
   <Card title="通用连接" href="/zh/datahub/quick-start/agent-connection/general">
     不预选 App，连接后让 Agent 搜索并运行合适的数据能力。
   </Card>
