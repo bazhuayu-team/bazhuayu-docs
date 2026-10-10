@@ -860,6 +860,7 @@
           {
             "tab": "更新日志",
             "pages": [
+              "zh/changelog/october-2026",
               "zh/changelog/september-2026",
               "zh/changelog/august-2026",
               "zh/changelog/july-2026",
@@ -887,7 +888,7 @@
     },
     {
       "source": "/zh/changelog",
-      "destination": "/zh/changelog/september-2026"
+      "destination": "/zh/changelog/october-2026"
     },
     {
       "source": "/zh/datahub/getting-started",
