@@ -15,7 +15,7 @@ GET https://api-datahub.bazhuayu.com/v1/runs
 
 我发起的所有运行。归属按**账号**：用 API Key、SDK、MCP 和网页登录态发起的运行都在同一份列表里。始终按发起时间倒序，`pagination.total` 是筛选后的总数。
 
-筛选条件可以组合。`status` 支持逗号分隔多值（OR）；`credential` 是发起凭证的非敏感稳定标识，用来追踪是哪把 Key 在消耗额度；`created_from` / `created_to` 按发起时间，起点包含、终点不包含。这套词汇与<a href="/zh/datahub/api/reference/account/get-billing">账单聚合</a>相同，把账单分组的键原样传进来就能钻取到对应的运行。
+筛选条件可以组合。`status` 支持逗号分隔多值（OR）；`credential` 是发起凭证的非敏感稳定标识，用来追踪是哪把 Key 在消耗额度；`created_from` / `created_to` 按发起时间，起点包含、终点不包含。这套词汇与<a href="/zh/datahub/api/reference/account/get-billing" target="_blank" rel="noopener noreferrer">账单聚合</a>相同，把账单分组的键原样传进来就能钻取到对应的运行。
 
 每一项都带 `billing` 与 `usage`，逐条对账不需要再单独查详情。输入回显打码规则与运行详情相同。
 
@@ -325,7 +325,7 @@ curl \
 | 401 | `unauthorized` | `forbidden` | 缺少或无效的 API Key。 |
 | 400 | `invalid-status` | `invalid_input` | `status` 含有词汇表之外的状态值。 |
 
-错误响应统一为 `{"error": {code, category, message, retryable}}`，见<a href="/zh/datahub/api/reference/introduction#错误">错误</a>。
+错误响应统一为 `{"error": {code, category, message, retryable}}`，见<a href="/zh/datahub/api/reference/introduction#错误" target="_blank" rel="noopener noreferrer">错误</a>。
 
 ## 客户端库
 

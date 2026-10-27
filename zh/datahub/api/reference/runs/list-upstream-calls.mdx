@@ -223,7 +223,7 @@ curl \
 | 401 | `unauthorized` | `forbidden` | 缺少或无效的 API Key。 |
 | 404 | `upstream-calls-not-found` | `not_found` | 只有调试运行（`run_kind=test`）保留上游调用留痕；生产运行、他人的运行与不存在的运行都返回此错误。 |
 
-错误响应统一为 `{"error": {code, category, message, retryable}}`，见<a href="/zh/datahub/api/reference/introduction#错误">错误</a>。
+错误响应统一为 `{"error": {code, category, message, retryable}}`，见<a href="/zh/datahub/api/reference/introduction#错误" target="_blank" rel="noopener noreferrer">错误</a>。
 
 ## 客户端库
 

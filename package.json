@@ -14,7 +14,9 @@
     "docs:links:repair": "node scripts/audit-document-links.mjs --repair-report",
     "docs:media:check": "node scripts/optimize-doc-media.mjs",
     "docs:media:normalize": "node scripts/optimize-doc-media.mjs --normalize",
-    "docs:media:optimize": "node scripts/optimize-doc-media.mjs --write"
+    "docs:media:optimize": "node scripts/optimize-doc-media.mjs --write",
+    "docs:readability:check": "node scripts/audit-document-readability.mjs",
+    "docs:readability:fix": "node scripts/audit-document-readability.mjs --write"
   },
   "dependencies": {
     "mintlify": "^4.2.571"

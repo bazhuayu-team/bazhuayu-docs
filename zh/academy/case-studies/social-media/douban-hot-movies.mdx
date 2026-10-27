@@ -1,18 +1,19 @@
 ---
 title: "【豆瓣】热门电影采集"
+description: "学习如何使用八爪鱼完成“【豆瓣】热门电影采集”数据采集。"
 source: "https://www.bazhuayu.com/helpcenter/docs/bsuKzb"
 ---
 **采集场景**
 
 在豆瓣电影首页（<a href="https://movie.douban.com/" target="_blank" rel="noopener noreferrer">https://movie.douban.com/</a>）输入关键词搜索，得到相关电影列表页。实例网址：<a href="https://search.douban.com/movie/subject_search?search_text=%E6%88%98%E7%8B%BC" target="_blank" rel="noopener noreferrer">https://search.douban.com/movie/subject_search?search_text=%E6%88%98%E7%8B%BC</a> ，是输入关键词【战狼】后得到的电影列表页。然后点击电影链接，进入电影详情页，采集详情页数据。
 
- 
+
 
 ![【豆瓣】热门电影采集](/assets/academy/case-studies/douban-hot-movies/01-653b3892a3083.png)
 
- 
 
- 
+
+
 
 **采集字段**
 
@@ -20,9 +21,9 @@ source: "https://www.bazhuayu.com/helpcenter/docs/bsuKzb"
 
 ![【豆瓣】热门电影采集](/assets/academy/case-studies/douban-hot-movies/02-653b38a426e0a.png)
 
- 
 
- 
+
+
 
 **采集结果**
 
@@ -30,7 +31,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/bsuKzb"
 
 ![【豆瓣】热门电影采集](/assets/academy/case-studies/douban-hot-movies/03-653b38b6179db.png)
 
- 
+
 
 **教程说明**
 
@@ -38,7 +39,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/bsuKzb"
 
 如果因网页改版造成网址或步骤无效，无法收集到目标数据，请联系官方客服，我们将及时修正。
 
- 
+
 
 **采集步骤**
 
@@ -56,21 +57,21 @@ source: "https://www.bazhuayu.com/helpcenter/docs/bsuKzb"
 
 步骤七、启动采集
 
- 
+
 
 **以下为具体步骤：**
 
- 
+
 
 ## 步骤一、打开网页
 
- 
+
 
 在首页【输入框】中输入目标网址 <a href="https://search.douban.com/movie/subject_search?search_text=%E6%88%98%E7%8B%BC" target="_blank" rel="noopener noreferrer">https://search.douban.com/movie/subject_search?search_text=%E6%88%98%E7%8B%BC</a>**&#xA0;**，点击【开始采集】，八爪鱼自动打开网页。
 
- 
 
-<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/8976e35f3270835014622937048/rYvvzqGAANoA.mp4" width="100%"></video>
+
+<video controls src="https://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/8976e35f3270835014622937048/rYvvzqGAANoA.mp4" width="100%"></video>
 
 > 特别说明：
 >
@@ -88,31 +89,31 @@ source: "https://www.bazhuayu.com/helpcenter/docs/bsuKzb"
 > 
 > - c. 目标网址可根据需求，更换成自己需要的，结构与示例网址结构相同即可（在 <a href="https://movie.douban.com/" target="_blank" rel="noopener noreferrer">https://movie.douban.com/</a> 中搜索关键词得到）。
 
- 
+
 
 ## 步骤二、建立循环翻页
 
- 
+
 
 如果只是采集一页数据，可跳过此步骤。
 
 如果需要翻页以采集多页数据：选择页面中的【后页>】按钮，在操作提示上单击【循环点击单个链接】，创建【循环翻页】。
 
-<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/cfba2aa53270835014623677871/I1Yapmkx6OkA.mp4" width="100%"></video>
+<video controls src="https://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/cfba2aa53270835014623677871/I1Yapmkx6OkA.mp4" width="100%"></video>
 
- 
 
- 
+
+
 
 特别说明：
 
 - a. 创建【循环翻页】后，八爪鱼会自动点击【下一页】按钮进行翻页，从第1页，第2页......直到最后1页。如果只需采集特定页的数据，可在八爪鱼中设置循环翻页的次数，详情点击查看  <a href="/zh/academy/basic-collection/pagination/next-page-button" target="_blank" rel="noopener noreferrer">翻页以采集多页数据教程</a>。
 
- 
+
 
 ## 步骤三、建立【循环列表】，提取所有电影标题
 
- 
+
 
 通过以下连续3步，提取所有电影标题
 
@@ -122,34 +123,34 @@ source: "https://www.bazhuayu.com/helpcenter/docs/bsuKzb"
 
 3、在操作提示框中，点击【文本内容】
 
-<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/0eda2c1f3270835014624098723/LHviHafITrsA.mp4" width="100%"></video>
+<video controls src="https://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/0eda2c1f3270835014624098723/LHviHafITrsA.mp4" width="100%"></video>
 
 还可以选中关键词输入框，在提示框中选择【文本框内的值】，将搜索的关键词文本提取下来。
 
-<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/c881215e3270835014623341984/oaiM46SsAagA.mp4" width="100%"></video>
+<video controls src="https://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/c881215e3270835014623341984/oaiM46SsAagA.mp4" width="100%"></video>
 
 ## 步骤四、点击电影链接，进入详情页
 
- 
+
 
 在当前电影列表中（在网页中用红色框框起来），选中电影标题，然后在操作提示框中点击【点击该链接】，点击后自动进入该电影详情页。
 
-<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/9408c7153270835014629240521/jiI1UhqPsmEA.mp4" width="100%"></video>
+<video controls src="https://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/9408c7153270835014629240521/jiI1UhqPsmEA.mp4" width="100%"></video>
 
- 
 
- 
+
+
 
 特别说明：
 
 - a. 一定要在当前电影列表中选中电影标题做【点击该链接】，否则【点击元素】步骤无法与【循环】中的电影列表产生联动，会一直重复点击某一条电影链接，进入其详情页。
 - b. 如何找到当前电影列表？在【循环列表】中查看当前项（蓝色背景），然后点击【提取列表数据】，网页中被红色框框起来的就是当前电影列表。
 
- 
+
 
 ## 步骤五、提取详情页中的字段
 
- 
+
 
 1、采集文本
 
@@ -157,11 +158,11 @@ source: "https://www.bazhuayu.com/helpcenter/docs/bsuKzb"
 
 文本类型的字段：选中页面中的文本，然后再选择【文本内容】。示例中提取了评分、星级占比等字段。
 
- 
 
-<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/7be5c1873270835014622399936/AATeTAi6DTkA.mp4" width="100%"></video>
 
- 
+<video controls src="https://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/7be5c1873270835014622399936/AATeTAi6DTkA.mp4" width="100%"></video>
+
+
 
 2、【导演】/【编剧】/【主演】字段
 
@@ -171,11 +172,11 @@ source: "https://www.bazhuayu.com/helpcenter/docs/bsuKzb"
 
 再点击目标字段后的  ... 按钮，选择【修改元素定位】，修改XPath为：**//span[contains(text(),'编剧')]/following-sibling::span&#x20;**&#x540E;保存。
 
-<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/7fff4e5a3270835014622519902/sxJSdvJkBdsA.mp4" width="100%"></video>
+<video controls src="https://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/7fff4e5a3270835014622519902/sxJSdvJkBdsA.mp4" width="100%"></video>
 
- 
 
- 
+
+
 
 特别说明：
 
@@ -186,7 +187,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/bsuKzb"
 
 【导演】字段XPath：**//span[contains(text(),'导演')]/following-sibling::span**
 
- 
+
 
 3、【类型】字段
 
@@ -194,7 +195,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/bsuKzb"
 
 如果需要采集，请按以下步骤操作：
 
- 
+
 
 ① 选中类型字段所在的一整块区域，在提示框选择【outer html】
 
@@ -208,32 +209,32 @@ source: "https://www.bazhuayu.com/helpcenter/docs/bsuKzb"
 
 ⑦ 点击【确定】→【应用】保存以上所有设置
 
- 
+
 
 在【当前页面数据预览】面板观察，【类型】从源码中被提取出来。
 
-<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/1cc4df093270835014624684975/ZJxjrrCzHaYA.mp4" width="100%"></video>
+<video controls src="https://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/1cc4df093270835014624684975/ZJxjrrCzHaYA.mp4" width="100%"></video>
 
- 
 
- 
+
+
 
 特别说明：
 
 - a. 什么是数据格式化？数据采集下来之后，有时候格式不是我们想要的，或者只想从一段数据里提取特定数据，可通过八爪鱼的【格式化数据】功能实现。详情点击查看 <a href="/zh/academy/video/operation-guidance/data-formatting/ohUzyg" target="_blank" rel="noopener noreferrer">数据格式化教程</a> 。
 - b. 正则表达式是什么？怎么写？正则表达式是对字符串（包括普通字符（例如，a 到 z 之间的字母）和特殊字符（称为“元字符”））操作的一种逻辑公式，用来从文本中匹配/过滤信息。正则表达式有其特定写法，需要系统学习才能掌握，点击查看 <a href="/zh/academy/video/operation-guidance/data-formatting/43CIS3" target="_blank" rel="noopener noreferrer">正则表达式 教程</a> 。
 
- 
+
 
 4、【制片国家/地区】【语言】【片长】【又名】字段
 
 这些字段也比较特殊，经过特殊处理后才能提取下来。**如果无需【类型】字段，可跳过此步骤。**
 
- 
+
 
 如果需要采集，请按以下步骤操作：
 
- 
+
 
 以【制片国家/地区】字段提取为例：
 
@@ -245,15 +246,15 @@ source: "https://www.bazhuayu.com/helpcenter/docs/bsuKzb"
 
 ④ 点击【确定】→【应用】保存以上所有设置
 
- 
+
 
 在【当前页面数据预览】面板观察，【制片国家/地区】从整块文本中提取出来。
 
- 
 
-<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/0e5a4a2f3270835014624026032/abLaMyazbaEA.mp4" width="100%"></video>
 
- 
+<video controls src="https://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/0e5a4a2f3270835014624026032/abLaMyazbaEA.mp4" width="100%"></video>
+
+
 
 特别说明：
 
@@ -261,13 +262,13 @@ source: "https://www.bazhuayu.com/helpcenter/docs/bsuKzb"
 - b. 正则表达式是什么？怎么写？正则表达式是对字符串（包括普通字符（例如，a 到 z 之间的字母）和特殊字符（称为“元字符”））操作的一种逻辑公式，用来从文本中匹配/过滤信息。正则表达式有其特定写法，需要系统学习才能掌握，点击查看 <a href="/zh/academy/video/operation-guidance/data-formatting/43CIS3" target="_blank" rel="noopener noreferrer">正则表达式 教程</a> 。
 - c. 【语言】【片长】【又名】的处理方式是相同的，在本文中未详细列出。如有需要，请联系客服。
 
- 
+
 
 5、【星级】字段
 
 【星级】字段比较特殊，经过特殊处理后才能提取下来。**如果无需【类型】字段，可跳过此步骤。**
 
- 
+
 
 如果需要采集，请按以下步骤操作：
 
@@ -285,47 +286,47 @@ source: "https://www.bazhuayu.com/helpcenter/docs/bsuKzb"
 
 ⑦ 点击【确定】→【应用】保存以上所有设置
 
- 
+
 
 在【当前页面数据预览】面板观察，【星级】从源码中被提取出来。
 
- 
 
-<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/7be5c1873270835014622399936/AATeTAi6DTkA.mp4" width="100%"></video>
 
- 
+<video controls src="https://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/7be5c1873270835014622399936/AATeTAi6DTkA.mp4" width="100%"></video>
+
+
 
 ## 步骤六、编辑字段
 
- 
+
 
 在【当前页面数据预览】页面，可删除多余字段，修改字段名，移动字段顺序等。 
 
- 
 
-<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/cad6d1fc3270835014623442872/h2wXGGNSEMoA.mp4" width="100%"></video>
 
- 
+<video controls src="https://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/cad6d1fc3270835014623442872/h2wXGGNSEMoA.mp4" width="100%"></video>
+
+
 
 ## 步骤七、启动采集
 
- 
+
 
 1、单击【采集】并【启动本地采集】。启动后八爪鱼开始自动采集数据。
 
- 
 
-<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/74764d363270835014622033286/ByiGRimqxesA.mp4" width="100%"></video>
 
- 
+<video controls src="https://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/74764d363270835014622033286/ByiGRimqxesA.mp4" width="100%"></video>
+
+
 
 2、采集完成后，选择合适的导出方式导出数据。支持导出为Excel、CSV、HTML、数据库等。这里导出为Excel。
 
- 
+
 
 ![【豆瓣】热门电影采集](/assets/academy/case-studies/douban-hot-movies/04-653b548491602.png)
 
- 
+
 
 作者：勾勾
 

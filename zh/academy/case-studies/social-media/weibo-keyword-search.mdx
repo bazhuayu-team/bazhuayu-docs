@@ -1,5 +1,6 @@
 ---
 title: "【微博】搜索关键词采集"
+description: "学习如何使用八爪鱼完成“【微博】搜索关键词采集”数据采集。"
 source: "https://www.bazhuayu.com/helpcenter/docs/OGo3db"
 ---
 **采集场景**
@@ -8,13 +9,13 @@ source: "https://www.bazhuayu.com/helpcenter/docs/OGo3db"
 
  ![](/assets/academy/case-studies/weibo-keyword-search/01-689ea03b69d32.png)
 
- 
+
 
 **采集字段**
 
 博主用户名、发布时间、博文内容、分享数、评论数、点赞数、评论、评论用户名、评论时间。
 
- 
+
 
 **采集结果**
 
@@ -22,9 +23,9 @@ source: "https://www.bazhuayu.com/helpcenter/docs/OGo3db"
 
  ![【微博】搜索关键词采集](/assets/academy/case-studies/weibo-keyword-search/02-689f085f8b70d.png)
 
- 
 
- 
+
+
 
 **教程说明**
 
@@ -32,7 +33,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/OGo3db"
 
 如果因网页改版造成网址或步骤无效，无法收集到目标数据，请联系官方客服，我们将及时修正。
 
- 
+
 
 **采集步骤**
 
@@ -52,23 +53,23 @@ source: "https://www.bazhuayu.com/helpcenter/docs/OGo3db"
 
 步骤八、启动采集
 
- 
 
- 
+
+
 
 **以下为具体步骤：**
 
- 
+
 
 ### 步骤一、打开网页
 
- 
+
 
 在首页搜索框输入微博首页网址 <a href="https://weibo.com/" target="_blank" rel="noopener noreferrer">https://weibo.com/</a>，然后点【开始采集】，八爪鱼自动打开网页。
 
- <video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/dfc3a76c5145403695252437787/XATYShtxghMA.mp4" width="100%"></video>
+ <video controls src="https://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/dfc3a76c5145403695252437787/XATYShtxghMA.mp4" width="100%"></video>
 
- 
+
 
 > 特别说明：
 >
@@ -84,23 +85,23 @@ source: "https://www.bazhuayu.com/helpcenter/docs/OGo3db"
 > 
 > - b. 【自动识别】适用于自动识别网页上的列表、滚动和翻页，识别成功后直接启动采集即可获取数据。详情点击查看 <a href="http://www.bazhuayu.com:8099/tutorial8/81zdypz" target="_blank" rel="noopener noreferrer">【自动识别】教程</a>
 
- 
+
 
 ### 步骤二、微博登录
 
- 
+
 
 要采集博文列表数据，首先需要登录。如果没有登录，只能采集第一页的博文。
 
 在八爪鱼中的登录步骤：
 
- 
+
 
 1、打开浏览器模式
 
 点击 ![](/assets/academy/case-studies/weibo-keyword-search/03-654b5840531fe.png) 按钮，打开浏览器模式。在浏览器模式中，点击页面的登录按钮，打开手机微博app扫码登录。
 
- 
+
 
 2、使用Cookie登录微博
 
@@ -108,9 +109,9 @@ source: "https://www.bazhuayu.com/helpcenter/docs/OGo3db"
 
 这样就获取到了登录后的Cookie，启动时直接以登录状态打开网页。
 
- <video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/258451b65145403695253100912/Yjb9gkkB2LcA.mp4" width="100%"></video>
+ <video controls src="https://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/258451b65145403695253100912/Yjb9gkkB2LcA.mp4" width="100%"></video>
 
- 
+
 
 > 特别说明：
 >
@@ -128,11 +129,11 @@ source: "https://www.bazhuayu.com/helpcenter/docs/OGo3db"
 > 
 > - c. 怎么判断是否获取到Cookie？获取Cookie后 ![](/assets/academy/case-studies/weibo-keyword-search/06-654b584060316.png) 会变成  ![](/assets/academy/case-studies/weibo-keyword-search/07-654b58411fb80.png) ，点击 <img src="/assets/academy/case-studies/weibo-keyword-search/08-654b58413a6ed.png" alt="" className="academy-inline-icon" /> ，可查看具体的Cookie内容。
 
- 
+
 
 ### 步骤三、在【高级搜索】中选择搜索条件
 
- 
+
 
 在八爪鱼中有2种方式实现：
 
@@ -142,23 +143,23 @@ source: "https://www.bazhuayu.com/helpcenter/docs/OGo3db"
 
 第2种方式更快更稳，示例中选择第2种方式。
 
- 
+
 
 1、获得带有搜索关键词和筛选条件的网址
 
 先在浏览器中测试一下。打开微博首页，输入关键词【小米发布会】，在【高级搜索】中选择条件：【原创】【2025-08-01 00时 至 2025-08-13 00时】，得到网址：<a href="https://s.weibo.com/weibo?q=%E4%B8%89%E4%BD%93&scope=ori&suball=1&timescope=custom%3A2023-03-01-0%3A2023-03-30-0&Refer=g" target="_blank" rel="noopener noreferrer">https://s.weibo.com/weibo?q=%E4%B8%89%E4%BD%93&scope=ori&suball=1&timescope=custom%3A2023-03-01-0%3A2023-03-30-0&Refer=g</a>。
 
- 
 
-<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/72b88cdf5145403695254137136/Atgy3XcrI7MA.mp4" width="100%"></video>
 
- 
+<video controls src="https://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/72b88cdf5145403695254137136/Atgy3XcrI7MA.mp4" width="100%"></video>
+
+
 
 特别说明：
 
 - a. 在【高级搜索】中选择什么条件，在得到的网址中就有一个对应参数，请注意观察筛选条件跟网址参数的对应关系，选择自己需要的。
 
- 
+
 
 2、将1中的网址，输入进八爪鱼中
 
@@ -166,15 +167,15 @@ source: "https://www.bazhuayu.com/helpcenter/docs/OGo3db"
 
 双击进入【打开网页1】设置页面，输入网址 <a href="https://s.weibo.com/weibo?q=%E4%B8%89%E4%BD%93&scope=ori&suball=1&timescope=custom%3A2023-03-01-0%3A2023-03-30-0&Refer=g" target="_blank" rel="noopener noreferrer">https://s.weibo.com/weibo?q=%E4%B8%89%E4%BD%93&scope=ori&suball=1&timescope=custom%3A2023-03-01-0%3A2023-03-30-0&Refer=g</a> ，然后保存，八爪鱼自动打开这个网页。
 
- <video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/db73c7e65145403695252287562/NNnaQI13GjcA.mp4" width="100%"></video>
+ <video controls src="https://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/db73c7e65145403695252287562/NNnaQI13GjcA.mp4" width="100%"></video>
 
- 
 
- 
+
+
 
 ### 步骤四、使用自动识别，自动识别列表页和翻页
 
- 
+
 
 1、使用自动识别，自动识别列表和翻页
 
@@ -182,7 +183,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/OGo3db"
 
 点击【生成采集设置】，将自动识别出的列表数据和翻页，生成为采集流程，方便我们使用和修改。
 
- <video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/e6b1769f5145403695252728024/acBA2uu7APMA.mp4" width="100%"></video>
+ <video controls src="https://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/e6b1769f5145403695252728024/acBA2uu7APMA.mp4" width="100%"></video>
 
 > 特别说明：
 >
@@ -196,23 +197,23 @@ source: "https://www.bazhuayu.com/helpcenter/docs/OGo3db"
 > 
 > - a. 本文使用【自动识别】，自动识别网页上的列表、滚动和翻页。识别成功后会生成采集规则，再对采集规则调整，以采集目标数据。如果【自动识别】的结果与以上图片不同，可点击【取消识别】自行配置采集流程或联系客服反馈。详情点击查看 <a href="http://www.bazhuayu.com:8099/tutorial8/81zdypz" target="_blank" rel="noopener noreferrer">【自动识别】教程</a>
 
- 
 
- 
+
+
 
 ### 步骤五、编辑字段
 
- 
+
 
 在【当前页面数据预览】面板中，可删除多余字段，修改字段名，移动字段顺序等。
 
- <video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/25864b3f5145403695270763043/JjIe84arw8MA.mp4" width="100%"></video>
+ <video controls src="https://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/25864b3f5145403695270763043/JjIe84arw8MA.mp4" width="100%"></video>
 
- 
+
 
 ### 步骤六、优化字段
 
- 
+
 
 1、采集博文内容点击展开后的数据
 
@@ -224,9 +225,9 @@ source: "https://www.bazhuayu.com/helpcenter/docs/OGo3db"
 
 修改XPath为：//div[@class="content"]//\*[@class='txt'][last()] ，然后应用
 
- <video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/ba63e4765145403695272503121/FH6A4Af94hYA.mp4" width="100%"></video>
+ <video controls src="https://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/ba63e4765145403695272503121/FH6A4Af94hYA.mp4" width="100%"></video>
 
- 
+
 
 2、格式化字段
 
@@ -238,19 +239,19 @@ source: "https://www.bazhuayu.com/helpcenter/docs/OGo3db"
 
 【评论数】、【点赞数】的格式化数据过程相同。
 
- <video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/b63965285145403695272375492/AOaAt3gycY0A.mp4" width="100%"></video>
+ <video controls src="https://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/b63965285145403695272375492/AOaAt3gycY0A.mp4" width="100%"></video>
 
- 
+
 
 ### 步骤七、采集多个关键词的搜索结果数据
 
- 
+
 
 回顾一下，步骤三中我们输入关键词【三体】，在【高级搜索】中选择条件：【原创】【2023-03-01 00时 至 2023-03-30 00时】，得到网址：<a href="https://s.weibo.com/weibo?q=%E4%B8%89%E4%BD%93&scope=ori&suball=1&timescope=custom%3A2023-03-01-0%3A2023-03-30-0&Refer=g" target="_blank" rel="noopener noreferrer">https://s.weibo.com/weibo?q=%E4%B8%89%E4%BD%93&scope=ori&suball=1&timescope=custom%3A2023-03-01-0%3A2023-03-30-0&Refer=g</a>。
 
 如果保持【高级搜索】的条件不变，需要更换其他关键词进行采集，怎么办？以下为具体步骤：
 
- 
+
 
 1、添加【循环-输入网址】步骤
 
@@ -258,9 +259,9 @@ source: "https://www.bazhuayu.com/helpcenter/docs/OGo3db"
 
 进入【循环】设置页面。选择循环方式为【网址列表】，点击  <img src="/assets/academy/case-studies/weibo-keyword-search/10-654b5843875a0.png" alt="" className="academy-inline-icon" /> 按钮，进入网址输入页面。
 
- <video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/c6f308e25145403695296520029/V6vtei7Su84A.mp4" width="100%"></video>
+ <video controls src="https://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/c6f308e25145403695296520029/V6vtei7Su84A.mp4" width="100%"></video>
 
- 
+
 
 2、根据网址中参数的规律，批量生成网址
 
@@ -300,15 +301,15 @@ source: "https://www.bazhuayu.com/helpcenter/docs/OGo3db"
 > 
 > - a. 八爪鱼支持通过网址中参数的规律，自动批量生成网址，详情点击查看 <a href="/zh/academy/advanced-features/workflow-settings/bulk-url-input-extra" target="_blank" rel="noopener noreferrer">网址批量输入</a>
 
- 
+
 
 ### 步骤八、启动采集
 
- 
+
 
 1、单击【采集】并【启动本地采集】。启动后八爪鱼开始自动采集数据。
 
- <video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/57de10ca5145403695298165426/bGGqagdYWroA.mp4" width="100%"></video>
+ <video controls src="https://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/57de10ca5145403695298165426/bGGqagdYWroA.mp4" width="100%"></video>
 
 > 特别说明：
 >
@@ -322,7 +323,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/OGo3db"
 > 
 > - a.【本地采集】是使用自己的电脑进行采集，【云采集】是使用八爪鱼提供的云服务器采集，点击查看<a href="http://www.bazhuayu.com:8099/tutorial8/81xsrm8" target="_blank" rel="noopener noreferrer">本地采集与云采集详解</a>。
 
- 
+
 
 2、采集完成后，选择合适的导出方式导出数据。支持导出为Excel、CSV、HTML、数据库等。这里导出为Excel。
 
@@ -332,6 +333,6 @@ source: "https://www.bazhuayu.com/helpcenter/docs/OGo3db"
 
  ![【微博】搜索关键词采集](/assets/academy/case-studies/weibo-keyword-search/13-689f08593bbb1.png)
 
-> 说明：\
-> 若网站改版导致采集问题，可扫码加群反馈\
+> 说明：
+> 若网站改版导致采集问题，可扫码加群反馈
 > ![【微博】搜索关键词采集](/assets/academy/case-studies/weibo-keyword-search/14-6707a992ea7e4.png)

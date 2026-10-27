@@ -52,7 +52,7 @@ for (const item of curatedAnswers.items ?? []) {
   if (item.status === "verified" && !chunks.length) errors.push(`${item.id}: curated answer missing from agent index`);
   if (item.status !== "verified" && chunks.length) errors.push(`${item.id}: non-verified curated answer leaked into agent index`);
 }
-if (audit.stats.articles !== 541 || audit.items.length !== 541) errors.push(`audit count is ${audit.items.length}, expected 541`);
+if (audit.stats.articles !== 540 || audit.items.length !== 540) errors.push(`audit count is ${audit.items.length}, expected 540`);
 if (errors.length) {
   console.error(`Knowledge-base validation failed (${errors.length} errors):\n${errors.join("\n")}`);
   process.exitCode = 1;

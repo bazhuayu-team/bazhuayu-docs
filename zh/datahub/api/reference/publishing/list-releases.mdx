@@ -13,7 +13,7 @@ GET https://api-datahub.bazhuayu.com/v1/data-apps/{app_id}/releases
 
 认证：需要 API Key，且仅 App 作者（发布者本人）可调用；其他人得到 `404`。
 
-作者视角的 Release 历史（含 `build_id` 与 `yanked`；公开视角是<a href="/zh/datahub/api/reference/discovery/list-data-app-versions">App 版本历史</a>）。最新在前；`latest` 是最大的未撤回版本。
+作者视角的 Release 历史（含 `build_id` 与 `yanked`；公开视角是<a href="/zh/datahub/api/reference/discovery/list-data-app-versions" target="_blank" rel="noopener noreferrer">App 版本历史</a>）。最新在前；`latest` 是最大的未撤回版本。
 
 ## 请求
 
@@ -84,7 +84,7 @@ curl \
 | --- | --- | --- | --- |
 | 401 | `unauthorized` | `forbidden` | 缺少或无效的 API Key。 |
 
-错误响应统一为 `{"error": {code, category, message, retryable}}`，见<a href="/zh/datahub/api/reference/introduction#错误">错误</a>。
+错误响应统一为 `{"error": {code, category, message, retryable}}`，见<a href="/zh/datahub/api/reference/introduction#错误" target="_blank" rel="noopener noreferrer">错误</a>。
 
 ## 客户端库
 

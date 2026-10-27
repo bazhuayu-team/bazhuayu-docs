@@ -4,9 +4,9 @@
   "rootSlug": "C83Oeh",
   "stats": {
     "groups": 17,
-    "articles": 541,
+    "articles": 540,
     "operation": 208,
-    "business": 329,
+    "business": 328,
     "troubleshooting": 4
   },
   "groups": [
@@ -6764,30 +6764,6 @@
         "external-link"
       ],
       "bodyLength": 113,
-      "titleDuplicateWith": []
-    },
-    {
-      "sourceSlug": "8qRsnK",
-      "title": "可以抓取小红书内容吗",
-      "route": "/zh/knowledge-base/faq/business/collection/8qRsnK",
-      "category": "业务类问题 / 采集相关",
-      "categorySlugs": [
-        "0lxJre",
-        "p6x0Gj"
-      ],
-      "topCategory": "业务类问题",
-      "topSlug": "0lxJre",
-      "sourceUrl": "https://www.bazhuayu.com/helpcenter/docs/8qRsnK",
-      "updatedAt": "1773107128",
-      "description": "小红书可以使用模板采集，但是要注意，模板采集所需网址，需从手机端tag界面复制，详情请仔细阅读客户端模板使用说明。 也可以使用自定义采集配置采集规则，自定义教程 若需采集小红书app的数据且有预算，可加企业微信群联系管理员数据定制",
-      "imageCount": 0,
-      "assets": [],
-      "videoHosts": [],
-      "riskLabels": [
-        "contact",
-        "external-link"
-      ],
-      "bodyLength": 174,
       "titleDuplicateWith": []
     },
     {

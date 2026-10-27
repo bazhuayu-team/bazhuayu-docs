@@ -76,14 +76,14 @@ Data App 是 DataHub 上可被发现和调用的一项数据能力，可以理�
 <img src="/assets/datahub/datahub-access-methods.png" alt="DataHub 支持网站门户、API、MCP 和 SDK 四种接入方式" />
 
 <CardGroup cols={2}>
-  <Card title="网站门户" href="/zh/datahub/quick-start/client-use">
+  <Card title="网页端直接使用" href="/zh/datahub/quick-start/client-use">
     适合评估和试用。浏览市场、查看详情、在线运行后在控制台查看或导出结果。
   </Card>
   <Card title="API" href="/zh/datahub/api">
     适合有研发能力的团队，以 API 密钥和标准接口将数据接入业务系统与数据管道。
   </Card>
   <Card title="MCP" href="/zh/datahub/quick-start/agent-connection/general">
-    适合使用 AI 助手与 Agent 的用户。可以先连接后由 Agent 搜索 App，也可以先选定 App 再建立固定连接。
+    适合使用 AI 助手与 Agent 的用户。千问办公和 WorkBuddy 可直接使用内置连接器；其他客户端可以安装通用 MCP，或先选定 App 再建立固定连接。
   </Card>
   <Card title="SDK" href="/zh/datahub/api/clients/python">
     适合开发者快速集成，以官方 SDK 调用能力并处理分页取数等常见流程。
@@ -91,6 +91,23 @@ Data App 是 DataHub 上可被发现和调用的一项数据能力，可以理�
 </CardGroup>
 
 四种方式使用同一账号体系和同一套 Data App 能力，选择取决于你的工作流，而不是数据能力本身。
+
+## 在国内 Agent 中直接连接
+
+千问办公和 WorkBuddy 已上线 DataHub 内置连接器。通过连接器市场安装或连接后，使用八爪鱼账号完成 OAuth 授权，即可在对话中搜索 Data App、查看参数和计费方式、运行任务并读取结构化结果。此路径不需要手动填写 MCP 服务地址或 API Key。
+
+<CardGroup cols={2}>
+  <Card title="千问办公：内置连接器" href="/zh/datahub/quick-start/agent-connection/qwen-office-connector">
+    在“扩展 → 连接器”中安装八爪鱼 DataHub，完成授权后在新任务中启用。
+  </Card>
+  <Card title="WorkBuddy：内置连接器" href="/zh/datahub/quick-start/agent-connection/workbuddy-connector">
+    在连接器市场中连接 DataHub，完成授权后在任务输入框中开启。
+  </Card>
+</CardGroup>
+
+<Note>
+  内置连接器适合快速接入完整的 DataHub 发现与运行能力。已经确定固定 App、需要缩小工具范围时，仍可使用“连接指定 App”的安装提示词方式；其他支持 Streamable HTTP MCP 的客户端继续使用通用连接教程。
+</Note>
 
 <CardGroup cols={2}>
   <Card title="查看 DataHub MCP 能力说明" href="/zh/datahub/mcp-capabilities">
@@ -129,5 +146,5 @@ DataHub 采用按量结算：可以先浏览和体验，实际调用后再按 Da
 </Steps>
 
 <Note>
-  DataHub 是数据能力市场；现有 MCP 服务中的“数据中心”内容搜索是另一类具体能力。需要了解数据中心的存量内容检索，请前往 <a href="/zh/mcp/index" target="_blank" rel="noopener noreferrer">MCP 服务</a>；需要直接试跑 Data App，请参阅 <a href="/zh/datahub/quick-start/client-use" target="_blank" rel="noopener noreferrer">客户端直接使用</a>；还未确定 App 时参阅 <a href="/zh/datahub/quick-start/agent-connection/general" target="_blank" rel="noopener noreferrer">通用连接</a>，已经确定 App 时选择 <a href="/zh/datahub/quick-start/agent-connection/codex" target="_blank" rel="noopener noreferrer">Codex：连接指定 App</a> 或 <a href="/zh/datahub/quick-start/agent-connection/workbuddy" target="_blank" rel="noopener noreferrer">WorkBuddy：连接指定 App</a>。
+  DataHub 是数据能力市场；现有 MCP 服务中的“数据中心”内容搜索是另一类具体能力。需要了解数据中心的存量内容检索，请前往 <a href="/zh/mcp/index" target="_blank" rel="noopener noreferrer">MCP 服务</a>；需要直接试跑 Data App，请参阅 <a href="/zh/datahub/quick-start/client-use" target="_blank" rel="noopener noreferrer">网页端直接使用</a>；使用千问办公或 WorkBuddy 时可选择 <a href="/zh/datahub/quick-start/agent-connection/qwen-office-connector" target="_blank" rel="noopener noreferrer">千问办公内置连接器</a> 或 <a href="/zh/datahub/quick-start/agent-connection/workbuddy-connector" target="_blank" rel="noopener noreferrer">WorkBuddy 内置连接器</a>。其他客户端还未确定 App 时参阅 <a href="/zh/datahub/quick-start/agent-connection/general" target="_blank" rel="noopener noreferrer">通用连接</a>，已经确定 App 时选择 <a href="/zh/datahub/quick-start/agent-connection/codex" target="_blank" rel="noopener noreferrer">Codex：连接指定 App</a> 或 <a href="/zh/datahub/quick-start/agent-connection/workbuddy" target="_blank" rel="noopener noreferrer">WorkBuddy：连接指定 App</a>。
 </Note>

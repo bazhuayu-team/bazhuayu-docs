@@ -1,12 +1,13 @@
 ---
 title: "【财联社】财经信息短报采集"
+description: "学习如何使用八爪鱼完成“【财联社】财经信息短报采集”数据采集。"
 source: "https://www.bazhuayu.com/helpcenter/docs/cai-lian-she-cai-jing-xin-xi-duan-bao-cai-ji"
 ---
 场景介绍
 
 采集财经资讯，实时监控全网实时热点动向，财联社电报支持实时更新滚动，采集器配置定时运行可实现实时监控最新财经热点动向需求。固定短周期采集。
 
- 
+
 
 **采集场景**
 
@@ -14,15 +15,15 @@ source: "https://www.bazhuayu.com/helpcenter/docs/cai-lian-she-cai-jing-xin-xi-d
 
 ![【财联社】财经信息短报采集](/assets/academy/case-studies/cls-finance-briefs/01-6942852ac7aee.png)
 
- 
 
- 
+
+
 
 主要采集字段
 
 ①发布时间，②标题，③短报内容，④关联话题，⑤阅读量。
 
- 
+
 
 **采集结果**
 
@@ -30,7 +31,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/cai-lian-she-cai-jing-xin-xi-d
 
 ![【财联社】财经信息短报采集](/assets/academy/case-studies/cls-finance-briefs/02-694285996b93b.png)
 
- 
+
 
 **教程说明**
 
@@ -38,7 +39,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/cai-lian-she-cai-jing-xin-xi-d
 
 如果因网页改版造成网址或步骤无效，无法收集到目标数据，请联系官方客服，我们将及时修正。
 
- 
+
 
 **采集步骤**
 
@@ -56,25 +57,25 @@ source: "https://www.bazhuayu.com/helpcenter/docs/cai-lian-she-cai-jing-xin-xi-d
 
 步骤七、启动采集
 
- 
+
 
 **以下为具体步骤：**
 
- 
+
 
 ### 步骤一、打开网页
 
- 
+
 
 1、打开网址
 
 在首页输入框中，输入网址<a href="https://www.cls.cn/telegraph" target="_blank" rel="noopener noreferrer">https://www.cls.cn/telegraph</a>，然后点击【开始采集】，八爪鱼自动打开网页，网站会自动跳到登录页面
 
- 
 
-<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/398ed8ce5145403709489486525/iaHfGFsOyScA.mp4" width="100%"></video>
 
- 
+<video controls src="https://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/398ed8ce5145403709489486525/iaHfGFsOyScA.mp4" width="100%"></video>
+
+
 
 > 特别说明：
 >
@@ -94,13 +95,13 @@ source: "https://www.bazhuayu.com/helpcenter/docs/cai-lian-she-cai-jing-xin-xi-d
 > 
 > 
 
- 
 
- 
+
+
 
 ### 步骤二、确定采集时间（当天）
 
- 
+
 
 1、点击选择日期，确定今日
 
@@ -112,11 +113,11 @@ source: "https://www.bazhuayu.com/helpcenter/docs/cai-lian-she-cai-jing-xin-xi-d
 
 ④ 在黄色操作提示框中，选择操作【点击该链接】
 
- 
 
-<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/74c8e23a5145403709503083255/Pdvyb9JYKbkA.mp4" width="100%"></video>
 
- 
+<video controls src="https://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/74c8e23a5145403709503083255/Pdvyb9JYKbkA.mp4" width="100%"></video>
+
+
 
 > 特别说明：
 >
@@ -150,17 +151,17 @@ source: "https://www.bazhuayu.com/helpcenter/docs/cai-lian-she-cai-jing-xin-xi-d
 > 
 > ![【财联社】财经信息短报采集](/assets/academy/case-studies/cls-finance-briefs/06-694358a903eba.png)
 
- 
 
- 
 
- 
 
- 
+
+
+
+
 
 ### 步骤三、确定循环列表并提取发布时间与短报信息
 
- 
+
 
 1、确定循环列表
 
@@ -170,11 +171,11 @@ source: "https://www.bazhuayu.com/helpcenter/docs/cai-lian-she-cai-jing-xin-xi-d
 
 ③ 在黄色操作提示框中，选择提取【文本内容】
 
- 
 
-<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/7c54ec2b5145403709490938357/bVBE8rpimD8A.mp4" width="100%"></video>
 
- 
+<video controls src="https://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/7c54ec2b5145403709490938357/bVBE8rpimD8A.mp4" width="100%"></video>
+
+
 
 > 特别说明：
 >
@@ -188,7 +189,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/cai-lian-she-cai-jing-xin-xi-d
 > 
 > - a.此配置完获取到的数据是整个列表的文本，实际不具有实用性，仅仅是为了获取循环列表的xpath，便于后续选择具体字段采集/点击提供拼接条件，相关说明可参考：<a href="/zh/academy/xpath/relative-absolute-xpath" target="_blank" rel="noopener noreferrer">绝对xpath、相对XPath学习与实例</a>
 
- 
+
 
 2、获取发布时间与短报内容
 
@@ -202,11 +203,11 @@ source: "https://www.bazhuayu.com/helpcenter/docs/cai-lian-she-cai-jing-xin-xi-d
 
 ③删除第一个字段
 
- 
 
-<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/3e381ed55145403709489684883/pCUCspImhxwA.mp4" width="100%"></video>
 
- 
+<video controls src="https://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/3e381ed55145403709489684883/pCUCspImhxwA.mp4" width="100%"></video>
+
+
 
 > 特别说明：
 >
@@ -222,7 +223,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/cai-lian-she-cai-jing-xin-xi-d
 > 
 > ![【财联社】财经信息短报采集](/assets/academy/case-studies/cls-finance-briefs/07-6942852a439d8.png)
 
- 
+
 
 3、设置翻页
 
@@ -230,11 +231,11 @@ source: "https://www.bazhuayu.com/helpcenter/docs/cai-lian-she-cai-jing-xin-xi-d
 
 ②在黄色操作提示框中，选择提取【循环点击】
 
- 
 
-<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/4a6709525145403709496965619/0Pz19HnfAvoA.mp4" width="100%"></video>
 
- 
+<video controls src="https://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/4a6709525145403709496965619/0Pz19HnfAvoA.mp4" width="100%"></video>
+
+
 
 > 特别说明：
 >
@@ -248,11 +249,11 @@ source: "https://www.bazhuayu.com/helpcenter/docs/cai-lian-she-cai-jing-xin-xi-d
 > 
 > - a.某一元素选择循环点击，从流程角度来说都是循环翻页，当黄色提示框没有提示翻页按钮配置时，可以如上操作实现翻页。相关参考：<a href="/zh/academy/basic-collection/pagination/next-page-button#141a1e00d56ad162b1ca7eae995e64a0" target="_blank" rel="noopener noreferrer">翻页以采集多页数据</a>
 
- 
+
 
 ### 步骤四、进入详情页提取相应数据
 
- 
+
 
 1、点击短报内容进入详情页
 
@@ -262,13 +263,13 @@ source: "https://www.bazhuayu.com/helpcenter/docs/cai-lian-she-cai-jing-xin-xi-d
 
 ③在黄色操作提示框中，选择操作【点击一次】
 
- 
 
-<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/0766f3fa5145403709485500270/PTdTVhJCSYsA.mp4" width="100%"></video>
 
- 
+<video controls src="https://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/0766f3fa5145403709485500270/PTdTVhJCSYsA.mp4" width="100%"></video>
 
- 
+
+
+
 
 2、获取相关字段数据
 
@@ -282,15 +283,15 @@ source: "https://www.bazhuayu.com/helpcenter/docs/cai-lian-she-cai-jing-xin-xi-d
 
 ⑤在黄色操作提示框中，选择提取【文本内容】
 
- 
 
-<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/c200500d5145403709484886642/IOEZHUlA6L8A.mp4" width="100%"></video>
 
- 
+<video controls src="https://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/c200500d5145403709484886642/IOEZHUlA6L8A.mp4" width="100%"></video>
+
+
 
 ### 步骤五、字段格式化处理
 
- 
+
 
 1、修改流程名
 
@@ -314,7 +315,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/cai-lian-she-cai-jing-xin-xi-d
 
 ![【财联社】财经信息短报采集](/assets/academy/case-studies/cls-finance-briefs/08-6942852a462b5.png)
 
- 
+
 
 > 特别说明：
 >
@@ -332,7 +333,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/cai-lian-she-cai-jing-xin-xi-d
 > 
 > ![【财联社】财经信息短报采集](/assets/academy/case-studies/cls-finance-briefs/09-6942852a40ffb.png)
 
- 
+
 
 2、修改字段名
 
@@ -344,7 +345,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/cai-lian-she-cai-jing-xin-xi-d
 
 ④更改“字段1\_文本”为“关联话题”
 
- 
+
 
 3、处理短报标题与短报详情
 
@@ -360,11 +361,11 @@ source: "https://www.bazhuayu.com/helpcenter/docs/cai-lian-she-cai-jing-xin-xi-d
 
 ⑥更改“短报详情”为“短报标题”
 
- 
 
-<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/3750ad7f5145403709496104822/LHlunNvLtnMA.mp4" width="100%"></video>
 
- 
+<video controls src="https://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/3750ad7f5145403709496104822/LHlunNvLtnMA.mp4" width="100%"></video>
+
+
 
 ⑦右键“短报详情\_复制”字段，选择格式化数据。
 
@@ -372,11 +373,11 @@ source: "https://www.bazhuayu.com/helpcenter/docs/cai-lian-she-cai-jing-xin-xi-d
 
 ⑨配置完成后点击应用。更改“短报详情\_复制”为“短报详情”。
 
- 
 
-<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/00c3083b5145403709485252105/ebZXwhZ43TIA.mp4" width="100%"></video>
 
- 
+<video controls src="https://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/00c3083b5145403709485252105/ebZXwhZ43TIA.mp4" width="100%"></video>
+
+
 
 > 特别说明：
 >
@@ -392,7 +393,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/cai-lian-she-cai-jing-xin-xi-d
 > 
 > - b.正则匹配使用方法详细参考该教程：<a href="/zh/academy/advanced-features/data-processing/field-formatting" target="_blank" rel="noopener noreferrer">字段格式化</a>
 
- 
+
 
 4、修改翻页xpath 手动执行任务发现翻页xpath定位到其中一条列表中，排查发现自动识别的xpath是路径定位，此类定位及其不准确。
 
@@ -400,11 +401,11 @@ source: "https://www.bazhuayu.com/helpcenter/docs/cai-lian-she-cai-jing-xin-xi-d
 
 修改xpath为：//div[@class="f-s-14 t-a-c m-auto m-t-24 m-b-24 w-162 h-38 c-222 l-h-38p b-w-1 b-s-s b-r-20 c-p bg-c-fff b-c-222 h-c-666 h-b-c-999"]
 
- 
 
-<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/4a8b2d8d5145403709496985315/3MVFrEx5ZKAA.mp4" width="100%"></video>
 
- 
+<video controls src="https://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/4a8b2d8d5145403709496985315/3MVFrEx5ZKAA.mp4" width="100%"></video>
+
+
 
 > 特别说明：
 >
@@ -418,7 +419,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/cai-lian-she-cai-jing-xin-xi-d
 > 
 > - a.<a href="/zh/academy/xpath/getting-started/why-use-xpath" target="_blank" rel="noopener noreferrer">Xpath详解</a>
 
- 
+
 
 5、发布时间格式化
 
@@ -426,7 +427,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/cai-lian-she-cai-jing-xin-xi-d
 
 ![【财联社】财经信息短报采集](/assets/academy/case-studies/cls-finance-briefs/11-6942852a5b783.png)
 
- 
+
 
 ①首先将其星期使用正则替换掉
 
@@ -434,11 +435,11 @@ source: "https://www.bazhuayu.com/helpcenter/docs/cai-lian-she-cai-jing-xin-xi-d
 
 ③将时间格式化为yyyy-MM-dd HH:mm:ss
 
- 
 
-<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/5e4961f65145403709486985577/UZWAKQJfJUcA.mp4" width="100%"></video>
 
- 
+<video controls src="https://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/5e4961f65145403709486985577/UZWAKQJfJUcA.mp4" width="100%"></video>
+
+
 
 > 特别说明：
 >
@@ -452,7 +453,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/cai-lian-she-cai-jing-xin-xi-d
 > 
 > - a.①②中正则具体操作方式类比步骤五-3、处理短报标题与短报详情，③阶段具体配置方法详细参考该教程：<a href="/zh/academy/advanced-features/data-processing/field-formatting" target="_blank" rel="noopener noreferrer">字段格式化</a>
 
- 
+
 
 6、其他修改
 
@@ -460,11 +461,11 @@ source: "https://www.bazhuayu.com/helpcenter/docs/cai-lian-she-cai-jing-xin-xi-d
 
 ②将关联话题合并为同一字段。
 
- 
 
-<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/3487d7e95145403709489232477/Xz5tpd5GstIA.mp4" width="100%"></video>
 
- 
+<video controls src="https://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/3487d7e95145403709489232477/Xz5tpd5GstIA.mp4" width="100%"></video>
+
+
 
 > 特别说明：
 >
@@ -478,9 +479,9 @@ source: "https://www.bazhuayu.com/helpcenter/docs/cai-lian-she-cai-jing-xin-xi-d
 > 
 > - a.将同一字段合并主要是解决同一类型循环元素占用数据采集行数的问题，具体请关注：<a href="/zh/academy/advanced-features/data-processing/field-merge" target="_blank" rel="noopener noreferrer">字段合并</a>
 
- 
 
- 
+
+
 
 ### 步骤六、优化规则
 
@@ -498,11 +499,11 @@ source: "https://www.bazhuayu.com/helpcenter/docs/cai-lian-she-cai-jing-xin-xi-d
 
 ⑤配置执行操作为“结束本次采集”-具体解释见本步骤特殊说明b
 
- 
 
-<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/4e57e1e45145403709493049534/FaEHHcQA3ocA.mp4" width="100%"></video>
 
- 
+<video controls src="https://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/4e57e1e45145403709493049534/FaEHHcQA3ocA.mp4" width="100%"></video>
+
+
 
 > 特别说明：
 >
@@ -524,7 +525,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/cai-lian-she-cai-jing-xin-xi-d
 > 
 > 
 
- 
+
 
 2、设置当前时间字段
 
@@ -536,19 +537,19 @@ source: "https://www.bazhuayu.com/helpcenter/docs/cai-lian-she-cai-jing-xin-xi-d
 
 ④点击应用
 
- 
 
-<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/10e32b305145403709485926865/uL5bENO1AcYA.mp4" width="100%"></video>
 
- 
+<video controls src="https://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/10e32b305145403709485926865/uL5bENO1AcYA.mp4" width="100%"></video>
+
+
 
 ⑤设置字段格式化
 
- 
 
-<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/e353bc365145403709488099687/kOvz8YGA7M8A.mp4" width="100%"></video>
 
- 
+<video controls src="https://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/e353bc365145403709488099687/kOvz8YGA7M8A.mp4" width="100%"></video>
+
+
 
 > 特别说明：
 >
@@ -562,7 +563,7 @@ source: "https://www.bazhuayu.com/helpcenter/docs/cai-lian-she-cai-jing-xin-xi-d
 > 
 > - a. 添加当前时间字段是为了与对比发布时间作为对比（便于证实每半小时新增采集），调整格式化是为了使对比更佳明显。
 
- 
+
 
 3、常规规则优化
 
@@ -574,11 +575,11 @@ source: "https://www.bazhuayu.com/helpcenter/docs/cai-lian-she-cai-jing-xin-xi-d
 
 ④“点击加载更多”配置“执行前等待1秒”
 
- 
 
-<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/b175d1075145403709484156079/4f58qt7tLd4A.mp4" width="100%"></video>
 
- 
+<video controls src="https://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/b175d1075145403709484156079/4f58qt7tLd4A.mp4" width="100%"></video>
+
+
 
 > 特别说明：
 >
@@ -596,21 +597,21 @@ source: "https://www.bazhuayu.com/helpcenter/docs/cai-lian-she-cai-jing-xin-xi-d
 > 
 > - b.具体规格优化参考：<a href="/zh/academy/troubleshooting/rule-optimization?search=1" target="_blank" rel="noopener noreferrer">规则优化-八爪鱼帮助中心</a>
 
- 
 
- 
+
+
 
 ### 步骤五、启动采集与下载
 
- 
+
 
 1、设置任务定时
 
- 
 
-<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/60ff8ed05145403709493846856/qfo3g4GTHrIA.mp4" width="100%"></video>
 
- 
+<video controls src="https://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/60ff8ed05145403709493846856/qfo3g4GTHrIA.mp4" width="100%"></video>
+
+
 
 > 特别说明：
 >
@@ -626,15 +627,15 @@ source: "https://www.bazhuayu.com/helpcenter/docs/cai-lian-she-cai-jing-xin-xi-d
 > 
 > - b.这里我们使用云采集，每半小时启动启动任务，则理论上，采集的数据就是采集任务启动半小时内的。由于是每半小时都会启动任务，所以不存在漏抓数据的情况。
 
- 
+
 
 2、定时新增采集效果展示
 
- 
 
-<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/50e226015145403709493177034/jqk7aKppUHEA.mp4" width="100%"></video>
 
- 
+<video controls src="https://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/50e226015145403709493177034/jqk7aKppUHEA.mp4" width="100%"></video>
+
+
 
 > 特别说明：
 >
@@ -652,23 +653,23 @@ source: "https://www.bazhuayu.com/helpcenter/docs/cai-lian-she-cai-jing-xin-xi-d
 > 
 > - b.采集新增数据亦有其他方案（本教程使用的是方法一），可参考：<a href="/zh/academy/premium-features/paid-features/collect-new-data" target="_blank" rel="noopener noreferrer">采集新增数据</a>
 
- 
+
 
 3、采集完成后，选择合适的导出方式来导出数据。支持导出为Excel，CSV，HTML，数据库等。这里导出为Excel。
 
- 
 
-<video controls src="http://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/777224465145403709490704469/VsfPhUhCNDIA.mp4" width="100%"></video>
 
- 
+<video controls src="https://1251101074.vod2.myqcloud.com/fbbb38d8vodcq1251101074/777224465145403709490704469/VsfPhUhCNDIA.mp4" width="100%"></video>
+
+
 
 4、设置自动导出
 
- 
 
-<video controls src="http://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/60ef020f5145403709493839268/ml7yr1AUlkwA.mp4" width="100%"></video>
 
- 
+<video controls src="https://1251101074.vod2.myqcloud.com/8cc84bf5vodgzp1251101074/60ef020f5145403709493839268/ml7yr1AUlkwA.mp4" width="100%"></video>
+
+
 
 > 特别说明：
 >
@@ -682,14 +683,14 @@ source: "https://www.bazhuayu.com/helpcenter/docs/cai-lian-she-cai-jing-xin-xi-d
 > 
 > - a. 定时自动导出可帮助我们周期性掌握新增短报数据，达到监控效果。
 
- 
 
- 
 
- 
 
- 
 
- 
+
+
+
+
+
 
 作者：YfY

@@ -13,7 +13,7 @@ GET https://api-datahub.bazhuayu.com/v1/account
 
 认证：需要 API Key（`Authorization: Bearer <API Key>`）。
 
-当前凭证对应账号的身份信息和累计数据费。这是身份端点，没有时间维度；按时段和维度查看消费用<a href="/zh/datahub/api/reference/account/get-billing">账单聚合</a>。
+当前凭证对应账号的身份信息和累计数据费。这是身份端点，没有时间维度；按时段和维度查看消费用<a href="/zh/datahub/api/reference/account/get-billing" target="_blank" rel="noopener noreferrer">账单聚合</a>。
 
 `total_spent` 只含数据费，即按 App 价格表对运行产出计的费用。钱包余额、充值和发票不在 DataHub API 范围内，请在八爪鱼账户中心查看。同一账号的多把 API Key 查到的是同一个累计值。
 
@@ -66,7 +66,7 @@ curl \
 | --- | --- | --- | --- |
 | 401 | `unauthorized` | `forbidden` | 缺少或无效的 API Key。 |
 
-错误响应统一为 `{"error": {code, category, message, retryable}}`，见<a href="/zh/datahub/api/reference/introduction#错误">错误</a>。
+错误响应统一为 `{"error": {code, category, message, retryable}}`，见<a href="/zh/datahub/api/reference/introduction#错误" target="_blank" rel="noopener noreferrer">错误</a>。
 
 ## 客户端库
 

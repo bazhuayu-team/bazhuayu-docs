@@ -1,21 +1,9 @@
 ---
-title: 客户端直接使用
-description: 在 DataHub 网页端选择、试跑并核对 Data App 的数据结果。
+title: 网页端直接使用
+description: 在 DataHub 网页端浏览 Data App、填写参数、在线运行并查看或导出结果。
 ---
 
-这篇教程适合希望直接在 DataHub 网页端使用数据能力的用户。你不需要配置 MCP 或编写代码，只需选择合适的 Data App、填写参数并在页面中检查结果。
-
-<CardGroup cols={2}>
-  <Card title="通用连接" href="/zh/datahub/quick-start/agent-connection/general">
-    不预选 App，先连接 DataHub MCP，再让 Agent 搜索和运行合适的能力。
-  </Card>
-  <Card title="Codex：连接指定 App" href="/zh/datahub/quick-start/agent-connection/codex">
-    已经确定 App 时，将该能力作为固定工具接入 Codex。
-  </Card>
-  <Card title="WorkBuddy：连接指定 App" href="/zh/datahub/quick-start/agent-connection/workbuddy">
-    已经确定 App 时，将该能力作为固定连接器接入 WorkBuddy。
-  </Card>
-</CardGroup>
+你可以直接在 DataHub 网页端完成从选择 Data App 到获取数据的整个流程：登录八爪鱼账号，在市场中找到合适的应用，核对输入参数、输出字段和价格，在线运行后查看并导出结果。
 
 ## 开始前
 
@@ -45,7 +33,7 @@ description: 在 DataHub 网页端选择、试跑并核对 Data App 的数据结
     <img src="/assets/datahub/getting-started/select-data-app.png" alt="在 Data Hub 市场选择一个 Data App" width="820" />
   </Step>
   <Step title="核对能力范围与费用">
-    依次查看“概览”“输入参数”“输出数据”“调用方式”和“价格”。重点确认数据来源与时效、必填参数、返回字段、单次调用限制和计费单位，避免不符合预期时直接扩大数据量。
+    查看“概览”“输入参数”“输出数据”和“价格”。重点确认数据来源与时效、必填参数、返回字段、单次调用限制和计费单位，再决定是否在线运行。
 
     <img src="/assets/datahub/getting-started/review-data-app-details.png" alt="查看 Data App 的能力、输入输出和价格说明" width="780" />
   </Step>
@@ -60,11 +48,17 @@ description: 在 DataHub 网页端选择、试跑并核对 Data App 的数据结
     <img src="/assets/datahub/getting-started/run-data-app-online.png" alt="填写 Data App 参数并提交运行" width="760" />
   </Step>
   <Step title="核对返回的数据">
-    等待运行完成后，在页面查看表格或 JSON 结果。先检查状态、返回条数和核心字段；确认符合预期后，再使用页面支持的导出方式或接入下游流程。
+    等待运行完成后，在页面查看表格或 JSON 结果。先检查状态、返回条数和核心字段，确认返回的数据符合预期。
 
     <img src="/assets/datahub/getting-started/review-online-results.png" alt="查看 Data App 在线运行结果" width="760" />
   </Step>
 </Steps>
+
+## 查看与导出结果
+
+在运行结果页面或开放平台控制台中查看本次运行的状态、结果和消耗。需要保存数据时，使用页面提供的导出入口，按当前应用支持的格式下载结果文件。
+
+如果结果不符合预期，先核对输入参数与应用说明，再调整筛选条件或数据范围重新运行。确认数据质量和实际费用后，再扩大运行规模。
 
 <Tip>
   在线运行成功只说明当前参数可以得到结果。正式业务使用前，建议再用接近真实场景的参数验证边界情况、数据完整性和实际费用。
@@ -76,19 +70,4 @@ description: 在 DataHub 网页端选择、试跑并核对 Data App 的数据结
 - 已核对输入参数、输出字段和公开价格。
 - 已用小范围参数完成一次在线运行。
 - 已检查状态、返回条数和关键字段。
-
-## 下一步：连接 Agent
-
-还没有确定 App 时选择“通用连接”；已经确定固定 App 时，再按实际客户端选择 Codex 或 WorkBuddy 教程。
-
-<CardGroup cols={2}>
-  <Card title="通用连接" href="/zh/datahub/quick-start/agent-connection/general">
-    连接后由 Agent 搜索、比较并运行 Data App。
-  </Card>
-  <Card title="Codex：指定 App" href="/zh/datahub/quick-start/agent-connection/codex">
-    先选 App，再配置 Codex 并完成第一次调用。
-  </Card>
-  <Card title="WorkBuddy：指定 App" href="/zh/datahub/quick-start/agent-connection/workbuddy">
-    先选 App，再安装并验证 WorkBuddy 连接器。
-  </Card>
-</CardGroup>
+- 已核对本次运行的消耗，并按需要导出结果。

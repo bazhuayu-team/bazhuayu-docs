@@ -544,6 +544,8 @@
                   {
                     "group": "平台对接",
                     "pages": [
+                      "zh/mcp/integrations/qwen-office",
+                      "zh/mcp/integrations/workbuddy",
                       "zh/mcp/integrations/coze",
                       "zh/mcp/integrations/dify",
                       "zh/mcp/integrations/qclaw",
@@ -725,7 +727,14 @@
                     "pages": [
                       "zh/datahub/quick-start/agent-connection/general",
                       "zh/datahub/quick-start/agent-connection/codex",
-                      "zh/datahub/quick-start/agent-connection/workbuddy"
+                      "zh/datahub/quick-start/agent-connection/workbuddy",
+                      {
+                        "group": "国内 Agent 内置连接器",
+                        "pages": [
+                          "zh/datahub/quick-start/agent-connection/qwen-office-connector",
+                          "zh/datahub/quick-start/agent-connection/workbuddy-connector"
+                        ]
+                      }
                     ]
                   }
                 ]
@@ -851,6 +860,7 @@
           {
             "tab": "更新日志",
             "pages": [
+              "zh/changelog/october-2026",
               "zh/changelog/september-2026",
               "zh/changelog/august-2026",
               "zh/changelog/july-2026",
@@ -878,7 +888,7 @@
     },
     {
       "source": "/zh/changelog",
-      "destination": "/zh/changelog/september-2026"
+      "destination": "/zh/changelog/october-2026"
     },
     {
       "source": "/zh/datahub/getting-started",

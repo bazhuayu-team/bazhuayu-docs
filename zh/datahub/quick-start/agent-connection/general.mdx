@@ -6,6 +6,10 @@ description: 不预先选择 Data App，先连接 DataHub MCP，再让 Agent 搜
 如果你还不知道应该使用哪个 Data App，或者希望 Agent 根据每次任务自行寻找能力，请使用这篇教程。通用连接会把 DataHub 的发现与运行工具接入 Agent；连接完成后，你可以先描述数据需求，再让 Agent 搜索合适的 Data App、查看参数，最后确认并运行。
 
 <Note>
+  **千问办公和 WorkBuddy 已提供 DataHub 内置连接器。** 使用这两个客户端时，优先参阅 <a href="/zh/datahub/quick-start/agent-connection/qwen-office-connector" target="_blank" rel="noopener noreferrer">千问办公：使用 DataHub 内置连接器</a> 或 <a href="/zh/datahub/quick-start/agent-connection/workbuddy-connector" target="_blank" rel="noopener noreferrer">WorkBuddy：使用 DataHub 内置连接器</a>。本文保留给没有内置连接器的 Agent，以及需要手动控制 MCP 配置的场景。
+</Note>
+
+<Note>
   **通用连接不要求先选 App。** 本教程与“Codex：连接指定 App”“WorkBuddy：连接指定 App”是两种不同用法。指定 App 连接适合目标明确、长期只使用固定能力的场景；通用连接适合需求会变化或尚未确定 App 的场景。
 </Note>
 
@@ -36,7 +40,7 @@ description: 不预先选择 Data App，先连接 DataHub MCP，再让 Agent 搜
 请准备好：
 
 - 一个能够正常登录的八爪鱼账号。
-- 一个支持 Streamable HTTP MCP 的 Agent 客户端，例如 WorkBuddy、Codex、Claude Code 或 Cursor。
+- 一个支持 Streamable HTTP MCP 的 Agent 客户端，例如 Codex、Claude Code 或 Cursor。千问办公和 WorkBuddy 用户可直接使用内置连接器教程。
 - 如果选择 API Key 方式：提前在用户中心创建 DataHub API Key。
 - 一个用于测试的简单数据目标，例如“寻找可以查询 Instagram 账号信息的 Data App”。
 
@@ -95,7 +99,7 @@ Authorization: Bearer <YOUR_API_KEY>
 
 ## 第四步：让 Agent 完成配置
 
-下面以 WorkBuddy 为例。Codex、Claude Code 和 Cursor 的按钮位置不同，但核心步骤相同：粘贴安装提示词、选择认证方式、允许修改当前用户的 MCP 配置，然后重新加载客户端。
+下面以 WorkBuddy 的手动配置界面为例。Codex、Claude Code 和 Cursor 的按钮位置不同，但核心步骤相同：粘贴安装提示词、选择认证方式、允许修改当前用户的 MCP 配置，然后重新加载客户端。WorkBuddy 普通用户应优先使用内置连接器；只有需要手动控制 MCP 配置时才按本节操作。
 
 <Steps>
   <Step title="把安装提示词发送给 Agent">
@@ -218,6 +222,19 @@ Agent 通常会先使用 `search_data_apps` 搜索市场，再使用 `get_data_a
   </Card>
   <Card title="WorkBuddy：连接指定 App" href="/zh/datahub/quick-start/agent-connection/workbuddy">
     先选择具体 App，再将它作为固定连接器接入 WorkBuddy。
+  </Card>
+</CardGroup>
+
+## 使用千问办公或 WorkBuddy？
+
+如果客户端已经提供 DataHub 内置连接器，无需复制安装提示词或填写 API Key：
+
+<CardGroup cols={2}>
+  <Card title="千问办公：内置连接器" href="/zh/datahub/quick-start/agent-connection/qwen-office-connector">
+    在连接器市场安装八爪鱼 DataHub，并通过八爪鱼账号完成 OAuth 授权。
+  </Card>
+  <Card title="WorkBuddy：内置连接器" href="/zh/datahub/quick-start/agent-connection/workbuddy-connector">
+    在连接器市场连接 DataHub，并在当前任务中开启连接器。
   </Card>
 </CardGroup>
 
