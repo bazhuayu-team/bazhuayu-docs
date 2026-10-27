@@ -9,28 +9,28 @@ description: 在 ChatGPT、Claude、Cursor、Gemini、OpenClaw、VS Code 等客�
 https://mcp.bazhuayu.com
 ```
 
-认证方式：**API Key**（Header：`x-api-key`）。API Key 创建见 <a href="/zh/mcp/quick-start/api-key" target="_blank" rel="noopener noreferrer">获取 API Key</a>；不要使用 OAuth 或 `Authorization: Bearer`。
+认证方式：**API Key**（Header：`Authorization: Bearer <API Key>`）。API Key 创建见 <a href="/zh/mcp/quick-start/api-key" target="_blank" rel="noopener noreferrer">获取 API Key</a>；使用 API Key 时不要省略 `Bearer` 前缀。
 
 ## Agent 对话安装
 
-WorkBuddy、QClaw、豆包专业版等能够自行管理工具配置的 Agent，可直接通过对话添加八爪鱼 MCP。推荐使用<a href="/zh/mcp/quick-start/api-key" target="_blank" rel="noopener noreferrer">获取 API Key</a>页面提供的完整提示词，让 Agent 写入 `x-api-key` 请求头、刷新工具列表并完成连接测试。
+WorkBuddy、QClaw、豆包专业版等能够自行管理工具配置的 Agent，可直接通过对话添加八爪鱼 MCP。推荐使用<a href="/zh/mcp/quick-start/api-key" target="_blank" rel="noopener noreferrer">获取 API Key</a>页面提供的完整提示词，让 Agent 写入 `Authorization` 请求头（值为 `Bearer <API Key>`）、刷新工具列表并完成连接测试。
 
 <Note>
-  对这类 Agent，应明确要求本次接入仅使用 API Key，不要把 Key 配置成 OAuth 凭据或 `Authorization: Bearer`。不支持自主配置的客户端，请继续按下方平台步骤手动操作。
+  对这类 Agent，应明确要求使用 API Key 时将请求头配置为 `Authorization`，值为 `Bearer <API Key>`。不支持自主配置的客户端，请继续按下方平台步骤手动操作。
 </Note>
 
 ## ChatGPT
 
 1. 打开 ChatGPT → **Settings** → **Connectors**（或「连接器」）。
 2. 添加 MCP 连接器，URL 填写 `https://mcp.bazhuayu.com` 或 `https://mcp.octoparse.com`。
-3. 在自定义 Headers 中填写 `x-api-key` 和你的 API Key；若该入口不支持自定义 Header，请使用该产品支持 HTTP MCP Headers 的配置方式。
+3. 在自定义 Headers 中填写 `Authorization` 和 `Bearer <你的 API Key>`；若该入口不支持自定义 Header，请使用该产品支持 HTTP MCP Headers 的配置方式。
 4. 在新对话中启用该连接器后测试搜索模板。
 
 ## Claude（桌面 / Web）
 
 1. **Settings** → **Connectors** → **Add connector**。
 2. 输入 MCP URL：`https://mcp.bazhuayu.com` 或 `https://mcp.octoparse.com`。
-3. 在连接器的 Headers / API Key 配置中填写 `x-api-key`；若当前入口不能配置 Header，请改用该客户端的本地 MCP 配置方式。
+3. 在连接器的 Headers / API Key 配置中填写 `Authorization`，值使用 `Bearer <你的 API Key>`；若当前入口不能配置 Header，请改用该客户端的本地 MCP 配置方式。
 4. 在对话中确认已勾选八爪鱼 MCP 工具。
 
 ## Claude Code
@@ -44,7 +44,7 @@ WorkBuddy、QClaw、豆包专业版等能够自行管理工具配置的 Agent，
       "type": "http",
       "url": "https://mcp.bazhuayu.com",
       "headers": {
-        "x-api-key": "你的APIKey"
+        "Authorization": "Bearer 你的APIKey"
       }
     }
   }
@@ -64,7 +64,7 @@ WorkBuddy、QClaw、豆包专业版等能够自行管理工具配置的 Agent，
       "type": "http",
       "url": "https://mcp.bazhuayu.com",
       "headers": {
-        "x-api-key": "你的APIKey"
+        "Authorization": "Bearer 你的APIKey"
       }
     }
   }
@@ -79,7 +79,7 @@ WorkBuddy、QClaw、豆包专业版等能够自行管理工具配置的 Agent，
 
 1. 在 **Settings → MCP / Extensions / Connectors** 中添加 HTTP MCP 服务。
 2. URL：`https://mcp.bazhuayu.com` 或 `https://mcp.octoparse.com`。
-3. 在 Headers 中配置 `x-api-key`。
+3. 在 Headers 中配置 `Authorization: Bearer <你的 API Key>`。
 4. 在对话中启用八爪鱼工具后测试 `list_platforms` 或 `search_templates`。
 
 具体入口名称因 Gemini 集成产品（Google AI Studio、第三方 IDE 插件等）而异，以当前客户端文档为准。
@@ -88,7 +88,7 @@ WorkBuddy、QClaw、豆包专业版等能够自行管理工具配置的 Agent，
 
 1. 安装支持 MCP 的 Copilot 扩展版本。
 2. 在 `settings.json` 或 MCP 配置文件中添加与 Cursor 相同的 `mcpServers` 块。
-3. URL 使用 `https://mcp.bazhuayu.com`，Header 使用 `x-api-key`。
+3. URL 使用 `https://mcp.bazhuayu.com`，Header 使用 `Authorization: Bearer <你的 API Key>`。
 
 ## OpenClaw
 

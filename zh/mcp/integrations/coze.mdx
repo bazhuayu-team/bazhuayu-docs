@@ -56,8 +56,8 @@ description: 在扣子编程中通过官方插件或自定义 MCP 接入八爪�
     - **Header 列表**：key：User-Agent、Value：Coze/1.0（使用默认不用改动）
     - **授权方式**：Service — Service token / API key（固定配置，不可更改）
     - **位置**：Header。（固定配置，不可更改）
-    - **Parameter name**：`x-api-key`。（固定配置，不可更改）
-    - **Service token / API key**：官网上自己账号获取的 API Key（见 <a href="/zh/mcp/quick-start/api-key" target="_blank" rel="noopener noreferrer">获取 API Key</a>）
+    - **Parameter name**：`Authorization`。（固定配置，不可更改）
+    - **Service token / API key**：填写 `Bearer ` 加上官网获取的 API Key（见 <a href="/zh/mcp/quick-start/api-key" target="_blank" rel="noopener noreferrer">获取 API Key</a>）
 
     <img src="/assets/mcp/coze/step-2-3-a.png" alt="新建插件窗口上半部分配置" className="mcp-step-image" />
     <img src="/assets/mcp/coze/step-2-3-b.png" alt="新建插件窗口 MCP 类型与 URL 配置" className="mcp-step-image" />
@@ -225,7 +225,7 @@ description: 在扣子编程中通过官方插件或自定义 MCP 接入八爪�
   - **操作建议与引导**：
     - 对于不熟悉采集的用户，主动提供示例模板名称（如「小红书笔记评论采集」「京东商品列表」）供参考。
     - 当用户询问不支持的版本时，温和纠正并介绍正确版本范围。
-  - **认证**：首次调用返回未授权错误时，提示用户检查 API Key 是否放在 `x-api-key` 请求头；不要使用 OAuth 或 Bearer Token。
+  - **认证**：首次调用返回未授权错误时，提示用户检查 API Key 是否放在 `Authorization` 请求头中，且值包含 `Bearer` 前缀。
 
   ### 输出风格
 

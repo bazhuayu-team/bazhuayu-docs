@@ -25,8 +25,8 @@ WorkBuddy、QClaw、豆包专业版等具备工具配置能力的 Agent，通常
 API Key：<粘贴你的 API Key>
 
 关键要求：
-1. 本次接入只使用 API Key 认证，请将密钥放在请求头 x-api-key 中。
-2. 不要改用 OAuth，也不要写成 Authorization: Bearer <API Key>。
+1. 本次接入使用 API Key 认证，请将请求头设置为 `Authorization`，值设置为 `Bearer <API Key>`。
+2. 不要省略 `Bearer` 前缀。
 3. 请根据当前客户端支持的 MCP 配置方式自行安装；完成后按需刷新工具列表或重启客户端。
 4. 请验证服务已连接并能读取工具列表，再调用只读工具 list_platforms 完成连通性测试；只向我报告配置位置、测试结果和后续用法，不要在回复中回显完整 API Key。
 ```
@@ -35,7 +35,7 @@ API Key：<粘贴你的 API Key>
   仅在可信的本地 Agent 或私密对话中提供 API Key。不要把真实 Key 发送到群聊、公开对话或截图中；安装完成后也不要让 Agent 回显密钥。
 </Warning>
 
-八爪鱼采集器 MCP 使用 API Key 认证：将 Key 放入 `x-api-key` 请求头。若 Agent 无权修改配置，请按<a href="/zh/mcp/guides/clients" target="_blank" rel="noopener noreferrer">客户端配置指南</a>手动添加。
+八爪鱼采集器 MCP 使用 API Key 认证：将 Key 以 `Bearer <API Key>` 格式放入 `Authorization` 请求头。若 Agent 无权修改配置，请按<a href="/zh/mcp/guides/clients" target="_blank" rel="noopener noreferrer">客户端配置指南</a>手动添加。
 
 ## 能力范围
 
@@ -61,7 +61,7 @@ API Key：<粘贴你的 API Key>
 
 ## 认证方式
 
-使用请求头 `x-api-key` 认证。API Key 在<a href="/zh/mcp/quick-start/api-key" target="_blank" rel="noopener noreferrer">八爪鱼账户中心创建</a>；不要改写为 OAuth 或 `Authorization: Bearer <API Key>`。
+使用 `Authorization: Bearer <API Key>` 请求头认证。API Key 在<a href="/zh/mcp/quick-start/api-key" target="_blank" rel="noopener noreferrer">八爪鱼账户中心创建</a>；使用 API Key 时不要省略 `Bearer` 前缀。
 
 <Warning>
   请勿将 API Key 写入公开仓库、截图或群聊。泄露后请立即在账户中心作废并重新创建。
@@ -117,7 +117,7 @@ API Key：<粘贴你的 API Key>
     优先将上方对话发送给支持自主配置的 Agent；也可以手动填写 `https://mcp.bazhuayu.com`（国际环境使用 `https://mcp.octoparse.com`）。
   </Step>
   <Step title="完成认证">
-    在 Headers 中配置 <a href="/zh/mcp/quick-start/api-key" target="_blank" rel="noopener noreferrer">API Key</a> 的 `x-api-key`。
+    在 Headers 中配置 <a href="/zh/mcp/quick-start/api-key" target="_blank" rel="noopener noreferrer">API Key</a> 的 `Authorization: Bearer`。
   </Step>
   <Step title="在对话中试用">
     先用只读请求验证连接，例如：「列出数据中心当前支持的平台」，或「帮我找一个采集电商商品列表的八爪鱼模板」。
@@ -183,7 +183,7 @@ API Key：<粘贴你的 API Key>
 
 <CardGroup cols={2}>
   <Card title="获取 API Key" href="/zh/mcp/quick-start/api-key">
-    API Key 创建与 `x-api-key` 配置说明。
+    API Key 创建与 `Authorization: Bearer` 配置说明。
   </Card>
   <Card title="速率限制" href="/zh/mcp/rate-limits">
     请求配额与 429 重试建议。
